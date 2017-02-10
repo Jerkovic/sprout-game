@@ -2,8 +2,6 @@ package com.binarybrains.sprout.item.tool;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.binarybrains.sprout.SproutGame;
 
 public abstract class Tool {
 
@@ -14,7 +12,7 @@ public abstract class Tool {
     public static Scythe scythe = new Scythe();
     public static FishingPole fishingpole = new FishingPole();
 
-
+    // -----------------------------------------------------------
 
     public final String name;
     public final String description;
@@ -34,10 +32,10 @@ public abstract class Tool {
         return description;
     }
 
-    public void use() {
+    public boolean use() {
         Gdx.app.log("DEBUG", "Use tool: " + this);
+        return true;
     }
-
 
 }
 

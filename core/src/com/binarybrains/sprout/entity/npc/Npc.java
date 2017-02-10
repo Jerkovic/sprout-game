@@ -212,7 +212,6 @@ public class Npc extends Mob implements Telegraph {
         batch.draw(currentFrame, getX(), getY());
     }
 
-
     public ActionState getActionState() {
         return actionState;
     }

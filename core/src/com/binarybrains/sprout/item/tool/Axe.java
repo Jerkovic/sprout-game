@@ -9,9 +9,9 @@ public class Axe extends Tool {
     }
 
     @Override
-    public void use() {
+    public boolean use() {
         Sound testSfx = SproutGame.assets.get("sfx/chop_wood2_converted.wav");
         testSfx.play();
-        super.use();
+        return true;
     }
 }

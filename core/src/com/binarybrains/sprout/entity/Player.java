@@ -93,7 +93,6 @@ public class Player extends Npc implements InputProcessor {
         setActionState(Npc.ActionState.CARRYING);
     }
 
-
     @Override
     public boolean blocks(Entity e) {
         if (this.equals(e)) return false;
@@ -114,6 +113,7 @@ public class Player extends Npc implements InputProcessor {
     }
 
     // move to NPC ?
+    // this should be smaller and close to the player
     public Rectangle getInteractBox() {
         float x=0, y=0, width =0, height=0;
 
@@ -142,14 +142,20 @@ public class Player extends Npc implements InputProcessor {
             y = getY() + getHeight();
             height = getHeight();
             width = getWidth();
-
         }
 
         return new Rectangle(x, y, width, height);
+
     }
 
     //  called on left click
     public void interactWithActiveItem() {
+        // can we really interact while carrying stuff?
+        if (getActionState() != ActionState.EMPTY_NORMAL) {
+            System.out.println("Cannot interact. Current actionState: " + getActionState());
+            return;
+        }
+
         boolean done = false;
         List<Entity> entities = getLevel().getEntities(getInteractBox());
         // should we really interact with all items here?
@@ -183,8 +189,14 @@ public class Player extends Npc implements InputProcessor {
 
     }
 
-    //  called on right click
+    //  use/check/investigate called on right click
     public void use() {
+        // can we really interact while carrying stuff?
+        if (getActionState() != ActionState.EMPTY_NORMAL) {
+            System.out.println("Cannot use/check. Current actionState: " + getActionState());
+            return;
+        }
+
         List<Entity> entities = getLevel().getEntities(getInteractBox());
         // should we really interact with all items here?
         for (int i = 0; i < entities.size(); i++) {
@@ -192,12 +204,11 @@ public class Player extends Npc implements InputProcessor {
             if (e != this)
                 e.use(this, getDirection());
         }
+
+        // can we right click a tile? if so implement that here
     }
 
-
-
     public void update(float delta) {
-        
         super.update(delta);
         updateMovement();
     }
@@ -240,12 +251,6 @@ public class Player extends Npc implements InputProcessor {
         if (keys.get(Keys.A) && keys.get(Keys.S)) {
             setDirection(Direction.SOUTH_WEST);
             setState(Mob.State.WALKING);
-        }
-
-
-        if (keys.get(Keys.SPACE)) {
-            //plantTest();
-            //setActionState(ActionState.CARRYING);
         }
 
         if ( !keys.get(Keys.UP) && !keys.get(Keys.DOWN) && !keys.get(Keys.LEFT) && !keys.get(Keys.RIGHT) &&
@@ -296,7 +301,6 @@ public class Player extends Npc implements InputProcessor {
 
         getLevel().interact(tile_x, tile_y, this);
 
-
         // Below can be removed!!
         // MUST CHECK ! also that we really can plant on this tile. isPlantableGround or something
         TiledMapTileLayer ground = (TiledMapTileLayer)getLevel().map.getLayers().get("ground");
@@ -307,6 +311,14 @@ public class Player extends Npc implements InputProcessor {
 
         cell.setTile(getLevel().map.getTileSets().getTile(39)); /* or some other id, identifying the tile */
         // layer.setCell(tile_x, tile_y, cell);
+    }
+
+    /**
+     * Returns the current selected mouse tile pos for player actions
+     * @return
+     */
+    public Vector2 getMouseSelectedTile() {
+        return new Vector2(clickedPos.x / 16, clickedPos.y / 16);
     }
 
     @Override
@@ -438,15 +450,6 @@ public class Player extends Npc implements InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
-    }
-
-
-    /**
-     * Returns the current selected mouse tile pos for player actions
-     * @return
-     */
-    public Vector2 getMouseSelectedTile() {
-        return new Vector2(clickedPos.x / 16, clickedPos.y / 16);
     }
 
     @Override
