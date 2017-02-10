@@ -13,12 +13,16 @@ public class BackgroundMusic {
     static boolean isStopped = false;
 
     public static void start() {
-        mVolume = 1f;
         mIsPlaying = true;
         track1.setLooping(true);
-        track1.setVolume(mVolume);
         track1.play();
     }
+
+    public static void setVolume(float volume) {
+        mVolume = volume;
+        track1.setVolume(mVolume);
+    }
+
     public static void stop() {
         isStopped = true;
     }

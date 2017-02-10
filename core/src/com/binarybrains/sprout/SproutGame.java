@@ -3,8 +3,6 @@ package com.binarybrains.sprout;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -12,9 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.screen.GameScreen;
-
-import java.awt.*;
-import java.util.Arrays;
 
 public class SproutGame extends Game {
 
@@ -69,6 +64,7 @@ public class SproutGame extends Game {
 		assets.load("sfx/blop.wav", Sound.class);
 		assets.load("sfx/water_splash.wav", Sound.class);
 		assets.load("sfx/powerup.wav", Sound.class);
+        assets.load("ambience/forest_morning_ambience.mp3", Sound.class);
         assets.load("items2.txt", TextureAtlas.class);
 		assets.load("music/track1.mp3", Music.class);
 		SproutGame.assets.finishLoading();

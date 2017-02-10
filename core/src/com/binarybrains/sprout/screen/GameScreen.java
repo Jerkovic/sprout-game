@@ -1,23 +1,15 @@
 package com.binarybrains.sprout.screen;
 
-import com.badlogic.ashley.core.Component;
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.PooledEngine;
-import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.binarybrains.sprout.SproutGame;
-import com.binarybrains.sprout.entity.ashley.components.MovementComponent;
-import com.binarybrains.sprout.entity.ashley.components.PositionComponent;
-import com.binarybrains.sprout.entity.ashley.systems.MovementSystem;
 import com.binarybrains.sprout.hud.Hud;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.misc.BackgroundMusic;
@@ -38,6 +30,8 @@ public class GameScreen implements Screen {
 
     public GameState gameState = GameState.RUN;
     public Hud hud;
+
+    public Sound forestAmbienceSfx;
 
     Skin skin;
 
@@ -62,27 +56,10 @@ public class GameScreen implements Screen {
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
 
+        BackgroundMusic.setVolume(.75f);
         BackgroundMusic.start();
-
-        // ashley test
-        Array<Entity> entities = new Array<Entity>();
-
-        PooledEngine engine = new PooledEngine();
-        engine.addSystem(new MovementSystem());
-
-
-        for (int i = 0; i < 10; i++) {
-            Entity entity = engine.createEntity();
-
-            entity.add(new MovementComponent(10, 10));
-            entity.add(new PositionComponent(0, 0));
-
-            engine.addEntity(entity);
-
-            entities.add(entity);
-        }
-
-        engine.update(0f); // deltaTime
+        forestAmbienceSfx = SproutGame.assets.get("ambience/forest_morning_ambience.mp3");
+        forestAmbienceSfx.loop(.9f);
 
     }
 
@@ -119,7 +96,6 @@ public class GameScreen implements Screen {
                 gameState = GameState.RUN;
                 level.gameTimer.resume();
             }
-
         }
 
         // Draw
@@ -154,6 +130,7 @@ public class GameScreen implements Screen {
     public void dispose() {
         level.dispose();
         batch.dispose();
+        BackgroundMusic.dispose();
 
     }
 }
