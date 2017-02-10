@@ -99,10 +99,10 @@ public class LevelEngine {
         return !tile[x][y].mayPass(e);
     }
 
-    public void interact(Level level, int x, int y, Entity entity) {
+    public void interact(int x, int y, Entity entity) {
 
         if (entity instanceof Player) {
-            tile[x][y].interact(level, x, y, entity);
+            tile[x][y].interact((Player) entity, x, y, ((Player) entity).getDirection());
         }
     }
 

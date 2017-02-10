@@ -41,7 +41,7 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
         player.setTilePos(9, 1.5f);
         BackgroundMusic.stop(); // fade out music
-        return super.interact(player, item, attackDir);
+        return true;
     }
 
 

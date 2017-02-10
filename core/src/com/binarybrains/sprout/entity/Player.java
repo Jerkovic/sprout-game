@@ -3,8 +3,9 @@ package com.binarybrains.sprout.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -33,6 +34,7 @@ public class Player extends Npc implements InputProcessor {
     public Vector3 clickedPos = new Vector3();
     public int newX = 0, newY = 0; // temp remove later
     public int inventoryCapacity = 12;
+    public Portable carriedItem;
 
     enum Keys {
         LEFT, RIGHT, UP, DOWN, CTRL, SPACE, W, A, S, D
@@ -85,6 +87,12 @@ public class Player extends Npc implements InputProcessor {
     public Item getActiveItem() {
         return activeItem;
     }
+
+    public void setCarriedItem(Portable carriedItem) {
+        this.carriedItem = carriedItem;
+        setActionState(Npc.ActionState.CARRYING);
+    }
+
 
     @Override
     public boolean blocks(Entity e) {
@@ -142,13 +150,37 @@ public class Player extends Npc implements InputProcessor {
 
     //  called on left click
     public void interactWithActiveItem() {
+        boolean done = false;
         List<Entity> entities = getLevel().getEntities(getInteractBox());
         // should we really interact with all items here?
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			if (e != this)
-				e.interact(this, activeItem, getDirection());
+				if (e.interact(this, activeItem, getDirection())) {
+                    done = true; // we have encountered an entity in the interact box
+                }
 		}
+        if (done) return; // move up in for loop?
+
+        int tile_x = getTileX();
+        int tile_y = getTileY();
+
+        if (getDirection() == WEST) {
+            tile_x -=1;
+        }
+        if (getDirection() == EAST) {
+            tile_x +=1;
+        }
+        if (getDirection() == NORTH) {
+            tile_y +=1;
+        }
+        if (getDirection() == SOUTH) {
+            tile_y -=1;
+        }
+
+        getLevel().interact(tile_x, tile_y, this);
+
+
     }
 
     //  called on right click
@@ -212,8 +244,8 @@ public class Player extends Npc implements InputProcessor {
 
 
         if (keys.get(Keys.SPACE)) {
-            plantTest();
-            setActionState(ActionState.CARRYING);
+            //plantTest();
+            //setActionState(ActionState.CARRYING);
         }
 
         if ( !keys.get(Keys.UP) && !keys.get(Keys.DOWN) && !keys.get(Keys.LEFT) && !keys.get(Keys.RIGHT) &&
@@ -234,27 +266,14 @@ public class Player extends Npc implements InputProcessor {
         shadow.draw(batch, 0.55f);
     }
 
-    public void drawCarryingObject(Batch batch) {
-        if (getLevel().debugMode) { // getLevel().debugMode
-            // we need to make this more handy!!
-            // below test with a chest
-
-
-        }
-    }
-
     public void draw(Batch batch, float parentAlpha) {
 
         drawShadow(batch, Gdx.app.getGraphics().getDeltaTime());
         super.draw(batch, 1f);
-        drawCarryingObject(batch);
-
     }
 
     public void plantTest() {
-
         plantTestFinished();
-        //setActionState(ActionState.THROWING);
     }
 
     public void plantTestFinished() {
@@ -275,7 +294,7 @@ public class Player extends Npc implements InputProcessor {
             tile_y -=1;
         }
 
-        getLevel().interact(getLevel(), tile_x, tile_y, this);
+        getLevel().interact(tile_x, tile_y, this);
 
 
         // Below can be removed!!

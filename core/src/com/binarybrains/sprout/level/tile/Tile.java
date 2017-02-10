@@ -47,8 +47,8 @@ public class Tile {
     public void steppedOn(Level level, int xt, int yt, Entity entity) {
     }
 
-
-    public boolean interact(Level level, int xt, int yt, Entity entity) {
+    public boolean interact(Player player, int xt, int yt, Mob.Direction attackDir) {
+        System.out.println(player + " tries to interact with " + this);
         return false;
     }
 

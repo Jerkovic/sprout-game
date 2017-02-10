@@ -3,10 +3,7 @@ package com.binarybrains.sprout.entity.furniture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.binarybrains.sprout.entity.Entity;
-import com.binarybrains.sprout.entity.Mob;
-import com.binarybrains.sprout.entity.Player;
-import com.binarybrains.sprout.entity.Portable;
+import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 
@@ -18,11 +15,16 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
 
     TextureRegion[][] frames;
     private boolean isOpen = false;
+    private boolean carried = false;
+    public Inventory inventory;
+    private int capacity = 12;
 
     private TextureRegion openRegion, closedRegion;
 
     public Chest(Level level, Vector2 position) {
         super(level, position, 16, 16);
+        // the chest is a inventory
+        inventory = new Inventory(level, capacity);
 
         // this should not be here .. move IT! it is all the tiles
         frames = TextureRegion.split(getLevel().spritesheet, 16, 16);
@@ -46,21 +48,32 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
 
     @Override
     public boolean use(Player player, Mob.Direction attackDir) {
-        // open chest on right click
-        isOpen = !isOpen;
-        // open chest inventory HUD window
-        // be able to move stuff from chest inventory <-> player inventory
+
+        if (!carried) {
+            isOpen = !isOpen;
+            // player.getLevel().hud.setMenu(new ContainerMenu(player, "Chest", inventory));
+            // open chest on right click
+            // open chest inventory HUD window
+            // be able to move stuff from chest inventory <-> player inventory
+        }
+
         return false;
     }
 
     @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
-        return super.interact(player, item, attackDir);
+        if (!carried) {
+            carried = true;
+            player.setCarriedItem(this);
+        }
+        return true;
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         // batch.draw(frames[15][0], getX(), getY());
+        if (carried) return;
+
         if (isOpen) {
             batch.draw(openRegion, getX(), getY());
         } else {
