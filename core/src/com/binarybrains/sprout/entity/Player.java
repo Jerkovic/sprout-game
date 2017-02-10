@@ -72,7 +72,6 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ResourceItem(Resource.stone, 12));
         getInventory().add(new ResourceItem(Resource.acorn, 3));
 
-
         // move this to a shadow system ?
         shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
     }
@@ -80,7 +79,6 @@ public class Player extends Npc implements InputProcessor {
 
     public void setActiveItem(Item item) {
         activeItem = item;
-        Gdx.app.log("DEBUG", item.getName() + " is active");
     }
 
     @Override
@@ -90,7 +88,7 @@ public class Player extends Npc implements InputProcessor {
 
     @Override
     public boolean blocks(Entity e) {
-        if (this.equals(e)) return false; // dont block yourself
+        if (this.equals(e)) return false;
         if (e instanceof Npc) {
             return true;
         }
@@ -200,7 +198,6 @@ public class Player extends Npc implements InputProcessor {
         }
 
 
-
         if (keys.get(Keys.SPACE)) {
             plantTest();
             setActionState(ActionState.CARRYING);
@@ -247,12 +244,10 @@ public class Player extends Npc implements InputProcessor {
 
         plantTestFinished();
         //setActionState(ActionState.THROWING);
-        //throwTime = 0; // need to reset throwTimer
     }
 
     public void plantTestFinished() {
 
-        System.out.println("Plant testing");
         int tile_x = getTileX();
         int tile_y = getTileY();
 
@@ -317,7 +312,7 @@ public class Player extends Npc implements InputProcessor {
                 plantTest();
                 break;
             case Input.Keys.CONTROL_LEFT: // interact
-                attack();
+                // attack(); // moved to left button
                 break;
         }
         return true;
@@ -382,13 +377,25 @@ public class Player extends Npc implements InputProcessor {
         // here check that we are clicking on something near the player
         /*
         Should we do something like this.
-        Left Click 	-> Use tool
+        Left Click 	-> Use tool/ action
         Right Click ->	Check/Do Action
 
          */
         if (mouseWorldPosX <= getTileX() + 1 && mouseWorldPosX >= getTileX() -1
                 && mouseWorldPosY <= getTileY() + 1 && mouseWorldPosY >= getTileY() -1) {
-            System.out.println("Yes you have clicked within the Action Range!");
+
+        }
+
+        switch (button)
+        {
+            case Input.Buttons.LEFT:
+                System.out.println("Yes you have clicked within the Action Range with left button");
+                attack(); // moved to left button
+                break;
+            case Input.Buttons.RIGHT:
+                System.out.println("Yes you have clicked within the Action Range with right button");
+                plantTest();
+                break;
         }
 
         return false;

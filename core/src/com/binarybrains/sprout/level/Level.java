@@ -21,8 +21,6 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.ItemEntity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.npc.Emma;
-import com.binarybrains.sprout.hud.Hud;
-import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.resource.Resource;
@@ -30,7 +28,6 @@ import com.binarybrains.sprout.item.tool.Tool;
 import com.binarybrains.sprout.level.tile.Tile;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
-import com.binarybrains.sprout.misc.Timer;
 import com.binarybrains.sprout.screen.GameScreen;
 
 import java.util.List;
@@ -187,12 +184,10 @@ public class Level extends LevelEngine {
 
         if (Gdx.input.isKeyPressed(Input.Keys.E)) {
             nightTimeAlpha += 0.01f;
-            System.out.println(nightTimeAlpha);
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.R)) {
             nightTimeAlpha -= 0.01f;
-            System.out.println(nightTimeAlpha);
         }
 
 

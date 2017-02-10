@@ -21,7 +21,6 @@ import static com.binarybrains.sprout.entity.Mob.Direction.*;
 public class Npc extends Mob implements Telegraph {
 
     public int spriteRow = 0; // the row on the spriteSheet where the NPC starts on
-    //public int spriteRows = 2; //
     private ActionState actionState = ActionState.EMPTY_NORMAL; // Idle normal state
 
     @Override
@@ -29,7 +28,7 @@ public class Npc extends Mob implements Telegraph {
         return false;
     }
 
-    public static enum ActionState { // Look into a Finite StateMachine
+    public static enum ActionState {
         EMPTY_NORMAL, CARRYING, THROWING, CHOPPING, ATTACKING
     }
 
@@ -41,9 +40,8 @@ public class Npc extends Mob implements Telegraph {
     public Npc(Level level, Vector2 position, float width, float height, int spriteRow) {
         super(level, position, width, height);
         setSpriteRow(spriteRow);
-        setupAnimations(); // test
+        setupAnimations();
     }
-
 
     @Override
     public void update(float delta) {
@@ -117,7 +115,6 @@ public class Npc extends Mob implements Telegraph {
                 getPosition().y -= getSpeed() * delta;
                 getPosition().x += getSpeed() * delta;
             } else {
-                // blocked here how can we set a state
                 setState(State.STANDING);
             }
         }
@@ -132,7 +129,6 @@ public class Npc extends Mob implements Telegraph {
                 getPosition().y += getSpeed() * delta;
                 getPosition().x += getSpeed() * delta;
             } else {
-                // blocked here how can we set a state
                 setState(State.STANDING);
             }
         }
@@ -148,7 +144,6 @@ public class Npc extends Mob implements Telegraph {
                 getPosition().y += getSpeed() * delta;
                 getPosition().x -= getSpeed() * delta;
             } else {
-                // blocked here how can we set a state
                 setState(State.STANDING);
             }
         }
@@ -164,7 +159,6 @@ public class Npc extends Mob implements Telegraph {
                 getPosition().y -= getSpeed() * delta;
                 getPosition().x -= getSpeed() * delta;
             } else {
-                // blocked here how can we set a state
                 setState(State.STANDING);
             }
         }
@@ -212,7 +206,6 @@ public class Npc extends Mob implements Telegraph {
         }
         else if (getState() == State.WALKING) {
             // override animations
-            System.out.println(getDirection().ordinal());
             currentFrame = animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
         }
 
@@ -243,7 +236,7 @@ public class Npc extends Mob implements Telegraph {
                 float animSpeed = .12f;
 
                 animationMatrix[a][d] = new Animation(animSpeed, currentAnimFrames);
-                // maybe we need a different getSpeed() for certain
+                // maybe we need a different getSpeed() for animations
             }
         }
 

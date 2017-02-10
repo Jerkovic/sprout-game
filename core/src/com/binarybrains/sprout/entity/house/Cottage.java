@@ -1,8 +1,6 @@
 package com.binarybrains.sprout.entity.house;
 
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -29,15 +27,11 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
         sprite = new Sprite(atlas.findRegion("home"));
         sprite.setSize(width, height);
         sprite.setPosition(getX(), getY());
-
-
     }
 
     @Override
     public void updateBoundingBox() {
         super.updateBoundingBox();
-        // update the walkBox hit detector for tiles hit detection
-        // this must be much easier see also the Tree entity
         this.walkBox.setWidth(getWidth());
         this.walkBox.setHeight(getHeight() - 32);
         this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
@@ -45,13 +39,8 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
 
     @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
-        // the cottage instance should have info on where in the world
-        // the player should teleport to. and info where the exit is.
-        // player.getLevel().gameTimer.getGameTime().hour
         player.setTilePos(9, 1.5f);
-        // fade out music
-        BackgroundMusic.stop();
-
+        BackgroundMusic.stop(); // fade out music
         return super.interact(player, item, attackDir);
     }
 
