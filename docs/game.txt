@@ -1,0 +1,139 @@
+Created by erikl on 27/06/16
+
+
+Sprout
+-------------
+A game about crafting, breeding, farming, hunting, exploring and surviving.
+
+---
+
+För att generera namn på saker.
+http://fantasynamegenerators.com/farm-names.php#.V34RBqOriko
+
+game logga
+http://textcraft.net
+
+Inspiration by
+-----------------
+Minicraft
+Stardew Valley
+Harvest Moon
+
+
+names:
+Dewrich Meadows
+
+
+
+-= Tech stuff -
+- animation system
+- asset manager
+- investigate stage actors
+- night overlay
+- lights
+- mouse to world coords
+- pixel fonts
+   https://github.com/gameover-fwk/gameover-fwk/blob/master/src/test/resources/simplest_font.png
+- ground and standing objects
+  first we have the ground... water and dirt etc.
+  then we need the shadow layer.. the standing objects will cast shadows on this layer (do we do this realtime?)
+  then we have trees houses, stones etc... they must be rendered in the order of their y value
+  we need to sort the sprites as well
+
+  layers:
+  - water
+  - ground
+  - shadow
+  - perspective (layer)
+
+Player
+- velocity
+- direction
+- cap world coordinates
+
+Crafting
+levels:
+1.basic
+2.steel iron
+3.gold
+
+
+Actions
+- Fishing
+- Drink water
+- Fill water from a well
+- Hunting
+
+Furniture (some can be carried by the player?)
+-Mailbox (här kommer det nya unlocks) t.ex "You have unlocked a new recipe 'Gold Axe'"
+-CraftingStations
+- Anvil
+- Furnace
+- Owen
+- Workbench
+-Others
+- Chest (like a inventory to store stuff 24 items?)
+
+Inventory (backpack or trunk)
+-Basic 12 slots
+-Unlocks the 2nd row of inventory (12 more slots).
+- The last upgrade to 36
+
+Survive
+- Water
+- Food
+- Health (blood lost)
+
+The perspective problem:
+http://gameover.co.in/2014/04/perspective-with-2d-files-map-in-libgdx/
+
+
+Shadows
+http://gigagrand.com/blog/?p=106
+http://gamedev.stackexchange.com/questions/25142/opengl-es-drop-shadows-for-2d-sprites
+
+
+Texture bleeding (fixed)
+Takes a heavily-packed sprite sheet with no padding between sprites/tiles and adds padding or spacing.
+Can also create a "gutter" around seamless tiles, filling the padding with the tile's edge pixels, preventing seams
+from appearing when using the tile in a 3D rendering environment due to interpolation.
+
+Sprites
+https://www.gamedevmarket.net/asset/16x16-character-sprites-human-pack-1-1778/
+
+tiles
+https://www.scirra.com/store/2d-game-graphics-packs/rpg-environment-pack-184
+
+http://opengameart.org/content/lots-of-free-2d-tiles-and-sprites-by-hyptosis
+
+http://opengameart.org/content/lpc-tile-atlas
+
+more simple gfx if we wanna go that route
+http://opengameart.org/content/tiny-16-basic
+
+Houses
+------------------------------
+Mill (grind vete to powder)
+Dog house
+Hen house
+
+
+
+items:
+------------------------
+Tools
+Watering pot = (vattenmängd, material) starter tool
+Shovel = spade för att gräva
+Hoe = hacka för åkrar (starter tool)
+Pick axe = (används för att utvinna saker ur sten och berg)
+Axe = (används för att hugga ner träd, träden lämnar stubbe och ur den kan man utvinna hard wood, krävs uppgraderad yxa)
+Hammer = (används för att snickra)
+Scythe = lie (används för att skörda) starter tool
+fishing rod = metspö (används i vatten och kan ge fisk, chansen borde öka att få bättre fisk var du fiskar)  baits??
+
+Weapons(tools)
+Sword = (borde kanske vara weapon?)
+Bow = pilbåge (wood x 3, rep (hampa), wood + sten för pilar)
+Spear = Spjut (wood + nån typ av sten)
+slingshot = slangbella / slunga
+crossbow = armborst

@@ -1,0 +1,166 @@
+items2.png
+size: 256, 512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Acorn
+  rotate: false
+  xy: 1, 1
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Axe
+  rotate: false
+  xy: 51, 1
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Balubas
+  rotate: false
+  xy: 101, 1
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Bread
+  rotate: false
+  xy: 151, 1
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Clock
+  rotate: false
+  xy: 201, 1
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Coal
+  rotate: false
+  xy: 1, 51
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Egg
+  rotate: false
+  xy: 51, 51
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Fishing_Pole
+  rotate: false
+  xy: 101, 51
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Gold_Bar
+  rotate: false
+  xy: 151, 51
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Gold_Nugget
+  rotate: false
+  xy: 201, 51
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Hoe
+  rotate: false
+  xy: 1, 101
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Iron_Bar
+  rotate: false
+  xy: 51, 101
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Iron_Ore
+  rotate: false
+  xy: 101, 101
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Pickaxe
+  rotate: false
+  xy: 151, 101
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Salmon
+  rotate: false
+  xy: 201, 101
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Scythe
+  rotate: false
+  xy: 1, 151
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Stone
+  rotate: false
+  xy: 51, 151
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Watering_Can
+  rotate: false
+  xy: 101, 151
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Wood
+  rotate: false
+  xy: 151, 151
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Wood_Fence
+  rotate: false
+  xy: 201, 151
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Wool
+  rotate: false
+  xy: 1, 201
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Wow_Cola
+  rotate: false
+  xy: 51, 201
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+home
+  rotate: false
+  xy: 101, 201
+  size: 99, 194
+  orig: 99, 194
+  offset: 0, 0
+  index: -1
