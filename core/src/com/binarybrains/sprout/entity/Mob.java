@@ -61,6 +61,11 @@ public abstract class Mob extends Entity {
         return speed;
     }
 
+    /*
+    public float getDiagonalSpeed() {
+        return speed / 1.41421356237f;
+    } */
+
     public void setSpeed(float speed) {
         this.speed = speed;
     }
@@ -68,7 +73,6 @@ public abstract class Mob extends Entity {
     protected void die() {
         if (!this.removed) {
             super.remove();
-            System.out.println(this + " died");
         }
     }
 

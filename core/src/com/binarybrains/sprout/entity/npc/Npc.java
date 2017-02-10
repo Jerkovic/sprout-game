@@ -48,7 +48,7 @@ public class Npc extends Mob implements Telegraph {
         super.update(delta);
 
         int newX, newY;
-        // update motion - move this
+        // update motion - move this?
         if (getDirection() == WEST && getState() == State.WALKING) {
             newX = (int) (getWalkWest() - (getSpeed() * delta)) / 16;
             newY = (int) (getWalkBoxCenterY() / 16);
@@ -58,7 +58,6 @@ public class Npc extends Mob implements Telegraph {
             if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
                 getPosition().x -= getSpeed() * delta;
             } else {
-                // blocked here how can we set a state
                 setState(State.STANDING);
             }
         }
@@ -71,7 +70,6 @@ public class Npc extends Mob implements Telegraph {
             if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
                 getPosition().x += getSpeed() * delta;
             } else {
-                // blocked here how can we set a state
                 setState(State.STANDING);
             }
         }
@@ -85,7 +83,6 @@ public class Npc extends Mob implements Telegraph {
             if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
                 getPosition().y += getSpeed() * delta;
             } else {
-                // blocked here how can we set a state
                 setState(State.STANDING);
             }
         }
@@ -99,10 +96,11 @@ public class Npc extends Mob implements Telegraph {
             if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
                 getPosition().y -= getSpeed() * delta;
             } else {
-                // blocked here how can we set a state
                 setState(State.STANDING);
             }
         }
+
+        // Diagonal Movement - Read more: http://himeworks.com/2014/11/diagonal-movement-and-movement-speed/
 
         if (getDirection() == SOUTH_EAST && getState() == State.WALKING) {
             newX = (int) (getWalkEast() + (getSpeed() * delta)) / 16;

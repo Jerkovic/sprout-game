@@ -65,6 +65,7 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
         if (!carried) {
             carried = true;
             player.setCarriedItem(this);
+            remove();
         }
         return true;
     }

@@ -148,11 +148,15 @@ public class Player extends Npc implements InputProcessor {
 
     }
 
-    //  called on left click
+    //  called on left click, boolean return type?
     public void interactWithActiveItem() {
         // can we really interact while carrying stuff?
         if (getActionState() != ActionState.EMPTY_NORMAL) {
             System.out.println("Cannot interact. Current actionState: " + getActionState());
+            // change below
+            Entity test = (Entity)carriedItem;
+            test.setTilePos(getTileX()+1, getTileY()+1);
+            getLevel().add(getLevel(), test);
             return;
         }
 
@@ -189,11 +193,12 @@ public class Player extends Npc implements InputProcessor {
 
     }
 
-    //  use/check/investigate called on right click
+    //  use/check/investigate called on right click.. boolean return type?
     public void use() {
         // can we really interact while carrying stuff?
         if (getActionState() != ActionState.EMPTY_NORMAL) {
             System.out.println("Cannot use/check. Current actionState: " + getActionState());
+            System.out.println("print " + carriedItem);
             return;
         }
 
