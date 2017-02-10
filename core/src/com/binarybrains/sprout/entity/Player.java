@@ -140,15 +140,28 @@ public class Player extends Npc implements InputProcessor {
         return new Rectangle(x, y, width, height);
     }
 
-    public void attack() {
-
+    //  called on left click
+    public void interactWithActiveItem() {
         List<Entity> entities = getLevel().getEntities(getInteractBox());
+        // should we really interact with all items here?
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			if (e != this)
 				e.interact(this, activeItem, getDirection());
 		}
     }
+
+    //  called on right click
+    public void use() {
+        List<Entity> entities = getLevel().getEntities(getInteractBox());
+        // should we really interact with all items here?
+        for (int i = 0; i < entities.size(); i++) {
+            Entity e = entities.get(i);
+            if (e != this)
+                e.use(this, getDirection());
+        }
+    }
+
 
 
     public void update(float delta) {
@@ -310,7 +323,7 @@ public class Player extends Npc implements InputProcessor {
                 plantTest();
                 break;
             case Input.Keys.CONTROL_LEFT: // interact
-                // attack(); // moved to left button
+                // interactWithActiveItem(); // moved to left button
                 break;
         }
         return true;
@@ -371,12 +384,6 @@ public class Player extends Npc implements InputProcessor {
         System.out.println("Mouse world pos: " + mouseWorldPosX + " x " + mouseWorldPosY);
         System.out.println("Player: " + getTileX() + " x " + getTileY());
 
-        /*
-        Should we do something like this.
-        Left Click 	-> Use tool/ action
-        Right Click ->	Check/Do Action
-
-         */
         if (mouseWorldPosX <= getTileX() + 1 && mouseWorldPosX >= getTileX() -1
                 && mouseWorldPosY <= getTileY() + 1 && mouseWorldPosY >= getTileY() -1) {
         }
@@ -384,10 +391,10 @@ public class Player extends Npc implements InputProcessor {
         switch (button)
         {
             case Input.Buttons.LEFT:
-                attack(); // moved to left button
+                interactWithActiveItem(); // Left Click  -> Use item/tool or pickup
                 break;
             case Input.Buttons.RIGHT:
-                plantTest();
+                use(); // Right Click -> Check/Use without any item
                 break;
         }
 

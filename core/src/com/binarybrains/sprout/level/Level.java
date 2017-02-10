@@ -316,11 +316,9 @@ public class Level extends LevelEngine {
             entities.get(i).renderDebug(debugRenderer, Color.CORAL);
         }
 
-        // Player attack /interact box
+        // Player interactWithActiveItem /interact box
         debugRenderer.setColor(Color.WHITE);
         debugRenderer.rect(player.getInteractBox().getX(), player.getInteractBox().getY(), player.getInteractBox().width, player.getInteractBox().height);
-
-
         debugRenderer.end();
 
     }
@@ -328,8 +326,7 @@ public class Level extends LevelEngine {
     private void renderHighlightCell() {
 
         debugRenderer.setProjectionMatrix(camera.combined);
-        //debugRenderer.begin(ShapeRenderer.ShapeType.Line);
-        debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        debugRenderer.begin(ShapeRenderer.ShapeType.Line);
         debugRenderer.setColor(Color.FIREBRICK);
         Vector2 clickedPos = player.getMouseSelectedTile();
 

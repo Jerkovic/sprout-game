@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.Portable;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 
@@ -13,7 +14,7 @@ import com.binarybrains.sprout.level.Level;
  * A chest is a furniture that can be moved around.
  * It also serves as a inventory space
  */
-public class Chest extends Entity { // extends Furniture that implements Portable?
+public class Chest extends Entity implements Portable { // extends Furniture that implements Portable instead?
 
     TextureRegion[][] frames;
     private boolean isOpen = false;
@@ -44,11 +45,16 @@ public class Chest extends Entity { // extends Furniture that implements Portabl
     }
 
     @Override
-    public boolean interact(Player player, Item item, Mob.Direction attackDir) {
+    public boolean use(Player player, Mob.Direction attackDir) {
         // open chest on right click
         isOpen = !isOpen;
         // open chest inventory HUD window
         // be able to move stuff from chest inventory <-> player inventory
+        return false;
+    }
+
+    @Override
+    public boolean interact(Player player, Item item, Mob.Direction attackDir) {
         return super.interact(player, item, attackDir);
     }
 
