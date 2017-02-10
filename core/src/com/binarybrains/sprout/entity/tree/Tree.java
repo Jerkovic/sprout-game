@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.binarybrains.sprout.entity.Entity;
-import com.binarybrains.sprout.entity.ItemEntity;
-import com.binarybrains.sprout.entity.Mob;
-import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
@@ -19,7 +16,6 @@ import com.binarybrains.sprout.item.tool.Axe;
 
 
 public class Tree extends Entity { // extends Vegitation or ?
-
 
     private Sprite sprite;
     private Sprite shadow;
@@ -32,7 +28,6 @@ public class Tree extends Entity { // extends Vegitation or ?
     @Override
     public void update(float delta) {
 
-
         if (falling) {
             time+=2;
             if (time < 60) {
@@ -44,9 +39,6 @@ public class Tree extends Entity { // extends Vegitation or ?
                 falling = false;
             }
         }
-
-
-
         super.update(delta);
     }
 
@@ -71,7 +63,6 @@ public class Tree extends Entity { // extends Vegitation or ?
 
     @Override
     public boolean blocks(Entity e) {
-
         // trees should not block birds for example todo check
         return true;
     }
@@ -88,19 +79,17 @@ public class Tree extends Entity { // extends Vegitation or ?
     public void hurt(Level level, int dmg) {
         damage += dmg;
 
-
         if (damage > 10) {
-            //remove();
             falling = true;
             // add some loot just as a test
             int count = MathUtils.random(1,4);
             for (int i = 0; i < count; i++) {
-                getLevel().add(getLevel(), new ItemEntity(getLevel(), new ResourceItem(Resource.wood), new Vector2(getCenterPos().x + MathUtils.random(-16, 16), getCenterPos().y + MathUtils.random(-16, 16))));
+                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.wood), new Vector2(getCenterPos().x + MathUtils.random(-16, 16), getCenterPos().y + MathUtils.random(-16, 16))));
             }
 
             count = MathUtils.random(0,2);
             for (int i = 0; i < count; i++) {
-                getLevel().add(getLevel(), new ItemEntity(getLevel(), new ResourceItem(Resource.acorn), new Vector2(getCenterPos().x + MathUtils.random(-10, 10), getCenterPos().y + MathUtils.random(-10, 10))));
+                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.acorn), new Vector2(getCenterPos().x + MathUtils.random(-10, 10), getCenterPos().y + MathUtils.random(-10, 10))));
             }
 
         }
@@ -117,7 +106,6 @@ public class Tree extends Entity { // extends Vegitation or ?
 
                 return true;
             }
-
         }
         return false;
     }

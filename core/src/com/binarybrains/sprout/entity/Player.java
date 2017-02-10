@@ -225,9 +225,7 @@ public class Player extends Npc implements InputProcessor {
         if (getLevel().debugMode) { // getLevel().debugMode
             // we need to make this more handy!!
             // below test with a chest
-            TextureRegion[][] frames = TextureRegion.split(getLevel().spritesheet, 16, 16);
-            // something like if activeItem instanceof Portable (like chests)
-            batch.draw(frames[15][0], getX(), getY() + getHeight()-4);
+
 
         }
     }
@@ -354,8 +352,6 @@ public class Player extends Npc implements InputProcessor {
         return false;
     }
 
-
-
     @Override
     public boolean keyTyped(char character) {
         return false;
@@ -374,7 +370,7 @@ public class Player extends Npc implements InputProcessor {
 
         System.out.println("Mouse world pos: " + mouseWorldPosX + " x " + mouseWorldPosY);
         System.out.println("Player: " + getTileX() + " x " + getTileY());
-        // here check that we are clicking on something near the player
+
         /*
         Should we do something like this.
         Left Click 	-> Use tool/ action
@@ -383,17 +379,14 @@ public class Player extends Npc implements InputProcessor {
          */
         if (mouseWorldPosX <= getTileX() + 1 && mouseWorldPosX >= getTileX() -1
                 && mouseWorldPosY <= getTileY() + 1 && mouseWorldPosY >= getTileY() -1) {
-
         }
 
         switch (button)
         {
             case Input.Buttons.LEFT:
-                System.out.println("Yes you have clicked within the Action Range with left button");
                 attack(); // moved to left button
                 break;
             case Input.Buttons.RIGHT:
-                System.out.println("Yes you have clicked within the Action Range with right button");
                 plantTest();
                 break;
         }

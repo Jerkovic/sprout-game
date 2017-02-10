@@ -18,8 +18,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.entity.Entity;
-import com.binarybrains.sprout.entity.ItemEntity;
+import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
@@ -138,10 +139,11 @@ public class Level extends LevelEngine {
             }
         }
 
-        // test add a ItemEntity - coal
-        add(this, new ItemEntity(this, new ResourceItem(Resource.coal, 2), new Vector2(16f * 28, 16f * 118)));
-        add(this, new ItemEntity(this, new ResourceItem(Resource.goldIngot, 1), new Vector2(16f * 6, 16f * 6)));
-        add(this, new ItemEntity(this, new ToolItem(Tool.fishingpole, 0), new Vector2(16 * 9, 16 * 8)));
+        // test some scattered Pickup items
+        add(this, new PickupItem(this, new ResourceItem(Resource.coal, 2), new Vector2(16f * 28, 16f * 118)));
+        add(this, new PickupItem(this, new ResourceItem(Resource.goldIngot, 1), new Vector2(16f * 26, 16f * 119)));
+        add(this, new PickupItem(this, new ToolItem(Tool.fishingpole, 0), new Vector2(16 * 27, 16 * 120)));
+        add(this, new Chest(this, new Vector2(16 * 22, 16 * 110)));
 
         camera = new Camera(this);
         camera.setToOrtho(false, screen.width / 4, screen.height / 4);

@@ -41,13 +41,10 @@ public class SmallTree extends Entity { // extends Vegitation or ?
         shadow.rotate(-21f);
     }
 
-
     @Override
     public boolean blocks(Entity e) {
-
         return true;
     }
-
 
     @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {

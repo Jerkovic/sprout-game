@@ -1,19 +1,18 @@
 package com.binarybrains.sprout.entity;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.List;
-import java.util.Random;
 
-public abstract class Entity { // GameObject
+// Our abstract GameObject class
+
+public abstract class Entity {
 
     private Level level;
     private Vector2 position = new Vector2();
@@ -55,7 +54,7 @@ public abstract class Entity { // GameObject
                 getWalkBox().getWidth(),
                 getWalkBox().getHeight());
 
-        renderer.setColor(Color.BLACK); // center crosshair
+        renderer.setColor(Color.BLACK); // center cross hair
         renderer.line(getCenterPos().x - 1, getCenterPos().y, getCenterPos().x + 1, getCenterPos().y);
         renderer.line(getCenterPos().x, getCenterPos().y - 1, getCenterPos().x, getCenterPos().y + 1);
 
@@ -207,8 +206,8 @@ public abstract class Entity { // GameObject
     }
 
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
-        System.out.println(player + " interacts  " + this);
-        return false; //item.interact(player, this, attackDir);
+        System.out.println(player + " interacts  with " + this + " using " + item);
+        return false;
     }
 
     public boolean use(Player player, Mob.Direction attackDir) {
