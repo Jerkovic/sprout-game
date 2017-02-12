@@ -32,7 +32,7 @@ public class Player extends Npc implements InputProcessor {
     public  Inventory inventory;
     public Item activeItem;
     public Vector3 clickedPos = new Vector3();
-    public int newX = 0, newY = 0; // temp remove later
+    public int newX = 0, newY = 0;
     public int inventoryCapacity = 12;
     public Portable carriedItem;
 
@@ -150,13 +150,26 @@ public class Player extends Npc implements InputProcessor {
 
     //  called on left click, boolean return type?
     public void interactWithActiveItem() {
+        System.out.println("Interact with item " + getActionState());
         // can we really interact while carrying stuff?
-        if (getActionState() != ActionState.EMPTY_NORMAL) {
-            System.out.println("Cannot interact. Current actionState: " + getActionState());
+        if (getActionState() == ActionState.CARRYING) {
             // change below
-            Entity test = (Entity)carriedItem;
-            test.setTilePos(getTileX()+1, getTileY()+1);
-            getLevel().add(getLevel(), test);
+            // we cant but down something if there is already something
+            List<Entity> entities = getLevel().getEntities(getInteractBox());
+
+            // getLevel().isTileBlocked()
+            if (entities.size() > 0) {
+                System.out.println("Can put down");
+                return;
+            }
+
+
+            carriedItem.deleteCarried();
+            Entity entity = (Entity)carriedItem;
+            entity.setPosition(getInteractBox().getX(), getInteractBox().getY());
+            getLevel().add(getLevel(), entity);
+            carriedItem = null;
+            setActionState(ActionState.EMPTY_NORMAL);
             return;
         }
 
@@ -169,8 +182,9 @@ public class Player extends Npc implements InputProcessor {
 				if (e.interact(this, activeItem, getDirection())) {
                     done = true; // we have encountered an entity in the interact box
                 }
+            if (done) return; // move up in for loop?
 		}
-        if (done) return; // move up in for loop?
+
 
         int tile_x = getTileX();
         int tile_y = getTileY();
@@ -198,7 +212,6 @@ public class Player extends Npc implements InputProcessor {
         // can we really interact while carrying stuff?
         if (getActionState() != ActionState.EMPTY_NORMAL) {
             System.out.println("Cannot use/check. Current actionState: " + getActionState());
-            System.out.println("print " + carriedItem);
             return;
         }
 
@@ -280,6 +293,12 @@ public class Player extends Npc implements InputProcessor {
 
         drawShadow(batch, Gdx.app.getGraphics().getDeltaTime());
         super.draw(batch, 1f);
+        // draw carried item
+        if (carriedItem != null) {
+            Entity carried = (Entity)carriedItem;
+            carried.setPosition(getPosition().x, getPosition().y + 12);
+            carried.draw(batch, 1f);
+        }
     }
 
     public void plantTest() {

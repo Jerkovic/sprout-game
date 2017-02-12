@@ -15,10 +15,10 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
 
     TextureRegion[][] frames;
     private boolean isOpen = false;
-    private boolean carried = false;
+
     public Inventory inventory;
     private int capacity = 12;
-
+    public boolean carried = false;
     private TextureRegion openRegion, closedRegion;
 
     public Chest(Level level, Vector2 position) {
@@ -66,6 +66,9 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
             carried = true;
             player.setCarriedItem(this);
             remove();
+        } else {
+            System.out.println("The chest seems to be in carried state already");
+
         }
         return true;
     }
@@ -73,7 +76,7 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
     @Override
     public void draw(Batch batch, float parentAlpha) {
         // batch.draw(frames[15][0], getX(), getY());
-        if (carried) return;
+        //if (carried) return;
 
         if (isOpen) {
             batch.draw(openRegion, getX(), getY());
@@ -81,5 +84,15 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
             batch.draw(closedRegion, getX(), getY());
         }
 
+    }
+
+    @Override
+    public void setCarried() {
+        carried = true;
+    }
+
+    @Override
+    public void deleteCarried() {
+        carried = false;
     }
 }
