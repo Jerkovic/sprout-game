@@ -15,7 +15,6 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
 
     TextureRegion[][] frames;
     private boolean isOpen = false;
-
     public Inventory inventory;
     private int capacity = 12;
     public boolean carried = false;
@@ -26,11 +25,9 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
         // the chest is a inventory
         inventory = new Inventory(level, capacity);
 
-        // this should not be here .. move IT! it is all the tiles
         frames = TextureRegion.split(getLevel().spritesheet, 16, 16);
         closedRegion = frames[8][11];
         openRegion = frames[8][12];
-        // something like if activeItem instanceof Portable (like chests)
     }
 
     @Override
@@ -75,15 +72,11 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        // batch.draw(frames[15][0], getX(), getY());
-        //if (carried) return;
-
         if (isOpen) {
             batch.draw(openRegion, getX(), getY());
         } else {
             batch.draw(closedRegion, getX(), getY());
         }
-
     }
 
     @Override

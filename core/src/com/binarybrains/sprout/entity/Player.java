@@ -153,19 +153,21 @@ public class Player extends Npc implements InputProcessor {
         System.out.println("Interact with item " + getActionState());
         // can we really interact while carrying stuff?
         if (getActionState() == ActionState.CARRYING) {
-            // change below
-            // we cant but down something if there is already something
-            List<Entity> entities = getLevel().getEntities(getInteractBox());
 
-            // getLevel().isTileBlocked()
+            Entity entity = (Entity)carriedItem;
+
+            List<Entity> entities = getLevel().getEntities(getInteractBox());
             if (entities.size() > 0) {
-                System.out.println("Can put down");
                 return;
             }
 
+            int x = (int)getInteractBox().getX() / 16;
+            int y = (int)getInteractBox().getY() / 16;
+            if (getLevel().isTileBlocked(x, y, entity)) {
+                return;
+            }
 
             carriedItem.deleteCarried();
-            Entity entity = (Entity)carriedItem;
             entity.setPosition(getInteractBox().getX(), getInteractBox().getY());
             getLevel().add(getLevel(), entity);
             carriedItem = null;
