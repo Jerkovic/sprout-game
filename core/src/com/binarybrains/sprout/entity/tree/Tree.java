@@ -84,12 +84,12 @@ public class Tree extends Entity { // extends Vegitation or ?
             // add some loot just as a test
             int count = MathUtils.random(1,4);
             for (int i = 0; i < count; i++) {
-                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.wood), new Vector2(getCenterPos().x + MathUtils.random(-16, 16), getCenterPos().y + MathUtils.random(-16, 16))));
+                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.wood), new Vector2(getPosition().x, getPosition().y)));
             }
 
             count = MathUtils.random(0,2);
             for (int i = 0; i < count; i++) {
-                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.acorn), new Vector2(getCenterPos().x + MathUtils.random(-10, 10), getCenterPos().y + MathUtils.random(-10, 10))));
+                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.acorn), new Vector2(getPosition().x, getPosition().y)));
             }
 
         }

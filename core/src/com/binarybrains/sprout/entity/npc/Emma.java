@@ -77,7 +77,6 @@ public class Emma extends Npc {
             player.getLevel().screen.hud.speakDialog(
                     String.format("Ohh! I really love this %s %s", item.getName(), item.getDescription())
             );
-            // setActionState(ActionState.CARRYING); // acorn
 
             return true;
         }

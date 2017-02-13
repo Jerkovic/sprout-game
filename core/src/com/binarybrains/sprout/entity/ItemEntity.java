@@ -18,15 +18,16 @@ public class ItemEntity extends Entity {
     private Sprite shadow;
     TextureAtlas atlas;
 
-
     public ItemEntity(Level level, Item item, Vector2 position) {
         super(level, position, 16, 16);
         this.item = item;
         // not a good solution
         atlas = SproutGame.assets.get("items2.txt", TextureAtlas.class);
+
         img = new Image(atlas.findRegion(item.getRegionId()));
         img.setSize(16, 16);
         img.setPosition(position.x, position.y);
+
         setupShadow();
     }
 
@@ -68,6 +69,9 @@ public class ItemEntity extends Entity {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         drawShadow(batch);
+        img.setPosition(getPosition().x, getPosition().y);
         img.draw(batch, parentAlpha);
+
+
     }
 }
