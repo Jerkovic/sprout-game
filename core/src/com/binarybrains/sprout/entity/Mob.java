@@ -25,7 +25,6 @@ public abstract class Mob extends Entity {
             } else {
                 return dir;
             }
-
         }
     }
 
@@ -105,10 +104,10 @@ public abstract class Mob extends Entity {
             System.out.println(mob + " gives " + damage + " damage to " + this + " " + direction);
             health -= damage;
         }
-        //if (attackDir == Direction.SOUTH) yKnockback = +6;
-        //if (attackDir == Direction.WEST) yKnockback = -6;
-        //if (attackDir == Direction.EAST) xKnockback = -6;
-        //if (attackDir == Direction.NORTH) xKnockback = +6;
+        //if (attackDir == Direction.SOUTH) yKnockback = +6; // knockback north
+        //if (attackDir == Direction.WEST) yKnockback = 6; // knockback east
+        //if (attackDir == Direction.EAST) xKnockback = -6; // knockback west
+        //if (attackDir == Direction.NORTH) xKnockback = -6; // knockback south
     }
 
 
