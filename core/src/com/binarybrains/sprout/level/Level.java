@@ -314,7 +314,7 @@ public class Level extends LevelEngine {
         debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
         debugRenderer.setColor(new Color(0f, .5f, 0f, 0.001f));
-        IntArray path = getPath(24,103, 44, 95);
+        IntArray path = getPath(24, 103, 44, 95);
         for (int i = 0, n = path.size; i < n; i += 2) {
             int px = path.get(i);
             int py = path.get(i + 1);

@@ -35,8 +35,7 @@ public class LevelEngine {
     public OrthogonalTiledMapRenderer tileMapRenderer;
     public int tilePixelWidth, tilePixelHeight, width, height = 0;
     public List<Entity> entities = new ArrayList<Entity>();
-    public Astar astar;
-
+    public Astar astar; // should this be here?
     public Tile tile[][] = new Tile[256][128];
 
     public Comparator<Entity> spriteSorter = new Comparator<Entity>() {
@@ -61,13 +60,14 @@ public class LevelEngine {
                 return getTile(x,y).mayPass;
             }
         };
-
     }
 
+    // should this take Entity?
     public IntArray getPath(Vector2 start, Vector2 target) {
         return astar.getPath((int)start.x, (int)start.y, (int)target.x, (int)target.y);
     }
 
+    // should this take Entity?
     public IntArray getPath(int startX, int startY, int targetX, int targetY) {
          return astar.getPath(startX, startY, targetX, targetY);
     }
@@ -77,13 +77,10 @@ public class LevelEngine {
     }
 
     public List<Entity> getEntities() { // optimize this!
-
         return entities;
     }
 
     // TODO: should probably need to another; get entities by a certain type/class
-
-
     public List<Entity> getEntities(Rectangle area) {
         List<Entity> result = new ArrayList<Entity>();
 
@@ -123,18 +120,15 @@ public class LevelEngine {
     }
 
     public void interact(int x, int y, Entity entity) {
-
         if (entity instanceof Player) {
             tile[x][y].interact((Player) entity, x, y, ((Player) entity).getDirection());
         }
     }
 
-
     public Rectangle getTileBounds(int tx, int ty) {
         Rectangle tileRect = new Rectangle(tx * 16, ty * 16, 16, 16);
         return tileRect;
     }
-
 
     public void loadMap(Level level, int i) {
         map = new TmxMapLoader().load("levels/level" + i + ".tmx");
@@ -197,6 +191,5 @@ public class LevelEngine {
         height = properties.get("height", Integer.class);
         tilePixelWidth = properties.get("tilewidth", Integer.class);
         tilePixelHeight = properties.get("tileheight", Integer.class);
-
     }
 }
