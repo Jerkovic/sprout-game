@@ -173,10 +173,6 @@ public class Level extends LevelEngine {
         }
         System.out.println("-----------------------------------------------");
 
-
-
-
-
     }
 
     public Camera getCamera() {
@@ -310,6 +306,20 @@ public class Level extends LevelEngine {
     private void renderDebug (List<Entity> entities) {
         debugRenderer.setProjectionMatrix(camera.combined);
 
+        // path finding test debug
+        debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+        debugRenderer.setColor(new Color(0f, .5f, 0f, 0.001f));
+        IntArray path = getPath(24,103, 44, 95);
+        for (int i = 0, n = path.size; i < n; i += 2) {
+            int px = path.get(i);
+            int py = path.get(i + 1);
+            Rectangle pathTile = new Rectangle(px*16, py*16, 16, 16);
+            debugRenderer.rect(pathTile.getX(), pathTile.getY(), pathTile.width, pathTile.height);
+        }
+        debugRenderer.end();
+        // end path finding test debug
+
         debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
         debugRenderer.setColor(Color.RED);
 
@@ -338,8 +348,8 @@ public class Level extends LevelEngine {
         // Player interactWithActiveItem /interact box
         debugRenderer.setColor(Color.WHITE);
         debugRenderer.rect(player.getInteractBox().getX(), player.getInteractBox().getY(), player.getInteractBox().width, player.getInteractBox().height);
-        debugRenderer.end();
 
+        debugRenderer.end();
     }
 
     private void renderHighlightCell() {
