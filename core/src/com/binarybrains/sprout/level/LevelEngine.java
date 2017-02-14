@@ -64,6 +64,10 @@ public class LevelEngine {
 
     }
 
+    public IntArray getPath(Vector2 start, Vector2 target) {
+        return astar.getPath((int)start.x, (int)start.y, (int)target.x, (int)target.y);
+    }
+
     public IntArray getPath(int startX, int startY, int targetX, int targetY) {
          return astar.getPath(startX, startY, targetX, targetY);
     }

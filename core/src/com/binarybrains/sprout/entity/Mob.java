@@ -48,11 +48,29 @@ public abstract class Mob extends Entity {
 
 
     public void update(float delta) {
-
         super.update(delta);
         if (getHealth() <= 0)
         {
             die();
+        }
+    }
+
+    public void lookAt(Entity entity) {
+        float angle = angleTo(entity);
+        String directions[] = {"NORTH", "EAST",  "SOUTH", "WEST"};
+        String direction = directions[Math.round((Math.abs(angle)) / 90) % 4];
+
+        if (direction.equals("WEST")) {
+            setDirection(Direction.WEST);
+
+        } else if (direction.equals("EAST")) {
+            setDirection(Direction.EAST);
+
+        } else if (direction.equals("NORTH")) {
+            setDirection(Direction.NORTH);
+
+        } else if (direction.equals("SOUTH")) {
+            setDirection(Direction.SOUTH);
         }
     }
 

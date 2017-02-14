@@ -132,11 +132,14 @@ public class Level extends LevelEngine {
         player.setTilePos(29, 103);
         this.add(this, player);
 
-        for(int r = 0; r < 6; r++) {
+        this.add(this, new Emma(this, new Vector2(30 * 16f, 104 * 16f), 16f, 16f));
+
+        // Generate some NPCs
+        for(int r = 0; r < 1; r++) {
             int xt = MathUtils.random(10, 30);
             int yt = MathUtils.random(100, 125);
             if (!isTileBlocked(xt, yt, player) && (player.getTileX() != xt && player.getTileY() != yt)) {
-                this.add(this, new Emma(this, new Vector2(xt * 16f,yt * 16f), 16f, 16f));
+                // this.add(this, new Emma(this, new Vector2(xt * 16f,yt * 16f), 16f, 16f));
             }
         }
 
@@ -160,10 +163,11 @@ public class Level extends LevelEngine {
         gameTimer.start();
 
         // test some path finding stuff
+        // should this be moved to Mob class?
         createPathFinding();
         //24x103 to 44x94
 
-        IntArray path = getPath(24,103, 44, 95);
+        IntArray path = getPath(24, 103, 44, 95);
 
         System.out.println("--------------PATH FINDING----------------------");
         for (int i = 0, n = path.size; i < n; i += 2) {

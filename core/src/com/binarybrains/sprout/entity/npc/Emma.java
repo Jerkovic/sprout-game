@@ -15,7 +15,7 @@ public class Emma extends Npc {
     public StateMachine<Emma, EmmaState> stateMachine;
 
     public Emma(Level level, Vector2 position, float width, float height) {
-        super(level, position, width, height, 3);
+        super(level, position, width, height, 3); // 3 is the spriteRow used
         setState(State.WALKING);
         setSpeed(MathUtils.random(16f, 32f));
         stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.WALK_ABOUT);
@@ -27,33 +27,12 @@ public class Emma extends Npc {
         super.update(delta);
         stateMachine.update();
 
-        float distance = getPosition().dst(getLevel().player.getPosition());
+        System.out.println("Emma pos:" + getTileX() + " " + getTileY());
 
+        float distance = getPosition().dst(getLevel().player.getPosition());
         if (distance < 32f) {
             // fake standing still and listening to our hero
-
-            // Move this to a more generic facingHelper method!
-            // this.distance(other)
-            // this.face(other)
-            float angle = (float) Math.toDegrees(Math.atan2(getLevel().player.getX() - getX(), getLevel().player.getY() - getY()));
-            angle = (float) (angle + Math.ceil( -angle / 360 ) * 360);
-
-            String directions[] = {"NORTH", "EAST",  "SOUTH", "WEST"};
-            String direction = directions[ Math.round((Math.abs(angle)) / 90) % 4 ];
-
-            if (direction.equals("WEST")) {
-                setDirection(Direction.WEST);
-
-            } else if (direction.equals("EAST")) {
-                setDirection(Direction.EAST);
-
-            } else if (direction.equals("NORTH")) {
-                setDirection(Direction.NORTH);
-
-            } else if (direction.equals("SOUTH")) {
-                setDirection(Direction.SOUTH);
-            }
-
+            super.lookAt(getLevel().player);
             setState(State.STANDING);
 
         } else if (getState().equals(State.STANDING)) {

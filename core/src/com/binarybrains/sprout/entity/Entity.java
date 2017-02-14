@@ -23,6 +23,10 @@ public abstract class Entity {
     public Rectangle walkBox = new Rectangle(); // add more complex walkPolygon instead of box?
     public Boolean removed = false;
 
+    public int previousTileX = -1;
+    public int previousTileY = -1;
+
+
     List<Entity> triggeredTouchList; // should we use for overlap check?
 
     public Entity(Level level, Vector2 position, float width, float height) {
@@ -32,6 +36,11 @@ public abstract class Entity {
         this.width = (int)width;
         this.height = (int)height;
         updateBoundingBox();
+    }
+
+    public float angleTo(Entity entity) {
+        float angle = (float) Math.toDegrees(Math.atan2(entity.getX() - getX(), entity.getY() - getY()));
+        return (float) (angle + Math.ceil( -angle / 360 ) * 360);
     }
 
     public Item getActiveItem() {
