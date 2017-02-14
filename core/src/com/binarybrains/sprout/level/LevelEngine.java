@@ -5,18 +5,21 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.objects.*;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.binarybrains.sprout.entity.Player;
-import com.binarybrains.sprout.entity.tree.Tree;
+import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
+import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.house.Cottage;
 import com.binarybrains.sprout.entity.tree.SmallTree;
+import com.binarybrains.sprout.entity.tree.Tree;
+import com.binarybrains.sprout.level.pathfind.Astar;
 import com.binarybrains.sprout.level.tile.GrassTile;
 import com.binarybrains.sprout.level.tile.Tile;
 import com.binarybrains.sprout.level.tile.WaterTile;
@@ -32,6 +35,7 @@ public class LevelEngine {
     public OrthogonalTiledMapRenderer tileMapRenderer;
     public int tilePixelWidth, tilePixelHeight, width, height = 0;
     public List<Entity> entities = new ArrayList<Entity>();
+    public Astar astar;
 
     public Tile tile[][] = new Tile[256][128];
 
@@ -47,6 +51,21 @@ public class LevelEngine {
         entity.removed = false;
         entities.add(entity);
         entity.init(level);
+    }
+
+    public void createPathFinding() {
+        astar = new Astar(256, 128) {
+            protected boolean isValid (int x, int y) {
+                // this would not be true for all entities.
+                // some entities are probably allowed where others aren't
+                return getTile(x,y).mayPass;
+            }
+        };
+
+    }
+
+    public IntArray getPath(int startX, int startY, int targetX, int targetY) {
+         return astar.getPath(startX, startY, targetX, targetY);
     }
 
     public void remove(Entity e) {

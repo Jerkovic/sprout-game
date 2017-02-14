@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
@@ -157,6 +158,24 @@ public class Level extends LevelEngine {
         gameTimer = new GameTime(1, 1, 1, 0, 0);
         gameTimer.setDuration((60 * 60 * 23) +50);
         gameTimer.start();
+
+        // test some path finding stuff
+        createPathFinding();
+        //24x103 to 44x94
+
+        IntArray path = getPath(24,103, 44, 95);
+
+        System.out.println("--------------PATH FINDING----------------------");
+        for (int i = 0, n = path.size; i < n; i += 2) {
+            int px = path.get(i);
+            int py = path.get(i + 1);
+            System.out.println(px + " x " +  py);
+        }
+        System.out.println("-----------------------------------------------");
+
+
+
+
 
     }
 
