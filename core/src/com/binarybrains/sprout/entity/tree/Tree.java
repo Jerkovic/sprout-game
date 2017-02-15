@@ -79,10 +79,12 @@ public class Tree extends Entity { // extends Vegitation or ?
     public void hurt(Level level, int dmg) {
         damage += dmg;
 
+
         if (damage > 10) {
-            falling = true;
+            // falling = true;
+            remove();
             // add some loot just as a test
-            int count = MathUtils.random(1,4);
+            int count = MathUtils.random(1,9);
             for (int i = 0; i < count; i++) {
                 getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.wood), new Vector2(getPosition().x, getPosition().y)));
             }
