@@ -162,7 +162,7 @@ public class Hud {
         window.add(table).pad(4f);
         window.row();
         window.pack();
-        window.setPosition(10, Gdx.app.getGraphics().getHeight() - window.getHeight());
+        window.setPosition(10, Gdx.app.getGraphics().getHeight() - window.getHeight()-10);
 
         stage.addActor(window);
     }
