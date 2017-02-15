@@ -57,7 +57,7 @@ public class LevelEngine {
             protected boolean isValid (int x, int y) {
                 // this would not be true for all entities.
                 // some entities are probably allowed where others aren't
-                return getTile(x,y).mayPass;
+                return getTile(x,y).mayPass && getEntitiesAtTile(x, y).size() == 0;
             }
         };
     }
@@ -94,10 +94,9 @@ public class LevelEngine {
         return result;
     }
 
-    public int getNumberEntitiesAtTile(int tile_x, int tile_y) {
-        Rectangle rect = new Rectangle(tile_x * 16 ,tile_y * 16,16,16);
-        //System.out.println("getEntAtTiles" + rect);
-        return getEntities(rect).size();
+    public List<Entity> getEntitiesAtTile(int tile_x, int tile_y) {
+        Rectangle rect = new Rectangle(tile_x * 16 ,tile_y * 16, 16, 16);
+        return getEntities(rect);
     }
 
 

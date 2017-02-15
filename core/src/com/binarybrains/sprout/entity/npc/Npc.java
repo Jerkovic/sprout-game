@@ -196,7 +196,7 @@ public class Npc extends Mob implements Telegraph {
 
     public void draw(Batch batch, float parentAlpha) {
 
-        //drawShadow(batch, Gdx.app.getGraphics().getDeltaTime());
+        //drawShadow(batch, Gdx.app.getGraphics().getDeltaTime()); // move to ShadowSystem
         Direction animDirection = Direction.getAnimationDirection(getDirection());
 
         if (getState() == State.STANDING) { // IDLE - NOT Walking
