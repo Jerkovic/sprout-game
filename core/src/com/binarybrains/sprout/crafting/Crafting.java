@@ -8,6 +8,8 @@ import com.binarybrains.sprout.item.resource.PlantableResource;
 import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.tool.Axe;
 import com.binarybrains.sprout.item.tool.Hoe;
+import com.binarybrains.sprout.item.tool.PickAxe;
+import com.binarybrains.sprout.item.tool.WateringCan;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,9 +30,9 @@ public class Crafting {
             //workbenchRecipes.add(new ToolRecipe(new Hoe(), 2).addCost(Resource.goldIngot, 10).addCost(Resource.wood, 3));
 
             workbenchRecipes.add(new ToolRecipe(new Axe(), 0).addCost(Resource.stone, 1).addCost(Resource.wood, 1));
-            //workbenchRecipes.add(new ToolRecipe(ToolType.hoe, 0).addCost(Resource.wood, 5));
-            //workbenchRecipes.add(new ToolRecipe(ToolType.pickaxe, 0).addCost(Resource.wood, 5));
-            //workbenchRecipes.add(new ToolRecipe(ToolType.shovel, 0).addCost(Resource.wood, 5));
+            workbenchRecipes.add(new ToolRecipe(new PickAxe(), 0).addCost(Resource.stone, 2).addCost(Resource.wood, 1));
+
+            workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Resource.ironBar, 5));
 
             // change to Furnace Recipes
             workbenchRecipes.add(new ResourceRecipe(Resource.ironBar).addCost(Resource.ironOre, 4).addCost(Resource.coal, 1));
