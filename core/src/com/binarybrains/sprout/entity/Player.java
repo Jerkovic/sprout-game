@@ -225,6 +225,20 @@ public class Player extends Npc implements InputProcessor {
         // can we right click a tile? if so implement that here
     }
 
+
+    @Override
+    public void updateBoundingBox() {
+        this.box.setWidth(getWidth());
+        this.box.setHeight(getHeight());
+        // Sets the x and y-coordinates of the bottom left corner
+        this.box.setPosition(getPosition());
+
+        // update the walkBox hit detector for tiles hit detection
+        this.walkBox.setWidth(12);
+        this.walkBox.setHeight(4);
+        this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
+    }
+
     public void update(float delta) {
         super.update(delta);
         updateMovement();

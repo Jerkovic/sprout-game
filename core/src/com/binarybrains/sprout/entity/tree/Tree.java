@@ -76,9 +76,9 @@ public class Tree extends Entity { // extends Vegitation or ?
         }
     }
 
+    // we dont need to send level in as param here
     public void hurt(Level level, int dmg) {
         damage += dmg;
-
 
         if (damage > 10) {
             // falling = true;

@@ -54,7 +54,7 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
             // be able to move stuff from chest inventory <-> player inventory
         }
 
-        return false;
+        return true;
     }
 
     @Override
