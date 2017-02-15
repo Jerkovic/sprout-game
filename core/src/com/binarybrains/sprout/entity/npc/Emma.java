@@ -27,7 +27,7 @@ public class Emma extends Npc {
         super.update(delta);
         stateMachine.update();
 
-        //System.out.println("Emma pos:" + getTileX() + " " + getTileY());
+        System.out.println("Emma pos:" + getTileX() + " " + getTileY() + " " + stateMachine.getCurrentState());
 
         float distance = getPosition().dst(getLevel().player.getPosition());
         if (distance < 32f) {
