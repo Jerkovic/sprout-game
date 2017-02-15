@@ -187,7 +187,6 @@ public class Player extends Npc implements InputProcessor {
             if (done) return; // move up in for loop?
 		}
 
-
         int tile_x = getTileX();
         int tile_y = getTileY();
 
@@ -205,8 +204,6 @@ public class Player extends Npc implements InputProcessor {
         }
 
         getLevel().interact(tile_x, tile_y, this);
-
-
     }
 
     //  use/check/investigate called on right click.. boolean return type?
@@ -377,7 +374,7 @@ public class Player extends Npc implements InputProcessor {
                 keys.get(keys.put(Keys.S, true));
                 break;
             case Input.Keys.SPACE:
-                plantTest();
+                // plantTest();
                 break;
             case Input.Keys.CONTROL_LEFT: // interact
                 // interactWithActiveItem(); // moved to left button
@@ -440,6 +437,9 @@ public class Player extends Npc implements InputProcessor {
 
         System.out.println("Mouse world pos: " + mouseWorldPosX + " x " + mouseWorldPosY);
         System.out.println("Player: " + getTileX() + " x " + getTileY());
+        // hash value
+        // this should be checked in the NPC class
+        System.out.println("PathFinding hashValue:" + getPosHash());
 
         if (mouseWorldPosX <= getTileX() + 1 && mouseWorldPosX >= getTileX() -1
                 && mouseWorldPosY <= getTileY() + 1 && mouseWorldPosY >= getTileY() -1) {

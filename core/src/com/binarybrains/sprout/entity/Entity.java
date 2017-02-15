@@ -149,6 +149,14 @@ public abstract class Entity {
         return (int)getCenterPos().x >> 4;
     }
 
+    /**
+     * Return as hash based on pos to be able to get moving directions from Travel HashMap
+     * @return long
+     */
+    public long getPosHash() {
+        return (long)getTileY() * getTileX();
+    }
+
     public int getTileY() {
         return (int)getCenterPos().y >> 4;
     }

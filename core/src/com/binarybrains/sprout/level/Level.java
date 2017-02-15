@@ -19,6 +19,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
+import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
@@ -32,7 +33,9 @@ import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Level extends LevelEngine {
@@ -165,18 +168,48 @@ public class Level extends LevelEngine {
         // test some path finding stuff
         // should this be moved to Mob class?
         createPathFinding();
-        //24x103 to 44x94
 
-        IntArray path = getPath(24, 103, 44, 95);
+        int startX = 24;
+        int startY = 103;
+        IntArray path = getPath(startX, startY, 44, 95);
+        path.reverse();
+
+        Map<Long, Mob.Direction> travelDirections = new HashMap<Long, Mob.Direction>();
+
+        // Entity class has a long getPosHash() in update we can check against this
 
         System.out.println("--------------PATH FINDING----------------------");
+        int prev_y = startY;
+        int prev_x = startX;
+        Mob.Direction dir = Mob.Direction.NORTH;;
         for (int i = 0, n = path.size; i < n; i += 2) {
-            int px = path.get(i);
-            int py = path.get(i + 1);
-            System.out.println(px + " x " +  py);
+            int py = path.get(i);
+            int px = path.get(i + 1);
+            System.out.println("x=" + px + " y=" +  py);
+            if (py > prev_y)
+            {
+                dir = Mob.Direction.NORTH;
+            }
+            if (py < prev_y)
+            {
+                dir = Mob.Direction.SOUTH;
+            }
+            if (px > prev_x)
+            {
+                dir = Mob.Direction.EAST;
+            }
+            if (px < prev_x)
+            {
+                dir = Mob.Direction.WEST;
+            }
+            travelDirections.put((long)py*px, dir);
+
+            prev_y = py;
+            prev_x = px;
+
         }
         System.out.println("-----------------------------------------------");
-
+        System.out.println(travelDirections);
     }
 
     public Camera getCamera() {
@@ -187,7 +220,6 @@ public class Level extends LevelEngine {
 
         gameTimer.update();
 
-        //System.out.println(gameTimer.getGameTime().hour);
         // Update all our entities
         for (int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
@@ -201,8 +233,8 @@ public class Level extends LevelEngine {
 
     public void draw() {
 
+        // Input ctrl should not be here
         // test darkness control
-
         if (Gdx.input.isKeyPressed(Input.Keys.E)) {
             nightTimeAlpha += 0.01f;
         }
@@ -210,7 +242,6 @@ public class Level extends LevelEngine {
         if (Gdx.input.isKeyPressed(Input.Keys.R)) {
             nightTimeAlpha -= 0.01f;
         }
-
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
@@ -294,19 +325,6 @@ public class Level extends LevelEngine {
         renderHighlightCell(); // mouse selection test
     }
 
-    public void dispose() {
-        tileMapRenderer.dispose();
-        debugRenderer.dispose();
-        map.dispose();
-        finalShader.dispose();
-        lightShader.dispose();
-        ambientShader.dispose();
-        defaultShader.dispose();
-        light.dispose();
-        fbo.dispose();
-
-    }
-
     private void renderDebug (List<Entity> entities) {
         debugRenderer.setProjectionMatrix(camera.combined);
 
@@ -383,6 +401,19 @@ public class Level extends LevelEngine {
         return true;
     }
 
+
+    public void dispose() {
+        tileMapRenderer.dispose();
+        debugRenderer.dispose();
+        map.dispose();
+        finalShader.dispose();
+        lightShader.dispose();
+        ambientShader.dispose();
+        defaultShader.dispose();
+        light.dispose();
+        fbo.dispose();
+
+    }
 
 
 }

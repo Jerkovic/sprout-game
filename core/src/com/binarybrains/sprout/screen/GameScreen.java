@@ -31,7 +31,7 @@ public class GameScreen implements Screen {
     public GameState gameState = GameState.RUN;
     public Hud hud;
 
-    public Sound forestAmbienceSfx;
+    public Sound forestAmbienceSfx; // temporary
 
     Skin skin;
 
@@ -52,6 +52,7 @@ public class GameScreen implements Screen {
         Gdx.input.setInputProcessor(multiplexer);
 
         // custom mouse pointer test
+        // the mouse pointer is transparent on Windows
         Pixmap pm = new Pixmap(Gdx.files.internal("mouse_pointer.png"));
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
@@ -97,23 +98,20 @@ public class GameScreen implements Screen {
                 level.gameTimer.resume();
             }
         }
-
         // Draw
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         level.draw();
         hud.draw();
-
     }
 
     @Override
     public void resize(int width, int height) {
-        // the windowed mode is not resizable
+
     }
 
     @Override
     public void pause() {
         gameState = GameState.PAUSE;
-
     }
 
     @Override
@@ -131,6 +129,5 @@ public class GameScreen implements Screen {
         level.dispose();
         batch.dispose();
         BackgroundMusic.dispose();
-
     }
 }
