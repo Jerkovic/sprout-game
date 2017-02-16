@@ -5,6 +5,16 @@ ________________________________________________________________________________
 https://github.com/sndcode/stardewvalleycode/tree/master/Stardew%20Valley
 ________________________________________________________________________________
 
+
+Class AmbientLocationSounds
+- Play sound louder if close to the source
+
+
+Sound effects
+-----------------------
+
+https://www.youtube.com/watch?v=PhYO-7SIL0c
+
 Sprout
 -------------
 A game about crafting, breeding, farming, hunting, exploring and surviving.
