@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Timer;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.hud.Hud;
 import com.binarybrains.sprout.level.Level;
@@ -61,6 +62,15 @@ public class GameScreen implements Screen {
         BackgroundMusic.start();
         forestAmbienceSfx = SproutGame.assets.get("ambience/forest_morning_ambience.mp3");
         forestAmbienceSfx.loop(.8f);
+
+
+        // test of timed events
+        Timer.schedule(new Timer.Task(){
+            @Override
+            public void run(){
+                System.out.println("Timed Event triggered!!!!!!!!!!!!");
+            }
+        }, 9.0f);
 
     }
 

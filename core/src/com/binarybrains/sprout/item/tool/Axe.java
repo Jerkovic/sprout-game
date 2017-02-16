@@ -12,6 +12,7 @@ public class Axe extends Tool {
     public boolean use() {
         Sound testSfx = SproutGame.assets.get("sfx/chop_wood2_converted.wav");
         testSfx.play();
+        // SproutGame.playSound("seeds");
         return true;
     }
 }
