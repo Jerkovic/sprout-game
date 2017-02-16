@@ -7,6 +7,7 @@ import com.binarybrains.sprout.level.Level;
 /**
  * Mobile Entities - we should maybe move stuff from NPC
  * - like player, enemies, cows, pigs etc
+ * - should all Mob(iles) be able to FindPath, Yes probably
  */
 public abstract class Mob extends Entity {
 

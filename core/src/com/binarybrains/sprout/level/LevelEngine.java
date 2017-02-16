@@ -52,24 +52,20 @@ public class LevelEngine {
         entity.init(level);
     }
 
-    public void createPathFinding() {
+    /**
+     * Setups and create A*star
+     */
+    public void setupPathFinding() {
         astar = new Astar(256, 128) {
             protected boolean isValid (int x, int y) {
-                // this would not be true for all entities.
-                // some entities are probably allowed where others aren't
                 return getTile(x,y).mayPass && getEntitiesAtTile(x, y).size() == 0;
             }
         };
     }
 
     // should this take Entity?
-    public IntArray getPath(Vector2 start, Vector2 target) {
-        return astar.getPath((int)start.x, (int)start.y, (int)target.x, (int)target.y);
-    }
-
-    // should this take Entity?
     public IntArray getPath(int startX, int startY, int targetX, int targetY) {
-         return astar.getPath(startX, startY, targetX, targetY);
+        return astar.getPath(startX, startY, targetX, targetY);
     }
 
     public void remove(Entity e) {

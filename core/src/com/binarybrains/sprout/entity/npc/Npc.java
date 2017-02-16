@@ -7,11 +7,14 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.level.Level;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.binarybrains.sprout.entity.Mob.Direction.*;
 
@@ -41,6 +44,50 @@ public class Npc extends Mob implements Telegraph {
         super(level, position, width, height);
         setSpriteRow(spriteRow);
         setupAnimations();
+    }
+
+    /**
+     * Returns a map containing the travel direction guid
+     */
+    public Map<Long, Direction> generatePathFindingDirections(int targetX, int targetY) {
+
+        int startX = getTileX();
+        int startY = getTileY();
+        IntArray path = getLevel().getPath(startX, startY, targetX, targetY);
+
+        Map<Long, Direction> travelDirections = new HashMap<Long, Direction>();
+        // Entity class has a long getPosHash() in update we can check against this
+
+        int prev_y = startY;
+        int prev_x = startX;
+        Mob.Direction dir = Mob.Direction.NORTH;;
+        for (int i = 0, n = path.size; i < n; i += 2) {
+            int py = path.get(i);
+            int px = path.get(i + 1);
+            if (py > prev_y)
+            {
+                dir = Mob.Direction.NORTH;
+            }
+            if (py < prev_y)
+            {
+                dir = Mob.Direction.SOUTH;
+            }
+            if (px > prev_x)
+            {
+                dir = Mob.Direction.EAST;
+            }
+            if (px < prev_x)
+            {
+                dir = Mob.Direction.WEST;
+            }
+            travelDirections.put((long)py*px, dir);
+
+            prev_y = py;
+            prev_x = px;
+
+        }
+
+        return travelDirections;
     }
 
     @Override
@@ -176,7 +223,6 @@ public class Npc extends Mob implements Telegraph {
         }
         return true;
     }
-
 
     private boolean canMoveToPos(float new2X, float new2Y) {
         List<Entity> entities = getLevel().getEntities();
