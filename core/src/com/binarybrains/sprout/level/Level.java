@@ -131,7 +131,7 @@ public class Level extends LevelEngine {
 
         loadMap(this, level);
 
-        player = new Player(this, 0, 0); //6f*11, 16f*96
+        player = new Player(this, 0, 0);
         player.setTilePos(29, 103);
         this.add(this, player);
 
@@ -153,6 +153,7 @@ public class Level extends LevelEngine {
         add(this, new Chest(this, new Vector2(16 * 22, 16 * 110)));
 
         camera = new Camera(this);
+        // we scale everything up from 16x16 tilesize to 64x64
         camera.setToOrtho(false, screen.width / 4, screen.height / 4);
         camera.update();
 
@@ -162,7 +163,7 @@ public class Level extends LevelEngine {
         debugRenderer = new ShapeRenderer();
 
         gameTimer = new GameTime(1, 1, 1, 0, 0);
-        gameTimer.setDuration((60 * 60 * 23) +50);
+        gameTimer.setDuration(0);
         gameTimer.start();
 
         // test some path finding stuff

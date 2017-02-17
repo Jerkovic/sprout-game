@@ -64,7 +64,6 @@ public class GameScreen implements Screen {
         forestAmbienceSfx.loop(.8f);
 
 
-        // test of timed events
         Timer.schedule(new Timer.Task(){
             @Override
             public void run(){
