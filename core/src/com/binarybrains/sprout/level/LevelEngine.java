@@ -108,6 +108,10 @@ public class LevelEngine {
         return tile[x][y];
     }
 
+    public void setTile(int x, int y, Tile newTile) {
+        tile[x][y] = newTile;
+    }
+
     public boolean isTileBlocked(int x, int y, Entity e) {
         if (x < 1) return true;
         if (y < 1) return true;
