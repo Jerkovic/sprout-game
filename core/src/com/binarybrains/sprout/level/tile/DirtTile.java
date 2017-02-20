@@ -14,7 +14,7 @@ public class DirtTile extends Tile {
 
     public DirtTile() {
         super(true);
-        super.setTileSetIndex(266);
+        super.setTileSetIndex(300);
     }
 
     @Override
