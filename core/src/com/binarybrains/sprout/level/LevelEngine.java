@@ -111,7 +111,7 @@ public class LevelEngine {
     public void setTile(int x, int y, Tile newTile) {
         tile[x][y] =  newTile;
 
-        TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground");
+        TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground_top");
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
 
          /* id identifying the tile */
