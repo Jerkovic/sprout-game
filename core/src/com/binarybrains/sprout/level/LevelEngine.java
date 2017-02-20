@@ -96,10 +96,10 @@ public class LevelEngine {
     }
 
 
-    public void sortAndRender(List<Entity> ents, Batch batch) {
-        Collections.sort(ents, spriteSorter);
-        for (int i = 0; i < ents.size(); i++) {
-            ents.get(i).draw(batch, 1f);
+    public void sortAndRender(List<Entity> entities, Batch batch) {
+        Collections.sort(entities, spriteSorter);
+        for (int i = 0; i < entities.size(); i++) {
+            entities.get(i).draw(batch, 1f);
         }
     }
 

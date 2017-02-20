@@ -1,7 +1,6 @@
 package com.binarybrains.sprout.crafting;
 
 import com.binarybrains.sprout.entity.Inventory;
-import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.resource.Resource;
 
@@ -15,7 +14,7 @@ public class ResourceRecipe extends Recipe {
 
     public void craft(Inventory inventory) {
 
-        inventory.add(0, new ResourceItem(resource, 1));
+        inventory.add(new ResourceItem(resource, 1));
     }
 
     public String getDescription() {

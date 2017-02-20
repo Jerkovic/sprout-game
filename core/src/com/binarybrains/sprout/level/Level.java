@@ -137,14 +137,15 @@ public class Level extends LevelEngine {
 
         this.add(this, new Emma(this, new Vector2(30 * 16f, 104 * 16f), 16f, 16f));
 
-        // Generate some NPCs
-        for(int r = 0; r < 1; r++) {
+        /* Generate some NPCs
+        // Note: Here we can not be sure that all are spawned
+        for(int r = 0; r < 1000; r++) {
             int xt = MathUtils.random(10, 30);
             int yt = MathUtils.random(100, 125);
             if (!isTileBlocked(xt, yt, player) && (player.getTileX() != xt && player.getTileY() != yt)) {
-                // this.add(this, new Emma(this, new Vector2(xt * 16f,yt * 16f), 16f, 16f));
+                this.add(this, new Emma(this, new Vector2(xt * 16f,yt * 16f), 16f, 16f));
             }
-        }
+        } */
 
         // test some scattered Pickup items
         add(this, new PickupItem(this, new ResourceItem(Resource.coal, 2), new Vector2(16f * 28, 16f * 118)));
@@ -263,7 +264,7 @@ public class Level extends LevelEngine {
             zAngle -= PI2;
 
         //draw the light to the FBO
-        if (true) {
+        if (false) {
             fbo.begin();
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
@@ -300,6 +301,7 @@ public class Level extends LevelEngine {
         // todo draw crops layer. the layer where the player can make changes to the ground
 
         tileMapRenderer.getBatch().begin();
+            // here we should render only entities on screen right?
             sortAndRender(entities, tileMapRenderer.getBatch());
         tileMapRenderer.getBatch().end();
 
@@ -307,7 +309,7 @@ public class Level extends LevelEngine {
         //tileMapRenderer.render(fg_layers);
 
         // Testing the night overlay
-        if (true) {
+        if (false) {
 
             Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND);
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);

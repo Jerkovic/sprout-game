@@ -17,10 +17,10 @@ public class ToolRecipe extends Recipe {
 
     @Override
     public void craft(Inventory inventory) {
-        inventory.add(0, new ToolItem(tool, level));
+        inventory.add(new ToolItem(tool, level));
     }
 
     public String getDescription() {
-        return "tools are funny and useful";
+        return "tools are fun and useful";
     } // this hoe is made of gold.
 }

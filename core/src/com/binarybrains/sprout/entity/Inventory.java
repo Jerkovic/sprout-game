@@ -33,6 +33,8 @@ public class Inventory {
 
     public boolean add(int slot, Item item) {
 
+        Gdx.app.log("Inventory", "Adding " + item +  " to inventory slot " + slot);
+
         if (item instanceof ResourceItem) {
             ResourceItem toTake = (ResourceItem) item;
             ResourceItem has = findResource(toTake.resource);
@@ -126,7 +128,7 @@ public class Inventory {
         System.out.println("**************************************");
         System.out.println("Inventory  Items: " + items.size() + " / " + capacity);
         for (int i = 0; i < items.size(); i++) {
-            System.out.println(items.get(i).getRegionId() + ", " + items.get(i).getName() + " x " + count(items.get(i)) + " - " + items.get(i).getDescription());
+            System.out.println("SlotIndex" + i + " " + items.get(i).getRegionId() + ", " + items.get(i).getName() + " x " + count(items.get(i)) + " - " + items.get(i).getDescription());
         }
         System.out.println("**************************************");
     }
