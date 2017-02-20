@@ -109,7 +109,16 @@ public class LevelEngine {
     }
 
     public void setTile(int x, int y, Tile newTile) {
-        tile[x][y] = newTile;
+        tile[x][y] =  newTile;
+
+        TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground");
+        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+
+         /* id identifying the tile */
+        cell.setTile(map.getTileSets().getTile(newTile.getTileSetIndex()));
+        layer.setCell(x, y, cell);
+
+
     }
 
     public boolean isTileBlocked(int x, int y, Entity e) {

@@ -9,6 +9,8 @@ import com.binarybrains.sprout.level.Level;
 
 public class Tile {
 
+    private int tileSetIndex = 0;
+
     public boolean mayPass = true;
 
     public boolean isHoldingFence() {
@@ -32,6 +34,15 @@ public class Tile {
     public boolean mayPass(Entity e) {
 
         return mayPass;
+    }
+
+    // the index in the tileSet to be able render correct tile
+    public int getTileSetIndex() {
+        return tileSetIndex;
+    }
+
+    public void setTileSetIndex(int index) {
+        tileSetIndex = index;
     }
 
 
