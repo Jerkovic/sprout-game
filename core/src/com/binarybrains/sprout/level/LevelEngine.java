@@ -104,8 +104,12 @@ public class LevelEngine {
     }
 
     public Tile getTile(int x, int y) {
-        // todo add try catch OutofBounds
-        return tile[x][y];
+        try {
+            return tile[x][y];
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            return new WaterTile();
+        }
     }
 
     public void setTile(int x, int y, Tile newTile) {
@@ -117,8 +121,6 @@ public class LevelEngine {
          /* id identifying the tile */
         cell.setTile(map.getTileSets().getTile(newTile.getTileSetIndex()));
         layer.setCell(x, y, cell);
-
-
     }
 
     public boolean isTileBlocked(int x, int y, Entity e) {
