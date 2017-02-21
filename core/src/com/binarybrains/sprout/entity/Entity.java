@@ -26,7 +26,6 @@ public abstract class Entity {
     public int previousTileX = -1;
     public int previousTileY = -1;
 
-
     List<Entity> triggeredTouchList; // should we use for overlap check?
 
     public Entity(Level level, Vector2 position, float width, float height) {
@@ -65,9 +64,7 @@ public abstract class Entity {
         renderer.setColor(Color.BLACK); // center cross hair
         renderer.line(getCenterPos().x - 1, getCenterPos().y, getCenterPos().x + 1, getCenterPos().y);
         renderer.line(getCenterPos().x, getCenterPos().y - 1, getCenterPos().x, getCenterPos().y + 1);
-
         renderer.setColor(restoreColor);
-
     }
 
     public void init(Level level)

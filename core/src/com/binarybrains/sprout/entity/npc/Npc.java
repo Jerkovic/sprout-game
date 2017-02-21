@@ -54,13 +54,14 @@ public class Npc extends Mob implements Telegraph {
         int startX = getTileX();
         int startY = getTileY();
         IntArray path = getLevel().getPath(startX, startY, targetX, targetY);
+        path.reverse();
 
         Map<Long, Direction> travelDirections = new HashMap<Long, Direction>();
-        // Entity class has a long getPosHash() in update we can check against this
 
         int prev_y = startY;
         int prev_x = startX;
         Mob.Direction dir = Mob.Direction.NORTH;;
+
         for (int i = 0, n = path.size; i < n; i += 2) {
             int py = path.get(i);
             int px = path.get(i + 1);

@@ -10,15 +10,22 @@ import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.level.Level;
 
+import java.util.Map;
+
 public class Emma extends Npc {
 
     public StateMachine<Emma, EmmaState> stateMachine;
+    public Map<Long, Direction> findPath;
 
     public Emma(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height, 3); // 3 is the spriteRow used
         setState(State.WALKING);
+        setDirection(Direction.EAST);
         setSpeed(MathUtils.random(16f, 32f));
         stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.WALK_ABOUT);
+
+        findPath = generatePathFindingDirections(40, 100);
+        System.out.println("" + findPath);
     }
 
     @Override
@@ -27,25 +34,21 @@ public class Emma extends Npc {
         super.update(delta);
         stateMachine.update();
 
-        // System.out.println("Emma pos:" + getTileX() + " " + getTileY() + " " + stateMachine.getCurrentState());
+        System.out.println("Emma pos:" + getPosHash() + " " + stateMachine.getCurrentState());
 
-        float distance = getPosition().dst(getLevel().player.getPosition());
-        if (distance < 32f) {
-            // fake standing still and listening to our hero
-            super.lookAt(getLevel().player);
-            setState(State.STANDING);
-
-        } else if (getState().equals(State.STANDING)) {
-            int changeDir = MathUtils.random(Direction.SOUTH.ordinal(), Direction.WEST.ordinal());
-            setDirection(Direction.values()[changeDir]); // test same Dir as player
+        if (findPath.containsKey(getPosHash())) {
+            System.out.println("Found: " + getPosHash() + " Direction:" + findPath.get(getPosHash()));
+            setDirection(findPath.get(getPosHash()));
             setState(State.WALKING);
         }
+
+        //return;
+
     }
 
     @Override
     public void touchedBy(Entity entity) {
         if ((entity instanceof Emma)) return;
-        // super.touchedBy(entity);
     }
 
     @Override

@@ -118,7 +118,6 @@ public class LevelEngine {
         TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground_top");
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
 
-         /* id identifying the tile */
         cell.setTile(map.getTileSets().getTile(newTile.getTileSetIndex()));
         layer.setCell(x, y, cell);
     }
