@@ -6,7 +6,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -303,42 +302,6 @@ public class Player extends Npc implements InputProcessor {
             carried.setPosition(getPosition().x, getPosition().y + 12);
             carried.draw(batch, 1f);
         }
-    }
-
-    public void plantTest() {
-        plantTestFinished();
-    }
-
-    public void plantTestFinished() {
-
-        int tile_x = getTileX();
-        int tile_y = getTileY();
-
-        if (getDirection() == WEST) {
-            tile_x -=1;
-        }
-        if (getDirection() == EAST) {
-            tile_x +=1;
-        }
-        if (getDirection() == NORTH) {
-            tile_y +=1;
-        }
-        if (getDirection() == SOUTH) {
-            tile_y -=1;
-        }
-
-        getLevel().interact(tile_x, tile_y, this);
-
-        // Below can be removed!!
-        // MUST CHECK ! also that we really can plant on this tile. isPlantableGround or something
-        TiledMapTileLayer ground = (TiledMapTileLayer)getLevel().map.getLayers().get("ground");
-
-        TiledMapTileLayer layer = (TiledMapTileLayer)getLevel().map.getLayers().get("ground_top");
-        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        //int ground_tile_id = ground.getCell(tile_x, tile_y).getTile().getId();
-
-        cell.setTile(getLevel().map.getTileSets().getTile(39)); /* or some other id, identifying the tile */
-        // layer.setCell(tile_x, tile_y, cell);
     }
 
     /**
