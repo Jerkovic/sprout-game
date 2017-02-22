@@ -24,8 +24,7 @@ public class Emma extends Npc {
         setSpeed(MathUtils.random(16f, 32f));
         stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.WALK_ABOUT);
 
-        findPath = generatePathFindingDirections(40, 100);
-        System.out.println("" + findPath);
+        findPath = generatePathFindingDirections(52, 89);
     }
 
     @Override
@@ -34,15 +33,15 @@ public class Emma extends Npc {
         super.update(delta);
         stateMachine.update();
 
-        System.out.println("Emma pos:" + getPosHash() + " " + stateMachine.getCurrentState());
+        //System.out.println("Emma pos:" + getPosHash() + " " + stateMachine.getCurrentState());
 
         if (findPath.containsKey(getPosHash())) {
-            System.out.println("Found: " + getPosHash() + " Direction:" + findPath.get(getPosHash()));
             setDirection(findPath.get(getPosHash()));
             setState(State.WALKING);
+        } else {
+            System.out.println("Could not find any more travelling directions. ");
+            setState(State.STANDING);
         }
-
-        //return;
 
     }
 

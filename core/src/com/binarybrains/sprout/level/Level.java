@@ -131,16 +131,6 @@ public class Level extends LevelEngine {
         player.setTilePos(29, 103);
         this.add(this, player);
 
-        /* Generate some NPCs
-        // Note: Here we can not be sure that all are spawned
-        for(int r = 0; r < 1000; r++) {
-            int xt = MathUtils.random(10, 30);
-            int yt = MathUtils.random(100, 125);
-            if (!isTileBlocked(xt, yt, player) && (player.getTileX() != xt && player.getTileY() != yt)) {
-                this.add(this, new Emma(this, new Vector2(xt * 16f,yt * 16f), 16f, 16f));
-            }
-        } */
-
         // test some scattered Pickup items
         add(this, new PickupItem(this, new ResourceItem(Resource.coal, 2), new Vector2(16f * 28, 16f * 118)));
         add(this, new PickupItem(this, new ResourceItem(Resource.goldIngot, 1), new Vector2(16f * 26, 16f * 119)));
@@ -148,8 +138,7 @@ public class Level extends LevelEngine {
         add(this, new Chest(this, new Vector2(16 * 22, 16 * 110)));
 
         camera = new Camera(this);
-        // we scale everything up from 16x16 tilesize to 64x64
-        camera.setToOrtho(false, screen.width / 4, screen.height / 4);
+        camera.setToOrtho(false, screen.width / 4, screen.height / 4); // we scale 16x16 to 64x64
         camera.update();
 
         tileMapRenderer = new OrthogonalTiledMapRenderer(map);
@@ -164,7 +153,7 @@ public class Level extends LevelEngine {
         // test some path finding stuff.. move this!!
         setupPathFinding();
 
-        this.add(this, new Emma(this, new Vector2(30 * 16f, 104 * 16f), 16f, 16f));
+        this.add(this, new Emma(this, new Vector2(12 * 16f, 119 * 16f), 16f, 16f));
 
     }
 

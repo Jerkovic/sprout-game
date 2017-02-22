@@ -151,7 +151,7 @@ public abstract class Entity {
      * @return long
      */
     public long getPosHash() {
-        return (long)getTileY() * getTileX();
+        return (long)getTileX() + (getTileY() * 256); // grid[x + y * width]
     }
 
     public int getTileY() {

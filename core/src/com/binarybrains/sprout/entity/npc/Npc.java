@@ -54,37 +54,44 @@ public class Npc extends Mob implements Telegraph {
         int startX = getTileX();
         int startY = getTileY();
         IntArray path = getLevel().getPath(startX, startY, targetX, targetY);
+        path.add(startX);
+        path.add(startY);
         path.reverse();
 
         Map<Long, Direction> travelDirections = new HashMap<Long, Direction>();
 
-        int prev_y = startY;
-        int prev_x = startX;
-        Mob.Direction dir = Mob.Direction.NORTH;;
+        Mob.Direction dir = Mob.Direction.EAST;
 
         for (int i = 0, n = path.size; i < n; i += 2) {
             int py = path.get(i);
             int px = path.get(i + 1);
-            if (py > prev_y)
+            int next_py = path.get(i + 2);
+            int next_px = path.get(i + 3);
+
+            if (next_py > py)
             {
                 dir = Mob.Direction.NORTH;
             }
-            if (py < prev_y)
+            if (next_py < py)
             {
                 dir = Mob.Direction.SOUTH;
             }
-            if (px > prev_x)
+            if (next_px > px)
             {
                 dir = Mob.Direction.EAST;
             }
-            if (px < prev_x)
+            if (next_px < px)
             {
                 dir = Mob.Direction.WEST;
             }
-            travelDirections.put((long)py*px, dir);
 
-            prev_y = py;
-            prev_x = px;
+            travelDirections.put((long)px + (py * 256), dir); // grid[x + y * width]
+
+            System.out.println(px + "x" + py + "dir" + dir);
+
+            if (i == n - 4) {
+                break;
+            }
 
         }
 
