@@ -26,8 +26,6 @@ import static com.binarybrains.sprout.entity.Mob.Direction.*;
 
 public class Player extends Npc implements InputProcessor {
 
-    // much of this can be moved to the Npc OR WHAT EVER WE GONNA CALL THE CLASS.
-
     private Sprite shadow;
     public  Inventory inventory;
     public Item activeItem;
@@ -37,21 +35,15 @@ public class Player extends Npc implements InputProcessor {
     public Portable carriedItem;
 
     enum Keys {
-        LEFT, RIGHT, UP, DOWN, CTRL, SPACE, W, A, S, D
+        W, A, S, D
     }
 
     static Map<Keys, Boolean> keys = new HashMap<Keys, Boolean>();
     static {
-        keys.put(Keys.LEFT, false);
-        keys.put(Keys.RIGHT, false);
-        keys.put(Keys.UP, false);
-        keys.put(Keys.DOWN, false);
-        keys.put(Keys.CTRL, false);
         keys.put(Keys.W, false);
         keys.put(Keys.A, false);
         keys.put(Keys.S, false);
         keys.put(Keys.D, false);
-        keys.put(Keys.SPACE, false);
     }
 
     public Player(Level level, float x, float y) {
@@ -246,20 +238,20 @@ public class Player extends Npc implements InputProcessor {
 
     private void updateMovement() {
 
-        if (keys.get(Keys.LEFT) || keys.get(Keys.A)) {
+        if (keys.get(Keys.A)) {
             setDirection(Mob.Direction.WEST);
             setState(Mob.State.WALKING);
         }
-        if (keys.get(Keys.RIGHT) || keys.get(Keys.D)) {
+        if (keys.get(Keys.D)) {
             setDirection(Mob.Direction.EAST);
             setState(Mob.State.WALKING);
         }
-        if (keys.get(Keys.UP) || keys.get(Keys.W)) {
+        if (keys.get(Keys.W)) {
             setDirection(Mob.Direction.NORTH);
             setState(Mob.State.WALKING);
         }
 
-        if (keys.get(Keys.DOWN) || keys.get(Keys.S)) {
+        if (keys.get(Keys.S)) {
             setDirection(Mob.Direction.SOUTH);
             setState(Mob.State.WALKING);
         }
@@ -284,8 +276,7 @@ public class Player extends Npc implements InputProcessor {
             setState(Mob.State.WALKING);
         }
 
-        if ( !keys.get(Keys.UP) && !keys.get(Keys.DOWN) && !keys.get(Keys.LEFT) && !keys.get(Keys.RIGHT) &&
-                !keys.get(Keys.W) && !keys.get(Keys.A) && !keys.get(Keys.S) && !keys.get(Keys.D) ) {
+        if (!keys.get(Keys.W) && !keys.get(Keys.A) && !keys.get(Keys.S) && !keys.get(Keys.D) ) {
             setState(State.STANDING);
         }
     }
@@ -363,18 +354,6 @@ public class Player extends Npc implements InputProcessor {
 
         switch (keycode)
         {
-            case Input.Keys.LEFT:
-                keys.get(keys.put(Keys.LEFT, true));
-                break;
-            case Input.Keys.RIGHT:
-                keys.get(keys.put(Keys.RIGHT, true));
-                break;
-            case Input.Keys.UP:
-                keys.get(keys.put(Keys.UP, true));
-                break;
-            case Input.Keys.DOWN:
-                keys.get(keys.put(Keys.DOWN, true));
-                break;
             case Input.Keys.A:
                 keys.get(keys.put(Keys.A, true));
                 break;
@@ -387,12 +366,6 @@ public class Player extends Npc implements InputProcessor {
             case Input.Keys.S:
                 keys.get(keys.put(Keys.S, true));
                 break;
-            case Input.Keys.SPACE:
-                // plantTest();
-                break;
-            case Input.Keys.CONTROL_LEFT: // interact
-                // interactWithActiveItem(); // moved to left button
-                break;
         }
         return true;
     }
@@ -402,18 +375,6 @@ public class Player extends Npc implements InputProcessor {
 
         switch (keycode)
         {
-            case Input.Keys.LEFT:
-                keys.get(keys.put(Keys.LEFT,false));
-                break;
-            case Input.Keys.RIGHT:
-                keys.get(keys.put(Keys.RIGHT, false));
-                break;
-            case Input.Keys.UP:
-                keys.get(keys.put(Keys.UP, false));
-                break;
-            case Input.Keys.DOWN:
-                keys.get(keys.put(Keys.DOWN, false));
-                break;
             case Input.Keys.A:
                 keys.get(keys.put(Keys.A, false));
                 break;
@@ -425,9 +386,6 @@ public class Player extends Npc implements InputProcessor {
                 break;
             case Input.Keys.S:
                 keys.get(keys.put(Keys.S, false));
-                break;
-            case Input.Keys.SPACE:
-                // keys.get(keys.put(Keys.SPACE, false));
                 break;
         }
         return false;
