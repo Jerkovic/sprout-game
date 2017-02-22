@@ -76,7 +76,6 @@ public abstract class Entity {
         return level;
     }
 
-
     public boolean remove() {
         return removed = true;
     }
@@ -146,14 +145,6 @@ public abstract class Entity {
         return (int)getCenterPos().x >> 4;
     }
 
-    /**
-     * Return as hash based on pos to be able to get moving directions from Travel HashMap
-     * @return long
-     */
-    public long getPosHash() {
-        return (long)getTileX() + (getTileY() * 256); // grid[x + y * width]
-    }
-
     public int getTileY() {
         return (int)getCenterPos().y >> 4;
     }
@@ -164,6 +155,14 @@ public abstract class Entity {
 
     public void setTileY(float y) {
         position.y = y * 16f;
+    }
+
+    /**
+     * Return as hash based on pos to be able to get moving directions from Travel HashMap
+     * @return long
+     */
+    public long getPosHash() {
+        return (long)getTileX() + (getTileY() * 256); // grid[x + y * width]
     }
 
     public void setTilePos(float x, float y) {
@@ -210,7 +209,6 @@ public abstract class Entity {
         System.out.println(entity + " overlaps " + this);
 
     }
-
 
     public  void touchedBy(Entity entity) {
         // System.out.println(this + " touchedBy " + entity);

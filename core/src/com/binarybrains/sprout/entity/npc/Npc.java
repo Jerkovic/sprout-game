@@ -46,6 +46,11 @@ public class Npc extends Mob implements Telegraph {
         setupAnimations();
     }
 
+    @Override
+    public long getPosHash() {
+        return (long)getTileX() + (getTileY() * 256); // grid[x + y * width]
+    }
+
     /**
      * Returns a map containing the travel direction guid
      */

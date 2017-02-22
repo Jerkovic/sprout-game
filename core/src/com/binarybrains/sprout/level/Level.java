@@ -179,7 +179,6 @@ public class Level extends LevelEngine {
     public void draw() {
 
         // Input ctrl should not be here
-        // test darkness control
         if (Gdx.input.isKeyPressed(Input.Keys.E)) {
             nightTimeAlpha += 0.01f;
         }

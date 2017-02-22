@@ -91,10 +91,9 @@ public class LevelEngine {
     }
 
     public List<Entity> getEntitiesAtTile(int tile_x, int tile_y) {
-        Rectangle rect = new Rectangle(tile_x * 16 ,tile_y * 16, 16, 16);
+        Rectangle rect = new Rectangle(tile_x * 16 , tile_y * 16, 16, 16);
         return getEntities(rect);
     }
-
 
     public void sortAndRender(List<Entity> entities, Batch batch) {
         Collections.sort(entities, spriteSorter);
