@@ -23,6 +23,7 @@ public class DirtTile extends Tile {
         if (item instanceof ResourceItem) { // seeds
             // todo seeds and fertilizing
             System.out.println("!Interact with DirtTile with " + item);
+            // make transform to a FarmTile
             return true;
         } else if (item instanceof ToolItem) { // watering can usage
             ToolItem toolItem = (ToolItem) item;
