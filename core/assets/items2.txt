@@ -115,51 +115,58 @@ Scythe
   orig: 48, 48
   offset: 0, 0
   index: -1
-Stone
+Seed_Bag
   rotate: false
   xy: 51, 151
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Watering_Can
+Stone
   rotate: false
   xy: 101, 151
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Wood
+Watering_Can
   rotate: false
   xy: 151, 151
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Wood_Fence
+Wood
   rotate: false
   xy: 201, 151
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Wool
+Wood_Fence
   rotate: false
   xy: 1, 201
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Wow_Cola
+Wool
   rotate: false
   xy: 51, 201
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-home
+Wow_Cola
   rotate: false
   xy: 101, 201
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+home
+  rotate: false
+  xy: 151, 201
   size: 99, 194
   orig: 99, 194
   offset: 0, 0
