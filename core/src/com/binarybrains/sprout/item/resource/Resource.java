@@ -20,6 +20,8 @@ public class Resource {
 
     public static Resource salmon = new FoodResource("Salmon", "Nice meatfish, grill it!");
 
+    public static Resource seeds = new PlantableResource("Seed Bag", "A bag of seeds");
+
     public final String name;
     public final String description;
 
