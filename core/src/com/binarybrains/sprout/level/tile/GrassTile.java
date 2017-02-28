@@ -23,7 +23,7 @@ public class GrassTile extends Tile {
         Item item = player.getActiveItem();
         if (item instanceof ToolItem) {
             ToolItem toolItem = (ToolItem) item;
-            if (toolItem.tool instanceof Hoe && toolItem.tool.use()) {
+            if (toolItem.tool instanceof Hoe && toolItem.tool.use(this)) {
                 if (MathUtils.random(1,2) == 1) {
                     player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resource.coal), new Vector2(xt * 16, yt * 16)));
                     player.getLevel().player.getLevel().setTile(xt, yt, new DirtTile());

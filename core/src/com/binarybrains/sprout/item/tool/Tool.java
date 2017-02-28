@@ -2,6 +2,7 @@ package com.binarybrains.sprout.item.tool;
 
 
 import com.badlogic.gdx.Gdx;
+import com.binarybrains.sprout.level.tile.Tile;
 
 public abstract class Tool {
 
@@ -32,8 +33,8 @@ public abstract class Tool {
         return description;
     }
 
-    public boolean use() {
-        Gdx.app.log("DEBUG", "Use tool: " + this);
+    public boolean use(Tile tile) {
+        Gdx.app.log("DEBUG", "Use tool: " + this +" on " + tile);
         return true;
     }
 

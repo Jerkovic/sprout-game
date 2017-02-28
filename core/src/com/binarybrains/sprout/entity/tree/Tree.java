@@ -102,7 +102,7 @@ public class Tree extends Entity { // extends Vegitation or ?
         if (item instanceof ToolItem) {
             ToolItem toolItem = (ToolItem) item;
             if (toolItem.tool instanceof Axe) {
-                toolItem.tool.use();
+                //toolItem.tool.use(); send tile
 
                 hurt(player.getLevel(), 1);
 

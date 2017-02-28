@@ -27,7 +27,7 @@ public class WaterTile extends Tile {
 
         if (item instanceof ToolItem && this instanceof WaterTile) {
             ToolItem toolItem = (ToolItem) item;
-            if (toolItem.tool instanceof FishingPole && toolItem.tool.use()) {
+            if (toolItem.tool instanceof FishingPole && toolItem.tool.use(this)) {
                 Sound testSfx = SproutGame.assets.get("sfx/water_splash.wav");
                 testSfx.play();
                 if (MathUtils.random(1,4) == 1) {
