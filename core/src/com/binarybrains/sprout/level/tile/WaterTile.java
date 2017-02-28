@@ -10,6 +10,7 @@ import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.tool.FishingPole;
+import com.binarybrains.sprout.item.tool.WateringCan;
 
 public class WaterTile extends Tile {
 
@@ -37,6 +38,12 @@ public class WaterTile extends Tile {
                     testSfx2.play();
                     // Some nice ResourceManager.giveLoot(player.skill, activeItem.level, timeOfday, placeOnMap etc)
                 }
+                return true;
+            }
+
+            if (toolItem.tool instanceof WateringCan && toolItem.tool.use(this)) {
+                Sound testSfx = SproutGame.assets.get("sfx/water_splash.wav");
+                testSfx.play();
                 return true;
             }
         }

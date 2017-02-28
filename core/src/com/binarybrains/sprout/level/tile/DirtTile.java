@@ -19,14 +19,16 @@ public class DirtTile extends Tile {
     @Override
     public boolean interact(Player player, int xt, int yt, Mob.Direction attackDir) {
         Item item = player.getActiveItem();
-        if (((ResourceItem) item).resource instanceof PlantableResource) { // seeds
-            // todo seeds and fertilizing
-            System.out.println("Interact with DirtTile with " + item);
-            // make transform to a FarmTile
-            player.getLevel().player.getLevel().setTile(xt, yt, new FarmTile());
-            return true;
+        if (item instanceof ResourceItem) {
+
+            if (((ResourceItem) item).resource instanceof PlantableResource) { // seeds
+                // todo seeds and fertilizing
+                System.out.println("Interact with DirtTile with " + item);
+                // make transform to a FarmTile
+                player.getLevel().player.getLevel().setTile(xt, yt, new FarmTile());
+                return true;
+            }
         }
         return false;
-
     }
 }

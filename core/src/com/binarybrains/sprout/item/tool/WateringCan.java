@@ -16,10 +16,11 @@ public class WateringCan extends Tool {
 
     public boolean use(Tile tile) {
         if (tile instanceof WaterTile) {
+            Gdx.app.log("WATERING_CAN", "Filling the watering can");
             water = 100; // fill up water again
         } else {
-            Gdx.app.log("WATERING_CAN", "Using Wateringcan");
             water--;
+            Gdx.app.log("WATERING_CAN", "Using Wateringcan" + water);
 
         }
         return true;
