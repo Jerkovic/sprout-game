@@ -108,114 +108,121 @@ Pickaxe
   orig: 48, 48
   offset: 0, 0
   index: -1
-Potato_Stage
+Potato
   rotate: false
   xy: 1, 151
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 1
+  index: -1
 Potato_Stage
   rotate: false
   xy: 51, 151
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 2
+  index: 1
 Potato_Stage
   rotate: false
   xy: 101, 151
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 3
+  index: 2
 Potato_Stage
   rotate: false
   xy: 151, 151
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 4
+  index: 3
 Potato_Stage
   rotate: false
   xy: 201, 151
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 5
+  index: 4
 Potato_Stage
   rotate: false
   xy: 1, 201
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 5
+Potato_Stage
+  rotate: false
+  xy: 51, 201
   size: 56, 56
   orig: 56, 56
   offset: 0, 0
   index: 6
 Salmon
   rotate: false
-  xy: 59, 201
+  xy: 109, 201
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Scythe
   rotate: false
-  xy: 109, 201
+  xy: 159, 201
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Seed_Bag
   rotate: false
-  xy: 159, 201
+  xy: 1, 259
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Stone
   rotate: false
-  xy: 1, 259
+  xy: 51, 259
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Watering_Can
   rotate: false
-  xy: 51, 259
+  xy: 101, 259
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Wood
   rotate: false
-  xy: 101, 259
+  xy: 151, 259
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Wood_Fence
   rotate: false
-  xy: 151, 259
+  xy: 201, 259
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Wool
   rotate: false
-  xy: 201, 259
+  xy: 1, 309
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Wow_Cola
   rotate: false
-  xy: 1, 309
+  xy: 51, 309
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 home
   rotate: false
-  xy: 51, 309
+  xy: 101, 309
   size: 99, 194
   orig: 99, 194
   offset: 0, 0

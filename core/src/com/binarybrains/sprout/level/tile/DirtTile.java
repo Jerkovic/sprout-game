@@ -24,6 +24,9 @@ public class DirtTile extends Tile {
 
             if (((ResourceItem) item).resource instanceof PlantableResource) { // seeds
                 // todo seeds and fertilizing
+                // deduct from player inventory
+                player.getInventory().removeResource(((ResourceItem) item).resource, 1);
+                // BUG. Inventory UI resource counter is not updated
                 System.out.println("Interact with DirtTile with " + item);
                 // make transform to a FarmTile
                 player.getLevel().setTile(xt, yt, new FarmTile());

@@ -3,11 +3,17 @@ package com.binarybrains.sprout.entity.crop;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
+import com.binarybrains.sprout.entity.PickupItem;
+import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.level.Level;
+import com.binarybrains.sprout.level.tile.DirtTile;
+import com.binarybrains.sprout.level.tile.FarmTile;
 
 /**
  * Created by erikl on 01/03/17.
@@ -48,12 +54,18 @@ public class Crop extends Entity {
         if (growTimer > 2 && regionIndex < 5) {
             regionIndex++;
             growTimer = 0;
-
         }
 
         if (growTimer > 5 && growTimer < 6 && canHarvest()) {
-            System.out.println(this +" can be harvested!");
-            // remove();
+            //System.out.println(this +" can be harvested!");
+            remove();
+            // set back the tile to Dirt instead of FarmTile
+            getLevel().setTile(getTileX(), getTileY(), new DirtTile());
+
+            int count = MathUtils.random(2, 6);
+            for (int i = 0; i < count; i++) {
+                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.potato), new Vector2(getPosition().x, getPosition().y)));
+            }
 
         }
 
