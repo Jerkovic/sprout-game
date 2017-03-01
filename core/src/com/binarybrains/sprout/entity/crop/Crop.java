@@ -20,7 +20,7 @@ public class Crop extends Entity {
     private float growTimer = 0;
 
 
-    // Crop should be abstract class
+    // Crop should be abstract class?
     public Crop(Level level, int tx, int ty) {
 
         super(level, new Vector2(16f * tx, 16f * ty), 16, 16);
@@ -37,6 +37,10 @@ public class Crop extends Entity {
 
     }
 
+    public boolean canHarvest() {
+        return (regionIndex == 5);
+    }
+
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
@@ -44,6 +48,12 @@ public class Crop extends Entity {
         if (growTimer > 2 && regionIndex < 5) {
             regionIndex++;
             growTimer = 0;
+
+        }
+
+        if (growTimer > 5 && growTimer < 6 && canHarvest()) {
+            System.out.println(this +" can be harvested!");
+            // remove();
 
         }
 
