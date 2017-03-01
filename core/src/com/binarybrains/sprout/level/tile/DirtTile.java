@@ -3,6 +3,7 @@ package com.binarybrains.sprout.level.tile;
 
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.crop.Crop;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
@@ -25,7 +26,9 @@ public class DirtTile extends Tile {
                 // todo seeds and fertilizing
                 System.out.println("Interact with DirtTile with " + item);
                 // make transform to a FarmTile
-                player.getLevel().player.getLevel().setTile(xt, yt, new FarmTile());
+                player.getLevel().setTile(xt, yt, new FarmTile());
+                // add our test crop potato, it sure grows fast
+                player.getLevel().add(player.getLevel(), new Crop(player.getLevel(), xt, yt));
                 return true;
             }
         }

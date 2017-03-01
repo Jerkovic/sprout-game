@@ -25,7 +25,7 @@ public class ItemEntity extends Entity {
         atlas = SproutGame.assets.get("items2.txt", TextureAtlas.class);
 
         img = new Image(atlas.findRegion(item.getRegionId()));
-        img.setSize(16, 16);
+        img.setSize(16, 16); // scale our items down
         img.setPosition(position.x, position.y);
 
         setupShadow();

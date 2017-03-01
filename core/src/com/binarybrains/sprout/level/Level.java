@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.crop.Crop;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.item.ResourceItem;
@@ -130,6 +131,9 @@ public class Level extends LevelEngine {
         player = new Player(this, 0, 0);
         player.setTilePos(29, 103);
         this.add(this, player);
+
+        // starting test of our crops
+        add(this, new Crop(this, 30, 104));
 
         // test some scattered Pickup items
         add(this, new PickupItem(this, new ResourceItem(Resource.coal, 2), new Vector2(16f * 28, 16f * 118)));
