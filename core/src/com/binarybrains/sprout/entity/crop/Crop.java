@@ -13,11 +13,8 @@ import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.level.tile.DirtTile;
-import com.binarybrains.sprout.level.tile.FarmTile;
 
-/**
- * Created by erikl on 01/03/17.
- */
+
 public class Crop extends Entity {
 
     private TextureAtlas atlas; // move

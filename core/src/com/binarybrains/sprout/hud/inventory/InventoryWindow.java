@@ -45,6 +45,9 @@ public class InventoryWindow extends Window {
         setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2), 20);
     }
 
+    /*
+     * Update this onInventory has changed
+     */
     public void onInventoryChanged(Inventory inventory) {
         clearChildren();
         syncInventory(inventory);
