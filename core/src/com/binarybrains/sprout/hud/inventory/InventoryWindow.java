@@ -87,7 +87,6 @@ public class InventoryWindow extends Window {
 
             Button button = new Button(new Image(atlas.findRegion(item.getRegionId())), skin, "toggle");
 
-
             String counter = "";
             if (item instanceof ResourceItem) {
                 counter = "" + inventory.count(item);

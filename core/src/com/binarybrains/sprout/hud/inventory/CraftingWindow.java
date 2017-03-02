@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.hud.inventory;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.crafting.Crafting;
 import com.binarybrains.sprout.crafting.Recipe;
-import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
@@ -20,9 +18,8 @@ import com.binarybrains.sprout.item.ResourceItem;
 
 public class CraftingWindow extends Window {
 
-    //ButtonGroup group;
     TextureAtlas atlas;
-    Inventory inventory;
+    Skin skin;
     Crafting craft;
     Player player;
 
@@ -48,9 +45,10 @@ public class CraftingWindow extends Window {
         super("Workbench Crafting", skin);
 
         this.player = player;
-        this.inventory = player.getInventory();
-        this.craft = new Crafting(Crafting.workbenchRecipes, inventory);
+        this.skin = skin;
+        this.craft = new Crafting(Crafting.workbenchRecipes, player.getInventory());
         this.atlas = SproutGame.assets.get("items2.txt");
+
 
         setKeepWithinStage(true);
         setModal(true);
@@ -60,18 +58,14 @@ public class CraftingWindow extends Window {
         setZIndex(200);
 
         // craft.debugCrafting();
+        build();
 
-        TextButton buttonExit = new TextButton("Close", skin);
-        buttonExit.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                setVisible(false);
-                //remove();
 
-            }
-        });
+    }
 
-        // setPosition(300, 400);
+
+    public void build() {
+        clearChildren();
 
         ButtonGroup Inventorygroup = buildInventoryButtonGroup(skin);
         Table itemTable = new Table(skin);
@@ -109,14 +103,25 @@ public class CraftingWindow extends Window {
         recipeContainer.add(recipeTableScrollPane).height(202).width(800);
         // end test
 
-        //add("Recipes").row();
         row();
+        //add(createTabs());
+        //row();
         add(recipeContainer);
         row(); // recipe container
-        add("Inventory");
+        add("Your Inventory:");
         row();
         add(inventoryContainer);
-        row(); // inventory container
+        row(); // inventory container'
+        TextButton buttonExit = new TextButton("Close Window", skin);
+        buttonExit.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                setVisible(false);
+                // unpause the game
+                //remove();
+
+            }
+        });
         add(buttonExit).pad(5);
 
         pack();
@@ -141,6 +146,8 @@ public class CraftingWindow extends Window {
                 public void changed(ChangeEvent event, Actor actor) {
                     //System.out.println(event.getTarget().getName());
                     craft.startCraft(player, Integer.parseInt(event.getTarget().getName()));
+                    onCrafting();
+
                 }
             });
 
@@ -148,11 +155,18 @@ public class CraftingWindow extends Window {
 
             Label lc = new Label(recipe.toString(), skin);
             lc.setAlignment(Align.left);
-            lc.setColor(Color.WHITE);
-            lc.layout();
             recipeRowTable.add(lc).padLeft(8).left(); // this made my evening. the left() made the table look better!
             //recipeRowTable.debugTable();
-            // todo add ingredients list
+            // todo improve the ingredients list
+            for (int ci = 0; ci < recipe.getCost().size(); ci++) {
+                Item cost = recipe.getCost().get(ci);
+                int cost_count = 1;
+                if (cost instanceof ResourceItem)
+                {
+                    cost_count = ((ResourceItem) cost).count;
+                }
+                recipeRowTable.add(cost.toString() + " x" + cost_count);
+            }
             recipeRowTable.row();
         }
 
@@ -161,22 +175,37 @@ public class CraftingWindow extends Window {
 
     }
 
+    public void onCrafting() {
+        //clearChildren();
+        //syncInventory(inventory);
+        build();
+        centerMe();
+    }
+
+    public void centerMe() {
+        //setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2), ??);
+    }
+
+
     public ButtonGroup buildInventoryButtonGroup(Skin skin) {
 
         ButtonGroup group = new ButtonGroup();
         group.uncheckAll();
 
 
-        for (Item item : inventory.getItems()) {
+        for (Item item : player.getInventory().getItems()) {
 
             Button button = new Button(new Image(atlas.findRegion(item.getRegionId())), skin, "default");
 
-            Label lc = new Label("" + inventory.count(item), skin);
+            String counter = "";
+            if (item instanceof ResourceItem) {
+                counter = "" + player.getInventory().count(item);
+            }
+
+            Label lc = new Label(counter, skin);
             lc.setAlignment(Align.bottomRight);
             lc.setColor(Color.BLACK);
             button.add(lc);
-
-
             button.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -190,6 +219,5 @@ public class CraftingWindow extends Window {
         group.setMaxCheckCount(0);
         return group;
     }
-
 
 }
