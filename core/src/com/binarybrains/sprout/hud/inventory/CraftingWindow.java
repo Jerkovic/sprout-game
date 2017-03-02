@@ -1,5 +1,6 @@
 package com.binarybrains.sprout.hud.inventory;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -147,6 +148,9 @@ public class CraftingWindow extends Window {
                     //System.out.println(event.getTarget().getName());
                     if (craft.startCraft(player, Integer.parseInt(event.getTarget().getName()))) {
                         onCrafting();
+                        // temp sound
+                        Sound testSfx = SproutGame.assets.get("sfx/blop.wav");
+                        testSfx.play();
                     }
 
                 }
