@@ -8,6 +8,7 @@ import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.resource.PlantableResource;
+import com.binarybrains.sprout.item.resource.SeedResource;
 import com.binarybrains.sprout.item.tool.WateringCan;
 
 public class DirtTile extends Tile {
@@ -22,7 +23,7 @@ public class DirtTile extends Tile {
         Item item = player.getActiveItem();
         if (item instanceof ResourceItem) {
 
-            if (((ResourceItem) item).resource instanceof PlantableResource) { // seeds
+            if (((ResourceItem) item).resource instanceof SeedResource) { // seeds
                 // todo seeds and fertilizing
                 // deduct from player inventory
                 // move this into a player method ?
