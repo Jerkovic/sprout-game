@@ -69,16 +69,17 @@ public class Crafting {
         return recipes;
     }
 
-    public void startCraft(Player player, int index) {
+    public boolean startCraft(Player player, int index) {
         Recipe recipe = recipes.get(index);
         recipe.checkCanCraft(player.getInventory());
         if (recipe.canCraft) {
             recipe.deductCost(player.getInventory());
             recipe.craft(player.getInventory());
+            return true;
 
         }
+        return false;
     }
-
 
     public void debugCrafting() {
         for (int i = 0; i < getRecipes().size(); i++) {

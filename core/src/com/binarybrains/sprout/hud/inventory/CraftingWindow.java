@@ -145,8 +145,9 @@ public class CraftingWindow extends Window {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     //System.out.println(event.getTarget().getName());
-                    craft.startCraft(player, Integer.parseInt(event.getTarget().getName()));
-                    onCrafting();
+                    if (craft.startCraft(player, Integer.parseInt(event.getTarget().getName()))) {
+                        onCrafting();
+                    }
 
                 }
             });

@@ -60,6 +60,7 @@ public class Hud {
     }
 
     public void showCraftingWindow() {
+        craftingWindow.build(); // refresh content in window
         craftingWindow.setVisible(true);
     }
 
