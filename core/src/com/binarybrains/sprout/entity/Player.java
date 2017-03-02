@@ -199,11 +199,11 @@ public class Player extends Npc implements InputProcessor {
     }
 
     //  use/check/investigate called on right click.. boolean return type?
-    public void use() {
+    public boolean use() {
         // can we really interact while carrying stuff?
         if (getActionState() != ActionState.EMPTY_NORMAL) {
             System.out.println("Cannot use/check. Current actionState: " + getActionState());
-            return;
+            return false;
         }
 
         List<Entity> entities = getLevel().getEntities(getInteractBox());
@@ -211,10 +211,12 @@ public class Player extends Npc implements InputProcessor {
         for (int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
             if (e != this)
-                e.use(this, getDirection());
+                return e.use(this, getDirection());
         }
 
         // can we right click a tile? if so implement that here
+
+        return false;
     }
 
 
