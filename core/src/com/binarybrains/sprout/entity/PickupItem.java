@@ -35,6 +35,9 @@ public class PickupItem extends ItemEntity {
         ya = random.nextGaussian() * 0.2;
         za = random.nextFloat() * 0.7 + 2;
 
+        // addEffect(new LifeTime(lifeTime))
+        // addEffect(new ShakeEffect
+
     }
 
     @Override

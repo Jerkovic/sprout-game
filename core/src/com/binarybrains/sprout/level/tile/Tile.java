@@ -1,10 +1,17 @@
 package com.binarybrains.sprout.level.tile;
 
 
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
+import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.bomb.Bomb;
 import com.binarybrains.sprout.item.Item;
+import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.item.resource.Resource;
+import com.binarybrains.sprout.item.tool.Hoe;
 import com.binarybrains.sprout.level.Level;
 
 
@@ -62,11 +69,26 @@ public class Tile {
     public boolean interact(Player player, int xt, int yt, Mob.Direction attackDir) {
         Item item = player.getActiveItem();
         if (item != null) {
-            System.out.println(player + " tries to interact with " + this + " using " + item);
+            System.out.println(player + " Interact with " + this + " using " + item);
+
+            if (item.getName().equals("Bomb")) {
+                // move this into a player method ?
+                player.getInventory().removeResource(((ResourceItem) item).resource, 1);
+                player.getLevel().screen.hud.refreshInventory();
+
+                player.getLevel().add(player.getLevel(), new Bomb(player.getLevel(), xt, yt));
+                return true;
+            }
         }
 
         return false;
     }
+
+    public String toString()
+    {
+        return getClass().getSimpleName();
+    }
+
 
     public boolean use(Level level, int xt, int yt, Player player, int attackDir) {
         return false;
