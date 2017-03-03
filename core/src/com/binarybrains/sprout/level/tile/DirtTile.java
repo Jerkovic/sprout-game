@@ -25,6 +25,7 @@ public class DirtTile extends Tile {
 
             if (((ResourceItem) item).resource instanceof SeedResource) { // seeds
                 // todo seeds and fertilizing
+
                 // deduct from player inventory
                 // move this into a player method ?
                 player.getInventory().removeResource(((ResourceItem) item).resource, 1);

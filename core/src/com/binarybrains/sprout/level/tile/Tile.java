@@ -4,6 +4,7 @@ package com.binarybrains.sprout.level.tile;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 
 
@@ -59,7 +60,11 @@ public class Tile {
     }
 
     public boolean interact(Player player, int xt, int yt, Mob.Direction attackDir) {
-        System.out.println(player + " tries to interact with " + this);
+        Item item = player.getActiveItem();
+        if (item != null) {
+            System.out.println(player + " tries to interact with " + this + " using " + item);
+        }
+
         return false;
     }
 

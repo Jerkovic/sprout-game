@@ -60,8 +60,6 @@ public class WoodFence extends Entity {
 
         }
 
-
-
         sprite = new Sprite(level.spritesheet, srcTileX * 16, srcTileY *16, (int)width, (int)height);
         sprite.setSize(width, height);
         sprite.setPosition(getX(), getY());

@@ -132,7 +132,6 @@ public class CraftingWindow extends Window {
 
         Table recipeRowTable = new Table(skin);
         recipeRowTable.setWidth(600);
-        //recipeRowTable.setFillParent(true);
         recipeRowTable.left().top();
 
         //recipeRowTable.debug();
