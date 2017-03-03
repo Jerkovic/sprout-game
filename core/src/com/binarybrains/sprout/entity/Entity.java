@@ -49,7 +49,7 @@ public abstract class Entity {
     public void renderDebug(ShapeRenderer renderer, Color walkBoxColor) {
         Color restoreColor = renderer.getColor();
 
-        renderer.setColor(Color.BLUE); // bounding box
+        renderer.setColor(Color.CYAN); // bounding box
         renderer.rect(getBoundingBox().getX(),
                 getBoundingBox().getY(),
                 getBoundingBox().getWidth(),
@@ -198,14 +198,11 @@ public abstract class Entity {
 
     }
 
-    public void hurt(Mob mob, int damage, int attackDir) {
-    }
-
-    public void hurt(int tile, int x, int y, int dmg) {
+    public void hurt(Entity ent, int damage) {
+        System.out.println(this + " is hurt by" + ent);
     }
 
     protected void overlaps(Entity entity) {
-        // debug this method should be empty
         System.out.println(entity + " overlaps " + this);
 
     }
@@ -252,4 +249,6 @@ public abstract class Entity {
     public void setHeight(int height) {
         this.height = height;
     }
+
+
 }

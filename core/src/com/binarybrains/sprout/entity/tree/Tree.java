@@ -76,8 +76,8 @@ public class Tree extends Entity { // extends Vegitation or ?
         }
     }
 
-    // we dont need to send level in as param here
-    public void hurt(Level level, int dmg) {
+    @Override
+    public void hurt(Entity e, int dmg) {
         damage += dmg;
 
         if (damage > 10) {
@@ -103,7 +103,7 @@ public class Tree extends Entity { // extends Vegitation or ?
             ToolItem toolItem = (ToolItem) item;
             if (toolItem.tool instanceof Axe) {
                 //toolItem.tool.use(); send tile
-                hurt(player.getLevel(), 1);
+                hurt(player, 1);
                 return true;
             }
         }

@@ -1,17 +1,12 @@
 package com.binarybrains.sprout.level.tile;
 
 
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
-import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.bomb.Bomb;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
-import com.binarybrains.sprout.item.resource.Resource;
-import com.binarybrains.sprout.item.tool.Hoe;
 import com.binarybrains.sprout.level.Level;
 
 
@@ -31,6 +26,7 @@ public class Tile {
 
     public boolean isHoldingFence = false;
 
+    // xt and yt also right?
     public Tile(boolean mayPass) {
         this.mayPass = mayPass;
     }
@@ -86,7 +82,7 @@ public class Tile {
 
     public String toString()
     {
-        return getClass().getSimpleName();
+        return "[" + this.getClass().getSimpleName() +  this.hashCode() + "@Pos:?]";
     }
 
 
