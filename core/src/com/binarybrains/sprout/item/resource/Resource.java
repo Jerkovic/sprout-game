@@ -9,7 +9,7 @@ public class Resource {
     public static Resource stone = new Resource("Stone", "Hard, solid, nonmetallic mineral matter especially \ngood as building material.");
 
     public static Resource ironOre = new Resource("Iron Ore", "Rock from which iron can be profitably extracted.");
-    public static Resource ironBar = new Resource("Iron Bar", "Strong, hard magnetic silvery-gray metall");
+    public static Resource ironBar = new Resource("Iron Bar", "Strong, hard magnetic silvery-gray metal");
 
     public static Resource goldNugget = new Resource("Gold Nugget", "Small lump of gold found ready-formed in the earth.");
     public static Resource goldIngot = new Resource("Gold Bar", "Solid block of gold in a oblong shape.");
