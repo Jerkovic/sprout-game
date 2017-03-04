@@ -1,5 +1,6 @@
 package com.binarybrains.sprout.entity.bomb;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -45,6 +46,11 @@ public class Bomb extends Entity implements Portable {
         time++;
         if (time >= lifeTime) {
             // explode
+
+            // temp sound
+            Sound testSfx = SproutGame.assets.get("sfx/explosion_1.wav");
+            testSfx.play();
+
             getLevel().getCamera().shake();
 
             // hurt entities in radius from the bomb
@@ -57,7 +63,6 @@ public class Bomb extends Entity implements Portable {
 
             remove();
         }
-
     }
 
     @Override
