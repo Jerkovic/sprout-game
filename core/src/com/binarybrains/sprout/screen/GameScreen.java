@@ -58,7 +58,7 @@ public class GameScreen implements Screen {
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
 
-        BackgroundMusic.setVolume(.65f);
+        BackgroundMusic.setVolume(.15f); // Preference.getSetting("music_volume")
         BackgroundMusic.start();
         forestAmbienceSfx = SproutGame.assets.get("ambience/forest_morning_ambience.mp3");
         forestAmbienceSfx.loop(.8f);
