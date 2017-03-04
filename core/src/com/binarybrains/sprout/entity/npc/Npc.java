@@ -48,7 +48,25 @@ public class Npc extends Mob implements Telegraph {
 
     @Override
     public long getPosHash() {
-        return (long)getTileX() + (getTileY() * 256); // grid[x + y * width]
+        int tile_x=0, tile_y=0;
+
+        if (getDirection() == Direction.EAST) {
+            tile_x = (int)getWalkBox().getX() >> 4;
+            tile_y = getTileY();
+        }
+        else if(getDirection() == Direction.WEST) {
+            tile_x = (int)(getWalkBox().getX()+16) >> 4;
+            tile_y = getTileY();
+        }
+        else if(getDirection() == Direction.SOUTH) {
+            tile_x = getTileX();
+            tile_y = (int)getWalkBox().getY()+8 >> 4;
+        }
+        else if(getDirection() == Direction.NORTH) {
+            tile_x = getTileX();
+            tile_y = (int)getWalkBox().getY() >> 4;
+        }
+        return (long)tile_x + (tile_y * 256); // grid[x + y * width]
     }
 
     /**
@@ -92,12 +110,9 @@ public class Npc extends Mob implements Telegraph {
 
             travelDirections.put((long)px + (py * 256), dir); // grid[x + y * width]
 
-            System.out.println(px + "x" + py + "dir" + dir);
-
             if (i == n - 4) {
                 break;
             }
-
         }
 
         return travelDirections;
@@ -241,7 +256,6 @@ public class Npc extends Mob implements Telegraph {
         List<Entity> entities = getLevel().getEntities();
         Rectangle newPos = new Rectangle(new2X, new2Y, getWalkBox().getWidth(), getWalkBox().getHeight());
         for (int i = 0; i < entities.size(); i++) {
-            // here we test to invoke the touchedBy event
             if (entities.get(i).getBoundingBox().overlaps(newPos)) {
                 entities.get(i).touchedBy(this);
             }
