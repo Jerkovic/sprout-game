@@ -16,6 +16,7 @@ public class Camera extends OrthographicCamera {
     public Camera (Level level) {
         super();
         this.level = level;
+        shake();
     }
 
     public void shake() {
@@ -29,14 +30,14 @@ public class Camera extends OrthographicCamera {
         float lerp = 1f;
         temp.x += (followPos.x - position.x) * lerp * deltaTime;
         temp.y += (followPos.y - position.y) * lerp * deltaTime;
-        //position.set(temp);
+        position.set(temp);
 
         position.set(followPos.x, followPos.y, 0);
 
         if (isShaking) {
-            if (TimeUtils.nanoTime() < startShakeTimer + 1000000000 * .3) {
-                position.x += MathUtils.random(-40f, 40f) * deltaTime;
-                position.y += MathUtils.random(-40f, 40f) * deltaTime;
+            if (TimeUtils.nanoTime() < startShakeTimer + 1000000000 * .2) {
+                position.x += MathUtils.random(-60f, 60f) * deltaTime;
+                position.y += MathUtils.random(-60f, 60f) * deltaTime;
             }
             else
             {

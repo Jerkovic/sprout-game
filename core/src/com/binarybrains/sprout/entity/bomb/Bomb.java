@@ -45,6 +45,7 @@ public class Bomb extends Entity implements Portable {
         time++;
         if (time >= lifeTime) {
             // explode
+            getLevel().getCamera().shake();
 
             // hurt entities in radius from the bomb
             List<Entity> entities = getLevel().getEntities(new Rectangle(getCenterPos().x - 48,getCenterPos().y -48, 48*2, 48*2));
