@@ -27,13 +27,9 @@ public class Crafting {
         try {
             workbenchRecipes.add(new ToolRecipe(new Hoe(), 0).addCost(Resource.stone, 1).addCost(Resource.wood, 1));
             //workbenchRecipes.add(new ToolRecipe(new Hoe(), 2).addCost(Resource.goldIngot, 10).addCost(Resource.wood, 3));
-
             workbenchRecipes.add(new ToolRecipe(new Axe(), 0).addCost(Resource.stone, 1).addCost(Resource.wood, 1));
             workbenchRecipes.add(new ToolRecipe(new PickAxe(), 0).addCost(Resource.stone, 2).addCost(Resource.wood, 1));
-
             workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Resource.ironBar, 5));
-
-
 
             // change to Furnace Recipes
             workbenchRecipes.add(new ResourceRecipe(Resource.bomb).addCost(Resource.ironOre, 4).addCost(Resource.coal, 2));

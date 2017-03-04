@@ -13,7 +13,7 @@ public enum EmmaState implements State<Emma> {
                 emma.stateMachine.changeState(WALK_ABOUT);
             }
             else {
-                emma.testAction();
+                // emma.some
             }
         }
     },
@@ -25,7 +25,7 @@ public enum EmmaState implements State<Emma> {
                 emma.stateMachine.changeState(WALK_HOME);
             }
             else {
-                emma.testAction();
+                // emma.some
             }
         }
     },

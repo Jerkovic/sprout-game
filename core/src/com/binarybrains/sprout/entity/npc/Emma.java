@@ -21,9 +21,8 @@ public class Emma extends Npc {
         super(level, position, width, height, 3); // 3 is the spriteRow used
         setState(State.WALKING);
         setDirection(Direction.EAST);
-        setSpeed(MathUtils.random(16f, 32f));
+        setSpeed(MathUtils.random(32f, 32f));
         stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.WALK_ABOUT);
-
         findPath = generatePathFindingDirections(52, 89);
     }
 
@@ -33,13 +32,11 @@ public class Emma extends Npc {
         super.update(delta);
         stateMachine.update();
 
-        //System.out.println("Emma pos:" + getPosHash() + " " + stateMachine.getCurrentState());
-
         if (findPath.containsKey(getPosHash())) {
             setDirection(findPath.get(getPosHash()));
             setState(State.WALKING);
         } else {
-            System.out.println("Could not find any more travelling directions. ");
+            // Could not find any more travelling directions. Change to another State perhaps
             setState(State.STANDING);
         }
 
@@ -58,7 +55,6 @@ public class Emma extends Npc {
             player.getLevel().screen.hud.speakDialog(
                     String.format("Ohh! I really love this %s %s", item.getName(), item.getDescription())
             );
-
             return true;
         }
         else
@@ -79,12 +75,8 @@ public class Emma extends Npc {
     public boolean isThreatened() {
         return false;
     }
-
     public boolean isSafe() {
         return false;
     }
 
-    public void testAction() {
-        // System.out.println(this + " test action called");
-    }
 }
