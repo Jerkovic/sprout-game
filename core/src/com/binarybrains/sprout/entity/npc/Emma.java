@@ -2,8 +2,11 @@ package com.binarybrains.sprout.entity.npc;
 
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
@@ -19,11 +22,13 @@ public class Emma extends Npc {
 
     public Emma(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height, 3); // 3 is the spriteRow used
+
         setState(State.WALKING);
         setDirection(Direction.EAST);
         setSpeed(MathUtils.random(32f, 32f));
-        stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.WALK_ABOUT);
-        findPath = generatePathFindingDirections(52, 89);
+        stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.WALK_HOME);
+        IntArray tilePath = generatePath(55, 89);
+        findPath = generatePathFindingDirections(tilePath);
     }
 
     @Override
@@ -41,6 +46,28 @@ public class Emma extends Npc {
         }
 
     }
+
+    @Override
+    public void updateBoundingBox() {
+        this.box.setWidth(getWidth());
+        this.box.setHeight(getHeight());
+        // Sets the x and y-coordinates of the bottom left corner
+        this.box.setPosition(getPosition());
+
+        this.walkBox.setWidth(12);
+        this.walkBox.setHeight(6);
+        this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
+    }
+
+    @Override
+    public void renderDebug(ShapeRenderer renderer, Color walkBoxColor) {
+        super.renderDebug(renderer, walkBoxColor);
+
+        // also draw the findPath
+
+    }
+
+
 
     @Override
     public void touchedBy(Entity entity) {

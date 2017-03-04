@@ -69,21 +69,31 @@ public class Npc extends Mob implements Telegraph {
         return (long)tile_x + (tile_y * 256); // grid[x + y * width]
     }
 
-    /**
-     * Returns a map containing the travel direction guid
-     */
-    public Map<Long, Direction> generatePathFindingDirections(int targetX, int targetY) {
 
+    /**
+     * Generates the path finding array
+     * @param targetX
+     * @param targetY
+     * @return IntArray
+     */
+    public IntArray generatePath(int targetX, int targetY) {
         int startX = getTileX();
         int startY = getTileY();
         IntArray path = getLevel().getPath(startX, startY, targetX, targetY);
         path.add(startX);
         path.add(startY);
         path.reverse();
+        return path;
+    }
+
+    /**
+     * Returns a map containing the travel direction guide
+     */
+    public Map<Long, Direction> generatePathFindingDirections(IntArray path) {
 
         Map<Long, Direction> travelDirections = new HashMap<Long, Direction>();
 
-        Mob.Direction dir = Mob.Direction.EAST;
+        Mob.Direction dir = Mob.Direction.WEST;
 
         for (int i = 0, n = path.size; i < n; i += 2) {
             int py = path.get(i);
@@ -303,7 +313,7 @@ public class Npc extends Mob implements Telegraph {
                     currentAnimFrames[f] = frames[getSpriteRow() + a][col];
                     col++;
                 }
-                float animSpeed = .12f;
+                float animSpeed = .14f;
 
                 animationMatrix[a][d] = new Animation(animSpeed, currentAnimFrames);
                 // maybe we need a different getSpeed() for animations

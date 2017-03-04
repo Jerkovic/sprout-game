@@ -9,16 +9,32 @@ public enum EmmaState implements State<Emma> {
     WALK_HOME() {
         @Override
         public void update(Emma emma) {
-            if (emma.isSafe()) {
-                emma.stateMachine.changeState(WALK_ABOUT);
+            if (emma.isThreatened()) {
+                emma.stateMachine.changeState(WALK_HOME);
             }
             else {
                 // emma.some
             }
         }
+
+        @Override
+        public void enter(Emma emma) {
+            System.out.println("===================================");
+            System.out.println("Entering state WALK_HOME");
+            System.out.println("===================================");
+        }
+
+        @Override
+        public void exit(Emma emma) {
+            System.out.println("===================================");
+            System.out.println("Ext state WALK_HOME");
+            System.out.println("===================================");
+        }
+
+
     },
 
-    WALK_ABOUT() {
+    WALK_TO_NORTH_EAST() {
         @Override
         public void update(Emma emma) {
             if (emma.isThreatened()) {
@@ -27,6 +43,11 @@ public enum EmmaState implements State<Emma> {
             else {
                 // emma.some
             }
+        }
+
+        @Override
+        public void enter(Emma emma) {
+            System.out.println("Entering state WALK_TO_NORTH_EAST");
         }
     },
 

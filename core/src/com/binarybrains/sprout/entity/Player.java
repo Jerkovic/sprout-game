@@ -152,13 +152,13 @@ public class Player extends Npc implements InputProcessor {
 
             List<Entity> entities = getLevel().getEntities(getInteractBox());
             if (entities.size() > 0) {
-                return;
+                return; // false
             }
 
             int x = (int)getInteractBox().getX() / 16;
             int y = (int)getInteractBox().getY() / 16;
             if (getLevel().isTileBlocked(x, y, entity)) {
-                return;
+                return; // false
             }
 
             carriedItem.deleteCarried();

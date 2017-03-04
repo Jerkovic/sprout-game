@@ -17,7 +17,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
@@ -303,7 +302,7 @@ public class Level extends LevelEngine {
         }
 
         for (int i = 0; i < entities.size(); i++) {
-            entities.get(i).renderDebug(debugRenderer, Color.CORAL);
+            entities.get(i).renderDebug(debugRenderer, Color.BLACK);
         }
 
         // Player interactWithActiveItem /interact box

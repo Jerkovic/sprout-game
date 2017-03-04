@@ -50,8 +50,7 @@ public abstract class Mob extends Entity {
 
     public void update(float delta) {
         super.update(delta);
-        if (getHealth() <= 0)
-        {
+        if (getHealth() <= 0) {
             die();
         }
     }
@@ -90,6 +89,7 @@ public abstract class Mob extends Entity {
 
     protected void die() {
         if (!this.removed) {
+            System.out.println(this + " died");
             super.remove();
         }
     }

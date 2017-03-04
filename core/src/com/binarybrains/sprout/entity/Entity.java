@@ -96,7 +96,6 @@ public abstract class Entity {
         this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), position.y);
     }
 
-
     public float getWalkWest() {
         return walkBox.getX();
     }
