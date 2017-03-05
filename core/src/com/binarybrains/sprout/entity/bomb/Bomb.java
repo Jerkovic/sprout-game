@@ -1,7 +1,9 @@
 package com.binarybrains.sprout.entity.bomb;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -9,10 +11,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Portable;
 import com.binarybrains.sprout.level.Level;
+
 
 import java.util.List;
 
@@ -25,16 +29,24 @@ public class Bomb extends Entity implements Portable {
     boolean carried = true;
     private TextureAtlas atlas; // move
     private TextureRegion region;
+    private Animation explosionAnimation;
+    private float elapsedTime = 0;
+
+
 
     private int lifeTime;
     private int time = 0;
     private int radius = 4;
 
+    private boolean explode = false;
 
     public Bomb(Level level, int tx, int ty) {
         super(level, new Vector2(16f * tx, 16f * ty), 16, 16);
         atlas = SproutGame.assets.get("items2.txt");
         region = atlas.findRegion("Bomb");
+
+        explosionAnimation = new Animation(1/12f, atlas.findRegions("Explosion"));
+
 
         lifeTime = 60 * 2 + MathUtils.random(1, 2);
     }
@@ -43,10 +55,14 @@ public class Bomb extends Entity implements Portable {
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        time++;
-        if (time >= lifeTime) {
-            // explode
+        if (explosionAnimation.isAnimationFinished(elapsedTime)) {
+            remove();
+            return;
+        }
 
+        time++;
+        if (!explode && time >= lifeTime) {
+            explode = true;
             // temp sound
             Sound testSfx = SproutGame.assets.get("sfx/explosion_1.wav");
             testSfx.play();
@@ -61,7 +77,6 @@ public class Bomb extends Entity implements Portable {
                 if (e != this) e.hurt(this, 100); // get damage value from bomb or not?
             }
 
-            remove();
         }
     }
 
@@ -83,9 +98,16 @@ public class Bomb extends Entity implements Portable {
     @Override
     public void draw(Batch batch, float parentAlpha) {
 
+        if (explode) {
+            elapsedTime += Gdx.graphics.getDeltaTime();
+            TextureRegion frame = explosionAnimation.getKeyFrame(elapsedTime, true);
+            batch.draw(frame, getCenterPos().x-(frame.getRegionWidth() / 2), getCenterPos().y - (frame.getRegionHeight() / 2));
+            return;
+
+        }
+
         if (time / 6 % 2 == 0) return;
         batch.draw(region, getX(), getY(), 16, 16);
-        // draw explosion also here
 
     }
 
