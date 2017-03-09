@@ -15,6 +15,7 @@ import com.binarybrains.sprout.crafting.Recipe;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.screen.GameScreen;
 
 
 public class CraftingWindow extends Window {
@@ -118,6 +119,8 @@ public class CraftingWindow extends Window {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 setVisible(false);
+                player.getLevel().screen.gameState = GameScreen.GameState.RUN;
+                player.getLevel().gameTimer.resume();
                 // unpause the game
                 //remove();
 

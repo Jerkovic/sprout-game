@@ -86,8 +86,7 @@ public class GameScreen implements Screen {
             case RUN:
                 BackgroundMusic.update(delta);
                 level.update(Math.min(delta, 1 / 60f));
-                hud.act(Math.min(delta, 1 / 60f));
-                SproutGame.getTweenManager().update(Math.min(delta, 1 / 60f)); // really here???
+
                 break;
             case PAUSE:
                 //System.out.println("paused");
@@ -95,6 +94,10 @@ public class GameScreen implements Screen {
             default:
                 break;
         }
+
+        SproutGame.getTweenManager().update(Math.min(delta, 1 / 60f)); // really here???
+        hud.act(Math.min(delta, 1 / 60f));
+
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             if (gameState == GameState.RUN) {
