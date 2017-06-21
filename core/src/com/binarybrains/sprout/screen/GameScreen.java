@@ -140,6 +140,7 @@ public class GameScreen implements Screen {
     public void dispose() {
         level.dispose();
         batch.dispose();
+        skin.dispose();
         BackgroundMusic.dispose();
     }
 }

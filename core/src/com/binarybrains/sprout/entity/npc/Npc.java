@@ -322,4 +322,8 @@ public class Npc extends Mob implements Telegraph {
 
     }
 
+    public void dispose() {
+
+    }
+
 }

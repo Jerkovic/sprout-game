@@ -20,10 +20,17 @@ public class Tree extends Entity { // extends Vegitation or ?
     private Sprite sprite;
     private Sprite shadow;
 
+    /*
+    We need to dispose of this
+    sprite.getTexture().dispose();
+    shadow.getTexture().dispose();
+    */
+
     private int damage = 0;
     private boolean falling = false;
 
     private int time = 0;
+
 
     @Override
     public void update(float delta) {
@@ -40,6 +47,7 @@ public class Tree extends Entity { // extends Vegitation or ?
             }
         }
         super.update(delta);
+
     }
 
     public Tree(Level level, Vector2 position, float width, float height) {

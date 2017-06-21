@@ -339,7 +339,6 @@ public class Level extends LevelEngine {
         return true;
     }
 
-
     public void dispose() {
         tileMapRenderer.dispose();
         debugRenderer.dispose();
@@ -350,7 +349,6 @@ public class Level extends LevelEngine {
         defaultShader.dispose();
         light.dispose();
         fbo.dispose();
-
     }
 
 

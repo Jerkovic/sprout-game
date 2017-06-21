@@ -144,18 +144,6 @@ public class LevelEngine {
         MapObjects objects = map.getLayers().get("objects").getObjects();
         System.out.println("# of objs found in objects layer: " + objects.getCount());
 
-        /*
-        MapObjects objects2 = map.getLayers().get("test").getObjects();
-
-        System.out.println("# of objs found in TEST layer: " + objects2.getCount());
-
-        for(MapObject object : objects2) {
-            System.out.println(object);
-            if (object instanceof TiledMapTileMapObject) {
-                System.out.println(((TiledMapTileMapObject) object).getTile().getId());
-            }
-        }
-        */
         for(MapObject object : objects) {
 
             if (object instanceof TextureMapObject) {

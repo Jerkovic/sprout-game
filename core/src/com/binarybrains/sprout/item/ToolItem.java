@@ -3,24 +3,26 @@ package com.binarybrains.sprout.item;
 
 import com.binarybrains.sprout.item.tool.Tool;
 
-import java.util.Random;
-
 public class ToolItem extends Item {
 
     public Tool tool;
     public int count = 1;
+    public int level;
 
     public static final int MAX_LEVEL = 3;
     public static final String[] LEVEL_NAMES = { //
             "Basic", "Iron", "Gold"//
     };
 
-    public int level = 0;
 
 
     public ToolItem(Tool tool, int level) {
         this.tool = tool;
         this.level = level;
+    }
+
+    public int getDamage() {
+        return level;
     }
 
     public String getRegionId() {
