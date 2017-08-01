@@ -19,7 +19,7 @@ import java.util.Map;
 import static com.binarybrains.sprout.entity.Mob.Direction.*;
 
 /**
- * This is the human class
+ * This is the human class ..how about a dog what is that animal class
  */
 public class Npc extends Mob implements Telegraph {
 
@@ -66,7 +66,7 @@ public class Npc extends Mob implements Telegraph {
             tile_x = getTileX();
             tile_y = (int)getWalkBox().getY() >> 4;
         }
-        return (long)tile_x + (tile_y * 256); // grid[x + y * width]
+        return (long)tile_x + (tile_y * 256); // grid[x + y * width] d
     }
 
 
