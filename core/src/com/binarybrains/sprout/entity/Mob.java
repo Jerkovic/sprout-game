@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.level.Level;
 
+import java.util.Random;
+
 /**
  * Mobile Entities - we should maybe move stuff from NPC
  * - like player, enemies, cows, pigs etc
@@ -27,6 +29,11 @@ public abstract class Mob extends Entity {
                 return dir;
             }
         }
+
+        public static Direction getRandomDirection() {
+            int ordinalDirection = new Random().nextInt(4);
+            return Direction.values()[ordinalDirection];
+        }
     }
 
     private State state = State.STANDING;
@@ -46,7 +53,6 @@ public abstract class Mob extends Entity {
         velocity = new Vector2(0, 0);
         setHealth(MathUtils.random(1, 100));
     }
-
 
     public void update(float delta) {
         super.update(delta);

@@ -20,10 +20,10 @@ import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
-import com.binarybrains.sprout.entity.bomb.Bomb;
 import com.binarybrains.sprout.entity.crop.Crop;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
+import com.binarybrains.sprout.entity.npc.Fido;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.resource.Resource;
@@ -132,11 +132,15 @@ public class Level extends LevelEngine {
         player.setTilePos(29, 103);
         this.add(this, player);
 
+        // Fido dog test
+        this.add(this, new Fido(this, new Vector2(28 * 16f, 102 * 16f)));
+
+
         // starting test of our crops
         add(this, new Crop(this, 30, 104));
 
         // bomb test
-        add(this, new Bomb(this, 31, 103));
+        // add(this, new Bomb(this, 31, 103));
 
         // test some scattered Pickup items
         add(this, new PickupItem(this, new ResourceItem(Resource.coal, 2), new Vector2(16f * 28, 16f * 118)));

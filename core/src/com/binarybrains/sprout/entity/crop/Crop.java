@@ -1,7 +1,6 @@
 package com.binarybrains.sprout.entity.crop;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -35,9 +34,7 @@ public class Crop extends Entity {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
         batch.draw(regions.get(regionIndex), getX(), getY(), 16, 16);
-
     }
 
     public boolean canHarvest() {

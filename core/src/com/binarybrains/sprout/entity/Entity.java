@@ -42,6 +42,13 @@ public abstract class Entity {
         return (float) (angle + Math.ceil( -angle / 360 ) * 360);
     }
 
+    public float distanceTo(Entity entity) {
+        float dx = entity.getX() - getX();
+        float dy = entity.getY() - getY();
+        return (float) (Math.sqrt((dx*dx)+(dy*dy)));
+    }
+
+
     public Item getActiveItem() {
         return null;
     }

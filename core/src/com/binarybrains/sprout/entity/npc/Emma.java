@@ -62,12 +62,8 @@ public class Emma extends Npc {
     @Override
     public void renderDebug(ShapeRenderer renderer, Color walkBoxColor) {
         super.renderDebug(renderer, walkBoxColor);
-
         // also draw the findPath
-
     }
-
-
 
     @Override
     public void touchedBy(Entity entity) {
