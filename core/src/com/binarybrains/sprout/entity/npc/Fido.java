@@ -4,6 +4,8 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.entity.Entity;
+import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.level.Level;
 
 public class Fido extends Npc {
@@ -38,6 +40,15 @@ public class Fido extends Npc {
             setState(State.WALKING);
             setDirection(Direction.getRandomDirection());
         }
+    }
+
+    @Override
+    public boolean blocks(Entity e) {
+        if (e instanceof Fido) return false;
+        if (e instanceof Player) {
+            return true;
+        }
+        return false;
     }
 
     @Override
