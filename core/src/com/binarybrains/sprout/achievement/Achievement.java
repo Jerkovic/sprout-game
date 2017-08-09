@@ -9,10 +9,10 @@ public class Achievement
     private ArrayList <Property> props;
     private boolean unlocked;
 
-    public Achievement(String theId, String desc, ArrayList <Property> theRelatedProps) {
+    public Achievement(String theId, String desc) { // ArrayList <Property> theRelatedProps
         this.name = theId;
         this.desc = desc;
-        this.props = theRelatedProps;
+        this.props = new ArrayList<Property>();
         this.unlocked = false;
     }
 
@@ -27,6 +27,12 @@ public class Achievement
     public void setProps(ArrayList<Property> props) {
         this.props = props;
     }
+
+    public Achievement addProperty(Property property) {
+        props.add(property);
+        return this;
+    }
+
 
     public boolean isUnlocked() {
         return unlocked;

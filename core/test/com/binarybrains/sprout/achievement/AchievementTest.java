@@ -14,8 +14,10 @@ public class AchievementTest {
     @Before
     public void setUp() throws Exception {
         ArrayList<Property> propertyList = new ArrayList<Property>();
-        propertyList.add(new Property("100kills", 0, "kills", 100));
-        achievement = new Achievement("Slayer", "Get a hundred kills",propertyList);
+
+        achievement = new Achievement("Slayer", "Get a hundred kills");
+        achievement.addProperty(new Property("100kills", 0, "kills", 100));
+
     }
 
     @Test
