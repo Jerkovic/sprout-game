@@ -58,7 +58,7 @@ public class Fido extends Npc {
         this.box.setPosition(getPosition());
 
         this.walkBox.setWidth(12);
-        this.walkBox.setHeight(6);
+        this.walkBox.setHeight(12);
         this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
     }
 
