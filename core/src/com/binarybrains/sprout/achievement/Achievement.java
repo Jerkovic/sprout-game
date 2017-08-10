@@ -28,7 +28,7 @@ public class Achievement
 
     private String name;
     private String desc;
-    private ArrayList <UnlockCriteria> unlockCriterias;
+    public ArrayList <UnlockCriteria> unlockCriterias;
     private boolean unlocked;
 
     public Achievement(String theId, String desc) {
@@ -46,6 +46,8 @@ public class Achievement
             try {
                 Object value = Stats.class.getField(criteria.getStatKey()).get(stats);
                 criteria.setCurrentValue((Integer) value);
+                Float temp = ((float)criteria.getCurrentValue() / (float)criteria.getValueNeeded());
+                criteria.progression = Math.min(temp, 1.0f);
                 if ((Integer) value >= criteria.getValueNeeded()) {
                     criteria.setUnlocked();
                 }

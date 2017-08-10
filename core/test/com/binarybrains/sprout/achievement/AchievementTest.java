@@ -16,7 +16,7 @@ public class AchievementTest {
         stats = new Stats();
         stats.score = 100;
         stats.zombie_kills = 11;
-        stats.potatoes = 10;
+        stats.potatoes = 5;
     }
 
     @Test
@@ -30,6 +30,7 @@ public class AchievementTest {
     public void testPotatofarmer() throws Exception {
         Achievement achievement = Achievement.achievements.get("potatofarmer");
         Assert.assertEquals(false, achievement.shallBeAwarded(stats));
+        Assert.assertEquals(100, achievement.unlockCriterias.get(0).getValueNeeded());
 
     }
 

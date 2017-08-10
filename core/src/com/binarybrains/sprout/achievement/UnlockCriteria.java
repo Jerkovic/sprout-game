@@ -7,6 +7,7 @@ public class UnlockCriteria
     private int currentValue;
     private String statKey;
     private Boolean unlocked;
+    public float progression = 0f;
 
     public UnlockCriteria(String name, String statKey, int valueNeeded) {
         this.name = name;
@@ -26,6 +27,10 @@ public class UnlockCriteria
 
     public int getValueNeeded() {
         return valueNeeded;
+    }
+
+    public int getCurrentValue() {
+        return currentValue;
     }
 
     public void setCurrentValue(int value) {
