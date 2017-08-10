@@ -4,12 +4,14 @@ public class UnlockCriteria
 {
     private String name;
     private int valueNeeded;
+    private int currentValue;
     private String statKey;
     private Boolean unlocked;
 
     public UnlockCriteria(String name, String statKey, int valueNeeded) {
         this.name = name;
         this.valueNeeded = valueNeeded;
+        this.currentValue = 0;
         this.statKey = statKey;
         this.unlocked = false;
     }
@@ -22,8 +24,12 @@ public class UnlockCriteria
         return unlocked;
     }
 
-    public long getValueNeeded() {
+    public int getValueNeeded() {
         return valueNeeded;
+    }
+
+    public void setCurrentValue(int value) {
+        currentValue = value;
     }
 
     public String getStatKey() { return statKey; }
@@ -40,6 +46,7 @@ public class UnlockCriteria
     public String toString() {
         return "UnlockCriteria{" +
                 "name='" + name + '\'' +
+                ", currentValue=" + currentValue +
                 ", valueNeeded=" + valueNeeded +
                 ", statKey='" + statKey + '\'' +
                 ", unlocked=" + unlocked +

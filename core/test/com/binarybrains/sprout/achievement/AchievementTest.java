@@ -25,4 +25,13 @@ public class AchievementTest {
         Assert.assertEquals(true, achievement.shallBeAwarded(stats));
 
     }
+
+    @Test
+    public void testPotatofarmer() throws Exception {
+        Achievement achievement = Achievement.achievements.get("potatofarmer");
+        Assert.assertEquals(false, achievement.shallBeAwarded(stats));
+
+    }
+
+
 }

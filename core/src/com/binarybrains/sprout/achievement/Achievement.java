@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class Achievement
 {
-    // public static final List<Achievement> achievements = new ArrayList<Achievement>();
     public  static final Map<String, Achievement> achievements = new HashMap<String,Achievement>();
 
     static {
@@ -17,6 +16,10 @@ public class Achievement
                     new Achievement("Zombie Slayer Level 1", "Prove you are a true zombie slayer.")
                             .addUnlockCriteria("Kill 10 Zombies", "zombie_kills", 10)
                             .addUnlockCriteria("Get 10 potatoes", "potatoes", 10)
+            );
+            achievements.put("potatofarmer",
+                    new Achievement("Potato Farmer", "get 100 potatoes")
+                            .addUnlockCriteria("Get 10 potatoes", "potatoes", 100)
             );
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -42,6 +45,7 @@ public class Achievement
         for (UnlockCriteria criteria : unlockCriterias) {
             try {
                 Object value = Stats.class.getField(criteria.getStatKey()).get(stats);
+                criteria.setCurrentValue((Integer) value);
                 if ((Integer) value >= criteria.getValueNeeded()) {
                     criteria.setUnlocked();
                 }
