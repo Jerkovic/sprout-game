@@ -15,7 +15,7 @@ public class Inventory {
     public Level level;
     public List<Item> items = new ArrayList<Item>();
 
-    private int capacity = 9; // this can be upgraded
+    private int capacity; // this can be upgraded
 
     public Inventory(Level level, int capacity) {
         this.level = level;
