@@ -1,38 +1,73 @@
 package com.binarybrains.sprout.achievement;
 
+import com.binarybrains.sprout.entity.Stats;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Achievement
 {
+    public static final List<Achievement> achievements = new ArrayList<Achievement>();
+
+    static {
+        try {
+            achievements.add(
+                    new Achievement("Zombie Slayer Level 1", "Prove you are a true zombie slayer.")
+                            .addUnlockCriteria("Kill 10 Zombies", "zombie_kills", 10)
+                            .addUnlockCriteria("Get 10 potatoes", "potatoes", 10)
+            );
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private String name;
     private String desc;
-    private ArrayList <Property> props;
+    private ArrayList <UnlockCriteria> unlockCriterias;
     private boolean unlocked;
 
-    public Achievement(String theId, String desc) { // ArrayList <Property> theRelatedProps
+    public Achievement(String theId, String desc) {
         this.name = theId;
         this.desc = desc;
-        this.props = new ArrayList<Property>();
+        this.unlockCriterias = new ArrayList<UnlockCriteria>();
         this.unlocked = false;
     }
 
-    public String getDesc() {
-        return desc;
+    public boolean shallBeAwarded(Stats stats)
+    {
+        if (unlocked) return false;
+
+        for (UnlockCriteria criteria : unlockCriterias) {
+            try {
+                Object value = Stats.class.getField(criteria.getStatKey()).get(stats);
+                if ((Integer) value >= criteria.getValueNeeded()) {
+                    criteria.setUnlocked();
+                }
+            } catch (Exception e) {
+                // e.printStackTrace();
+            }
+
+        }
+        for (UnlockCriteria criteria : unlockCriterias) {
+            if (!criteria.isUnlocked()) {
+                setUnlocked(false);
+                return false;
+            }
+        }
+
+        setUnlocked(true);
+        return true;
     }
 
-    public ArrayList getProps() {
-        return props;
-    }
-
-    public void setProps(ArrayList<Property> props) {
-        this.props = props;
-    }
-
-    public Achievement addProperty(Property property) {
-        props.add(property);
+    public Achievement addUnlockCriteria(UnlockCriteria unlockCriteria) {
+        unlockCriterias.add(unlockCriteria);
         return this;
     }
 
+    public Achievement addUnlockCriteria(String name, String statKey, int valueNeeded) {
+        unlockCriterias.add(new UnlockCriteria(name, statKey, valueNeeded));
+        return this;
+    }
 
     public boolean isUnlocked() {
         return unlocked;
@@ -42,4 +77,13 @@ public class Achievement
         this.unlocked = unlocked;
     }
 
+    @Override
+    public String toString() {
+        return "Achievement{" +
+                "name='" + name + '\'' +
+                ", desc='" + desc + '\'' +
+                ", unlockCriterias=" + unlockCriterias +
+                ", unlocked=" + unlocked +
+                '}';
+    }
 }
