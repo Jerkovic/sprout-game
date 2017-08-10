@@ -3,15 +3,17 @@ package com.binarybrains.sprout.achievement;
 import com.binarybrains.sprout.entity.Stats;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Achievement
 {
-    public static final List<Achievement> achievements = new ArrayList<Achievement>();
+    // public static final List<Achievement> achievements = new ArrayList<Achievement>();
+    public  static final Map<String, Achievement> achievements = new HashMap<String,Achievement>();
 
     static {
         try {
-            achievements.add(
+            achievements.put("zombieSlayer1",
                     new Achievement("Zombie Slayer Level 1", "Prove you are a true zombie slayer.")
                             .addUnlockCriteria("Kill 10 Zombies", "zombie_kills", 10)
                             .addUnlockCriteria("Get 10 potatoes", "potatoes", 10)
