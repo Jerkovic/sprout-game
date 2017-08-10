@@ -16,12 +16,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.achievement.Achievement;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryWindow;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
-import com.binarybrains.sprout.misc.Timer;
 
 public class Hud {
 
@@ -117,6 +117,39 @@ public class Hud {
         //.addAction(forever(sequence(fadeOut(5), fadeIn(5))));
     }
 
+    // a test right now
+    public void addAchievement(Achievement achievement) {
+        final Window window = new Window("New Achievement", skin);
+        window.setRound(false);
+        window.setKeepWithinStage(false);
+        window.setPosition(200, -50);
+        window.setMovable(false);
+        window.row().fill().expandX();
+
+        Label notLabel = new Label(achievement.getName(), skin);
+        notLabel.setWrap(false);
+        notLabel.setWidth(240);
+        notLabel.setEllipsis(true);
+        notLabel.pack();
+
+        window.add(notLabel).pad(6f);
+        window.row();
+        window.pack();
+
+        stage.addActor(window);
+
+        //Tween.set(window, ActorAccessor.ALPHA).target(0f).start(SproutGame.getTweenManager());
+        Tween.to(window, ActorAccessor.POSITION_XY, 2.9f).target(200, 140).ease(TweenEquations.easeOutElastic).delay(0.4f)
+                .setCallback(new TweenCallback() {
+
+                    @Override
+                    public void onEvent(int type, BaseTween<?> source) {
+                        window.remove();
+                    }
+
+                }).start(SproutGame.getTweenManager());
+    }
+
     public void speakDialog(String say) {
 
         TypeWriterDialog dialog = new TypeWriterDialog("Emma", skin, "dialog") {
@@ -129,9 +162,6 @@ public class Hud {
         dialog.center();
         //dialog.key(Keys.Enter, true); //sends "true" when the ENTER key is pressed
         dialog.show(stage);
-        //twd.setDialogText("Oh for me! I really love acorns");
-        //stage.addActor(twd);
-        // twd.show(stage);
     }
 
     public void gameTimeWindow() {

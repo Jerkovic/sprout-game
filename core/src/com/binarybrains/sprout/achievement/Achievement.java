@@ -38,6 +38,10 @@ public class Achievement
         this.unlocked = false;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public boolean shallBeAwarded(Stats stats)
     {
         if (unlocked) return false;

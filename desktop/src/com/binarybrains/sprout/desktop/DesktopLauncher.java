@@ -17,9 +17,9 @@ public class DesktopLauncher {
 
         }
         else {
-            config.width = 1024; //1440;
-            config.height = 768;//900;
-            config.fullscreen = false;
+            config.width = 1280; //1440;
+            config.height = 1024;//900;
+            config.fullscreen = true;
 
         }
         config.resizable = false;

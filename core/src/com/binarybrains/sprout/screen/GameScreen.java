@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.achievement.Achievement;
 import com.binarybrains.sprout.hud.Hud;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.misc.BackgroundMusic;
@@ -67,9 +68,10 @@ public class GameScreen implements Screen {
         Timer.schedule(new Timer.Task(){
             @Override
             public void run(){
-                System.out.println("Timed Event triggered!!!!!!!!!!!!");
+                Achievement achievement = Achievement.achievements.get("zombieSlayer1");
+                level.screen.hud.addAchievement(achievement);
             }
-        }, 9.0f);
+        }, 5.0f, 10);
 
     }
 
