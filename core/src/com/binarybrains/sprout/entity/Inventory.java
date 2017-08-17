@@ -105,6 +105,27 @@ public class Inventory {
         return true;
     }
 
+    public boolean hasSpaceFor(Item item) {
+        if (item instanceof ResourceItem) {
+            ResourceItem ri = findResource(((ResourceItem) item).resource);
+            if (ri != null) return true;
+        } else {
+            int count = 0;
+            for (int i = 0; i < items.size(); i++) {
+                if (items.get(i).matches(item)) count++;
+            }
+            if (count > 0) {
+                Gdx.app.log("Inventory", "You already have a " + item.getName());
+                return false;
+            }
+
+            if (!isFull()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int count(Item item) {
         if (item instanceof ResourceItem) {
             ResourceItem ri = findResource(((ResourceItem)item).resource);

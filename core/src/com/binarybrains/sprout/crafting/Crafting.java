@@ -70,7 +70,7 @@ public class Crafting {
         Recipe recipe = recipes.get(index);
         recipe.checkCanCraft(player.getInventory());
 
-        if (recipe.canCraft) {
+        if (recipe.canCraft && player.getInventory().hasSpaceFor(recipe.getItem())) {
             recipe.deductCost(player.getInventory());
             recipe.craft(player.getInventory());
             return true;
