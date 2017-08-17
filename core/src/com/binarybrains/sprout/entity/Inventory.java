@@ -105,10 +105,23 @@ public class Inventory {
         return true;
     }
 
+    /**
+     * @todo we acually have to check if when we craft something if that leaves a spot after crafting that we
+     * can grant that
+     * @param item
+     * @return
+     */
     public boolean hasSpaceFor(Item item) {
         if (item instanceof ResourceItem) {
             ResourceItem ri = findResource(((ResourceItem) item).resource);
-            if (ri != null) return true;
+            if (ri != null) {
+                return true;
+            }
+
+            // new resource
+            if (!isFull()) {
+                return true;
+            }
         } else {
             int count = 0;
             for (int i = 0; i < items.size(); i++) {
