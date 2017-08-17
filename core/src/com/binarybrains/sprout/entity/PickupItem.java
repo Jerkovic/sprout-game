@@ -1,5 +1,6 @@
 package com.binarybrains.sprout.entity;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
@@ -42,17 +43,15 @@ public class PickupItem extends ItemEntity {
 
     @Override
     public void touchedBy(Entity entity) {
-        // if (time > 30) entity.touchItem(this);
         if (entity instanceof Player) {
-
             if (((Player)entity).getInventory().add(item)) {
                 remove();
-
                 // temp sound
                 Sound testSfx = SproutGame.assets.get("sfx/blop.wav");
                 testSfx.play();
+            } else {
+                Gdx.app.log("INVENTORY", "Could not pickup up: " + entity.toString());
             }
-
         }
     }
 

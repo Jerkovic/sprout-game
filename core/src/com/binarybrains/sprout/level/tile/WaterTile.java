@@ -2,8 +2,10 @@ package com.binarybrains.sprout.level.tile;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Mob;
+import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
@@ -32,7 +34,8 @@ public class WaterTile extends Tile {
                 Sound testSfx = SproutGame.assets.get("sfx/water_splash.wav");
                 testSfx.play();
                 if (MathUtils.random(1,4) == 1) {
-                    player.getInventory().add(new ResourceItem(Resource.salmon, 1));
+                    // player.getInventory().add(new ResourceItem(Resource.salmon, 1));
+                    player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resource.salmon), new Vector2(player.getX(), player.getY())));
                     // we should delay sounds like the one below and be able to delay other sorts of actions
                     Sound testSfx2 = SproutGame.assets.get("sfx/powerup.wav");
                     testSfx2.play();
