@@ -10,19 +10,39 @@ public class WateringCan extends Tool {
     private int water = 100;
 
     public WateringCan() {
-        super("Watering Can", "A portable water container with a spout, used for watering plants.");
+        super("Watering Can", "A portable water container used for watering plants.");
     }
 
+    public int pour() {
+        if (water > 0) {
+            Gdx.app.log("WATERING_CAN", "Using Wateringcan pouring. " + water);
+            water = water - 5;
+            return 5;
+        } else {
+            Gdx.app.log("WATERING_CAN", "Empty is the can :( Fill it again");
+        }
+        return 0;
+    }
 
+    public void fill(int value) {
+        water += value;
+        if (water > 100) {
+            water = 100;
+        }
+        Gdx.app.log("WATERING_CAN", "Filling can to: " +  water);
+    }
+
+    @Override
+    public String getDescription() {
+        return description + " " + water + "%";
+    }
+
+    @Override
     public boolean use(Tile tile) {
         if (tile instanceof WaterTile) {
-            Gdx.app.log("WATERING_CAN", "Filling the watering can");
-            water = 100; // fill up water again
-        } else {
-            water--;
-            Gdx.app.log("WATERING_CAN", "Using Wateringcan" + water);
-
+            fill(10);
+            return true;
         }
-        return true;
+        return false;
     }
 }

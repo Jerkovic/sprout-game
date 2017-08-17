@@ -51,20 +51,20 @@ public class Player extends Npc implements InputProcessor {
         setSpeed(64);
         // Add some stuff to the player from start
         inventory = new Inventory(level, inventoryCapacity);
-        //getInventory().add(new ToolItem(Tool.hoe, 0));
-        //getInventory().add(new ToolItem(Tool.scythe, 0));
-        //getInventory().add(new ToolItem(Tool.wateringcan, 0));
+        getInventory().add(new ToolItem(Tool.hoe, 0));
+        getInventory().add(new ToolItem(Tool.scythe, 0));
+        getInventory().add(new ToolItem(Tool.wateringcan, 0));
         getInventory().add(new ToolItem(Tool.axe, 0));
-        //getInventory().add(new ToolItem(Tool.pickaxe, 0));
+        getInventory().add(new ToolItem(Tool.pickaxe, 0));
         getInventory().add(new ToolItem(Tool.fishingpole, 0));
 
         getInventory().add(new ResourceItem(Resource.bomb,92));
         getInventory().add(new ResourceItem(Resource.ironOre, 40));
         getInventory().add(new ResourceItem(Resource.seeds, 8));
-        getInventory().add(new ResourceItem(Resource.wood, 3));
+        //getInventory().add(new ResourceItem(Resource.wood, 3));
         getInventory().add(new ResourceItem(Resource.coal, 21));
         getInventory().add(new ResourceItem(Resource.stone, 12));
-        getInventory().add(new ResourceItem(Resource.acorn, 3));
+        //getInventory().add(new ResourceItem(Resource.acorn, 3));
 
         setActiveItem(getInventory().getItems().get(3));
 
