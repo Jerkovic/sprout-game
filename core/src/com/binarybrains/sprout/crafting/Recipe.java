@@ -39,9 +39,7 @@ public abstract class Recipe implements ListItem {
                 }
             }
         }
-        if (inventory.count() >= inventory.getCapacity()) {
-            canCraft = false;
-        }
+
         canCraft = true;
     }
 

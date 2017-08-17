@@ -200,12 +200,15 @@ public class Level extends LevelEngine {
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
-            // show menu window
+            // todo show some sort of menu window
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             debugMode = !debugMode;
+        }
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.I)) {
+            player.getInventory().renderDebug();
         }
 
         if (camera != null) {

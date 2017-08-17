@@ -1,14 +1,12 @@
 package com.binarybrains.sprout.crafting;
 
+import com.badlogic.gdx.Gdx;
 import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.resource.Resource;
-import com.binarybrains.sprout.item.tool.Axe;
-import com.binarybrains.sprout.item.tool.Hoe;
-import com.binarybrains.sprout.item.tool.PickAxe;
-import com.binarybrains.sprout.item.tool.WateringCan;
+import com.binarybrains.sprout.item.tool.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +28,7 @@ public class Crafting {
             workbenchRecipes.add(new ToolRecipe(new Axe(), 0).addCost(Resource.stone, 1).addCost(Resource.wood, 1));
             workbenchRecipes.add(new ToolRecipe(new PickAxe(), 0).addCost(Resource.stone, 2).addCost(Resource.wood, 1));
             workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Resource.ironBar, 5));
+            workbenchRecipes.add(new ToolRecipe(new Scythe(), 0).addCost(Resource.ironBar, 2).addCost(Resource.wood, 2));
 
             // change to Furnace Recipes
             workbenchRecipes.add(new ResourceRecipe(Resource.bomb).addCost(Resource.ironOre, 4).addCost(Resource.coal, 2));
@@ -70,11 +69,15 @@ public class Crafting {
     public boolean startCraft(Player player, int index) {
         Recipe recipe = recipes.get(index);
         recipe.checkCanCraft(player.getInventory());
+
         if (recipe.canCraft) {
             recipe.deductCost(player.getInventory());
             recipe.craft(player.getInventory());
             return true;
 
+        }
+        else {
+            Gdx.app.log("Crafting", "Cant craft!!");
         }
         return false;
     }

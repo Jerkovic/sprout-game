@@ -27,7 +27,6 @@ public class Inventory {
     }
 
     public void setCapacity(int capacity) {
-        // slots capacity
         this.capacity = capacity;
     }
 
@@ -124,13 +123,20 @@ public class Inventory {
         return items.size();
     }
 
+    public boolean isFull() {
+
+        return count() >= getCapacity();
+    }
+
     public void renderDebug() {
-        System.out.println("**************************************");
+        System.out.println("****************************************************************************");
         System.out.println("Inventory  Items: " + items.size() + " / " + capacity);
+        System.out.println("****************************************************************************");
         for (int i = 0; i < items.size(); i++) {
-            System.out.println("SlotIndex" + i + " " + items.get(i).getRegionId() + ", " + items.get(i).getName() + " x " + count(items.get(i)) + " - " + items.get(i).getDescription());
+            System.out.println("Slot: " + i + " " + items.get(i).getRegionId() + ", " + items.get(i).getName() + " x " + count(items.get(i)));
+            System.out.println("-----------------------------------------------------------------------------------");
         }
-        System.out.println("**************************************");
+        System.out.println("****************************************************************************");
     }
 
     public List<Item> getItems() {
@@ -138,7 +144,7 @@ public class Inventory {
     }
 
     public void equipTo(Player player, int checkedIndex) {
-        // do something like this if the entity already has a activeItem
+        // do something like this pif the entity already has a activeItem
         // items.add(0, entityPlayer.activeItem);
         items.remove(checkedIndex);
         // entityPlayer.activeItem = item;
