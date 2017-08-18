@@ -9,6 +9,8 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.binarybrains.sprout.entity.Entity;
+import com.binarybrains.sprout.entity.tweens.EntityAccessor;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.screen.GameScreen;
 
@@ -24,6 +26,7 @@ public class SproutGame extends Game {
 		setTweenManager(new TweenManager());
 		Tween.setCombinedAttributesLimit(4);
 		Tween.registerAccessor(Actor.class, new ActorAccessor());
+        Tween.registerAccessor(Entity.class, new EntityAccessor());
 		loadAssets();
 		//setScreen(new SplashScreen(this));
 		setScreen(new GameScreen(this));
