@@ -27,7 +27,7 @@ public class Camera extends OrthographicCamera {
 
     public void followPosition(Vector2 followPos, float deltaTime) {
         Vector3 temp = position;
-        float lerp = 1f;
+        float lerp = 0.1f;
         temp.x += (followPos.x - position.x) * lerp * deltaTime;
         temp.y += (followPos.y - position.y) * lerp * deltaTime;
         position.set(temp);

@@ -77,6 +77,12 @@ public class PickupItem extends ItemEntity {
         za -= 0.15;
         setPosition((float)xx, (float)yy + (float)zz);
 
+        float distance = distanceTo(getLevel().player);
+        if (distance < 40) {
+
+        }
+
+
     }
 
     public void draw(Batch batch, float parentAlpha) {

@@ -2,8 +2,6 @@ package com.binarybrains.sprout.misc;
 
 import com.badlogic.gdx.utils.TimeUtils;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
 
 public class GameTime
@@ -68,7 +66,6 @@ public class GameTime
     public Gdt getGameTime() {
         return gdt;
     }
-
 
     public void paus() {
         paused = true;

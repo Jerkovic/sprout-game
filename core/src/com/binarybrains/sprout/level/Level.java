@@ -23,7 +23,6 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.crop.Crop;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
-import com.binarybrains.sprout.entity.npc.Fido;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.resource.Resource;
@@ -133,7 +132,7 @@ public class Level extends LevelEngine {
         this.add(this, player);
 
         // Fido dog test
-        this.add(this, new Fido(this, new Vector2(28 * 16f, 102 * 16f)));
+        // this.add(this, new Fido(this, new Vector2(28 * 16f, 102 * 16f)));
 
 
         // starting test of our crops
