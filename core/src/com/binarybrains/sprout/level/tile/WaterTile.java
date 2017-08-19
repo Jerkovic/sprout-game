@@ -34,8 +34,10 @@ public class WaterTile extends Tile {
                 Sound testSfx = SproutGame.assets.get("sfx/water_splash.wav");
                 testSfx.play();
                 if (MathUtils.random(1,4) == 1) {
-                    // player.getInventory().add(new ResourceItem(Resource.salmon, 1));
-                    player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resource.salmon), new Vector2(player.getX(), player.getY())));
+                    player.getLevel().add(
+                            player.getLevel(),
+                            new PickupItem(player.getLevel(), new ResourceItem(Resource.salmon), new Vector2(xt * 16, yt * 16))
+                    );
                     // we should delay sounds like the one below and be able to delay other sorts of actions
                     Sound testSfx2 = SproutGame.assets.get("sfx/powerup.wav");
                     testSfx2.play();

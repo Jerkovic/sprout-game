@@ -33,7 +33,6 @@ public class Bomb extends Entity implements Portable {
     private float elapsedTime = 0;
 
 
-
     private int lifeTime;
     private int time = 0;
     private int radius = 4;

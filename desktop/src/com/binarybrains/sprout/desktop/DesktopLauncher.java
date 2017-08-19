@@ -9,8 +9,6 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
         if (true == false) { // todo args instead and create two runners
-            // Couldn't set display mode 1440x900, fullscreen: true
-            // Must handle GdxRuntimeException for above
             config.width = 1440; //1440;
             config.height = 900;//900;
             config.fullscreen = true;
