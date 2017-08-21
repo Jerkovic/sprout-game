@@ -111,6 +111,18 @@ public class LevelEngine {
         }
     }
 
+    public int getTileBitmaskIndex() {
+        //perform 4 bit Bitmasking calculation
+        // Directional check
+        // north_tile = place_meeting(x,y-size,object_index);
+        // west_tile = place_meeting(x-size,y,object_index);
+        // east_tile = place_meeting(x+size,y,object_index);
+        // south_tile = place_meeting(x,y+size,object_index);
+
+        //int index = north_tile + 2 * west_tile + 4 * east_tile + 8* south_tile;
+        return 0;
+    }
+
     public void setTile(int x, int y, Tile newTile) {
         tile[x][y] =  newTile;
 
