@@ -113,25 +113,22 @@ public class LevelEngine {
         //perform 4 bit Bitmasking calculation
         // Directional check
         // Note: South and North and switched
-        System.out.println("North " + tile[x][y+1]);
-        System.out.println("South " + tile[x][y-1]);
-        System.out.println("West " + tile[x-1][y]);
-        System.out.println("East " + tile[x+1][y]);
+        // System.out.println("North " + getTile(x,y+1));
 
         int north_tile, west_tile, east_tile, south_tile;
-        if (tile[x][y+1] instanceof DirtTile) {
+        if (getTile(x,y+1) instanceof DirtTile) {
             north_tile = 1;
         } else north_tile = 0;
 
-        if (tile[x-1][y] instanceof DirtTile) {
+        if (getTile(x-1,y) instanceof DirtTile) {
             west_tile = 1;
         } else west_tile = 0;
 
-        if (tile[x][y-1] instanceof DirtTile) {
+        if (getTile(x,y-1) instanceof DirtTile) {
             south_tile = 1;
         } else south_tile = 0;
 
-        if (tile[x+1][y] instanceof DirtTile) {
+        if (getTile(x+1, y) instanceof DirtTile) {
             east_tile = 1;
         } else east_tile = 0;
 

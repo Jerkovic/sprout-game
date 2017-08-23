@@ -1,6 +1,7 @@
 package com.binarybrains.sprout.level.tile;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.PickupItem;
@@ -30,10 +31,10 @@ public class GrassTile extends Tile {
         dirtAutoTiles.put(5, 49+1);
         dirtAutoTiles.put(6, 49+2);
         dirtAutoTiles.put(7, 49+3);
-        dirtAutoTiles.put(8, 80);
-        dirtAutoTiles.put(9, 80+1);
-        dirtAutoTiles.put(10, 80+2);
-        dirtAutoTiles.put(11, 80+3);
+        dirtAutoTiles.put(8, 81);
+        dirtAutoTiles.put(9, 81+1);
+        dirtAutoTiles.put(10, 81+2);
+        dirtAutoTiles.put(11, 81+3);
         dirtAutoTiles.put(12, 113);
         dirtAutoTiles.put(13, 113+1);
         dirtAutoTiles.put(14, 113+2);
@@ -58,8 +59,6 @@ public class GrassTile extends Tile {
                     System.out.println("Tileindex; " + player.getLevel().getTileBitmaskIndex(xt,yt));
                     player.getLevel().setTile(xt, yt, new DirtTile());
                     player.getLevel().setAutoTile(xt, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitmaskIndex(xt,yt)));
-
-
 
                 }
                 return true;
