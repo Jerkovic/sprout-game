@@ -78,6 +78,9 @@ public class Emma extends Npc {
             player.getLevel().screen.hud.speakDialog(
                     String.format("Ohh! I really love this %s %s", item.getName(), item.getDescription())
             );
+            ResourceItem ri = (ResourceItem) player.activeItem;
+            player.getInventory().removeResource(ri.resource, 1);
+            player.getLevel().screen.hud.refreshInventory();
             return true;
         }
         else
