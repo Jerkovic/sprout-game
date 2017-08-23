@@ -256,15 +256,15 @@ public class Level extends LevelEngine {
         int[] bg_layers = {0,1};
         tileMapRenderer.render(bg_layers);
 
-        // todo draw crops layer. the layer where the player can make changes to the ground
+        // crops layer is 1 . the layer where the player can make changes to the ground
 
         tileMapRenderer.getBatch().begin();
             // here we should render only entities on screen right?
             sortAndRender(entities, tileMapRenderer.getBatch());
         tileMapRenderer.getBatch().end();
 
-        //int[] fg_layers = {3};
-        //tileMapRenderer.render(fg_layers);
+        int[] fg_layers = {3};
+        tileMapRenderer.render(fg_layers);
 
         // Testing the night overlay
         if (false) {
@@ -300,12 +300,16 @@ public class Level extends LevelEngine {
 
         TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground");
 
-        debugRenderer.setColor(Color.FIREBRICK);
+        debugRenderer.setColor(Color.DARK_GRAY);
 
         for(int row = 0; row < layer.getHeight(); row++) {
             for(int col = 0; col < layer.getWidth(); col++) {
                 Rectangle tile = new Rectangle(row*16, col*16, 16, 16);
                 debugRenderer.rect(tile.getX(), tile.getY(), tile.width, tile.height);
+                if (!getTile(row, col).mayPass) {
+                    debugRenderer.line(tile.getX(), tile.getY(), tile.getX()+16, tile.getY()+16);
+                    debugRenderer.line(tile.getX()+16, tile.getY(), tile.getX(), tile.getY()+16);
+                }
             }
         }
 
@@ -333,8 +337,6 @@ public class Level extends LevelEngine {
     }
 
     public boolean setTile(int tile_x, int tile_y, boolean blocked) {
-        // TiledMapTileLayer ground = (TiledMapTileLayer)map.getLayers().get("ground");
-
         TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground_top");
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         //int ground_tile_id = ground.getCell(tile_x, tile_y).getTile().getId();

@@ -35,7 +35,7 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
     public void updateBoundingBox() {
         super.updateBoundingBox();
         this.walkBox.setWidth(getWidth());
-        this.walkBox.setHeight(getHeight() - 32);
+        this.walkBox.setHeight(getHeight() / 2);
         this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
     }
 

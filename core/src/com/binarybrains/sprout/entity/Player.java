@@ -144,7 +144,6 @@ public class Player extends Npc implements InputProcessor {
 
     //  called on left click, boolean return type?
     public void interactWithActiveItem() {
-        System.out.println("Interact with item " + getActionState());
         // can we really interact while carrying stuff?
         if (getActionState() == ActionState.CARRYING) {
 

@@ -226,19 +226,6 @@ public class LevelEngine {
             }
         }
 
-        // temp override with ground-top
-        TiledMapTileLayer layer2 = (TiledMapTileLayer) map.getLayers().get("ground_top");
-        // temp stuff below, must be easy to map TileMap.Tile to (my)Tile
-        for(int x = 0; x < layer2.getWidth();x++) {
-            for(int y = 0; y < layer2.getHeight();y++) {
-                TiledMapTileLayer.Cell cell2 = layer2.getCell(x, y);
-                if (cell2 != null && cell2.getTile().getProperties().containsKey("blocked") ) {
-                    tile[x][y] = new StoneTile(); // just test
-
-                }
-            }
-        }
-
         MapProperties properties = map.getProperties();
         width = properties.get("width", Integer.class);
         height = properties.get("height", Integer.class);

@@ -26,8 +26,8 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
         inventory = new Inventory(level, capacity);
 
         frames = TextureRegion.split(getLevel().spritesheet, 16, 16);
-        closedRegion = frames[8][11];
-        openRegion = frames[8][12];
+        closedRegion = frames[48][23];
+        openRegion = frames[48][24];
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
     @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
         if (!carried) {
-            carried = true;
+            setCarried();
             player.setCarriedItem(this);
             remove();
         } else {
