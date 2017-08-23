@@ -133,7 +133,7 @@ public class Player extends Npc implements InputProcessor {
         }
         if (getDirection()== Direction.NORTH) {
             x = getX();
-            y = getY() + getHeight();
+            y = getY()-12 + getHeight();
             height = getHeight();
             width = getWidth();
         }
