@@ -55,10 +55,30 @@ public class GrassTile extends Tile {
             if (toolItem.tool instanceof Hoe && toolItem.tool.use(this)) {
                 if (MathUtils.random(1,2) == 1) {
                     player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resource.coal), new Vector2(xt * 16, yt * 16)));
-                    // Here we have to handle bitmasking
+                    // Here we are handling autotiling test
                     System.out.println("Tileindex; " + player.getLevel().getTileBitmaskIndex(xt,yt));
                     player.getLevel().setTile(xt, yt, new DirtTile());
                     player.getLevel().setAutoTile(xt, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitmaskIndex(xt,yt)));
+                    // auto tile arround the newly placed tile:
+                    // south
+                    if (player.getLevel().getTile(xt, yt-1) instanceof DirtTile) {
+                        player.getLevel().setAutoTile(xt, yt-1, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitmaskIndex(xt,yt-1)));
+                    }
+                    // west
+                    if (player.getLevel().getTile(xt-1, yt) instanceof DirtTile) {
+                        player.getLevel().setAutoTile(xt-1, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitmaskIndex(xt-1,yt)));
+                    }
+
+                    // east
+                    if (player.getLevel().getTile(xt+1, yt) instanceof DirtTile) {
+                        player.getLevel().setAutoTile(xt+1, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitmaskIndex(xt+1,yt)));
+                    }
+
+                    // south
+                    if (player.getLevel().getTile(xt, yt+1) instanceof DirtTile) {
+                        player.getLevel().setAutoTile(xt, yt+1, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitmaskIndex(xt,yt+1)));
+                    }
+
 
                 }
                 return true;
