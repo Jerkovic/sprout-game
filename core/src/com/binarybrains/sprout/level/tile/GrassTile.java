@@ -23,22 +23,22 @@ public class GrassTile extends Tile {
     static
     {
         dirtAutoTiles = new HashMap<Integer, Integer>();
-        dirtAutoTiles.put(0, 17);
-        dirtAutoTiles.put(1, 17+1);
-        dirtAutoTiles.put(2, 17+2);
-        dirtAutoTiles.put(3, 17+3);
-        dirtAutoTiles.put(4, 49);
-        dirtAutoTiles.put(5, 49+1);
-        dirtAutoTiles.put(6, 49+2);
-        dirtAutoTiles.put(7, 49+3);
-        dirtAutoTiles.put(8, 81);
-        dirtAutoTiles.put(9, 81+1);
-        dirtAutoTiles.put(10, 81+2);
-        dirtAutoTiles.put(11, 81+3);
-        dirtAutoTiles.put(12, 113);
-        dirtAutoTiles.put(13, 113+1);
-        dirtAutoTiles.put(14, 113+2);
-        dirtAutoTiles.put(15, 113+3);
+        dirtAutoTiles.put(0, 1326);
+        dirtAutoTiles.put(1, 1326+1);
+        dirtAutoTiles.put(2, 1326+2);
+        dirtAutoTiles.put(3, 1326+3);
+        dirtAutoTiles.put(4, 1351);
+        dirtAutoTiles.put(5, 1351+1);
+        dirtAutoTiles.put(6, 1351+2);
+        dirtAutoTiles.put(7, 1351+3);
+        dirtAutoTiles.put(8, 1376);
+        dirtAutoTiles.put(9, 1376+1);
+        dirtAutoTiles.put(10, 1376+2);
+        dirtAutoTiles.put(11, 1376+3);
+        dirtAutoTiles.put(12, 1401);
+        dirtAutoTiles.put(13, 1401+1);
+        dirtAutoTiles.put(14, 1401+2);
+        dirtAutoTiles.put(15, 1401+3);
     }
 
     public GrassTile() {

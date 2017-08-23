@@ -16,17 +16,19 @@ import com.binarybrains.sprout.misc.BackgroundMusic;
 
 public class Cottage extends Entity { // extend House that extends StaticEntity
 
-    private TextureAtlas atlas; // move
     private Sprite sprite;
 
     public Cottage(Level level, Vector2 position, float width, float height) {
 
         super(level, position, width, height);
 
-        atlas = SproutGame.assets.get("items2.txt");
-        sprite = new Sprite(atlas.findRegion("home"));
+        // the code below is no good - remake this
+        // 25 tiles bred och 79 hög
+        sprite = new Sprite(level.spritesheet, 20*16, 71*16, (int)width, (int)height);
         sprite.setSize(width, height);
         sprite.setPosition(getX(), getY());
+        sprite.setOrigin(getWidth() / 2, 8);
+
     }
 
     @Override
@@ -53,6 +55,7 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
     public void draw(Batch batch, float parentAlpha) {
 
         sprite.draw(batch);
+
     }
 
 

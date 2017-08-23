@@ -46,7 +46,7 @@ public class Level extends LevelEngine {
 
     public float nightTimeAlpha = 0f; // test darkness
 
-    public Texture spritesheet;
+    public Texture spritesheet; // 400x1264 pixels 25 tiles bred och 79 hög
     public Texture charsheet;
 
     public GameScreen screen;
@@ -121,7 +121,9 @@ public class Level extends LevelEngine {
 
         setupAmbientLight();
         this.screen = screen;
-        spritesheet = new Texture(Gdx.files.internal("levels/rpg_tileset.png"));
+        //spritesheet = new Texture(Gdx.files.internal("levels/rpg_tileset.png")); // olds
+        spritesheet = new Texture(Gdx.files.internal("levels/stardew_valley_01.png"));
+
         charsheet = new Texture(Gdx.files.internal("spritesheet.png"));
         // temp code
 

@@ -161,9 +161,14 @@ public class LevelEngine {
     }
 
     public boolean isTileBlocked(int x, int y, Entity e) {
-        if (x < 1) return true;
-        if (y < 1) return true;
-        return !tile[x][y].mayPass(e);
+        try {
+            if (x < 1) return true;
+            if (y < 1) return true;
+            return !tile[x][y].mayPass(e);
+        } catch (ArrayIndexOutOfBoundsException exc) {
+            return true;
+        }
+
     }
 
     public void interact(int x, int y, Entity entity) {
@@ -178,7 +183,7 @@ public class LevelEngine {
     }
 
     public void loadMap(Level level, int i) {
-        map = new TmxMapLoader().load("levels/level" + i + ".tmx");
+        map = new TmxMapLoader().load("levels/sdv_level" + i + ".tmx");
 
         MapObjects objects = map.getLayers().get("objects").getObjects();
         System.out.println("# of objs found in objects layer: " + objects.getCount());
@@ -195,8 +200,8 @@ public class LevelEngine {
                 Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
                 if (objType.equals("bigtree")) {
                     add(level, new Tree(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
-                } else if (objType.equals("house")) {
-                    Gdx.app.log("", "Instance info" + object.getProperties().get("description"));
+                } else if (objType.equals("cottage")) {
+                    // Gdx.app.log("", "Instance info" + object.getProperties().get("description"));
                     add(level, new Cottage(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
                 } else if (objType.equals("someitem")) {
                     // something

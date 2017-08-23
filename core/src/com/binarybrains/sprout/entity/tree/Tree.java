@@ -49,19 +49,30 @@ public class Tree extends Entity { // extends Vegitation or ?
         super.update(delta);
 
     }
+    @Override
+    public void updateBoundingBox() {
+        this.box.setWidth(getWidth());
+        this.box.setHeight(getHeight());
+        // Sets the x and y-coordinates of the bottom left corner
+        this.box.setPosition(getPosition());
+
+        this.walkBox.setWidth(16);
+        this.walkBox.setHeight(16);
+        this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
+    }
 
     public Tree(Level level, Vector2 position, float width, float height) {
 
         super(level, position, width, height);
 
         // the code below is no good - remake this
-        sprite = new Sprite(level.spritesheet, 32, 0, (int)width, (int)height);
+        sprite = new Sprite(level.spritesheet, 48, 0, (int)width, (int)height);
         sprite.setSize(width, height);
         sprite.setPosition(getX(), getY());
         sprite.setOrigin(getWidth() / 2, 8);
 
 
-        shadow = new Sprite(level.spritesheet, 32, 0, (int)width, (int)height);
+        shadow = new Sprite(level.spritesheet, 48, 0, (int)width, (int)height);
         shadow.setColor(Color.BLACK);
         shadow.setAlpha(0.4f);
         shadow.setPosition(getX(), getY());
