@@ -20,10 +20,7 @@ import com.binarybrains.sprout.entity.house.Cottage;
 import com.binarybrains.sprout.entity.tree.SmallTree;
 import com.binarybrains.sprout.entity.tree.Tree;
 import com.binarybrains.sprout.level.pathfind.Astar;
-import com.binarybrains.sprout.level.tile.GrassTile;
-import com.binarybrains.sprout.level.tile.StoneTile;
-import com.binarybrains.sprout.level.tile.Tile;
-import com.binarybrains.sprout.level.tile.WaterTile;
+import com.binarybrains.sprout.level.tile.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -112,16 +109,34 @@ public class LevelEngine {
         }
     }
 
-    public int getTileBitmaskIndex() {
+    public int getTileBitmaskIndex(int x, int y) {
         //perform 4 bit Bitmasking calculation
         // Directional check
-        // north_tile = place_meeting(x,y-size,object_index);
-        // west_tile = place_meeting(x-size,y,object_index);
-        // east_tile = place_meeting(x+size,y,object_index);
-        // south_tile = place_meeting(x,y+size,object_index);
+        // Note: South and North and switched
+        System.out.println("North " + tile[x][y+1]);
+        System.out.println("South " + tile[x][y-1]);
+        System.out.println("West " + tile[x-1][y]);
+        System.out.println("East " + tile[x+1][y]);
 
-        //int index = north_tile + 2 * west_tile + 4 * east_tile + 8* south_tile;
-        return 0;
+        int north_tile, west_tile, east_tile, south_tile;
+        if (tile[x][y+1] instanceof DirtTile) {
+            north_tile = 1;
+        } else north_tile = 0;
+
+        if (tile[x-1][y] instanceof DirtTile) {
+            west_tile = 1;
+        } else west_tile = 0;
+
+        if (tile[x][y-1] instanceof DirtTile) {
+            south_tile = 1;
+        } else south_tile = 0;
+
+        if (tile[x+1][y] instanceof DirtTile) {
+            east_tile = 1;
+        } else east_tile = 0;
+
+        return north_tile + (2 * west_tile) + (4 * east_tile) + (8 * south_tile);
+
     }
 
     public void setTile(int x, int y, Tile newTile) {

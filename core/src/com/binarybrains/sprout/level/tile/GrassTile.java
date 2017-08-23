@@ -28,8 +28,10 @@ public class GrassTile extends Tile {
                 if (MathUtils.random(1,2) == 1) {
                     player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resource.coal), new Vector2(xt * 16, yt * 16)));
                     // Here we have to handle bitmasking
-                    // H
-                    player.getLevel().player.getLevel().setTile(xt, yt, new DirtTile());
+                    System.out.println("Tileindex; " + player.getLevel().getTileBitmaskIndex(xt,yt));
+                    player.getLevel().setTile(xt, yt, new DirtTile());
+
+
 
                 }
                 return true;

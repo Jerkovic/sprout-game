@@ -15,7 +15,7 @@ public class DirtTile extends Tile {
 
     public DirtTile() {
         super(true);
-        super.setTileSetIndex(300);
+        super.setTileSetIndex(17);
     }
 
     @Override
@@ -35,6 +35,8 @@ public class DirtTile extends Tile {
                 System.out.println("Interact with DirtTile with " + item);
                 // make transform to a FarmTile
                 player.getLevel().setTile(xt, yt, new FarmTile());
+
+
                 // add our test crop potato, it sure grows fast
                 player.getLevel().add(player.getLevel(), new Crop(player.getLevel(), xt, yt));
                 return true;
