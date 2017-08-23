@@ -21,6 +21,7 @@ import com.binarybrains.sprout.entity.tree.SmallTree;
 import com.binarybrains.sprout.entity.tree.Tree;
 import com.binarybrains.sprout.level.pathfind.Astar;
 import com.binarybrains.sprout.level.tile.GrassTile;
+import com.binarybrains.sprout.level.tile.StoneTile;
 import com.binarybrains.sprout.level.tile.Tile;
 import com.binarybrains.sprout.level.tile.WaterTile;
 
@@ -190,6 +191,19 @@ public class LevelEngine {
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
                 if (cell.getTile().getProperties().containsKey("blocked") ) {
                     tile[x][y] = new WaterTile();
+                }
+            }
+        }
+
+        // temp override with ground-top
+        TiledMapTileLayer layer2 = (TiledMapTileLayer) map.getLayers().get("ground_top");
+        // temp stuff below, must be easy to map TileMap.Tile to (my)Tile
+        for(int x = 0; x < layer2.getWidth();x++) {
+            for(int y = 0; y < layer2.getHeight();y++) {
+                TiledMapTileLayer.Cell cell2 = layer2.getCell(x, y);
+                if (cell2 != null && cell2.getTile().getProperties().containsKey("blocked") ) {
+                    tile[x][y] = new StoneTile(); // just test
+
                 }
             }
         }
