@@ -139,6 +139,20 @@ public class LevelEngine {
 
     }
 
+    /**
+     * Used for auto-tiling, just the graphical is changed.
+     * @param x
+     * @param y
+     * @param tilesetIndex
+     */
+    public void setAutoTile(int x, int y, int tilesetIndex) {
+
+        TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground_top");
+        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
+        cell.setTile(map.getTileSets().getTile(tilesetIndex));
+        layer.setCell(x, y, cell);
+    }
+
     public void setTile(int x, int y, Tile newTile) {
         tile[x][y] =  newTile;
 
