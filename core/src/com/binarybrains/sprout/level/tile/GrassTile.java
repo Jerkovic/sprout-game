@@ -45,6 +45,9 @@ public class GrassTile extends Tile {
         super(true);
     }
 
+    public GrassTile(Boolean mayPass) {
+        super(mayPass);
+    }
 
     @Override
     public boolean interact(Player player, int xt, int yt, Mob.Direction attackDir) {

@@ -253,7 +253,7 @@ public class Level extends LevelEngine {
         light.bind(0); //we force the binding of a texture on first texture unit to avoid artefacts
         //this is because our default and ambiant shader dont use multi texturing...
         //youc can basically bind anything, it doesnt matter
-        int[] bg_layers = {0,1};
+        int[] bg_layers = {0,1}; // ground and ground_top
         tileMapRenderer.render(bg_layers);
 
         // crops layer is 1 . the layer where the player can make changes to the ground
@@ -263,7 +263,7 @@ public class Level extends LevelEngine {
             sortAndRender(entities, tileMapRenderer.getBatch());
         tileMapRenderer.getBatch().end();
 
-        int[] fg_layers = {3};
+        int[] fg_layers = {2,4};
         tileMapRenderer.render(fg_layers);
 
         // Testing the night overlay
