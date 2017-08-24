@@ -178,11 +178,25 @@ public class Npc extends Mob implements Telegraph {
             float new2X = getWalkBox().x;
             float new2Y = getWalkBox().y - (getSpeed() * delta);
 
-            if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
-                getPosition().y -= getSpeed() * delta;
-            } else {
-                setState(State.STANDING);
+            // test of the new multi tile collision
+            int newXLeft = (int) (getWalkBox().getX() / 16);
+            int newXRight = (int) ((getWalkBox().getX()+ getWalkBox().getWidth()) / 16);
+
+            if (newXLeft != newXRight) {
+                if (canMoveToTile(newXLeft, newY) && canMoveToTile(newXRight, newY) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().y -= getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
+
+            } else { // single tile movement
+                if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().y -= getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
             }
+
         }
 
         // Diagonal Movement - Read more: http://himeworks.com/2014/11/diagonal-movement-and-movement-speed/
@@ -256,6 +270,8 @@ public class Npc extends Mob implements Telegraph {
     }
 
     public boolean canMoveToTile(int tx, int ty) {
+        // this is buggy
+        // System.out.println("Npc " + getLevel().getTileBounds(tx, ty));
         if (getLevel().isTileBlocked(tx, ty, this)) {
             return false;
         }

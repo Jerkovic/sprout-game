@@ -71,7 +71,7 @@ public class GameScreen implements Screen {
                 Achievement achievement = Achievement.achievements.get("zombieSlayer1");
                 level.screen.hud.addAchievement(achievement);
             }
-        }, 5.0f, 10);
+        }, 5.0f, 60);
 
     }
 

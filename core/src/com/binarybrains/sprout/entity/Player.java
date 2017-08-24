@@ -292,7 +292,7 @@ public class Player extends Npc implements InputProcessor {
 
     public void drawShadow(Batch batch, float delta) {
         shadow.setX(getX() + 1);
-        shadow.setY(getY() - 6);
+        shadow.setY(getY() - 4); // if we want the player to jump ... we should decrease the y value.
         shadow.draw(batch, 0.55f);
     }
 
@@ -378,7 +378,7 @@ public class Player extends Npc implements InputProcessor {
         System.out.println("Player: " + getTileX() + " x " + getTileY());
         // hash value
         // this should be checked in the NPC class
-        System.out.println("PathFinding hashValue:" + getPosHash());
+        // System.out.println("PathFinding hashValue:" + getPosHash());
 
         if (mouseWorldPosX <= getTileX() + 1 && mouseWorldPosX >= getTileX() -1
                 && mouseWorldPosY <= getTileY() + 1 && mouseWorldPosY >= getTileY() -1) {

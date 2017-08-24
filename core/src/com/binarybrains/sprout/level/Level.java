@@ -136,12 +136,9 @@ public class Level extends LevelEngine {
         // Fido dog test
         // this.add(this, new Fido(this, new Vector2(28 * 16f, 102 * 16f)));
 
-
         // starting test of our crops
         add(this, new Crop(this, 30, 104));
 
-        // bomb test
-        // add(this, new Bomb(this, 31, 103));
 
         // test some scattered Pickup items
         add(this, new PickupItem(this, new ResourceItem(Resource.coal, 2), new Vector2(16f * 28, 16f * 118)));
@@ -165,7 +162,7 @@ public class Level extends LevelEngine {
         // test some path finding stuff.. move this!!
         setupPathFinding();
 
-        this.add(this, new Emma(this, new Vector2(12 * 16f, 119 * 16f), 16f, 16f));
+        // this.add(this, new Emma(this, new Vector2(12 * 16f, 119 * 16f), 16f, 16f));
 
     }
 
