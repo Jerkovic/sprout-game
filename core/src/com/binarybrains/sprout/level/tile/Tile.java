@@ -67,7 +67,7 @@ public class Tile {
         if (item != null) {
             System.out.println(player + " Interact with " + this + " using " + item);
 
-            if (item.getName().equals("Bomb")) {
+            if (item.getName().equals("Bomb") && mayPass) {
                 // move this into a player method ?
                 player.getInventory().removeResource(((ResourceItem) item).resource, 1);
                 player.getLevel().screen.hud.refreshInventory();

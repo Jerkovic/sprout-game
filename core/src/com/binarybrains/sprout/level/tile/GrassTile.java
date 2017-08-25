@@ -54,7 +54,7 @@ public class GrassTile extends Tile {
         Item item = player.getActiveItem();
         if (item instanceof ToolItem) {
             ToolItem toolItem = (ToolItem) item;
-            if (toolItem.tool instanceof Hoe && toolItem.tool.use(this)) {
+            if (toolItem.tool instanceof Hoe && toolItem.tool.use(this) && mayPass) {
                 // Here we are handling autotiling test
                 System.out.println("Tileindex; " + player.getLevel().getTileBitwiseIndex(xt,yt));
                 player.getLevel().setTile(xt, yt, new DirtTile());
