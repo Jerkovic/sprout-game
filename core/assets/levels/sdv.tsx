@@ -56,6 +56,18 @@
    <property name="blocked" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="637">
+  <animation>
+   <frame tileid="637" duration="100"/>
+   <frame tileid="638" duration="100"/>
+   <frame tileid="639" duration="100"/>
+   <frame tileid="640" duration="100"/>
+   <frame tileid="641" duration="100"/>
+   <frame tileid="642" duration="100"/>
+   <frame tileid="643" duration="100"/>
+   <frame tileid="644" duration="100"/>
+  </animation>
+ </tile>
  <tile id="1955">
   <properties>
    <property name="blocked" type="bool" value="true"/>
