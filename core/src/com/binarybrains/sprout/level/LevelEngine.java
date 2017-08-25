@@ -79,7 +79,6 @@ public class LevelEngine {
         List<Entity> result = new ArrayList<Entity>();
 
         for (int i = 0; i < entities.size(); i++) {
-
             Entity e = entities.get(i);
             if (e.getWalkBox().overlaps(area)) {
                 result.add(e);
@@ -109,12 +108,10 @@ public class LevelEngine {
         }
     }
 
-    public int getTileBitmaskIndex(int x, int y) {
-        //perform 4 bit Bitmasking calculation
-        // Directional check
-        // Note: South and North and switched
-        // System.out.println("North " + getTile(x,y+1));
-
+    /**
+     * 4 bit bitwise auto tiling
+     */
+    public int getTileBitwiseIndex(int x, int y) {
         int north_tile, west_tile, east_tile, south_tile;
         if (getTile(x,y+1) instanceof DirtTile) {
             north_tile = 1;

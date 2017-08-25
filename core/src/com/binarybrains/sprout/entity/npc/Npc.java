@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
+import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.HashMap;
@@ -322,13 +323,22 @@ public class Npc extends Mob implements Telegraph {
         List<Entity> entities = getLevel().getEntities();
         Rectangle newPos = new Rectangle(new2X, new2Y, getWalkBox().getWidth(), getWalkBox().getHeight());
         for (int i = 0; i < entities.size(); i++) {
+            // trigger touched by
             if (entities.get(i).getBoundingBox().overlaps(newPos)) {
                 entities.get(i).touchedBy(this);
             }
+            // trigger contains once! - should not be in NPC right?
+            if (!entities.get(i).equals(this) && entities.get(i).getBoundingBox().contains(newPos)) {
+                entities.get(i).contains(this);
+            } else {
+                entities.get(i).clearContains(this);
+            }
+
 
             if (entities.get(i).blocks(this) && entities.get(i).getWalkBox().overlaps(newPos)) {
                 return false;
             }
+
         }
         return true;
     }

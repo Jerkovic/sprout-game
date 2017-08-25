@@ -130,16 +130,13 @@ public class Tree extends Entity { // extends Vegitation or ?
     }
 
     public void draw(Batch batch, float parentAlpha) {
-
         drawShadow(batch);
         sprite.draw(batch);
-
     }
 
     public void drawShadow(Batch batch){
         shadow.setPosition(sprite.getX() + 10, sprite.getY()+1);
         shadow.draw(batch);
     }
-
 
 }

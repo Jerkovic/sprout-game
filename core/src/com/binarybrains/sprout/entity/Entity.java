@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // Our abstract GameObject class
@@ -23,7 +24,8 @@ public abstract class Entity {
     public Rectangle walkBox = new Rectangle(); // add more complex walkPolygon instead of box?
     public Boolean removed = false;
 
-    List<Entity> triggeredTouchList; // should we use for overlap check?
+    private List<Entity> containsList = new ArrayList<Entity>();
+
 
     public Entity(Level level, Vector2 position, float width, float height) {
         init(level);
@@ -197,21 +199,26 @@ public abstract class Entity {
 
     }
 
-    public void intersects(Entity entity) {
-
-    }
-
     public void hurt(Entity ent, int damage) {
         System.out.println(this + " is hurt by" + ent);
     }
 
-    protected void overlaps(Entity entity) {
-        System.out.println(entity + " overlaps " + this);
+    public void contains(Entity entity) {
+        if (!containsList.contains(entity)) {
+            System.out.println(this.getClass() + " CONTAINS " + entity.getClass());
+            containsList.add(entity);
+        }
+    }
 
+    public void clearContains(Entity entity) {
+        if (containsList.contains(entity)) {
+            containsList.remove(entity);
+            System.out.println(entity.getClass() + " LEFT CONTAINS " + this.getClass());
+        }
     }
 
     public void touchedBy(Entity entity) {
-        System.out.println(this + " touchedBy " + entity);
+        // System.out.println(this + " touchedBy " + entity);
     }
 
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {

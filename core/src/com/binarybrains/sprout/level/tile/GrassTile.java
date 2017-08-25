@@ -1,7 +1,6 @@
 package com.binarybrains.sprout.level.tile;
 
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.PickupItem;
@@ -57,27 +56,27 @@ public class GrassTile extends Tile {
             ToolItem toolItem = (ToolItem) item;
             if (toolItem.tool instanceof Hoe && toolItem.tool.use(this)) {
                 // Here we are handling autotiling test
-                System.out.println("Tileindex; " + player.getLevel().getTileBitmaskIndex(xt,yt));
+                System.out.println("Tileindex; " + player.getLevel().getTileBitwiseIndex(xt,yt));
                 player.getLevel().setTile(xt, yt, new DirtTile());
-                player.getLevel().setAutoTile(xt, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitmaskIndex(xt,yt)));
+                player.getLevel().setAutoTile(xt, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitwiseIndex(xt,yt)));
                 // auto tile arround the newly placed tile:
                 // south
                 if (player.getLevel().getTile(xt, yt-1) instanceof DirtTile) {
-                    player.getLevel().setAutoTile(xt, yt-1, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitmaskIndex(xt,yt-1)));
+                    player.getLevel().setAutoTile(xt, yt-1, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitwiseIndex(xt,yt-1)));
                 }
                 // west
                 if (player.getLevel().getTile(xt-1, yt) instanceof DirtTile) {
-                    player.getLevel().setAutoTile(xt-1, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitmaskIndex(xt-1,yt)));
+                    player.getLevel().setAutoTile(xt-1, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitwiseIndex(xt-1,yt)));
                 }
 
                 // east
                 if (player.getLevel().getTile(xt+1, yt) instanceof DirtTile) {
-                    player.getLevel().setAutoTile(xt+1, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitmaskIndex(xt+1,yt)));
+                    player.getLevel().setAutoTile(xt+1, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitwiseIndex(xt+1,yt)));
                 }
 
                 // south
                 if (player.getLevel().getTile(xt, yt+1) instanceof DirtTile) {
-                    player.getLevel().setAutoTile(xt, yt+1, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitmaskIndex(xt,yt+1)));
+                    player.getLevel().setAutoTile(xt, yt+1, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitwiseIndex(xt,yt+1)));
                 }
 
 
