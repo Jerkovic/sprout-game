@@ -192,6 +192,7 @@ public class Hud {
         timeLabel.setWrap(false);
         window.add(table).pad(4f);
         window.row();
+        window.add(buildHealthMeters());
         window.pack();
         window.setPosition(10, Gdx.app.getGraphics().getHeight() - window.getHeight()-10);
 
@@ -204,11 +205,11 @@ public class Hud {
     }
 
 
-    public void buildHealthMeters() {
+    public Table buildHealthMeters() {
         // create hud test
         Table hudTable = new Table(skin);
-        hudTable.setSize(80,20);
-        hudTable.setPosition(80, Gdx.app.getGraphics().getHeight() - 50);
+        //hudTable.setSize(80,20);
+        //hudTable.setPosition(80, Gdx.app.getGraphics().getHeight() - 50);
 
         Pixmap pixmap = new Pixmap(10, 10, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.WHITE);
@@ -221,10 +222,12 @@ public class Hud {
         );
         barStyle.knobBefore = barStyle.knob;
 
-        ProgressBar healthBar = new ProgressBar(0, 9f, 1f, false, barStyle);
-        healthBar.setValue(8f);
+        ProgressBar healthBar = new ProgressBar(0, 10f, 1f, false, barStyle);
+        healthBar.setValue(5f);
         hudTable.add(healthBar);
         hudTable.row();
+
+        return hudTable;
 
     }
 
