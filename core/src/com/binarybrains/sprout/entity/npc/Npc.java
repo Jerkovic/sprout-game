@@ -81,6 +81,11 @@ public class Npc extends Mob implements Telegraph {
         int startX = getTileX();
         int startY = getTileY();
         IntArray path = getLevel().getPath(startX, startY, targetX, targetY);
+
+        if (path.size < 1) {
+            path.add(targetX);
+            path.add(targetY);
+        }
         path.add(startX);
         path.add(startY);
         path.reverse();
@@ -93,19 +98,19 @@ public class Npc extends Mob implements Telegraph {
     public Map<Long, Direction> generatePathFindingDirections(IntArray path) {
 
         Map<Long, Direction> travelDirections = new HashMap<Long, Direction>();
-        // Map<Vector2, Direction> tDirs = new HashMap<Vector2, Direction>();
 
         Mob.Direction dir = Mob.Direction.WEST;
 
-        if (path.size < 4) {
-            return travelDirections;
+        if (path.size < 4) { // there must be at least two pos(x,y) to be able to generate travel directions
+            throw new RuntimeException("There must be at least two pos(x,y) to be able to generate travel directions");
         }
+        int py, px, next_py, next_px;
 
         for (int i = 0, n = path.size; i < n; i += 2) {
-            int py = path.get(i);
-            int px = path.get(i + 1);
-            int next_py = path.get(i + 2);
-            int next_px = path.get(i + 3);
+            py = path.get(i);
+            px = path.get(i + 1);
+            next_py = path.get(i + 2);
+            next_px = path.get(i + 3);
 
             if (next_py > py)
             {
@@ -123,7 +128,6 @@ public class Npc extends Mob implements Telegraph {
             {
                 dir = Mob.Direction.WEST;
             }
-            System.out.println(px + "x" + py + "to " + next_px + "x" + next_py + " " + dir);
             travelDirections.put((long)px + (py * 256), dir); // grid[x + y * width]
 
             if (i == n - 4) {
@@ -150,7 +154,6 @@ public class Npc extends Mob implements Telegraph {
             int new2YTop = (int) ((getWalkBox().getY()) / 16);
 
             if (new2YBottom != new2YTop) {
-                //System.out.println("_" + new2YBottom + " " + new2YTop);
                 if (canMoveToTile(newX, new2YTop) && canMoveToTile(newX, new2YBottom) && canMoveToPos(new2X, new2Y)) {
                     getPosition().x -= getSpeed() * delta;
                 } else {
@@ -391,6 +394,13 @@ public class Npc extends Mob implements Telegraph {
         }
 
     }
+
+    @Override
+    public String toString()
+    {
+        return super.toString() + "ActionState" + getActionState();
+    }
+
 
     public void dispose() {
 

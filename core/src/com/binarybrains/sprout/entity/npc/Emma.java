@@ -25,10 +25,14 @@ public class Emma extends Npc {
 
         setState(State.WALKING);
         setDirection(Direction.EAST);
-        setSpeed(MathUtils.random(16f, 16f));
-        stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.WALK_HOME);
-        IntArray tilePath = generatePath(1, 1);
-        findPath = generatePathFindingDirections(tilePath);
+        setSpeed(16f);
+        stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.WALK_LABYRINTH);
+        stateMachine.changeState(EmmaState.WALK_LABYRINTH);
+
+    }
+
+    public void updateWalkDirections(int x, int y) {
+        findPath = generatePathFindingDirections(generatePath(x, y));
     }
 
     @Override
@@ -37,19 +41,12 @@ public class Emma extends Npc {
         super.update(delta);
         stateMachine.update();
 
-        if (findPath.containsKey(getPosHash())) {
+        if (findPath != null && findPath.containsKey(getPosHash())) {
             setDirection(findPath.get(getPosHash()));
             setState(State.WALKING);
         } else {
-            // Could not find any more travelling directions. Change to another State perhaps
-            setState(State.STANDING);
-            // setState(State.WALKING);
-            // setDirection(Direction.WEST);
-            // findPath = generatePathFindingDirections(generatePath(10, 70));
-            // findPath.clear();
-            // findPath = generatePathFindingDirections(generatePath(10,10));
+            System.out.println("no path for " + this);
         }
-
     }
 
     @Override
@@ -102,6 +99,13 @@ public class Emma extends Npc {
         }
         return false;
     }
+
+    @Override
+    public String toString()
+    {
+        return super.toString() + " StateMachine-> " + stateMachine.getCurrentState();
+    }
+
 
     public boolean isThreatened() {
         return false;
