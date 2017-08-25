@@ -23,9 +23,6 @@ public abstract class Entity {
     public Rectangle walkBox = new Rectangle(); // add more complex walkPolygon instead of box?
     public Boolean removed = false;
 
-    public int previousTileX = -1;
-    public int previousTileY = -1;
-
     List<Entity> triggeredTouchList; // should we use for overlap check?
 
     public Entity(Level level, Vector2 position, float width, float height) {
@@ -213,8 +210,8 @@ public abstract class Entity {
 
     }
 
-    public  void touchedBy(Entity entity) {
-        // System.out.println(this + " touchedBy " + entity);
+    public void touchedBy(Entity entity) {
+        System.out.println(this + " touchedBy " + entity);
     }
 
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {

@@ -91,7 +91,7 @@ public class Tree extends Entity { // extends Vegitation or ?
         if (!(entity instanceof Npc)) return;
         if (entity instanceof Player) {
             // sprite.setAlpha(.5f); // if player is behind a tree make the tree transparent
-            // super.touchedBy(entity);
+            super.touchedBy(entity);
         }
     }
 

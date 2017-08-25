@@ -140,11 +140,26 @@ public class Npc extends Mob implements Telegraph {
 
             float new2X = getWalkBox().x - (getSpeed() * delta);
             float new2Y = getWalkBox().y;
-            if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
-                getPosition().x -= getSpeed() * delta;
-            } else {
-                setState(State.STANDING);
+
+            int new2YBottom = (int) ((getWalkBox().getY()+ getWalkBox().getHeight()) / 16);
+            int new2YTop = (int) ((getWalkBox().getY()) / 16);
+
+            if (new2YBottom != new2YTop) {
+                //System.out.println("_" + new2YBottom + " " + new2YTop);
+                if (canMoveToTile(newX, new2YTop) && canMoveToTile(newX, new2YBottom) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().x -= getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
+
+            } else { // single tile movement
+                if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().x -= getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
             }
+
         }
         else if (getDirection() == EAST && getState() == State.WALKING) {
             newX = (int) (getWalkEast() + (getSpeed() * delta)) / 16;
@@ -152,11 +167,25 @@ public class Npc extends Mob implements Telegraph {
 
             float new2X = getWalkBox().x + (getSpeed() * delta);
             float new2Y = getWalkBox().y;
-            if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
-                getPosition().x += getSpeed() * delta;
-            } else {
-                setState(State.STANDING);
+
+            int new2YBottom = (int) ((getWalkBox().getY()+ getWalkBox().getHeight()) / 16);
+            int new2YTop = (int) ((getWalkBox().getY()) / 16);
+
+            if (new2YBottom != new2YTop) {
+                if (canMoveToTile(newX, new2YTop) && canMoveToTile(newX, new2YBottom) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().x += getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
+
+            } else { // single tile movement
+                if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().x += getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
             }
+
         }
         else if (getDirection() == NORTH && getState() == State.WALKING) {
             newX = (int) (getWalkBoxCenterX() / 16);
@@ -165,11 +194,24 @@ public class Npc extends Mob implements Telegraph {
             float new2X = getWalkBox().x;
             float new2Y = getWalkBox().y + (getSpeed() * delta);
 
-            if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
-                getPosition().y += getSpeed() * delta;
-            } else {
-                setState(State.STANDING);
+            int newXLeft = (int) (getWalkBox().getX() / 16);
+            int newXRight = (int) ((getWalkBox().getX()+ getWalkBox().getWidth()) / 16);
+
+            if (newXLeft != newXRight) {
+                if (canMoveToTile(newXLeft, newY) && canMoveToTile(newXRight, newY) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().y += getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
+
+            } else { // single tile movement
+                if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().y += getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
             }
+
         }
         else if (getDirection() == SOUTH && getState() == State.WALKING) {
             newX = (int) (getWalkBoxCenterX() / 16);
@@ -270,8 +312,6 @@ public class Npc extends Mob implements Telegraph {
     }
 
     public boolean canMoveToTile(int tx, int ty) {
-        // this is buggy
-        // System.out.println("Npc " + getLevel().getTileBounds(tx, ty));
         if (getLevel().isTileBlocked(tx, ty, this)) {
             return false;
         }
