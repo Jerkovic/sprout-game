@@ -2,9 +2,7 @@ package com.binarybrains.sprout.hud;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -32,8 +30,6 @@ public class TypeWriterDialog extends Window {
 
     String dialogText = "I have nothing to say.";
     Boolean skipTypeWriter = false;
-    Sound typeSound;
-    long typeSoundId = 0L;
     int charCountLastFrame = 0;
 
     protected InputListener ignoreTouchDown = new InputListener() {
@@ -67,26 +63,22 @@ public class TypeWriterDialog extends Window {
         int charCountThisFrame = (int)stringCompleteness;
         if (skipTypeWriter) {
             charCountThisFrame = dialogText.length();
-            typeSound.stop();
-            typeSoundId = 0;
+            //typeSound.stop();
         }
         if (charCountThisFrame == 1) {
             // pan panning in the range -1 (full left) to 1 (full right). 0 is center position.
             // the pitch multiplier, 1 == default,  >1 == faster,  <1 == slower, the value has to be between 0.5 and 2.0
-            typeSoundId = typeSound.loop(1f, MathUtils.random(2.1f, 2.2f), 0f);
+            // typeSoundId = typeSound.loop(1f, MathUtils.random(2.1f, 2.2f), 0f);
         }
         if (charCountThisFrame > dialogText.length())
         {
             charCountThisFrame = dialogText.length();
-            typeSound.stop();
-            typeSoundId = 0;
         }
         if (textLabel != null) {
             textLabel.setText(dialogText.substring(0, charCountThisFrame));
         }
 
         charCountLastFrame = charCountThisFrame;
-        // textLabel.debug();
         super.act(delta);
     }
 
@@ -97,8 +89,6 @@ public class TypeWriterDialog extends Window {
     private void initialize () {
         setModal(true);
         setMovable(false);
-        typeSound = Gdx.audio.newSound(Gdx.files.internal("sfx/test1.wav"));
-        // debug();
 
         defaults().space(32);
         // this should also have a profile pic of the NPC
@@ -107,9 +97,6 @@ public class TypeWriterDialog extends Window {
         add(contentTable).expand().fill();
         row();
         add(buttonTable = new Table(skin));
-
-        //contentTable.defaults().space(32);
-        //buttonTable.defaults().space(32);
 
         buttonTable.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
