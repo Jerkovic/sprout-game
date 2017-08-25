@@ -45,7 +45,13 @@ public class Emma extends Npc {
             setDirection(findPath.get(getPosHash()));
             setState(State.WALKING);
         } else {
-            System.out.println("no path for " + this);
+            // System.out.println("Emma is lost. No path for " + this + " " + findPath);
+        }
+
+        if (this.distanceTo(getLevel().player) < 20f) {
+            System.out.println("Emma is close to the player make here stop and look at the player");
+            this.lookAt(getLevel().player);
+            //stateMachine.changeState(EmmaState.GOT_ACORN);
         }
     }
 

@@ -130,7 +130,7 @@ public class Level extends LevelEngine {
         loadMap(this, level);
 
         player = new Player(this, 0, 0);
-        player.setTilePos(13, 2);
+        player.setTilePos(13, 100);
         this.add(this, player);
 
         // Fido dog test
