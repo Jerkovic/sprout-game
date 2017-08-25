@@ -1,16 +1,30 @@
 package com.binarybrains.sprout.locations;
 
-public class Location {
+import com.badlogic.gdx.math.Vector2;
+import com.binarybrains.sprout.entity.Entity;
+import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.level.Level;
+
+// A Trigger more than a Location
+public class Location extends Entity {
 
     private String name, description;
-    private int posX, posY; // rect?
 
     // SHACK, MINE, BANK, SALOON, QUARRY
-    // HOME, FOREST, OLD WILLS HOUSE
+    // HOME, FOREST, OLD WILLS HOUSE, BROKEN BRIDGE
     // The Manor
 
-    public Location(String name, String description) {
+    public Location(Level level, Vector2 pos, float width, float height, String name, String description) {
+        super(level, pos, width, height);
         this.name = name;
         this.description = description;
     }
+
+    public void containTrigger(Entity entity) {
+        if (entity instanceof Player) {
+            ((Player) entity).releaseKeys();
+            getLevel().screen.hud.speakDialog(name, description);
+        }
+    }
+
 }

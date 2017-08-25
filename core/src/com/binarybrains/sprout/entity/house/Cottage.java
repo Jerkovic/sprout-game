@@ -41,7 +41,7 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
 
     @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
-        player.setTilePos(9, 1.5f);
+        player.setTilePos(9, 1.5f); // move indoors (to a different place in our map)
         BackgroundMusic.stop(); // fade out music
         return true;
     }

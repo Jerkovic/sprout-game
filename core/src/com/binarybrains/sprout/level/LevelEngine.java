@@ -21,6 +21,7 @@ import com.binarybrains.sprout.entity.tree.SmallTree;
 import com.binarybrains.sprout.entity.tree.Tree;
 import com.binarybrains.sprout.level.pathfind.Astar;
 import com.binarybrains.sprout.level.tile.*;
+import com.binarybrains.sprout.locations.Location;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -201,8 +202,10 @@ public class LevelEngine {
                 } else if (objType.equals("cottage")) {
                     // Gdx.app.log("", "Instance info" + object.getProperties().get("description"));
                     add(level, new Cottage(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
-                } else if (objType.equals("someitem")) {
-                    // something
+                } else if (objType.equals("Trigger")) {
+                    System.out.println(object.getProperties());
+                    String desc = object.getProperties().get("description").toString();
+                    add(level, new Location(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(),"Trigger", desc));
                 } else if (objType.equals("SmallTree")) {
 
                     add(level, new SmallTree(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));

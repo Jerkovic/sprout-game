@@ -84,6 +84,7 @@ public class Emma extends Npc {
         if (player.activeItem instanceof ResourceItem && ((ResourceItem) player.activeItem).resource.name.equals("Acorn")) {
             stateMachine.changeState(EmmaState.WALK_HOME);
             player.getLevel().screen.hud.speakDialog(
+                    this.getClass().getSimpleName(),
                     String.format("Ohh! I really love this %s %s", item.getName(), item.getDescription())
             );
             ResourceItem ri = (ResourceItem) player.activeItem;

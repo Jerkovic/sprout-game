@@ -337,6 +337,13 @@ public class Player extends Npc implements InputProcessor {
         return true;
     }
 
+    public void releaseKeys() {
+        keys.put(Keys.A, false);
+        keys.put(Keys.D, false);
+        keys.put(Keys.W, false);
+        keys.put(Keys.S, false);
+    }
+
     @Override
     public boolean keyUp(int keycode) {
 

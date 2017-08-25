@@ -150,15 +150,15 @@ public class Hud {
                 }).start(SproutGame.getTweenManager());
     }
 
-    public void speakDialog(String say) {
+    public void speakDialog(String title, String say) {
 
-        TypeWriterDialog dialog = new TypeWriterDialog("Emma", skin, "dialog") {
+        TypeWriterDialog dialog = new TypeWriterDialog(title, skin, "dialog") {
             public void result(Object obj) {
                // System.out.println("result "+obj);
             }
         };
         dialog.text(say);
-        dialog.button("Close", true); //sends "true" as the result
+        dialog.button("  OK  ", true); //sends "true" as the result
         dialog.center();
         //dialog.key(Keys.Enter, true); //sends "true" when the ENTER key is pressed
         dialog.show(stage);
