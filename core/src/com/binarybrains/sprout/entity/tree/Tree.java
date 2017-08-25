@@ -90,10 +90,18 @@ public class Tree extends Entity { // extends Vegitation or ?
     public void touchedBy(Entity entity) {
         if (!(entity instanceof Npc)) return;
         if (entity instanceof Player) {
-            // sprite.setAlpha(.5f); // if player is behind a tree make the tree transparent
             super.touchedBy(entity);
         }
     }
+
+    public void leftContainTrigger(Entity entity) {
+        sprite.setAlpha(1f);
+    }
+
+    public void containTrigger(Entity entity) {
+        sprite.setAlpha(.55f);
+    }
+
 
     @Override
     public void hurt(Entity e, int dmg) {

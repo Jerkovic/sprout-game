@@ -10,6 +10,7 @@ import com.binarybrains.sprout.level.Level;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 // Our abstract GameObject class
 
@@ -203,17 +204,26 @@ public abstract class Entity {
         System.out.println(this + " is hurt by" + ent);
     }
 
-    public void contains(Entity entity) {
+    final public void contains(Entity entity) {
         if (!containsList.contains(entity)) {
-            System.out.println(this.getClass() + " CONTAINS " + entity.getClass());
             containsList.add(entity);
+            this.containTrigger(entity);
         }
     }
 
-    public void clearContains(Entity entity) {
+    public void leftContainTrigger(Entity entity) {
+        // System.out.println(entity.getClass() + " LEFT CONTAINS " + this.getClass());
+    }
+
+    public void containTrigger(Entity entity) {
+        // System.out.println(this.getClass() + " CONTAINS " + entity.getClass());
+    }
+
+    final public void clearContains(Entity entity) {
         if (containsList.contains(entity)) {
             containsList.remove(entity);
-            System.out.println(entity.getClass() + " LEFT CONTAINS " + this.getClass());
+            leftContainTrigger(entity);
+
         }
     }
 
