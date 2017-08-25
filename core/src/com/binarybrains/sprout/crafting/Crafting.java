@@ -76,9 +76,7 @@ public class Crafting {
             return true;
 
         }
-        else {
-            Gdx.app.log("Crafting", "Cant craft: " + recipe.toString());
-        }
+
         return false;
     }
 

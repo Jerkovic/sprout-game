@@ -57,6 +57,7 @@ public class CraftingWindow extends Window {
 
         Table recipesGroup = buildRecipesButtonGroup(skin);
         ScrollPane recipeTableScrollPane = new ScrollPane(recipesGroup, skin);
+        recipeTableScrollPane.setFlickScroll(false);
         recipeTableScrollPane.setFadeScrollBars(false);
         recipeTableScrollPane.setForceScroll(false, true);
         recipeTableScrollPane.setWidth(500);
@@ -96,7 +97,10 @@ public class CraftingWindow extends Window {
         for (Recipe recipe : craft.getRecipes()) {
             recipe.checkCanCraft(player.getInventory());
 
-            Button button = new Button(new Image(atlas.findRegion(recipe.getItem().getRegionId())), skin, "default");
+            Image icon = new Image(atlas.findRegion(recipe.getItem().getRegionId()));
+            if (!recipe.canCraft) icon.setColor(0,0,0,.55f);
+
+            Button button = new Button(icon, skin, "default");
             if (!recipe.canCraft) button.setDisabled(true);
             button.setName("" + index++);
             button.addListener(new ChangeListener() {
@@ -104,17 +108,18 @@ public class CraftingWindow extends Window {
                 public void changed(ChangeEvent event, Actor actor) {
                     if (craft.startCraft(player, Integer.parseInt(event.getTarget().getName()))) {
                         onCrafting();
-                        // temp sound
-                        System.out.println(event.getTarget().getY());
+                        // temp sound remake this.
                         Sound testSfx = SproutGame.assets.get("sfx/blop.wav");
                         testSfx.play();
+                    } else {
+                        player.getLevel().screen.hud.addToasterMessage("Inventory" ,"Inventory is full!");
                     }
                 }
             });
 
             recipeRowTable.add(button);
 
-            Label lc = new Label(recipe.toString(), skin);
+            Label lc = new Label(recipe.getItem().getName(), skin);
             lc.setAlignment(Align.left);
             recipeRowTable.add(lc).padLeft(8).left(); // this made my evening. the left() made the table look better!
 

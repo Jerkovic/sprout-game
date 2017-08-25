@@ -118,15 +118,15 @@ public class Hud {
     }
 
     // a test right now
-    public void addAchievement(Achievement achievement) {
-        final Window window = new Window("New Achievement", skin);
+    public void addToasterMessage(String title, String text) {
+        final Window window = new Window(title, skin);
         window.setRound(false);
-        window.setKeepWithinStage(false);
-        window.setPosition(200, -50);
+        window.setKeepWithinStage(true);
+        window.setPosition(50, 50);
         window.setMovable(false);
         window.row().fill().expandX();
 
-        Label notLabel = new Label(achievement.getName(), skin);
+        Label notLabel = new Label(text, skin);
         notLabel.setWrap(false);
         notLabel.setWidth(240);
         notLabel.setEllipsis(true);
@@ -138,8 +138,8 @@ public class Hud {
 
         stage.addActor(window);
 
-        //Tween.set(window, ActorAccessor.ALPHA).target(0f).start(SproutGame.getTweenManager());
-        Tween.to(window, ActorAccessor.POSITION_XY, 2.9f).target(200, 140).ease(TweenEquations.easeOutElastic).delay(0.4f)
+        Tween.set(window, ActorAccessor.ALPHA).target(0f);
+        Tween.to(window, ActorAccessor.ALPHA, .9f).target(1f).ease(TweenEquations.easeInExpo).delay(0.4f)
                 .setCallback(new TweenCallback() {
 
                     @Override
@@ -203,60 +203,6 @@ public class Hud {
         return stage;
     }
 
-    public void buildInventory() {
-
-        group = new ButtonGroup();
-
-        for (TextureAtlas.AtlasRegion atlasRegion : atlas.getRegions()) {
-
-            Button button = new Button(new Image(atlasRegion), skin, "toggle");
-
-            Table tooltipTable = new Table(skin);
-            tooltipTable.pad(3).background("default-round");
-            tooltipTable.add(new Label("Iron ore", skin));
-            tooltipTable.row();
-
-
-            Pixmap pixmap = new Pixmap(10, 10, Pixmap.Format.RGBA8888);
-            pixmap.setColor(Color.WHITE);
-            pixmap.fill();
-            skin.add("default-texture", new Texture(pixmap));
-
-            ProgressBar.ProgressBarStyle barStyle = new ProgressBar.ProgressBarStyle(
-                    skin.newDrawable("default-texture", Color.LIGHT_GRAY),
-                    skin.newDrawable("default-texture", Color.DARK_GRAY)
-            );
-            barStyle.knobBefore = barStyle.knob;
-
-            ProgressBar healthBar = new ProgressBar(0, 9f, 1f, false, barStyle);
-            healthBar.setValue(3f);
-
-            tooltipTable.add(healthBar);
-            tooltipTable.row();
-            tooltipTable.add(new Label(" ", skin));
-            tooltipTable.row();
-
-            button.addListener(new ChangeListener() {
-                @Override
-                public void changed (ChangeEvent event, Actor actor) {
-                    if (group.getCheckedIndex() > -1) {
-                        System.out.println("Selected item from inventory: " + group.getCheckedIndex());
-                        craftingWindow.setVisible(true);
-                        // inventory.equipToEntity(level.player, group.getCheckedIndex());
-                        // level.getPlayer().getInventory()
-                        //level.player.getInventory().renderDebug();
-                    }
-                }
-            });
-
-            button.addListener(new Tooltip(tooltipTable));
-
-            group.add(button);
-
-        }
-        group.setMinCheckCount(0);
-        group.setMaxCheckCount(1);
-    }
 
     public void buildHealthMeters() {
         // create hud test
