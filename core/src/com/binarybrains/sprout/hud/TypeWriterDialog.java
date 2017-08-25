@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.hud;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.*;
@@ -63,13 +62,8 @@ public class TypeWriterDialog extends Window {
         int charCountThisFrame = (int)stringCompleteness;
         if (skipTypeWriter) {
             charCountThisFrame = dialogText.length();
-            //typeSound.stop();
         }
-        if (charCountThisFrame == 1) {
-            // pan panning in the range -1 (full left) to 1 (full right). 0 is center position.
-            // the pitch multiplier, 1 == default,  >1 == faster,  <1 == slower, the value has to be between 0.5 and 2.0
-            // typeSoundId = typeSound.loop(1f, MathUtils.random(2.1f, 2.2f), 0f);
-        }
+
         if (charCountThisFrame > dialogText.length())
         {
             charCountThisFrame = dialogText.length();
