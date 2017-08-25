@@ -25,9 +25,9 @@ public class Emma extends Npc {
 
         setState(State.WALKING);
         setDirection(Direction.EAST);
-        setSpeed(MathUtils.random(32f, 32f));
+        setSpeed(MathUtils.random(16f, 16f));
         stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.WALK_HOME);
-        IntArray tilePath = generatePath(55, 89);
+        IntArray tilePath = generatePath(1, 1);
         findPath = generatePathFindingDirections(tilePath);
     }
 
@@ -43,6 +43,11 @@ public class Emma extends Npc {
         } else {
             // Could not find any more travelling directions. Change to another State perhaps
             setState(State.STANDING);
+            // setState(State.WALKING);
+            // setDirection(Direction.WEST);
+            // findPath = generatePathFindingDirections(generatePath(10, 70));
+            // findPath.clear();
+            // findPath = generatePathFindingDirections(generatePath(10,10));
         }
 
     }

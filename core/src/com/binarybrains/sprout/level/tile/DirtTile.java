@@ -13,6 +13,9 @@ import com.binarybrains.sprout.item.tool.WateringCan;
 
 public class DirtTile extends Tile {
 
+    public boolean hasCrops = false;
+    public int waterLevel = 0;
+
     public DirtTile() {
         super(true);
         super.setTileSetIndex(17);
@@ -21,24 +24,29 @@ public class DirtTile extends Tile {
     @Override
     public boolean interact(Player player, int xt, int yt, Mob.Direction attackDir) {
         Item item = player.getActiveItem();
+
+        if (item instanceof ToolItem) { // watering can usage
+            ToolItem toolItem = (ToolItem) item;
+
+            if (toolItem.tool instanceof WateringCan) {
+                //waterCounter++;
+                System.out.println("Watering " + player.getLevel().getEntitiesAtTile(xt, yt));
+                return true;
+            }
+        }
+
+
         if (item instanceof ResourceItem) {
 
-            if (((ResourceItem) item).resource instanceof SeedResource) { // seeds
-                // todo seeds and fertilizing
+            if (((ResourceItem) item).resource instanceof SeedResource && !hasCrops) {
+                // todo fertilizing
 
-                // deduct from player inventory
-                // move this into a player method ?
                 player.getInventory().removeResource(((ResourceItem) item).resource, 1);
                 player.getLevel().screen.hud.refreshInventory();
 
-                // BUG. Inventory UI resource counter is not updated
-                System.out.println("Interact with DirtTile with " + item);
-                // make transform to a FarmTile
-                player.getLevel().setTile(xt, yt, new FarmTile());
-
-
                 // add our test crop potato, it sure grows fast
                 player.getLevel().add(player.getLevel(), new Crop(player.getLevel(), xt, yt));
+                hasCrops = true;
                 return true;
             }
         }

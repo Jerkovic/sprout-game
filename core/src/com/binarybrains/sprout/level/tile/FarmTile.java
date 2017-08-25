@@ -21,7 +21,7 @@ public class FarmTile extends Tile {
 
     public FarmTile() {
         super(true);
-        super.setTileSetIndex(300); // same as dirtTile for the moment
+        super.setTileSetIndex(12); // same as dirtTile for the moment
     }
 
 

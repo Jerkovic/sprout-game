@@ -54,6 +54,7 @@ public class LevelEngine {
      * Setups and create A*star
      */
     public void setupPathFinding() {
+        // should be the size of the map
         astar = new Astar(256, 128) {
             protected boolean isValid (int x, int y) {
                 return getTile(x,y).mayPass && getEntitiesAtTile(x, y).size() == 0;
@@ -217,7 +218,7 @@ public class LevelEngine {
             for(int y = 0; y < layer.getHeight();y++) {
                 tile[x][y] = new GrassTile();
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
-                if (cell.getTile().getProperties().containsKey("blocked") ) {
+                if (cell != null && cell.getTile().getProperties().containsKey("blocked") ) {
                     tile[x][y] = new WaterTile();
                 }
             }

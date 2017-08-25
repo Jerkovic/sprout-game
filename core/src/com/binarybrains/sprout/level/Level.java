@@ -130,14 +130,11 @@ public class Level extends LevelEngine {
         loadMap(this, level);
 
         player = new Player(this, 0, 0);
-        player.setTilePos(29, 103);
+        player.setTilePos(13, 2);
         this.add(this, player);
 
         // Fido dog test
         // this.add(this, new Fido(this, new Vector2(28 * 16f, 102 * 16f)));
-
-        // starting test of our crops
-        add(this, new Crop(this, 30, 104));
 
 
         // test some scattered Pickup items
@@ -160,9 +157,9 @@ public class Level extends LevelEngine {
         gameTimer.start();
 
         // test some path finding stuff.. move this!!
-        setupPathFinding();
+        setupPathFinding(); // construct the A.star
 
-        // this.add(this, new Emma(this, new Vector2(12 * 16f, 119 * 16f), 16f, 16f));
+        this.add(this, new Emma(this, new Vector2(3 * 16f, 13 * 16f), 16f, 16f));
 
     }
 
@@ -331,19 +328,6 @@ public class Level extends LevelEngine {
         Rectangle highRect = new Rectangle( (int)clickedPos.x,  (int)clickedPos.y, 16, 16);
         debugRenderer.rect((highRect.getX()) * 16, (highRect.getY()) * 16, highRect.width, highRect.height);
         debugRenderer.end();
-    }
-
-    public boolean setTile(int tile_x, int tile_y, boolean blocked) {
-        TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground_top");
-        TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
-        //int ground_tile_id = ground.getCell(tile_x, tile_y).getTile().getId();
-
-        cell.setTile(map.getTileSets().getTile(202)); /* or some other id, identifying the tile */
-        layer.setCell(tile_x, tile_y, cell);
-        Tile currentTile = tile[tile_x][tile_y];
-        currentTile.setMayPass(!blocked);
-
-        return true;
     }
 
     public void dispose() {

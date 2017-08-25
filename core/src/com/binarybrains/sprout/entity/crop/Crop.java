@@ -17,6 +17,7 @@ import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.tool.WateringCan;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.level.tile.DirtTile;
+import com.binarybrains.sprout.level.tile.Tile;
 
 
 public class Crop extends Entity {
@@ -25,7 +26,7 @@ public class Crop extends Entity {
     private Array<TextureAtlas.AtlasRegion> regions;
     private int regionIndex = 0;
     private float growTimer = 0;
-
+    public boolean watered = false;
 
     // Crop should be abstract class?
     public Crop(Level level, int tx, int ty) {
@@ -43,6 +44,7 @@ public class Crop extends Entity {
             if (toolItem.tool instanceof WateringCan) {
                 WateringCan can = (WateringCan)toolItem.tool;
                 can.pour();
+                watered = true;
                 return true;
             }
         }
@@ -67,7 +69,9 @@ public class Crop extends Entity {
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        // growing
+        // if not watered ... it is not growing
+        if (!watered) return;
+
         growTimer = growTimer + deltaTime;
         if (growTimer > 2 && regionIndex < 5) {
             regionIndex++;
@@ -79,7 +83,10 @@ public class Crop extends Entity {
             //System.out.println(this +" can be harvested!");
             remove();
             // set back the tile to Dirt instead of FarmTile
-            getLevel().setTile(getTileX(), getTileY(), new DirtTile());
+            Tile tile = getLevel().getTile(getTileX(), getTileY());
+            if (tile instanceof DirtTile) {
+                ((DirtTile) tile).hasCrops = false;
+            }
 
             int count = MathUtils.random(2, 6);
             for (int i = 0; i < count; i++) {

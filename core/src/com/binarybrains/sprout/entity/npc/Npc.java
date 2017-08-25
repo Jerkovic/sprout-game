@@ -56,12 +56,12 @@ public class Npc extends Mob implements Telegraph {
             tile_y = getTileY();
         }
         else if(getDirection() == Direction.WEST) {
-            tile_x = (int)(getWalkBox().getX()+16) >> 4;
+            tile_x = (int)(getWalkBox().getX()+getWalkBox().getWidth()) >> 4; // 12 should be getWidht
             tile_y = getTileY();
         }
         else if(getDirection() == Direction.SOUTH) {
             tile_x = getTileX();
-            tile_y = (int)getWalkBox().getY()+8 >> 4;
+            tile_y = (int)(getWalkBox().getY()+getWalkBox().getHeight()) >> 4;
         }
         else if(getDirection() == Direction.NORTH) {
             tile_x = getTileX();
@@ -93,8 +93,13 @@ public class Npc extends Mob implements Telegraph {
     public Map<Long, Direction> generatePathFindingDirections(IntArray path) {
 
         Map<Long, Direction> travelDirections = new HashMap<Long, Direction>();
+        // Map<Vector2, Direction> tDirs = new HashMap<Vector2, Direction>();
 
         Mob.Direction dir = Mob.Direction.WEST;
+
+        if (path.size < 4) {
+            return travelDirections;
+        }
 
         for (int i = 0, n = path.size; i < n; i += 2) {
             int py = path.get(i);
@@ -118,14 +123,13 @@ public class Npc extends Mob implements Telegraph {
             {
                 dir = Mob.Direction.WEST;
             }
-
+            System.out.println(px + "x" + py + "to " + next_px + "x" + next_py + " " + dir);
             travelDirections.put((long)px + (py * 256), dir); // grid[x + y * width]
 
             if (i == n - 4) {
                 break;
             }
         }
-
         return travelDirections;
     }
 
