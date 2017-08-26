@@ -24,17 +24,16 @@ public class WateringCan extends Tool {
         return 0;
     }
 
+    public int getWater() {
+        return water;
+    }
+
     public void fill(int value) {
         water += value;
         if (water > 100) {
             water = 100;
         }
         Gdx.app.log("WATERING_CAN", "Filling can to: " +  water);
-    }
-
-    @Override
-    public String getDescription() {
-        return description + " " + water + "%";
     }
 
     @Override

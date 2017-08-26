@@ -16,6 +16,9 @@ import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.item.ToolItem;
+import com.binarybrains.sprout.item.tool.Tool;
+import com.binarybrains.sprout.item.tool.WateringCan;
 import com.binarybrains.sprout.level.Level;
 
 
@@ -75,13 +78,19 @@ public class InventoryWindow extends Window {
         String selected = level.player.activeItem.getName();
 
         for (Item item : inventory.getItems()) {
-
+            
             Button button = new Button(skin, "toggle");
             //ImageTextButton
             String counter = "";
             if (item instanceof ResourceItem) {
                 counter = "" + inventory.count(item);
             }
+
+            if (item instanceof ToolItem && ((ToolItem) item).tool instanceof WateringCan) {
+                Tool tool = ((ToolItem) item).tool;
+                counter = "" + ((WateringCan) tool).getWater();
+            }
+
             //button.debug();
             Label lc = new Label(counter, skin);
             lc.setAlignment(Align.bottomRight);
