@@ -14,8 +14,6 @@ public class ToolItem extends Item {
             "Basic", "Iron", "Gold"//
     };
 
-
-
     public ToolItem(Tool tool, int level) {
         this.tool = tool;
         this.level = level;

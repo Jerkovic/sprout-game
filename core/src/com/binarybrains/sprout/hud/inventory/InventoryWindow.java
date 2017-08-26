@@ -32,6 +32,7 @@ public class InventoryWindow extends Window {
 
     public InventoryWindow(Level level, Skin skin) {
         super("Inventory", skin);
+
         this.level = level;
         this.skin = skin;
         setKeepWithinStage(true);
@@ -77,8 +78,10 @@ public class InventoryWindow extends Window {
         group.clear();
         String selected = level.player.activeItem.getName();
 
+        getTitleLabel().setText("Inventory " + inventory.getItems().size() + "/" + inventory.getCapacity());
+
         for (Item item : inventory.getItems()) {
-            
+
             Button button = new Button(skin, "toggle");
             //ImageTextButton
             String counter = "";
@@ -88,7 +91,7 @@ public class InventoryWindow extends Window {
 
             if (item instanceof ToolItem && ((ToolItem) item).tool instanceof WateringCan) {
                 Tool tool = ((ToolItem) item).tool;
-                counter = "" + ((WateringCan) tool).getWater();
+                counter = "" + ((WateringCan) tool).getWater() + "%";
             }
 
             //button.debug();

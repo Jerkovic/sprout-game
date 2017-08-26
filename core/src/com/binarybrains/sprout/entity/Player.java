@@ -30,7 +30,7 @@ public class Player extends Npc implements InputProcessor {
     public Item activeItem;
     public Vector3 clickedPos = new Vector3();
     public int newX = 0, newY = 0;
-    public int inventoryCapacity = 12;
+    public int inventoryCapacity = 24;
     public Portable carriedItem;
 
     enum Keys {
