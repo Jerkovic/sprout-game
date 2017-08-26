@@ -7,21 +7,29 @@ import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.achievement.Achievement;
+import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryWindow;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class Hud {
 
@@ -29,6 +37,9 @@ public class Hud {
     Label timeLabel;
     Level level;
     Skin skin;
+
+    private Actor fadeActor = new Actor();
+    private ShapeRenderer fadeRenderer;
 
     ButtonGroup group;
     TextureAtlas atlas;
@@ -41,7 +52,6 @@ public class Hud {
         this.skin = skin;
         this.level = level;
         stage = new Stage(new ScreenViewport());
-
         atlas = SproutGame.assets.get("items2.txt");
 
         craftingWindow = new CraftingWindow(level.player,"Crafting", skin);
@@ -49,14 +59,29 @@ public class Hud {
         craftingWindow.setVisible(false);
         craftingWindow.setPosition(Gdx.graphics.getWidth() / 2 - craftingWindow.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - craftingWindow.getHeight()/2);
-        //buildInventory(); // builds a ButtonGroup containing item buttons
 
         inventoryWindow = new InventoryWindow(level, skin);
         inventoryWindow.onInventoryChanged(level.player.getInventory());
         stage.addActor(inventoryWindow);
 
+        fadeRenderer = new ShapeRenderer();
+        fadeActor.clearActions();
+        fadeActor.setColor(Color.CLEAR);
 
         gameTimeWindow();
+    }
+
+    public void teleportPlayer(final Player player, final int x, final int y) {
+        fadeActor.clearActions();
+        fadeActor.addAction(Actions.sequence(
+                Actions.alpha(0),
+                Actions.fadeIn(1f, Interpolation.fade),
+                Actions.run(new Runnable() { public void run(){
+                    player.setTilePos(x,y);
+                }}),
+                Actions.fadeOut(1f, Interpolation.fade)
+        ));
+
     }
 
     public void showCraftingWindow() {
@@ -232,7 +257,19 @@ public class Hud {
     }
 
     public void draw() {
-        //super.draw();
+
+        float alpha = fadeActor.getColor().a;
+
+        if (alpha != 0){
+            Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND);
+            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            fadeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            fadeRenderer.setColor(new Color(0f, 0f, 0.031f, alpha));
+            fadeRenderer.rect(0, 0, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
+            fadeRenderer.end();
+            Gdx.gl.glDisable(GL20.GL_BLEND);
+        }
+
         stage.draw();
     }
 
@@ -240,6 +277,8 @@ public class Hud {
     public void act(float delta) {
         timeLabel.setText(level.gameTimer.toString());
         stage.act(delta);
+        fadeActor.act(delta);
+
     }
 
 

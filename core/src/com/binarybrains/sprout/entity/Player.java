@@ -337,6 +337,9 @@ public class Player extends Npc implements InputProcessor {
         return true;
     }
 
+    /**
+     * Release WASD keys
+     */
     public void releaseKeys() {
         keys.put(Keys.A, false);
         keys.put(Keys.D, false);
