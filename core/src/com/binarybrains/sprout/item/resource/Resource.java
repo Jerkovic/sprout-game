@@ -16,11 +16,15 @@ public class Resource {
 
     public static Resource acorn = new Resource("Acorn", "Fruit of the oak, a smooth oval nut in a rough cuplike base.");
 
+    public static Resource wool = new Resource("Wool", "Wool is the textile fiber obtained from sheep.");
+    public static Resource cloth = new Resource("Cloth", "Textile obtained from whool");
+
     public static Resource woodFence = new PlantableResource("Wood Fence", "Keep animals contained and the wolf away");
     public static Resource bomb = new PlantableResource("Bomb", "Generates an explosion");
 
     public static Resource salmon = new FoodResource("Salmon", "Nice meatfish, grill it!");
     public static Resource potato = new FoodResource("Potato", "Starchy, tuberous crop.");
+    public static Resource apple = new FoodResource("Apple", "A fruit");
 
     public static Resource seeds = new SeedResource("Seed Bag", "A bag of mixed seeds");
 

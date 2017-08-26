@@ -59,7 +59,7 @@ public class InventoryWindow extends Window {
         centerMe();
     }
 
-    public void build() {
+    private void build() {
 
         Table itemTable = new Table(skin);
 
@@ -73,7 +73,7 @@ public class InventoryWindow extends Window {
         pack();
     }
 
-    public void syncInventory(final Inventory inventory) {
+    private void syncInventory(final Inventory inventory) {
 
         group.clear();
         String selected = level.player.activeItem.getName();
@@ -83,7 +83,6 @@ public class InventoryWindow extends Window {
         for (Item item : inventory.getItems()) {
 
             Button button = new Button(skin, "toggle");
-            //ImageTextButton
             String counter = "";
             if (item instanceof ResourceItem) {
                 counter = "" + inventory.count(item);
@@ -133,6 +132,5 @@ public class InventoryWindow extends Window {
 
         }
     }
-
 
 }

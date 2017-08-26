@@ -13,7 +13,7 @@ import java.util.List;
 public class Inventory {
 
     public Level level;
-    public List<Item> items = new ArrayList<Item>();
+    public List<Item> items = new ArrayList<Item>(); // should we make this into a Map<slotNumber, Item> instead?
 
     private int capacity; // this can be upgraded
 
@@ -32,8 +32,6 @@ public class Inventory {
 
     public boolean add(int slot, Item item) {
 
-        Gdx.app.log("Inventory", "Adding " + item +  " to inventory slot " + slot);
-
         if (item instanceof ResourceItem) {
             ResourceItem toTake = (ResourceItem) item;
             ResourceItem has = findResource(toTake.resource);
@@ -46,7 +44,6 @@ public class Inventory {
                     } catch (NullPointerException e) {
                     }
                 } else {
-                    Gdx.app.log("Inventory", "Inventory is full. Max capacity:" + capacity);
                     return false;
                 }
             } else {
@@ -66,7 +63,6 @@ public class Inventory {
                 } catch (NullPointerException e) {
                 }
             } else {
-                Gdx.app.log("Inventory", "Inventory is full. Max capacity:" + capacity);
                 return false;
             }
         }
