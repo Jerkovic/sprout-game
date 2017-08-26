@@ -89,6 +89,11 @@ public class Hud {
         inventoryWindow.onInventoryChanged(level.player.getInventory());
     }
 
+    public void adjustInventoryWindow() {
+        inventoryWindow.setWindowTop();
+        // todo more logic
+    }
+
     public void addNotification(Item item) {
         // here we need a queue or something
         // action que from our Pinball game will do
@@ -226,10 +231,7 @@ public class Hud {
 
 
     public Table buildHealthMeters() {
-        // create hud test
         Table hudTable = new Table(skin);
-        //hudTable.setSize(80,20);
-        //hudTable.setPosition(80, Gdx.app.getGraphics().getHeight() - 50);
 
         Pixmap pixmap = new Pixmap(10, 10, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.WHITE);

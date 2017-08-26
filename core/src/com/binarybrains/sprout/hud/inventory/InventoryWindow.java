@@ -29,6 +29,7 @@ public class InventoryWindow extends Window {
     ButtonGroup group;
     TextureAtlas atlas;
     Level level;
+    Float yPos;
 
     public InventoryWindow(Level level, Skin skin) {
         super("Inventory", skin);
@@ -42,11 +43,17 @@ public class InventoryWindow extends Window {
 
         atlas = SproutGame.assets.get("items2.txt");
         group = new ButtonGroup();
+        yPos = 20f;
+        centerMe();
+    }
+
+    public void setWindowTop() {
+        yPos = (float )Gdx.app.getGraphics().getHeight() - 100;
         centerMe();
     }
 
     public void centerMe() {
-        setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2), 20);
+        setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2), yPos);
     }
 
     /*

@@ -14,7 +14,8 @@ public class TeleporterTile extends Tile {
         super(true);
     }
     public boolean interact(Player player, int xt, int yt, Mob.Direction attackDir) {
-        System.out.println(player + " Interact with TELEPORTER");
+        // improve this
+        player.getLevel().screen.hud.adjustInventoryWindow(); // a a test to make it align top
         player.getLevel().screen.hud.teleportPlayer(player, 18,91);
         return false;
     }
