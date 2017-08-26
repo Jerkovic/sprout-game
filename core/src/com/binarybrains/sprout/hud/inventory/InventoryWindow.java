@@ -57,7 +57,6 @@ public class InventoryWindow extends Window {
 
     public void build() {
 
-        // Table of items
         Table itemTable = new Table(skin);
 
         for (int i = 0, n = group.getButtons().size; i < n; i++) {
@@ -65,15 +64,7 @@ public class InventoryWindow extends Window {
             if ((i + 1) % 12 == 0) itemTable.row();
         }
 
-        Table container = new Table();
-        ScrollPane itemTableScrollPane = new ScrollPane(itemTable, skin);
-
-        itemTableScrollPane.setFlickScroll(false);
-        itemTableScrollPane.setFadeScrollBars(false);
-        itemTableScrollPane.setForceScroll(false, false);
-        container.add(itemTableScrollPane).height((50 * 1) + 2);
-        container.align(Align.top);
-        add(container);
+        add(itemTable);
         row();
         pack();
     }
@@ -85,28 +76,36 @@ public class InventoryWindow extends Window {
 
         for (Item item : inventory.getItems()) {
 
-            Button button = new Button(new Image(atlas.findRegion(item.getRegionId())), skin, "toggle");
-
+            Button button = new Button(skin, "toggle");
+            //ImageTextButton
             String counter = "";
             if (item instanceof ResourceItem) {
                 counter = "" + inventory.count(item);
             }
-
+            //button.debug();
             Label lc = new Label(counter, skin);
             lc.setAlignment(Align.bottomRight);
-            lc.setColor(Color.BLACK);
-            button.add(lc);
+            lc.setColor(Color.WHITE);
+
+            Image image = new Image(atlas.findRegion(item.getRegionId()));
+            Stack stack = new Stack();
+            stack.add(image);
+
+            //Second add wrapped overlay object
+            Table overlay = new Table();
+            overlay.add(lc).expand().fillX().bottom().left();
+            stack.add(overlay);
+
+            button.add(stack);
+
 
             // tooltip test
             button.addListener(new TextTooltip(item.getDescription(), skin));
-
+            button.pack();
             if (selected != null && item.getName().equals(selected))
             {
-                //System.out.println(item.getName() + " - " + selected);
                 button.setChecked(true);
             }
-
-
 
             button.addListener(new ChangeListener() {
                 @Override
@@ -116,8 +115,6 @@ public class InventoryWindow extends Window {
                     }
                 }
             });
-
-            //System.out.println(button.getListeners());
 
 
             group.add(button);

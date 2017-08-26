@@ -16,12 +16,9 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
-import com.binarybrains.sprout.achievement.Achievement;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryWindow;
@@ -29,7 +26,6 @@ import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 
 public class Hud {
 
@@ -75,11 +71,11 @@ public class Hud {
         fadeActor.clearActions();
         fadeActor.addAction(Actions.sequence(
                 Actions.alpha(0),
-                Actions.fadeIn(1f, Interpolation.fade),
+                Actions.fadeIn(.5f, Interpolation.fade),
                 Actions.run(new Runnable() { public void run(){
                     player.setTilePos(x,y);
                 }}),
-                Actions.fadeOut(1f, Interpolation.fade)
+                Actions.fadeOut(.3f, Interpolation.fade)
         ));
 
     }
@@ -193,7 +189,6 @@ public class Hud {
 
         timeLabel = new Label("Day 0 00:00", skin);
 
-        //define a table used to organize hud's labels
         Table table = new Table(skin);
         table.bottom();
         table.setFillParent(false);
@@ -258,6 +253,8 @@ public class Hud {
 
     public void draw() {
 
+        stage.draw();
+
         float alpha = fadeActor.getColor().a;
 
         if (alpha != 0){
@@ -270,7 +267,6 @@ public class Hud {
             Gdx.gl.glDisable(GL20.GL_BLEND);
         }
 
-        stage.draw();
     }
 
 
