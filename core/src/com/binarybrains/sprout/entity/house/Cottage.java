@@ -41,7 +41,7 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
 
     @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
-        getLevel().screen.hud.teleportPlayer(player, 9, 15);
+        getLevel().screen.hud.teleportPlayer(player, 4, 2);
         BackgroundMusic.stop(); // fade out music
         return true;
     }

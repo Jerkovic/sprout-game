@@ -219,9 +219,22 @@ public class LevelEngine {
         // temp stuff below, must be easy to map TileMap.Tile to (my)Tile
         for(int x = 0; x < layer.getWidth();x++) {
             for(int y = 0; y < layer.getHeight();y++) {
-                tile[x][y] = new GrassTile();
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
+                String tileType;
+
+                tile[x][y] = new GrassTile();
+
+                if (cell != null && cell.getTile() != null) {
+                    if (cell.getTile().getProperties().containsKey("tileType")) {
+                        tile[x][y] = new TeleporterTile();
+                    }
+                }
+
+
                 if (cell != null && cell.getTile().getProperties().containsKey("blocked") ) {
+                    tile[x][y] = new WaterTile();
+                }
+                if (false) {
                     tile[x][y] = new WaterTile();
                 }
             }
