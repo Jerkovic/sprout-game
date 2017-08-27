@@ -6,6 +6,7 @@ public class Resource {
     public static Resource coal = new Resource("Coal", "Combustible black or dark brown rock consisting \nmainly of carbonized plant matter, found mainly in underground \ndeposits and widely used as fuel");
 
     public static Resource wood = new Resource("Wood", "Hard fibrous material that forms the main substance \nof the trunk or branches of a tree or shrub.");
+    public static Resource stick = new Resource("Stick", "A stick made of wood");
     public static Resource stone = new Resource("Stone", "Hard, solid, nonmetallic mineral matter especially \ngood as building material.");
 
     public static Resource ironOre = new Resource("Iron Ore", "Rock from which iron can be profitably extracted.");
@@ -18,6 +19,7 @@ public class Resource {
 
     public static Resource wool = new Resource("Wool", "Wool is the textile fiber obtained from sheep.");
     public static Resource cloth = new Resource("Cloth", "Textile obtained from whool");
+    public static Resource string = new Resource("String", "A nice strong string.");
 
     public static Resource woodFence = new PlantableResource("Wood Fence", "Keep animals contained and the wolf away");
     public static Resource bomb = new PlantableResource("Bomb", "Generates an explosion");

@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.crafting;
 
-import com.badlogic.gdx.Gdx;
 import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
@@ -23,12 +22,14 @@ public class Crafting {
 
     static {
         try {
-            workbenchRecipes.add(new ToolRecipe(new Hoe(), 0).addCost(Resource.stone, 1).addCost(Resource.wood, 1));
-            //workbenchRecipes.add(new ToolRecipe(new Hoe(), 2).addCost(Resource.goldIngot, 10).addCost(Resource.wood, 3));
-            workbenchRecipes.add(new ToolRecipe(new Axe(), 0).addCost(Resource.stone, 1).addCost(Resource.wood, 1));
-            workbenchRecipes.add(new ToolRecipe(new PickAxe(), 0).addCost(Resource.stone, 2).addCost(Resource.wood, 1));
+            workbenchRecipes.add(new ResourceRecipe(Resource.stick).addCost(Resource.wood, 1));
+            workbenchRecipes.add(new ToolRecipe(new Hoe(), 0).addCost(Resource.stone, 1).addCost(Resource.stick, 1));
+            workbenchRecipes.add(new ToolRecipe(new Axe(), 0).addCost(Resource.stone, 1).addCost(Resource.stick, 1));
+            workbenchRecipes.add(new ToolRecipe(new PickAxe(), 0).addCost(Resource.stone, 2).addCost(Resource.stick, 1));
             workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Resource.ironBar, 5));
-            workbenchRecipes.add(new ToolRecipe(new Scythe(), 0).addCost(Resource.ironBar, 2).addCost(Resource.wood, 2));
+            workbenchRecipes.add(new ToolRecipe(new Scythe(), 0).addCost(Resource.ironBar, 2).addCost(Resource.stick, 2));
+            workbenchRecipes.add(new ToolRecipe(new FishingPole(), 0).addCost(Resource.ironBar, 1).addCost(Resource.stick, 1).addCost(Resource.string, 1));
+
 
             workbenchRecipes.add(new ResourceRecipe(Resource.cloth).addCost(Resource.wool, 3));
 
@@ -39,6 +40,7 @@ public class Crafting {
             workbenchRecipes.add(new ResourceRecipe(Resource.woodFence).addCost(Resource.wood, 1));
 
             //furnaceRecipes.add(new ResourceRecipe(Resource.glass).addCost(Resource.sand, 4).addCost(Resource.coal, 1));
+
 
 
         } catch (Exception e) {

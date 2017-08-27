@@ -276,44 +276,58 @@ Seed_Bag
   orig: 48, 48
   offset: 0, 0
   index: -1
-Stone
+Stick
   rotate: false
   xy: 51, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Watering_Can
+Stone
   rotate: false
   xy: 101, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Wood
+String
   rotate: false
   xy: 151, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Wood_Fence
+Watering_Can
   rotate: false
   xy: 201, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Wool
+Wood
   rotate: false
   xy: 251, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Wow_Cola
+Wood_Fence
   rotate: false
   xy: 301, 403
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Wool
+  rotate: false
+  xy: 351, 403
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Wow_Cola
+  rotate: false
+  xy: 401, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
