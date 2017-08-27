@@ -62,7 +62,7 @@ public class GameScreen implements Screen {
         BackgroundMusic.setVolume(.15f); // Preference.getSetting("music_volume")
         //BackgroundMusic.start();
         forestAmbienceSfx = SproutGame.assets.get("ambience/forest_morning_ambience.mp3");
-        //forestAmbienceSfx.loop(.25f);
+        forestAmbienceSfx.loop(.25f);
 
         /*
         Timer.schedule(new Timer.Task(){

@@ -29,12 +29,12 @@ public class SmallTree extends Entity { // extends Vegitation or ?
         super(level, position, width, height);
 
         // the code below is no good - remake this
-        sprite = new Sprite(level.spritesheet, 0, 0, (int)width, (int)height);
+        sprite = new Sprite(level.spritesheet, 96, 0, (int)width, (int)height);
         sprite.setSize(width, height);
         sprite.setPosition(getX(), getY());
 
         // move to shadow System?
-        shadow = new Sprite(level.spritesheet, 0, 0, (int)width, (int)height);
+        shadow = new Sprite(level.spritesheet, 96, 0, (int)width, (int)height);
         shadow.setColor(Color.BLACK);
         shadow.setAlpha(0.4f);
         shadow.setPosition(getX(), getY());
@@ -65,7 +65,7 @@ public class SmallTree extends Entity { // extends Vegitation or ?
     }
 
     public void drawShadow(Batch batch){
-        shadow.setPosition(sprite.getX() + 10, sprite.getY()+1);
+        shadow.setPosition(sprite.getX() + 15, sprite.getY()+1);
         shadow.draw(batch);
     }
 

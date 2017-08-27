@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.house.Cottage;
+import com.binarybrains.sprout.entity.tree.Bush;
 import com.binarybrains.sprout.entity.tree.SmallTree;
 import com.binarybrains.sprout.entity.tree.Tree;
 import com.binarybrains.sprout.level.pathfind.Astar;
@@ -209,6 +210,8 @@ public class LevelEngine {
                 } else if (objType.equals("SmallTree")) {
 
                     add(level, new SmallTree(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
+                } else if (objType.equals("Bush")) {
+                    add(level, new Bush(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
                 }
                 System.out.println("type:" + object.getClass() + " " + object.getProperties().get("type") + " " + rectangle);
                 // EntityFactory.createEntityFromTileMapObject(Object obj)
