@@ -1,5 +1,5 @@
 items2.png
-size: 512, 1024
+size: 512, 512
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -316,12 +316,5 @@ Wow_Cola
   xy: 301, 403
   size: 48, 48
   orig: 48, 48
-  offset: 0, 0
-  index: -1
-home
-  rotate: false
-  xy: 351, 403
-  size: 99, 194
-  orig: 99, 194
   offset: 0, 0
   index: -1
