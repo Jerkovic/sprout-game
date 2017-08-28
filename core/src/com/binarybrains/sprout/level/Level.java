@@ -44,7 +44,7 @@ public class Level extends LevelEngine {
     public boolean debugMode = false;
     public GameTime gameTimer;
 
-    public float nightTimeAlpha = 0f; // test darkness
+    public float nightTimeAlpha = .5f; // test darkness
 
     public Texture spritesheet; // 400x1264 pixels 25 tiles bred och 79 hög
     public Texture charsheet;
@@ -56,12 +56,12 @@ public class Level extends LevelEngine {
     private Texture light;
     private FrameBuffer fbo;
 
-    public static float ambientIntensity = .12f;
-    public static final Vector3 ambientColor = new Vector3(.2f, .2f, .9f); // .6 .6 .8
+    public static float ambientIntensity = .70f;
+    public static final Vector3 ambientColor = new Vector3(.2f, .2f, .8f); // .6 .6 .8
 
     //used to make the light flicker
     public float zAngle;
-    public static final float zSpeed = 5.0f;
+    public static final float zSpeed = 4.0f;
     public static final float PI2 = 3.1415926535897932384626433832795f * 1.0f;
 
     //read our shader files
@@ -102,8 +102,7 @@ public class Level extends LevelEngine {
         light = new Texture("shader/light.png");
 
 
-        // this was laying around in the resize
-        fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight(), false);
+        fbo = new FrameBuffer(Pixmap.Format.RGB888, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight(), false);
 
         lightShader.begin();
         lightShader.setUniformf("resolution", Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
@@ -112,7 +111,6 @@ public class Level extends LevelEngine {
         finalShader.begin();
         finalShader.setUniformf("resolution", Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
         finalShader.end();
-        // end shader
 
     }
 
@@ -121,9 +119,7 @@ public class Level extends LevelEngine {
 
         setupAmbientLight();
         this.screen = screen;
-        //spritesheet = new Texture(Gdx.files.internal("levels/rpg_tileset.png")); // olds
         spritesheet = new Texture(Gdx.files.internal("levels/stardew_valley_01.png"));
-
         charsheet = new Texture(Gdx.files.internal("spritesheet.png"));
         // temp code
 
@@ -133,14 +129,6 @@ public class Level extends LevelEngine {
         player.setTilePos(13, 100);
         this.add(this, player);
 
-        // Fido dog test
-        // this.add(this, new Fido(this, new Vector2(28 * 16f, 102 * 16f)));
-
-
-        // test some scattered Pickup items
-        add(this, new PickupItem(this, new ResourceItem(Resource.coal, 2), new Vector2(16f * 28, 16f * 118)));
-        add(this, new PickupItem(this, new ResourceItem(Resource.goldIngot, 1), new Vector2(16f * 26, 16f * 119)));
-        add(this, new PickupItem(this, new ToolItem(Tool.fishingpole, 0), new Vector2(16 * 27, 16 * 120)));
         add(this, new Chest(this, new Vector2(16 * 22, 16 * 110)));
 
         camera = new Camera(this);
@@ -195,7 +183,7 @@ public class Level extends LevelEngine {
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
-            // todo show some sort of menu window
+            // todo show some sort of tabbed menu window
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
@@ -216,32 +204,31 @@ public class Level extends LevelEngine {
             zAngle -= PI2;
 
         //draw the light to the FBO
-        if (false) {
+        if (true) {
             fbo.begin();
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
 
             tileMapRenderer.getBatch().setShader(defaultShader);
 
-            float lightSize = lightOscillate ? (85.0f + 3.25f * (float)Math.sin(zAngle) + .5f * MathUtils.random()):85.0f;
+            float lightSize = lightOscillate ? (75.0f + 3.25f * (float)Math.sin(zAngle) + .5f * MathUtils.random()):75.0f;
 
             tileMapRenderer.getBatch().begin();
-                tileMapRenderer.getBatch().draw(light, 48 - lightSize * 0.5f + 0.5f, 48 + 0.5f - lightSize * 0.5f, lightSize, lightSize);
-                tileMapRenderer.getBatch().draw(light, player.getX(),player.getY(), lightSize, lightSize);
+                tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2,player.getWalkBoxCenterY() - lightSize / 2, lightSize, lightSize);
             tileMapRenderer.getBatch().end();
             fbo.end();
         }
         // end draw lights
 
         // draw the screen
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         tileMapRenderer.setView(camera);
         tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
-        /*if (gameTimer.getGameTime().minute > 30) {
+        if (gameTimer.getGameTime().minute > 10) {
             tileMapRenderer.getBatch().setShader(finalShader);
 
-        }*/
+        }
 
         fbo.getColorBufferTexture().bind(1); //this is important! bind the FBO to the 2nd texture unit
         light.bind(0); //we force the binding of a texture on first texture unit to avoid artefacts
@@ -260,7 +247,7 @@ public class Level extends LevelEngine {
         int[] fg_layers = {3,5};
         tileMapRenderer.render(fg_layers);
 
-        // Testing the night overlay
+        // Testing the night overlay - the simple version
         if (false) {
 
             Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND);
