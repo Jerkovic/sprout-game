@@ -13,21 +13,17 @@ import java.util.List;
 public class Inventory {
 
     public Level level;
-    public List<Item> items = new ArrayList<Item>(); // should we make this into a Map<slotNumber, Item> instead?
+    public List<Item> items = new ArrayList<Item>();
 
     private int capacity; // this can be upgraded
 
     public Inventory(Level level, int capacity) {
         this.level = level;
-        this.capacity = capacity;
+        setCapacity(capacity);
     }
 
     public boolean add(Item item) {
         return add(items.size(), item);
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
     }
 
     public boolean add(int slot, Item item) {
@@ -174,10 +170,11 @@ public class Inventory {
     }
 
     public void equipTo(Player player, int checkedIndex) {
-        // do something like this pif the entity already has a activeItem
-        // items.add(0, entityPlayer.activeItem);
         items.remove(checkedIndex);
-        // entityPlayer.activeItem = item;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public int getCapacity() {

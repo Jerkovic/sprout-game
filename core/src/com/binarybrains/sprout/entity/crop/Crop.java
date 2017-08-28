@@ -42,8 +42,8 @@ public class Crop extends Entity {
         if (item instanceof ToolItem) {
             ToolItem toolItem = (ToolItem) item;
             if (toolItem.tool instanceof WateringCan) {
-                WateringCan can = (WateringCan)toolItem.tool;
-                can.pour();
+                ((WateringCan)toolItem.tool).pour();
+                player.getLevel().screen.hud.refreshInventory();
                 watered = true;
                 return true;
             }
