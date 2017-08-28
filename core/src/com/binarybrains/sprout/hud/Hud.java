@@ -52,8 +52,10 @@ public class Hud {
         atlas = SproutGame.assets.get("items2.txt");
 
         craftingWindow = new CraftingWindow(level.player,"Crafting", skin);
-        stage.addActor(craftingWindow);
         craftingWindow.setVisible(false);
+        craftingWindow.hide();
+        stage.addActor(craftingWindow);
+
         craftingWindow.setPosition(Gdx.graphics.getWidth() / 2 - craftingWindow.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - craftingWindow.getHeight()/2);
 
@@ -85,6 +87,8 @@ public class Hud {
     public void showCraftingWindow() {
         craftingWindow.build(); // refresh content in window
         craftingWindow.setVisible(true);
+        craftingWindow.show(getStage());
+        craftingWindow.setScrollFocus(getStage());
     }
 
     public void refreshInventory()  {
@@ -207,10 +211,10 @@ public class Hud {
         Image icon2 = new Image(atlas.findRegion("Balubas")); // balubas icon
         table.add(icon2);
 
-        table.add(new Label("1.256,00", skin));
+        table.add(new Label("0", skin));
 
         stage.addActor(table);
-        Window window = new Window("Mr Sprout", skin);
+        Window window = new Window(SproutGame.name, skin);
         window.setKeepWithinStage(false);
 
         window.setMovable(true);

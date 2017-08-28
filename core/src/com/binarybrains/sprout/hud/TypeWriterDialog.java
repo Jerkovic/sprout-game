@@ -25,8 +25,6 @@ public class TypeWriterDialog extends Window {
     private float stringCompleteness = 0;
     Label textLabel;
 
-
-
     String dialogText = "I have nothing to say.";
     Boolean skipTypeWriter = false;
     int charCountLastFrame = 0;

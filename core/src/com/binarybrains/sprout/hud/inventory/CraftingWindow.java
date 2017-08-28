@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -20,12 +21,14 @@ import com.binarybrains.sprout.screen.GameScreen;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 
 
-public class CraftingWindow extends Window {
+public class CraftingWindow extends Dialog {
 
     TextureAtlas atlas;
     Skin skin;
     Crafting craft;
     Player player;
+    ScrollPane recipeTableScrollPane;
+    private float rememberScrollY = 0;
 
     public CraftingWindow(Player player, String title, Skin skin) {
         super("Workbench Crafting", skin);
@@ -36,25 +39,16 @@ public class CraftingWindow extends Window {
         this.atlas = SproutGame.assets.get("items2.txt");
 
         setKeepWithinStage(true);
-        setModal(true);
         setMovable(false);
-        center();
-        setResizable(false);
-        setZIndex(200);
+        setModal(true);
         build();
-
     }
-
-    public void hide () {
-        fadeOut(0.4f, Interpolation.fade);
-    }
-
 
     public void build() {
         clearChildren();
 
         Table recipesGroup = buildRecipesButtonGroup(skin);
-        ScrollPane recipeTableScrollPane = new ScrollPane(recipesGroup, skin);
+        this.recipeTableScrollPane = new ScrollPane(recipesGroup, skin);
         recipeTableScrollPane.setFlickScroll(false);
         recipeTableScrollPane.setFadeScrollBars(false);
         recipeTableScrollPane.setForceScroll(false, true);
@@ -74,7 +68,7 @@ public class CraftingWindow extends Window {
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                setVisible(false);
+                hide();
                 player.getLevel().screen.gameState = GameScreen.GameState.RUN;
                 player.getLevel().gameTimer.resume();
 
@@ -82,6 +76,7 @@ public class CraftingWindow extends Window {
         });
         add(buttonExit).pad(5);
         pack();
+
     }
 
     public Table buildRecipesButtonGroup(Skin skin) {
@@ -105,6 +100,7 @@ public class CraftingWindow extends Window {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     if (craft.startCraft(player, Integer.parseInt(event.getTarget().getName()))) {
+                        //rememberScrollY = recipeTableScrollPane.getVisualScrollY();
                         onCrafting();
                         // temp sound remake this.
                         ((Sound) SproutGame.assets.get("sfx/craft_complete.wav")).play(.15f);
@@ -145,6 +141,11 @@ public class CraftingWindow extends Window {
 
     private void onCrafting() {
         build();
+        //recipeTableScrollPane.setScrollY(100);
+        getStage().setScrollFocus(recipeTableScrollPane);
     }
 
+    public void setScrollFocus(Stage stage) {
+        stage.setScrollFocus(recipeTableScrollPane);
+    }
 }
