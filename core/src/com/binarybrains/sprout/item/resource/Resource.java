@@ -23,6 +23,7 @@ public class Resource {
 
     public static Resource woodFence = new PlantableResource("Wood Fence", "Keep animals contained and the wolf away");
     public static Resource bomb = new PlantableResource("Bomb", "Generates an explosion");
+    public static Resource ladder = new PlantableResource("Ladder", "ladder to climb");
 
     public static Resource salmon = new FoodResource("Salmon", "Nice meatfish, grill it!");
     public static Resource potato = new FoodResource("Potato", "Starchy, tuberous crop.");

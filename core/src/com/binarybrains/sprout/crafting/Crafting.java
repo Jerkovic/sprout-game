@@ -38,6 +38,7 @@ public class Crafting {
             workbenchRecipes.add(new ResourceRecipe(Resource.ironBar).addCost(Resource.ironOre, 4).addCost(Resource.coal, 1));
             workbenchRecipes.add(new ResourceRecipe(Resource.goldIngot).addCost(Resource.goldNugget, 4).addCost(Resource.coal, 1));
             workbenchRecipes.add(new ResourceRecipe(Resource.woodFence).addCost(Resource.wood, 1));
+            workbenchRecipes.add(new ResourceRecipe(Resource.ladder).addCost(Resource.wood, 6));
 
             //furnaceRecipes.add(new ResourceRecipe(Resource.glass).addCost(Resource.sand, 4).addCost(Resource.coal, 1));
 

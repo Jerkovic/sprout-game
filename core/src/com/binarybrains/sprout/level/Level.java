@@ -44,7 +44,7 @@ public class Level extends LevelEngine {
     public boolean debugMode = false;
     public GameTime gameTimer;
 
-    public float nightTimeAlpha = .5f; // test darkness
+    public float nightTimeAlpha = .58f; // test darkness
 
     public Texture spritesheet; // 400x1264 pixels 25 tiles bred och 79 hög
     public Texture charsheet;
@@ -56,8 +56,8 @@ public class Level extends LevelEngine {
     private Texture light;
     private FrameBuffer fbo;
 
-    public static float ambientIntensity = .70f;
-    public static final Vector3 ambientColor = new Vector3(.2f, .2f, .8f); // .6 .6 .8
+    public float ambientIntensity = .58f;
+    public static final Vector3 ambientColor = new Vector3(.3f, .3f, .8f); // .6 .6 .8
 
     //used to make the light flicker
     public float zAngle;
@@ -174,11 +174,11 @@ public class Level extends LevelEngine {
 
         // Input ctrl should not be here
         if (Gdx.input.isKeyPressed(Input.Keys.E)) {
-            nightTimeAlpha += 0.01f;
+            ambientIntensity += 0.1f;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.R)) {
-            nightTimeAlpha -= 0.01f;
+            ambientIntensity -= 0.1f;
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
@@ -225,7 +225,7 @@ public class Level extends LevelEngine {
 
         tileMapRenderer.setView(camera);
         tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
-        if (gameTimer.getGameTime().minute > 10) {
+        if (gameTimer.getGameTime().minute > 5) {
             tileMapRenderer.getBatch().setShader(finalShader);
 
         }

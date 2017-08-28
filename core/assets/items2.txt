@@ -199,135 +199,142 @@ Iron_Ore
   orig: 48, 48
   offset: 0, 0
   index: -1
-Pickaxe
+Ladder
   rotate: false
   xy: 1, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Potato
+Pickaxe
   rotate: false
   xy: 51, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Potato_Stage
+Potato
   rotate: false
   xy: 101, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 1
+  index: -1
 Potato_Stage
   rotate: false
   xy: 151, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 2
+  index: 1
 Potato_Stage
   rotate: false
   xy: 201, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 3
+  index: 2
 Potato_Stage
   rotate: false
   xy: 251, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 4
+  index: 3
 Potato_Stage
   rotate: false
   xy: 301, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
-  index: 5
+  index: 4
 Potato_Stage
   rotate: false
   xy: 351, 345
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 5
+Potato_Stage
+  rotate: false
+  xy: 401, 345
   size: 56, 56
   orig: 56, 56
   offset: 0, 0
   index: 6
 Salmon
   rotate: false
-  xy: 409, 345
+  xy: 459, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Scythe
   rotate: false
-  xy: 459, 345
+  xy: 1, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Seed_Bag
   rotate: false
-  xy: 1, 403
+  xy: 51, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Stick
   rotate: false
-  xy: 51, 403
+  xy: 101, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Stone
   rotate: false
-  xy: 101, 403
+  xy: 151, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 String
   rotate: false
-  xy: 151, 403
+  xy: 201, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Watering_Can
   rotate: false
-  xy: 201, 403
+  xy: 251, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Wood
   rotate: false
-  xy: 251, 403
+  xy: 301, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Wood_Fence
   rotate: false
-  xy: 301, 403
+  xy: 351, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Wool
   rotate: false
-  xy: 351, 403
+  xy: 401, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Wow_Cola
   rotate: false
-  xy: 401, 403
+  xy: 451, 403
   size: 48, 48
   orig: 48, 48
   offset: 0, 0

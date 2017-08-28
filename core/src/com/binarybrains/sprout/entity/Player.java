@@ -69,6 +69,7 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ResourceItem(Resource.stone, 12));
         getInventory().add(new ResourceItem(Resource.goldNugget, 13));
         getInventory().add(new ResourceItem(Resource.apple, 12));
+        getInventory().add(new ResourceItem(Resource.ladder, 1));
 
         setActiveItem(getInventory().getItems().get(3));
 
