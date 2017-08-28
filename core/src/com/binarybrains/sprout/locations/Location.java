@@ -6,6 +6,7 @@ import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.level.Level;
+import com.binarybrains.sprout.misc.BackgroundMusic;
 
 // A Trigger more than a Location
 public class Location extends Entity {
@@ -25,6 +26,7 @@ public class Location extends Entity {
     public void containTrigger(Entity entity) {
         if (entity instanceof Player) {
             ((Player) entity).releaseKeys();
+            BackgroundMusic.stop();
             ((Sound) SproutGame.assets.get("sfx/fancy_reward.wav")).play();
             getLevel().screen.hud.speakDialog(name, description);
         }

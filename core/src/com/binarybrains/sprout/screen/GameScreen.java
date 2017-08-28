@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 import com.binarybrains.sprout.SproutGame;
-import com.binarybrains.sprout.achievement.Achievement;
 import com.binarybrains.sprout.hud.Hud;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.misc.BackgroundMusic;
@@ -59,20 +58,21 @@ public class GameScreen implements Screen {
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
 
-        BackgroundMusic.setVolume(.15f); // Preference.getSetting("music_volume")
-        //BackgroundMusic.start();
+        BackgroundMusic.setVolume(.10f); // Preference.getSetting("music_volume")
+
         forestAmbienceSfx = SproutGame.assets.get("ambience/forest_morning_ambience.mp3");
         forestAmbienceSfx.loop(.25f);
 
-        /*
+
         Timer.schedule(new Timer.Task(){
             @Override
             public void run(){
-                Achievement achievement = Achievement.achievements.get("zombieSlayer1");
-                level.screen.hud.addAchievement(achievement);
+                if (!BackgroundMusic.isPlaying()) {
+                    BackgroundMusic.start();
+                }
             }
-        }, 5.0f, 60);
-        */
+        }, 3.0f, 60);
+
     }
 
     @Override

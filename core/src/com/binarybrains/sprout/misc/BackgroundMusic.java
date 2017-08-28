@@ -14,13 +14,22 @@ public class BackgroundMusic {
 
     public static void start() {
         mIsPlaying = true;
+        isStopped = false;
         track1.setLooping(true);
         track1.play();
+    }
+
+    public static void changeTrack(int track) {
+        // todo change track
     }
 
     public static void setVolume(float volume) {
         mVolume = volume;
         track1.setVolume(mVolume);
+    }
+
+    public static boolean isPlaying() {
+        return mIsPlaying && !isStopped;
     }
 
     public static void stop() {
