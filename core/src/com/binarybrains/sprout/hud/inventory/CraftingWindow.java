@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -19,7 +18,6 @@ import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.screen.GameScreen;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 
 public class CraftingWindow extends Window {
@@ -109,8 +107,7 @@ public class CraftingWindow extends Window {
                     if (craft.startCraft(player, Integer.parseInt(event.getTarget().getName()))) {
                         onCrafting();
                         // temp sound remake this.
-                        Sound testSfx = SproutGame.assets.get("sfx/blop.wav");
-                        testSfx.play();
+                        ((Sound) SproutGame.assets.get("sfx/craft_complete.wav")).play(.15f);
                     } else {
                         player.getLevel().screen.hud.addToasterMessage("Inventory" ,"Inventory is full!");
                     }
