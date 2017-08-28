@@ -85,6 +85,7 @@ public class Hud {
     }
 
     public void showCraftingWindow() {
+        level.player.releaseKeys();
         craftingWindow.build(); // refresh content in window
         craftingWindow.setVisible(true);
         craftingWindow.show(getStage());

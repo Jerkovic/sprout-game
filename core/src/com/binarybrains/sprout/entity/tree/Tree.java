@@ -36,7 +36,7 @@ public class Tree extends Entity { // extends Vegitation or ?
     public void update(float delta) {
 
         if (falling) {
-            time+=2;
+            time+=delta * 100;
             if (time < 60) {
                 sprite.setRotation(time);
             }
@@ -107,9 +107,9 @@ public class Tree extends Entity { // extends Vegitation or ?
     public void hurt(Entity e, int dmg) {
         damage += dmg;
 
-        if (damage > 10) {
-            // falling = true;
-            remove();
+        if (damage > 10 && !falling) {
+            falling = true;
+            //remove();
             // add some loot just as a test
             int count = MathUtils.random(1,9);
             for (int i = 0; i < count; i++) {
