@@ -11,12 +11,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Portable;
 import com.binarybrains.sprout.level.Level;
-
 
 import java.util.List;
 
@@ -62,9 +60,7 @@ public class Bomb extends Entity implements Portable {
         time++;
         if (!explode && time >= lifeTime) {
             explode = true;
-            // temp sound
-            Sound testSfx = SproutGame.assets.get("sfx/explosion_1.wav");
-            testSfx.play();
+            ((Sound) SproutGame.assets.get("sfx/explosion_1.wav")).play();
 
             getLevel().getCamera().shake();
 

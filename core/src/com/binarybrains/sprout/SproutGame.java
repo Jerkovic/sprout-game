@@ -64,16 +64,16 @@ public class SproutGame extends Game {
 	}
 
 	public void loadAssets() {
-		assets.load("sfx/chop_wood2_converted.wav", Sound.class);
+		assets.load("sfx/chopping_Wood_1.wav", Sound.class);
+        assets.load("sfx/chopping_Wood_2.wav", Sound.class);
 		assets.load("sfx/blop.wav", Sound.class);
 		assets.load("sfx/water_splash.wav", Sound.class);
 		assets.load("sfx/powerup.wav", Sound.class);
         assets.load("sfx/explosion_1.wav", Sound.class);
         assets.load("sfx/dog_woof.wav", Sound.class);
+        assets.load("sfx/fancy_reward.wav", Sound.class);
         assets.load("ambience/forest_morning_ambience.mp3", Sound.class);
-
         assets.load("music/track1.mp3", Music.class);
-
         assets.load("items2.txt", TextureAtlas.class);
 
 		SproutGame.assets.finishLoading();

@@ -24,7 +24,6 @@ public abstract class Tool {
         this.description = description;
     }
 
-
     public String getName() {
         return name;
     }

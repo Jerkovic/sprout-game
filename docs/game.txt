@@ -53,10 +53,13 @@ ocean
 
 Inspiration by
 -----------------
-Minicraft
+Mine(i)craft
 Stardew Valley
 Harvest Moon
 Leisure Suit Larry
+Crono Trigger
+Secrets of Mana
+
 
 
 names:
