@@ -12,6 +12,7 @@ public abstract class Tool {
     public static WateringCan wateringcan = new WateringCan();
     public static Scythe scythe = new Scythe();
     public static FishingPole fishingpole = new FishingPole();
+    // public static GoldKey goldenKey = new GoldKey();
 
     // -----------------------------------------------------------
 

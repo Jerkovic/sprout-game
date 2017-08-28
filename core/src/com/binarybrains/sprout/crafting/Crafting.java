@@ -29,6 +29,7 @@ public class Crafting {
             workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Resource.ironBar, 5));
             workbenchRecipes.add(new ToolRecipe(new Scythe(), 0).addCost(Resource.ironBar, 2).addCost(Resource.stick, 2));
             workbenchRecipes.add(new ToolRecipe(new FishingPole(), 0).addCost(Resource.ironBar, 1).addCost(Resource.stick, 1).addCost(Resource.string, 1));
+            workbenchRecipes.add(new ToolRecipe(new GoldKey(), 0).addCost(Resource.goldIngot, 2));
 
 
             workbenchRecipes.add(new ResourceRecipe(Resource.cloth).addCost(Resource.wool, 3));
@@ -38,7 +39,7 @@ public class Crafting {
             workbenchRecipes.add(new ResourceRecipe(Resource.ironBar).addCost(Resource.ironOre, 4).addCost(Resource.coal, 1));
             workbenchRecipes.add(new ResourceRecipe(Resource.goldIngot).addCost(Resource.goldNugget, 4).addCost(Resource.coal, 1));
             workbenchRecipes.add(new ResourceRecipe(Resource.woodFence).addCost(Resource.wood, 1));
-            workbenchRecipes.add(new ResourceRecipe(Resource.ladder).addCost(Resource.wood, 6));
+            workbenchRecipes.add(new ResourceRecipe(Resource.ladder).addCost(Resource.stick, 6));
 
             //furnaceRecipes.add(new ResourceRecipe(Resource.glass).addCost(Resource.sand, 4).addCost(Resource.coal, 1));
 

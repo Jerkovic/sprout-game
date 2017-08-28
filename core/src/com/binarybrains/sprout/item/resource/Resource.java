@@ -28,6 +28,7 @@ public class Resource {
     public static Resource salmon = new FoodResource("Salmon", "Nice meatfish, grill it!");
     public static Resource potato = new FoodResource("Potato", "Starchy, tuberous crop.");
     public static Resource apple = new FoodResource("Apple", "A fruit");
+    public static Resource banana = new FoodResource("Banana", "A yellow strange looking fruit");
 
     public static Resource seeds = new SeedResource("Seed Bag", "A bag of mixed seeds");
 

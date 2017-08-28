@@ -1,13 +1,17 @@
 package com.binarybrains.sprout.entity.tree;
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.bomb.Bomb;
 import com.binarybrains.sprout.item.Item;
+import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.tool.Axe;
 import com.binarybrains.sprout.level.Level;
@@ -48,11 +52,18 @@ public class SmallTree extends Entity { // extends Vegitation or ?
 
     @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
-        if (item instanceof ToolItem) {
-            ToolItem toolItem = (ToolItem) item;
-            if (toolItem.tool instanceof Axe) {
+        if (item != null) {
+            if (item.getName().equals("Ladder")) {
+                // move this into a player method ?
+                ((Sound) SproutGame.assets.get("sfx/fancy_reward.wav")).play();
+                player.getInventory().removeResource(((ResourceItem) item).resource, 1);
+                player.getLevel().screen.hud.refreshInventory();
+                player.getLevel().screen.hud.speakDialog(
+                        "The secret tree house",
+                        "The ladder is perfect! You climb the secret tree and up there is a tree house."
+                );
+                return true;
             }
-
         }
         return false;
     }
