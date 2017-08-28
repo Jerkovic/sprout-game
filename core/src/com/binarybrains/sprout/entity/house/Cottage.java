@@ -1,9 +1,9 @@
 package com.binarybrains.sprout.entity.house;
 
 
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
@@ -41,6 +41,8 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
 
     @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
+        // enter house
+        ((Sound) SproutGame.assets.get("sfx/door_open.wav")).play();
         getLevel().screen.hud.teleportPlayer(player, 4, 2);
         BackgroundMusic.stop(); // fade out music
         return true;

@@ -12,6 +12,7 @@ public class Axe extends Tool {
 
     public void playSound() {
         if (MathUtils.randomBoolean())
+            // SproutGame.playWav("chopping_Wood_1");
             ((Sound) SproutGame.assets.get("sfx/chopping_Wood_1.wav")).play();
         else
             ((Sound) SproutGame.assets.get("sfx/chopping_Wood_2.wav")).play();
