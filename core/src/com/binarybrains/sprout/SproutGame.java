@@ -71,7 +71,7 @@ public class SproutGame extends Game {
         assets.load("sfx/door_close1.wav", Sound.class);
 		assets.load("sfx/water_splash.wav", Sound.class);
 		assets.load("sfx/powerup.wav", Sound.class);
-        assets.load("sfx/explosion_1.wav", Sound.class);
+        assets.load("sfx/bomb_explosion.wav", Sound.class);
         assets.load("sfx/dog_woof.wav", Sound.class);
         assets.load("sfx/fancy_reward.wav", Sound.class);
         assets.load("sfx/craft_complete.wav", Sound.class);

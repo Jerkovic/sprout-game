@@ -60,8 +60,7 @@ public class Bomb extends Entity implements Portable {
         time++;
         if (!explode && time >= lifeTime) {
             explode = true;
-            ((Sound) SproutGame.assets.get("sfx/explosion_1.wav")).play();
-
+            ((Sound) SproutGame.assets.get("sfx/bomb_explosion.wav")).play();
             getLevel().getCamera().shake();
 
             // hurt entities in radius from the bomb
