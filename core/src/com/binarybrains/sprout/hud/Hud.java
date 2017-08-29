@@ -35,6 +35,7 @@ public class Hud {
     Label timeLabel;
     Level level;
     Skin skin;
+    Label fpsLabel;
 
     private Actor fadeActor = new Actor();
     private ShapeRenderer fadeRenderer;
@@ -202,6 +203,7 @@ public class Hud {
     public void gameTimeWindow() {
 
         timeLabel = new Label("Day 0 00:00", skin);
+        fpsLabel = new Label("", skin);
 
         Table table = new Table(skin);
         table.bottom();
@@ -215,6 +217,8 @@ public class Hud {
         table.add(icon2);
 
         table.add(new Label("0", skin));
+        table.row();
+        table.add(fpsLabel);
 
         stage.addActor(table);
         Window window = new Window(SproutGame.name, skin);
@@ -283,6 +287,7 @@ public class Hud {
 
     public void act(float delta) {
         timeLabel.setText(level.gameTimer.toString());
+        fpsLabel.setText("fps: " + Gdx.graphics.getFramesPerSecond());
         stage.act(delta);
         fadeActor.act(delta);
 
