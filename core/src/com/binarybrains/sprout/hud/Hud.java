@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.hud;
 
-
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
@@ -269,7 +268,6 @@ public class Hud {
     public void draw() {
 
         stage.draw();
-
         float alpha = fadeActor.getColor().a;
 
         if (alpha != 0){
@@ -281,18 +279,14 @@ public class Hud {
             fadeRenderer.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
         }
-
     }
-
 
     public void act(float delta) {
         timeLabel.setText(level.gameTimer.toString());
         fpsLabel.setText("fps: " + Gdx.graphics.getFramesPerSecond());
         stage.act(delta);
         fadeActor.act(delta);
-
     }
-
 
     public void dispose() {
         //super.dispose();

@@ -142,7 +142,6 @@ public class Level extends LevelEngine {
         setupPathFinding(); // construct the A.star
 
         this.add(this, new Emma(this, new Vector2(3 * 16f, 1 * 16f), 16f, 16f));
-
     }
 
     public Camera getCamera() {
@@ -173,14 +172,6 @@ public class Level extends LevelEngine {
     public void draw() {
 
         // Input ctrl should not be here
-        if (Gdx.input.isKeyPressed(Input.Keys.E)) {
-            ambientIntensity += 0.1f;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.R)) {
-            ambientIntensity -= 0.1f;
-        }
-
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
             // todo show some sort of tabbed menu window

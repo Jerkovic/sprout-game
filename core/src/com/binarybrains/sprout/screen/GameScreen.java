@@ -69,6 +69,7 @@ public class GameScreen implements Screen {
             public void run(){
                 if (!BackgroundMusic.isPlaying()) {
                     BackgroundMusic.start();
+                    BackgroundMusic.setVolume(0.4f);
                 }
             }
         }, 3.0f, 60);
