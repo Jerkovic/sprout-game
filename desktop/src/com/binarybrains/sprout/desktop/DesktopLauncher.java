@@ -1,5 +1,6 @@
 package com.binarybrains.sprout.desktop;
 
+import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.binarybrains.sprout.SproutGame;
@@ -8,20 +9,16 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
-        if (true == false) { // todo args instead and create two runners
-            config.width = 1440; //1440;
-            config.height = 900;//900;
-            config.fullscreen = true;
-
+        Graphics.DisplayMode[] modes = LwjglApplicationConfiguration.getDisplayModes();
+        System.out.println("Operating System: " + System.getProperty("os.name"));
+        System.out.println("======================Graphic Modes=========================");
+        for (Graphics.DisplayMode mode: modes) {
+            System.out.println(mode);
         }
-        else {
-            config.width = 1024; //1440;
-            config.height = 768;//900;
-            config.fullscreen = false;
-
-        }
-
-        // config.disableAudio = true;
+        System.out.println("============================================================");
+        Graphics.DisplayMode displayMode = LwjglApplicationConfiguration.getDesktopDisplayMode();
+        config.setFromDisplayMode(displayMode);
+        config.fullscreen = true;
         config.resizable = false;
         config.useGL30 = false;
 		config.title = SproutGame.name;
