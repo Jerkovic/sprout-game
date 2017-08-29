@@ -196,7 +196,6 @@ public abstract class Entity {
     public void update(float deltaTime) {
         stateTime += deltaTime;
         updateBoundingBox();
-
     }
 
     public void hurt(Entity ent, int damage) {

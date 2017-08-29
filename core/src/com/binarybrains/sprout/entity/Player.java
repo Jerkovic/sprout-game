@@ -289,7 +289,6 @@ public class Player extends Npc implements InputProcessor {
         }
     }
 
-
     @Override
     public void hurt(Mob mob, int dmg, Direction attackDir) {
         super.hurt(mob, dmg, attackDir);

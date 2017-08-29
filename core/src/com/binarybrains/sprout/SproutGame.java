@@ -73,8 +73,8 @@ public class SproutGame extends Game {
         assets.load("sfx/fancy_reward.wav", Sound.class);
         assets.load("sfx/craft_complete.wav", Sound.class);
         assets.load("sfx/watering.wav", Sound.class);
+        assets.load("sfx/grass_walk.wav", Sound.class);
         // todo snoring
-        // todo walk steps
 
         // Ambience sounds
         assets.load("ambience/forest_morning_ambience.mp3", Sound.class);

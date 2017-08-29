@@ -20,7 +20,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
-import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
@@ -140,7 +139,7 @@ public class Level extends LevelEngine {
         // test some path finding stuff.. move this!!
         setupPathFinding(); // construct the A.star
 
-        this.add(this, new Emma(this, new Vector2(3 * 16f, 1 * 16f), 16f, 16f));
+        // this.add(this, new Emma(this, new Vector2(3 * 16f, 1 * 16f), 16f, 16f));
     }
 
     public Camera getCamera() {

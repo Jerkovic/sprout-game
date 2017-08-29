@@ -5,6 +5,7 @@ import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
@@ -245,7 +246,6 @@ public class Npc extends Mob implements Telegraph {
                     setState(State.STANDING);
                 }
             }
-
         }
 
         // Diagonal Movement - Read more: http://himeworks.com/2014/11/diagonal-movement-and-movement-speed/
@@ -308,6 +308,13 @@ public class Npc extends Mob implements Telegraph {
                 setState(State.STANDING);
             }
         }
+
+        // play walking sound here?
+        if (getState() == State.WALKING) {
+            if (true && MathUtils.random(1, 60) == 5) {
+                // ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).play();
+            }
+        }
     }
 
     public int getSpriteRow() {
@@ -358,9 +365,11 @@ public class Npc extends Mob implements Telegraph {
             currentFrame = animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrames()[0];
         }
         else if (getState() == State.WALKING) {
-            // override animations
+            animationMatrix[getActionState().ordinal()][animDirection.ordinal()].setPlayMode(Animation.PlayMode.LOOP);
             currentFrame = animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
-        }
+            int walk_frame_idx = animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrameIndex(stateTime);
+
+       }
 
         batch.draw(currentFrame, getX(), getY());
     }
@@ -402,7 +411,7 @@ public class Npc extends Mob implements Telegraph {
 
 
     public void dispose() {
-
+        // todo disposal
     }
 
 }
