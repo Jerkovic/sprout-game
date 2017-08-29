@@ -194,17 +194,21 @@ public class Level extends LevelEngine {
             float lightSize = lightOscillate ? (75.0f + 3.25f * (float)Math.sin(zAngle) + .5f * MathUtils.random()):75.0f;
 
             tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
+            tileMapRenderer.getBatch().enableBlending();
             tileMapRenderer.getBatch().setShader(defaultShader);
+            int src = tileMapRenderer.getBatch().getBlendSrcFunc();
+            int dest = tileMapRenderer.getBatch().getBlendDstFunc();
 
+            tileMapRenderer.getBatch().setBlendFunction(GL20.GL_ONE, GL20.GL_ONE);
             tileMapRenderer.getBatch().begin();
-                // tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX()-40 - lightSize / 2,player.getWalkBoxCenterY() - lightSize / 2-40, lightSize, lightSize);
                 tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2,player.getWalkBoxCenterY() - lightSize / 2, lightSize, lightSize);
             tileMapRenderer.getBatch().end();
+            tileMapRenderer.getBatch().setBlendFunction(src, dest);
+
             fbo.end();
 
-            // Gdx.gl.glDisable(GL20.GL_BLEND);
         }
-        // end draw lights
+        // end draw lights to fbo
 
         // draw the screen
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
