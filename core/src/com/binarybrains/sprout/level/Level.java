@@ -37,8 +37,6 @@ public class Level extends LevelEngine {
     public boolean debugMode = false;
     public GameTime gameTimer;
 
-    public float nightTimeAlpha = .58f; // test darkness
-
     public Texture spritesheet; // 400x1264 pixels 25 tiles bred och 79 hög
     public Texture charsheet;
 
@@ -55,7 +53,7 @@ public class Level extends LevelEngine {
     //used to make the light flicker
     public float zAngle;
     public static final float zSpeed = 4.0f;
-    public static final float PI2 = 3.1415926535897932384626433832795f * 1.0f;
+    public static final float PI2 = 3.1415926535897932384626433832795f * 2.0f;
 
     //read our shader files
     final String vertexShader = new FileHandle("shader/vertexShader.glsl").readString();
@@ -69,8 +67,10 @@ public class Level extends LevelEngine {
     private ShaderProgram lightShader;
     private ShaderProgram finalShader;
 
+    /**
+     * Setup Ambient light and shaders.
+     */
     public void setupAmbientLight() {
-        // shader
         ShaderProgram.pedantic = false;
         defaultShader = new ShaderProgram(vertexShader, defaultPixelShader);
         ambientShader = new ShaderProgram(vertexShader, ambientPixelShader);
@@ -104,7 +104,6 @@ public class Level extends LevelEngine {
         finalShader.begin();
         finalShader.setUniformf("resolution", Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
         finalShader.end();
-
     }
 
 
@@ -166,7 +165,6 @@ public class Level extends LevelEngine {
             camera.followPosition(player.getPosition(), delta);
             camera.update();
         }
-
     }
 
     public void draw() {
@@ -193,16 +191,18 @@ public class Level extends LevelEngine {
         if (true) {
             fbo.begin();
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
-
-            tileMapRenderer.getBatch().setShader(defaultShader);
-
             float lightSize = lightOscillate ? (75.0f + 3.25f * (float)Math.sin(zAngle) + .5f * MathUtils.random()):75.0f;
 
+            tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
+            tileMapRenderer.getBatch().setShader(defaultShader);
+
             tileMapRenderer.getBatch().begin();
+                // tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX()-40 - lightSize / 2,player.getWalkBoxCenterY() - lightSize / 2-40, lightSize, lightSize);
                 tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2,player.getWalkBoxCenterY() - lightSize / 2, lightSize, lightSize);
             tileMapRenderer.getBatch().end();
             fbo.end();
+
+            // Gdx.gl.glDisable(GL20.GL_BLEND);
         }
         // end draw lights
 
@@ -211,40 +211,22 @@ public class Level extends LevelEngine {
 
         tileMapRenderer.setView(camera);
         tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
-        if (gameTimer.getGameTime().minute > 5) {
+        if (gameTimer.getGameTime().minute > 2) {
             tileMapRenderer.getBatch().setShader(finalShader);
-
         }
 
-        fbo.getColorBufferTexture().bind(1); //this is important! bind the FBO to the 2nd texture unit
-        light.bind(0); //we force the binding of a texture on first texture unit to avoid artefacts
-        //this is because our default and ambiant shader dont use multi texturing...
-        //youc can basically bind anything, it doesnt matter
         int[] bg_layers = {0,1,2}; // ground and ground_top
         tileMapRenderer.render(bg_layers);
 
-        // crops layer is 1 . the layer where the player can make changes to the ground
+        fbo.getColorBufferTexture().bind(1);
+        light.bind(0);
 
         tileMapRenderer.getBatch().begin();
-            // here we should render only entities on screen right?
-            sortAndRender(entities, tileMapRenderer.getBatch());
+            sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
         tileMapRenderer.getBatch().end();
 
         int[] fg_layers = {3,5};
         tileMapRenderer.render(fg_layers);
-
-        // Testing the night overlay - the simple version
-        if (false) {
-
-            Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND);
-            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-            debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            debugRenderer.setColor(new Color(0f, 0f, 0.031f, nightTimeAlpha));
-            debugRenderer.rect(0, 0, 18000, 20000);
-            debugRenderer.end();
-            Gdx.gl.glDisable(GL20.GL_BLEND);
-        }
-        // end test night
 
         // debug mode
         if (debugMode) renderDebug(entities);
