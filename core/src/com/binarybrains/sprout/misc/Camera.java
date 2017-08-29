@@ -35,7 +35,7 @@ public class Camera extends OrthographicCamera {
         position.set(followPos.x, followPos.y, 0);
 
         if (isShaking) {
-            if (TimeUtils.nanoTime() < startShakeTimer + 1000000000 * .2) {
+            if (TimeUtils.nanoTime() < startShakeTimer + 1000000000 * .3) {
                 position.x += MathUtils.random(-60f, 60f) * deltaTime;
                 position.y += MathUtils.random(-60f, 60f) * deltaTime;
             }
