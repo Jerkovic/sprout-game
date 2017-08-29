@@ -18,16 +18,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.entity.Entity;
-import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
-import com.binarybrains.sprout.entity.crop.Crop;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
-import com.binarybrains.sprout.item.ResourceItem;
-import com.binarybrains.sprout.item.ToolItem;
-import com.binarybrains.sprout.item.resource.Resource;
-import com.binarybrains.sprout.item.tool.Tool;
-import com.binarybrains.sprout.level.tile.Tile;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
@@ -133,6 +126,7 @@ public class Level extends LevelEngine {
 
         camera = new Camera(this);
         camera.setToOrtho(false, screen.width / 4, screen.height / 4); // we scale 16x16 to 64x64
+        camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();
 
         tileMapRenderer = new OrthogonalTiledMapRenderer(map);
@@ -168,6 +162,12 @@ public class Level extends LevelEngine {
                 entities.remove(i--);
             }
         }
+
+        if (camera != null) {
+            camera.followPosition(player.getPosition(), delta);
+            camera.update();
+        }
+
     }
 
     public void draw() {
@@ -192,11 +192,6 @@ public class Level extends LevelEngine {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             player.getInventory().renderDebug();
-        }
-
-        if (camera != null) {
-            camera.followPosition(player.getPosition(), Gdx.graphics.getDeltaTime());
-            camera.update();
         }
 
         zAngle += Gdx.app.getGraphics().getRawDeltaTime() * zSpeed;

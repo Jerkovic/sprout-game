@@ -27,12 +27,13 @@ public class Camera extends OrthographicCamera {
 
     public void followPosition(Vector2 followPos, float deltaTime) {
         Vector3 temp = position;
-        float lerp = 1.3f;
+        float lerp = 3.5f;
         temp.x += (followPos.x - position.x) * lerp * deltaTime;
         temp.y += (followPos.y - position.y) * lerp * deltaTime;
-        // position.set(temp);
+        temp.z = 0;
+        position.set(temp);
 
-        position.set(followPos.x, followPos.y, 0);
+        // position.set(followPos.x, followPos.y, 0);
 
         if (isShaking) {
             if (TimeUtils.nanoTime() < startShakeTimer + 1000000000 * .3) {
@@ -82,5 +83,9 @@ public class Camera extends OrthographicCamera {
         position.set((int)(position.x),(int) position.y, 0);
 
         super.update();
+    }
+
+    public void setPosition(Vector3 pos) {
+        position.set(pos);
     }
 }

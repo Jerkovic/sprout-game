@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -77,6 +78,7 @@ public class Hud {
                 Actions.fadeIn(.5f, Interpolation.fade),
                 Actions.run(new Runnable() { public void run(){
                     player.setTilePos(x,y);
+                    player.getLevel().getCamera().setPosition(new Vector3(player.getX(), player.getY(), 0));
                     ((Sound) SproutGame.assets.get("sfx/door_close1.wav")).play();
                 }}),
                 Actions.fadeOut(.3f, Interpolation.fade)
