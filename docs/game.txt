@@ -21,7 +21,7 @@ A game about crafting, breeding, farming, hunting, exploring and surviving.
 
 ---
 
-För att generera namn på saker.
+För att generera namn på farms.
 http://fantasynamegenerators.com/farm-names.php#.V34RBqOriko
 
 game logga
@@ -29,8 +29,8 @@ http://textcraft.net
 
 Game Name
 ----------------------
-Cockscomb Crest
-Garden
+Bearshade Creek
+
 
 city
  church - priest

@@ -22,13 +22,12 @@ public class SproutGame extends Game {
 
 	@Override
 	public void create() {
-        Gdx.app.log("Gdx version", com.badlogic.gdx.Version.VERSION);
+        Gdx.app.log("LibGdx version:", com.badlogic.gdx.Version.VERSION);
 		setTweenManager(new TweenManager());
 		Tween.setCombinedAttributesLimit(4);
 		Tween.registerAccessor(Actor.class, new ActorAccessor());
         Tween.registerAccessor(Entity.class, new EntityAccessor());
 		loadAssets();
-		//setScreen(new SplashScreen(this));
 		setScreen(new GameScreen(this));
 	}
 
@@ -47,10 +46,8 @@ public class SproutGame extends Game {
 
 	@Override
 	public void dispose() {
-
         super.dispose();
         assets.dispose();
-
 	}
 
 	@Override
@@ -72,18 +69,29 @@ public class SproutGame extends Game {
 		assets.load("sfx/water_splash.wav", Sound.class);
 		assets.load("sfx/powerup.wav", Sound.class);
         assets.load("sfx/bomb_explosion.wav", Sound.class);
-        assets.load("sfx/dog_woof.wav", Sound.class);
+        assets.load("sfx/dog_woof.wav", Sound.class); // replace
         assets.load("sfx/fancy_reward.wav", Sound.class);
         assets.load("sfx/craft_complete.wav", Sound.class);
         assets.load("sfx/watering.wav", Sound.class);
+        // todo snoring
+        // todo walk steps
 
+        // Ambience sounds
         assets.load("ambience/forest_morning_ambience.mp3", Sound.class);
+        // https://www.youtube.com/watch?v=W8tVwiYsgHg
+        // todo cave
+
+        // Music (check out Ross Bugden)
         assets.load("music/track1.mp3", Music.class);
+        // https://www.youtube.com/watch?v=9qk-vZ1qicI
+        // https://www.youtube.com/watch?v=je9bnuIqVVc
+        // https://www.youtube.com/watch?v=XVHVFwwuOa0
+
+        //  Sprite items
         assets.load("items2.txt", TextureAtlas.class);
 
 		SproutGame.assets.finishLoading();
 	}
-
 
 }
 

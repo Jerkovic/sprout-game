@@ -5,9 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 import com.binarybrains.sprout.SproutGame;
@@ -19,9 +17,11 @@ public class GameScreen implements Screen {
 
     public SproutGame game;
     public Level level;
-    public SpriteBatch batch;
     public Float width;
     public Float height;
+    public Hud hud;
+    public Sound forestAmbienceSfx; // temporary
+    Skin skin;
 
     public enum GameState
     {
@@ -30,21 +30,14 @@ public class GameScreen implements Screen {
     }
 
     public GameState gameState = GameState.RUN;
-    public Hud hud;
-
-    public Sound forestAmbienceSfx; // temporary
-
-    Skin skin;
 
     public GameScreen(SproutGame game) {
         this.game = game;
         width = (float) Gdx.graphics.getWidth();
         height = (float) Gdx.graphics.getHeight();
 
-        batch = new SpriteBatch();
         level = new Level(this, 1);
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-
         hud = new Hud(skin, level);
 
         InputMultiplexer multiplexer = new InputMultiplexer();
@@ -52,8 +45,6 @@ public class GameScreen implements Screen {
         multiplexer.addProcessor(level.player);
         Gdx.input.setInputProcessor(multiplexer);
 
-        // custom mouse pointer test
-        // the mouse pointer is transparent on Windows
         Pixmap pm = new Pixmap(Gdx.files.internal("mouse_pointer.png"));
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
@@ -89,18 +80,18 @@ public class GameScreen implements Screen {
             case RUN:
                 BackgroundMusic.update(delta);
                 level.update(Math.min(delta, 1 / 60f));
-
                 break;
             case PAUSE:
-                //System.out.println("paused");
+                // System.out.println("paused");
+                // todo indicate in hud that the game is paused
                 break;
             default:
                 break;
         }
 
-        SproutGame.getTweenManager().update(Math.min(delta, 1 / 60f)); // really here???
+        // Yes the tween manager has  to be here because the hud utils it
+        SproutGame.getTweenManager().update(Math.min(delta, 1 / 60f));
         hud.act(Math.min(delta, 1 / 60f));
-
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             if (gameState == GameState.RUN) {
@@ -113,15 +104,15 @@ public class GameScreen implements Screen {
                 level.gameTimer.resume();
             }
         }
+
         // Draw
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         level.draw();
         hud.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-
+        // no resize available
     }
 
     @Override
@@ -142,7 +133,6 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         level.dispose();
-        batch.dispose();
         skin.dispose();
         BackgroundMusic.dispose();
     }
