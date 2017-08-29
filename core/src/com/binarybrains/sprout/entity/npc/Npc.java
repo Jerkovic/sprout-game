@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
-import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.HashMap;
@@ -398,7 +397,7 @@ public class Npc extends Mob implements Telegraph {
     @Override
     public String toString()
     {
-        return super.toString() + "ActionState" + getActionState();
+        return super.toString() + " ActionState: " + getActionState();
     }
 
 

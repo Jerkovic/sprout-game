@@ -222,7 +222,6 @@ public abstract class Entity {
         if (containsList.contains(entity)) {
             containsList.remove(entity);
             leftContainTrigger(entity);
-
         }
     }
 

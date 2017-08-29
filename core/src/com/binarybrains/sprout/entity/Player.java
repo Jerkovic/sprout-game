@@ -391,9 +391,6 @@ public class Player extends Npc implements InputProcessor {
 
         System.out.println("Mouse world pos: " + mouseWorldPosX + " x " + mouseWorldPosY);
         System.out.println("Player: " + getTileX() + " x " + getTileY());
-        // hash value
-        // this should be checked in the NPC class
-        // System.out.println("PathFinding hashValue:" + getPosHash());
 
         if (mouseWorldPosX <= getTileX() + 1 && mouseWorldPosX >= getTileX() -1
                 && mouseWorldPosY <= getTileY() + 1 && mouseWorldPosY >= getTileY() -1) {
@@ -406,6 +403,7 @@ public class Player extends Npc implements InputProcessor {
                 break;
             case Input.Buttons.RIGHT:
                 use(); // Right Click -> Check/Use without any item
+                System.out.println("Right mouse button clicked");
                 break;
         }
 
