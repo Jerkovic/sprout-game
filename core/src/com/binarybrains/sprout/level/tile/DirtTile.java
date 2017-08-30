@@ -12,8 +12,8 @@ public class DirtTile extends Tile {
 
     public boolean hasCrops = false;
 
-    public DirtTile() {
-        super(true);
+    public DirtTile(int x, int y) {
+        super(x, y, true);
         super.setTileSetIndex(17);
     }
 

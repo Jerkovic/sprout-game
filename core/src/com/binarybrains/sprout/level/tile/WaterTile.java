@@ -17,8 +17,8 @@ import com.binarybrains.sprout.item.tool.WateringCan;
 public class WaterTile extends Tile {
 
 
-    public WaterTile() {
-        super(false);
+    public WaterTile(int x, int y) {
+        super(x, y, false);
     }
 
     @Override

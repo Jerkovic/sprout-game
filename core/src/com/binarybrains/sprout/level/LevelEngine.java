@@ -106,7 +106,7 @@ public class LevelEngine {
             return tile[x][y];
         }
         catch (ArrayIndexOutOfBoundsException e) {
-            return new WaterTile();
+            return new WaterTile(x, y);
         }
     }
 
@@ -224,21 +224,21 @@ public class LevelEngine {
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
                 String tileType;
 
-                tile[x][y] = new GrassTile();
+                tile[x][y] = new GrassTile(x, y, true);
 
                 if (cell != null && cell.getTile() != null) {
                     // custom property
                     if (cell.getTile().getProperties().containsKey("tileType") && (cell.getTile().getProperties().get("tileType").equals("teleporter"))) {
-                        tile[x][y] = new TeleporterTile();
+                        tile[x][y] = new TeleportTile(x, y);
                     }
 
                     if (cell.getTile().getProperties().containsKey("tileType") && (cell.getTile().getProperties().get("tileType").equals("Wood"))) {
-                        tile[x][y] = new WoodTile();
+                        tile[x][y] = new WoodTile(x, y);
                     }
                 }
 
                 if (cell != null && cell.getTile().getProperties().containsKey("blocked") ) {
-                    tile[x][y] = new WaterTile();
+                    tile[x][y] = new WaterTile(x, y);
                 }
 
             }
@@ -251,20 +251,18 @@ public class LevelEngine {
             for(int y = 0; y < layer2.getHeight();y++) {
                 TiledMapTileLayer.Cell cell2 = layer2.getCell(x, y);
                 if (cell2 != null && cell2.getTile().getProperties().containsKey("blocked") ) {
-                    tile[x][y] = new GrassTile(false); // just test
+                    tile[x][y] = new GrassTile(x, y); // just test
 
                 }
 
                 if (cell2 != null && cell2.getTile() != null) {
                     // custom property .. wooden stuff
                     if (cell2.getTile().getProperties().containsKey("tileType") && (cell2.getTile().getProperties().get("tileType").equals("Wood"))) {
-                        tile[x][y] = new WoodTile();
+                        tile[x][y] = new WoodTile(x, y);
                     }
                 }
-
             }
         }
-
 
         MapProperties properties = map.getProperties();
         width = properties.get("width", Integer.class);

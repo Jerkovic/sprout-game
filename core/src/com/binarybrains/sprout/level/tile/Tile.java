@@ -12,9 +12,16 @@ import com.binarybrains.sprout.level.Level;
 
 public class Tile {
 
-    private int tileSetIndex = 0;
-
+    private int x, y, tileSetIndex = 0;
     public boolean mayPass = true;
+    public boolean isHoldingFence = false;
+
+    // xt and yt also right?
+    public Tile(int x, int y, boolean mayPass) {
+        this.x = x;
+        this.y = y;
+        setMayPass(mayPass);
+    }
 
     public boolean isHoldingFence() {
         return isHoldingFence;
@@ -22,13 +29,6 @@ public class Tile {
 
     public void setIsHoldingFence(boolean isHoldingFence) {
         this.isHoldingFence = isHoldingFence;
-    }
-
-    public boolean isHoldingFence = false;
-
-    // xt and yt also right?
-    public Tile(boolean mayPass) {
-        this.mayPass = mayPass;
     }
 
     public void setMayPass(boolean mayPass) {
@@ -82,9 +82,8 @@ public class Tile {
 
     public String toString()
     {
-        return "[" + this.getClass().getSimpleName() +  this.hashCode() + "@Pos:?]";
+        return "[" + this.getClass().getSimpleName() +  this.hashCode() + "@Pos: (" + x + "x" + y + ")]";
     }
-
 
     public boolean use(Level level, int xt, int yt, Player player, int attackDir) {
         return false;

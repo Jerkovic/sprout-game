@@ -40,12 +40,12 @@ public class GrassTile extends Tile {
         dirtAutoTiles.put(15, 1401+3);
     }
 
-    public GrassTile() {
-        super(true);
+    public GrassTile(int x, int y, Boolean mayPass) {
+        super(x, y, mayPass);
     }
 
-    public GrassTile(Boolean mayPass) {
-        super(mayPass);
+    public GrassTile(int x, int y) {
+        super(x, y, true);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class GrassTile extends Tile {
             if (toolItem.tool instanceof Hoe && toolItem.tool.use(this) && mayPass) {
                 // Here we are handling autotiling test
                 System.out.println("Tileindex; " + player.getLevel().getTileBitwiseIndex(xt,yt));
-                player.getLevel().setTile(xt, yt, new DirtTile());
+                player.getLevel().setTile(xt, yt, new DirtTile(xt, yt));
                 player.getLevel().setAutoTile(xt, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitwiseIndex(xt,yt)));
                 // auto tile arround the newly placed tile:
                 // south

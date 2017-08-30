@@ -19,8 +19,8 @@ public class FarmTile extends Tile {
     public int fertilized = 0;
     public int someGrowTimeCounter = 0;
 
-    public FarmTile() {
-        super(true);
+    public FarmTile(int x, int y) {
+        super(x, y, true);
         super.setTileSetIndex(12); // same as dirtTile for the moment
     }
 
