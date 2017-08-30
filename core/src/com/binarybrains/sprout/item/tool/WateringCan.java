@@ -12,6 +12,7 @@ public class WateringCan extends Tool {
 
     public WateringCan() {
         super("Watering Can", "A portable water container used for watering plants.");
+        setCoolDownTime(900);
     }
 
     public int pour() {
@@ -20,9 +21,9 @@ public class WateringCan extends Tool {
             water = water - 5;
             return 5;
         } else {
-            Gdx.app.log("WATERING_CAN", "Empty is the can :( Fill it again");
+            // SproutGame.playSound("no_water");
+            return 0;
         }
-        return 0;
     }
 
     public int getWater() {

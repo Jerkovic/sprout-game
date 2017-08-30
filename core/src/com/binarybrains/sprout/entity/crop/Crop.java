@@ -41,7 +41,7 @@ public class Crop extends Entity {
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
         if (item instanceof ToolItem) {
             ToolItem toolItem = (ToolItem) item;
-            if (toolItem.tool instanceof WateringCan) {
+            if (toolItem.tool instanceof WateringCan && toolItem.tool.canUse()) {
                 ((WateringCan)toolItem.tool).pour();
                 player.getLevel().screen.hud.refreshInventory();
                 watered = true;
