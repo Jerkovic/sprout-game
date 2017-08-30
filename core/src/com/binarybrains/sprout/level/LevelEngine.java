@@ -237,6 +237,7 @@ public class LevelEngine {
                     }
                 }
 
+                // check for tileType
                 if (cell != null && cell.getTile().getProperties().containsKey("blocked") ) {
                     tile[x][y] = new WaterTile(x, y);
                 }
@@ -251,7 +252,7 @@ public class LevelEngine {
             for(int y = 0; y < layer2.getHeight();y++) {
                 TiledMapTileLayer.Cell cell2 = layer2.getCell(x, y);
                 if (cell2 != null && cell2.getTile().getProperties().containsKey("blocked") ) {
-                    tile[x][y] = new GrassTile(x, y); // just test
+                    tile[x][y] = new GrassTile(x, y, false); // just test
 
                 }
 
