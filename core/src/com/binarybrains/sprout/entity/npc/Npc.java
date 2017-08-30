@@ -404,7 +404,7 @@ public class Npc extends Mob implements Telegraph {
         for (int a = ActionState.EMPTY_NORMAL.ordinal(); a <= ActionState.CARRYING.ordinal(); a++) {
             int col = 0; // column counter
             for (int d = Direction.SOUTH.ordinal(); d <= Direction.WEST.ordinal(); d++) { // directions
-                TextureRegion[] currentAnimFrames = new TextureRegion[4];
+                Object[] currentAnimFrames = new TextureRegion[4];
                 for (int f = 0; f < 4; f++) {
                     currentAnimFrames[f] = frames[getSpriteRow() + a][col];
                     col++;
@@ -415,7 +415,6 @@ public class Npc extends Mob implements Telegraph {
                 // maybe we need a different getSpeed() for animations
             }
         }
-
     }
 
     @Override
