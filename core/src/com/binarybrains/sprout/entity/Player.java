@@ -32,6 +32,7 @@ public class Player extends Npc implements InputProcessor {
     public int newX = 0, newY = 0;
     public int inventoryCapacity = 24;
     public Portable carriedItem;
+    public boolean CanMove = true;
 
     enum Keys {
         W, A, S, D
@@ -249,6 +250,11 @@ public class Player extends Npc implements InputProcessor {
 
     private void updateMovement() {
 
+        if (!CanMove) {
+            releaseKeys();
+            return;
+        }
+
         if (keys.get(Keys.A)) {
             setDirection(Mob.Direction.WEST);
             setState(Mob.State.WALKING);
@@ -390,9 +396,6 @@ public class Player extends Npc implements InputProcessor {
 
         int mouseWorldPosX = (int)clickedPos.x / 16;
         int mouseWorldPosY = (int)clickedPos.y / 16;
-
-        System.out.println("Mouse world pos: " + mouseWorldPosX + " x " + mouseWorldPosY);
-        System.out.println("Player: " + getTileX() + " x " + getTileY());
 
         if (mouseWorldPosX <= getTileX() + 1 && mouseWorldPosX >= getTileX() -1
                 && mouseWorldPosY <= getTileY() + 1 && mouseWorldPosY >= getTileY() -1) {

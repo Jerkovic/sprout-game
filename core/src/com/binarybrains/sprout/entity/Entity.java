@@ -229,12 +229,12 @@ public abstract class Entity {
     }
 
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
-        System.out.println(player + " interacts  with " + this + " using Item: " + item);
+        System.out.println(player + " interacts with " + this + " using  " + item);
         return false;
     }
 
     public boolean use(Player player, Mob.Direction attackDir) {
-        System.out.println(player + " using " + this);
+        System.out.println(player + " using/viewing " + this);
         return false;
     }
 

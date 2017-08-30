@@ -59,6 +59,8 @@ public class SmallTree extends Entity { // extends Vegitation or ?
                         "The ladder is perfect! You climb the secret tree and up there is a tree house."
                 );
                 return true;
+            } else {
+                super.interact(player, item, player.getDirection());
             }
         }
         return false;

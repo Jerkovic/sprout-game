@@ -1,7 +1,11 @@
 ﻿Created by erikl on 27/06/16
 
+
+
 ________________________________________________________________________________
+
 https://github.com/sndcode/stardewvalleycode/tree/master/Stardew%20Valley
+
 ________________________________________________________________________________
 
 
@@ -9,26 +13,27 @@ Class AmbientLocationSounds
 - Play sound louder if close to the source
 
 
-Sound effects
------------------------
-
-https://www.youtube.com/watch?v=PhYO-7SIL0c
-
-Sprout
--------------
+Sprout (working title)
+--------------------------------------------------------------------------
 A game about crafting, breeding, farming, hunting, exploring and surviving.
+---------------------------------------------------------------------------
+Plot. You have taken over the house where you were raised. Trough the game
+you will encounter and face your childhood memories.
 
----
+Ideas on what is going on in the game:
+- Secret tree house
+- Fix the flag for the flagpole. For this you need to craft textile. (http://piq.codeus.net/static/media/userpics/piq_81080_400x400.png)
+- Fix the bridge
+- Blow the stone with bomb
+- Books of wisdom
+
+Game Name ideas
+----------------------
+Bearshade Creek (https://cdn.dribbble.com/users/75575/screenshots/936394/californiashot.png)
+
 
 För att generera namn på farms.
 http://fantasynamegenerators.com/farm-names.php#.V34RBqOriko
-
-game logga
-http://textcraft.net
-
-Game Name
-----------------------
-Bearshade Creek
 
 
 city
@@ -49,6 +54,9 @@ forrest
 mountain
 creek
 ocean
+the manor
+the village
+the farm/your house
 
 Inspiration by
 -----------------
@@ -61,12 +69,7 @@ Secrets of Mana
 
 
 
-names:
-Dewrich Meadows
-
-
-
--= Tech stuff -
+-------------------------= Tech stuff --------------------------------
 - animation system
 - asset manager
 - investigate stage actors
@@ -171,6 +174,7 @@ Axe = (används för att hugga ner träd, träden lämnar stubbe och ur den kan 
 Hammer = (används för att snickra)
 Scythe = lie (används för att skörda) starter tool
 fishing rod = metspö (används i vatten och kan ge fisk, chansen borde öka att få bättre fisk var du fiskar)  baits??
+Ladder
 
 Weapons(tools)
 Sword = (borde kanske vara weapon?)
