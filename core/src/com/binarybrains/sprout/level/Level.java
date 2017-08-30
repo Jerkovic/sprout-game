@@ -200,9 +200,8 @@ public class Level extends LevelEngine {
 
             tileMapRenderer.getBatch().setBlendFunction(GL20.GL_ONE, GL20.GL_ONE);
             tileMapRenderer.getBatch().begin();
-                tileMapRenderer.getBatch().draw(light,200, 1330, lightSize, lightSize);
-                tileMapRenderer.getBatch().draw(light,80, 1278, lightSize, lightSize);
-                tileMapRenderer.getBatch().draw(light,90, 1289, lightSize, lightSize);
+                tileMapRenderer.getBatch().draw(light,(16*16) - lightSize / 2, (85*16) - lightSize / 2, lightSize, lightSize);
+                //tileMapRenderer.getBatch().draw(light,90, 1289, lightSize, lightSize);
                 tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2,player.getWalkBoxCenterY() - lightSize / 2, lightSize, lightSize);
             tileMapRenderer.getBatch().end();
             tileMapRenderer.getBatch().setBlendFunction(src, dest);
