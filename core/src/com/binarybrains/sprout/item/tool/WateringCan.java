@@ -40,6 +40,7 @@ public class WateringCan extends Tool {
 
     @Override
     public boolean use(Tile tile) {
+        super.use(tile);
         if (tile instanceof WaterTile) {
             fill(10);
             return true;

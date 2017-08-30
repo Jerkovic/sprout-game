@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
+import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.level.tile.Tile;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
@@ -139,7 +140,7 @@ public class Level extends LevelEngine {
 
         // test some path finding stuff.. move this!!
         setupPathFinding(); // construct the A.star
-        // this.add(this, new Emma(this, new Vector2(3 * 16f, 1 * 16f), 16f, 16f));
+        this.add(this, new Emma(this, new Vector2(3 * 16f, 1 * 16f), 16f, 16f));
     }
 
     public Camera getCamera() {
@@ -205,7 +206,6 @@ public class Level extends LevelEngine {
                 tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2,player.getWalkBoxCenterY() - lightSize / 2, lightSize, lightSize);
             tileMapRenderer.getBatch().end();
             tileMapRenderer.getBatch().setBlendFunction(src, dest);
-
             fbo.end();
 
         }
@@ -216,7 +216,7 @@ public class Level extends LevelEngine {
 
         tileMapRenderer.setView(camera);
         tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
-        if (gameTimer.getGameTime().minute > 2) {
+        if (gameTimer.getGameTime().minute > 35) {
             tileMapRenderer.getBatch().setShader(finalShader);
         }
 
