@@ -116,7 +116,7 @@ public class Level extends LevelEngine {
 
         loadMap(this, level);
 
-        player = new Player(this, 0, 0);
+        player = new Player(this);
         player.setTilePos(13, 100);
         this.add(this, player);
 
@@ -138,7 +138,6 @@ public class Level extends LevelEngine {
 
         // test some path finding stuff.. move this!!
         setupPathFinding(); // construct the A.star
-
         // this.add(this, new Emma(this, new Vector2(3 * 16f, 1 * 16f), 16f, 16f));
     }
 
@@ -200,6 +199,9 @@ public class Level extends LevelEngine {
 
             tileMapRenderer.getBatch().setBlendFunction(GL20.GL_ONE, GL20.GL_ONE);
             tileMapRenderer.getBatch().begin();
+                tileMapRenderer.getBatch().draw(light,200, 1330, lightSize, lightSize);
+                tileMapRenderer.getBatch().draw(light,80, 1278, lightSize, lightSize);
+                tileMapRenderer.getBatch().draw(light,90, 1289, lightSize, lightSize);
                 tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2,player.getWalkBoxCenterY() - lightSize / 2, lightSize, lightSize);
             tileMapRenderer.getBatch().end();
             tileMapRenderer.getBatch().setBlendFunction(src, dest);

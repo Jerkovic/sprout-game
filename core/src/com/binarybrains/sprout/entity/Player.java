@@ -45,9 +45,9 @@ public class Player extends Npc implements InputProcessor {
         keys.put(Keys.D, false);
     }
 
-    public Player(Level level, float x, float y) {
+    public Player(Level level) {
 
-        super(level, new Vector2(x, y), 16f, 16f, 0);
+        super(level, new Vector2(0, 0), 16f, 16f, 0);
         setSpeed(64);
         // Add some stuff to the player from start
         inventory = new Inventory(level, inventoryCapacity);
