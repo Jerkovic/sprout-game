@@ -94,7 +94,7 @@ public class Bomb extends Entity implements Portable {
 
         if (explode) {
             elapsedTime += Gdx.graphics.getDeltaTime();
-            TextureRegion frame = explosionAnimation.getKeyFrame(elapsedTime, false);
+            TextureRegion frame = (TextureRegion) explosionAnimation.getKeyFrame(elapsedTime, false);
             batch.draw(frame, getCenterPos().x-(frame.getRegionWidth() / 2), getCenterPos().y - (frame.getRegionHeight() / 2));
             return;
 

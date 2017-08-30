@@ -378,11 +378,11 @@ public class Npc extends Mob implements Telegraph {
         Direction animDirection = Direction.getAnimationDirection(getDirection());
 
         if (getState() == State.STANDING) { // IDLE - NOT Walking
-            currentFrame = animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrames()[0];
+            currentFrame = (TextureRegion)animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrames()[0];
         }
         else if (getState() == State.WALKING) {
             animationMatrix[getActionState().ordinal()][animDirection.ordinal()].setPlayMode(Animation.PlayMode.LOOP);
-            currentFrame = animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
+            currentFrame = (TextureRegion) animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
             int walk_frame_idx = animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrameIndex(stateTime);
 
        }

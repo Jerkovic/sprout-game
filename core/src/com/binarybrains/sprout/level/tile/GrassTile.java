@@ -79,8 +79,7 @@ public class GrassTile extends Tile {
                     player.getLevel().setAutoTile(xt, yt+1, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitwiseIndex(xt,yt+1)));
                 }
 
-
-                if (MathUtils.random(1,2) == 1) {
+                if (MathUtils.randomBoolean()) {
                     player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resource.coal), new Vector2(xt * 16, yt * 16)));
 
                 }

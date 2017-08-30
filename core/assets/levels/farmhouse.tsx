@@ -36,7 +36,7 @@
    <property name="blocked" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="137" type="teleporter">
+ <tile id="137" type="TeleporterTile">
   <properties>
    <property name="tileType" value="teleporter"/>
   </properties>

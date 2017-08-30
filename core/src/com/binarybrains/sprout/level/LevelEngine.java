@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.level;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -168,7 +167,6 @@ public class LevelEngine {
         } catch (ArrayIndexOutOfBoundsException exc) {
             return true;
         }
-
     }
 
     public void interact(int x, int y, Entity entity) {
@@ -228,18 +226,16 @@ public class LevelEngine {
                 tile[x][y] = new GrassTile();
 
                 if (cell != null && cell.getTile() != null) {
+                    // custom property
                     if (cell.getTile().getProperties().containsKey("tileType")) {
                         tile[x][y] = new TeleporterTile();
                     }
                 }
 
-
                 if (cell != null && cell.getTile().getProperties().containsKey("blocked") ) {
                     tile[x][y] = new WaterTile();
                 }
-                if (false) {
-                    tile[x][y] = new WaterTile();
-                }
+
             }
         }
 
