@@ -23,9 +23,10 @@ you will encounter and face your childhood memories.
 Ideas on what is going on in the game:
 - Secret tree house
 - Fix the flag for the flagpole. For this you need to craft textile. (http://piq.codeus.net/static/media/userpics/piq_81080_400x400.png)
-- Fix the bridge
+- Fix the bridge (500 wood)
 - Blow the stone with bomb
 - Books of wisdom
+- Key crafting recipe must be unlocked and key crafted
 
 Game Name ideas
 ----------------------
@@ -45,10 +46,11 @@ city
  carpenter
  blacksmith
  BrewerY - jam,
+ hospital
 
 PEOPLE
  - bad rich guy
-
+ - tiggare
 
 forrest
 mountain
@@ -70,25 +72,8 @@ Secrets of Mana
 
 
 -------------------------= Tech stuff --------------------------------
-- animation system
-- asset manager
-- investigate stage actors
-- night overlay
-- lights
-- mouse to world coords
 - pixel fonts
    https://github.com/gameover-fwk/gameover-fwk/blob/master/src/test/resources/simplest_font.png
-- ground and standing objects
-  first we have the ground... water and dirt etc.
-  then we need the shadow layer.. the standing objects will cast shadows on this layer (do we do this realtime?)
-  then we have trees houses, stones etc... they must be rendered in the order of their y value
-  we need to sort the sprites as well
-
-  layers:
-  - water
-  - ground
-  - shadow
-  - perspective (layer)
 
 Player
 - velocity

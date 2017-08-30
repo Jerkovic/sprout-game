@@ -14,9 +14,19 @@ public abstract class Recipe implements ListItem {
     public List<Item> costs = new ArrayList<Item>();
     public boolean canCraft = false;
     public Item resultTemplate;
+    public boolean isUnlocked = true;
 
     public Recipe(Item resultTemplate) {
         this.resultTemplate = resultTemplate;
+    }
+
+    public Recipe setLocked() {
+        this.isUnlocked = false;
+        return this;
+    }
+
+    public void setUnlocked() {
+        this.isUnlocked = true;
     }
 
     public Recipe addCost(Resource resource, int count) {

@@ -2,7 +2,6 @@ package com.binarybrains.sprout.hud.inventory;
 
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,8 +16,6 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.screen.GameScreen;
-
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 
 
 public class CraftingWindow extends Dialog {
@@ -92,6 +89,7 @@ public class CraftingWindow extends Dialog {
 
             Image icon = new Image(atlas.findRegion(recipe.getItem().getRegionId()));
             if (!recipe.canCraft) icon.setColor(0,0,0,.55f);
+            if (!recipe.isUnlocked) icon.setColor(0,0,0,.15f);
 
             Button button = new Button(icon, skin, "default");
             if (!recipe.canCraft) button.setDisabled(true);
@@ -100,10 +98,9 @@ public class CraftingWindow extends Dialog {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     if (craft.startCraft(player, Integer.parseInt(event.getTarget().getName()))) {
-                        //rememberScrollY = recipeTableScrollPane.getVisualScrollY();
                         onCrafting();
                         // temp sound remake this.
-                        ((Sound) SproutGame.assets.get("sfx/craft_complete.wav")).play(.15f);
+                        ((Sound) SproutGame.assets.get("sfx/craft_complete.wav")).play(.1f);
                     } else {
                         player.getLevel().screen.hud.addToasterMessage("Inventory" ,"Inventory is full!");
                     }
@@ -112,7 +109,8 @@ public class CraftingWindow extends Dialog {
 
             recipeRowTable.add(button);
 
-            Label lc = new Label(recipe.getItem().getName(), skin);
+            // todo nice overlay over the row if the recipe is locked
+            Label lc = new Label(recipe.getItem().getName() + " (Recipe unlocked: " + recipe.isUnlocked + ")", skin);
             lc.setAlignment(Align.left);
             recipeRowTable.add(lc).padLeft(8).left(); // this made my evening. the left() made the table look better!
 
