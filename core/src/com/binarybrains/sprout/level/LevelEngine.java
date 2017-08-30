@@ -218,6 +218,7 @@ public class LevelEngine {
 
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("ground");
         // temp stuff below, must be easy to map TileMap.Tile to (my)Tile
+        // TileFactory.createTileFromCell()
         for(int x = 0; x < layer.getWidth();x++) {
             for(int y = 0; y < layer.getHeight();y++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
@@ -227,8 +228,12 @@ public class LevelEngine {
 
                 if (cell != null && cell.getTile() != null) {
                     // custom property
-                    if (cell.getTile().getProperties().containsKey("tileType")) {
+                    if (cell.getTile().getProperties().containsKey("tileType") && (cell.getTile().getProperties().get("tileType").equals("teleporter"))) {
                         tile[x][y] = new TeleporterTile();
+                    }
+
+                    if (cell.getTile().getProperties().containsKey("tileType") && (cell.getTile().getProperties().get("tileType").equals("Wood"))) {
+                        tile[x][y] = new WoodTile();
                     }
                 }
 
@@ -249,6 +254,14 @@ public class LevelEngine {
                     tile[x][y] = new GrassTile(false); // just test
 
                 }
+
+                if (cell2 != null && cell2.getTile() != null) {
+                    // custom property .. wooden stuff
+                    if (cell2.getTile().getProperties().containsKey("tileType") && (cell2.getTile().getProperties().get("tileType").equals("Wood"))) {
+                        tile[x][y] = new WoodTile();
+                    }
+                }
+
             }
         }
 

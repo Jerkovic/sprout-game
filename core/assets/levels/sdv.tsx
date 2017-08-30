@@ -128,7 +128,26 @@
    <property name="blocked" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="1785" type="Wood"/>
+ <tile id="1785" type="Wood">
+  <properties>
+   <property name="tileType" value="Wood"/>
+  </properties>
+ </tile>
+ <tile id="1786">
+  <properties>
+   <property name="tileType" value="Wood"/>
+  </properties>
+ </tile>
+ <tile id="1791">
+  <properties>
+   <property name="tileType" value="Wood"/>
+  </properties>
+ </tile>
+ <tile id="1810">
+  <properties>
+   <property name="tileType" value="Wood"/>
+  </properties>
+ </tile>
  <tile id="1827">
   <properties>
    <property name="blocked" type="bool" value="true"/>

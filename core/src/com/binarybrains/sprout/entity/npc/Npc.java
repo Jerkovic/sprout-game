@@ -409,10 +409,8 @@ public class Npc extends Mob implements Telegraph {
                     currentAnimFrames[f] = frames[getSpriteRow() + a][col];
                     col++;
                 }
-                float animSpeed = .14f;
-
+                float animSpeed = .14f; // maybe we need a different getSpeed() for animations
                 animationMatrix[a][d] = new Animation(animSpeed, currentAnimFrames);
-                // maybe we need a different getSpeed() for animations
             }
         }
     }

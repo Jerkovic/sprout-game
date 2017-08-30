@@ -65,7 +65,7 @@ public class Tile {
     public boolean interact(Player player, int xt, int yt, Mob.Direction attackDir) {
         Item item = player.getActiveItem();
         if (item != null) {
-            System.out.println(player + " Interact with " + this + " using " + item);
+            System.out.println(player + " Interact with tile " + this + " using " + item);
 
             if (item.getName().equals("Bomb") && mayPass) {
                 // move this into a player method ?

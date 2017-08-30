@@ -66,7 +66,6 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         long soundID = forestAmbienceSfx.loop(.5f);
-        System.out.println("forestAmb" + soundID);
     }
 
     @Override
