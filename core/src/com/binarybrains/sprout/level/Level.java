@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
+import com.binarybrains.sprout.level.tile.Tile;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
@@ -260,7 +261,7 @@ public class Level extends LevelEngine {
             for(int col = 0; col < layer.getWidth(); col++) {
                 Rectangle tile = new Rectangle(row*16, col*16, 16, 16);
                 debugRenderer.rect(tile.getX(), tile.getY(), tile.width, tile.height);
-                if (!getTile(row, col).mayPass) {
+                if (getTile(row, col) instanceof Tile && !getTile(row, col).mayPass) {
                     debugRenderer.line(tile.getX(), tile.getY(), tile.getX()+16, tile.getY()+16);
                     debugRenderer.line(tile.getX()+16, tile.getY(), tile.getX(), tile.getY()+16);
                 }

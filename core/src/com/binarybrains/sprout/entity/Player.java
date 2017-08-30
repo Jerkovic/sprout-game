@@ -162,6 +162,7 @@ public class Player extends Npc implements InputProcessor {
             int x = (int)getInteractBox().getX() / 16;
             int y = (int)getInteractBox().getY() / 16;
             if (getLevel().isTileBlocked(x, y, entity)) {
+                System.out.println("tile is blocked " + getLevel().getTile(x, y));
                 return; // false
             }
 

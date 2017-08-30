@@ -31,24 +31,22 @@ public class WaterTile extends Tile {
         if (item instanceof ToolItem && this instanceof WaterTile) {
             ToolItem toolItem = (ToolItem) item;
             if (toolItem.tool instanceof FishingPole && toolItem.tool.use(this)) {
-                Sound testSfx = SproutGame.assets.get("sfx/water_splash.wav");
-                testSfx.play();
+
+                ((Sound) SproutGame.assets.get("sfx/water_splash.wav")).play();
+
                 if (MathUtils.random(1,4) == 1) {
                     player.getLevel().add(
                             player.getLevel(),
                             new PickupItem(player.getLevel(), new ResourceItem(Resource.salmon), new Vector2(xt * 16, yt * 16))
                     );
                     // we should delay sounds like the one below and be able to delay other sorts of actions
-                    Sound testSfx2 = SproutGame.assets.get("sfx/powerup.wav");
-                    testSfx2.play();
                     // Some nice ResourceManager.giveLoot(player.skill, activeItem.level, timeOfday, placeOnMap etc)
                 }
                 return true;
             }
 
             if (toolItem.tool instanceof WateringCan && toolItem.tool.use(this)) {
-                Sound testSfx = SproutGame.assets.get("sfx/water_splash.wav");
-                testSfx.play();
+                ((Sound) SproutGame.assets.get("sfx/water_splash.wav")).play();
                 return true;
             }
         }

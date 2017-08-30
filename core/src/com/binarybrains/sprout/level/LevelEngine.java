@@ -161,17 +161,24 @@ public class LevelEngine {
 
     public boolean isTileBlocked(int x, int y, Entity e) {
         try {
-            if (x < 1) return true;
-            if (y < 1) return true;
             return !tile[x][y].mayPass(e);
         } catch (ArrayIndexOutOfBoundsException exc) {
+            return true;
+        } catch (NullPointerException exc) {
+            System.out.println("No tile @ inBoundPos " + x  + "x" + y);
             return true;
         }
     }
 
     public void interact(int x, int y, Entity entity) {
         if (entity instanceof Player) {
-            tile[x][y].interact((Player) entity, x, y, ((Player) entity).getDirection());
+            try {
+                tile[x][y].interact((Player) entity, x, y, ((Player) entity).getDirection());
+            } catch (ArrayIndexOutOfBoundsException exc) {
+                System.out.println("Array out of bounds in Tile interact");
+            } catch (NullPointerException exc) {
+                System.out.println("No interaction tile @ inBoundPos " + x  + "x" + y);
+            }
         }
     }
 
@@ -216,17 +223,30 @@ public class LevelEngine {
             }
         }
 
+        // water
+        TiledMapTileLayer waterLayer = (TiledMapTileLayer) map.getLayers().get("water");
+        // TileFactory.createTileFromCell()
+        for(int x = 0; x < waterLayer.getWidth();x++) {
+            for(int y = 0; y < waterLayer.getHeight();y++) {
+                TiledMapTileLayer.Cell waterCell = waterLayer.getCell(x, y);
+                if (waterCell != null && waterCell.getTile() != null) {
+                    tile[x][y] = new WaterTile(x, y);
+                }
+            }
+        }
+
+
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("ground");
         // temp stuff below, must be easy to map TileMap.Tile to (my)Tile
         // TileFactory.createTileFromCell()
         for(int x = 0; x < layer.getWidth();x++) {
             for(int y = 0; y < layer.getHeight();y++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
-                String tileType;
-
-                tile[x][y] = new GrassTile(x, y, true);
 
                 if (cell != null && cell.getTile() != null) {
+
+                    tile[x][y] = new GrassTile(x, y, true);
+
                     // custom property
                     if (cell.getTile().getProperties().containsKey("tileType") && (cell.getTile().getProperties().get("tileType").equals("teleporter"))) {
                         tile[x][y] = new TeleportTile(x, y);
@@ -239,7 +259,7 @@ public class LevelEngine {
 
                 // check for tileType
                 if (cell != null && cell.getTile().getProperties().containsKey("blocked") ) {
-                    tile[x][y] = new WaterTile(x, y);
+                    tile[x][y] = new GrassTile(x, y, false); // mayNot pass grassTile
                 }
 
             }
@@ -251,10 +271,6 @@ public class LevelEngine {
         for(int x = 0; x < layer2.getWidth();x++) {
             for(int y = 0; y < layer2.getHeight();y++) {
                 TiledMapTileLayer.Cell cell2 = layer2.getCell(x, y);
-                if (cell2 != null && cell2.getTile().getProperties().containsKey("blocked") ) {
-                    tile[x][y] = new GrassTile(x, y, false); // just test
-
-                }
 
                 if (cell2 != null && cell2.getTile() != null) {
                     // custom property .. wooden stuff
@@ -262,6 +278,11 @@ public class LevelEngine {
                         tile[x][y] = new WoodTile(x, y);
                     }
                 }
+                // check for tileType
+                if (cell2 != null && cell2.getTile().getProperties().containsKey("blocked") ) {
+                    tile[x][y] = new GrassTile(x, y, false); // mayNot pass could be a fence or alike
+                }
+
             }
         }
 

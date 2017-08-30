@@ -11,6 +11,16 @@
    <property name="blocked" type="bool" value="true"/>
   </properties>
  </tile>
+ <tile id="333">
+  <properties>
+   <property name="tileType" value="water"/>
+  </properties>
+ </tile>
+ <tile id="334">
+  <properties>
+   <property name="tileType" value="water"/>
+  </properties>
+ </tile>
  <tile id="383">
   <properties>
    <property name="blocked" type="bool" value="true"/>

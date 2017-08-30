@@ -46,9 +46,7 @@ public class PickupItem extends ItemEntity {
         if (entity instanceof Player) {
             if (((Player)entity).getInventory().add(item)) {
                 remove();
-                // temp sound
-                Sound testSfx = SproutGame.assets.get("sfx/blop.wav");
-                testSfx.play();
+                ((Sound) SproutGame.assets.get("sfx/blop.wav")).play();
             } else {
                 Gdx.app.log("INVENTORY", "Could not pickup up: " + entity.toString());
             }
