@@ -310,24 +310,25 @@ public class Npc extends Mob implements Telegraph {
             }
         }
 
+        // The code below is just POC
         // play walking sound here ...really in NPC class?
         // https://www.youtube.com/watch?v=wYREdw4nz4E
         //
         if (getState() == State.WALKING) {
-            if (true) {
-                System.out.println("Sound effect Surface : " + getFeetSurface());
-                if (walkSoundId == 0) {
-                    walkSoundId = ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).loop(.15f);
-                } else {
-                    ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).resume(walkSoundId);
-                }
+            System.out.println("Sound effect Surface : " + getFeetSurface());
+            if (walkSoundId < 0) {
+                walkSoundId = ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).loop(.15f);
+            } else {
+                ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).resume(walkSoundId);
             }
         } else {
-            ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).pause(walkSoundId);
+            if (walkSoundId > 0L) {
+                ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).pause(walkSoundId);
+            }
         }
     }
 
-    private long walkSoundId = 0;
+    private long walkSoundId = -1; // temp
 
     public int getSpriteRow() {
         return spriteRow;
@@ -383,8 +384,6 @@ public class Npc extends Mob implements Telegraph {
         else if (getState() == State.WALKING) {
             animationMatrix[getActionState().ordinal()][animDirection.ordinal()].setPlayMode(Animation.PlayMode.LOOP);
             currentFrame = (TextureRegion) animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
-            int walk_frame_idx = animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrameIndex(stateTime);
-
        }
 
         batch.draw(currentFrame, getX(), getY());
