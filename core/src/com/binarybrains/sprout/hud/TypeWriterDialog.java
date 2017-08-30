@@ -224,8 +224,8 @@ public class TypeWriterDialog extends Window {
     /** {@link #pack() Packs} the dialog and adds it to the stage, centered with default fadeIn action */
     public TypeWriterDialog show (Stage stage) {
         show(stage, sequence(Actions.alpha(0), Actions.fadeIn(0.4f, Interpolation.fade)));
-        setSize(stage.getWidth()-(16*2), 200);
-        setPosition(Math.round((stage.getWidth() - getWidth()) / 2), 10);
+        setSize(stage.getWidth() / 2, 200);
+        setPosition(Math.round((stage.getWidth() - getWidth()) / 2), Math.round((stage.getHeight() - getHeight()) / 2));
         stringCompleteness = 0;
         return this;
     }

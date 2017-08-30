@@ -192,6 +192,7 @@ public class Hud {
                // System.out.println("result "+obj);
             }
         };
+
         dialog.text(say);
         dialog.button("  OK  ", true); //sends "true" as the result
         dialog.center();
