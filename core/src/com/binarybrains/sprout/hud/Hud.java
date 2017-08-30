@@ -5,7 +5,6 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -79,7 +78,7 @@ public class Hud {
                 Actions.run(new Runnable() { public void run(){
                     player.setTilePos(x,y);
                     player.getLevel().getCamera().setPosition(new Vector3(player.getX(), player.getY(), 0));
-                    ((Sound) SproutGame.assets.get("sfx/door_close1.wav")).play();
+                    SproutGame.playSound("door_close1");
                 }}),
                 Actions.fadeOut(.3f, Interpolation.fade)
         ));

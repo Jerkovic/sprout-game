@@ -2,7 +2,6 @@ package com.binarybrains.sprout.item.tool;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.level.tile.Tile;
 import com.binarybrains.sprout.level.tile.WaterTile;
@@ -17,7 +16,7 @@ public class WateringCan extends Tool {
 
     public int pour() {
         if (water > 0) {
-            ((Sound) SproutGame.assets.get("sfx/watering.wav")).play();
+            SproutGame.playSound("watering");
             water = water - 5;
             return 5;
         } else {

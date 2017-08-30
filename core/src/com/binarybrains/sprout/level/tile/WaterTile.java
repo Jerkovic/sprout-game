@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.level.tile;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
@@ -32,7 +31,7 @@ public class WaterTile extends Tile {
             ToolItem toolItem = (ToolItem) item;
             if (toolItem.tool instanceof FishingPole && toolItem.tool.use(this)) {
 
-                ((Sound) SproutGame.assets.get("sfx/water_splash.wav")).play();
+                SproutGame.playSound("water_splash");
 
                 if (MathUtils.random(1,4) == 1) {
                     player.getLevel().add(
@@ -46,7 +45,7 @@ public class WaterTile extends Tile {
             }
 
             if (toolItem.tool instanceof WateringCan && toolItem.tool.use(this)) {
-                ((Sound) SproutGame.assets.get("sfx/water_splash.wav")).play();
+                SproutGame.playSound("water_splash");
                 return true;
             }
         }

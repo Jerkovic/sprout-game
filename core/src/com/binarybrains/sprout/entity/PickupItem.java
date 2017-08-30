@@ -1,7 +1,6 @@
 package com.binarybrains.sprout.entity;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -46,7 +45,7 @@ public class PickupItem extends ItemEntity {
         if (entity instanceof Player) {
             if (((Player)entity).getInventory().add(item)) {
                 remove();
-                ((Sound) SproutGame.assets.get("sfx/blop.wav")).play();
+                SproutGame.playSound("blop");
             } else {
                 Gdx.app.log("INVENTORY", "Could not pickup up: " + entity.toString());
             }

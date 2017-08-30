@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.item.tool;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.MathUtils;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.level.tile.Tile;
@@ -12,10 +11,9 @@ public class Axe extends Tool {
 
     public void playSound() {
         if (MathUtils.randomBoolean())
-            // SproutGame.playWav("chopping_Wood_1");
-            ((Sound) SproutGame.assets.get("sfx/chopping_Wood_1.wav")).play();
+            SproutGame.playSound("chopping_Wood_1");
         else
-            ((Sound) SproutGame.assets.get("sfx/chopping_Wood_2.wav")).play();
+            SproutGame.playSound("chopping_Wood_2");
     }
 
     @Override

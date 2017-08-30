@@ -60,6 +60,10 @@ public class SproutGame extends Game {
 		super.resume();
 	}
 
+    public static void playSound(String name) {
+        ((Sound) SproutGame.assets.get("sfx/" + name + ".wav")).play();
+    }
+
 	public void loadAssets() {
 		assets.load("sfx/chopping_Wood_1.wav", Sound.class);
         assets.load("sfx/chopping_Wood_2.wav", Sound.class);

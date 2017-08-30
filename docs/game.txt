@@ -1,6 +1,5 @@
 ﻿Created by erikl on 27/06/16
 
-Some code structure  inspiration
 ________________________________________________________________________________
 https://github.com/sndcode/stardewvalleycode/tree/master/Stardew%20Valley
 ________________________________________________________________________________

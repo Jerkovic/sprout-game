@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.locations;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
@@ -27,7 +26,7 @@ public class Location extends Entity {
         if (entity instanceof Player) {
             ((Player) entity).releaseKeys();
             BackgroundMusic.stop();
-            ((Sound) SproutGame.assets.get("sfx/fancy_reward.wav")).play();
+            SproutGame.playSound("fancy_reward");
             getLevel().screen.hud.speakDialog(name, description);
         }
     }

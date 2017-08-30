@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.entity.tree;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -9,11 +8,8 @@ import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
-import com.binarybrains.sprout.entity.bomb.Bomb;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
-import com.binarybrains.sprout.item.ToolItem;
-import com.binarybrains.sprout.item.tool.Axe;
 import com.binarybrains.sprout.level.Level;
 
 
@@ -55,7 +51,7 @@ public class SmallTree extends Entity { // extends Vegitation or ?
         if (item != null) {
             if (item.getName().equals("Ladder")) {
                 // move this into a player method ?
-                ((Sound) SproutGame.assets.get("sfx/fancy_reward.wav")).play();
+                SproutGame.playSound("fancy_reward");
                 player.getInventory().removeResource(((ResourceItem) item).resource, 1);
                 player.getLevel().screen.hud.refreshInventory();
                 player.getLevel().screen.hud.speakDialog(
