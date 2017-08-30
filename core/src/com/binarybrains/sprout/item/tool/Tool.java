@@ -7,7 +7,17 @@ import com.binarybrains.sprout.level.tile.Tile;
 
 public abstract class Tool {
 
-    // How should we handle consumable Tools... like keys, ladders etc?
+    public static Hoe hoe = new Hoe();
+    public static Axe axe = new Axe();
+    public static PickAxe pickaxe = new PickAxe();
+    public static WateringCan wateringcan = new WateringCan();
+    public static Scythe scythe = new Scythe();
+    public static FishingPole fishingpole = new FishingPole();
+    public static GoldKey goldenKey = new GoldKey();
+    public static Hammer hammer = new Hammer();
+
+    // How should we handle consumable Tools... like keys?
+
     public final String name;
     public final String description;
     private long lastUseTime = 0;
