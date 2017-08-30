@@ -105,6 +105,7 @@ public class Tree extends Entity { // extends Vegitation or ?
 
     @Override
     public void hurt(Entity e, int dmg) {
+
         damage += dmg;
 
         if (damage > 10 && !falling) {
@@ -128,9 +129,9 @@ public class Tree extends Entity { // extends Vegitation or ?
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
         if (item instanceof ToolItem) {
             ToolItem toolItem = (ToolItem) item;
-            if (toolItem.tool instanceof Axe) {
-                ((Axe) toolItem.tool).playSound();
-                hurt(player, 1);
+            if (toolItem.tool instanceof Axe && toolItem.tool.canUse()) {
+                ((Axe) toolItem.tool).playRandomChopSound();
+                hurt(player, 1); // hurt the tree
                 return true;
             }
         }

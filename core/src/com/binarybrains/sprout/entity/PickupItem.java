@@ -56,7 +56,7 @@ public class PickupItem extends ItemEntity {
     public void update(float deltaTime) {
         super.update(deltaTime);
 
-        time++;
+        time+=deltaTime * 100;
         if (time >= lifeTime) {
             remove();
             return;
@@ -76,7 +76,7 @@ public class PickupItem extends ItemEntity {
 
         float distance = distanceTo(getLevel().player);
         if (distance < 40) {
-
+            // item in state of being sucked to the player
         }
 
 
