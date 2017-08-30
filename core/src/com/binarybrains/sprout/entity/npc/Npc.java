@@ -315,6 +315,7 @@ public class Npc extends Mob implements Telegraph {
         //
         if (getState() == State.WALKING) {
             if (true) {
+                System.out.println("Sound effect Surface : " + getFeetSurface());
                 if (walkSoundId == 0) {
                     walkSoundId = ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).loop(.15f);
                 } else {
@@ -341,6 +342,10 @@ public class Npc extends Mob implements Telegraph {
             return false;
         }
         return true;
+    }
+
+    public String getFeetSurface() {
+        return "surfaceTile" + getLevel().getTile(getTileX(), getTileY());
     }
 
     private boolean canMoveToPos(float new2X, float new2Y) {
