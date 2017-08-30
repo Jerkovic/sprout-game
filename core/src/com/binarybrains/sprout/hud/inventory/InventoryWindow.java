@@ -5,11 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.SproutGame;
@@ -105,9 +100,15 @@ public class InventoryWindow extends Window {
             lc.setAlignment(Align.bottomRight);
             lc.setColor(Color.WHITE);
 
-            Image image = new Image(atlas.findRegion(item.getRegionId()));
             Stack stack = new Stack();
-            stack.add(image);
+
+            TextureAtlas.AtlasRegion icon = atlas.findRegion(item.getRegionId());
+            if (icon != null) {
+                Image image = new Image(icon);
+                stack.add(image);
+            } else {
+                stack.add(new Label("n/a", skin)); // should not happen
+            }
 
             //Second add wrapped overlay object
             Table overlay = new Table();
