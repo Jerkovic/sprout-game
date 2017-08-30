@@ -75,17 +75,22 @@ public class SproutGame extends Game {
         assets.load("sfx/watering.wav", Sound.class);
         assets.load("sfx/grass_walk.wav", Sound.class);
         // todo snoring
+        // More footsteps https://www.youtube.com/watch?v=wYREdw4nz4E
 
         // Ambience sounds
         assets.load("ambience/forest_morning_ambience.mp3", Sound.class);
         // https://www.youtube.com/watch?v=W8tVwiYsgHg
         // todo cave
 
+
         // Music (check out Ross Bugden)
         assets.load("music/track1.mp3", Music.class);
+        assets.load("music/track2.mp3", Music.class); // https://www.youtube.com/watch?v=je9bnuIqVVc
         // https://www.youtube.com/watch?v=9qk-vZ1qicI
-        // https://www.youtube.com/watch?v=je9bnuIqVVc
+        // https://www.youtube.com/watch?v=BnmglWHoVrk
         // https://www.youtube.com/watch?v=XVHVFwwuOa0
+        // https://www.youtube.com/watch?v=OiVYAXKVh_k
+        // https://www.youtube.com/watch?v=ZOrxwqvfD2E Scary
 
         //  Sprite items
         assets.load("items2.txt", TextureAtlas.class);

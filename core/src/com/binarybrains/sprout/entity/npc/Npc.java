@@ -2,13 +2,14 @@ package com.binarybrains.sprout.entity.npc;
 
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.level.Level;
@@ -309,13 +310,23 @@ public class Npc extends Mob implements Telegraph {
             }
         }
 
-        // play walking sound here?
+        // play walking sound here ...really in NPC class?
+        // https://www.youtube.com/watch?v=wYREdw4nz4E
+        //
         if (getState() == State.WALKING) {
-            if (true && MathUtils.random(1, 60) == 5) {
-                // ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).play();
+            if (true) {
+                if (walkSoundId == 0) {
+                    walkSoundId = ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).loop(.15f);
+                } else {
+                    ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).resume(walkSoundId);
+                }
             }
+        } else {
+            ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).pause(walkSoundId);
         }
     }
+
+    private long walkSoundId = 0;
 
     public int getSpriteRow() {
         return spriteRow;
