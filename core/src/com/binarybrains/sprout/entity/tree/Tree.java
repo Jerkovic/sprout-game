@@ -28,9 +28,32 @@ public class Tree extends Entity { // extends Vegitation or ?
 
     private int damage = 0;
     private boolean falling = false;
+    private boolean flipped = false;
 
     private int time = 0;
 
+
+    public Tree(Level level, Vector2 position, float width, float height) {
+
+        super(level, position, width, height);
+
+        this.flipped = MathUtils.randomBoolean();
+
+        System.out.println(this  +" flipped : "+  flipped);
+
+        // the code below is no good - remake this
+        sprite = new Sprite(level.spritesheet, 48, 0, (int)width, (int)height);
+        sprite.setSize(width, height);
+        sprite.setPosition(getX(), getY());
+        sprite.setOrigin(getWidth() / 2, 8);
+
+
+        shadow = new Sprite(level.spritesheet, 48, 0, (int)width, (int)height);
+        shadow.setColor(Color.BLACK);
+        shadow.setAlpha(0.4f);
+        shadow.setPosition(getX(), getY());
+        shadow.rotate(-21f);
+    }
 
     @Override
     public void update(float delta) {
@@ -60,25 +83,6 @@ public class Tree extends Entity { // extends Vegitation or ?
         this.walkBox.setHeight(16);
         this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
     }
-
-    public Tree(Level level, Vector2 position, float width, float height) {
-
-        super(level, position, width, height);
-
-        // the code below is no good - remake this
-        sprite = new Sprite(level.spritesheet, 48, 0, (int)width, (int)height);
-        sprite.setSize(width, height);
-        sprite.setPosition(getX(), getY());
-        sprite.setOrigin(getWidth() / 2, 8);
-
-
-        shadow = new Sprite(level.spritesheet, 48, 0, (int)width, (int)height);
-        shadow.setColor(Color.BLACK);
-        shadow.setAlpha(0.4f);
-        shadow.setPosition(getX(), getY());
-        shadow.rotate(-21f);
-    }
-
 
     @Override
     public boolean blocks(Entity e) {
@@ -121,7 +125,6 @@ public class Tree extends Entity { // extends Vegitation or ?
             for (int i = 0; i < count; i++) {
                 getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.acorn), new Vector2(getPosition().x, getPosition().y)));
             }
-
         }
     }
 
@@ -131,7 +134,7 @@ public class Tree extends Entity { // extends Vegitation or ?
             ToolItem toolItem = (ToolItem) item;
             if (toolItem.tool instanceof Axe && toolItem.tool.canUse()) {
                 ((Axe) toolItem.tool).playRandomChopSound();
-                hurt(player, 1); // hurt the tree
+                hurt(player, toolItem.getDamage()); // hurt the tree
                 return true;
             }
         }
@@ -140,6 +143,7 @@ public class Tree extends Entity { // extends Vegitation or ?
 
     public void draw(Batch batch, float parentAlpha) {
         drawShadow(batch);
+        sprite.setFlip(flipped, false);
         sprite.draw(batch);
     }
 
@@ -147,5 +151,4 @@ public class Tree extends Entity { // extends Vegitation or ?
         shadow.setPosition(sprite.getX() + 10, sprite.getY()+1);
         shadow.draw(batch);
     }
-
 }
