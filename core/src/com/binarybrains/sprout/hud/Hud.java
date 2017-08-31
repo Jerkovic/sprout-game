@@ -71,6 +71,7 @@ public class Hud {
     }
 
     public void teleportPlayer(final Player player, final int x, final int y) {
+        player.releaseKeys();
         fadeActor.clearActions();
         fadeActor.addAction(Actions.sequence(
                 Actions.alpha(0),

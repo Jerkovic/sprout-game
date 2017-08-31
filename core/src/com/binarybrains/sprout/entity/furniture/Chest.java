@@ -3,6 +3,7 @@ package com.binarybrains.sprout.entity.furniture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
@@ -45,13 +46,13 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
 
     @Override
     public boolean use(Player player, Mob.Direction attackDir) {
-
         if (!carried) {
             isOpen = !isOpen;
-            player.getLevel().screen.hud.showCraftingWindow();
-            // open chest on right click
-            // open chest inventory HUD window
-            // be able to move stuff from chest inventory <-> player inventory
+            if (isOpen) {
+                SproutGame.playSound("door_open");
+                player.getLevel().screen.hud.showCraftingWindow();
+
+            }
         }
 
         return true;
