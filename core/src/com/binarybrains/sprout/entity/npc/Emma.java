@@ -4,9 +4,8 @@ import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.IntArray;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
@@ -26,33 +25,41 @@ public class Emma extends Npc {
         setState(State.WALKING);
         setDirection(Direction.EAST);
         setSpeed(16f);
-        stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.WALK_LABYRINTH);
+        stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.IDLE);
         stateMachine.changeState(EmmaState.WALK_LABYRINTH);
 
     }
 
     public void updateWalkDirections(int x, int y) {
+        clearFindPath();
         findPath = generatePathFindingDirections(generatePath(x, y));
+    }
+
+    // temp method
+    public void leaveHouse() {
+        setTilePos(18,91); // outside the house test
+        SproutGame.playSound("door_close1");
+    }
+
+    /**
+     * Use this to clear this Mob's path finding route
+     */
+    public void clearFindPath() {
+        findPath = null;
     }
 
     @Override
     public void update(float delta) {
-
         super.update(delta);
-        stateMachine.update();
-
         if (findPath != null && findPath.containsKey(getPosHash())) {
             setDirection(findPath.get(getPosHash()));
             setState(State.WALKING);
         } else {
-            // System.out.println("Emma is lost. No path for " + this + " " + findPath);
+            // System.out.println("Emma lost?");
         }
 
-        if (this.distanceTo(getLevel().player) < 20f) {
-            System.out.println("Emma is close to the player make here stop and look at the player");
-            this.lookAt(getLevel().player);
-            //stateMachine.changeState(EmmaState.GOT_ACORN);
-        }
+
+        stateMachine.update();
     }
 
     @Override
@@ -102,7 +109,7 @@ public class Emma extends Npc {
     public boolean blocks(Entity e) {
         if (e instanceof Emma) return false;
         if (e instanceof Player) {
-            return true;
+            return false; // true
         }
         return false;
     }

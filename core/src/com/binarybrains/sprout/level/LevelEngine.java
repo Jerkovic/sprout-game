@@ -94,6 +94,17 @@ public class LevelEngine {
         return getEntities(rect);
     }
 
+    public boolean isBlockingEntitiesAtTile(Entity ent, int tile_x, int tile_y) {
+        List<Entity> tile_entities = getEntitiesAtTile(tile_x, tile_y);
+        for (int i = 0; i < tile_entities.size(); i++) {
+            Entity e = tile_entities.get(i);
+            if (e.blocks(ent)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void sortAndRender(List<Entity> entities, Batch batch) {
         Collections.sort(entities, spriteSorter);
         for (int i = 0; i < entities.size(); i++) {

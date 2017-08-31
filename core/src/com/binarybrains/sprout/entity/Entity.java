@@ -170,9 +170,13 @@ public abstract class Entity {
         return (long)getTileX() + (getTileY() * 256); // grid[x + y * width]
     }
 
-    public void setTilePos(float x, float y) {
-        setTileX(x);
-        setTileY(y);
+    public void setTilePos(int x, int y) {
+        if (!getLevel().isBlockingEntitiesAtTile(this, x, y)) {
+            setTileX(x);
+            setTileY(y);
+        } else {
+            System.out.println("setTilePos failed for" + this + " : " + getLevel().getEntitiesAtTile(x, y));
+        }
     }
 
     public float getX() {

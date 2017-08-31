@@ -29,8 +29,6 @@ public class SheetGenerator extends ApplicationAdapter {
         cam.update();
 
         batch = new SpriteBatch();
-        shapeRenderer = new ShapeRenderer();
-
         player = new PlayerSpriteGenerator();
 
     }

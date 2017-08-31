@@ -38,11 +38,11 @@ public abstract class Mob extends Entity {
 
     private State state = State.STANDING;
     private Direction direction = Direction.SOUTH;
-    private Vector2 velocity;
 
     private int health = 0;
     private int damage = 0;
     private float speed = 0;
+    private long lastChangeDirection = 0L;
 
 
     public Mob(Level level, Vector2 position, float width, float height) {
@@ -50,7 +50,7 @@ public abstract class Mob extends Entity {
         super(level, position, width, height);
         setState(State.STANDING);
         setDirection(Direction.SOUTH);
-        velocity = new Vector2(0, 0);
+        // velocity = new Vector2(0, 0);
         setHealth(MathUtils.random(1, 100));
     }
 
