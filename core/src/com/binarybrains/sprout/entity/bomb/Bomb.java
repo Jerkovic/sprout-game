@@ -74,6 +74,11 @@ public class Bomb extends Entity implements Portable {
     }
 
     @Override
+    public boolean blocks(Entity e) {
+        return true;
+    }
+
+    @Override
     public void renderDebug(ShapeRenderer renderer, Color walkBoxColor) {
         Color restoreColor = renderer.getColor();
 
