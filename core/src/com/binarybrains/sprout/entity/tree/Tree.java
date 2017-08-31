@@ -54,6 +54,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         // the code below is no good - remake this
         sprite = new Sprite(level.spritesheet, 48, 0, (int)width, (int)height);
         sprite.setSize(width, height);
+        sprite.setFlip(flipped, false);
         sprite.setPosition(getX(), getY());
         sprite.setOrigin(getWidth() / 2, 8);
 
@@ -167,10 +168,8 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
     }
 
     public void draw(Batch batch, float parentAlpha) {
-        drawShadow(batch);
-        sprite.setFlip(flipped, false);
-        if (isShaking) {
-            // sprite.setPosition(sprite.getX());
+        if (!falling) {
+            drawShadow(batch);
         }
         sprite.draw(batch);
     }
@@ -179,4 +178,5 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         shadow.setPosition(sprite.getX() + 10, sprite.getY()+1);
         shadow.draw(batch);
     }
+
 }
