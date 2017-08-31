@@ -3,12 +3,14 @@ package com.binarybrains.sprout.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
@@ -246,6 +248,31 @@ public class Player extends Npc implements InputProcessor {
     public void update(float delta) {
         super.update(delta);
         updateMovement();
+        surfaceSoundEffect();
+    }
+
+    private long walkSoundId = -1; // temp
+
+    private void surfaceSoundEffect() {
+        // plays different walking sounds here.
+        // https://www.youtube.com/watch?v=wYREdw4nz4E
+        //
+        if (this instanceof Player) {
+            int val = 1;
+        }
+        if (getState() == State.WALKING) {
+            // System.out.println("Sound effect Surface : " + getFeetSurface());
+            if (walkSoundId < 0) {
+                walkSoundId = ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).loop(.15f);
+            } else {
+                ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).resume(walkSoundId);
+            }
+        } else {
+            if (walkSoundId > 0L) {
+                ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).pause(walkSoundId);
+            }
+        }
+
     }
 
     private void updateMovement() {
