@@ -20,6 +20,7 @@ public class Resource {
     public static Resource wool = new Resource("Wool", "Wool is the textile fiber obtained from sheep.");
     public static Resource cloth = new Resource("Cloth", "Textile obtained from whool");
     public static Resource string = new Resource("String", "A nice strong string.");
+    public static Resource teddy = new Resource("Teddy", "A really old but still soft and cuddly teddy bear.");
 
     public static Resource woodFence = new PlantableResource("Wood Fence", "Keep animals contained and the wolf away");
     public static Resource bomb = new PlantableResource("Bomb", "Generates an explosion");
