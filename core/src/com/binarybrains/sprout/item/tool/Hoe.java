@@ -5,8 +5,8 @@ import com.binarybrains.sprout.SproutGame;
 
 public class Hoe extends Tool {
     public Hoe() {
-        super("Hoe", "A long-handled gardening tool with a thin metal blade, used mainly for weeding and breaking up soil.");
-        setCoolDownTime(500); // half a second cooldown time
+        super("Hoe", "A long-handled gardening tool with a thin blade, used mainly for weeding and breaking up soil.");
+        setCoolDownTime(500);
     }
 
     public void playDigSound() {

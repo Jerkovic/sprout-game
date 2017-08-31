@@ -31,7 +31,7 @@ public class Crop extends Entity {
     // Crop should be abstract class?
     public Crop(Level level, int tx, int ty) {
 
-        super(level, new Vector2(16f * tx, 16f * ty), 16, 16);
+        super(level, new Vector2(16f * tx, 16f * ty+4), 16, 16);
         atlas = SproutGame.assets.get("items2.txt");
         regions = atlas.findRegions("Potato_Stage"); // potato test
 
