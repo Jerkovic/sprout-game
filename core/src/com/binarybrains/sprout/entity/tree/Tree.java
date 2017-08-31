@@ -5,17 +5,21 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.binarybrains.sprout.entity.*;
+import com.badlogic.gdx.utils.TimeUtils;
+import com.binarybrains.sprout.entity.Entity;
+import com.binarybrains.sprout.entity.Mob;
+import com.binarybrains.sprout.entity.PickupItem;
+import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.resource.Resource;
-import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.item.tool.Axe;
+import com.binarybrains.sprout.level.Level;
 
 
-public class Tree extends Entity { // extends Vegitation or ?
+public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation ?
 
     private Sprite sprite;
     private Sprite shadow;
@@ -24,22 +28,28 @@ public class Tree extends Entity { // extends Vegitation or ?
     We need to dispose of this
     sprite.getTexture().dispose();
     shadow.getTexture().dispose();
+    spriteBatch.Draw(
+
     */
 
     private int damage = 0;
     private boolean falling = false;
     private boolean flipped = false;
-
     private int time = 0;
+    private boolean isShaking = false;
+    private long startShakeTimer;
+
+    public void shake() {
+        startShakeTimer = TimeUtils.nanoTime();
+        isShaking = true;
+    }
+
 
 
     public Tree(Level level, Vector2 position, float width, float height) {
 
         super(level, position, width, height);
-
         this.flipped = MathUtils.randomBoolean();
-
-        System.out.println(this  +" flipped : "+  flipped);
 
         // the code below is no good - remake this
         sprite = new Sprite(level.spritesheet, 48, 0, (int)width, (int)height);
@@ -58,7 +68,7 @@ public class Tree extends Entity { // extends Vegitation or ?
     @Override
     public void update(float delta) {
 
-        if (falling) {
+        if (falling) { // timber!!
             time+=delta * 100;
             if (time < 60) {
                 sprite.setRotation(time);
@@ -68,6 +78,18 @@ public class Tree extends Entity { // extends Vegitation or ?
                 remove();
                 falling = false;
             }
+        } else { // not falling
+            if (isShaking) {
+                if (TimeUtils.nanoTime() < startShakeTimer + 1000000000 * .3) {
+                    // position.x += MathUtils.random(-60f, 60f) * delta;
+                    // position.y += MathUtils.random(-60f, 60f) * delta;
+                    flipped = !flipped;
+                }
+                else
+                {
+                    isShaking = false;
+                }
+            }
         }
         super.update(delta);
 
@@ -76,7 +98,6 @@ public class Tree extends Entity { // extends Vegitation or ?
     public void updateBoundingBox() {
         this.box.setWidth(getWidth());
         this.box.setHeight(getHeight());
-        // Sets the x and y-coordinates of the bottom left corner
         this.box.setPosition(getPosition());
 
         this.walkBox.setWidth(16);
@@ -111,6 +132,9 @@ public class Tree extends Entity { // extends Vegitation or ?
     public void hurt(Entity e, int dmg) {
 
         damage += dmg;
+        shake();
+
+        System.out.println("shake tree");
 
         if (damage > 10 && !falling) {
             falling = true;
@@ -144,6 +168,9 @@ public class Tree extends Entity { // extends Vegitation or ?
     public void draw(Batch batch, float parentAlpha) {
         drawShadow(batch);
         sprite.setFlip(flipped, false);
+        if (isShaking) {
+            // sprite.setPosition(sprite.getX());
+        }
         sprite.draw(batch);
     }
 

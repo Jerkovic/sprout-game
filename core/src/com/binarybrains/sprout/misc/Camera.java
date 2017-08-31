@@ -20,7 +20,6 @@ public class Camera extends OrthographicCamera {
     }
 
     public void shake() {
-
         startShakeTimer = TimeUtils.nanoTime();
         isShaking = true;
     }
@@ -33,8 +32,6 @@ public class Camera extends OrthographicCamera {
         temp.z = 0;
         position.set(temp);
 
-        // position.set(followPos.x, followPos.y, 0);
-
         if (isShaking) {
             if (TimeUtils.nanoTime() < startShakeTimer + 1000000000 * .3) {
                 position.x += MathUtils.random(-60f, 60f) * deltaTime;
@@ -46,7 +43,6 @@ public class Camera extends OrthographicCamera {
             }
         }
     }
-
 
     @Override
     public void update() {
@@ -81,7 +77,6 @@ public class Camera extends OrthographicCamera {
         }
 
         position.set((int)(position.x),(int) position.y, 0);
-
         super.update();
     }
 

@@ -20,7 +20,7 @@ public class ToolItem extends Item {
     }
 
     public int getDamage() {
-        return level;
+        return level+1;
     }
 
     public String getRegionId() {

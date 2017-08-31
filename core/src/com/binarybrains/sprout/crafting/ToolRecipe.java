@@ -22,5 +22,5 @@ public class ToolRecipe extends Recipe {
 
     public String getDescription() {
         return "tools are fun and useful";
-    } // this hoe is made of gold.
+    }
 }

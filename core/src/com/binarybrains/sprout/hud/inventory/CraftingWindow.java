@@ -87,6 +87,7 @@ public class CraftingWindow extends Dialog {
         for (Recipe recipe : craft.getRecipes()) {
             recipe.checkCanCraft(player.getInventory());
 
+            // add error handling getRegion may throw NullPointerException
             Image icon = new Image(atlas.findRegion(recipe.getItem().getRegionId()));
             if (!recipe.canCraft) icon.setColor(0,0,0,.55f);
             if (!recipe.isUnlocked) icon.setColor(0,0,0,.15f);
