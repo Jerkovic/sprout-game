@@ -3,6 +3,7 @@ package com.binarybrains.sprout.util;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -32,11 +33,32 @@ public class SheetGenerator extends ApplicationAdapter {
 
         player = new PlayerSpriteGenerator();
 
+    }
+
+    private void handleInput() {
+
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            cam.translate(-1, 0, 0);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            cam.translate(1, 0, 0);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            cam.translate(0, -1, 0);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            cam.translate(0, 1, 0);
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            Gdx.app.exit();
+        }
 
     }
 
     @Override
     public void render () {
+        handleInput();
         Gdx.gl.glClearColor(0.2f, 0.25f, 0.8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 

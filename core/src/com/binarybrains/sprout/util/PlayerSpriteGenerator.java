@@ -109,6 +109,7 @@ public class PlayerSpriteGenerator {
         if (walkAnimation.getKeyFrameIndex(stateTime) == 3) {
             offset = 2;
         }
+
         batch.draw(hair, y, y-offset);
     }
 
