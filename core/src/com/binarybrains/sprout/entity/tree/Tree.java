@@ -81,9 +81,10 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         } else { // not falling
             if (isShaking) {
                 if (TimeUtils.nanoTime() < startShakeTimer + 1000000000 * .3) {
-                    // position.x += MathUtils.random(-60f, 60f) * delta;
-                    // position.y += MathUtils.random(-60f, 60f) * delta;
-                    flipped = !flipped;
+                    float currentPower = 4 * delta;
+                    float x = (MathUtils.random(0f, 1f) - 0.5f) * 2 * currentPower;
+                    float y = (MathUtils.random(0f, 1f) - 0.5f) * 2 * currentPower;
+                    sprite.translate(-x, -y);
                 }
                 else
                 {
