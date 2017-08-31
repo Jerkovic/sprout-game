@@ -75,6 +75,16 @@ public class InventoryWindow extends Window {
         pack();
     }
 
+    private Table createTooltipTable(Item item) {
+        Table tooltipTable = new Table(skin);
+        tooltipTable.pad(10).background("default-round");
+        tooltipTable.add(item.getName()).left();
+        tooltipTable.row();
+        tooltipTable.add(item.getDescription()).left();
+        tooltipTable.align(Align.left | Align.top);
+        return tooltipTable;
+    }
+
     private void syncInventory(final Inventory inventory) {
 
         group.clear();
@@ -116,11 +126,9 @@ public class InventoryWindow extends Window {
             stack.add(overlay);
 
             button.add(stack);
-
-
-            // tooltip test
-            button.addListener(new TextTooltip(item.getDescription(), skin));
+            button.addListener(new Tooltip(createTooltipTable(item)));
             button.pack();
+
             if (selected != null && item.getName().equals(selected))
             {
                 button.setChecked(true);
@@ -134,7 +142,6 @@ public class InventoryWindow extends Window {
                     }
                 }
             });
-
 
             group.add(button);
 

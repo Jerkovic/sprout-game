@@ -257,9 +257,6 @@ public class Player extends Npc implements InputProcessor {
         // plays different walking sounds here.
         // https://www.youtube.com/watch?v=wYREdw4nz4E
         //
-        if (this instanceof Player) {
-            int val = 1;
-        }
         if (getState() == State.WALKING) {
             // System.out.println("Sound effect Surface : " + getFeetSurface());
             if (walkSoundId < 0) {
