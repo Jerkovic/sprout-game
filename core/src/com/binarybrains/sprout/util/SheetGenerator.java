@@ -3,7 +3,9 @@ package com.binarybrains.sprout.util;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -13,12 +15,21 @@ public class SheetGenerator extends ApplicationAdapter {
     PlayerSpriteGenerator player;
     ShapeRenderer shapeRenderer;
     SpriteBatch batch;
+    Camera cam;
 
     @Override
     public void create () {
 
+        float w = Gdx.graphics.getWidth();
+        float h = Gdx.graphics.getHeight();
+
+        cam = new OrthographicCamera(80, 80 * (h / w));
+        cam.position.set(cam.viewportWidth / 2f, cam.viewportHeight / 2f, 0);
+        cam.update();
+
         batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
+
         player = new PlayerSpriteGenerator();
 
 
@@ -26,15 +37,16 @@ public class SheetGenerator extends ApplicationAdapter {
 
     @Override
     public void render () {
-        Gdx.gl.glClearColor(0.4f, 0.45f, 0.1f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        Gdx.gl.glClearColor(0.2f, 0.25f, 0.8f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         float delta = Gdx.app.getGraphics().getDeltaTime();
 
         player.update(delta);
         // rendering stuff
+        cam.update();
+        batch.setProjectionMatrix(cam.combined);
+
         batch.begin();
         player.draw(batch);
         batch.end();

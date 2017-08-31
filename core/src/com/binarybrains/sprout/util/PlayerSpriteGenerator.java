@@ -50,7 +50,7 @@ public class PlayerSpriteGenerator {
         SheetCoordinates walkPants = new SheetCoordinates();
 
 
-        float frameSpeed = .15f;
+        float frameSpeed = .85f;
         int row = 0;
 
         hair = spriteSheet[0][24];
@@ -92,16 +92,24 @@ public class PlayerSpriteGenerator {
         TextureRegion currentPantsFrame = (TextureRegion) walkPantsAnimation.getKeyFrame(stateTime);
         TextureRegion currentArmsFrame = (TextureRegion) walkArmsAnimation.getKeyFrame(stateTime);
 
+        int x = 0;
+        int y = 0;
         // right order here is important
-        batch.draw(currentPantsFrame, 100,500);
-        batch.draw(currentFrame, 100,500);
-        batch.draw(currentArmsFrame, 100,500);
+        batch.draw(currentPantsFrame, x,y);
+        batch.draw(currentFrame, x,y);
+        batch.draw(currentArmsFrame, x,y);
 
         System.out.println(walkAnimation.getKeyFrameIndex(stateTime));
-        if (walkAnimation.getKeyFrameIndex(stateTime) != 0) {
+        if (walkAnimation.getKeyFrameIndex(stateTime) == 1) {
             offset = 2;
         }
-        batch.draw(hair, 100, 500-offset);
+        if (walkAnimation.getKeyFrameIndex(stateTime) == 2) {
+            offset = 1;
+        }
+        if (walkAnimation.getKeyFrameIndex(stateTime) == 3) {
+            offset = 2;
+        }
+        batch.draw(hair, y, y-offset);
     }
 
     public void update(float delta) {

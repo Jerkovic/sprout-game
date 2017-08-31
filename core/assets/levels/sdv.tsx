@@ -78,6 +78,11 @@
    <frame tileid="644" duration="100"/>
   </animation>
  </tile>
+ <tile id="1329">
+  <properties>
+   <property name="blocked" type="bool" value="true"/>
+  </properties>
+ </tile>
  <tile id="1750">
   <properties>
    <property name="blocked" type="bool" value="true"/>
