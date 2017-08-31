@@ -26,7 +26,6 @@ public class DesktopLauncher {
         config.vSyncEnabled = true;
         /** Window icons: 128x128(Mac), 32x32 (for Win and Linux), and 16x16 (for Win). */
         // config.addIcon("some icon", Files.FileType.Local);
-		// new LwjglApplication(new SproutGame(), config);
         new LwjglApplication(new SproutGame(), config);
 	}
 }

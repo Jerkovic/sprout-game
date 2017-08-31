@@ -68,7 +68,24 @@ public class SproutGame extends Game {
         ((Sound) SproutGame.assets.get("sfx/" + name + ".wav")).play();
     }
 
-	public void loadAssets() {
+    public static void playSound(String name, float volume) {
+        ((Sound) SproutGame.assets.get("sfx/" + name + ".wav")).play(volume);
+    }
+
+    /**
+     *
+     * @param name
+     * @param volume
+     * @param pitch the pitch multiplier, 1 == default, >1 == faster, <1 == slower, the value has to be between 0.5 and 2.0
+     * @param pan
+     */
+    public static void playSound(String name, float volume, float pitch, float pan) {
+        ((Sound) SproutGame.assets.get("sfx/" + name + ".wav")).play(volume, pitch, pan);
+    }
+
+
+
+    public void loadAssets() {
 		assets.load("sfx/chopping_Wood_1.wav", Sound.class);
         assets.load("sfx/chopping_Wood_2.wav", Sound.class);
 		assets.load("sfx/blop.wav", Sound.class);
@@ -80,6 +97,7 @@ public class SproutGame extends Game {
         assets.load("sfx/dog_woof.wav", Sound.class); // replace
         assets.load("sfx/fancy_reward.wav", Sound.class);
         assets.load("sfx/craft_complete.wav", Sound.class);
+        assets.load("sfx/dirt_digging.wav", Sound.class);
         assets.load("sfx/watering.wav", Sound.class);
         assets.load("sfx/grass_walk.wav", Sound.class);
         // todo snoring
