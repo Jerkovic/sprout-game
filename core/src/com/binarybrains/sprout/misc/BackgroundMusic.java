@@ -7,8 +7,8 @@ import com.badlogic.gdx.audio.Music;
 public class BackgroundMusic {
 
     static Music track1 = Gdx.audio.newMusic(Gdx.files.internal("music/track2.mp3"));
-    static float FACTOR = .3f; // The bigger the factor, the faster the fade-out will be
-    static float mVolume = 1f;
+    static float FACTOR = .2f; // The bigger the factor, the faster the fade-out will be
+    static float mVolume = 1.2f;
     static boolean mIsPlaying = false;
     static boolean isStopped = false;
 
@@ -37,6 +37,7 @@ public class BackgroundMusic {
     }
 
     public static void dispose() {
+        // dispose tracks
         track1.dispose();
     }
 

@@ -21,7 +21,6 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
-import com.binarybrains.sprout.level.tile.Tile;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
@@ -169,7 +168,7 @@ public class Level extends LevelEngine {
 
     public void draw() {
 
-        // Input ctrl should not be here
+        // Input ctrl should not be here!!
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
             // todo show some sort of tabbed menu window
@@ -188,6 +187,7 @@ public class Level extends LevelEngine {
             zAngle -= PI2;
 
         //draw the light to the FBO
+        // we have to get entities that emmits light here
         if (true) {
             fbo.begin();
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -241,40 +241,29 @@ public class Level extends LevelEngine {
 
     private void renderDebug (List<Entity> entities) {
         debugRenderer.setProjectionMatrix(camera.combined);
-
-        debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        debugRenderer.setColor(Color.RED);
-
-        Rectangle collisonRect = getTileBounds(player.newX, player.newY);
-        debugRenderer.rect(collisonRect.getX(), collisonRect.getY(), collisonRect.width, collisonRect.height);
-
-        debugRenderer.end();
-
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);
 
         TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground");
-
         debugRenderer.setColor(Color.DARK_GRAY);
 
         for(int row = 0; row < layer.getHeight(); row++) {
             for(int col = 0; col < layer.getWidth(); col++) {
                 Rectangle tile = new Rectangle(row*16, col*16, 16, 16);
                 debugRenderer.rect(tile.getX(), tile.getY(), tile.width, tile.height);
-                if (getTile(row, col) instanceof Tile && !getTile(row, col).mayPass) {
+                if (getTile(row, col) != null && !getTile(row, col).mayPass) {
                     debugRenderer.line(tile.getX(), tile.getY(), tile.getX()+16, tile.getY()+16);
                     debugRenderer.line(tile.getX()+16, tile.getY(), tile.getX(), tile.getY()+16);
                 }
             }
         }
 
-        for (int i = 0; i < entities.size(); i++) {
-            entities.get(i).renderDebug(debugRenderer, Color.BLACK);
+        for (Entity entity : entities) {
+            entity.renderDebug(debugRenderer, Color.BLACK);
         }
 
-        // Player interactWithActiveItem /interact box
+        // Player interact box
         debugRenderer.setColor(Color.WHITE);
         debugRenderer.rect(player.getInteractBox().getX(), player.getInteractBox().getY(), player.getInteractBox().width, player.getInteractBox().height);
-
         debugRenderer.end();
     }
 
@@ -293,12 +282,15 @@ public class Level extends LevelEngine {
     public void dispose() {
         tileMapRenderer.dispose();
         debugRenderer.dispose();
+
         map.dispose();
         finalShader.dispose();
         lightShader.dispose();
         ambientShader.dispose();
         defaultShader.dispose();
         light.dispose();
+        spritesheet.dispose();
+        charsheet.dispose();
         fbo.dispose();
     }
 

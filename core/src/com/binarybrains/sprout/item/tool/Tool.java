@@ -1,7 +1,6 @@
 package com.binarybrains.sprout.item.tool;
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.binarybrains.sprout.level.tile.Tile;
 
@@ -54,16 +53,7 @@ public abstract class Tool {
     }
 
     public boolean use(Tile tile) {
-        if (canUse())
-        {
-            Gdx.app.log("DEBUG", "Use tool: " + this +" on " + tile);
-            return true;
-        } else {
-            Gdx.app.log("DEBUG", "Cooling down" + this);
-            return false;
-        }
-
-
+        return canUse();
     }
 
 }

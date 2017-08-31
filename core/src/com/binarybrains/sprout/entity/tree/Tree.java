@@ -31,7 +31,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
     spriteBatch.Draw(
 
     */
-
+    public boolean isProtected = false;
     private int damage = 0;
     private boolean falling = false;
     private boolean flipped = false;
@@ -43,7 +43,6 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         startShakeTimer = TimeUtils.nanoTime();
         isShaking = true;
     }
-
 
 
     public Tree(Level level, Vector2 position, float width, float height) {
@@ -109,7 +108,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
 
     @Override
     public boolean blocks(Entity e) {
-        // trees should not block birds for example todo check
+        // todo trees should not block birds for example
         return true;
     }
 
@@ -136,12 +135,8 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         damage += dmg;
         shake();
 
-        System.out.println("shake tree");
-
         if (damage > 10 && !falling) {
             falling = true;
-            //remove();
-            // add some loot just as a test
             int count = MathUtils.random(1,9);
             for (int i = 0; i < count; i++) {
                 getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.wood), new Vector2(getPosition().x, getPosition().y)));
@@ -160,7 +155,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
             ToolItem toolItem = (ToolItem) item;
             if (toolItem.tool instanceof Axe && toolItem.tool.canUse()) {
                 ((Axe) toolItem.tool).playRandomChopSound();
-                hurt(player, toolItem.getDamage()); // hurt the tree
+                hurt(player, toolItem.getDamage()); // hurt the tree with the correct damage level
                 return true;
             }
         }
@@ -175,7 +170,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
     }
 
     public void drawShadow(Batch batch){
-        shadow.setPosition(sprite.getX() + 10, sprite.getY()+1);
+        shadow.setPosition(sprite.getX() + 15, sprite.getY()+1);
         shadow.draw(batch);
     }
 

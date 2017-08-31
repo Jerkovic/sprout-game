@@ -28,6 +28,9 @@ public class SproutGame extends Game {
 		Tween.registerAccessor(Actor.class, new ActorAccessor());
         Tween.registerAccessor(Entity.class, new EntityAccessor());
 		loadAssets();
+        // A game usually have many screens
+        // - Splash Screen
+        // - Menu Screen
 		setScreen(new GameScreen(this));
 	}
 
@@ -48,6 +51,7 @@ public class SproutGame extends Game {
 	public void dispose() {
         super.dispose();
         assets.dispose();
+        getScreen().dispose();
 	}
 
 	@Override

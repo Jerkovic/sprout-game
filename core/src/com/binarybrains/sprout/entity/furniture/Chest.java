@@ -48,7 +48,7 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
 
         if (!carried) {
             isOpen = !isOpen;
-            // player.getLevel().hud.setMenu(new ContainerMenu(player, "Chest", inventory));
+            player.getLevel().screen.hud.showCraftingWindow();
             // open chest on right click
             // open chest inventory HUD window
             // be able to move stuff from chest inventory <-> player inventory
