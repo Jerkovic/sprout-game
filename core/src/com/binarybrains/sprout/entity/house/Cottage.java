@@ -62,11 +62,14 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
 
     @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
-        // enter house
-        SproutGame.playSound("door_open");
-        getLevel().screen.hud.teleportPlayer(player, 4, 2);
-        BackgroundMusic.stop(); // fade out music
-        return true;
+        if (player.getInteractBox().overlaps(door) && player.getDirection().equals(Mob.Direction.NORTH)) {
+            SproutGame.playSound("door_open");
+            getLevel().screen.hud.teleportPlayer(player, 4, 2);
+            BackgroundMusic.stop(); // fade out music
+            return true;
+        }
+        // todo more interactions
+        return false;
     }
 
 
