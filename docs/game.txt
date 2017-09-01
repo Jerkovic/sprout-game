@@ -1,5 +1,8 @@
 ﻿Created by erikl on 27/06/16
 
+Immediate things to fix:
+- Cottage/house door pos
+-
 
 
 ________________________________________________________________________________
@@ -28,6 +31,10 @@ Ideas on what is going on in the game:
 - Books of wisdom
 - Key crafting recipe must be unlocked and key crafted
 - Find Teddy and return it to its place.
+
+Cave gen
+--------
+https://gamedevelopment.tutsplus.com/tutorials/create-a-procedurally-generated-dungeon-cave-system--gamedev-10099
 
 
 Game Name ideas

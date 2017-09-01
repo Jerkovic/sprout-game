@@ -26,7 +26,11 @@
  <objectgroup name="objects">
   <object id="92" type="bigtree" x="272" y="224" width="48" height="96"/>
   <object id="93" type="SmallTree" x="176" y="368" width="64" height="112"/>
-  <object id="100" type="cottage" x="256" y="448" width="80" height="128"/>
+  <object id="100" type="cottage" x="256" y="448" width="80" height="128">
+   <properties>
+    <property name="doorTileX" type="int" value="3"/>
+   </properties>
+  </object>
   <object id="101" type="bigtree" x="368" y="240" width="48" height="96"/>
   <object id="102" type="bigtree" x="320" y="496" width="48" height="96"/>
   <object id="103" type="bigtree" x="224" y="512" width="48" height="96"/>

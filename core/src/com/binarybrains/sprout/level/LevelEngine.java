@@ -217,8 +217,9 @@ public class LevelEngine {
                 if (objType.equals("bigtree")) {
                     add(level, new Tree(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
                 } else if (objType.equals("cottage")) {
-                    // Gdx.app.log("", "Instance info" + object.getProperties().get("description"));
-                    add(level, new Cottage(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
+                    Cottage cottage = new Cottage(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight());
+                    cottage.setDoorTilePos((Integer) object.getProperties().get("doorTileX"));
+                    add(level, cottage);
                 } else if (objType.equals("Trigger")) {
                     System.out.println(object.getProperties());
                     String desc = object.getProperties().get("description").toString();
@@ -269,7 +270,7 @@ public class LevelEngine {
                 }
 
                 // check for tileType
-                if (cell != null && cell.getTile().getProperties().containsKey("blocked") ) {
+                if (cell != null && cell.getTile().getProperties().containsKey("blocked") && cell.getTile().getProperties().get("blocked").equals(true)) {
                     tile[x][y] = new GrassTile(x, y, false); // mayNot pass grassTile
                 }
 

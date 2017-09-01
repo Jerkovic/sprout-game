@@ -83,8 +83,6 @@ public class SproutGame extends Game {
         ((Sound) SproutGame.assets.get("sfx/" + name + ".wav")).play(volume, pitch, pan);
     }
 
-
-
     public void loadAssets() {
 		assets.load("sfx/chopping_Wood_1.wav", Sound.class);
         assets.load("sfx/chopping_Wood_2.wav", Sound.class);
@@ -102,11 +100,13 @@ public class SproutGame extends Game {
         assets.load("sfx/grass_walk.wav", Sound.class);
         // todo snoring
         // More footsteps https://www.youtube.com/watch?v=wYREdw4nz4E
+        // Open futuristic chest https://www.youtube.com/watch?v=n_Ug7hgd4kE
+        // Open close chest https://www.youtube.com/watch?v=PnjKFzFQpfU
 
         // Ambience sounds
         assets.load("ambience/forest_morning_ambience.mp3", Sound.class);
         // https://www.youtube.com/watch?v=W8tVwiYsgHg
-        // todo cave
+        // todo cave amb
 
 
         // Music (check out Ross Bugden)
