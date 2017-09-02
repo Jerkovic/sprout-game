@@ -26,6 +26,7 @@ Ideas on what is going on in the game:
 - Books of wisdom
 - Key crafting recipe must be unlocked and key crafted
 - Find Teddy and return it to its place.
+- Phone booth call the number found in/on X
 
 Cave gen
 --------
