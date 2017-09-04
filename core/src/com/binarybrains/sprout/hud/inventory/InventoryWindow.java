@@ -95,7 +95,7 @@ public class InventoryWindow extends Window {
 
             Button button = new Button(skin, "toggle");
             String counter = "";
-            if (item instanceof ResourceItem) {
+            if (item instanceof ResourceItem && inventory.count(item) > 1) {
                 counter = "" + inventory.count(item);
             }
 
