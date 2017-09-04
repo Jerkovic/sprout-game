@@ -140,7 +140,6 @@ public class CraftingWindow extends Dialog {
 
     private void onCrafting() {
         build();
-        //recipeTableScrollPane.setScrollY(100);
         getStage().setScrollFocus(recipeTableScrollPane);
     }
 

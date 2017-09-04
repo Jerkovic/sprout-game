@@ -197,3 +197,45 @@ white
   orig: 3, 3
   offset: 0, 0
   index: -1
+tab-body
+  rotate: false
+  xy: 1, 6
+  size: 17, 8
+  split: 8, 8, 0, 7
+  orig: 17, 8
+  offset: 0, 0
+  index: -1
+tab-title-begin
+  rotate: false
+  xy: 44, 82
+  size: 7, 7
+  split: 6, 0, 6, 0
+  orig: 7, 7
+  offset: 0, 0
+  index: -1
+tab-title-checked
+  rotate: false
+  xy: 102, 113
+  size: 14, 14
+  split: 6, 6, 5, 7
+  pad: 4, 4, 3, 9
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+tab-title-end
+  rotate: false
+  xy: 53, 82
+  size: 7, 7
+  split: 0, 6, 6, 0
+  orig: 7, 7
+  offset: 0, 0
+  index: -1
+tab-title-unchecked
+  rotate: false
+  xy: 1, 16
+  size: 14, 14
+  split: 6, 6, 5, 7
+  pad: 4, 4, 3, 9
+  orig: 14, 14
+  offset: 0, 0
+  index: -1

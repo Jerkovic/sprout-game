@@ -68,6 +68,12 @@ public class Hud {
         fadeActor.setColor(Color.CLEAR);
 
         gameTimeWindow();
+
+        /*
+        Dialog menuWindow = new TabbedMenuWindow(skin);
+        menuWindow.setVisible(true);
+        stage.addActor(menuWindow);
+        */
     }
 
     public void teleportPlayer(final Player player, final int x, final int y) {

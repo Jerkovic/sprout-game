@@ -64,10 +64,6 @@ public class TabbedPane extends Table {
         initialize(skin.get(styleName, TabbedPaneStyle.class));
     }
 
-    /** Creates a {@code TabbedPane} using the specified style.
-     * @param styleName the style name
-     * @param tabTitleAlign the alignment for tab titles. Must be one of {@link Align#left}, {@link Align#center} or
-     *           {@link Align#right}. */
     public TabbedPane (TabbedPaneStyle style) {
         initialize(style);
     }
@@ -172,7 +168,7 @@ public class TabbedPane extends Table {
                 setSelectedIndex(tabTitleButton.index);
             }
         });
-        tabTitleTable.add(button); // .uniform().fill(); // uniform gives tabs the same size
+        tabTitleTable.add(button).padLeft(20f).uniform().fill(); // .uniform().fill(); // uniform gives tabs the same size
         tabBodyStack.add(actor);
 
         // Make sure the 1st tab is selected even after adding the tab
