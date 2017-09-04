@@ -65,8 +65,8 @@ public class Hud {
         fadeActor.clearActions();
         fadeActor.setColor(Color.CLEAR);
 
-        // mouse follow item
-        mouseItem = new Image(atlas.findRegion("Teddy"));
+        // mouse follow item -- todo fix this hardcoded crap
+        mouseItem = new Image(atlas.findRegion("Pickaxe"));
         stage.addActor(mouseItem);
 
 

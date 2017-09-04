@@ -40,7 +40,7 @@ public class ItemEntity extends Entity {
     }
 
     public void drawShadow(Batch batch){
-        shadow.setPosition(getX() + 1, getY() + 2);
+        shadow.setPosition(getX() + 1, getY() + 1);
         shadow.draw(batch);
     }
 

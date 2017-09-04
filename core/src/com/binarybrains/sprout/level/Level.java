@@ -47,7 +47,7 @@ public class Level extends LevelEngine {
     private Texture light;
     private FrameBuffer fbo;
 
-    public float ambientIntensity = .58f;
+    public float ambientIntensity = 1f;
     public static final Vector3 ambientColor = new Vector3(.3f, .3f, .8f); // .6 .6 .8
 
     //used to make the light flicker
@@ -58,13 +58,9 @@ public class Level extends LevelEngine {
     //read our shader files
     final String vertexShader = new FileHandle("shader/vertexShader.glsl").readString();
     final String defaultPixelShader = new FileHandle("shader/defaultPixelShader.glsl").readString();
-    final String ambientPixelShader = new FileHandle("shader/ambientPixelShader.glsl").readString();
-    final String lightPixelShader =  new FileHandle("shader/lightPixelShader.glsl").readString();
     final String finalPixelShader =  new FileHandle("shader/pixelShader.glsl").readString();
 
     private ShaderProgram defaultShader;
-    private ShaderProgram ambientShader;
-    private ShaderProgram lightShader;
     private ShaderProgram finalShader;
 
     /**
@@ -73,18 +69,7 @@ public class Level extends LevelEngine {
     public void setupAmbientLight() {
         ShaderProgram.pedantic = false;
         defaultShader = new ShaderProgram(vertexShader, defaultPixelShader);
-        ambientShader = new ShaderProgram(vertexShader, ambientPixelShader);
-        lightShader = new ShaderProgram(vertexShader, lightPixelShader);
         finalShader = new ShaderProgram(vertexShader, finalPixelShader);
-
-        ambientShader.begin();
-        ambientShader.setUniformf("ambientColor", ambientColor.x, ambientColor.y,
-                ambientColor.z, ambientIntensity);
-        ambientShader.end();
-
-        lightShader.begin();
-        lightShader.setUniformi("u_lightmap", 1);
-        lightShader.end();
 
         finalShader.begin();
         finalShader.setUniformi("u_lightmap", 1);
@@ -93,13 +78,7 @@ public class Level extends LevelEngine {
         finalShader.end();
 
         light = new Texture("shader/light.png");
-
-
         fbo = new FrameBuffer(Pixmap.Format.RGB888, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight(), false);
-
-        lightShader.begin();
-        lightShader.setUniformf("resolution", Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
-        lightShader.end();
 
         finalShader.begin();
         finalShader.setUniformf("resolution", Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
@@ -117,16 +96,16 @@ public class Level extends LevelEngine {
 
         loadMap(this, level);
 
-        player = new Player(this);
-        player.setTilePos(13, 100);
-        this.add(this, player);
-
-        add(this, new Chest(this, new Vector2(16 * 22, 16 * 110)));
-
         camera = new Camera(this);
         camera.setToOrtho(false, screen.width / 4, screen.height / 4); // we scale 16x16 to 64x64
+
+        player = new Player(this);
+        player.setTilePos(13, 100);
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();
+
+        add(this, player);
+        add(this, new Chest(this, new Vector2(16 * 22, 16 * 110)));
 
         tileMapRenderer = new OrthogonalTiledMapRenderer(map);
         tileMapRenderer.setView(camera);
@@ -134,7 +113,7 @@ public class Level extends LevelEngine {
         debugRenderer = new ShapeRenderer();
 
         gameTimer = new GameTime(1, 1, 1, 0, 0);
-        gameTimer.setDuration(0);
+        gameTimer.setDuration(32424);
         gameTimer.start();
 
         // test some path finding stuff.. move this!!
@@ -174,6 +153,19 @@ public class Level extends LevelEngine {
 
     public void draw() {
 
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.B)) {
+            ambientIntensity -= .05f;
+            if (ambientIntensity < 0) ambientIntensity = 0;
+            //System.out.println(ambientIntensity);
+
+        }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.V)) {
+            ambientIntensity += .05f;
+            if (ambientIntensity > 1f) ambientIntensity = 1f;
+        }
+
         // Input ctrl should not be here!!
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
@@ -194,7 +186,13 @@ public class Level extends LevelEngine {
 
         //draw the light to the FBO
         // we have to get entities that emmits light here
-        if (false) {
+        if (ambientIntensity < 1f) {
+
+            finalShader.begin();
+            finalShader.setUniformf("ambientColor", ambientColor.x, ambientColor.y,
+                    ambientColor.z, ambientIntensity);
+            finalShader.end();
+
             fbo.begin();
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             float lightSize = lightOscillate ? (75.0f + 3.25f * (float)Math.sin(zAngle) + .5f * MathUtils.random()):75.0f;
@@ -202,17 +200,24 @@ public class Level extends LevelEngine {
             tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
             tileMapRenderer.getBatch().enableBlending();
             tileMapRenderer.getBatch().setShader(defaultShader);
+            // todo move int:s
+
             int src = tileMapRenderer.getBatch().getBlendSrcFunc();
             int dest = tileMapRenderer.getBatch().getBlendDstFunc();
 
             tileMapRenderer.getBatch().setBlendFunction(GL20.GL_ONE, GL20.GL_ONE);
             tileMapRenderer.getBatch().begin();
-                tileMapRenderer.getBatch().draw(light,(17*16) - lightSize / 2, (85*16) - lightSize / 2, lightSize, lightSize);
+            if (ambientIntensity <= .3f) {
+                tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (85 * 16) - lightSize / 2, lightSize, lightSize);
                 //tileMapRenderer.getBatch().draw(light,90, 1289, lightSize, lightSize);
-                tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2,player.getWalkBoxCenterY() - lightSize / 2, lightSize, lightSize);
+                tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2, player.getWalkBoxCenterY() - lightSize / 2, lightSize, lightSize);
+            }
+
             tileMapRenderer.getBatch().end();
             tileMapRenderer.getBatch().setBlendFunction(src, dest);
+
             fbo.end();
+
 
         }
         // end draw lights to fbo
@@ -222,11 +227,11 @@ public class Level extends LevelEngine {
 
         tileMapRenderer.setView(camera);
         tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
-        if (gameTimer.getGameTime().minute > 35) {
-            // tileMapRenderer.getBatch().setShader(finalShader);
+        if (gameTimer.getGameTime().minute != 0 && ambientIntensity != 1f) {
+            tileMapRenderer.getBatch().setShader(finalShader);
         }
 
-        int[] bg_layers = {0,1,2}; // ground and ground_top
+        int[] bg_layers = {0,1,2}; // water, ground and ground_top
         tileMapRenderer.render(bg_layers);
 
         fbo.getColorBufferTexture().bind(1);
@@ -291,8 +296,6 @@ public class Level extends LevelEngine {
 
         map.dispose();
         finalShader.dispose();
-        lightShader.dispose();
-        ambientShader.dispose();
         defaultShader.dispose();
         light.dispose();
         spritesheet.dispose();

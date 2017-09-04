@@ -69,6 +69,10 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
             return true;
         }
         // todo more interactions
+        if (item.getName().equals("Wood")) {
+            getLevel().screen.hud.speakDialog("Repair house", "You need 500 wood to complete house repair. You currently have " + player.getInventory().count(item) + " wood. Chop chop!");
+
+        }
         return false;
     }
 

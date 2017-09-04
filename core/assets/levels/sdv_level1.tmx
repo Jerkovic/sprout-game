@@ -34,7 +34,7 @@
   <object id="101" type="bigtree" x="368" y="240" width="48" height="96"/>
   <object id="102" type="bigtree" x="320" y="496" width="48" height="96"/>
   <object id="103" type="bigtree" x="224" y="512" width="48" height="96"/>
-  <object id="104" name="FIx the bridge!" type="Trigger" x="32" y="384" width="32" height="32">
+  <object id="104" name="FIx the bridge!" type="Trigger" x="128" y="384" width="32" height="32">
    <properties>
     <property name="description">The Carlton Bridge was destroyed a long time ago and no one has been trying to fix it. You can repair it for 500 wood.
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin rhoncus felis. Ut eget consequat orci. 
