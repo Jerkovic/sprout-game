@@ -5,10 +5,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
@@ -104,9 +101,12 @@ public class Hud {
         inventoryWindow.onInventoryChanged(level.player.getInventory());
     }
 
-    public void adjustInventoryWindow() {
+    public void inventoryTop() {
         inventoryWindow.setWindowTop();
-        // todo more logic
+    }
+
+    public void inventoryBottom() {
+        inventoryWindow.setWindowBottom();
     }
 
     public void addNotification(Item item) {

@@ -78,6 +78,14 @@ public class Camera extends OrthographicCamera {
 
         position.set((int)(position.x),(int) position.y, 0);
         super.update();
+
+        if (isCameraBottomWorld()) {
+            System.out.println("hud goes top!");
+        }
+    }
+
+    public boolean isCameraBottomWorld() {
+        return position.y - (viewportHeight * .5f) <= 0;
     }
 
     public void setPosition(Vector3 pos) {

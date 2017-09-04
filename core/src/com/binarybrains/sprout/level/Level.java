@@ -163,6 +163,12 @@ public class Level extends LevelEngine {
         if (camera != null) {
             camera.followPosition(player.getPosition(), delta);
             camera.update();
+
+            if (getCamera().isCameraBottomWorld()) {
+                screen.hud.inventoryTop();
+            } else {
+                screen.hud.inventoryBottom();
+            }
         }
     }
 
