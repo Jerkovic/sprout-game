@@ -25,6 +25,7 @@ Ideas on what is going on in the game:
 - Blow the stone with bomb
 - Books of wisdom
 - Key crafting recipe must be unlocked and key crafted
+- Key could unlock Motel (room 5)
 - Find Teddy and return it to its place.
 - Phone booth call the number found in/on X
 
@@ -43,6 +44,7 @@ http://fantasynamegenerators.com/farm-names.php#.V34RBqOriko
 
 
 city
+ Tates Motel - Norman Tate the owner
  church - priest
  police - man
  store  - salesclerk
@@ -56,6 +58,7 @@ city
 PEOPLE
  - bad rich guy
  - tiggare
+ - Tates Motel
 
 forrest
 mountain
@@ -74,7 +77,7 @@ Leisure Suit Larry
 Crono Trigger
 Secrets of Mana
 Hayday
-
+Zelda
 
 
 -------------------------= Tech stuff --------------------------------
