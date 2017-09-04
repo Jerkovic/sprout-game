@@ -17,7 +17,6 @@ import com.binarybrains.sprout.item.tool.WateringCan;
 import com.binarybrains.sprout.level.Level;
 
 
-
 public class InventoryWindow extends Window {
 
     Skin skin;
@@ -33,7 +32,7 @@ public class InventoryWindow extends Window {
         this.skin = skin;
         setKeepWithinStage(true);
         setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2)-getWidth(),
-                getMinHeight() + 10);
+                getMinHeight() + 20);
         row().fill().expandX();
 
         atlas = SproutGame.assets.get("items2.txt");
@@ -43,7 +42,7 @@ public class InventoryWindow extends Window {
     }
 
     public void setWindowTop() {
-        yPos = (float )Gdx.app.getGraphics().getHeight() - 100;
+        yPos = (float )Gdx.app.getGraphics().getHeight() - (getHeight()+20);
         centerMe();
     }
 

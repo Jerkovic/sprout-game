@@ -188,7 +188,7 @@ public class Level extends LevelEngine {
 
         //draw the light to the FBO
         // we have to get entities that emmits light here
-        if (true) {
+        if (false) {
             fbo.begin();
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             float lightSize = lightOscillate ? (75.0f + 3.25f * (float)Math.sin(zAngle) + .5f * MathUtils.random()):75.0f;
@@ -217,7 +217,7 @@ public class Level extends LevelEngine {
         tileMapRenderer.setView(camera);
         tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
         if (gameTimer.getGameTime().minute > 35) {
-            tileMapRenderer.getBatch().setShader(finalShader);
+            // tileMapRenderer.getBatch().setShader(finalShader);
         }
 
         int[] bg_layers = {0,1,2}; // ground and ground_top
