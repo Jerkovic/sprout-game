@@ -41,6 +41,7 @@ public class Hud {
     InventoryWindow inventoryWindow;
 
     public int notificationsInHud = 0;
+    public Image mouseItem;
 
     public Hud(Skin skin, Level level) {
         this.skin = skin;
@@ -64,6 +65,11 @@ public class Hud {
         fadeActor.clearActions();
         fadeActor.setColor(Color.CLEAR);
 
+        // mouse follow item
+        mouseItem = new Image(atlas.findRegion("Teddy"));
+        stage.addActor(mouseItem);
+
+
         gameTimeWindow();
 
         /*
@@ -71,6 +77,10 @@ public class Hud {
         menuWindow.setVisible(true);
         stage.addActor(menuWindow);
         */
+    }
+
+    public void setMouseItem(String regionId) {
+        mouseItem.setDrawable(new Image(atlas.findRegion(regionId)).getDrawable());
     }
 
     public void teleportPlayer(final Player player, final int x, final int y) {
@@ -291,8 +301,13 @@ public class Hud {
     public void act(float delta) {
         timeLabel.setText(level.gameTimer.toString());
         fpsLabel.setText("fps: " + Gdx.graphics.getFramesPerSecond());
+        // temp mouseItem
+        mouseItem.setPosition(Gdx.input.getX(), Gdx.app.getGraphics().getHeight() - Gdx.input.getY());
+
         stage.act(delta);
         fadeActor.act(delta);
+        //
+
     }
 
     public void dispose() {

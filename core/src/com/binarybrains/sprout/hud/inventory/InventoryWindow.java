@@ -98,6 +98,7 @@ public class InventoryWindow extends Window {
         group.clear();
         String selected = level.player.activeItem.getName();
 
+
         getTitleLabel().setText("Inventory " + inventory.getItems().size() + "/" + inventory.getCapacity());
 
         for (Item item : inventory.getItems()) {
@@ -148,6 +149,8 @@ public class InventoryWindow extends Window {
                 public void clicked(InputEvent event, float x, float y)
                 {
                     // System.out.println("right mouse button");
+                    // addActor(new Image());
+
                 }
             });
 
