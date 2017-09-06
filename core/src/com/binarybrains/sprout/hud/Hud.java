@@ -103,12 +103,23 @@ public class Hud {
 
     }
 
+    public void hideMouseItem() {
+        if (mouseItem == null) return;
+        mouseItem.setVisible(false);
+    }
+
+    public void showMouseItem() {
+        if (mouseItem == null) return;
+        mouseItem.setVisible(true);
+    }
+
     public void showCraftingWindow() {
         level.player.releaseKeys();
         craftingWindow.build(); // refresh content in window
         craftingWindow.setVisible(true);
         craftingWindow.show(getStage());
         craftingWindow.setScrollFocus(getStage());
+        hideMouseItem();
     }
 
     public void refreshInventory()  {
@@ -207,9 +218,11 @@ public class Hud {
 
     public void speakDialog(String title, String say) {
 
+        hideMouseItem();
         TypeWriterDialog dialog = new TypeWriterDialog(title, skin, "dialog") {
             public void result(Object obj) {
                // System.out.println("result "+obj);
+                showMouseItem();
             }
         };
 

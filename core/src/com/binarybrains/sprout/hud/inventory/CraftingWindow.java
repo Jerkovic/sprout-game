@@ -68,6 +68,7 @@ public class CraftingWindow extends Dialog {
                 hide();
                 player.getLevel().screen.gameState = GameScreen.GameState.RUN;
                 player.getLevel().gameTimer.resume();
+                player.getLevel().screen.hud.showMouseItem();
 
             }
         });
@@ -141,6 +142,7 @@ public class CraftingWindow extends Dialog {
     private void onCrafting() {
         build();
         getStage().setScrollFocus(recipeTableScrollPane);
+        player.getLevel().screen.hud.hideMouseItem();
     }
 
     public void setScrollFocus(Stage stage) {
