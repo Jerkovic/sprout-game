@@ -35,8 +35,7 @@ public class InventoryWindow extends Window {
         this.skin = skin;
         setKeepWithinStage(true);
         setMovable(false);
-        setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2)-getWidth(),
-                getMinHeight() + 20);
+        setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2)-getWidth(), getMinHeight() + 20);
         row().fill().expandX();
 
         atlas = SproutGame.assets.get("items2.txt");
@@ -83,6 +82,11 @@ public class InventoryWindow extends Window {
         pack();
     }
 
+    /**
+     * Creates a tooltip table for an item
+     * @param item
+     * @return
+     */
     private Table createTooltipTable(Item item) {
         Table tooltipTable = new Table(skin);
         tooltipTable.pad(10).background("default-round");
@@ -97,8 +101,6 @@ public class InventoryWindow extends Window {
 
         group.clear();
         String selected = level.player.activeItem.getName();
-
-
         getTitleLabel().setText("Inventory " + inventory.getItems().size() + "/" + inventory.getCapacity());
 
         for (Item item : inventory.getItems()) {
@@ -168,5 +170,4 @@ public class InventoryWindow extends Window {
 
         }
     }
-
 }
