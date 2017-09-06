@@ -65,11 +65,6 @@ public class Hud {
         fadeActor.clearActions();
         fadeActor.setColor(Color.CLEAR);
 
-        // mouse follow item -- todo fix this hardcoded crap
-        mouseItem = new Image(atlas.findRegion("Pickaxe"));
-        stage.addActor(mouseItem);
-
-
         gameTimeWindow();
 
         /*
@@ -80,7 +75,16 @@ public class Hud {
     }
 
     public void setMouseItem(String regionId) {
-        mouseItem.setDrawable(new Image(atlas.findRegion(regionId)).getDrawable());
+        removeMouseItem();
+        mouseItem = new Image(atlas.findRegion(regionId));
+        getStage().addActor(mouseItem);
+    }
+
+    public void removeMouseItem() {
+        if (mouseItem != null)
+            mouseItem.remove();
+            mouseItem = null;
+
     }
 
     public void teleportPlayer(final Player player, final int x, final int y) {
@@ -302,7 +306,9 @@ public class Hud {
         timeLabel.setText(level.gameTimer.toString());
         fpsLabel.setText("fps: " + Gdx.graphics.getFramesPerSecond());
         // temp mouseItem
-        mouseItem.setPosition(Gdx.input.getX(), Gdx.app.getGraphics().getHeight() - Gdx.input.getY());
+        if (mouseItem != null) {
+            mouseItem.setPosition(Gdx.input.getX(), Gdx.app.getGraphics().getHeight() - Gdx.input.getY());
+        }
 
         stage.act(delta);
         fadeActor.act(delta);
