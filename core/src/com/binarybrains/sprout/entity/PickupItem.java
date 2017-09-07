@@ -35,8 +35,8 @@ public class PickupItem extends ItemEntity {
         ya = random.nextGaussian() * 0.2;
         za = random.nextFloat() * 0.7 + 2;
 
-        // addEffect(new LifeTime(lifeTime))
-        // addEffect(new ShakeEffect
+        // addAction(new LifeTime(lifeTime))
+        // addAction(new MoveToAction())
 
     }
 
@@ -78,15 +78,12 @@ public class PickupItem extends ItemEntity {
         if (distance < 40) {
             // item in state of being sucked to the player
         }
-
-
     }
 
     public void draw(Batch batch, float parentAlpha) {
         if (time >= lifeTime - (6 * 20)) {
             if (time / 6 % 2 == 0) return;
         }
-
         super.draw(batch, parentAlpha);
     }
 

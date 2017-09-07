@@ -1,10 +1,13 @@
 package com.binarybrains.sprout.entity;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
+import com.binarybrains.sprout.entity.actions.Action;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 
@@ -25,6 +28,7 @@ public abstract class Entity {
     public Boolean removed = false;
 
     private List<Entity> containsList = new ArrayList<Entity>();
+    private final Array<Action> actions = new Array(0);
 
 
     public Entity(Level level, Vector2 position, float width, float height) {
@@ -34,6 +38,53 @@ public abstract class Entity {
         this.width = (int)width;
         this.height = (int)height;
         updateBoundingBox();
+    }
+
+    /**
+     * Add action to our entity
+     * @param action
+     */
+    public void addAction (Action action) {
+        action.setEntity(this);
+        actions.add(action);
+    }
+
+    public Array<Action> getActions () {
+        return actions;
+    }
+
+    /** Returns true if the actor has one or more actions. */
+    public boolean hasActions () {
+        return actions.size > 0;
+    }
+
+    public void removeAction (Action action) {
+        if (actions.removeValue(action, true)) action.setEntity(null);
+    }
+
+    /** Removes all actions on this actor. */
+    public void clearActions () {
+        for (int i = actions.size - 1; i >= 0; i--)
+            actions.get(i).setEntity(null);
+        actions.clear();
+    }
+
+    public void tickActions(float delta) {
+        Array<Action> actions = this.actions;
+        if (actions.size > 0) {
+            for (int i = 0; i < actions.size; i++) {
+                Action action = actions.get(i);
+                if (action.act(delta) && i < actions.size) {
+                    Action current = actions.get(i);
+                    int actionIndex = current == action ? i : actions.indexOf(action, true);
+                    if (actionIndex != -1) {
+                        actions.removeIndex(actionIndex);
+                        action.setEntity(null);
+                        i--;
+                    }
+                }
+            }
+        }
     }
 
     public float angleTo(Entity entity) {
@@ -199,6 +250,7 @@ public abstract class Entity {
 
     public void update(float deltaTime) {
         stateTime += deltaTime;
+        tickActions(deltaTime); // we need our actions to update
         updateBoundingBox();
     }
 

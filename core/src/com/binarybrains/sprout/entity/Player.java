@@ -7,10 +7,13 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.entity.actions.Actions;
+import com.binarybrains.sprout.entity.actions.MoveToAction;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
@@ -82,6 +85,9 @@ public class Player extends Npc implements InputProcessor {
 
         // move this to a shadow system ?
         shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
+
+        // test our of entity action system
+        addAction(Actions.moveTo(100,10, 15f, Interpolation.bounce));
     }
 
 
