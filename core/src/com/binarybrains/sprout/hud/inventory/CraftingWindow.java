@@ -66,15 +66,13 @@ public class CraftingWindow extends Dialog {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 hide();
-                player.getLevel().screen.gameState = GameScreen.GameState.RUN;
-                player.getLevel().gameTimer.resume();
+                player.getLevel().screen.game.resume();
                 player.getLevel().screen.hud.showMouseItem();
 
             }
         });
         add(buttonExit).pad(5);
         pack();
-
     }
 
     public Table buildRecipesButtonGroup(Skin skin) {

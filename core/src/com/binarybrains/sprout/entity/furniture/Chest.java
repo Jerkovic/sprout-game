@@ -48,8 +48,8 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
     public boolean use(Player player, Mob.Direction attackDir) {
         if (!carried) {
             isOpen = !isOpen;
+            SproutGame.playSound("door_open");
             if (isOpen) {
-                SproutGame.playSound("door_open");
                 // player.getLevel().screen.hud.showCraftingWindow();
             }
         }

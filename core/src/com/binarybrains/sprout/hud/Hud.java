@@ -35,7 +35,6 @@ public class Hud {
     private Actor fadeActor = new Actor();
     private ShapeRenderer fadeRenderer;
 
-    ButtonGroup group;
     TextureAtlas atlas;
     CraftingWindow craftingWindow;
     InventoryWindow inventoryWindow;
@@ -114,6 +113,7 @@ public class Hud {
     }
 
     public void showCraftingWindow() {
+        level.screen.game.pause();
         level.player.releaseKeys();
         craftingWindow.build(); // refresh content in window
         craftingWindow.setVisible(true);
@@ -217,11 +217,12 @@ public class Hud {
     }
 
     public void speakDialog(String title, String say) {
-
+        level.screen.game.pause();
         hideMouseItem();
         TypeWriterDialog dialog = new TypeWriterDialog(title, skin, "dialog") {
             public void result(Object obj) {
                // System.out.println("result "+obj);
+                level.screen.game.resume();
                 showMouseItem();
             }
         };
@@ -248,25 +249,20 @@ public class Hud {
         table.row();
         Image icon2 = new Image(atlas.findRegion("Balubas")); // balubas icon
         table.add(icon2);
-
         table.add(new Label("0", skin));
         table.row();
         table.add(fpsLabel);
-
         stage.addActor(table);
         Window window = new Window(SproutGame.name, skin);
         window.setKeepWithinStage(false);
-
         window.setMovable(true);
         window.row().fill().expandX();
-
         timeLabel.setWrap(false);
         window.add(table).pad(4f);
         window.row();
         window.add(buildHealthMeters());
         window.pack();
         window.setPosition(10, Gdx.app.getGraphics().getHeight() - window.getHeight()-10);
-
         stage.addActor(window);
     }
 

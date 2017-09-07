@@ -88,11 +88,11 @@ public class Emma extends Npc {
     @Override
     public boolean interact(Player player, Item item, Direction attackDir) {
 
-        if (player.activeItem instanceof ResourceItem && ((ResourceItem) player.activeItem).resource.name.equals("Acorn")) {
+        if (player.activeItem instanceof ResourceItem && ((ResourceItem) player.activeItem).resource.name.equals("Teddy")) {
             stateMachine.changeState(EmmaState.WALK_HOME);
             player.getLevel().screen.hud.speakDialog(
                     this.getClass().getSimpleName(),
-                    String.format("Ohh! I really love this %s %s", item.getName(), item.getDescription())
+                    String.format("Ohh! Is that %s? I have really missed him! Thank you!", item.getName())
             );
             ResourceItem ri = (ResourceItem) player.activeItem;
             player.getInventory().removeResource(ri.resource, 1);

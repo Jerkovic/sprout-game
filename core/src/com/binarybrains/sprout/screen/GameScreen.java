@@ -91,13 +91,10 @@ public class GameScreen implements Screen {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
             if (gameState == GameState.RUN) {
-                gameState = GameState.PAUSE;
-                level.gameTimer.paus();
-
+                pause();
                 hud.showCraftingWindow();
             } else {
-                gameState = GameState.RUN;
-                level.gameTimer.resume();
+                resume();
             }
         }
 
@@ -114,11 +111,13 @@ public class GameScreen implements Screen {
     @Override
     public void pause() {
         gameState = GameState.PAUSE;
+        level.gameTimer.paus();
     }
 
     @Override
     public void resume() {
-
+        gameState = GameState.RUN;
+        level.gameTimer.resume();
     }
 
     @Override
