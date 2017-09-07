@@ -91,7 +91,7 @@ public class Player extends Npc implements InputProcessor {
                 Actions.delay(2f),
                 Actions.run((new Runnable() {
                     public void run () {
-                        System.out.println("Action complete!");
+                        setActionState(ActionState.CARRYING);
                     }
                 }))
         ));
@@ -235,7 +235,6 @@ public class Player extends Npc implements InputProcessor {
     public boolean use() {
         // can we really interact while carrying stuff?
         if (getActionState() != ActionState.EMPTY_NORMAL) {
-            System.out.println("Cannot use/check. Current actionState: " + getActionState());
             return false;
         }
 
