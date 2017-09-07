@@ -87,7 +87,8 @@ public class Player extends Npc implements InputProcessor {
         shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
 
         // test our of entity action system
-        addAction(Actions.moveTo(100,10, 15f, Interpolation.bounce));
+        // addAction(Actions.);
+        addAction(Actions.delay(2f, Actions.moveTo(16,16, 1f, Interpolation.fade)));
     }
 
 
