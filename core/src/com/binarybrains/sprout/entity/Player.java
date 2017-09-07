@@ -54,10 +54,9 @@ public class Player extends Npc implements InputProcessor {
 
         super(level, new Vector2(0, 0), 16f, 16f, 0);
         setSpeed(64);
-        // Add some stuff to the player from start
+
         inventory = new Inventory(level, inventoryCapacity);
         getInventory().add(new ToolItem(Tool.hoe, 0));
-        //getInventory().add(new ToolItem(Tool.scythe, 0));
         getInventory().add(new ToolItem(Tool.wateringcan, 0));
         getInventory().add(new ToolItem(Tool.axe, 0));
         getInventory().add(new ToolItem(Tool.pickaxe, 0));
@@ -71,9 +70,7 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ResourceItem(Resource.stick, 3));
         getInventory().add(new ResourceItem(Resource.banana, 1));
         getInventory().add(new ResourceItem(Resource.wool, 3));
-
         getInventory().add(new ResourceItem(Resource.teddy, 1));
-
         getInventory().add(new ResourceItem(Resource.coal, 21));
         getInventory().add(new ResourceItem(Resource.stone, 12));
         getInventory().add(new ResourceItem(Resource.goldNugget, 13));
@@ -85,16 +82,17 @@ public class Player extends Npc implements InputProcessor {
         // move this to a shadow system ?
         shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
 
+        /*
         addAction(Actions.sequence(
                 Actions.delay(2f),
-                Actions.moveTo(100, 40, 3f, Interpolation.swing),
+                Actions.moveTo(100, 200, 3f, Interpolation.pow5Out),
                 Actions.delay(2f),
                 Actions.run((new Runnable() {
                     public void run () {
-                        setActionState(ActionState.CARRYING);
+
                     }
                 }))
-        ));
+        )); */
 
     }
 
@@ -188,11 +186,10 @@ public class Player extends Npc implements InputProcessor {
             int x = (int)getInteractBox().getX() / 16;
             int y = (int)getInteractBox().getY() / 16;
             if (getLevel().isTileBlocked(x, y, entity)) {
-                System.out.println("tile is blocked " + getLevel().getTile(x, y));
                 return; // false
             }
 
-            carriedItem.deleteCarried();
+            if (carriedItem != null)  carriedItem.deleteCarried();
             entity.setPosition(getInteractBox().getX(), getInteractBox().getY());
             getLevel().add(getLevel(), entity);
             carriedItem = null;

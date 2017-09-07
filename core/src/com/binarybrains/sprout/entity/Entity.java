@@ -144,10 +144,7 @@ public abstract class Entity {
     public void updateBoundingBox() {
         this.box.setWidth(width);
         this.box.setHeight(height);
-        // Sets the x and y-coordinates of the bottom left corner
         this.box.setPosition(position.x, position.y);
-
-        // update the walkBox hit detector for tiles hit detection
         this.walkBox.setWidth(width / 3);
         this.walkBox.setHeight(height / 4);
         this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), position.y);

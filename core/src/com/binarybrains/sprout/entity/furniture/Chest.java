@@ -50,8 +50,7 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
             isOpen = !isOpen;
             if (isOpen) {
                 SproutGame.playSound("door_open");
-                player.getLevel().screen.hud.showCraftingWindow();
-
+                // player.getLevel().screen.hud.showCraftingWindow();
             }
         }
 
@@ -64,9 +63,6 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
             setCarried();
             player.setCarriedItem(this);
             remove();
-        } else {
-            System.out.println("The chest seems to be in carried state already");
-
         }
         return true;
     }

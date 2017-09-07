@@ -40,10 +40,7 @@ public class Bomb extends Entity implements Portable {
         super(level, new Vector2(16f * tx, 16f * ty), 16, 16);
         atlas = SproutGame.assets.get("items2.txt");
         region = atlas.findRegion("Bomb");
-
         explosionAnimation = new Animation(1/12f, atlas.findRegions("Explosion"));
-
-
         lifeTime = 60 * 2 + MathUtils.random(1, 2);
     }
 
@@ -62,7 +59,6 @@ public class Bomb extends Entity implements Portable {
             SproutGame.playSound("bomb_explosion");
             getLevel().getCamera().shake();
 
-            // hurt entities in radius from the bomb
             List<Entity> entities = getLevel().getEntities(new Rectangle(getCenterPos().x - 48,getCenterPos().y -48, 48*2, 48*2));
 
             for (int i = 0; i < entities.size(); i++) {
@@ -101,7 +97,6 @@ public class Bomb extends Entity implements Portable {
             TextureRegion frame = (TextureRegion) explosionAnimation.getKeyFrame(elapsedTime, false);
             batch.draw(frame, getCenterPos().x-(frame.getRegionWidth() / 2), getCenterPos().y - (frame.getRegionHeight() / 2));
             return;
-
         }
 
         if (time / 6 % 2 == 0) return;
