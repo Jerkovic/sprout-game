@@ -49,6 +49,7 @@ public class GameScreen implements Screen {
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
 
+        // forest_night_ambience todo
         forestAmbienceSfx = SproutGame.assets.get("ambience/forest_morning_ambience.mp3");
 
         Timer.schedule(new Timer.Task(){
@@ -56,16 +57,16 @@ public class GameScreen implements Screen {
             public void run(){
                 if (!BackgroundMusic.isPlaying()) {
                     BackgroundMusic.start();
-                    BackgroundMusic.setVolume(0.10f);
+                    BackgroundMusic.setVolume(0.18f);
                 }
             }
-        }, 7.0f, 60);
+        }, 2.0f, 10);
 
     }
 
     @Override
     public void show() {
-        long soundID = forestAmbienceSfx.loop(.13f);
+        long soundID = forestAmbienceSfx.loop(.15f);
     }
 
     @Override
