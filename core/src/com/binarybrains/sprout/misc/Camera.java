@@ -79,9 +79,6 @@ public class Camera extends OrthographicCamera {
         position.set((int)(position.x),(int) position.y, 0);
         super.update();
 
-        if (isCameraBottomWorld()) {
-            System.out.println("hud goes top!");
-        }
     }
 
     public boolean isCameraBottomWorld() {
