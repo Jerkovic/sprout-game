@@ -289,6 +289,12 @@ public class Player extends Npc implements InputProcessor {
 
     }
 
+    public void pausSurfaceSound() {
+        if (walkSoundId > 0L) {
+            ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).pause(walkSoundId);
+        }
+    }
+
     private void updateMovement() {
 
         if (!CanMove) {
@@ -395,6 +401,7 @@ public class Player extends Npc implements InputProcessor {
      * Release WASD keys
      */
     public void releaseKeys() {
+        pausSurfaceSound();
         keys.put(Keys.A, false);
         keys.put(Keys.D, false);
         keys.put(Keys.W, false);

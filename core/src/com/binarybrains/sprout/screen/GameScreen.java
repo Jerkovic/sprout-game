@@ -111,12 +111,16 @@ public class GameScreen implements Screen {
 
     @Override
     public void pause() {
+        level.player.releaseKeys();
+        forestAmbienceSfx.pause();
         gameState = GameState.PAUSE;
         level.gameTimer.paus();
     }
 
     @Override
     public void resume() {
+        level.player.releaseKeys();
+        forestAmbienceSfx.resume();
         gameState = GameState.RUN;
         level.gameTimer.resume();
     }
