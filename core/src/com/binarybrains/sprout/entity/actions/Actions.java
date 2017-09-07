@@ -62,5 +62,64 @@ public class Actions {
         return action;
     }
 
+    static public RunnableAction run (Runnable runnable) {
+        RunnableAction action = action(RunnableAction.class);
+        action.setRunnable(runnable);
+        return action;
+    }
+
+
+    static public SequenceAction sequence (Action action1) {
+        SequenceAction action = action(SequenceAction.class);
+        action.addAction(action1);
+        return action;
+    }
+
+    static public SequenceAction sequence (Action action1, Action action2) {
+        SequenceAction action = action(SequenceAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        return action;
+    }
+
+    static public SequenceAction sequence (Action action1, Action action2, Action action3) {
+        SequenceAction action = action(SequenceAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        action.addAction(action3);
+        return action;
+    }
+
+    static public SequenceAction sequence (Action action1, Action action2, Action action3, Action action4) {
+        SequenceAction action = action(SequenceAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        action.addAction(action3);
+        action.addAction(action4);
+        return action;
+    }
+
+    static public SequenceAction sequence (Action action1, Action action2, Action action3, Action action4, Action action5) {
+        SequenceAction action = action(SequenceAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        action.addAction(action3);
+        action.addAction(action4);
+        action.addAction(action5);
+        return action;
+    }
+
+    static public SequenceAction sequence (Action... actions) {
+        SequenceAction action = action(SequenceAction.class);
+        for (int i = 0, n = actions.length; i < n; i++)
+            action.addAction(actions[i]);
+        return action;
+    }
+
+    static public SequenceAction sequence () {
+        return action(SequenceAction.class);
+    }
+
+
 
 }
