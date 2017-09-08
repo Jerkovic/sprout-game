@@ -42,8 +42,7 @@ public class Crafting {
             workbenchRecipes.add(new ResourceRecipe(Resource.ladder).addCost(Resource.stick, 6));
 
             //furnaceRecipes.add(new ResourceRecipe(Resource.glass).addCost(Resource.sand, 4).addCost(Resource.coal, 1));
-
-
+            // ovenRecipes.add(new FoodRecipe(Food.pizza)
 
         } catch (Exception e) {
             throw new RuntimeException(e);

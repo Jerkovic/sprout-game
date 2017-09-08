@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -41,6 +42,16 @@ public class InventoryWindow extends Window {
         atlas = SproutGame.assets.get("items2.txt");
         group = new ButtonGroup();
         setWindowBottom();
+
+        // ignore clicking on the window
+        InputListener ignoreTouchDown = new InputListener() {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                event.cancel();
+                return false;
+            }
+        };
+
+        this.addListener(ignoreTouchDown);
     }
 
     public void setWindowTop() {
@@ -156,9 +167,9 @@ public class InventoryWindow extends Window {
                 }
             });
 
-            button.addListener(new ChangeListener() {
+            button.addListener(new ClickListener(Input.Buttons.LEFT) {
                 @Override
-                public void changed(ChangeEvent event, Actor actor) {
+                public void clicked(InputEvent event, float x, float y) {
                     if (group.getCheckedIndex() > -1) {
                         level.player.setActiveItem(inventory.getItems().get(group.getCheckedIndex()));
                     }

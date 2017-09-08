@@ -67,10 +67,8 @@ public class SmallTree extends Entity { // extends Vegitation or ?
     }
 
     public void draw(Batch batch, float parentAlpha) {
-
         drawShadow(batch);
         sprite.draw(batch);
-
     }
 
     public void drawShadow(Batch batch){
