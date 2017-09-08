@@ -46,6 +46,8 @@ public class PickupItem extends ItemEntity {
             if (((Player)entity).getInventory().add(item)) {
                 remove();
                 SproutGame.playSound("blop", 1f, MathUtils.random(0.6f, 1.2f), 1f);
+                ((Player)entity).increaseStats(item.regionId, 1);
+                System.out.println(((Player)entity).getStats(item.regionId));
             } else {
                 Gdx.app.log("INVENTORY", "Could not pickup up: " + entity.toString());
             }

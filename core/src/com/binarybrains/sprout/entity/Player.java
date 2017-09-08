@@ -21,6 +21,7 @@ import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.tool.Tool;
 import com.binarybrains.sprout.level.Level;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,7 @@ public class Player extends Npc implements InputProcessor {
     public int inventoryCapacity = 24;
     public Portable carriedItem;
     public boolean CanMove = true;
+    private Stats stats = new Stats();
 
     enum Keys {
         W, A, S, D
@@ -93,9 +95,15 @@ public class Player extends Npc implements InputProcessor {
                     }
                 }))
         )); */
-
     }
 
+    public int getStats(String statKey) {
+        return stats.get(statKey);
+    }
+
+    public void increaseStats(String statKey, int increment) {
+        stats.increase(statKey, increment);
+    }
 
     public void setActiveItem(Item item) {
         activeItem = item;

@@ -1,11 +1,25 @@
 package com.binarybrains.sprout.entity;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Stats {
-    public int score = 0;
-    public int zombie_kills = 0;
-    public int slime_kills = 0;
-    public int shots = 0;
-    public int shots_hit = 0;
-    public int potatoes = 0;
+
+    private Map<String, Integer> dataMap = new HashMap<String, Integer>();
+
+    public void increase(String statKey, Integer increment) {
+        if (dataMap.containsKey(statKey)) {
+            dataMap.put(statKey, dataMap.get(statKey) + increment);
+        } else {
+            dataMap.put(statKey, increment);
+        }
+    }
+
+    public int get(String statKey) {
+        if (dataMap.containsKey(statKey)) {
+            return dataMap.get(statKey);
+        }
+        return 0;
+    }
 }
