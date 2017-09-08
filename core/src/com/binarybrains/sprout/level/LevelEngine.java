@@ -181,16 +181,18 @@ public abstract class LevelEngine {
         }
     }
 
-    public void interact(int x, int y, Entity entity) {
+    public boolean interact(int x, int y, Entity entity) {
         if (entity instanceof Player) {
             try {
-                tile[x][y].interact((Player) entity, x, y, ((Player) entity).getDirection());
+                return tile[x][y].interact((Player) entity, x, y, ((Player) entity).getDirection());
             } catch (ArrayIndexOutOfBoundsException exc) {
-                System.out.println("Array out of bounds in Tile interact");
+                return false;
             } catch (NullPointerException exc) {
                 System.out.println("No interaction tile @ inBoundPos " + x  + "x" + y);
+                return false;
             }
         }
+        return false;
     }
 
     public Rectangle getTileBounds(int tx, int ty) {

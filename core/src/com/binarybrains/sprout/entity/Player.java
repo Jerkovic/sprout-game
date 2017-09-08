@@ -172,21 +172,21 @@ public class Player extends Npc implements InputProcessor {
     }
 
     //  called on left click, boolean return type?
-    public void interactWithActiveItem() {
-        // can we really interact while carrying stuff?
+    public boolean interactWithActiveItem() {
+
         if (getActionState() == ActionState.CARRYING) {
 
             Entity entity = (Entity)carriedItem;
 
             List<Entity> entities = getLevel().getEntities(getInteractBox());
             if (entities.size() > 0) {
-                return; // false
+                return false;
             }
 
             int x = (int)getInteractBox().getX() / 16;
             int y = (int)getInteractBox().getY() / 16;
             if (getLevel().isTileBlocked(x, y, entity)) {
-                return; // false
+                return false;
             }
 
             if (carriedItem != null)  carriedItem.deleteCarried();
@@ -194,7 +194,7 @@ public class Player extends Npc implements InputProcessor {
             getLevel().add(getLevel(), entity);
             carriedItem = null;
             setActionState(ActionState.EMPTY_NORMAL);
-            return;
+            return true;
         }
 
         boolean done = false;
@@ -206,7 +206,7 @@ public class Player extends Npc implements InputProcessor {
 				if (e.interact(this, activeItem, getDirection())) {
                     done = true; // we have encountered an entity in the interact box
                 }
-            if (done) return; // move up in for loop?
+            if (done) return done; // move up in for loop?
 		}
 
         int tile_x = getTileX();
@@ -226,6 +226,7 @@ public class Player extends Npc implements InputProcessor {
         }
 
         getLevel().interact(tile_x, tile_y, this);
+        return true;
     }
 
     //  use/check/investigate called on right click.. boolean return type?
@@ -442,22 +443,18 @@ public class Player extends Npc implements InputProcessor {
         getLevel().getCamera().translate(-deltaX, deltaY, 0);
         clickedPos = getLevel().getCamera().unproject(clickedPos);
 
-        int mouseWorldPosX = (int)clickedPos.x / 16;
-        int mouseWorldPosY = (int)clickedPos.y / 16;
+        float mouseWorldPosX = clickedPos.x;
+        float mouseWorldPosY = clickedPos.y;
 
-        if (mouseWorldPosX <= getTileX() + 1 && mouseWorldPosX >= getTileX() -1
-                && mouseWorldPosY <= getTileY() + 1 && mouseWorldPosY >= getTileY() -1) {
-        }
-
-        switch (button)
-        {
-            case Input.Buttons.LEFT:
-                interactWithActiveItem(); // Left Click  -> Use item/tool or pickup
-                break;
-            case Input.Buttons.RIGHT:
-                use(); // Right Click -> Check/Use without any item
-                System.out.println("Right mouse button clicked");
-                break;
+        if (mouseWorldPosX <= getInteractBox().getX() + getInteractBox().getWidth() && mouseWorldPosX >= getInteractBox().getX()
+                && mouseWorldPosY <= getInteractBox().getY()+ getInteractBox().getHeight() && mouseWorldPosY >= getInteractBox().getY()) {
+            if (button == Input.Buttons.LEFT) {
+                return interactWithActiveItem();
+            }
+            else if (button == Input.Buttons.RIGHT) {
+                System.out.println("right click");
+                return use();
+            }
         }
 
         return false;
