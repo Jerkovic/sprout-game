@@ -14,6 +14,7 @@ public class Stats {
         } else {
             dataMap.put(statKey, increment);
         }
+        debug();
     }
 
     public int get(String statKey) {
@@ -21,5 +22,12 @@ public class Stats {
             return dataMap.get(statKey);
         }
         return 0;
+    }
+
+    public void debug() {
+        System.out.println("-------------------Stats----------------------");
+        for (Map.Entry<String, Integer> entry : dataMap.entrySet()) {
+            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+        }
     }
 }

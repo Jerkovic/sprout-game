@@ -102,6 +102,7 @@ public class Player extends Npc implements InputProcessor {
     }
 
     public void increaseStats(String statKey, int increment) {
+        System.out.println("Increasing " + statKey);
         stats.increase(statKey, increment);
     }
 
