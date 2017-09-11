@@ -55,18 +55,18 @@ public class Npc extends Mob implements Telegraph {
             tile_y = getTileY();
         }
         else if(getDirection() == Direction.WEST) {
-            tile_x = (int)(getWalkBox().getX()+getWalkBox().getWidth()) >> 4; // 12 should be getWidht
+            tile_x = (int)(getWalkBox().getX() + getWalkBox().getWidth()) >> 4; // 12 should be getWidht
             tile_y = getTileY();
         }
         else if(getDirection() == Direction.SOUTH) {
             tile_x = getTileX();
-            tile_y = (int)(getWalkBox().getY()+getWalkBox().getHeight()) >> 4;
+            tile_y = (int)getWalkBox().getY() >> 4;
         }
         else if(getDirection() == Direction.NORTH) {
             tile_x = getTileX();
-            tile_y = (int)getWalkBox().getY() >> 4;
+            tile_y = (int)(getWalkBox().getY() + getWalkBox().getHeight()) >> 4;
         }
-        return (long)tile_x + (tile_y * 256); // grid[x + y * width] d
+        return (long)(tile_x + (tile_y * 256)); // grid[x + y * width] d
     }
 
 
@@ -127,7 +127,7 @@ public class Npc extends Mob implements Telegraph {
             {
                 dir = Mob.Direction.WEST;
             }
-            travelDirections.put((long)px + (py * 256), dir); // grid[x + y * width]
+            travelDirections.put((long)(px + (py * 256)), dir); // grid[x + y * width]
 
             if (i == n - 4) {
                 break;

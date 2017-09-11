@@ -33,6 +33,7 @@ public class Emma extends Npc {
     public void updateWalkDirections(int x, int y) {
         clearFindPath();
         findPath = generatePathFindingDirections(generatePath(x, y));
+        printMap(findPath);
     }
 
     // temp method
@@ -53,14 +54,25 @@ public class Emma extends Npc {
         super.update(delta);
         if (findPath != null && findPath.containsKey(getPosHash())) {
             setDirection(findPath.get(getPosHash()));
+            System.out.println("go " + getDirection() + " " + getPosHash());
             setState(State.WALKING);
+            //findPath.remove(getPosHash());
         } else {
-            // System.out.println("Emma lost?");
+            //System.out.println("Emma lost?");
         }
 
 
         stateMachine.update();
     }
+
+    //pretty print a map
+    public static <K, V> void printMap(Map<K, V> map) {
+        for (Map.Entry<K, V> entry : map.entrySet()) {
+            System.out.println("Key : " + entry.getKey()
+                    + " Value : " + entry.getValue());
+        }
+    }
+
 
     @Override
     public void updateBoundingBox() {
@@ -97,6 +109,7 @@ public class Emma extends Npc {
             ResourceItem ri = (ResourceItem) player.activeItem;
             player.getInventory().removeResource(ri.resource, 1);
             player.getLevel().screen.hud.refreshInventory();
+
             return true;
         }
         else

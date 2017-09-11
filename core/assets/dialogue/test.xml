@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<conversations npc="Emma">
+    <dialogue id="1">
+        <condition statsKey="delivered_teddybear" value="0">
+        <message>I miss my Teddybear so much. Can you find him for me?</message>
+        <choices>
+            <choice id="I will try!">
+                <command>hero.carFixingSkills += 1</command>
+                <command>nextDialogue = 104</command>
+            </choice>
+            <choice id="I can't...">
+                <command>nextDialogue = 105</command>
+            </choice>
+            <choice id="Find him yourself">
+                <command>npc.likesHero -= 1</command>
+            </choice>
+        </choices>
+    </dialogue>
+</conversations>
