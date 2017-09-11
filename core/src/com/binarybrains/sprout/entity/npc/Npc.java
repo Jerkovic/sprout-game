@@ -53,20 +53,20 @@ public class Npc extends Mob implements Telegraph {
         // this method we might need to revisit some ugly hacks below
 
         if (getDirection() == Direction.EAST) {
-            tile_x = (int)getWalkBox().getX() >> 4;
+            tile_x = (int)(getCenterPos().x -7) >> 4;
             tile_y = getTileY();
         }
         else if(getDirection() == Direction.WEST) {
-            tile_x = (int)(getWalkBox().getX() + getWalkBox().getWidth()) >> 4; // 12 should be getWidht
+            tile_x = (int)(getCenterPos().x+7) >> 4; // 12 should be getWidht
             tile_y = getTileY();
         }
         else if(getDirection() == Direction.SOUTH) {
             tile_x = getTileX();
-            tile_y = (int)((getWalkBox().getY() + getWalkBox().getHeight()+4)) >> 4;
+            tile_y = (int)(getCenterPos().y+7) >> 4;
         }
         else if(getDirection() == Direction.NORTH) {
             tile_x = getTileX();
-            tile_y = (int)getWalkBox().getY() >> 4;
+            tile_y = (int)(getCenterPos().y-7) >> 4;
         }
         return (long)(tile_x + (tile_y * 256)); // grid[x + y * width] d
     }
