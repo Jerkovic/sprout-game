@@ -124,6 +124,7 @@ public class Hud {
 
     public void refreshInventory()  {
         inventoryWindow.onInventoryChanged(level.player.getInventory());
+        removeMouseItem();
     }
 
     public void inventoryTop() {

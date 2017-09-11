@@ -179,6 +179,8 @@ public class InventoryWindow extends Window {
 
             group.add(button);
 
+            level.player.setActiveItem(inventory.getItems().get(group.getCheckedIndex()));
+
         }
     }
 }
