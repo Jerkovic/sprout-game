@@ -50,6 +50,8 @@ public class Npc extends Mob implements Telegraph {
     public long getPosHash() {
         int tile_x=0, tile_y=0;
 
+        // this method we might need to revisit some ugly hacks below
+
         if (getDirection() == Direction.EAST) {
             tile_x = (int)getWalkBox().getX() >> 4;
             tile_y = getTileY();
@@ -60,11 +62,11 @@ public class Npc extends Mob implements Telegraph {
         }
         else if(getDirection() == Direction.SOUTH) {
             tile_x = getTileX();
-            tile_y = (int)getWalkBox().getY() >> 4;
+            tile_y = (int)((getWalkBox().getY() + getWalkBox().getHeight()+4)) >> 4;
         }
         else if(getDirection() == Direction.NORTH) {
             tile_x = getTileX();
-            tile_y = (int)(getWalkBox().getY() + getWalkBox().getHeight()) >> 4;
+            tile_y = (int)getWalkBox().getY() >> 4;
         }
         return (long)(tile_x + (tile_y * 256)); // grid[x + y * width] d
     }
