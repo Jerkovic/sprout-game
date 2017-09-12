@@ -199,6 +199,14 @@ public abstract class Entity {
         return (int)getCenterPos().x >> 4;
     }
 
+    public int getWBTileY() {
+        return (int)getWalkBox().y >> 4;
+    }
+
+    public int getWBTileX() {
+        return (int)getWalkBox().x >> 4;
+    }
+
     public int getTileY() {
         return (int)getCenterPos().y >> 4;
     }
@@ -249,6 +257,39 @@ public abstract class Entity {
     public boolean canMoveToTile(int tx, int ty) {
         if (getLevel().isTileBlocked(tx, ty, this)) {
             return false;
+        }
+        return true;
+    }
+
+    public boolean canMoveToTile2(float new2X, float new2Y) {
+        Rectangle newWalkPos = new Rectangle(new2X, new2Y, getWalkBox().getWidth(), getWalkBox().getHeight());
+        // surrounding tiles
+        // East
+        if (newWalkPos.overlaps(getLevel().getTileBounds(getWBTileX()+1, getWBTileY()))) {
+            System.out.println("canMoveToTile2 false" + newWalkPos + " " + getLevel().getTileBounds(getTileX(), getTileY()));
+            return false;
+        }
+        return true;
+    }
+
+    public boolean canMoveToPos(float new2X, float new2Y) {
+        List<Entity> entities = getLevel().getEntities();
+        Rectangle newPos = new Rectangle(new2X, new2Y, getWalkBox().getWidth(), getWalkBox().getHeight());
+        for (int i = 0; i < entities.size(); i++) {
+            if (entities.get(i).getBoundingBox().overlaps(newPos)) {
+                entities.get(i).touchedBy(this);
+            }
+            if (!entities.get(i).equals(this) && entities.get(i).getBoundingBox().contains(newPos)) {
+                entities.get(i).contains(this);
+            } else {
+                entities.get(i).clearContains(this);
+            }
+
+
+            if (entities.get(i).blocks(this) && entities.get(i).getWalkBox().overlaps(newPos)) {
+                return false;
+            }
+
         }
         return true;
     }

@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.binarybrains.sprout.achievement.Achievement;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
@@ -128,6 +129,9 @@ public class Level extends LevelEngine {
     public void update(float delta) {
 
         gameTimer.update();
+
+        // check for achievement
+        Achievement.checkAwards(player.getStats(), this);
 
         // Update all our entities
         for (int i = 0; i < entities.size(); i++) {

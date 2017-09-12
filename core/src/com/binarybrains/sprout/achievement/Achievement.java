@@ -1,6 +1,8 @@
 package com.binarybrains.sprout.achievement;
 
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Stats;
+import com.binarybrains.sprout.level.Level;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,11 +17,11 @@ public class Achievement
             achievements.put("zombieSlayer1",
                     new Achievement("Zombie Slayer Level 1", "Prove you are a true zombie slayer.")
                             .addUnlockCriteria("Kill 10 Zombies", "zombie_kills", 10)
-                            .addUnlockCriteria("Get 10 potatoes", "potatoes", 10)
+                            .addUnlockCriteria("Get 10 potatoes", "Potato", 10)
             );
             achievements.put("potatofarmer",
-                    new Achievement("Potato Farmer", "get 100 potatoes")
-                            .addUnlockCriteria("Get 10 potatoes", "potatoes", 100)
+                    new Achievement("Potato Farmer", "get 10 potatoes")
+                            .addUnlockCriteria("Get 10 potatoes", "Potato", 10)
             );
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -48,7 +50,7 @@ public class Achievement
 
         for (UnlockCriteria criteria : unlockCriterias) {
             try {
-                Object value = Stats.class.getField(criteria.getStatKey()).get(stats);
+                Object value = stats.get(criteria.getStatKey());
                 criteria.setCurrentValue((Integer) value);
                 Float temp = ((float)criteria.getCurrentValue() / (float)criteria.getValueNeeded());
                 criteria.progression = Math.min(temp, 1.0f);
@@ -87,6 +89,17 @@ public class Achievement
 
     public void setUnlocked(boolean unlocked) {
         this.unlocked = unlocked;
+    }
+
+    public static void checkAwards(Stats player, Level level)
+    {
+        if (achievements.get("potatofarmer").shallBeAwarded(player))
+        {
+            //SproutGame.playSound("");
+            String msg = achievements.get("potatofarmer").getName();
+            System.out.println("New achievement:" + msg);
+        }
+
     }
 
     @Override

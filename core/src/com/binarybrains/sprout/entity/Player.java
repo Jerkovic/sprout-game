@@ -69,7 +69,7 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ResourceItem(Resource.seeds, 8));
         getInventory().add(new ResourceItem(Resource.wood, 3));
         getInventory().add(new ResourceItem(Resource.string, 3));
-        getInventory().add(new ResourceItem(Resource.stick, 3));
+        getInventory().add(new ResourceItem(Resource.potato, 8));
         getInventory().add(new ResourceItem(Resource.banana, 1));
         getInventory().add(new ResourceItem(Resource.wool, 3));
         getInventory().add(new ResourceItem(Resource.teddy, 1));
@@ -95,6 +95,10 @@ public class Player extends Npc implements InputProcessor {
                     }
                 }))
         )); */
+    }
+
+    public Stats getStats() {
+        return stats;
     }
 
     public int getStats(String statKey) {
@@ -171,7 +175,7 @@ public class Player extends Npc implements InputProcessor {
         }
         if (getDirection()== Direction.NORTH) {
             x = getX();
-            y = getY();
+            y = getY() + getWalkBox().getHeight();
             height = getHeight();
             width = getWidth();
         }
