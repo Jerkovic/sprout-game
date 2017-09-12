@@ -320,15 +320,9 @@ public class Npc extends Mob implements Telegraph {
         this.spriteRow = spriteRow;
     }
 
-    public boolean canMoveToTile(int tx, int ty) {
-        if (getLevel().isTileBlocked(tx, ty, this)) {
-            return false;
-        }
-        return true;
-    }
 
     public String getFeetSurface() {
-        return "surfaceTile" + getLevel().getTile(getTileX(), getTileY());
+        return "surfaceTile: " + getLevel().getTile(getTileX(), getTileY());
     }
 
     private boolean canMoveToPos(float new2X, float new2Y) {
@@ -391,7 +385,7 @@ public class Npc extends Mob implements Telegraph {
                     currentAnimFrames[f] = frames[getSpriteRow() + a][col];
                     col++;
                 }
-                float animSpeed = .14f; // maybe we need a different getSpeed() for animations
+                float animSpeed = .14f; // maybe we need getSpeed() for animations?
                 animationMatrix[a][d] = new Animation(animSpeed, currentAnimFrames);
             }
         }

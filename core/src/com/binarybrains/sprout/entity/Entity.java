@@ -246,6 +246,13 @@ public abstract class Entity {
         updateBoundingBox();
     }
 
+    public boolean canMoveToTile(int tx, int ty) {
+        if (getLevel().isTileBlocked(tx, ty, this)) {
+            return false;
+        }
+        return true;
+    }
+
     public void update(float deltaTime) {
         stateTime += deltaTime;
         tickActions(deltaTime); // we need our actions to update
@@ -263,10 +270,18 @@ public abstract class Entity {
         }
     }
 
+    /**
+     * This has left/stepped out  container - Trigger
+     * @param entity
+     */
     public void leftContainTrigger(Entity entity) {
         // System.out.println(entity.getClass() + " LEFT CONTAINS " + this.getClass());
     }
 
+    /**
+     * This has entered container - Trigger
+     * @param entity
+     */
     public void containTrigger(Entity entity) {
         // System.out.println(this.getClass() + " CONTAINS " + entity.getClass());
     }

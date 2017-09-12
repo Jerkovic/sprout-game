@@ -19,7 +19,6 @@ public abstract class Mob extends Entity {
         STANDING, WALKING, ATTACKING
     }
 
-    protected int xKnockback = 0, yKnockback = 0;
 
     public static enum Direction {
         SOUTH, EAST, NORTH, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST;
