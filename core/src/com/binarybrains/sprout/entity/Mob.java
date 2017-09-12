@@ -1,7 +1,9 @@
 package com.binarybrains.sprout.entity;
 
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.Random;
@@ -16,6 +18,8 @@ public abstract class Mob extends Entity {
     public static enum State {
         STANDING, WALKING, ATTACKING
     }
+
+    protected int xKnockback = 0, yKnockback = 0;
 
     public static enum Direction {
         SOUTH, EAST, NORTH, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST;
@@ -42,7 +46,6 @@ public abstract class Mob extends Entity {
     private int health = 0;
     private int damage = 0;
     private float speed = 0;
-    private long lastChangeDirection = 0L;
 
 
     public Mob(Level level, Vector2 position, float width, float height) {
@@ -50,7 +53,6 @@ public abstract class Mob extends Entity {
         super(level, position, width, height);
         setState(State.STANDING);
         setDirection(Direction.SOUTH);
-        // velocity = new Vector2(0, 0);
         setHealth(MathUtils.random(1, 100));
     }
 
@@ -129,10 +131,22 @@ public abstract class Mob extends Entity {
             System.out.println(mob + " gives " + damage + " damage to " + this + " " + direction);
             health -= damage;
         }
-        //if (attackDir == Direction.SOUTH) yKnockback = +6; // knockback north
-        //if (attackDir == Direction.WEST) yKnockback = 6; // knockback east
-        //if (attackDir == Direction.EAST) xKnockback = -6; // knockback west
-        //if (attackDir == Direction.NORTH) xKnockback = -6; // knockback south
+
+        // knockBackAction test
+        if (attackDir == Direction.SOUTH) {
+            addAction(Actions.moveTo(getX(), getY() - 16, .2f, Interpolation.pow2));
+        }
+        if (attackDir == Direction.NORTH) {
+            addAction(Actions.moveTo(getX(), getY() + 16, .2f, Interpolation.swingOut));
+        }
+
+        if (attackDir == Direction.WEST) {
+            addAction(Actions.moveTo(getX()-16, getY(), .2f, Interpolation.swingOut));
+        }
+        if (attackDir == Direction.EAST) {
+            addAction(Actions.moveTo(getX()+16, getY(), .2f, Interpolation.swingOut));
+        }
+
     }
 
 

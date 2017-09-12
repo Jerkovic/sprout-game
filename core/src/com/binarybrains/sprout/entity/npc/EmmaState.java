@@ -95,7 +95,7 @@ public enum EmmaState implements State<Emma> {
         @Override
         public void update(Emma emma) {
             if (emma.distanceTo(emma.getLevel().player) < 20f) {
-                System.out.println("Emma is close to the player make here stop and look at the player");
+                // System.out.println("Emma is close to the player make here stop and look at the player");
                 emma.lookAt(emma.getLevel().player);
                 // maybe another state
             }

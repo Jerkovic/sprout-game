@@ -10,6 +10,8 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.item.ToolItem;
+import com.binarybrains.sprout.item.tool.Axe;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.Map;
@@ -24,7 +26,7 @@ public class Emma extends Npc {
 
         setState(State.WALKING);
         setDirection(Direction.EAST);
-        setSpeed(16f);
+        setSpeed(32f);
         stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.IDLE);
         stateMachine.changeState(EmmaState.WALK_LABYRINTH);
 
@@ -65,7 +67,6 @@ public class Emma extends Npc {
         stateMachine.update();
     }
 
-    //pretty print a map
     public static <K, V> void printMap(Map<K, V> map) {
         for (Map.Entry<K, V> entry : map.entrySet()) {
             System.out.println("Key : " + entry.getKey()
@@ -73,12 +74,10 @@ public class Emma extends Npc {
         }
     }
 
-
     @Override
     public void updateBoundingBox() {
         this.box.setWidth(getWidth());
         this.box.setHeight(getHeight());
-        // Sets the x and y-coordinates of the bottom left corner
         this.box.setPosition(getPosition());
 
         this.walkBox.setWidth(12);
@@ -89,7 +88,6 @@ public class Emma extends Npc {
     @Override
     public void renderDebug(ShapeRenderer renderer, Color walkBoxColor) {
         super.renderDebug(renderer, walkBoxColor);
-        // also draw the findPath
     }
 
     @Override
@@ -99,6 +97,14 @@ public class Emma extends Npc {
 
     @Override
     public boolean interact(Player player, Item item, Direction attackDir) {
+        if (item instanceof ToolItem) {
+            ToolItem toolItem = (ToolItem) item;
+            if (toolItem.tool instanceof Axe && toolItem.tool.canUse()) {
+                ((Axe) toolItem.tool).playRandomChopSound();
+                hurt(player, toolItem.getDamage(), player.getDirection()); // hurt emma
+                return true;
+            }
+        }
 
         if (player.activeItem instanceof ResourceItem && ((ResourceItem) player.activeItem).resource.name.equals("Teddy")) {
             stateMachine.changeState(EmmaState.WALK_HOME);
@@ -112,10 +118,8 @@ public class Emma extends Npc {
 
             return true;
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
     }
 
     @Override
@@ -133,12 +137,5 @@ public class Emma extends Npc {
         return super.toString() + " StateMachine-> " + stateMachine.getCurrentState();
     }
 
-
-    public boolean isThreatened() {
-        return false;
-    }
-    public boolean isSafe() {
-        return false;
-    }
 
 }
