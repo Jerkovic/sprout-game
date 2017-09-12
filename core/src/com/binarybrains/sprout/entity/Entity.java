@@ -21,10 +21,10 @@ public abstract class Entity {
     private Level level;
     private Vector2 position = new Vector2();
     private int width, height;
-    public float zIndex = 0;
-    public float stateTime = 0;
-    public Rectangle box = new Rectangle();
-    public Rectangle walkBox = new Rectangle(); // add more complex walkPolygon instead of box?
+    private float zIndex = 0;
+    protected float stateTime = 0;
+    protected Rectangle box = new Rectangle();
+    protected Rectangle walkBox = new Rectangle(); // add more complex walkPolygon instead of box?
     public Boolean removed = false;
 
     private List<Entity> containsList = new ArrayList<Entity>();
@@ -74,7 +74,7 @@ public abstract class Entity {
         if (actions.size > 0) {
             for (int i = 0; i < actions.size; i++) {
                 Action action = actions.get(i);
-                System.out.println("tickAction" + action);
+                // System.out.println("tickAction" + action);
                 if (action.act(delta) && i < actions.size) {
                     Action current = actions.get(i);
                     int actionIndex = current == action ? i : actions.indexOf(action, true);
@@ -266,7 +266,7 @@ public abstract class Entity {
         // surrounding tiles
         // East
         if (newWalkPos.overlaps(getLevel().getTileBounds(getWBTileX()+1, getWBTileY()))) {
-            System.out.println("canMoveToTile2 false" + newWalkPos + " " + getLevel().getTileBounds(getTileX(), getTileY()));
+            //System.out.println("canMoveToTile2 false" + newWalkPos + " " + getLevel().getTileBounds(getTileX(), getTileY()));
             return false;
         }
         return true;
@@ -316,7 +316,7 @@ public abstract class Entity {
      * @param entity
      */
     public void leftContainTrigger(Entity entity) {
-        // System.out.println(entity.getClass() + " LEFT CONTAINS " + this.getClass());
+        System.out.println(entity.getClass() + " LEFT CONTAINS " + this.getClass());
     }
 
     /**
@@ -324,7 +324,7 @@ public abstract class Entity {
      * @param entity
      */
     public void containTrigger(Entity entity) {
-        // System.out.println(this.getClass() + " CONTAINS " + entity.getClass());
+        System.out.println(this.getClass() + " CONTAINS " + entity.getClass());
     }
 
     final public void clearContains(Entity entity) {
@@ -335,7 +335,7 @@ public abstract class Entity {
     }
 
     public void touchedBy(Entity entity) {
-        // System.out.println(this + " touchedBy " + entity);
+        System.out.println(this + " touchedBy " + entity);
     }
 
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {

@@ -19,9 +19,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.achievement.Achievement;
 import com.binarybrains.sprout.entity.Entity;
+import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
+import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
@@ -130,7 +133,7 @@ public class Level extends LevelEngine {
 
         gameTimer.update();
 
-        // check for achievement
+        // check for achievement ...really here? timed event ?
         Achievement.checkAwards(player.getStats(), this);
 
         // Update all our entities
@@ -156,8 +159,6 @@ public class Level extends LevelEngine {
     }
 
     public void draw() {
-
-
         if(Gdx.input.isKeyJustPressed(Input.Keys.B)) {
             ambientIntensity -= .05f;
             if (ambientIntensity < 0) ambientIntensity = 0;
@@ -178,6 +179,14 @@ public class Level extends LevelEngine {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             debugMode = !debugMode;
+        }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+
+            int count = MathUtils.random(2, 6);
+            for (int i = 0; i < count; i++) {
+                add(this, new PickupItem(this, new ResourceItem(Resource.potato), new Vector2(player.getX()+85, player.getY())));
+            }
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.I)) {

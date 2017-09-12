@@ -2,9 +2,11 @@ package com.binarybrains.sprout.entity;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 
@@ -36,7 +38,7 @@ public class PickupItem extends ItemEntity {
         za = random.nextFloat() * 0.7 + 2;
 
         // addAction(new LifeTime(lifeTime))
-        // addAction(new MoveToAction())
+        // addAction(new BounceAction())
 
     }
 
@@ -47,10 +49,14 @@ public class PickupItem extends ItemEntity {
                 remove();
                 SproutGame.playSound("blop", 1f, MathUtils.random(0.6f, 1.2f), 1f);
                 ((Player)entity).increaseStats(item.getName(), 1);
-            } else {
-                Gdx.app.log("INVENTORY", "Could not pickup up: " + entity.toString());
             }
         }
+    }
+
+    @Override
+    public void containTrigger(Entity entity) {
+        super.containTrigger(entity);
+        touchedBy(entity);
     }
 
     @Override
@@ -73,11 +79,22 @@ public class PickupItem extends ItemEntity {
             ya *= 0.6;
         }
         za -= 0.15;
-        setPosition((float)xx, (float)yy + (float)zz);
 
         float distance = distanceTo(getLevel().player);
-        if (distance < 40) {
+        if (getActions().size < 1 && distance > 32)  setPosition((float)xx, (float)yy + (float)zz);
+
+
+        if (distance < 32 && getActions().size < 1) {
             // item in state of being sucked to the player
+            addAction(Actions.sequence(
+                    Actions.moveTo(getLevel().player.getX(), getLevel().player.getY()-8, .3f, Interpolation.pow3),
+                    Actions.run((new Runnable() {
+                        public void run () {
+                            touchedBy(getLevel().player);
+                        }
+                    })
+
+            )));
         }
     }
 

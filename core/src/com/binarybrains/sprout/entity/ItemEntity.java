@@ -45,6 +45,7 @@ public class ItemEntity extends Entity {
     }
 
     public void touchedBy(Entity entity) {
+        super.touchedBy(entity);
     }
 
 

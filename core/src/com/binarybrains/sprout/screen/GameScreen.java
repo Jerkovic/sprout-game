@@ -52,6 +52,7 @@ public class GameScreen implements Screen {
         // forest_night_ambience todo
         forestAmbienceSfx = SproutGame.assets.get("ambience/forest_morning_ambience.mp3");
 
+        /*
         Timer.schedule(new Timer.Task(){
             @Override
             public void run(){
@@ -61,7 +62,7 @@ public class GameScreen implements Screen {
                 }
             }
         }, 2.0f, 10);
-
+        */
     }
 
     @Override

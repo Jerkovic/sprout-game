@@ -25,6 +25,10 @@ public abstract class Recipe implements ListItem {
         return this;
     }
 
+    public Recipe unlockRecipes() {
+        return this;
+    }
+
     public void setUnlocked() {
         this.isUnlocked = true;
     }
