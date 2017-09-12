@@ -162,6 +162,18 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         return false;
     }
 
+    @Override
+    public boolean use(Player player, Mob.Direction attackDir) {
+        // return super.use(player, attackDir);
+        shake();
+        int count = MathUtils.random(1,3);
+        for (int i = 0; i < count; i++) {
+            getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.apple), new Vector2(getCenterPos().x, getCenterPos().y)));
+        }
+        return true;
+
+    }
+
     public void draw(Batch batch, float parentAlpha) {
         if (!falling) {
             drawShadow(batch);

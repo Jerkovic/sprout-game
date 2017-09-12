@@ -33,6 +33,8 @@ public class Crafting {
 
 
             workbenchRecipes.add(new ResourceRecipe(Resource.cloth).addCost(Resource.wool, 3));
+            workbenchRecipes.add(new ResourceRecipe(Resource.cider).addCost(Resource.apple, 17));
+
 
             // change to Furnace Recipes
             workbenchRecipes.add(new ResourceRecipe(Resource.bomb).addCost(Resource.ironOre, 4).addCost(Resource.coal, 2));

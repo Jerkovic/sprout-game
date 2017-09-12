@@ -31,6 +31,8 @@ public class Resource {
     public static Resource apple = new FoodResource("Apple", "A fruit");
     public static Resource banana = new FoodResource("Banana", "A yellow bended fruit");
 
+    public static Resource cider = new FoodResource("Cider", "A very refreshing drink made of apples");
+
     public static Resource seeds = new SeedResource("Seed Bag", "A bag of mixed seeds");
 
 
