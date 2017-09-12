@@ -134,7 +134,7 @@ public abstract class Mob extends Entity {
 
         // knockBackAction test
         if (attackDir == Direction.SOUTH) {
-            addAction(Actions.moveTo(getX(), getY() - 16, .2f, Interpolation.pow2));
+            addAction(Actions.moveTo(getX(), getY() - 16, .2f, Interpolation.swingOut));
         }
         if (attackDir == Direction.NORTH) {
             addAction(Actions.moveTo(getX(), getY() + 16, .2f, Interpolation.swingOut));
