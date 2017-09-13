@@ -1,7 +1,9 @@
 package com.binarybrains.sprout.entity;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -24,14 +26,19 @@ public class PickupItem extends ItemEntity {
     public double xa, ya, za;
     public double xx, yy, zz;
 
+    private float shadowY;
+
+    private Sprite shadow;
+
     public PickupItem(Level level, Item item, Vector2 position) {
         super(level, item, position);
         lifeTime = 60 * 10 + MathUtils.random(1, 60);
 
+        shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
         // bounce
         Random random = new Random();
         xx = position.x;
-        yy = position.y;
+        yy = shadowY = position.y;
         zz = 2;
         xa = random.nextGaussian() * 0.3;
         ya = random.nextGaussian() * 0.2;
@@ -98,11 +105,20 @@ public class PickupItem extends ItemEntity {
         }
     }
 
+    public void drawShadow(Batch batch, float delta) {
+        shadow.setX(getX());
+        shadow.setY(getY()-(float)zz - 2); // if we want the player to jump ... we should decrease the y value.
+        shadow.draw(batch, 0.35f);
+    }
+
+
     public void draw(Batch batch, float parentAlpha) {
         if (time >= lifeTime - (6 * 20)) {
             if (time / 6 % 2 == 0) return;
         }
+        drawShadow(batch, 0f);
         super.draw(batch, parentAlpha);
+
     }
 
 }

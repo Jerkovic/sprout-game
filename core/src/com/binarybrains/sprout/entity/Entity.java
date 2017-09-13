@@ -284,12 +284,9 @@ public abstract class Entity {
             } else {
                 entities.get(i).clearContains(this);
             }
-
-
             if (entities.get(i).blocks(this) && entities.get(i).getWalkBox().overlaps(newPos)) {
                 return false;
             }
-
         }
         return true;
     }
