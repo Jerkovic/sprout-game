@@ -29,10 +29,16 @@ public class PickupItem extends ItemEntity {
     private float shadowY;
 
     private Sprite shadow;
+    private boolean magnet = true;
 
     public PickupItem(Level level, Item item, Vector2 position) {
         super(level, item, position);
         lifeTime = 60 * 10 + MathUtils.random(1, 60);
+
+        if (this.distanceTo(level.player) < 48) {
+            // no magnet
+            magnet = false;
+        }
 
         shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
         // bounce
@@ -91,7 +97,7 @@ public class PickupItem extends ItemEntity {
         if (getActions().size < 1 && distance > 32)  setPosition((float)xx, (float)yy + (float)zz);
 
 
-        if (distance < 32 && getActions().size < 1) {
+        if (distance < 32 && getActions().size < 1 && magnet) {
             // item in state of being sucked to the player
             addAction(Actions.sequence(
                     Actions.moveTo(getLevel().player.getX(), getLevel().player.getY()-8, .3f, Interpolation.pow3),
