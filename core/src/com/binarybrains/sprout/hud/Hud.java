@@ -184,7 +184,7 @@ public class Hud {
         //.addAction(forever(sequence(fadeOut(5), fadeIn(5))));
     }
 
-    // a test right now
+    // a test right now, we need some graphics
     public void addToasterMessage(String title, String text) {
         final Window window = new Window(title, skin);
         window.setRound(false);
@@ -206,7 +206,7 @@ public class Hud {
         stage.addActor(window);
 
         Tween.set(window, ActorAccessor.ALPHA).target(0f);
-        Tween.to(window, ActorAccessor.ALPHA, .9f).target(1f).ease(TweenEquations.easeInExpo).delay(0.4f)
+        Tween.to(window, ActorAccessor.ALPHA, .9f).target(1f).ease(TweenEquations.easeInExpo).delay(5f)
                 .setCallback(new TweenCallback() {
 
                     @Override

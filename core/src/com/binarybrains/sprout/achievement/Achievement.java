@@ -97,7 +97,9 @@ public class Achievement
         {
             //SproutGame.playSound("");
             String msg = achievements.get("potatofarmer").getName();
-            System.out.println("New achievement:" + msg);
+            // System.out.println("New achievement:" + msg);
+            SproutGame.playSound("fancy_reward");
+            level.screen.hud.addToasterMessage("New achievement" ,msg);
         }
 
     }
