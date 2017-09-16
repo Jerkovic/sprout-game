@@ -113,7 +113,7 @@ public class PickupItem extends ItemEntity {
 
     public void drawShadow(Batch batch, float delta) {
         shadow.setX(getX());
-        shadow.setY(getY()-(float)zz - 2); // if we want the player to jump ... we should decrease the y value.
+        shadow.setY(getY()-(float)zz - 2);
         shadow.draw(batch, 0.35f);
     }
 

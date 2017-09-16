@@ -180,7 +180,7 @@ public class Level extends LevelEngine {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             debugMode = !debugMode;
-            // save game
+            // save game test
             try {
                 player.getStats().save();
             } catch (IOException e) {

@@ -332,7 +332,7 @@ public abstract class Entity {
     }
 
     public void touchedBy(Entity entity) {
-        System.out.println(this + " touchedBy " + entity);
+        // System.out.println(this + " touchedBy " + entity);
     }
 
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
