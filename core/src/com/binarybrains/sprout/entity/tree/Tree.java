@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.PickupItem;
@@ -166,7 +167,8 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
     public boolean use(Player player, Mob.Direction attackDir) {
         // return super.use(player, attackDir);
         shake();
-        int count = MathUtils.random(1,3);
+        SproutGame.playSound("leaves_rustling", MathUtils.random(0.5f, 0.8f), MathUtils.random(0.9f, 1.1f), 1f);
+        int count = MathUtils.random(1,2);
         for (int i = 0; i < count; i++) {
             getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.apple), new Vector2(getCenterPos().x, getCenterPos().y)));
         }

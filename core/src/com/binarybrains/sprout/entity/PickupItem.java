@@ -26,7 +26,6 @@ public class PickupItem extends ItemEntity {
     public double xa, ya, za;
     public double xx, yy, zz;
 
-    private float shadowY;
 
     private Sprite shadow;
     private boolean magnet = true;
@@ -44,7 +43,7 @@ public class PickupItem extends ItemEntity {
         // bounce
         Random random = new Random();
         xx = position.x;
-        yy = shadowY = position.y;
+        yy = position.y;
         zz = 2;
         xa = random.nextGaussian() * 0.3;
         ya = random.nextGaussian() * 0.2;
@@ -74,7 +73,8 @@ public class PickupItem extends ItemEntity {
 
     @Override
     public void update(float deltaTime) {
-        super.update(deltaTime);
+
+        tickActions(deltaTime);
 
         time+=deltaTime * 100;
         if (time >= lifeTime) {
@@ -109,6 +109,8 @@ public class PickupItem extends ItemEntity {
 
             )));
         }
+
+        updateBoundingBox();
     }
 
     public void drawShadow(Batch batch, float delta) {
