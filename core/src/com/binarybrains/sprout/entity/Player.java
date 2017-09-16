@@ -469,7 +469,6 @@ public class Player extends Npc implements InputProcessor {
                 return interactWithActiveItem();
             }
             else if (button == Input.Buttons.RIGHT) {
-                System.out.println("right click");
                 return use();
             }
         }

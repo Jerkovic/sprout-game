@@ -22,6 +22,7 @@ import com.binarybrains.sprout.hud.inventory.InventoryWindow;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
+import sun.rmi.server.InactiveGroupException;
 
 
 public class Hud {
@@ -189,34 +190,36 @@ public class Hud {
     // a test right now, we need some graphics
     public void addToasterMessage(String title, String text) {
         final Window window = new Window(title, skin);
-        window.setRound(false);
+        window.setRound(true);
         window.setKeepWithinStage(true);
-        window.setPosition(50, 50);
+
+
         window.setMovable(false);
         window.row().fill().expandX();
 
         Label notLabel = new Label(text, skin);
         notLabel.setWrap(false);
-        notLabel.setWidth(240);
+        notLabel.setWidth(600);
+
         notLabel.setEllipsis(true);
         notLabel.pack();
 
         window.add(notLabel).pad(6f);
         window.row();
         window.pack();
+        window.setPosition(Gdx.graphics.getWidth() / 2 - window.getWidth() / 2, Gdx.graphics.getHeight() - window.getHeight()-5);
 
         stage.addActor(window);
 
-        Tween.set(window, ActorAccessor.ALPHA).target(0f);
-        Tween.to(window, ActorAccessor.ALPHA, .9f).target(1f).ease(TweenEquations.easeInExpo).delay(5f)
-                .setCallback(new TweenCallback() {
-
-                    @Override
-                    public void onEvent(int type, BaseTween<?> source) {
-                        window.remove();
-                    }
-
-                }).start(SproutGame.getTweenManager());
+        window.addAction(Actions.sequence(
+                Actions.alpha(0f),
+                Actions.alpha(1f, 1.2f, Interpolation.fade),
+                Actions.delay(5f),
+                Actions.alpha(0f, .6f, Interpolation.fade),
+                Actions.run(new Runnable() { public void run(){
+                    window.remove();
+                }})
+        ));
     }
 
     public void speakDialog(String title, String say) {
