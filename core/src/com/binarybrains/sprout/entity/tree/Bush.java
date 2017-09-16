@@ -2,8 +2,15 @@ package com.binarybrains.sprout.entity.tree;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
+import com.binarybrains.sprout.entity.Mob;
+import com.binarybrains.sprout.entity.PickupItem;
+import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.level.Level;
 
 public class Bush extends Entity {
@@ -17,6 +24,13 @@ public class Bush extends Entity {
         sprite = new Sprite(level.spritesheet, 13 * 16, 0, (int)width, (int)height);
         sprite.setSize(width, height);
         sprite.setPosition(getX(), getY());
+
+    }
+    @Override
+    public boolean use(Player player, Mob.Direction attackDir) {
+        // shake();
+        SproutGame.playSound("leaves_rustling", MathUtils.random(0.5f, 0.8f), MathUtils.random(0.9f, 1.1f), 1f);
+        return true;
 
     }
 

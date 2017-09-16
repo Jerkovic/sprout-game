@@ -61,6 +61,8 @@ public class PickupItem extends ItemEntity {
                 remove();
                 SproutGame.playSound("blop", 1f, MathUtils.random(0.6f, 1.2f), 1f);
                 ((Player)entity).increaseStats(item.getName(), 1);
+                // test some money
+                getLevel().player.increaseFunds(1);
             }
         }
     }

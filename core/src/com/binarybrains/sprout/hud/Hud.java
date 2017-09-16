@@ -27,10 +27,12 @@ import com.binarybrains.sprout.level.Level;
 public class Hud {
 
     Stage stage;
-    Label timeLabel;
+    Label timeLabel, moneyLabel;
     Level level;
     Skin skin;
     Label fpsLabel;
+
+    Image moneyIcon;
 
     private Actor fadeActor = new Actor();
     private ShapeRenderer fadeRenderer;
@@ -239,7 +241,7 @@ public class Hud {
 
         timeLabel = new Label("Day 0 00:00", skin);
         fpsLabel = new Label("", skin);
-
+        moneyLabel = new Label("0", skin);
         Table table = new Table(skin);
         table.bottom();
         table.setFillParent(false);
@@ -248,9 +250,9 @@ public class Hud {
         table.add(icon);
         table.add(timeLabel);
         table.row();
-        Image icon2 = new Image(atlas.findRegion("Balubas")); // balubas icon
-        table.add(icon2);
-        table.add(new Label("0", skin));
+        moneyIcon = new Image(atlas.findRegion("Balubas")); // balubas icon
+        table.add(moneyIcon);
+        table.add(moneyLabel);
         table.row();
         table.add(fpsLabel);
         stage.addActor(table);
@@ -312,6 +314,17 @@ public class Hud {
         }
     }
 
+    public void updateFunds(Player player) {
+        if (moneyIcon.hasActions()) return;
+        float oldW = moneyIcon.getImageWidth();
+        float oldH = moneyIcon.getImageHeight();
+        moneyIcon.addAction(Actions.sequence(
+                Actions.sizeTo(moneyIcon.getImageWidth()+10,moneyIcon.getImageHeight()+10, .15f, Interpolation.pow2),
+                Actions.sizeTo(oldW,oldH, .1f, Interpolation.fade)
+        ));
+        moneyLabel.setText("" + player.getStats().get("money"));
+    }
+
     public void act(float delta) {
         timeLabel.setText(level.gameTimer.toString());
         fpsLabel.setText("fps: " + Gdx.graphics.getFramesPerSecond());
@@ -322,7 +335,6 @@ public class Hud {
 
         stage.act(delta);
         fadeActor.act(delta);
-        //
 
     }
 

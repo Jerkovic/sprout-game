@@ -106,8 +106,12 @@ public class Player extends Npc implements InputProcessor {
     }
 
     public void increaseStats(String statKey, int increment) {
-        System.out.println("Increasing " + statKey);
         stats.increase(statKey, increment);
+    }
+
+    public void increaseFunds(int increment) {
+        increaseStats("money", increment);
+        getLevel().screen.hud.updateFunds(this);
     }
 
     public void setActiveItem(Item item) {

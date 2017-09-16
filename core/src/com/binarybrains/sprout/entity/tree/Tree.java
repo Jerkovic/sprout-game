@@ -61,7 +61,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
 
         shadow = new Sprite(level.spritesheet, 48, 0, (int)width, (int)height);
         shadow.setColor(Color.BLACK);
-        shadow.setAlpha(0.4f);
+        shadow.setAlpha(0.3f);
         shadow.setPosition(getX(), getY());
         shadow.rotate(-21f);
     }
