@@ -94,7 +94,7 @@ public class PickupItem extends ItemEntity {
         za -= 0.15;
 
         float distance = distanceTo(getLevel().player);
-        if (getActions().size < 1 && distance > 32)  setPosition((float)xx, (float)yy + (float)zz);
+        if (getActions().size < 1) setPosition((float)xx, (float)yy + (float)zz);
 
 
         if (distance < 32 && getActions().size < 1 && magnet) {

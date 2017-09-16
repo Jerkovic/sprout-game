@@ -29,6 +29,7 @@ import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -179,6 +180,12 @@ public class Level extends LevelEngine {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             debugMode = !debugMode;
+            // save game
+            try {
+                player.getStats().save();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {

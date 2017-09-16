@@ -171,7 +171,7 @@ fishing rod = metspö (används i vatten och kan ge fisk, chansen borde öka att
 Ladder
 
 Weapons(tools)
-Sword = (borde kanske vara weapon?)
+Sword
 Bow = pilbåge (wood x 3, rep (hampa), wood + sten för pilar)
 Spear = Spjut (wood + nån typ av sten)
 slingshot = slangbella / slunga
