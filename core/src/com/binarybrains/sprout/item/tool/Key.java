@@ -5,6 +5,6 @@ package com.binarybrains.sprout.item.tool;
  */
 public class Key extends Tool {
     public Key() {
-        super("Key", "The key of all keys.");
+        super("Key", "An old key, wondering what lock it fits in...");
     }
 }
