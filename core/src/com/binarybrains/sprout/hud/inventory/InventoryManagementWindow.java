@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Inventory;
+import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
@@ -27,11 +28,13 @@ public class InventoryManagementWindow extends Dialog {
     private TextureAtlas atlas;
     private Level level;
 
+    private Player player;
     private Item heldItem;
 
     public InventoryManagementWindow(Level level, Skin skin) {
         super("Inventory Management", skin);
 
+        this.player = level.player;
         this.level = level;
         this.skin = skin;
         setKeepWithinStage(true);
@@ -42,6 +45,8 @@ public class InventoryManagementWindow extends Dialog {
 
         atlas = SproutGame.assets.get("items2.txt");
         group = new ButtonGroup();
+        group.uncheckAll();
+        //group.setMaxCheckCount(0);
 
         // ignore clicking on the window
         InputListener ignoreTouchDown = new InputListener() {
@@ -79,6 +84,21 @@ public class InventoryManagementWindow extends Dialog {
 
         add(itemTable);
         row();
+        pack();
+
+        row(); // recipe container
+
+        TextButton buttonExit = new TextButton("   Close   ", skin);
+        buttonExit.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                hide();
+                player.getLevel().screen.game.resume();
+                player.getLevel().screen.hud.showMouseItem();
+
+            }
+        });
+        add(buttonExit).pad(5);
         pack();
     }
 
@@ -127,7 +147,13 @@ public class InventoryManagementWindow extends Dialog {
 
             Stack stack = new Stack();
 
-            TextureAtlas.AtlasRegion icon = atlas.findRegion(item.getRegionId());
+            TextureAtlas.AtlasRegion icon;
+            if (item != null) {
+                icon = atlas.findRegion(item.getRegionId());
+            } else {
+                icon = atlas.findRegion("Empty");
+
+            }
             if (icon != null) {
                 Image image = new Image(icon);
                 stack.add(image);
@@ -141,13 +167,11 @@ public class InventoryManagementWindow extends Dialog {
             stack.add(overlay);
 
             button.add(stack);
-            button.addListener(new Tooltip(createTooltipTable(item)));
+            if (item != null) {
+                button.addListener(new Tooltip(createTooltipTable(item)));
+            }
             button.pack();
 
-            if (selected != null && item.getName().equals(selected))
-            {
-                button.setChecked(true);
-            }
 
             button.addListener(new ClickListener(Input.Buttons.RIGHT)
             {
@@ -163,6 +187,7 @@ public class InventoryManagementWindow extends Dialog {
             button.addListener(new ClickListener(Input.Buttons.LEFT) {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                    System.out.println("" + event.getButton());
                     if (group.getCheckedIndex() > -1) {
 
                         setHeldItem(inventory.getItems().get(group.getCheckedIndex()));

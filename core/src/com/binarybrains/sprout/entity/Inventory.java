@@ -171,6 +171,7 @@ public class Inventory {
 
     public void removeSlot(int checkedIndex) {
         items.remove(checkedIndex);
+        items.add(checkedIndex, null);
     }
 
     public void setCapacity(int capacity) {
