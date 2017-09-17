@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
+import com.binarybrains.sprout.hud.inventory.InventoryManagementWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryWindow;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.item.Item;
@@ -41,6 +42,7 @@ public class Hud {
     TextureAtlas atlas;
     CraftingWindow craftingWindow;
     InventoryWindow inventoryWindow;
+    InventoryManagementWindow inventoryManagementWindow;
 
     public int notificationsInHud = 0;
     public Image mouseItem;
@@ -56,8 +58,15 @@ public class Hud {
         craftingWindow.hide();
         stage.addActor(craftingWindow);
 
+
         craftingWindow.setPosition(Gdx.graphics.getWidth() / 2 - craftingWindow.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - craftingWindow.getHeight()/2);
+
+        inventoryManagementWindow = new InventoryManagementWindow(level, skin);
+        inventoryManagementWindow.setVisible(false);
+        stage.addActor(inventoryManagementWindow);
+
+
 
         inventoryWindow = new InventoryWindow(level, skin);
         inventoryWindow.onInventoryChanged(level.player.getInventory());
@@ -123,6 +132,14 @@ public class Hud {
         craftingWindow.show(getStage());
         craftingWindow.setScrollFocus(getStage());
         hideMouseItem();
+    }
+
+    public void showInventoryManagementWindow() {
+        level.screen.game.pause();
+        level.player.releaseKeys();
+        // inventoryManagementWindow.build(); // refresh content in window
+        inventoryManagementWindow.setVisible(true);
+        inventoryManagementWindow.onInventoryChanged(level.player.getInventory());
     }
 
     public void refreshInventory()  {

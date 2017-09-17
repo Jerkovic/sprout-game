@@ -58,6 +58,7 @@ public class Crafting {
             this.recipes.get(i).checkCanCraft(inventory);
         }
 
+        // this should probably move to its own method
         Collections.sort(this.recipes, new Comparator<Recipe>() {
             public int compare(Recipe r1, Recipe r2) {
                 if (r1.canCraft && !r2.canCraft) return -1;

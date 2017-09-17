@@ -100,6 +100,16 @@ public class GameScreen implements Screen {
             }
         }
 
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.I)) {
+            if (gameState == GameState.RUN) {
+                pause();
+                hud.showInventoryManagementWindow();
+            } else {
+                resume();
+            }
+        }
+
         // Draw
         level.draw();
         hud.draw();

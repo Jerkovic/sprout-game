@@ -169,7 +169,7 @@ public class Inventory {
         return items;
     }
 
-    public void equipTo(Player player, int checkedIndex) {
+    public void removeSlot(int checkedIndex) {
         items.remove(checkedIndex);
     }
 
