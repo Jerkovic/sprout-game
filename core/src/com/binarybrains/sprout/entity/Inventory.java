@@ -40,6 +40,10 @@ public class Inventory {
                     } catch (NullPointerException e) {
                     }
                 } else {
+                    // we need to be able to find an empty slot
+                    System.out.println("Add inventory slot returns false");
+
+                    System.out.println("" + count());
                     return false;
                 }
             } else {
