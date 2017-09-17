@@ -16,7 +16,7 @@ import java.util.List;
 public class Crafting {
 
     public static final List<Recipe> anvilRecipes = new ArrayList<Recipe>();
-    public static final List<Recipe> ovenRecipes = new ArrayList<Recipe>();
+    public static final List<Recipe> cookingRecipes = new ArrayList<Recipe>();
     public static final List<Recipe> furnaceRecipes = new ArrayList<Recipe>();
     public static final List<Recipe> workbenchRecipes = new ArrayList<Recipe>();
 
@@ -31,10 +31,8 @@ public class Crafting {
             workbenchRecipes.add(new ToolRecipe(new FishingPole(), 0).addCost(Resource.ironBar, 1).addCost(Resource.stick, 1).addCost(Resource.string, 1));
             workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Resource.ironBar, 2));
 
-
             workbenchRecipes.add(new ResourceRecipe(Resource.cloth).addCost(Resource.wool, 3));
             workbenchRecipes.add(new ResourceRecipe(Resource.cider).addCost(Resource.apple, 17));
-
 
             // change to Furnace Recipes
             workbenchRecipes.add(new ResourceRecipe(Resource.bomb).addCost(Resource.ironOre, 4).addCost(Resource.coal, 2));
