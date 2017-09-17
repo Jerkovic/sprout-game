@@ -196,9 +196,7 @@ public class Level extends LevelEngine {
             }
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.I)) {
-            player.getInventory().renderDebug();
-        }
+
 
         zAngle += Gdx.app.getGraphics().getRawDeltaTime() * zSpeed;
         while(zAngle > PI2)

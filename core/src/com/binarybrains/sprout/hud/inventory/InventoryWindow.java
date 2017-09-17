@@ -134,7 +134,13 @@ public class InventoryWindow extends Window {
 
             Stack stack = new Stack();
 
-            TextureAtlas.AtlasRegion icon = atlas.findRegion(item.getRegionId());
+            TextureAtlas.AtlasRegion icon;
+            if (item != null) {
+                icon = atlas.findRegion(item.getRegionId());
+            } else {
+                icon = atlas.findRegion("Empty");
+
+            }
             if (icon != null) {
                 Image image = new Image(icon);
                 stack.add(image);
@@ -148,10 +154,12 @@ public class InventoryWindow extends Window {
             stack.add(overlay);
 
             button.add(stack);
-            button.addListener(new Tooltip(createTooltipTable(item)));
+            if (item != null) {
+                button.addListener(new Tooltip(createTooltipTable(item)));
+            }
             button.pack();
 
-            if (selected != null && item.getName().equals(selected))
+            if (item != null && selected != null && item.getName().equals(selected))
             {
                 button.setChecked(true);
             }
@@ -171,7 +179,8 @@ public class InventoryWindow extends Window {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     if (group.getCheckedIndex() > -1) {
-                        level.player.setActiveItem(inventory.getItems().get(group.getCheckedIndex()));
+                        Item it = inventory.getItems().get(group.getCheckedIndex());
+                        if (it != null) level.player.setActiveItem(it);
                     }
 
                 }

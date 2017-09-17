@@ -64,6 +64,7 @@ public class Hud {
 
         inventoryManagementWindow = new InventoryManagementWindow(level, skin);
         inventoryManagementWindow.setVisible(false);
+        inventoryManagementWindow.hide();
         stage.addActor(inventoryManagementWindow);
 
 
@@ -139,6 +140,7 @@ public class Hud {
         level.player.releaseKeys();
         // inventoryManagementWindow.build(); // refresh content in window
         inventoryManagementWindow.setVisible(true);
+        inventoryManagementWindow.show(getStage());
         inventoryManagementWindow.onInventoryChanged(level.player.getInventory());
     }
 

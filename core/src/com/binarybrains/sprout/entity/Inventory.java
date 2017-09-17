@@ -136,9 +136,11 @@ public class Inventory {
             ResourceItem ri = findResource(((ResourceItem)item).resource);
             if (ri != null) return ri.count;
         } else {
+            if (item == null) return 0;
             int count = 0;
             for (int i = 0; i < items.size(); i++) {
-                if (items.get(i).matches(item)) count++;
+                Item it = items.get(i);
+                if (it != null && it.matches(item)) count++;
             }
             return count;
         }
@@ -171,7 +173,7 @@ public class Inventory {
 
     public void removeSlot(int checkedIndex) {
         items.remove(checkedIndex);
-        items.add(checkedIndex, null);
+        items.add(checkedIndex, null); // test empty slot
     }
 
     public void setCapacity(int capacity) {

@@ -95,6 +95,7 @@ public class InventoryManagementWindow extends Dialog {
                 hide();
                 player.getLevel().screen.game.resume();
                 player.getLevel().screen.hud.showMouseItem();
+                player.getLevel().screen.hud.refreshInventory();
 
             }
         });
