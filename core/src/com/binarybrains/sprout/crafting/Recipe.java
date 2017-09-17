@@ -15,6 +15,7 @@ public abstract class Recipe implements ListItem {
     public boolean canCraft = false;
     private Item resultTemplate;
     public boolean isUnlocked = true;
+    private boolean removeRecipeOnCraft = false;
 
     public Recipe(Item resultTemplate) {
         this.resultTemplate = resultTemplate;
@@ -25,8 +26,13 @@ public abstract class Recipe implements ListItem {
         return this;
     }
 
-    public Recipe unlockRecipes() {
+    public Recipe setRemoveRecipeOnCrafted() {
+        this.removeRecipeOnCraft = true;
         return this;
+    }
+
+    public boolean shouldRemoveRecipeOnCrafted() {
+        return removeRecipeOnCraft;
     }
 
     public void setUnlocked() {

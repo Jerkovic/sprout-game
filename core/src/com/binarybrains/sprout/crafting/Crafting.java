@@ -20,6 +20,8 @@ public class Crafting {
     public static final List<Recipe> furnaceRecipes = new ArrayList<Recipe>();
     public static final List<Recipe> workbenchRecipes = new ArrayList<Recipe>();
 
+    private List<Recipe> recipes;
+
     static {
         try {
             workbenchRecipes.add(new ResourceRecipe(Resource.stick).addCost(Resource.wood, 1));
@@ -29,7 +31,7 @@ public class Crafting {
             workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Resource.ironBar, 5));
             workbenchRecipes.add(new ToolRecipe(new Scythe(), 0).addCost(Resource.ironBar, 2).addCost(Resource.stick, 2));
             workbenchRecipes.add(new ToolRecipe(new FishingPole(), 0).addCost(Resource.ironBar, 1).addCost(Resource.stick, 1).addCost(Resource.string, 1));
-            workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Resource.ironBar, 2));
+            workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Resource.ironBar, 2).setRemoveRecipeOnCrafted());
 
             workbenchRecipes.add(new ResourceRecipe(Resource.cloth).addCost(Resource.wool, 3));
             workbenchRecipes.add(new ResourceRecipe(Resource.cider).addCost(Resource.apple, 17));
@@ -48,8 +50,6 @@ public class Crafting {
             throw new RuntimeException(e);
         }
     }
-
-    public List<Recipe> recipes;
 
     public Crafting(List<Recipe> recipes, Inventory inventory) {
         this.recipes = new ArrayList<Recipe>(recipes);
@@ -95,8 +95,10 @@ public class Crafting {
         if (recipe.canCraft && player.getInventory().hasSpaceFor(recipe.getItem())) {
             recipe.deductCost(player.getInventory());
             recipe.craft(player.getInventory());
+            if (recipe.shouldRemoveRecipeOnCrafted()) {
+                recipes.remove(index);
+            }
             return true;
-
         }
 
         return false;
