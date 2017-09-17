@@ -35,7 +35,7 @@ public class Emma extends Npc {
     public void updateWalkDirections(int x, int y) {
         clearFindPath();
         findPath = generatePathFindingDirections(generatePath(x, y));
-        printMap(findPath);
+        // printMap(findPath);
     }
 
     // temp method

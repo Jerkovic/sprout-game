@@ -31,7 +31,7 @@ public class Crafting {
             workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Resource.ironBar, 5));
             workbenchRecipes.add(new ToolRecipe(new Scythe(), 0).addCost(Resource.ironBar, 2).addCost(Resource.stick, 2));
             workbenchRecipes.add(new ToolRecipe(new FishingPole(), 0).addCost(Resource.ironBar, 1).addCost(Resource.stick, 1).addCost(Resource.string, 1));
-            workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Resource.ironBar, 2).setRemoveRecipeOnCrafted());
+            workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Resource.ironBar, 2).setRemoveRecipeOnCrafted().setLocked());
 
             workbenchRecipes.add(new ResourceRecipe(Resource.cloth).addCost(Resource.wool, 3));
             workbenchRecipes.add(new ResourceRecipe(Resource.cider).addCost(Resource.apple, 17));

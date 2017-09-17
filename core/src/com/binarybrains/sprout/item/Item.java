@@ -32,10 +32,6 @@ public abstract class Item implements ListItem {
         return false;
     }
 
-    public boolean canAttack() {
-        return false;
-    }
-
     public String getName() {
         return "";
     }
