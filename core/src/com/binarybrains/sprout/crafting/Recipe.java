@@ -13,7 +13,7 @@ import java.util.List;
 public abstract class Recipe implements ListItem {
     public List<Item> costs = new ArrayList<Item>();
     public boolean canCraft = false;
-    public Item resultTemplate;
+    private Item resultTemplate;
     public boolean isUnlocked = true;
 
     public Recipe(Item resultTemplate) {

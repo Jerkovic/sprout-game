@@ -71,6 +71,23 @@ public class Crafting {
         return recipes;
     }
 
+    /**
+     * Finds a recipe by name
+     * @param name
+     * @return
+     */
+    public Recipe findRecipeByName(String name) {
+
+        for (int i = 0; i < getRecipes().size(); i++) {
+            Recipe recipe = getRecipes().get(i);
+            System.out.println(recipe.getItem().getName());
+            if (recipe.getItem().getName().equals(name)) {
+                return recipe;
+            }
+        }
+        return null;
+    }
+
     public boolean startCraft(Player player, int index) {
         Recipe recipe = recipes.get(index);
         recipe.checkCanCraft(player.getInventory());
@@ -88,7 +105,6 @@ public class Crafting {
     public void debugCrafting() {
         for (int i = 0; i < getRecipes().size(); i++) {
             Recipe recipe = getRecipes().get(i);
-            System.out.println(recipe.toString() + " Costs: ");
             for (int ci = 0; ci < recipe.getCost().size(); ci++) {
                 Item cost = recipe.getCost().get(ci);
                 int cost_count = 1;
