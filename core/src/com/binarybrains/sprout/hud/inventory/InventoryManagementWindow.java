@@ -189,11 +189,19 @@ public class InventoryManagementWindow extends Dialog {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     System.out.println("" + event.getButton());
-                    if (group.getCheckedIndex() > -1) {
+                    if (group.getCheckedIndex() > -1 && heldItem == null) {
 
                         setHeldItem(inventory.getItems().get(group.getCheckedIndex()));
                         inventory.removeSlot(group.getCheckedIndex());
                         System.out.println("left mouse button: " + heldItem);
+                        onInventoryChanged(inventory);
+                    }  else if (group.getCheckedIndex() > -1 && heldItem != null) {
+
+                        inventory.add(group.getCheckedIndex(), heldItem);
+                        heldItem = null;
+                        setHeldItem(null);
+                        // inventory.removeSlot(group.getCheckedIndex());
+                        //System.out.println("left mouse button: " + heldItem);
                         onInventoryChanged(inventory);
                     }
 

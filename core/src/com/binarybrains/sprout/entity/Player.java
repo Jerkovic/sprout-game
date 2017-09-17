@@ -115,6 +115,7 @@ public class Player extends Npc implements InputProcessor {
     }
 
     public void setActiveItem(Item item) {
+        if (item == null) return;
         activeItem = item;
         if (getLevel().screen.hud != null && !(activeItem instanceof ToolItem))
             getLevel().screen.hud.setMouseItem(activeItem.getRegionId());
