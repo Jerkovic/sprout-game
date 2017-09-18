@@ -14,6 +14,7 @@ public abstract class Tool {
     public static FishingPole fishingpole = new FishingPole();
     public static Key goldenKey = new Key();
     public static Hammer hammer = new Hammer();
+    public static Mace mace = new Mace();
 
     // How should we handle consumable Tools... like keys?
 

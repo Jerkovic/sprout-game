@@ -62,7 +62,7 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ToolItem(Tool.wateringcan, 0));
         getInventory().add(new ToolItem(Tool.axe, 0));
         getInventory().add(new ToolItem(Tool.pickaxe, 0));
-        getInventory().add(new ToolItem(Tool.hammer, 0));
+        getInventory().add(new ToolItem(Tool.mace, 0));
 
         getInventory().add(new ResourceItem(Resource.bomb,392));
         getInventory().add(new ResourceItem(Resource.ironOre, 40));
