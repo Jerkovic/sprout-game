@@ -52,65 +52,72 @@ Bread
   orig: 48, 48
   offset: 0, 0
   index: -1
-Cider
+Chuck_Berry
   rotate: false
   xy: 351, 1
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Clock
+Cider
   rotate: false
   xy: 401, 1
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Cloth
+Clock
   rotate: false
   xy: 451, 1
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Coal
+Cloth
   rotate: false
   xy: 1, 51
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Egg
+Coal
   rotate: false
   xy: 51, 51
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Empty
+Egg
   rotate: false
   xy: 101, 51
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Explosion
+Empty
   rotate: false
   xy: 151, 51
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Explosion
+  rotate: false
+  xy: 201, 51
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: 0
 Explosion
   rotate: false
-  xy: 249, 51
+  xy: 299, 51
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: 1
 Explosion
   rotate: false
-  xy: 347, 51
+  xy: 397, 51
   size: 96, 96
   orig: 96, 96
   offset: 0, 0

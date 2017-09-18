@@ -29,7 +29,12 @@ public class Bush extends Entity {
     @Override
     public boolean use(Player player, Mob.Direction attackDir) {
         // shake();
-        SproutGame.playSound("leaves_rustling", MathUtils.random(0.5f, 0.8f), MathUtils.random(0.9f, 1.1f), 1f);
+        SproutGame.playSound("leaves_rustling", MathUtils.random(0.4f, 0.8f), MathUtils.random(0.9f, 1.2f), 1f);
+        // could produce Chuck Berries
+        int count = MathUtils.random(2, 6);
+        for (int i = 0; i < count; i++) {
+            getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.chuckBerry), new Vector2(getWalkBoxCenterX(), getWalkBoxCenterY())));
+        }
         return true;
 
     }

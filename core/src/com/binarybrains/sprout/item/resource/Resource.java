@@ -30,6 +30,7 @@ public class Resource {
     public static Resource potato = new FoodResource("Potato", "Starchy, tuberous crop.");
     public static Resource apple = new FoodResource("Apple", "A fruit");
     public static Resource banana = new FoodResource("Banana", "A yellow bended fruit");
+    public static Resource chuckBerry = new FoodResource("Chuck Berry", "A very rare berry");
 
     public static Resource cider = new FoodResource("Cider", "A very refreshing drink made of apples. Consume with care.");
 
