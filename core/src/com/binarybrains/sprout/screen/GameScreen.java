@@ -105,6 +105,7 @@ public class GameScreen implements Screen {
             if (gameState == GameState.RUN) {
                 pause();
                 hud.showInventoryManagementWindow();
+                level.player.inventory.renderDebug();
             } else {
                 resume();
             }

@@ -126,7 +126,9 @@ public class InventoryManagementWindow extends Dialog {
     private void syncInventory(final Inventory inventory) {
 
         group.clear();
-        String selected = level.player.activeItem.getName();
+        String selected = "";
+        if (level.player.activeItem != null) selected = level.player.activeItem.getName();
+
         getTitleLabel().setText("Inventory Management");
 
         for (Item item : inventory.getItems()) {
@@ -189,23 +191,19 @@ public class InventoryManagementWindow extends Dialog {
             button.addListener(new ClickListener(Input.Buttons.LEFT) {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    System.out.println("" + event.getButton());
-                    if (group.getCheckedIndex() > -1 && heldItem == null) {
-
-                        setHeldItem(inventory.getItems().get(group.getCheckedIndex()));
-                        inventory.removeSlot(group.getCheckedIndex());
-                        System.out.println("left mouse button: " + heldItem);
-                        onInventoryChanged(inventory);
-                    }  else if (group.getCheckedIndex() > -1 && heldItem != null) {
-
-                        inventory.add(group.getCheckedIndex(), heldItem);
-                        heldItem = null;
-                        setHeldItem(null);
-                        // inventory.removeSlot(group.getCheckedIndex());
-                        //System.out.println("left mouse button: " + heldItem);
-                        onInventoryChanged(inventory);
+                    if (group.getCheckedIndex() > -1) {
+                        if (heldItem == null) {
+                            setHeldItem(inventory.getItems().get(group.getCheckedIndex()));
+                            inventory.removeSlot(group.getCheckedIndex());
+                            onInventoryChanged(inventory);
+                        } else if (heldItem != null) {
+                            heldItem = inventory.replace(group.getCheckedIndex(), heldItem);
+                            setHeldItem(heldItem);
+                            onInventoryChanged(inventory);
+                        } else {
+                            System.out.println("unknown state inventory managamenet");
+                        }
                     }
-
                 }
             });
 

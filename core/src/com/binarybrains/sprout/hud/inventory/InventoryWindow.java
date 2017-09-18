@@ -111,7 +111,10 @@ public class InventoryWindow extends Window {
     private void syncInventory(final Inventory inventory) {
 
         group.clear();
-        String selected = level.player.activeItem.getName();
+
+        String selected = "";
+        if (level.player.activeItem != null) selected = level.player.activeItem.getName();
+
         getTitleLabel().setText("Inventory " + inventory.getItems().size() + "/" + inventory.getCapacity());
 
         for (Item item : inventory.getItems()) {

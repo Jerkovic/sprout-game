@@ -19,7 +19,7 @@ public class Stats implements Serializable {
         } else {
             dataMap.put(statKey, increment);
         }
-        debug();
+        // debug();
     }
 
     public int get(String statKey) {

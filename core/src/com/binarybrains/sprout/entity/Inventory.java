@@ -20,14 +20,34 @@ public class Inventory {
     public Inventory(Level level, int capacity) {
         this.level = level;
         setCapacity(capacity);
+        // fill with empty slots right
+        createEmptySlots();
+    }
+
+    private void createEmptySlots() {
+        for (int i = 0; i < getCapacity(); i++) {
+            items.add(i, null);
+        }
     }
 
     public boolean add(Item item) {
-        return add(items.size(), item);
+        return replace(count(), item) != null;
     }
 
-    public boolean add(int slot, Item item) {
+    public Item replace(int slot, Item item) {
+        try {
+            Item replacedItem = items.get(slot);
+            items.remove(slot);
+            items.add(slot, item);
+            return replacedItem;
+        } catch (Exception e){
+            System.out.println("Error Inventory: " + e);
+            return null;
+        }
+    }
 
+    // not used but all new additions should not return bool but the item
+    public boolean add(int slot, Item item) {
         if (item instanceof ResourceItem) {
             ResourceItem toTake = (ResourceItem) item;
             ResourceItem has = findResource(toTake.resource);
@@ -35,38 +55,25 @@ public class Inventory {
             if (has == null) {
                 if (count() < capacity) {
                     items.add(slot, toTake);
-                    try {
-                        level.screen.hud.addNotification(toTake);
-                    } catch (NullPointerException e) {
-                    }
                 } else {
                     // we need to be able to find an empty slot
                     System.out.println("Add inventory slot returns false");
-
                     System.out.println("" + count());
                     return false;
                 }
             } else {
                 has.count += toTake.count;
-                try {
-                    level.screen.hud.addNotification(toTake);
-                } catch (NullPointerException e) {
-                }
             }
-        } else { // like tools and stuff
 
+        } else { // like tools and single instance items
             if (count() < capacity) {
                 items.add(slot, item);
-
-                try {
-                    level.screen.hud.addNotification(item);
-                } catch (NullPointerException e) {
-                }
             } else {
                 return false;
             }
         }
 
+        // move the code below
         try {
             level.screen.hud.refreshInventory();
         } catch (NullPointerException e) {
@@ -152,11 +159,15 @@ public class Inventory {
     }
 
     public int count() {
-        return items.size();
+        int count = 0;
+        for (Item it : items) {
+            if (it != null) count++;
+        }
+        return count;
+
     }
 
     public boolean isFull() {
-
         return count() >= getCapacity();
     }
 
@@ -165,7 +176,12 @@ public class Inventory {
         System.out.println("Inventory  Items: " + items.size() + " / " + capacity);
         System.out.println("****************************************************************************");
         for (int i = 0; i < items.size(); i++) {
-            System.out.println("Slot: " + i + " " + items.get(i).getRegionId() + ", " + items.get(i).getName() + " x " + count(items.get(i)));
+            if (items.get(i) != null) {
+                System.out.println("Slot: " + i + " " + items.get(i).getRegionId() + ", " + items.get(i).getName() + " x " + count(items.get(i)));
+            } else {
+                System.out.println("Slot: " + i + " Empty");
+            }
+
             System.out.println("-----------------------------------------------------------------------------------");
         }
         System.out.println("****************************************************************************");
