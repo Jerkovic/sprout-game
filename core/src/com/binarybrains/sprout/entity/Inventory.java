@@ -29,31 +29,19 @@ public class Inventory {
         }
     }
 
+    private void fillEmptySlots() {
+        for(int i = items.size(); i < getCapacity(); i++) {
+            items.add(i, null);
+        }
+    }
+
     public boolean add(Item item) {
-        return replace(count(), item) != null;
+        return add(findEmptySlot(), item);
     }
 
     public Item replace(int slot, Item item) {
         if (item instanceof ResourceItem) {
-            ResourceItem toTake = (ResourceItem) item;
-            ResourceItem has = findResource(toTake.resource);
-
-            if (has == null) {
-                if (count() < capacity) {
-                    // items.add(slot, toTake);
-                    int freeslot = findEmptySlot();
-                    items.remove(freeslot);
-                    items.add(freeslot, item);
-                } else {
-                    // we need to be able to find an empty slot
-                    System.out.println("Add inventory slot returns false");
-                    System.out.println("" + count());
-                    return null;
-                }
-            } else {
-                has.count += toTake.count;
-            }
-
+            // what to do
         } else {
             try {
                 Item replacedItem = items.get(slot);
@@ -76,7 +64,9 @@ public class Inventory {
 
             if (has == null) {
                 if (count() < capacity) {
+                    items.remove(slot);
                     items.add(slot, toTake);
+                    fillEmptySlots();
                 } else {
                     // we need to be able to find an empty slot
                     System.out.println("Add inventory slot returns false");
@@ -89,7 +79,9 @@ public class Inventory {
 
         } else { // like tools and single instance items
             if (count() < capacity) {
+                items.remove(slot);
                 items.add(slot, item);
+                fillEmptySlots();
             } else {
                 return false;
             }
@@ -127,6 +119,7 @@ public class Inventory {
         if (ri.count < count) return false;
         ri.count -= count;
         if (ri.count <= 0) items.remove(ri);
+        fillEmptySlots();
         return true;
     }
 
