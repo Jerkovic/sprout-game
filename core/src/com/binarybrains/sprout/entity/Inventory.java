@@ -189,7 +189,7 @@ public class Inventory {
 
     }
 
-    public int findEmptySlot() {
+    private int findEmptySlot() {
         int index = 0;
         for (Item it : items) {
             if (it == null) return index;
@@ -198,7 +198,7 @@ public class Inventory {
         return -1;
     }
 
-    public boolean isFull() {
+    private boolean isFull() {
         return count() >= getCapacity();
     }
 
