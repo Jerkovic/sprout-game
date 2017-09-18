@@ -79,22 +79,12 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ResourceItem(Resource.apple, 12));
         getInventory().add(new ResourceItem(Resource.ladder, 1));
 
+        // setActiveItemByName
         setActiveItem(getInventory().getItems().get(3));
 
         // move this to a shadow system ?
         shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
 
-        /*
-        addAction(Actions.sequence(
-                Actions.delay(2f),
-                Actions.moveTo(100, 200, 3f, Interpolation.pow5Out),
-                Actions.delay(2f),
-                Actions.run((new Runnable() {
-                    public void run () {
-
-                    }
-                }))
-        )); */
     }
 
     public Stats getStats() {
@@ -186,11 +176,10 @@ public class Player extends Npc implements InputProcessor {
         }
 
         return new Rectangle(x, y, width, height);
-
     }
 
     //  called on left click, boolean return type?
-    public boolean interactWithActiveItem() {
+    private boolean interactWithActiveItem() {
 
         if (getActionState() == ActionState.CARRYING) {
 
@@ -267,15 +256,11 @@ public class Player extends Npc implements InputProcessor {
         return false;
     }
 
-
     @Override
     public void updateBoundingBox() {
         this.box.setWidth(getWidth());
         this.box.setHeight(getHeight());
-        // Sets the x and y-coordinates of the bottom left corner
         this.box.setPosition(getPosition());
-
-        // update the walkBox hit detector for tiles hit detection
         this.walkBox.setWidth(12);
         this.walkBox.setHeight(4);
         this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);

@@ -136,6 +136,7 @@ public class Hud {
     }
 
     public void showInventoryManagementWindow() {
+        hideInventory();
         level.screen.game.pause();
         level.player.releaseKeys();
         // inventoryManagementWindow.build(); // refresh content in window
@@ -155,6 +156,14 @@ public class Hud {
 
     public void inventoryBottom() {
         inventoryWindow.setWindowBottom();
+    }
+
+    public void hideInventory() {
+        inventoryWindow.setVisible(false);
+    }
+
+    public void showInventory() {
+        inventoryWindow.setVisible(true);
     }
 
     public void addNotification(Item item) {

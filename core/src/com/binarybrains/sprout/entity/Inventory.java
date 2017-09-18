@@ -121,7 +121,7 @@ public class Inventory {
         } else {
             int count = 0;
             for (int i = 0; i < items.size(); i++) {
-                if (items.get(i).matches(item)) count++;
+                if (items.get(i) != null && items.get(i).matches(item)) count++;
             }
             if (count > 0) {
                 Gdx.app.log("Inventory", "You already have a " + item.getName());

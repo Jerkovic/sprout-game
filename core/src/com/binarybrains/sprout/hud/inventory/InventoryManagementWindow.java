@@ -93,6 +93,7 @@ public class InventoryManagementWindow extends Dialog {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 hide();
+                player.getLevel().screen.hud.showInventory();
                 player.getLevel().screen.game.resume();
                 player.getLevel().screen.hud.showMouseItem();
                 player.getLevel().screen.hud.refreshInventory();
