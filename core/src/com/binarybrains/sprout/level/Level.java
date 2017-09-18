@@ -197,7 +197,6 @@ public class Level extends LevelEngine {
         }
 
 
-
         zAngle += Gdx.app.getGraphics().getRawDeltaTime() * zSpeed;
         while(zAngle > PI2)
             zAngle -= PI2;

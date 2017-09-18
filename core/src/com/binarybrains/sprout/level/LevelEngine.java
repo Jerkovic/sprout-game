@@ -21,7 +21,8 @@ import com.binarybrains.sprout.entity.tree.SmallTree;
 import com.binarybrains.sprout.entity.tree.Tree;
 import com.binarybrains.sprout.level.pathfind.Astar;
 import com.binarybrains.sprout.level.tile.*;
-import com.binarybrains.sprout.locations.Location;
+import com.binarybrains.sprout.locations.Bed;
+import com.binarybrains.sprout.locations.Bridge;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -222,17 +223,20 @@ public abstract class LevelEngine {
                     Cottage cottage = new Cottage(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight());
                     cottage.setDoorTilePos((Integer) object.getProperties().get("doorTileX"));
                     add(level, cottage);
-                } else if (objType.equals("Trigger")) {
-                    System.out.println(object.getProperties());
+                } else if (objType.equals("BridgeTrigger")) { // location triggers
                     String desc = object.getProperties().get("description").toString();
-                    add(level, new Location(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(),"Trigger", desc));
+                    //String name = object.getProperties().get("Name").toString();
+                    add(level, new Bridge(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(),"Bridge trigger", desc));
+                } else if (objType.equals("BedTrigger")) { // location triggers
+                    String desc = object.getProperties().get("description").toString();
+                    //String name = object.getProperties().get("Name").toString();
+                    add(level, new Bed(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(),"Go to bed", desc));
                 } else if (objType.equals("SmallTree")) {
-
                     add(level, new SmallTree(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
                 } else if (objType.equals("Bush")) {
                     add(level, new Bush(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
                 }
-                System.out.println("type:" + object.getClass() + " " + object.getProperties().get("type") + " " + rectangle);
+                // System.out.println("type:" + object.getClass() + " " + object.getProperties().get("type") + " " + rectangle);
                 // EntityFactory.createEntityFromTileMapObject(Object obj)
             }
         }

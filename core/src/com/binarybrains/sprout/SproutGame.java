@@ -99,6 +99,7 @@ public class SproutGame extends Game {
         assets.load("sfx/watering.wav", Sound.class);
         assets.load("sfx/grass_walk.wav", Sound.class);
 		assets.load("sfx/leaves_rustling.wav", Sound.class);
+		assets.load("sfx/yawning.wav", Sound.class);
         // todo snoring
 		// Bubble pop https://www.youtube.com/watch?v=5ZCahoiTIds
         // More footsteps https://www.youtube.com/watch?v=wYREdw4nz4E
@@ -109,7 +110,7 @@ public class SproutGame extends Game {
         assets.load("ambience/forest_morning_ambience.mp3", Sound.class);
         assets.load("ambience/forest_night_ambience.mp3", Sound.class);
         // https://www.youtube.com/watch?v=W8tVwiYsgHg
-        // todo cave amb
+        // todo cave ambience
 
 
         // Music (check out Ross Bugden)

@@ -65,10 +65,21 @@ public class GameScreen implements Screen {
         */
     }
 
+    private long soundID;
+
     @Override
     public void show() {
-        long soundID = forestAmbienceSfx.loop(.15f);
+        soundID = forestAmbienceSfx.loop(.15f);
     }
+
+    public void pauseAmbience () {
+        forestAmbienceSfx.pause(soundID);
+    }
+
+    public void resumeAmbience () {
+        forestAmbienceSfx.resume(soundID);
+    }
+
 
     @Override
     public void render(float delta) {

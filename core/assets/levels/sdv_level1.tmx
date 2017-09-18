@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="256" height="128" tilewidth="16" tileheight="16" nextobjectid="211">
+<map version="1.0" tiledversion="1.0.2" orientation="orthogonal" renderorder="right-down" width="256" height="128" tilewidth="16" tileheight="16" nextobjectid="212">
  <tileset firstgid="1" source="sdv.tsx"/>
  <tileset firstgid="1976" source="farmhouse.tsx"/>
  <tileset firstgid="2216" source="town.tsx"/>
@@ -34,7 +34,7 @@
   <object id="101" type="bigtree" x="368" y="240" width="48" height="96"/>
   <object id="102" type="bigtree" x="320" y="496" width="48" height="96"/>
   <object id="103" type="bigtree" x="224" y="512" width="48" height="96"/>
-  <object id="104" name="FIx the bridge!" type="Trigger" x="128" y="384" width="32" height="32">
+  <object id="104" name="Bridge" type="BridgeTrigger" x="128" y="384" width="32" height="32">
    <properties>
     <property name="description">The Carlton Bridge was destroyed a long time ago and no one has been trying to fix it. You can repair it for 500 wood.
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin rhoncus felis. Ut eget consequat orci. 
@@ -146,6 +146,11 @@ Nam eu varius turpis. Pellentesque mi lacus, posuere et mauris sed, maximus conv
   <object id="208" type="bigtree" x="1680" y="1120" width="48" height="96"/>
   <object id="209" type="bigtree" x="1440" y="1200" width="48" height="96"/>
   <object id="210" type="bigtree" x="1264" y="1088" width="48" height="96"/>
+  <object id="211" name="Bed" type="BedTrigger" x="144" y="2000" width="16" height="32">
+   <properties>
+    <property name="description" value="This is your bed."/>
+   </properties>
+  </object>
  </objectgroup>
  <layer name="above_all" width="256" height="128">
   <data encoding="base64">

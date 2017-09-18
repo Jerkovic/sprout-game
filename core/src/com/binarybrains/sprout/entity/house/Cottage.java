@@ -66,6 +66,7 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
             SproutGame.playSound("door_open");
             getLevel().screen.hud.teleportPlayer(player, 4, 2);
             BackgroundMusic.stop(); // fade out music
+            getLevel().screen.pauseAmbience();
             return true;
         }
         // todo more interactions

@@ -41,4 +41,9 @@
    <property name="tileType" value="teleporter"/>
   </properties>
  </tile>
+ <tile id="189">
+  <properties>
+   <property name="triggerLocation" value="bed"/>
+  </properties>
+ </tile>
 </tileset>

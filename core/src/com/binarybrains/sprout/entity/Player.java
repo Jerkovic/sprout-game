@@ -355,8 +355,8 @@ public class Player extends Npc implements InputProcessor {
     }
 
     public void drawShadow(Batch batch, float delta) {
-        shadow.setX(getX() + 1);
-        shadow.setY(getY() - 4); // if we want the player to jump ... we should decrease the y value.
+        shadow.setX(getX());
+        shadow.setY(getY()-5); // if we want the player to jump ... we should decrease the y value.
         shadow.draw(batch, 0.55f);
     }
 
