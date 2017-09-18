@@ -20,8 +20,7 @@ public class Inventory {
     public Inventory(Level level, int capacity) {
         this.level = level;
         setCapacity(capacity);
-        // fill with empty slots right
-        createEmptySlots();
+        createEmptySlots(); // fill with empty slots
     }
 
     private void createEmptySlots() {
@@ -35,15 +34,38 @@ public class Inventory {
     }
 
     public Item replace(int slot, Item item) {
-        try {
-            Item replacedItem = items.get(slot);
-            items.remove(slot);
-            items.add(slot, item);
-            return replacedItem;
-        } catch (Exception e){
-            System.out.println("Error Inventory: " + e);
-            return null;
+        if (item instanceof ResourceItem) {
+            ResourceItem toTake = (ResourceItem) item;
+            ResourceItem has = findResource(toTake.resource);
+
+            if (has == null) {
+                if (count() < capacity) {
+                    // items.add(slot, toTake);
+                    int freeslot = findEmptySlot();
+                    items.remove(freeslot);
+                    items.add(freeslot, item);
+                } else {
+                    // we need to be able to find an empty slot
+                    System.out.println("Add inventory slot returns false");
+                    System.out.println("" + count());
+                    return null;
+                }
+            } else {
+                has.count += toTake.count;
+            }
+
+        } else {
+            try {
+                Item replacedItem = items.get(slot);
+                items.remove(slot);
+                items.add(slot, item);
+                return replacedItem;
+            } catch (Exception e) {
+                System.out.println("Error Inventory: " + e);
+                return null;
+            }
         }
+        return null;
     }
 
     // not used but all new additions should not return bool but the item
@@ -165,6 +187,15 @@ public class Inventory {
         }
         return count;
 
+    }
+
+    public int findEmptySlot() {
+        int index = 0;
+        for (Item it : items) {
+            if (it == null) return index;
+            index++;
+        }
+        return -1;
     }
 
     public boolean isFull() {
