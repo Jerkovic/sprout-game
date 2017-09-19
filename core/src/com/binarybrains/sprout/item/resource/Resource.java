@@ -3,40 +3,6 @@ package com.binarybrains.sprout.item.resource;
 
 public class Resource {
 
-    public static Resource coal = new Resource("Coal", "Combustible black or dark brown rock consisting \nmainly of carbonized plant matter, found mainly in underground \ndeposits and widely used as fuel");
-
-    public static Resource wood = new Resource("Wood", "Hard fibrous material that forms the main substance \nof the trunk or branches of a tree or shrub.");
-    public static Resource stick = new Resource("Stick", "A stick made of wood");
-    public static Resource stone = new Resource("Stone", "Hard, solid, nonmetallic mineral matter especially \ngood as building material.");
-
-    public static Resource ironOre = new Resource("Iron Ore", "Rock from which iron can be profitably extracted.");
-    public static Resource ironBar = new Resource("Iron Bar", "Strong, hard magnetic silvery-gray metal");
-
-    public static Resource goldNugget = new Resource("Gold Nugget", "Small lump of gold found ready-formed in the earth.");
-    public static Resource goldIngot = new Resource("Gold Bar", "Solid block of gold in a oblong shape.");
-
-    public static Resource acorn = new Resource("Acorn", "Fruit of the oak, a smooth oval nut in a rough cuplike base.");
-
-    public static Resource wool = new Resource("Wool", "Wool is the textile fiber obtained from sheep.");
-    public static Resource cloth = new Resource("Cloth", "Textile obtained from whool");
-    public static Resource string = new Resource("String", "A nice strong string.");
-    public static Resource teddy = new Resource("Teddy", "A really old but still soft and cuddly teddy bear.");
-
-    public static Resource woodFence = new PlantableResource("Wood Fence", "Keep animals contained and the wolf away");
-    public static Resource bomb = new PlantableResource("Bomb", "Generates an explosion");
-    public static Resource ladder = new PlantableResource("Ladder", "ladder to climb");
-
-    public static Resource salmon = new FoodResource("Salmon", "Nice meatfish, grill it!");
-    public static Resource potato = new FoodResource("Potato", "Starchy, tuberous crop.");
-    public static Resource apple = new FoodResource("Apple", "A fruit");
-    public static Resource banana = new FoodResource("Banana", "A yellow bended fruit");
-    public static Resource chuckBerry = new FoodResource("Chuck Berry", "A very rare berry");
-
-    public static Resource cider = new FoodResource("Cider", "A very refreshing drink made of apples. Consume with care.");
-
-    public static Resource seeds = new SeedResource("Seed Bag", "A bag of mixed seeds");
-
-
     public final String name;
     public final String description;
 

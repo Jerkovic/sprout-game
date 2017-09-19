@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.entity;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -62,7 +61,7 @@ public abstract class Entity {
         if (actions.removeValue(action, true)) action.setEntity(null);
     }
 
-    /** Removes all actions on this actor. */
+    /** Removes all actions on this entity. */
     public void clearActions () {
         for (int i = actions.size - 1; i >= 0; i--)
             actions.get(i).setEntity(null);

@@ -13,6 +13,7 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
+import com.binarybrains.sprout.item.resource.Items;
 import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.tool.WateringCan;
 import com.binarybrains.sprout.level.Level;
@@ -90,7 +91,7 @@ public class Crop extends Entity {
 
             int count = MathUtils.random(2, 6);
             for (int i = 0; i < count; i++) {
-                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resource.potato), new Vector2(getPosition().x, getPosition().y)));
+                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Items.potato), new Vector2(getPosition().x, getPosition().y)));
             }
 
         }

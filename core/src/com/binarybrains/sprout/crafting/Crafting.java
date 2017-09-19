@@ -4,6 +4,7 @@ import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.item.resource.Items;
 import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.tool.*;
 
@@ -24,26 +25,26 @@ public class Crafting {
 
     static {
         try {
-            workbenchRecipes.add(new ResourceRecipe(Resource.stick).addCost(Resource.wood, 1));
-            workbenchRecipes.add(new ToolRecipe(new Hoe(), 0).addCost(Resource.stone, 1).addCost(Resource.stick, 1));
-            workbenchRecipes.add(new ToolRecipe(new Axe(), 0).addCost(Resource.stone, 1).addCost(Resource.stick, 1));
-            workbenchRecipes.add(new ToolRecipe(new PickAxe(), 0).addCost(Resource.stone, 2).addCost(Resource.stick, 1));
-            workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Resource.ironBar, 5));
-            workbenchRecipes.add(new ToolRecipe(new Scythe(), 0).addCost(Resource.ironBar, 2).addCost(Resource.stick, 2));
-            workbenchRecipes.add(new ToolRecipe(new FishingPole(), 0).addCost(Resource.ironBar, 1).addCost(Resource.stick, 1).addCost(Resource.string, 1));
-            workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Resource.ironBar, 2).setRemoveRecipeOnCrafted().setLocked());
+            workbenchRecipes.add(new ResourceRecipe(Items.stick).addCost(Items.wood, 1));
+            workbenchRecipes.add(new ToolRecipe(new Hoe(), 0).addCost(Items.stone, 1).addCost(Items.stick, 1));
+            workbenchRecipes.add(new ToolRecipe(new Axe(), 0).addCost(Items.stone, 1).addCost(Items.stick, 1));
+            workbenchRecipes.add(new ToolRecipe(new PickAxe(), 0).addCost(Items.stone, 2).addCost(Items.stick, 1));
+            workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Items.ironBar, 5));
+            workbenchRecipes.add(new ToolRecipe(new Scythe(), 0).addCost(Items.ironBar, 2).addCost(Items.stick, 2));
+            workbenchRecipes.add(new ToolRecipe(new FishingPole(), 0).addCost(Items.ironBar, 1).addCost(Items.stick, 1).addCost(Items.string, 1));
+            workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Items.ironBar, 2).setRemoveRecipeOnCrafted().setLocked());
 
-            workbenchRecipes.add(new ResourceRecipe(Resource.cloth).addCost(Resource.wool, 3));
-            workbenchRecipes.add(new ResourceRecipe(Resource.cider).addCost(Resource.apple, 17));
+            workbenchRecipes.add(new ResourceRecipe(Items.cloth).addCost(Items.wool, 3));
+            workbenchRecipes.add(new ResourceRecipe(Items.cider).addCost(Items.apple, 17));
 
             // change to Furnace Recipes
-            workbenchRecipes.add(new ResourceRecipe(Resource.bomb).addCost(Resource.ironOre, 4).addCost(Resource.coal, 2));
-            workbenchRecipes.add(new ResourceRecipe(Resource.ironBar).addCost(Resource.ironOre, 4).addCost(Resource.coal, 1));
-            workbenchRecipes.add(new ResourceRecipe(Resource.goldIngot).addCost(Resource.goldNugget, 4).addCost(Resource.coal, 1));
-            workbenchRecipes.add(new ResourceRecipe(Resource.woodFence).addCost(Resource.wood, 1));
-            workbenchRecipes.add(new ResourceRecipe(Resource.ladder).addCost(Resource.stick, 6));
+            workbenchRecipes.add(new ResourceRecipe(Items.bomb).addCost(Items.ironOre, 4).addCost(Items.coal, 2));
+            workbenchRecipes.add(new ResourceRecipe(Items.ironBar).addCost(Items.ironOre, 4).addCost(Items.coal, 1));
+            workbenchRecipes.add(new ResourceRecipe(Items.goldIngot).addCost(Items.goldNugget, 4).addCost(Items.coal, 1));
+            workbenchRecipes.add(new ResourceRecipe(Items.woodFence).addCost(Items.wood, 1));
+            workbenchRecipes.add(new ResourceRecipe(Items.ladder).addCost(Items.stick, 6));
 
-            //furnaceRecipes.add(new ResourceRecipe(Resource.glass).addCost(Resource.sand, 4).addCost(Resource.coal, 1));
+            //furnaceRecipes.add(new ResourceRecipe(Resource.glass).addCost(Items.sand, 4).addCost(Items.coal, 1));
             // ovenRecipes.add(new FoodRecipe(Food.pizza)
 
         } catch (Exception e) {
