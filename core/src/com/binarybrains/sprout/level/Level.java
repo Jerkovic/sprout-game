@@ -195,7 +195,6 @@ public class Level extends LevelEngine {
         // test PickupItem
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 
-            player.inventory.upgrade(); // test upgrade
             SproutGame.playSound("magic_upgrade");
             player.setDirection(Mob.Direction.SOUTH);
             player.setActionState(Npc.ActionState.CARRYING);
@@ -205,6 +204,9 @@ public class Level extends LevelEngine {
                     Actions.run(new Runnable() { public void run(){
                         player.setActionState(Npc.ActionState.EMPTY_NORMAL);
                         player.unFreezePlayerControl();
+                        player.inventory.upgrade(); // test upgrade backpack
+                        screen.hud.refreshInventory();
+
                     }})
             ));
 

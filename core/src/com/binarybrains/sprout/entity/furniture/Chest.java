@@ -18,7 +18,7 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
     private boolean isOpen = false;
     public Inventory inventory;
     private int capacity = 12;
-    public boolean carried = false;
+    private boolean carried = false;
     private TextureRegion openRegion, closedRegion;
 
     public Chest(Level level, Vector2 position) {
