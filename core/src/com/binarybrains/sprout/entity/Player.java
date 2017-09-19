@@ -299,6 +299,17 @@ public class Player extends Npc implements InputProcessor {
         }
     }
 
+    public void freezePlayerControl() {
+        CanMove = false;
+        releaseKeys();
+        setState(State.STANDING);
+    }
+
+    public void unFreezePlayerControl() {
+        CanMove = true;
+    }
+
+
     private void updateMovement() {
 
         if (!CanMove) {
@@ -383,6 +394,10 @@ public class Player extends Npc implements InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
 
+        if (!CanMove) {
+            return false;
+        }
+
         switch (keycode)
         {
             case Input.Keys.A:
@@ -440,6 +455,11 @@ public class Player extends Npc implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+        if (!CanMove) {
+            return false;
+        }
+
         clickedPos.set(screenX, screenY, 0);
         float deltaX = (float)Gdx.input.getDeltaX();
         float deltaY = (float)Gdx.input.getDeltaY();
