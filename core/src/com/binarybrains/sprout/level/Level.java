@@ -191,6 +191,7 @@ public class Level extends LevelEngine {
         // test PickupItem
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 
+            player.inventory.upgrade(); // test upgrade
             int count = MathUtils.random(2, 6);
             for (int i = 0; i < count; i++) {
                 add(this, new PickupItem(this, new ResourceItem(Resource.potato), new Vector2(player.getX()+85, player.getY())));

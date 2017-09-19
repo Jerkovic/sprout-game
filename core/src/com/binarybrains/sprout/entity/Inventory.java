@@ -14,13 +14,25 @@ public class Inventory {
 
     public Level level;
     public List<Item> items = new ArrayList<Item>();
-
-    private int capacity; // this can be upgraded
+    private static int UPGRADE_SLOTS = 12;
+    private static int MAX_UPGRADE_SLOTS = 36;
+    private int capacity;
 
     public Inventory(Level level, int capacity) {
         this.level = level;
         setCapacity(capacity);
         createEmptySlots(); // fill with empty slots
+    }
+
+    /**
+     * Upgrade Inventory
+     * @return
+     */
+    public boolean upgrade() {
+        if (Inventory.MAX_UPGRADE_SLOTS == getCapacity()) return false;
+        setCapacity(getCapacity()+ Inventory.UPGRADE_SLOTS);
+        fillEmptySlots();
+        return true;
     }
 
     private void createEmptySlots() {
