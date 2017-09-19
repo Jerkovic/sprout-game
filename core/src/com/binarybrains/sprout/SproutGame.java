@@ -105,11 +105,12 @@ public class SproutGame extends Game {
 		assets.load("sfx/button_click.wav", Sound.class);
 		assets.load("sfx/speaker_blip.wav", Sound.class);
 
-		// todo snoring
+		// todo find snoring
 		// Bubble pop https://www.youtube.com/watch?v=5ZCahoiTIds
         // More footsteps https://www.youtube.com/watch?v=wYREdw4nz4E
         // Open futuristic chest https://www.youtube.com/watch?v=n_Ug7hgd4kE
         // Open close chest https://www.youtube.com/watch?v=PnjKFzFQpfU
+        // Rope stretch https://www.youtube.com/watch?v=UhtONqZ-nag
 
         // Ambience sounds
         assets.load("ambience/forest_morning_ambience.mp3", Sound.class);
