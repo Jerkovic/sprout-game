@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -46,7 +47,6 @@ public class InventoryManagementWindow extends Dialog {
         atlas = SproutGame.assets.get("items2.txt");
         group = new ButtonGroup();
         group.uncheckAll();
-        //group.setMaxCheckCount(0);
 
         // ignore clicking on the window
         InputListener ignoreTouchDown = new InputListener() {
@@ -59,9 +59,22 @@ public class InventoryManagementWindow extends Dialog {
         this.addListener(ignoreTouchDown);
     }
 
-    private void trashCan() {
+    private Button trashCan() {
 
-        Image image = new Image(atlas.findRegion("Empty"));
+        Image image = new Image(atlas.findRegion("Empty")); // Trash Can todo
+        Button button = new Button(skin, "default");
+        button.add(image);
+
+        button.addListener(new ClickListener(Input.Buttons.LEFT) {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (getHeldItem() != null) {
+                    setHeldItem(null);
+                    SproutGame.playSound("garbage_can", .4f, MathUtils.random(0.9f, 1.1f), 1f);
+                }
+            }
+        });
+        return button;
 
     }
 
@@ -89,6 +102,9 @@ public class InventoryManagementWindow extends Dialog {
         }
 
         add(itemTable);
+
+        row();
+        add(trashCan()).pad(15);
         row();
 
         TextButton buttonExit = new TextButton("   Close   ", skin);
@@ -104,6 +120,7 @@ public class InventoryManagementWindow extends Dialog {
             }
         });
         add(buttonExit).pad(5);
+
         pack();
     }
 
@@ -124,6 +141,10 @@ public class InventoryManagementWindow extends Dialog {
 
     private void setHeldItem(Item item) {
         heldItem = item;
+    }
+
+    private Item getHeldItem() {
+        return heldItem;
     }
 
     private void syncInventory(final Inventory inventory) {

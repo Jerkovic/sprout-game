@@ -100,6 +100,7 @@ public class SproutGame extends Game {
         assets.load("sfx/grass_walk.wav", Sound.class);
 		assets.load("sfx/leaves_rustling.wav", Sound.class);
 		assets.load("sfx/yawning.wav", Sound.class);
+		assets.load("sfx/garbage_can.wav", Sound.class);
         // todo snoring
 		// Bubble pop https://www.youtube.com/watch?v=5ZCahoiTIds
         // More footsteps https://www.youtube.com/watch?v=wYREdw4nz4E
