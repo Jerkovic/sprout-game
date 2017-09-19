@@ -18,9 +18,11 @@ public class Bridge extends Location {
         if (entity instanceof Player) {
             ((Player) entity).releaseKeys();
             BackgroundMusic.stop();
-            SproutGame.playSound("fancy_reward");
+            //SproutGame.playSound("fancy_reward");
             getLevel().screen.hud.speakDialog(name, description);
         }
     }
+
+
 
 }

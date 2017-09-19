@@ -1,7 +1,9 @@
 package com.binarybrains.sprout.hud;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -10,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.binarybrains.sprout.SproutGame;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
@@ -56,10 +59,14 @@ public class TypeWriterDialog extends Window {
     }
 
     public void act (float delta) {
-        stringCompleteness += 85f * delta;
+        stringCompleteness += 40f * delta;
         int charCountThisFrame = (int)stringCompleteness;
         if (skipTypeWriter) {
             charCountThisFrame = dialogText.length();
+        }
+        if (charCountThisFrame > charCountLastFrame && charCountThisFrame < dialogText.length() && charCountThisFrame % 2 == 0) {
+            SproutGame.playSound("speaker_blip", .34f, MathUtils.random(0.5f, 1.2f), 1f);
+            //System.out.println("play" + charCountThisFrame);
         }
 
         if (charCountThisFrame > dialogText.length())
@@ -89,6 +96,7 @@ public class TypeWriterDialog extends Window {
         add(contentTable).expand().fill();
         row();
         add(buttonTable = new Table(skin));
+
 
         buttonTable.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {

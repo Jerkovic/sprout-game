@@ -73,7 +73,7 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ResourceItem(Resources.wool, 3));
 
         getInventory().add(new ArtifactItem(Artifacts.teddy));
-        getInventory().add(new ArtifactItem(Artifacts.book));
+        getInventory().add(new ArtifactItem(Artifacts.backpack));
 
         getInventory().add(new ResourceItem(Resources.coal, 21));
         getInventory().add(new ResourceItem(Resources.stone, 12));
@@ -123,6 +123,7 @@ public class Player extends Npc implements InputProcessor {
 
     public void setCarriedItem(Portable carriedItem) {
         this.carriedItem = carriedItem;
+        carriedItem.setCarried();
         setActionState(Npc.ActionState.CARRYING);
     }
 
@@ -198,7 +199,7 @@ public class Player extends Npc implements InputProcessor {
                 return false;
             }
 
-            if (carriedItem != null)  carriedItem.deleteCarried();
+            if (carriedItem != null) carriedItem.deleteCarried();
             entity.setPosition(getInteractBox().getX(), getInteractBox().getY());
             getLevel().add(getLevel(), entity);
             carriedItem = null;

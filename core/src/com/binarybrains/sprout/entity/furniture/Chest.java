@@ -60,7 +60,7 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
     @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
         if (!carried) {
-            setCarried();
+
             player.setCarriedItem(this);
             remove();
         }

@@ -1,14 +1,17 @@
 package com.binarybrains.sprout.item;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.binarybrains.sprout.entity.Portable;
 import com.binarybrains.sprout.item.artifact.Artifact;
 
-public class ArtifactItem extends Item {
+public class ArtifactItem extends Item implements Portable {
 
     private Artifact artifact;
+    private boolean carried = false;
+    private TextureRegion region;
 
     public ArtifactItem(Artifact artifact) {
         this.artifact = artifact;
-        // category = Artifact
     }
 
     public String getName() {
@@ -34,4 +37,16 @@ public class ArtifactItem extends Item {
         return artifact.name.replaceAll(" ", "_");
 
     }
+
+    @Override
+    public void setCarried() {
+        carried = true;
+    }
+
+    @Override
+    public void deleteCarried() {
+        carried = false;
+    }
+
+
 }

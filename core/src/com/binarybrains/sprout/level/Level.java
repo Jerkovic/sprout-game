@@ -27,7 +27,11 @@ import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
+import com.binarybrains.sprout.item.ArtifactItem;
+import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.item.artifact.Artifact;
+import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
@@ -204,6 +208,7 @@ public class Level extends LevelEngine {
                     Actions.run(new Runnable() { public void run(){
                         player.setActionState(Npc.ActionState.EMPTY_NORMAL);
                         player.unFreezePlayerControl();
+                        // player.setCarriedItem(new ArtifactItem(Artifacts.backpack));
                         player.inventory.upgrade(); // test upgrade backpack
                         screen.hud.refreshInventory();
 

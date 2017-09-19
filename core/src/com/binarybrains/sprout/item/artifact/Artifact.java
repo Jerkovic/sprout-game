@@ -1,8 +1,6 @@
 package com.binarybrains.sprout.item.artifact;
 
-/**
- * Created by erikl on 19/09/17.
- */
+
 public class Artifact {
 
     public final String name;
