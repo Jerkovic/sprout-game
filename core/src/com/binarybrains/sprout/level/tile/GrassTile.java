@@ -8,8 +8,7 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
-import com.binarybrains.sprout.item.resource.Items;
-import com.binarybrains.sprout.item.resource.Resource;
+import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.Hoe;
 
 import java.util.HashMap;
@@ -83,7 +82,7 @@ public class GrassTile extends Tile {
                 }
 
                 if (MathUtils.randomBoolean()) {
-                    player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Items.coal), new Vector2(xt * 16, yt * 16)));
+                    player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resources.coal), new Vector2(xt * 16, yt * 16)));
 
                 }
                 return true;

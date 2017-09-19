@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
@@ -106,14 +107,14 @@ public class Emma extends Npc {
             }
         }
 
-        if (player.activeItem instanceof ResourceItem && ((ResourceItem) player.activeItem).resource.name.equals("Teddy")) {
+        if (player.activeItem instanceof ArtifactItem && ((ArtifactItem) player.activeItem).getName().equals("Teddy")) {
             stateMachine.changeState(EmmaState.WALK_HOME);
             player.getLevel().screen.hud.speakDialog(
                     this.getClass().getSimpleName(),
                     String.format("Ohh! Is that %s? I have really missed him! Thank you!", item.getName())
             );
-            ResourceItem ri = (ResourceItem) player.activeItem;
-            player.getInventory().removeResource(ri.resource, 1);
+            ArtifactItem ai = (ArtifactItem) player.activeItem;
+            player.getInventory().removeItem(ai);
             player.getLevel().screen.hud.refreshInventory();
 
             return true;

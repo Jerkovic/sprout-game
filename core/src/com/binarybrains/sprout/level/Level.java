@@ -28,8 +28,7 @@ import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.item.ResourceItem;
-import com.binarybrains.sprout.item.resource.Items;
-import com.binarybrains.sprout.item.resource.Resource;
+import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
@@ -213,7 +212,7 @@ public class Level extends LevelEngine {
 
             int count = MathUtils.random(2, 6);
             for (int i = 0; i < count; i++) {
-                add(this, new PickupItem(this, new ResourceItem(Items.potato), new Vector2(player.getX()+85, player.getY())));
+                add(this, new PickupItem(this, new ResourceItem(Resources.potato), new Vector2(player.getX()+85, player.getY())));
             }
         }
 

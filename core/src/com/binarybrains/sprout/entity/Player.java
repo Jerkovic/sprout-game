@@ -7,23 +7,20 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.SproutGame;
-import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.npc.Npc;
+import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
-import com.binarybrains.sprout.item.resource.Items;
-import com.binarybrains.sprout.item.resource.Resource;
-import com.binarybrains.sprout.item.tool.Tool;
+import com.binarybrains.sprout.item.artifact.Artifacts;
+import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.Tools;
 import com.binarybrains.sprout.level.Level;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,20 +63,23 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ToolItem(Tools.pickaxe, 0));
         getInventory().add(new ToolItem(Tools.mace, 0));
 
-        getInventory().add(new ResourceItem(Items.bomb,392));
-        getInventory().add(new ResourceItem(Items.ironOre, 40));
-        getInventory().add(new ResourceItem(Items.seeds, 8));
-        getInventory().add(new ResourceItem(Items.wood, 3));
-        getInventory().add(new ResourceItem(Items.string, 3));
-        getInventory().add(new ResourceItem(Items.potato, 8));
-        getInventory().add(new ResourceItem(Items.banana, 1));
-        getInventory().add(new ResourceItem(Items.wool, 3));
-        getInventory().add(new ResourceItem(Items.teddy, 1));
-        getInventory().add(new ResourceItem(Items.coal, 21));
-        getInventory().add(new ResourceItem(Items.stone, 12));
-        getInventory().add(new ResourceItem(Items.goldNugget, 13));
-        getInventory().add(new ResourceItem(Items.apple, 12));
-        getInventory().add(new ResourceItem(Items.ladder, 1));
+        getInventory().add(new ResourceItem(Resources.bomb,392));
+        getInventory().add(new ResourceItem(Resources.ironOre, 40));
+        getInventory().add(new ResourceItem(Resources.seeds, 8));
+        getInventory().add(new ResourceItem(Resources.wood, 3));
+        getInventory().add(new ResourceItem(Resources.string, 3));
+        getInventory().add(new ResourceItem(Resources.potato, 8));
+        getInventory().add(new ResourceItem(Resources.banana, 1));
+        getInventory().add(new ResourceItem(Resources.wool, 3));
+
+        getInventory().add(new ArtifactItem(Artifacts.teddy));
+        getInventory().add(new ArtifactItem(Artifacts.book));
+
+        getInventory().add(new ResourceItem(Resources.coal, 21));
+        getInventory().add(new ResourceItem(Resources.stone, 12));
+        getInventory().add(new ResourceItem(Resources.goldNugget, 13));
+        getInventory().add(new ResourceItem(Resources.apple, 12));
+        getInventory().add(new ResourceItem(Resources.ladder, 1));
 
         // setActiveItemByName
         setActiveItem(getInventory().getItems().get(3));

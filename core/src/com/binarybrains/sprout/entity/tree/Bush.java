@@ -10,8 +10,7 @@ import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.ResourceItem;
-import com.binarybrains.sprout.item.resource.Items;
-import com.binarybrains.sprout.item.resource.Resource;
+import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.level.Level;
 
 public class Bush extends Entity {
@@ -34,7 +33,7 @@ public class Bush extends Entity {
         // could produce Chuck Berries
         int count = MathUtils.random(2, 6);
         for (int i = 0; i < count; i++) {
-            getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Items.chuckBerry), new Vector2(getWalkBoxCenterX(), getWalkBoxCenterY())));
+            getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.chuckBerry), new Vector2(getWalkBoxCenterX(), getWalkBoxCenterY())));
         }
         return true;
 

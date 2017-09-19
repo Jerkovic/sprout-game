@@ -8,8 +8,7 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
-import com.binarybrains.sprout.item.resource.Items;
-import com.binarybrains.sprout.item.resource.Resource;
+import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.PickAxe;
 
 public class StoneTile extends Tile {
@@ -29,7 +28,7 @@ public class StoneTile extends Tile {
                 if (MathUtils.random(1,1) == 1) {
                     player.getLevel().add(
                             player.getLevel(),
-                            new PickupItem(player.getLevel(), new ResourceItem(Items.stone), new Vector2(xt * 16, yt * 16))
+                            new PickupItem(player.getLevel(), new ResourceItem(Resources.stone), new Vector2(xt * 16, yt * 16))
                     );
                     // Some nice ResourceManager.giveLoot(player.skill, activeItem.level, timeOfday, placeOnMap etc)
                 }

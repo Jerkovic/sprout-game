@@ -9,8 +9,7 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
-import com.binarybrains.sprout.item.resource.Items;
-import com.binarybrains.sprout.item.resource.Resource;
+import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.FishingPole;
 import com.binarybrains.sprout.item.tool.WateringCan;
 
@@ -37,7 +36,7 @@ public class WaterTile extends Tile {
                 if (MathUtils.random(1,4) == 1) {
                     player.getLevel().add(
                             player.getLevel(),
-                            new PickupItem(player.getLevel(), new ResourceItem(Items.salmon), new Vector2(xt * 16, yt * 16))
+                            new PickupItem(player.getLevel(), new ResourceItem(Resources.salmon), new Vector2(xt * 16, yt * 16))
                     );
                     // we should delay sounds like the one below and be able to delay other sorts of actions
                     // Some nice ResourceManager.giveLoot(player.skill, activeItem.level, timeOfday, placeOnMap etc)

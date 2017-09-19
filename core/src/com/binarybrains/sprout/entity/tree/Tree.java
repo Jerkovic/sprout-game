@@ -15,8 +15,7 @@ import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
-import com.binarybrains.sprout.item.resource.Items;
-import com.binarybrains.sprout.item.resource.Resource;
+import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.Axe;
 import com.binarybrains.sprout.level.Level;
 
@@ -141,12 +140,12 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
             falling = true;
             int count = MathUtils.random(1,9);
             for (int i = 0; i < count; i++) {
-                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Items.wood), new Vector2(getPosition().x, getPosition().y)));
+                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.wood), new Vector2(getPosition().x, getPosition().y)));
             }
 
             count = MathUtils.random(0,2);
             for (int i = 0; i < count; i++) {
-                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Items.acorn), new Vector2(getPosition().x, getPosition().y)));
+                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.acorn), new Vector2(getPosition().x, getPosition().y)));
             }
         }
     }
@@ -171,7 +170,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         SproutGame.playSound("leaves_rustling", MathUtils.random(0.5f, 0.8f), MathUtils.random(0.9f, 1.1f), 1f);
         int count = MathUtils.random(1,2);
         for (int i = 0; i < count; i++) {
-            getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Items.apple), new Vector2(getCenterPos().x, getCenterPos().y)));
+            getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.apple), new Vector2(getCenterPos().x, getCenterPos().y)));
         }
         return true;
 

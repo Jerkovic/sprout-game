@@ -121,6 +121,16 @@ public class Inventory {
         return ri.count >= count;
     }
 
+    public boolean removeItem(Item item) {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) != null && items.get(i).matches(item)) {
+                items.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean removeResource(Resource r, int count) {
         ResourceItem ri = findResource(r);
         if (ri == null) return false;
@@ -205,7 +215,7 @@ public class Inventory {
 
     public void renderDebug() {
         System.out.println("****************************************************************************");
-        System.out.println("Inventory  Items: " + items.size() + " / " + capacity);
+        System.out.println("Inventory  Resources: " + items.size() + " / " + capacity);
         System.out.println("****************************************************************************");
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) != null) {
