@@ -19,6 +19,7 @@ import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.tool.Tool;
+import com.binarybrains.sprout.item.tool.Tools;
 import com.binarybrains.sprout.level.Level;
 
 import java.lang.reflect.Field;
@@ -58,11 +59,11 @@ public class Player extends Npc implements InputProcessor {
         setSpeed(64);
 
         inventory = new Inventory(level, inventoryCapacity);
-        getInventory().add(new ToolItem(Tool.hoe, 0));
-        getInventory().add(new ToolItem(Tool.wateringcan, 0));
-        getInventory().add(new ToolItem(Tool.axe, 0));
-        getInventory().add(new ToolItem(Tool.pickaxe, 0));
-        getInventory().add(new ToolItem(Tool.mace, 0));
+        getInventory().add(new ToolItem(Tools.hoe, 0));
+        getInventory().add(new ToolItem(Tools.wateringcan, 0));
+        getInventory().add(new ToolItem(Tools.axe, 0));
+        getInventory().add(new ToolItem(Tools.pickaxe, 0));
+        getInventory().add(new ToolItem(Tools.mace, 0));
 
         getInventory().add(new ResourceItem(Resource.bomb,392));
         getInventory().add(new ResourceItem(Resource.ironOre, 40));

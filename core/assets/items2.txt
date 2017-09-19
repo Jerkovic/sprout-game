@@ -24,394 +24,415 @@ Axe
   orig: 48, 48
   offset: 0, 0
   index: -1
-Balubas
+Backpack
   rotate: false
   xy: 151, 1
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Banana
+Balubas
   rotate: false
   xy: 201, 1
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Bomb
+Banana
   rotate: false
   xy: 251, 1
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Bread
+Bomb
   rotate: false
   xy: 301, 1
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Chuck_Berry
+Book
   rotate: false
   xy: 351, 1
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Cider
+Bread
   rotate: false
   xy: 401, 1
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Clock
+Chuck_Berry
   rotate: false
   xy: 451, 1
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Cloth
+Cider
   rotate: false
   xy: 1, 51
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Coal
+Clock
   rotate: false
   xy: 51, 51
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Egg
+Cloth
   rotate: false
   xy: 101, 51
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Empty
+Coal
   rotate: false
   xy: 151, 51
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Explosion
+Egg
   rotate: false
   xy: 201, 51
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Empty
+  rotate: false
+  xy: 251, 51
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Explosion
+  rotate: false
+  xy: 301, 51
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: 0
 Explosion
   rotate: false
-  xy: 299, 51
+  xy: 399, 51
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
   index: 1
-Explosion
-  rotate: false
-  xy: 397, 51
-  size: 96, 96
-  orig: 96, 96
-  offset: 0, 0
-  index: 10
 Explosion
   rotate: false
   xy: 1, 149
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
-  index: 11
+  index: 10
 Explosion
   rotate: false
   xy: 99, 149
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
-  index: 2
+  index: 11
 Explosion
   rotate: false
   xy: 197, 149
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
-  index: 3
+  index: 2
 Explosion
   rotate: false
   xy: 295, 149
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
-  index: 4
+  index: 3
 Explosion
   rotate: false
   xy: 393, 149
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
-  index: 5
+  index: 4
 Explosion
   rotate: false
   xy: 1, 247
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
-  index: 6
+  index: 5
 Explosion
   rotate: false
   xy: 99, 247
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
-  index: 7
+  index: 6
 Explosion
   rotate: false
   xy: 197, 247
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
-  index: 8
+  index: 7
 Explosion
   rotate: false
   xy: 295, 247
   size: 96, 96
   orig: 96, 96
   offset: 0, 0
-  index: 9
-Fishing_Pole
+  index: 8
+Explosion
   rotate: false
   xy: 393, 247
-  size: 48, 48
-  orig: 48, 48
+  size: 96, 96
+  orig: 96, 96
   offset: 0, 0
-  index: -1
-Gold_Bar
-  rotate: false
-  xy: 443, 247
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: -1
-Gold_Nugget
+  index: 9
+Fishing_Pole
   rotate: false
   xy: 1, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Hammer
+Garbage_Can
   rotate: false
   xy: 51, 345
+  size: 66, 66
+  orig: 66, 66
+  offset: 0, 0
+  index: -1
+Gold_Bar
+  rotate: false
+  xy: 119, 345
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Gold_Nugget
+  rotate: false
+  xy: 169, 345
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Hammer
+  rotate: false
+  xy: 219, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Hoe
   rotate: false
-  xy: 101, 345
+  xy: 269, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Iron_Bar
   rotate: false
-  xy: 151, 345
+  xy: 319, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Iron_Ore
   rotate: false
-  xy: 201, 345
+  xy: 369, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Key
   rotate: false
-  xy: 251, 345
+  xy: 419, 345
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Ladder
   rotate: false
-  xy: 301, 345
+  xy: 1, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 LineArtLock
   rotate: false
-  xy: 351, 345
+  xy: 51, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Mace
   rotate: false
-  xy: 401, 345
+  xy: 101, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Pickaxe
   rotate: false
-  xy: 451, 345
+  xy: 151, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Potato
   rotate: false
-  xy: 1, 395
+  xy: 201, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Potato_Stage
   rotate: false
-  xy: 51, 395
+  xy: 251, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 1
 Potato_Stage
   rotate: false
-  xy: 101, 395
+  xy: 301, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 2
 Potato_Stage
   rotate: false
-  xy: 151, 395
+  xy: 351, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 3
 Potato_Stage
   rotate: false
-  xy: 201, 395
+  xy: 401, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 4
 Potato_Stage
   rotate: false
-  xy: 251, 395
+  xy: 451, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 5
 Potato_Stage
   rotate: false
-  xy: 301, 395
+  xy: 1, 463
   size: 56, 56
   orig: 56, 56
   offset: 0, 0
   index: 6
 Salmon
   rotate: false
-  xy: 359, 395
+  xy: 59, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Scythe
   rotate: false
-  xy: 409, 395
+  xy: 109, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Seed_Bag
   rotate: false
-  xy: 459, 395
+  xy: 159, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Stick
   rotate: false
-  xy: 1, 453
+  xy: 209, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Stone
   rotate: false
-  xy: 51, 453
+  xy: 259, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 String
   rotate: false
-  xy: 101, 453
+  xy: 309, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Teddy
   rotate: false
-  xy: 151, 453
+  xy: 359, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Watering_Can
   rotate: false
-  xy: 201, 453
+  xy: 409, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Wood
   rotate: false
-  xy: 251, 453
+  xy: 459, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Wood_Fence
   rotate: false
-  xy: 301, 453
+  xy: 1, 521
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Wool
   rotate: false
-  xy: 351, 453
+  xy: 51, 521
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Wow_Cola
   rotate: false
-  xy: 401, 453
+  xy: 101, 521
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 particle
   rotate: false
-  xy: 451, 453
+  xy: 151, 521
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 smokeparticle
   rotate: false
-  xy: 1, 503
+  xy: 185, 521
   size: 128, 128
   orig: 128, 128
   offset: 0, 0

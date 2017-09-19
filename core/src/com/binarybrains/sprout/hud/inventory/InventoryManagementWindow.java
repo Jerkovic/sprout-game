@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
@@ -61,7 +62,7 @@ public class InventoryManagementWindow extends Dialog {
 
     private Button trashCan() {
 
-        Image image = new Image(atlas.findRegion("Empty")); // Trash Can todo
+        Image image = new Image(atlas.findRegion("Garbage_Can")); // Trash Can todo
         Button button = new Button(skin, "default");
         button.add(image);
 
@@ -70,7 +71,7 @@ public class InventoryManagementWindow extends Dialog {
             public void clicked(InputEvent event, float x, float y) {
                 if (getHeldItem() != null) {
                     setHeldItem(null);
-                    SproutGame.playSound("garbage_can", .4f, MathUtils.random(0.9f, 1.1f), 1f);
+                    SproutGame.playSound("garbage_can", .4f, MathUtils.random(0.8f, 1.1f), 1f);
                 }
             }
         });
