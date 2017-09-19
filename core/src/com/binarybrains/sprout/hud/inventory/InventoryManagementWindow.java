@@ -59,6 +59,12 @@ public class InventoryManagementWindow extends Dialog {
         this.addListener(ignoreTouchDown);
     }
 
+    private void trashCan() {
+
+        Image image = new Image(atlas.findRegion("Empty"));
+
+    }
+
     public void centerMe() {
         setPosition(Gdx.graphics.getWidth() / 2 - getWidth() / 2, Gdx.graphics.getHeight() / 2 - getHeight()/2);
     }
@@ -84,9 +90,6 @@ public class InventoryManagementWindow extends Dialog {
 
         add(itemTable);
         row();
-        pack();
-
-        row(); // recipe container
 
         TextButton buttonExit = new TextButton("   Close   ", skin);
         buttonExit.addListener(new ClickListener() {
@@ -126,14 +129,11 @@ public class InventoryManagementWindow extends Dialog {
     private void syncInventory(final Inventory inventory) {
 
         group.clear();
-        String selected = "";
-        if (level.player.activeItem != null) selected = level.player.activeItem.getName();
-
         getTitleLabel().setText("Inventory Management");
 
         for (Item item : inventory.getItems()) {
 
-            Button button = new Button(skin, "toggle");
+            Button button = new Button(skin, "default");
             String counter = "";
             if (item instanceof ResourceItem && inventory.count(item) > 1) {
                 counter = "" + inventory.count(item);
@@ -201,8 +201,6 @@ public class InventoryManagementWindow extends Dialog {
                             heldItem = inventory.replace(group.getCheckedIndex(), heldItem);
                             setHeldItem(heldItem);
                             onInventoryChanged(inventory);
-                        } else {
-                            System.out.println("unknown state inventory managamenet");
                         }
                     }
                 }

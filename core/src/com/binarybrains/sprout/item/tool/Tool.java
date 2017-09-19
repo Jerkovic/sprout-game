@@ -14,6 +14,8 @@ public abstract class Tool {
     public static FishingPole fishingpole = new FishingPole();
     public static Key goldenKey = new Key();
     public static Hammer hammer = new Hammer();
+
+    // Weapons class/interface
     public static Mace mace = new Mace();
 
     // How should we handle consumable Tools... like keys?
@@ -22,7 +24,6 @@ public abstract class Tool {
     public final String description;
     private long lastUseTime = 0;
     private long coolDownTime = 0;
-
 
     public Tool(String name, String description) {
         if (name.length() > 16) throw new RuntimeException("Tool name cannot be longer than 16 characters!");
