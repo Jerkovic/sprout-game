@@ -195,6 +195,7 @@ public class InventoryManagementWindow extends Dialog {
                         if (heldItem == null) {
                             setHeldItem(inventory.getItems().get(group.getCheckedIndex()));
                             inventory.removeSlot(group.getCheckedIndex());
+                            System.out.println("heldItem" + heldItem);
                             onInventoryChanged(inventory);
                         } else if (heldItem != null) {
                             heldItem = inventory.replace(group.getCheckedIndex(), heldItem);

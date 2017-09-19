@@ -20,7 +20,7 @@ public class GameScreen implements Screen {
     public Float width;
     public Float height;
     public Hud hud;
-    public Sound forestAmbienceSfx; // temporary
+    public Sound forestAmbienceSfx; // temporary move to AmbienceSound handler class
     Skin skin;
 
     public enum GameState
@@ -49,7 +49,7 @@ public class GameScreen implements Screen {
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
 
-        // forest_night_ambience todo
+        // todo we need a handling class for Ambience
         forestAmbienceSfx = SproutGame.assets.get("ambience/forest_morning_ambience.mp3");
 
         /*
@@ -111,7 +111,6 @@ public class GameScreen implements Screen {
             }
         }
 
-
         if(Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             if (gameState == GameState.RUN) {
                 pause();
@@ -122,14 +121,13 @@ public class GameScreen implements Screen {
             }
         }
 
-        // Draw
         level.draw();
         hud.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        // no resize available
+        // no resize available (yet)
     }
 
     @Override

@@ -188,7 +188,8 @@ public class Level extends LevelEngine {
             }
         }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.S)) {
+        // test PickupItem
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 
             int count = MathUtils.random(2, 6);
             for (int i = 0; i < count; i++) {

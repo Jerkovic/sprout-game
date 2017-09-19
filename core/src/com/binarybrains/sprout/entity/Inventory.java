@@ -40,20 +40,16 @@ public class Inventory {
     }
 
     public Item replace(int slot, Item item) {
-        if (item instanceof ResourceItem) {
-            // what to do
-        } else {
-            try {
-                Item replacedItem = items.get(slot);
-                items.remove(slot);
-                items.add(slot, item);
-                return replacedItem;
-            } catch (Exception e) {
-                System.out.println("Error Inventory: " + e);
-                return null;
-            }
+        // what to do
+        try {
+            Item replacedItem = items.get(slot);
+            items.remove(slot);
+            items.add(slot, item);
+            return replacedItem;
+        } catch (Exception e) {
+            System.out.println("Error Inventory: " + e);
+            return null;
         }
-        return null;
     }
 
     // not used but all new additions should not return bool but the item
