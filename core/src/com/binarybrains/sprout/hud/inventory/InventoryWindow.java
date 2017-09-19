@@ -115,7 +115,7 @@ public class InventoryWindow extends Window {
         String selected = "";
         if (level.player.activeItem != null) selected = level.player.activeItem.getName();
 
-        getTitleLabel().setText("Inventory " + inventory.getItems().size() + "/" + inventory.getCapacity());
+        getTitleLabel().setText("Inventory " + inventory.count() + "/" + inventory.getCapacity());
 
         for (Item item : inventory.getItems()) {
 

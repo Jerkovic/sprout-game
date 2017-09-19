@@ -107,7 +107,7 @@ public class Emma extends Npc {
             }
         }
 
-        if (player.activeItem instanceof ArtifactItem && ((ArtifactItem) player.activeItem).getName().equals("Teddy")) {
+        if (player.activeItem instanceof ArtifactItem && player.activeItem.getName().equals("Teddy")) {
             stateMachine.changeState(EmmaState.WALK_HOME);
             player.getLevel().screen.hud.speakDialog(
                     this.getClass().getSimpleName(),

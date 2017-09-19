@@ -52,7 +52,7 @@ public class GameScreen implements Screen {
         // todo we need a handling class for Ambience
         forestAmbienceSfx = SproutGame.assets.get("ambience/forest_morning_ambience.mp3");
 
-        /*
+
         Timer.schedule(new Timer.Task(){
             @Override
             public void run(){
@@ -62,7 +62,7 @@ public class GameScreen implements Screen {
                 }
             }
         }, 2.0f, 10);
-        */
+
     }
 
     private long soundID;

@@ -199,18 +199,20 @@ public class Level extends LevelEngine {
         // test PickupItem
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 
-            SproutGame.playSound("magic_upgrade");
+            SproutGame.playSound("magic_upgrade", .45f);
+
             player.setDirection(Mob.Direction.SOUTH);
             player.setActionState(Npc.ActionState.CARRYING);
             player.freezePlayerControl();
             player.addAction(Actions.sequence(
-                    Actions.delay(1.2f),
+                    Actions.delay(1.5f),
                     Actions.run(new Runnable() { public void run(){
                         player.setActionState(Npc.ActionState.EMPTY_NORMAL);
                         player.unFreezePlayerControl();
                         // player.setCarriedItem(new ArtifactItem(Artifacts.backpack));
                         player.inventory.upgrade(); // test upgrade backpack
                         screen.hud.refreshInventory();
+                        screen.hud.addToasterMessage("Inventory Upgrade", "You were awarded a backpack.");
 
                     }})
             ));

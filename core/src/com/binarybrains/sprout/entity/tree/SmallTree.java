@@ -51,12 +51,12 @@ public class SmallTree extends Entity { // extends Vegitation or ?
         if (item != null) {
             if (item.getName().equals("Ladder")) {
                 // move this into a player method ?
-                SproutGame.playSound("fancy_reward");
+                SproutGame.playSound("fancy_reward", 0.34f);
                 player.getInventory().removeResource(((ResourceItem) item).resource, 1);
                 player.getLevel().screen.hud.refreshInventory();
                 player.getLevel().screen.hud.speakDialog(
                         "The secret tree house",
-                        "The ladder is perfect! You climb the secret tree and up there is a tree house."
+                        "The ladder is perfect! You climb the secret tree and up there is a tree house....?!"
                 );
                 return true;
             } else {

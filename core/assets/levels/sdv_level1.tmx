@@ -36,9 +36,8 @@
   <object id="103" type="bigtree" x="224" y="512" width="48" height="96"/>
   <object id="104" name="Bridge" type="BridgeTrigger" x="128" y="384" width="32" height="32">
    <properties>
-    <property name="description">The Carlton Bridge was destroyed a long time ago and no one has been trying to fix it. You can repair it for 500 wood.
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin rhoncus felis. Ut eget consequat orci. 
-Nam eu varius turpis. Pellentesque mi lacus, posuere et mauris sed, maximus convallis ante.</property>
+    <property name="description">The old wooden &quot;Carlton Bridge&quot; was destroyed a long time ago and no one has been trying to fix it. You can repair it for 500 wood.
+</property>
    </properties>
   </object>
   <object id="106" name="Bush" type="Bush" x="208" y="656" width="48" height="48"/>

@@ -76,9 +76,6 @@ public class Inventory {
                     items.add(slot, toTake);
                     fillEmptySlots();
                 } else {
-                    // we need to be able to find an empty slot
-                    System.out.println("Add inventory slot returns false");
-                    System.out.println("" + count());
                     return false;
                 }
             } else {
@@ -125,6 +122,7 @@ public class Inventory {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) != null && items.get(i).matches(item)) {
                 items.remove(i);
+                fillEmptySlots();
                 return true;
             }
         }
@@ -164,7 +162,6 @@ public class Inventory {
                 if (items.get(i) != null && items.get(i).matches(item)) count++;
             }
             if (count > 0) {
-                Gdx.app.log("Inventory", "You already have a " + item.getName());
                 return false;
             }
 
