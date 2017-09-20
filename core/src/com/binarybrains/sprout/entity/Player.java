@@ -385,7 +385,9 @@ public class Player extends Npc implements InputProcessor {
         // draw carried item
         if (carriedItem != null) {
             Entity carried = (Entity)carriedItem;
-            carried.setPosition(getPosition().x, getPosition().y + 12);
+            if (!(carriedItem instanceof TemporaryCarriedItem)) {
+                carried.setPosition(getPosition().x, getPosition().y + TemporaryCarriedItem.OFFSET_PLAYER_Y);
+            }
             carried.draw(batch, 1f);
         }
     }

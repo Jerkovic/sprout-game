@@ -19,18 +19,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.achievement.Achievement;
-import com.binarybrains.sprout.entity.Entity;
-import com.binarybrains.sprout.entity.Mob;
-import com.binarybrains.sprout.entity.PickupItem;
-import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.item.ArtifactItem;
-import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
-import com.binarybrains.sprout.item.artifact.Artifact;
 import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.misc.Camera;
@@ -200,13 +195,11 @@ public class Level extends LevelEngine {
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 
             SproutGame.playSound("magic_upgrade", .45f);
-
             player.setDirection(Mob.Direction.SOUTH);
-            Chest backpack = new Chest(player.getLevel(), new Vector2(0,0));
-            player.setCarriedItem(backpack);
+            player.setCarriedItem(new TemporaryCarriedItem(player.getLevel(), new ArtifactItem(Artifacts.backpack)));
             player.freezePlayerControl();
             player.addAction(Actions.sequence(
-                    Actions.delay(1.5f),
+                    Actions.delay(1.3f),
                     Actions.run(new Runnable() { public void run(){
                         player.setActionState(Npc.ActionState.EMPTY_NORMAL);
                         player.setCarriedItem(null);

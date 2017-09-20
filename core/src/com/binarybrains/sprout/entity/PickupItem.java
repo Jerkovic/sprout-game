@@ -14,11 +14,6 @@ import com.binarybrains.sprout.level.Level;
 
 import java.util.Random;
 
-/**
- * Items that can be pickup on the map, right now just walk over them
- *
- */
-
 public class PickupItem extends ItemEntity {
 
     private int lifeTime;

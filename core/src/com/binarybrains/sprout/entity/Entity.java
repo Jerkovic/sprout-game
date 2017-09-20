@@ -73,7 +73,7 @@ public abstract class Entity {
         if (actions.size > 0) {
             for (int i = 0; i < actions.size; i++) {
                 Action action = actions.get(i);
-                // System.out.println("tickAction" + action);
+                System.out.println("tickAction" + action);
                 if (action.act(delta) && i < actions.size) {
                     Action current = actions.get(i);
                     int actionIndex = current == action ? i : actions.indexOf(action, true);
@@ -245,6 +245,7 @@ public abstract class Entity {
 
     public void setPosition(Vector2 position) {
         this.position = position;
+        updateBoundingBox();
     }
 
     public void setPosition(float x, float y) {

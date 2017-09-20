@@ -21,7 +21,7 @@ public class ItemEntity extends Entity {
     public ItemEntity(Level level, Item item, Vector2 position) {
         super(level, position, 16, 16);
         this.item = item;
-        // not a good solution
+        // not a good solution remake this
         atlas = SproutGame.assets.get("items2.txt", TextureAtlas.class);
 
         img = new Image(atlas.findRegion(item.getRegionId()));

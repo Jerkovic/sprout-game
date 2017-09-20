@@ -22,7 +22,7 @@ public class Resources {
     public static Resource string = new Resource("String", "A nice strong string.");
 
     public static Resource woodFence = new PlantableResource("Wood Fence", "Keep animals contained and the wolf away");
-    public static Resource bomb = new PlantableResource("Bomb", "Generates an explosion");
+    public static Resource bomb = new PlantableResource("Bomb", "Generates an explosion. Be careful!");
     public static Resource ladder = new PlantableResource("Ladder", "ladder to climb");
 
     public static Resource salmon = new FoodResource("Salmon", "Nice meatfish, grill it!");
@@ -30,7 +30,6 @@ public class Resources {
     public static Resource apple = new FoodResource("Apple", "A fruit");
     public static Resource banana = new FoodResource("Banana", "A yellow bended fruit");
     public static Resource chuckBerry = new FoodResource("Chuck Berry", "A very rare berry");
-
     public static Resource cider = new FoodResource("Cider", "A very refreshing drink made of apples. Consume with care.");
 
     public static Resource seeds = new SeedResource("Seed Bag", "A bag of mixed seeds");
