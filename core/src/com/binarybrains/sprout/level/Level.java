@@ -19,6 +19,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.achievement.Achievement;
+import com.binarybrains.sprout.bellsandwhistles.Sparkle;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.furniture.Chest;
@@ -198,6 +199,7 @@ public class Level extends LevelEngine {
             player.setDirection(Mob.Direction.SOUTH);
             player.setCarriedItem(new TemporaryCarriedItem(player.getLevel(), new ArtifactItem(Artifacts.backpack)));
             player.freezePlayerControl();
+            add(player.getLevel(), new Sparkle(player.getLevel(), player.getCenterPos()));
             player.addAction(Actions.sequence(
                     Actions.delay(1.3f),
                     Actions.run(new Runnable() { public void run(){
