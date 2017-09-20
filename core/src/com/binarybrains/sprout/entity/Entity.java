@@ -374,6 +374,10 @@ public abstract class Entity {
         this.height = height;
     }
 
+    public float getSortOrder() {
+        return getY();
+    }
+
     public void dispose() {
 
     }

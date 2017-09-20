@@ -283,156 +283,212 @@ Mace
   orig: 48, 48
   offset: 0, 0
   index: -1
-Pickaxe
+Mineral_Stone
   rotate: false
   xy: 151, 413
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Pickaxe
+  rotate: false
+  xy: 185, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Potato
   rotate: false
-  xy: 201, 413
+  xy: 235, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Potato_Stage
   rotate: false
-  xy: 251, 413
+  xy: 285, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 1
 Potato_Stage
   rotate: false
-  xy: 301, 413
+  xy: 335, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 2
 Potato_Stage
   rotate: false
-  xy: 351, 413
+  xy: 385, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 3
 Potato_Stage
   rotate: false
-  xy: 401, 413
+  xy: 435, 413
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 4
 Potato_Stage
   rotate: false
-  xy: 451, 413
+  xy: 1, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: 5
 Potato_Stage
   rotate: false
-  xy: 1, 463
+  xy: 51, 463
   size: 56, 56
   orig: 56, 56
   offset: 0, 0
   index: 6
 Salmon
   rotate: false
-  xy: 59, 463
+  xy: 109, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Scythe
   rotate: false
-  xy: 109, 463
+  xy: 159, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Seed_Bag
   rotate: false
-  xy: 159, 463
-  size: 48, 48
-  orig: 48, 48
-  offset: 0, 0
-  index: -1
-Stick
-  rotate: false
   xy: 209, 463
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Stone
+Sparkle
   rotate: false
   xy: 259, 463
-  size: 48, 48
-  orig: 48, 48
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
-  index: -1
-String
+  index: 0
+Sparkle
   rotate: false
-  xy: 309, 463
-  size: 48, 48
-  orig: 48, 48
+  xy: 293, 463
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
-  index: -1
-Teddy
+  index: 1
+Sparkle
   rotate: false
-  xy: 359, 463
-  size: 48, 48
-  orig: 48, 48
+  xy: 327, 463
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
-  index: -1
-Watering_Can
+  index: 2
+Sparkle
   rotate: false
-  xy: 409, 463
-  size: 48, 48
-  orig: 48, 48
+  xy: 361, 463
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
-  index: -1
-Wood
+  index: 3
+Sparkle
   rotate: false
-  xy: 459, 463
-  size: 48, 48
-  orig: 48, 48
+  xy: 395, 463
+  size: 32, 32
+  orig: 32, 32
   offset: 0, 0
-  index: -1
-Wood_Fence
+  index: 4
+Sparkle
+  rotate: false
+  xy: 429, 463
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+Sparkle
+  rotate: false
+  xy: 463, 463
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 6
+Stick
   rotate: false
   xy: 1, 521
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Wool
+Stone
   rotate: false
   xy: 51, 521
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-Wow_Cola
+String
   rotate: false
   xy: 101, 521
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
-particle
+Teddy
   rotate: false
   xy: 151, 521
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Watering_Can
+  rotate: false
+  xy: 201, 521
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Wood
+  rotate: false
+  xy: 251, 521
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Wood_Fence
+  rotate: false
+  xy: 301, 521
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Wool
+  rotate: false
+  xy: 351, 521
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+Wow_Cola
+  rotate: false
+  xy: 401, 521
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+particle
+  rotate: false
+  xy: 451, 521
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 smokeparticle
   rotate: false
-  xy: 185, 521
+  xy: 1, 571
   size: 128, 128
   orig: 128, 128
   offset: 0, 0

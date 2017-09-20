@@ -40,8 +40,8 @@ public abstract class LevelEngine {
 
     public Comparator<Entity> spriteSorter = new Comparator<Entity>() {
         public int compare(Entity e0, Entity e1) {
-            if (e1.getY() < e0.getY()) return -1;
-            if (e1.getY() > e0.getY()) return +1;
+            if (e1.getSortOrder() < e0.getSortOrder()) return -1;
+            if (e1.getSortOrder() > e0.getSortOrder()) return +1;
             return 0;
         }
     };

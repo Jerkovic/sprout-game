@@ -19,11 +19,16 @@ public class Sparkle extends Entity {
     public Sparkle(Level level, Vector2 position) {
         super(level, position, 32, 32);
         TextureAtlas atlas = SproutGame.assets.get("items2.txt");
-        animation = new Animation<TextureAtlas.AtlasRegion>(1/8f, atlas.findRegions("Explosion")); // todo Sparkle
+        animation = new Animation<TextureAtlas.AtlasRegion>(1/8f, atlas.findRegions("Sparkle")); // todo Sparkle
 
         setWidth(animation.getKeyFrame(0).originalWidth);
         setHeight(animation.getKeyFrame(0).originalHeight);
 
+    }
+
+    @Override
+    public float getSortOrder() {
+        return -1;
     }
 
     @Override
