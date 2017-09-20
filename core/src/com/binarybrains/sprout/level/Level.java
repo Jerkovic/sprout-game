@@ -202,14 +202,15 @@ public class Level extends LevelEngine {
             SproutGame.playSound("magic_upgrade", .45f);
 
             player.setDirection(Mob.Direction.SOUTH);
-            player.setActionState(Npc.ActionState.CARRYING);
+            Chest backpack = new Chest(player.getLevel(), new Vector2(0,0));
+            player.setCarriedItem(backpack);
             player.freezePlayerControl();
             player.addAction(Actions.sequence(
                     Actions.delay(1.5f),
                     Actions.run(new Runnable() { public void run(){
                         player.setActionState(Npc.ActionState.EMPTY_NORMAL);
+                        player.setCarriedItem(null);
                         player.unFreezePlayerControl();
-                        // player.setCarriedItem(new ArtifactItem(Artifacts.backpack));
                         player.inventory.upgrade(); // test upgrade backpack
                         screen.hud.refreshInventory();
                         screen.hud.addToasterMessage("Inventory Upgrade", "You were awarded a backpack.");

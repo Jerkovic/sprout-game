@@ -123,8 +123,12 @@ public class Player extends Npc implements InputProcessor {
 
     public void setCarriedItem(Portable carriedItem) {
         this.carriedItem = carriedItem;
-        carriedItem.setCarried();
-        setActionState(Npc.ActionState.CARRYING);
+        if (carriedItem != null) {
+            carriedItem.setCarried();
+            setActionState(Npc.ActionState.CARRYING);
+        } else {
+            setActionState(ActionState.EMPTY_NORMAL);
+        }
     }
 
     @Override
