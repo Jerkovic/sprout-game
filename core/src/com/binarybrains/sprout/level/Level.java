@@ -29,6 +29,7 @@ import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.Resources;
+import com.binarybrains.sprout.level.tile.StoneTile;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
@@ -110,6 +111,8 @@ public class Level extends LevelEngine {
 
         player = new Player(this);
         player.setTilePos(13, 100);
+        // add a stoneTIle test
+        setTile(15, 100, new StoneTile(15, 100));
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();
 

@@ -2,6 +2,7 @@ package com.binarybrains.sprout.item.tool;
 
 
 import com.badlogic.gdx.utils.TimeUtils;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.level.tile.Tile;
 
 public abstract class Tool {

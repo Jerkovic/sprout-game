@@ -104,6 +104,8 @@ public class SproutGame extends Game {
 		assets.load("sfx/magic_upgrade.wav", Sound.class);
 		assets.load("sfx/button_click.wav", Sound.class);
 		assets.load("sfx/speaker_blip.wav", Sound.class);
+		assets.load("sfx/break_stone.wav", Sound.class);
+		assets.load("sfx/swing_03.wav", Sound.class);
 
 		// todo find snoring
 		// Bubble pop https://www.youtube.com/watch?v=5ZCahoiTIds
@@ -132,6 +134,7 @@ public class SproutGame extends Game {
         assets.load("items2.txt", TextureAtlas.class);
 
 		SproutGame.assets.finishLoading();
+
 	}
 
 }
