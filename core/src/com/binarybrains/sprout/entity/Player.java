@@ -308,7 +308,7 @@ public class Player extends Npc implements InputProcessor {
 
     public void freezePlayerControl() {
         CanMove = false;
-        releaseKeys();
+        // releaseKeys();
         setState(State.STANDING);
     }
 
@@ -320,7 +320,6 @@ public class Player extends Npc implements InputProcessor {
     private void updateMovement() {
 
         if (!CanMove) {
-            releaseKeys();
             return;
         }
 
