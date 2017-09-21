@@ -14,8 +14,10 @@ import com.binarybrains.sprout.item.tool.PickAxe;
 
 public class StoneTile extends Tile {
 
+
     public StoneTile(int x, int y) {
         super(x, y, false);
+        setTileSetIndex(1951);
     }
 
     @Override
@@ -33,8 +35,9 @@ public class StoneTile extends Tile {
                 for (int i = 0; i <  MathUtils.random(2,3); i++) {
                     player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resources.stone), new Vector2(xt * 16, yt * 16)));
                 }
+                // reset
+                player.getLevel().setTile(xt, yt, new GrassTile(xt, yt, true));
 
-                // player.getLevel().setTile(xt, yt, new GrassTile(xt, yt, true));
                 return true;
             }
         }

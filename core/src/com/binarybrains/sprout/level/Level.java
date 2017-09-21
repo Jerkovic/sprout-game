@@ -111,8 +111,11 @@ public class Level extends LevelEngine {
 
         player = new Player(this);
         player.setTilePos(13, 100);
-        // add a stoneTIle test
+
+        // todo stone spawner
         setTile(15, 100, new StoneTile(15, 100));
+        setTile(16, 101, new StoneTile(16, 101));
+
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();
 

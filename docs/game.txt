@@ -8,7 +8,7 @@ ________________________________________________________________________________
 
 TODOS:
 
-* Add new stone tile graphics..
+* Stone tile has correct tilsetIndex and can now be used to be spawned randomly in world.
 
 * Shadow system. More generic or what should we do?
 
