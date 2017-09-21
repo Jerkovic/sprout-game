@@ -236,7 +236,7 @@ public class Hud {
     public void addToasterMessage(String title, String text) {
         final Window window = new Window(title, skin);
         window.setRound(true);
-        window.setKeepWithinStage(true);
+        window.setKeepWithinStage(false);
 
 
         window.setMovable(false);
@@ -252,15 +252,27 @@ public class Hud {
         window.add(notLabel).pad(6f);
         window.row();
         window.pack();
-        window.setPosition(Gdx.graphics.getWidth() / 2 - window.getWidth() / 2, Gdx.graphics.getHeight() - window.getHeight()-5);
+        float startY = Gdx.graphics.getHeight() - window.getHeight() - 120;
+        float endY = Gdx.graphics.getHeight() - window.getHeight() - 5;
+        window.setPosition(Gdx.graphics.getWidth() / 2 - window.getWidth() / 2, startY);
 
+        float moveBy = startY - endY;
         stage.addActor(window);
 
         window.addAction(Actions.sequence(
                 Actions.alpha(0f),
-                Actions.alpha(1f, .5f, Interpolation.fade),
+
+                Actions.parallel(
+                        Actions.alpha(1f, .8f, Interpolation.fade),
+                        Actions.moveBy(0, -moveBy, 1.5f, Interpolation.fade)
+                ),
+
                 Actions.delay(5f),
-                Actions.alpha(0f, .25f, Interpolation.fade),
+                Actions.parallel(
+                        Actions.alpha(0f, .5f, Interpolation.fade),
+                        Actions.moveBy(0, -moveBy, 1.5f, Interpolation.fade)
+                ),
+
                 Actions.run(new Runnable() { public void run(){
                     window.remove();
                 }})
