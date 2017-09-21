@@ -6,9 +6,39 @@ https://github.com/sndcode/stardewvalleycode/tree/master/Stardew%20Valley
 
 ________________________________________________________________________________
 
+TODOS:
 
-Class AmbientLocationSounds
-- Play sound louder if close to the source
+* Shadow system. More generic or what should we do?
+
+* Inventory Management - heldItem should display item stack to the mouse pointer
+
+* AmbientLocationSounds Handler - Play sound louder if close to the source
+
+* Water shader (make waves)
+
+* Smoke particles (chimney)
+
+* Upgrade tools and balance / tweek the speed and power
+
+* Fix new player sprite 16x32
+    * Walk animation
+    * Carrying animation
+    * Axe chopping(?)
+
+* New Emma animations
+
+* Weather conditions
+
+* Day night cycle handler
+
+* NPC AI - introduce more behaviours to Emma.
+  * Get teddy...
+  * At a specific time. Walk to the water stand there until at specific time
+  * Walk to the house
+  * Enter the house
+  * Look at the flower (create flower)
+
+
 
 
 Sprout (working title)

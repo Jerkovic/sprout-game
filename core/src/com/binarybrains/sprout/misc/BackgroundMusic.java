@@ -6,7 +6,9 @@ import com.badlogic.gdx.audio.Music;
 
 public class BackgroundMusic {
 
+    // make it a Map?
     static Music track1 = Gdx.audio.newMusic(Gdx.files.internal("music/track2.mp3"));
+
     static float FACTOR = .2f; // The bigger the factor, the faster the fade-out will be
     static float mVolume = 1.2f;
     static boolean mIsPlaying = false;
@@ -26,6 +28,11 @@ public class BackgroundMusic {
     public static void setVolume(float volume) {
         mVolume = volume;
         track1.setVolume(mVolume);
+    }
+
+    public static void changeTrack(String newTrackName) {
+        // todo change track
+
     }
 
     public static boolean isPlaying() {
