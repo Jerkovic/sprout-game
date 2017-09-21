@@ -15,6 +15,8 @@ public class Resources {
     public static Resource goldNugget = new Resource("Gold Nugget", "Small lump of gold found ready-formed in the earth.");
     public static Resource goldIngot = new Resource("Gold Bar", "Solid block of gold in a oblong shape.");
 
+    public static Resource diamond = new Resource("Diamond", "A very valuable gem.");
+
     public static Resource acorn = new Resource("Acorn", "Fruit of the oak, a smooth oval nut in a rough cuplike base.");
 
     public static Resource wool = new Resource("Wool", "Wool is the textile fiber obtained from sheep.");

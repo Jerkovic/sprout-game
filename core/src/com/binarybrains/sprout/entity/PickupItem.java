@@ -13,6 +13,8 @@ import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class PickupItem extends ItemEntity {
@@ -33,9 +35,11 @@ public class PickupItem extends ItemEntity {
         setCenterPos(position.x, position.y);
         lifeTime = 60 * 10 + MathUtils.random(1, 60);
 
-        // should sparkle
+        List<String> valueables = Arrays.asList("Gold Nugget", "Diamond");
+
+
         // todo rareness level on item
-        if (item.getName().equals("Gold Nugget")) {
+        if (valueables.contains(item.getName())) {
             sparkle = new Sparkle(level, getCenterPos());
             sparkle.setLooping();
             level.add(level, sparkle);

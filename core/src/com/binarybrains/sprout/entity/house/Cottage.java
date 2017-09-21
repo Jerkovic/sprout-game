@@ -12,6 +12,7 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
+import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 
@@ -20,6 +21,7 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
 
     private Sprite sprite;
     private Rectangle door;
+    private boolean isRepaired = false;
 
     public Cottage(Level level, Vector2 position, float width, float height) {
 
@@ -69,10 +71,18 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
             getLevel().screen.pauseAmbience();
             return true;
         }
-        // todo more interactions
-        if (item.getName().equals("Wood")) {
-            getLevel().screen.hud.speakDialog("Repair house", "You need 500 wood to complete house repair. You currently have " + player.getInventory().count(item) + " wood. Chop chop!");
 
+        if (isRepaired) return false;
+
+        if (item.getName().equals("Wood") && !player.getInventory().hasResources(Resources.wood, 500)) {
+            getLevel().screen.hud.speakDialog("Repair house", "You need 500 wood to complete house repair. You currently have " + player.getInventory().count(item) + " wood. Chop chop!");
+        } else if (item.getName().equals("Wood") && player.getInventory().hasResources(Resources.wood, 500)) {
+            getLevel().screen.hud.addToasterMessage("House fixed", "Congratulations! Your house is repaired.");
+            SproutGame.playSound("fancy_reward", 0.34f);
+            player.getInventory().removeResource(Resources.wood, 500);
+            player.getLevel().screen.hud.refreshInventory();
+            // give player something
+            isRepaired = true;
         }
         return false;
     }
@@ -84,7 +94,10 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
     }
 
     public void draw(Batch batch, float parentAlpha) {
-
+        // change sprite if isRepaired
+        if (isRepaired) {
+            sprite.setAlpha(.5f);
+        }
         sprite.draw(batch);
 
     }
