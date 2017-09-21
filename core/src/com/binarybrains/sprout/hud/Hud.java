@@ -258,9 +258,9 @@ public class Hud {
 
         window.addAction(Actions.sequence(
                 Actions.alpha(0f),
-                Actions.alpha(1f, 1.2f, Interpolation.fade),
+                Actions.alpha(1f, .5f, Interpolation.fade),
                 Actions.delay(5f),
-                Actions.alpha(0f, .6f, Interpolation.fade),
+                Actions.alpha(0f, .25f, Interpolation.fade),
                 Actions.run(new Runnable() { public void run(){
                     window.remove();
                 }})

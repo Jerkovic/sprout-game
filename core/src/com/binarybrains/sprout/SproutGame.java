@@ -109,6 +109,7 @@ public class SproutGame extends Game {
 		assets.load("sfx/speaker_blip.wav", Sound.class);
 		assets.load("sfx/break_stone.wav", Sound.class);
 		assets.load("sfx/swing_03.wav", Sound.class);
+		assets.load("sfx/metal_hit.wav", Sound.class);
 
 		// todo find snoring
 		// Bubble pop https://www.youtube.com/watch?v=5ZCahoiTIds

@@ -30,10 +30,22 @@ public class StoneTile extends Tile {
 
             if (toolItem.tool instanceof PickAxe && toolItem.tool.use(this)) {
 
-                SproutGame.playSound("break_stone", 0.45f);
+                SproutGame.playSound("break_stone", 0.8f);
 
                 for (int i = 0; i <  MathUtils.random(2,3); i++) {
                     player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resources.stone), new Vector2(xt * 16, yt * 16)));
+                }
+
+                if (MathUtils.randomBoolean()) {
+                    player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resources.ironOre), new Vector2(xt * 16, yt * 16)));
+
+                }
+
+                if (MathUtils.random(1,4) == 1) {
+                    player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resources.goldNugget), new Vector2(xt * 16, yt * 16)));
+                    if (player.getStats(Resources.goldNugget.name) < 2) {
+                        player.getLevel().screen.hud.addToasterMessage("Gold", "You found your first gold nugget! Great job!");
+                    }
                 }
                 // reset
                 player.getLevel().setTile(xt, yt, new GrassTile(xt, yt, true));

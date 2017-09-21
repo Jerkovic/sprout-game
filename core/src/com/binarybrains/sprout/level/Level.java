@@ -112,9 +112,6 @@ public class Level extends LevelEngine {
         player = new Player(this);
         player.setTilePos(13, 100);
 
-        // todo stone spawner
-        setTile(15, 100, new StoneTile(15, 100));
-        setTile(16, 101, new StoneTile(16, 101));
 
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();
@@ -134,6 +131,18 @@ public class Level extends LevelEngine {
         // test some path finding stuff.. move this!!
         setupPathFinding(); // construct the A.star
         this.add(this, new Emma(this, new Vector2(5 * 16f, 1 * 16f), 16f, 16f));
+
+        //  stone spawner
+        for (int i = 0; i < 300; i++) {
+            int xt = MathUtils.random(0,100);
+            int yt = MathUtils.random(90,200);
+
+            if (getTile(xt, yt).mayPass && getEntitiesAtTile(xt, yt).size() < 1) {
+                setTile(xt, yt, new StoneTile(xt, yt));
+                // System.out.println("spawn stone at " + xt + "x" + yt);
+            }
+
+        }
     }
 
     public Camera getCamera() {
