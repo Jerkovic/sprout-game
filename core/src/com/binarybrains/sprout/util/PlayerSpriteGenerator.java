@@ -50,7 +50,7 @@ public class PlayerSpriteGenerator {
         SheetCoordinates walkPants = new SheetCoordinates();
 
 
-        float frameSpeed = .85f;
+        float frameSpeed = .35f;
         int row = 0;
 
         hair = spriteSheet[0][24];

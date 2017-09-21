@@ -4,6 +4,7 @@ import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.util.SheetGenerator;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -21,7 +22,7 @@ public class DesktopLauncher {
         config.setFromDisplayMode(displayMode);
         //config.width = 1024;
         //config.height = 768;
-        config.fullscreen = true;
+        config.fullscreen = false;
         config.resizable = false;
         config.useGL30 = false;
 		config.title = SproutGame.name;
@@ -30,6 +31,6 @@ public class DesktopLauncher {
         // Window icons: 128x128(Mac), 32x32 (for Win and Linux), and 16x16 (for Win).
         // config.addIcon("some icon", Files.FileType.Local);
         new LwjglApplication(new SproutGame(), config);
-        // new LwjglApplication(new SheetGenerator(), config);
+        //new LwjglApplication(new SheetGenerator(), config);
 	}
 }

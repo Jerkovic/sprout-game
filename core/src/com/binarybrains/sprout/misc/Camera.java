@@ -12,6 +12,7 @@ public class Camera extends OrthographicCamera {
     private boolean isShaking = false;
     private long startShakeTimer;
     private Level level;
+    private boolean noFollow = false;
 
     public Camera (Level level) {
         super();
@@ -24,7 +25,18 @@ public class Camera extends OrthographicCamera {
         isShaking = true;
     }
 
+    public float getX() {
+        return position.x;
+    }
+
+    public float getY() {
+        return position.y;
+    }
+
+
     public void followPosition(Vector2 followPos, float deltaTime) {
+
+        if (noFollow) return; // disabled
         Vector3 temp = position;
         float lerp = 3.5f;
         temp.x += (followPos.x - position.x) * lerp * deltaTime;
@@ -86,6 +98,15 @@ public class Camera extends OrthographicCamera {
     }
 
     public void setPosition(Vector3 pos) {
-        position.set(pos);
+        // position.set(pos);
+        position.set((int)(pos.x),(int) pos.y, 0);
+    }
+
+    public void disableFollow() {
+        this.noFollow = true;
+    }
+
+    public void enableFollow() {
+        this.noFollow = false;
     }
 }

@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.tweens.EntityAccessor;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
+import com.binarybrains.sprout.hud.tweens.CameraAccessor;
+import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.screen.GameScreen;
 
 public class SproutGame extends Game {
@@ -27,6 +29,7 @@ public class SproutGame extends Game {
 		Tween.setCombinedAttributesLimit(4);
 		Tween.registerAccessor(Actor.class, new ActorAccessor());
         Tween.registerAccessor(Entity.class, new EntityAccessor());
+		Tween.registerAccessor(Camera.class, new CameraAccessor());
 		loadAssets();
         // A game usually have many screens
         // - Splash Screen

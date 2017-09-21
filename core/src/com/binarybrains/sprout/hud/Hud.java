@@ -21,6 +21,7 @@ import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryManagementWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryWindow;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
+import com.binarybrains.sprout.hud.tweens.CameraAccessor;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 import sun.rmi.server.InactiveGroupException;
@@ -213,6 +214,22 @@ public class Hud {
         }).start(SproutGame.getTweenManager());
         //Tween.to(window, ActorAccessor.ALPHA, 2).target(1f).start(SproutGame.getTweenManager());
         //.addAction(forever(sequence(fadeOut(5), fadeIn(5))));
+    }
+
+    public void moveCamera(float targetX, float targetY) {
+
+        level.getCamera().disableFollow();
+
+        Tween.to(level.getCamera(), CameraAccessor.POSITION_XY, 3f)
+                .target(targetX, targetY)
+                .ease(TweenEquations.easeOutSine).setCallback(new TweenCallback() {
+
+                    @Override
+                    public void onEvent(int type, BaseTween<?> source) {
+                        level.getCamera().enableFollow();
+                    }
+
+                }).start(SproutGame.getTweenManager());
     }
 
     // a test right now, we need some graphics

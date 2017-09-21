@@ -212,6 +212,7 @@ public class Level extends LevelEngine {
                         player.inventory.upgrade(); // test upgrade backpack
                         screen.hud.refreshInventory();
                         screen.hud.addToasterMessage("Inventory Upgrade", "You were awarded a backpack.");
+                        screen.hud.moveCamera(600, 1000);
 
                     }})
             ));
