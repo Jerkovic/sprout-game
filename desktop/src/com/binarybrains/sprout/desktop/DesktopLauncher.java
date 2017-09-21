@@ -22,7 +22,7 @@ public class DesktopLauncher {
         config.setFromDisplayMode(displayMode);
         //config.width = 1024;
         //config.height = 768;
-        config.fullscreen = false;
+        config.fullscreen = true;
         config.resizable = false;
         config.useGL30 = false;
 		config.title = SproutGame.name;

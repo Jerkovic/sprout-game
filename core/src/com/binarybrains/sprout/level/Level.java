@@ -210,6 +210,8 @@ public class Level extends LevelEngine {
         // test PickupItem
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 
+            // generateCaves();
+
             SproutGame.playSound("magic_upgrade", .45f);
             player.setDirection(Mob.Direction.SOUTH);
             player.setCarriedItem(new TemporaryCarriedItem(player.getLevel(), new ArtifactItem(Artifacts.backpack)));

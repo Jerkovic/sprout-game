@@ -8,9 +8,9 @@ ________________________________________________________________________________
 
 TODOS:
 
-* Cave generation 3-4 rooms and connecting hallways
+* PickupItems collide with water should *drown*
 
-* Stone tile has correct tilsetIndex and can now be used to be spawned randomly in world.
+* Cave level generation 3-4 rooms and connecting hallways
 
 * Shadow system. More generic or what should we do?
 
