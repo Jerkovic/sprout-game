@@ -8,6 +8,8 @@ ________________________________________________________________________________
 
 TODOS:
 
+* smashable stones should be sprites. easier to bomb damage and shake when hit etc.
+
 * PickupItems collide with water should *drown*
 
 * Cave level generation 3-4 rooms and connecting hallways
@@ -22,7 +24,7 @@ TODOS:
 
 * Smoke particles (chimney)
 
-* Upgrade tools and balance / tweek the speed and power
+* Upgraded tools should be balanced when it comes to the speed (cooldown) and power (damage)
 
 * Fix new player sprite 16x32
     * Walk animation

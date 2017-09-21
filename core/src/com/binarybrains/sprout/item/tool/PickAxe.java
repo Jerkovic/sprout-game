@@ -8,7 +8,7 @@ public class PickAxe extends Tool {
     public PickAxe() {
 
         super("Pickaxe", "A tool used to remove blocks and mine ores.");
-        setCoolDownTime(500); // half a second cooldown time should be lower depending on level of the tool right?
+        setCoolDownTime(450); // half a second cooldown time should be lower depending on level of the tool right?
     }
 
     public boolean use(Tile tile) {

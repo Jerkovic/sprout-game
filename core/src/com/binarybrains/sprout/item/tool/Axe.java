@@ -12,9 +12,9 @@ public class Axe extends Tool {
 
     public void playRandomChopSound() {
         if (MathUtils.randomBoolean())
-            SproutGame.playSound("chopping_Wood_1", 1f, MathUtils.random(0.90f, 1.01f), 1f);
+            SproutGame.playSound("chopping_Wood_1", 1f, MathUtils.random(0.90f, .99f), 1f);
         else
-            SproutGame.playSound("chopping_Wood_2",  1f, MathUtils.random(0.90f, 1.01f), MathUtils.random(0.96f, 1.05f));
+            SproutGame.playSound("chopping_Wood_2",  1f, MathUtils.random(0.90f, .99f),1f);
     }
 
     @Override

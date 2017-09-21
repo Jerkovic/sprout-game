@@ -36,7 +36,7 @@ public class InventoryWindow extends Window {
         this.skin = skin;
         setKeepWithinStage(true);
         setMovable(false);
-        setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2)-getWidth(), getMinHeight() + 20);
+        setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2)-getWidth(), getMinHeight() + 5);
         row().fill().expandX();
 
         atlas = SproutGame.assets.get("items2.txt");
@@ -55,12 +55,12 @@ public class InventoryWindow extends Window {
     }
 
     public void setWindowTop() {
-        yPos = (float )Gdx.app.getGraphics().getHeight() - (getHeight()+20);
+        yPos = (float )Gdx.app.getGraphics().getHeight() - (getHeight()+5);
         centerMe();
     }
 
     public void setWindowBottom() {
-        yPos = 20f;
+        yPos = 5f;
         centerMe();
     }
 
