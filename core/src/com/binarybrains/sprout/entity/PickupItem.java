@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.bellsandwhistles.Sparkle;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
@@ -25,10 +26,20 @@ public class PickupItem extends ItemEntity {
 
     private Sprite shadow;
     private boolean magnet = true;
+    private Sparkle sparkle;
 
     public PickupItem(Level level, Item item, Vector2 position) {
         super(level, item, position);
+        setCenterPos(position.x, position.y);
         lifeTime = 60 * 10 + MathUtils.random(1, 60);
+
+        // should sparkle
+        // todo rareness level on item
+        if (item.getName().equals("Gold Nugget")) {
+            sparkle = new Sparkle(level, getCenterPos());
+            sparkle.setLooping();
+            level.add(level, sparkle);
+        }
 
         if (this.distanceTo(level.player) < 48) {
             // no magnet
@@ -48,13 +59,20 @@ public class PickupItem extends ItemEntity {
     }
 
     @Override
+    public boolean remove() {
+        super.remove();
+        if (sparkle != null) sparkle.remove();
+        return true;
+    }
+
+    @Override
     public void touchedBy(Entity entity) {
         if (entity instanceof Player) {
             if (((Player)entity).getInventory().add(item)) {
                 remove();
                 SproutGame.playSound("blop", 1f, MathUtils.random(0.6f, 1.2f), 1f);
                 ((Player)entity).increaseStats(item.getName(), 1);
-                // test some money
+                // test some money earning
                 getLevel().player.increaseFunds(10);
             }
         }
@@ -118,6 +136,9 @@ public class PickupItem extends ItemEntity {
     public void draw(Batch batch, float parentAlpha) {
         if (time >= lifeTime - (6 * 20)) {
             if (time / 6 % 2 == 0) return;
+        }
+        if (sparkle != null) {
+            sparkle.setCenterPos(getCenterPos().x, getCenterPos().y);
         }
         drawShadow(batch, 0f);
         super.draw(batch, parentAlpha);

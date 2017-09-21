@@ -218,6 +218,10 @@ public abstract class Entity {
         position.y = y * 16f;
     }
 
+    public void setCenterPos(float x, float y) {
+        setPosition(x- (getWidth() /2 ), y -(getHeight() /2));
+    }
+
     /**
      * Return as hash based on pos to be able to get moving directions from Travel HashMap
      * @return long

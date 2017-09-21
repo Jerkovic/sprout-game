@@ -292,6 +292,7 @@ public abstract class LevelEngine {
 
                 if (cell2 != null && cell2.getTile() != null) {
                     // custom property .. wooden stuff
+
                     if (cell2.getTile().getProperties().containsKey("tileType") && (cell2.getTile().getProperties().get("tileType").equals("Wood"))) {
                         tile[x][y] = new WoodTile(x, y);
                     }

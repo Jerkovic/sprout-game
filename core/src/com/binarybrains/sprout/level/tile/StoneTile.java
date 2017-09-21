@@ -3,6 +3,7 @@ package com.binarybrains.sprout.level.tile;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.bellsandwhistles.Sparkle;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
@@ -38,13 +39,15 @@ public class StoneTile extends Tile {
 
                 if (MathUtils.randomBoolean()) {
                     player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resources.ironOre), new Vector2(xt * 16, yt * 16)));
-
                 }
 
-                if (MathUtils.random(1,4) == 1) {
+                if (MathUtils.random(1,1) == 1) {
                     player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resources.goldNugget), new Vector2(xt * 16, yt * 16)));
+
+
                     if (player.getStats(Resources.goldNugget.name) < 2) {
                         player.getLevel().screen.hud.addToasterMessage("Gold", "You found your first gold nugget! Great job!");
+
                     }
                 }
                 // reset

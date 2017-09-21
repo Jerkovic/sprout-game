@@ -214,7 +214,6 @@ public class Level extends LevelEngine {
             player.setDirection(Mob.Direction.SOUTH);
             player.setCarriedItem(new TemporaryCarriedItem(player.getLevel(), new ArtifactItem(Artifacts.backpack)));
             player.freezePlayerControl();
-            add(player.getLevel(), new Sparkle(player.getLevel(), player.getCenterPos()));
             player.addAction(Actions.sequence(
                     Actions.delay(1.3f),
                     Actions.run(new Runnable() { public void run(){
@@ -224,7 +223,7 @@ public class Level extends LevelEngine {
                         player.inventory.upgrade(); // test upgrade backpack
                         screen.hud.refreshInventory();
                         screen.hud.addToasterMessage("Inventory Upgrade", "You were awarded a backpack.");
-                        screen.hud.moveCamera(600, 1000);
+                        //screen.hud.moveCamera(600, 1000);
 
                     }})
             ));
