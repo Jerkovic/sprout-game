@@ -8,6 +8,8 @@ ________________________________________________________________________________
 
 TODOS:
 
+* Add new stone tile graphics..
+
 * Shadow system. More generic or what should we do?
 
 * Inventory Management - heldItem should display item stack to the mouse pointer
