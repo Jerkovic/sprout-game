@@ -11,6 +11,7 @@ import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.level.Level;
@@ -81,7 +82,9 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
             SproutGame.playSound("fancy_reward", 0.34f);
             player.getInventory().removeResource(Resources.wood, 500);
             player.getLevel().screen.hud.refreshInventory();
+
             // give player something
+            // change house sprite
             isRepaired = true;
         }
         return false;

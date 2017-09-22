@@ -130,7 +130,7 @@ public class PickupItem extends ItemEntity {
         updateBoundingBox();
     }
 
-    public void drawShadow(Batch batch, float delta) {
+    private void drawShadow(Batch batch, float delta) {
         shadow.setX(getX());
         shadow.setY(getY()-(float)zz - 2);
         shadow.draw(batch, 0.35f);

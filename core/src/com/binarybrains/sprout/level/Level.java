@@ -230,7 +230,7 @@ public class Level extends LevelEngine {
                     }})
             ));
 
-            int count = MathUtils.random(2, 6);
+            int count = MathUtils.random(1,3);
             for (int i = 0; i < count; i++) {
                 add(this, new PickupItem(this, new ResourceItem(Resources.potato), new Vector2(player.getX()+85, player.getY())));
             }

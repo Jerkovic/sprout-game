@@ -15,7 +15,7 @@ import com.binarybrains.sprout.item.tool.PickAxe;
 // dont make stone as a tile
 public class StoneTile extends Tile {
 
-    private int health = 5;
+    private int health = 30;
 
     public StoneTile(int x, int y) {
         super(x, y, false);
@@ -32,7 +32,7 @@ public class StoneTile extends Tile {
 
             if (toolItem.tool instanceof PickAxe && toolItem.tool.use(this)) {
 
-                SproutGame.playSound("metal_hit", 0.5f, MathUtils.random(0.68f, .78f), 1f);
+
                 health-=toolItem.getDamage();
 
                 if (health < 1) {
@@ -63,6 +63,8 @@ public class StoneTile extends Tile {
                     // reset
                     player.getLevel().setTile(xt, yt, new GrassTile(xt, yt, true));
 
+                } else {
+                    SproutGame.playSound("metal_hit", 0.5f, MathUtils.random(0.68f, .78f), 1f);
                 }
 
                 return true;
