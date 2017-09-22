@@ -8,7 +8,9 @@ ________________________________________________________________________________
 
 TODOS:
 
-* when hitting something .. we need to display the damage made
+* https://github.com/libgdx/libgdx/wiki/Interpolation
+
+* when hitting something .. we need to display the damage made like a textParticle
 
 * make apples fall in a more natural way
 

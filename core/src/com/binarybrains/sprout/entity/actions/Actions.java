@@ -49,6 +49,11 @@ public class Actions {
         return action;
     }
 
+    static public BounceAction bounce() {
+        BounceAction action = action(BounceAction.class);
+        return action;
+    }
+
     static public DelayAction delay (float duration) {
         DelayAction action = action(DelayAction.class);
         action.setDuration(duration);
