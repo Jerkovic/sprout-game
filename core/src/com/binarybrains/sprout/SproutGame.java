@@ -112,6 +112,10 @@ public class SproutGame extends Game {
 		assets.load("sfx/metal_hit.wav", Sound.class);
 
 		// todo find snoring
+		// Alot of different sounds https://www.youtube.com/watch?v=WL3AeICxSuU
+		// Magic want ..wingggg https://www.youtube.com/watch?v=rvtiLLJEMGs
+		// Magic spell https://www.youtube.com/watch?v=cJ8TOsuiH08
+		// Magic blast https://www.youtube.com/watch?v=JRZYh-ZO9HY
 		// Bubble pop https://www.youtube.com/watch?v=5ZCahoiTIds
         // More footsteps https://www.youtube.com/watch?v=wYREdw4nz4E
         // Open futuristic chest https://www.youtube.com/watch?v=n_Ug7hgd4kE

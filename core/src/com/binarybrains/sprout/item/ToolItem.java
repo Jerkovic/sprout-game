@@ -1,6 +1,7 @@
 package com.binarybrains.sprout.item;
 
 
+import com.badlogic.gdx.math.MathUtils;
 import com.binarybrains.sprout.item.tool.Tool;
 
 public class ToolItem extends Item {
@@ -19,8 +20,15 @@ public class ToolItem extends Item {
         this.level = level;
     }
 
+    /**
+     * Gets damage value (tool level * 5)
+     * 0 = 5
+     * 1 = 10
+     * 2 = 15
+     * @return
+     */
     public int getDamage() {
-        return level+1;
+        return (level+1) * 5;
     }
 
     public String getRegionId() {

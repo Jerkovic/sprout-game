@@ -133,6 +133,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
     @Override
     public void hurt(Entity e, int dmg) {
 
+        super.hurt(e, dmg); // just debug
         damage += dmg;
         shake();
 

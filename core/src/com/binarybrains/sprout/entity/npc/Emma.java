@@ -13,6 +13,7 @@ import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.tool.Axe;
+import com.binarybrains.sprout.item.tool.Mace;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.Map;
@@ -25,6 +26,7 @@ public class Emma extends Npc {
     public Emma(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height, 3); // 3 is the spriteRow used
 
+        setHealth(100);
         setState(State.WALKING);
         setDirection(Direction.EAST);
         setSpeed(32f);
@@ -100,8 +102,7 @@ public class Emma extends Npc {
     public boolean interact(Player player, Item item, Direction attackDir) {
         if (item instanceof ToolItem) {
             ToolItem toolItem = (ToolItem) item;
-            if (toolItem.tool instanceof Axe && toolItem.tool.canUse()) {
-                ((Axe) toolItem.tool).playRandomChopSound();
+            if (toolItem.tool instanceof Mace && toolItem.tool.canUse()) {
                 hurt(player, toolItem.getDamage(), player.getDirection()); // hurt emma
                 return true;
             }

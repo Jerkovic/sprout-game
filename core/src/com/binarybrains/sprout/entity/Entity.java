@@ -302,7 +302,7 @@ public abstract class Entity {
     }
 
     public void hurt(Entity ent, int damage) {
-        System.out.println(this + " is hurt by" + ent);
+        System.out.println(this + " is hurt by" + ent + "with " + damage);
     }
 
     final public void contains(Entity entity) {

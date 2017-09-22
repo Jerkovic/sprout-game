@@ -127,23 +127,23 @@ public abstract class Mob extends Entity {
 
     public void hurt(Mob mob, int damage, Direction attackDir) {
         if (damage > 0) {
-            System.out.println(mob + " gives " + damage + " damage to " + this + " " + direction);
             health -= damage;
+            System.out.println(mob + " gives " + damage + " damage to " + this + " " + direction + " health remaining: " + getHealth());
         }
 
         // knockBackAction test
         if (attackDir == Direction.SOUTH) {
-            addAction(Actions.moveTo(getX(), getY() - 16, .2f, Interpolation.swingOut));
+            addAction(Actions.moveTo(getX(), getY() - 16, .2f, Interpolation.exp5Out));
         }
         if (attackDir == Direction.NORTH) {
-            addAction(Actions.moveTo(getX(), getY() + 16, .2f, Interpolation.swingOut));
+            addAction(Actions.moveTo(getX(), getY() + 16, .2f, Interpolation.exp5Out));
         }
 
         if (attackDir == Direction.WEST) {
-            addAction(Actions.moveTo(getX()-16, getY(), .2f, Interpolation.swingOut));
+            addAction(Actions.moveTo(getX()-16, getY(), .2f, Interpolation.exp5Out));
         }
         if (attackDir == Direction.EAST) {
-            addAction(Actions.moveTo(getX()+16, getY(), .2f, Interpolation.swingOut));
+            addAction(Actions.moveTo(getX()+16, getY(), .2f, Interpolation.exp5Out));
         }
 
     }
