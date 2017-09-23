@@ -19,6 +19,7 @@ import java.util.Random;
 
 public class PickupItem extends ItemEntity {
 
+    private boolean bounce = true;
     private int lifeTime;
     private int time = 0;
 
@@ -35,11 +36,23 @@ public class PickupItem extends ItemEntity {
         setCenterPos(position.x, position.y);
         lifeTime = 60 * 10 + MathUtils.random(1, 60);
 
-        List<String> valueables = Arrays.asList("Gold Nugget", "Diamond");
+        List<String> valuables = Arrays.asList("Gold Nugget", "Diamond");
 
+        List<String> fallfruit = Arrays.asList("Apple");
+
+        if (fallfruit.contains(item.getName())) {
+            bounce = false;
+            if (MathUtils.randomBoolean())
+                setX(getX()+MathUtils.random(8, 20));
+            else
+                setX(getX()-MathUtils.random(8,20));
+
+            // this has to be connected to the tree
+            addAction(Actions.moveTo(position.x, position.y-42, MathUtils.random(.9f, 1.2f), Interpolation.bounceOut));
+        }
 
         // todo rareness level on item
-        if (valueables.contains(item.getName())) {
+        if (valuables.contains(item.getName())) {
             sparkle = new Sparkle(level, getCenterPos());
             sparkle.setLooping();
             level.add(level, sparkle);
@@ -52,15 +65,20 @@ public class PickupItem extends ItemEntity {
 
         shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
         // bounce
-        Random random = new Random();
-        xx = position.x;
-        yy = position.y;
-        zz = 2;
-        xa = random.nextGaussian() * 0.3;
-        ya = random.nextGaussian() * 0.2;
-        za = random.nextFloat() * 0.7 + 2;
+        if (bounce)
+        {
+            Random random = new Random();
+            xx = position.x;
+            yy = position.y;
+            zz = 2;
+            xa = random.nextGaussian() * 0.3;
+            ya = random.nextGaussian() * 0.2;
+            za = random.nextFloat() * 0.7 + 2;
+
+        }
 
     }
+
 
     @Override
     public boolean remove() {
@@ -88,17 +106,7 @@ public class PickupItem extends ItemEntity {
         touchedBy(entity);
     }
 
-    @Override
-    public void update(float deltaTime) {
-
-        tickActions(deltaTime);
-
-        time+=deltaTime * 100;
-        if (time >= lifeTime) {
-            remove();
-            return;
-        }
-
+    private void updateBounce() {
         xx += xa;
         yy += ya;
         zz += za;
@@ -110,10 +118,26 @@ public class PickupItem extends ItemEntity {
         }
         za -= 0.15;
 
-        float distance = distanceTo(getLevel().player);
         if (getActions().size < 1) setPosition((float)xx, (float)yy + (float)zz);
 
+    }
 
+    @Override
+    public void update(float deltaTime) {
+
+        tickActions(deltaTime);
+
+        time+=deltaTime * 100;
+        if (time >= lifeTime) {
+            remove();
+            return;
+        }
+
+        if (bounce) {
+            updateBounce();
+        }
+
+        float distance = distanceTo(getLevel().player);
         if (distance < 32 && getActions().size < 1 && magnet && getLevel().player.inventory.hasSpaceFor(this.item)) {
             // item in state of being sucked to the player
             addAction(Actions.sequence(
