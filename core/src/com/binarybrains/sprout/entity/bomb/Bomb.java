@@ -28,11 +28,10 @@ public class Bomb extends Entity implements Portable {
     private TextureRegion region;
     private Animation explosionAnimation;
     private float elapsedTime = 0;
-
+    private int damage = 100;
 
     private int lifeTime;
     private int time = 0;
-    private int radius = 4;
 
     private boolean explode = false;
 

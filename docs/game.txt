@@ -15,16 +15,11 @@ TODOS:
 
 * when hitting something .. we need to display the damage made like a textParticle
 
-* cooldown on player use(right click)  shakes
-
 * Prevent camera slides after hud window displays.
 
 * Add smashing/hit animation to item being pounded.
 
-* Smashable stones should be sprites. easier to bomb damage and shake when hit etc.
-
 * PickupItems collide with water should *drown* and disappear
-
 
 * Shadow system. More generic or what should we do?
 

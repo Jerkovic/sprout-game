@@ -25,11 +25,11 @@ import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
+import com.binarybrains.sprout.entity.terrain.Stone;
 import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.Resources;
-import com.binarybrains.sprout.level.tile.StoneTile;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
@@ -138,7 +138,8 @@ public class Level extends LevelEngine {
             int yt = MathUtils.random(90,200);
 
             if (getTile(xt, yt).mayPass && getEntitiesAtTile(xt, yt).size() < 1) {
-                setTile(xt, yt, new StoneTile(xt, yt));
+                //setTile(xt, yt, new StoneTile(xt, yt));
+                add(this, new Stone(this, xt, yt));
                 // System.out.println("spawn stone at " + xt + "x" + yt);
             }
 
