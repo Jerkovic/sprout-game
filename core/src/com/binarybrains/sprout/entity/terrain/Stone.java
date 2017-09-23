@@ -21,7 +21,7 @@ import com.binarybrains.sprout.level.Level;
 public class Stone extends Entity {
 
     private Sprite sprite;
-    private int health = 200; // change
+    private int health = 50; // change
     private boolean isShaking = false;
     private long startShakeTimer;
 
@@ -72,7 +72,6 @@ public class Stone extends Entity {
 
     @Override
     public void hurt(Entity ent, int damage) {
-        System.out.println(this + " is hurt by" + ent + "with " + damage);
         health -= damage;
         shake();
 
