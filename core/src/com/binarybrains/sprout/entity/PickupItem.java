@@ -30,6 +30,9 @@ public class PickupItem extends ItemEntity {
     private Sprite shadow;
     private boolean magnet = true;
     private Sparkle sparkle;
+    private float shadowFallingY = 0;
+    private float endPositionY = 0;
+    private boolean isPlayed = false;
 
     public PickupItem(Level level, Item item, Vector2 position) {
         super(level, item, position);
@@ -47,8 +50,11 @@ public class PickupItem extends ItemEntity {
             else
                 setX(getX()-MathUtils.random(8,20));
 
-            // this has to be connected to the tree
-            addAction(Actions.moveTo(position.x, position.y-42, MathUtils.random(.9f, 1.2f), Interpolation.bounceOut));
+            // this has to be connected to the tree?
+            shadowFallingY = position.y-45;
+            endPositionY = position.y-42;
+
+            addAction(Actions.moveTo(position.x, endPositionY, MathUtils.random(.9f, 1.2f), Interpolation.bounceOut));
         }
 
         // todo rareness level on item
@@ -137,6 +143,12 @@ public class PickupItem extends ItemEntity {
             updateBounce();
         }
 
+
+        if (getY() <= endPositionY+2 && bounce == false && !isPlayed) {
+            SproutGame.playSound("small_ground_hit", .18f, MathUtils.random(0.8f, .9f), 1);
+            isPlayed = true;
+        }
+
         float distance = distanceTo(getLevel().player);
         if (distance < 32 && getActions().size < 1 && magnet && getLevel().player.inventory.hasSpaceFor(this.item)) {
             // item in state of being sucked to the player
@@ -156,7 +168,14 @@ public class PickupItem extends ItemEntity {
 
     private void drawShadow(Batch batch, float delta) {
         shadow.setX(getX());
-        shadow.setY(getY()-(float)zz - 2);
+        if (bounce)
+        {
+            shadow.setY(getY()-(float)zz - 2);
+
+        } else
+        {
+            shadow.setY(shadowFallingY);
+        }
         shadow.draw(batch, 0.35f);
     }
 

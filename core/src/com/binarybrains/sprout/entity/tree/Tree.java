@@ -166,7 +166,6 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
 
     @Override
     public boolean use(Player player, Mob.Direction attackDir) {
-        // return super.use(player, attackDir);
         shake();
         SproutGame.playSound("leaves_rustling", MathUtils.random(0.5f, 0.8f), MathUtils.random(0.9f, 1.1f), 1f);
         int count = MathUtils.random(0,1);
