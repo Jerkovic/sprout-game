@@ -76,7 +76,7 @@ public class Stone extends Entity {
         health -= damage;
         shake();
 
-        getLevel().add(getLevel(), new TextParticle(getLevel(), getCenterPos(), "" + "+"  + damage));
+        getLevel().add(getLevel(), new TextParticle(getLevel(), getTopCenterPos(), "" + "+"  + damage));
 
         if (health < 1) {
             SproutGame.playSound("break_stone", 0.9f);

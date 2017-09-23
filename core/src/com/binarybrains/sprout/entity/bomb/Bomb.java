@@ -62,10 +62,14 @@ public class Bomb extends Entity implements Portable {
 
             for (int i = 0; i < entities.size(); i++) {
                 Entity e = entities.get(i);
-                if (e != this) e.hurt(this, 100); // get damage value from bomb or not?
+                if (e != this) e.hurt(this, getDamage()); // get damage value from bomb or not?
             }
 
         }
+    }
+
+    public int getDamage() {
+        return MathUtils.random(90, 100);
     }
 
     @Override

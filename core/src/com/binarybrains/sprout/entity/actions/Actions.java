@@ -1,7 +1,6 @@
 package com.binarybrains.sprout.entity.actions;
 
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.binarybrains.sprout.entity.Entity;
@@ -141,6 +140,58 @@ public class Actions {
 
     static public SequenceAction sequence () {
         return action(SequenceAction.class);
+    }
+
+
+    static public ParallelAction parallel (Action action1) {
+        ParallelAction action = action(ParallelAction.class);
+        action.addAction(action1);
+        return action;
+    }
+
+    static public ParallelAction parallel (Action action1, Action action2) {
+        ParallelAction action = action(ParallelAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        return action;
+    }
+
+    static public ParallelAction parallel (Action action1, Action action2, Action action3) {
+        ParallelAction action = action(ParallelAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        action.addAction(action3);
+        return action;
+    }
+
+    static public ParallelAction parallel (Action action1, Action action2, Action action3, Action action4) {
+        ParallelAction action = action(ParallelAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        action.addAction(action3);
+        action.addAction(action4);
+        return action;
+    }
+
+    static public ParallelAction parallel (Action action1, Action action2, Action action3, Action action4, Action action5) {
+        ParallelAction action = action(ParallelAction.class);
+        action.addAction(action1);
+        action.addAction(action2);
+        action.addAction(action3);
+        action.addAction(action4);
+        action.addAction(action5);
+        return action;
+    }
+
+    static public ParallelAction parallel (Action... actions) {
+        ParallelAction action = action(ParallelAction.class);
+        for (int i = 0, n = actions.length; i < n; i++)
+            action.addAction(actions[i]);
+        return action;
+    }
+
+    static public ParallelAction parallel () {
+        return action(ParallelAction.class);
     }
 
 }

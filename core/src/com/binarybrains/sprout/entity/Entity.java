@@ -124,14 +124,14 @@ public abstract class Entity {
         renderer.setColor(restoreColor);
     }
 
-    final Color color = new Color(1, 1, 1, 1);
+    private Color color = new Color(1, 1, 1, 1);
 
     public Color getColor () {
         return color;
     }
 
-    public Color setColor (Color color) {
-        return color;
+    public void setColor (Color color) {
+        this.color = color;
     }
 
 
@@ -187,6 +187,10 @@ public abstract class Entity {
 
     public Vector2 getCenterPos() {
         return new Vector2(position.x + (width / 2), position.y + (height / 2));
+    }
+
+    public Vector2 getTopCenterPos() {
+        return new Vector2(position.x + (width / 2), position.y + (height ));
     }
 
     public Rectangle getBoundingBox() {
