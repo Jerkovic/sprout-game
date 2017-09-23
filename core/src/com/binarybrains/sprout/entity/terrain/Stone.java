@@ -6,26 +6,24 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.bellsandwhistles.TextParticle;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
-import com.binarybrains.sprout.entity.bomb.Bomb;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.PickAxe;
 import com.binarybrains.sprout.level.Level;
-import com.binarybrains.sprout.level.tile.GrassTile;
 
 public class Stone extends Entity {
 
     private Sprite sprite;
-    private int health = 20; // change
+    private int health = 200; // change
     private boolean isShaking = false;
     private long startShakeTimer;
-
 
 
     public Stone(Level level, int tx, int ty) {
@@ -77,6 +75,8 @@ public class Stone extends Entity {
         System.out.println(this + " is hurt by" + ent + "with " + damage);
         health -= damage;
         shake();
+
+        getLevel().add(getLevel(), new TextParticle(getLevel(), getCenterPos(), "" + "+"  + damage));
 
         if (health < 1) {
             SproutGame.playSound("break_stone", 0.9f);

@@ -17,7 +17,7 @@ TODOS:
 
 * Prevent camera slides after hud window displays.
 
-* Add smashing/hit animation to item being pounded.
+* Add smashing/hit animation to item being pounded with tool.
 
 * PickupItems collide with water should *drown* and disappear
 

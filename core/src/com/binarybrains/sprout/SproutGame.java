@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.binarybrains.sprout.entity.Entity;
@@ -21,6 +22,7 @@ public class SproutGame extends Game {
 	public static String name = "Sprout";
 	private static TweenManager tweenManager;
 	public static AssetManager assets = new AssetManager();
+	private BitmapFont font;
 
 	@Override
 	public void create() {
@@ -31,9 +33,8 @@ public class SproutGame extends Game {
         Tween.registerAccessor(Entity.class, new EntityAccessor());
 		Tween.registerAccessor(Camera.class, new CameraAccessor());
 		loadAssets();
-        // A game usually have many screens
-        // - Splash Screen
-        // - Menu Screen
+
+
 		setScreen(new GameScreen(this));
 	}
 
@@ -48,6 +49,10 @@ public class SproutGame extends Game {
 	public static TweenManager getTweenManager() {
 
 		return tweenManager;
+	}
+
+	public BitmapFont getFont() {
+		return font;
 	}
 
 	@Override

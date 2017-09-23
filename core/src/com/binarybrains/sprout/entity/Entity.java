@@ -124,6 +124,17 @@ public abstract class Entity {
         renderer.setColor(restoreColor);
     }
 
+    final Color color = new Color(1, 1, 1, 1);
+
+    public Color getColor () {
+        return color;
+    }
+
+    public Color setColor (Color color) {
+        return color;
+    }
+
+
     public void init(Level level)
     {
         this.level = level;

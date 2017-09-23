@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.achievement.Achievement;
 import com.binarybrains.sprout.bellsandwhistles.Sparkle;
+import com.binarybrains.sprout.bellsandwhistles.TextParticle;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.furniture.Chest;
@@ -46,6 +48,7 @@ public class Level extends LevelEngine {
     public Player player;
     public boolean debugMode = false;
     public GameTime gameTimer;
+    public BitmapFont font;
 
     public Texture spritesheet; // 400x1264 pixels 25 tiles bred och 79 hög
     public Texture charsheet;
@@ -104,6 +107,10 @@ public class Level extends LevelEngine {
         charsheet = new Texture(Gdx.files.internal("spritesheet.png"));
         // temp code
 
+        // BitmapFont to use for text Particles
+        font = new BitmapFont(Gdx.files.internal("dpcomic.fnt"),
+                Gdx.files.internal("dpcomic.png"), false);
+
         loadMap(this, level);
 
         camera = new Camera(this);
@@ -144,6 +151,13 @@ public class Level extends LevelEngine {
             }
 
         }
+
+    }
+
+    public void add(Entity entity) {
+        entity.removed = false;
+        entities.add(entity);
+        entity.init(this);
     }
 
     public Camera getCamera() {
