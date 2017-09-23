@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.item.ArtifactItem;
@@ -38,6 +39,10 @@ public class Player extends Npc implements InputProcessor {
     public Portable carriedItem;
     public boolean CanMove = true;
     private Stats stats = new Stats();
+
+    private long lastUseTime = 0;
+    private long coolDownUseTime = 900; // this is how long before in millis the player can perform use/view again
+
 
     enum Keys {
         W, A, S, D
@@ -243,9 +248,26 @@ public class Player extends Npc implements InputProcessor {
         return true;
     }
 
+    public boolean canUse() {
+        long useTime = TimeUtils.millis();
+        if (TimeUtils.timeSinceMillis(lastUseTime) > coolDownUseTime)
+        {
+            lastUseTime = useTime;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     //  use/check/investigate called on right click.. boolean return type?
     public boolean use() {
         // can we really interact while carrying stuff?
+        // we need a use coolDown timer
+        if (!canUse()) {
+            System.out.println("cooldown use");
+            return false;
+        }
+
         if (getActionState() != ActionState.EMPTY_NORMAL) {
             return false;
         }
