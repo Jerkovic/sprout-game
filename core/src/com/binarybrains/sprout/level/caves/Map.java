@@ -48,7 +48,7 @@ public class Map
                     map[x][y] = 1; // solid rock
                 }
                 else {
-                    map[x][y] = 0; // solid rock
+                    map[x][y] = 0; // walk space
                 }
             }
         }
@@ -57,8 +57,10 @@ public class Map
     public void debug() {
         for (int y = 0; y < height; y++){
             for (int x = 0; x < width; x++){
-                if (map[x][y] > 0)
-                    System.out.print("8");
+                if (map[x][y] == 1)
+                    System.out.print("8"); // wall
+                else if (map[x][y] == 7)
+                    System.out.print("X"); // a valid entity start pos
                 else System.out.print(" ");
             }
             System.out.println("");
@@ -68,7 +70,7 @@ public class Map
 
     public Integer[][] generateMap(){
 
-        for(int i=0; i< 100; i++){
+        for(int i=0; i< 50; i++){
             map = doSimulationStep(map);
         }
         return map;
@@ -106,10 +108,38 @@ public class Map
         return newMap;
     }
 
+    public void edges() {
+        for (int x = 0; x < width; x++) {
+            map[x][0] = 1; // top
+            map[x][height-1] = 1; // bottom
+        }
+        for (int y = 0; y < height; y++) {
+            map[0][y] = 1; // left
+            map[width-1][y] = 1; // right
+        }
+    }
+
+    public void placeEntity(){
+        for (int x=0; x < width; x++){
+            for (int y=0; y < height; y++){
+                if(map[x][y] == 0){
+                    int nbs = countAliveNeighbours(map, x, y);
+                    if(nbs < 1){
+                        map[x][y] = 7; // place player pos
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+
     public static void main(String[] args)
     {
         Map cave = new Map();
         cave.generateMap();
+        cave.edges();
+        cave.placeEntity();
         cave.debug();
 
 
