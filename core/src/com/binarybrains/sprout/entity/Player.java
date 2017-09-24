@@ -264,7 +264,7 @@ public class Player extends Npc implements InputProcessor {
         // can we really interact while carrying stuff?
         // we need a use coolDown timer
         if (!canUse()) {
-            System.out.println("cooldown use");
+            // System.out.println("cooldown use");
             return false;
         }
 

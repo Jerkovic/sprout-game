@@ -28,7 +28,7 @@ public class ToolItem extends Item {
      * @return
      */
     public int getDamage() {
-        return (level+1) * 5;
+        return MathUtils.random((level+1) * 5, (level+2) * 5);
     }
 
     public String getRegionId() {
