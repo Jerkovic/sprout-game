@@ -306,10 +306,6 @@ public abstract class LevelEngine {
             }
         }
 
-        // ------------------------------------Caves ---------------------------------
-        // generateCaves();
-        // ------------------------------------Caves ---------------------------------
-
         MapProperties properties = map.getProperties();
         width = properties.get("width", Integer.class);
         height = properties.get("height", Integer.class);

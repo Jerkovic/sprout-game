@@ -33,6 +33,7 @@ import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.level.caves.Map;
+import com.binarybrains.sprout.level.tile.StairsTile;
 import com.binarybrains.sprout.level.tile.WallTile;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 import com.binarybrains.sprout.misc.Camera;
@@ -150,13 +151,26 @@ public class Level extends LevelEngine {
 
     public void spawnStoneInCaves() {
 
-        for (int i = 0; i < 300; i++) {
+        // random exit points
+        for (int i = 0; i < 6; i++) {
+            int xat = MathUtils.random(64,64+31);
+            int yat = MathUtils.random(1,31);
+            if (getTile(xat, yat).mayPass) {
+                setTile(xat, yat, new StairsTile(xat, yat));
+            }
+        }
+
+        // stones
+        for (int i = 0; i < 100; i++) {
             int xt = MathUtils.random(64,64+31);
             int yt = MathUtils.random(1,31);
             if (getTile(xt, yt).mayPass && getEntitiesAtTile(xt, yt).size() < 1 && (cavePoint.x != xt && cavePoint.y != yt)) {
                 add(this, new Stone(this, xt, yt));
             }
         }
+
+
+
     }
 
     public void generateCaves() {

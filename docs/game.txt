@@ -13,7 +13,8 @@ TODOS:
 * Slime enemy
 
 * Cave level generation 3-4 rooms and connecting hallways
-  https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664
+  - https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664
+  - TODO! Cave exit and cave next level point
 
 * https://github.com/libgdx/libgdx/wiki/Interpolation
 
