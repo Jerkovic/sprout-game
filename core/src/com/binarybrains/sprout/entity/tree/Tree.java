@@ -139,12 +139,15 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
 
         if (damage > 10 && !falling) {
             falling = true;
+            SproutGame.playSound("tree_fall", .30f, .76f, 1f);
             addAction(
                     Actions.sequence(
+                        Actions.delay(MathUtils.random(0.0001f, 0.1238f)),
                         Actions.rotateTo(90f, 1.5f, Interpolation.circleIn),
                         Actions.run(new Runnable() {
                             public void run () {
                                 remove();
+                                getLevel().getCamera().shake();
 
                                 int count = MathUtils.random(1,9);
                                 for (int i = 0; i < count; i++) {
