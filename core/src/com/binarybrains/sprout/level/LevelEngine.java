@@ -19,6 +19,7 @@ import com.binarybrains.sprout.entity.house.Cottage;
 import com.binarybrains.sprout.entity.tree.Bush;
 import com.binarybrains.sprout.entity.tree.SmallTree;
 import com.binarybrains.sprout.entity.tree.Tree;
+import com.binarybrains.sprout.level.caves.Map;
 import com.binarybrains.sprout.level.pathfind.Astar;
 import com.binarybrains.sprout.level.tile.*;
 import com.binarybrains.sprout.locations.Bed;
@@ -313,19 +314,5 @@ public abstract class LevelEngine {
     }
 
     public void generateCaves() {
-        float STAGE_SIZE = 128f;
-        Map map = new Map(System.currentTimeMillis(), (int) STAGE_SIZE, (int) STAGE_SIZE, 5, 9, 4, 4, 8, 8, 2000, false);
-
-        map.generate();
-
-        for (int i = 0; i < map.getHeight(); i++)
-        {
-            for (int j = 0; j < map.getWidth(); j++)
-            {
-                System.out.print(map.getTile(j, i));
-            }
-            System.out.println();
-
-        }
     }
 }

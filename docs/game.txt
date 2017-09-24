@@ -8,6 +8,10 @@ ________________________________________________________________________________
 
 TODOS:
 
+* New bitmap font for the onMap text .. TextParticle for example http://www.dafont.com/silkscreen.font
+
+* Slime enemy
+
 * Cave level generation 3-4 rooms and connecting hallways
   https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664
 
