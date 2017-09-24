@@ -45,6 +45,8 @@ TODOS:
 
 * New Emma animations
 
+* if a bomb explodes trees we need to see where the force came from to make the proper falling dir of the tree.
+
 * Weather conditions
 
 * Day night cycle handler
