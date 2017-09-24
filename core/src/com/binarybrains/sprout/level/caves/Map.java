@@ -143,15 +143,17 @@ public class Map
         return new Vector2(0,0); // throw exception instead
     }
 
-
-    public static void main(String[] args)
-    {
-        Map cave = new Map();
-        cave.generateMap();
-        cave.edges();
-        cave.debug();
-        // System.out.println(cave.countAliveNeighbours(cave.map, 1,1));
-        System.exit(0);
+    public Vector2 getFreeSpawnPos(int adjustmentX){
+        for (int x=0; x < width; x++){
+            for (int y=0; y < height; y++){
+                if(map[x][y] == 0){
+                    return  new Vector2(x+adjustmentX,y); // throw exception instead
+                }
+            }
+        }
+        return new Vector2(0,0); // throw exception instead
     }
+
+
 
 }

@@ -307,7 +307,7 @@ public abstract class LevelEngine {
         }
 
         // ------------------------------------Caves ---------------------------------
-        generateCaves();
+        // generateCaves();
         // ------------------------------------Caves ---------------------------------
 
         MapProperties properties = map.getProperties();
@@ -317,21 +317,5 @@ public abstract class LevelEngine {
         tilePixelHeight = properties.get("tileheight", Integer.class);
     }
 
-    public Vector2 cavePoint;
 
-    public void generateCaves() {
-        Map cave = new Map();
-        cave.generateMap();
-        cave.edges();
-        int adjustmentX = 64;
-
-
-        for(int x = 0; x < cave.getWidth();x++) {
-            for (int y = 0; y < cave.getHeight(); y++) {
-                if (cave.map[x][y] == 1) setTile(x+ adjustmentX, y, new WallTile(x+ adjustmentX, y));
-            }
-        }
-        this.cavePoint = cave.getPlayerStaringPos(adjustmentX);
-        System.out.println("cave" + cavePoint);
-    }
 }

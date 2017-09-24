@@ -32,6 +32,8 @@ import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.Resources;
+import com.binarybrains.sprout.level.caves.Map;
+import com.binarybrains.sprout.level.tile.WallTile;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
@@ -140,18 +142,36 @@ public class Level extends LevelEngine {
         setupPathFinding(); // construct the A.star
         this.add(this, new Emma(this, new Vector2(5 * 16f, 1 * 16f), 16f, 16f));
 
-        //  stone spawner
+        generateCaves(); // test
+
+    }
+
+    public Vector2 cavePoint;
+
+    public void spawnStoneInCaves() {
+
         for (int i = 0; i < 300; i++) {
-            int xt = MathUtils.random(0,100);
-            int yt = MathUtils.random(90,200);
-
-            if (getTile(xt, yt).mayPass && getEntitiesAtTile(xt, yt).size() < 1) {
-                //setTile(xt, yt, new StoneTile(xt, yt));
+            int xt = MathUtils.random(64,64+31);
+            int yt = MathUtils.random(1,31);
+            if (getTile(xt, yt).mayPass && getEntitiesAtTile(xt, yt).size() < 1 && (cavePoint.x != xt && cavePoint.y != yt)) {
                 add(this, new Stone(this, xt, yt));
-                // System.out.println("spawn stone at " + xt + "x" + yt);
             }
-
         }
+    }
+
+    public void generateCaves() {
+        Map cave = new Map();
+        cave.generateMap();
+        cave.edges();
+        int adjustmentX = 64;
+
+        for(int x = 0; x < cave.getWidth();x++) {
+            for (int y = 0; y < cave.getHeight(); y++) {
+                if (cave.map[x][y] == 1) setTile(x+ adjustmentX, y, new WallTile(x+ adjustmentX, y));
+            }
+        }
+        this.cavePoint = cave.getPlayerStaringPos(adjustmentX);
+        spawnStoneInCaves();
 
     }
 
