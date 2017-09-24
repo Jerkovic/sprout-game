@@ -2,6 +2,7 @@ package com.binarybrains.sprout.level.caves;
 
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 
 public class Map
 {
@@ -14,8 +15,16 @@ public class Map
         init();
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     //Returns the number of cells in a ring around (x,y) that are alive.
-    public int countAliveNeighbours(Integer[][] map, int x, int y){
+    private int countAliveNeighbours(Integer[][] map, int x, int y){
         int count = 0;
         for(int i=-1; i < 2; i++){
             for(int j=-1; j < 2; j++){
@@ -39,7 +48,7 @@ public class Map
     }
 
 
-    public void init() {
+    private void init() {
         // Our random cave before any cellular automaton simulation steps.
         float chanceToStartAlive = 0.45f;
         for (int x = 0; x < width; x++){
@@ -76,7 +85,7 @@ public class Map
         return map;
     }
 
-    public Integer[][] doSimulationStep(Integer[][] oldMap){
+    private Integer[][] doSimulationStep(Integer[][] oldMap){
 
         Integer[][] newMap = new Integer[width][height];
         int killFewNeighbours = 5;
@@ -119,18 +128,19 @@ public class Map
         }
     }
 
-    public void placeEntity(){
+    public Vector2 getPlayerStaringPos(int adjustmentX){
         for (int x=0; x < width; x++){
             for (int y=0; y < height; y++){
                 if(map[x][y] == 0){
                     int nbs = countAliveNeighbours(map, x, y);
                     if(nbs < 1){
                         map[x][y] = 7; // place player pos
-                        return;
+                        return new Vector2(x+adjustmentX, y);
                     }
                 }
             }
         }
+        return new Vector2(0,0); // throw exception instead
     }
 
 
@@ -139,10 +149,7 @@ public class Map
         Map cave = new Map();
         cave.generateMap();
         cave.edges();
-        cave.placeEntity();
         cave.debug();
-
-
         // System.out.println(cave.countAliveNeighbours(cave.map, 1,1));
         System.exit(0);
     }
