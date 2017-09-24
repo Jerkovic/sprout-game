@@ -133,13 +133,17 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
     @Override
     public void hurt(Entity e, int dmg) {
 
+        if (falling) return;
         super.hurt(e, dmg); // just debug
         damage += dmg;
         shake();
 
-        if (damage > 10 && !falling) {
+        // todo implement tree falling both left and right.
+
+        if (damage > 50 && !falling) {
+
             falling = true;
-            SproutGame.playSound("tree_fall", .30f, .76f, 1f);
+            SproutGame.playSound("tree_fall", .40f, .76f, 1f);
             addAction(
                     Actions.sequence(
                         Actions.delay(MathUtils.random(0.0001f, 0.1238f)),
@@ -149,14 +153,14 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
                                 remove();
                                 getLevel().getCamera().shake();
 
-                                int count = MathUtils.random(1,9);
+                                int count = MathUtils.random(3,9);
                                 for (int i = 0; i < count; i++) {
                                     getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.wood), new Vector2(getPosition().x, getPosition().y)));
                                 }
 
-                                count = MathUtils.random(0,2);
+                                count = MathUtils.random(0,1);
                                 for (int i = 0; i < count; i++) {
-                                    getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.acorn), new Vector2(getPosition().x, getPosition().y)));
+                                    getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.acorn), new Vector2(sprite.getX(), sprite.getY())));
                                 }
 
                             }

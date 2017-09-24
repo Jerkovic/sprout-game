@@ -5,6 +5,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -293,7 +294,7 @@ public class Hud {
         dialog.text(say);
         dialog.button("  OK  ", true); //sends "true" as the result
         dialog.center();
-        //dialog.key(Keys.Enter, true); //sends "true" when the ENTER key is pressed
+        //dialog.key(Input.Keys.Enter, true); //sends "true" when the ENTER key is pressed
         dialog.show(stage);
     }
 

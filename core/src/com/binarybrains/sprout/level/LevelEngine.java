@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.house.Cottage;
+import com.binarybrains.sprout.entity.house.Tower;
 import com.binarybrains.sprout.entity.tree.Bush;
 import com.binarybrains.sprout.entity.tree.SmallTree;
 import com.binarybrains.sprout.entity.tree.Tree;
@@ -224,6 +225,10 @@ public abstract class LevelEngine {
                     Cottage cottage = new Cottage(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight());
                     cottage.setDoorTilePos((Integer) object.getProperties().get("doorTileX"));
                     add(level, cottage);
+                } else if (objType.equals("tower")) {
+                    Tower tower = new Tower(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight());
+                    tower.setDoorTilePos((Integer) object.getProperties().get("doorTileX"));
+                    add(level, tower);
                 } else if (objType.equals("BridgeTrigger")) { // location triggers
                     String desc = object.getProperties().get("description").toString();
                     //String name = object.getProperties().get("Name").toString();

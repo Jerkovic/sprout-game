@@ -10,7 +10,11 @@ TODOS:
 
 * New bitmap font for the onMap text .. TextParticle for example http://www.dafont.com/silkscreen.font
 
+* Bitwise auto-tiling in the mines.
+
 * Slime enemy
+
+* if player dies fade out and wake up in bed...some inventory items are gone and some money
 
 * Cave level generation 3-4 rooms and connecting hallways
   - https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664
