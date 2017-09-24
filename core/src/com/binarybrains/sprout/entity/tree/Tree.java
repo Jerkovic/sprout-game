@@ -3,6 +3,7 @@ package com.binarybrains.sprout.entity.tree;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
@@ -11,6 +12,7 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
@@ -69,15 +71,13 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
     @Override
     public void update(float delta) {
 
+
         if (falling) { // timber!!
             time+=delta * 100;
-            if (time < 60) {
-                sprite.setRotation(time);
-            }
 
-            if (time >= 60) {
-                remove();
-                falling = false;
+            if (time >= 70) {
+                //remove();
+                //falling = false;
             }
         } else { // not falling
             if (isShaking) {
@@ -139,15 +139,26 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
 
         if (damage > 10 && !falling) {
             falling = true;
-            int count = MathUtils.random(1,9);
-            for (int i = 0; i < count; i++) {
-                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.wood), new Vector2(getPosition().x, getPosition().y)));
-            }
+            addAction(
+                    Actions.sequence(
+                        Actions.rotateTo(90f, 1.5f, Interpolation.circleIn),
+                        Actions.run(new Runnable() {
+                            public void run () {
+                                remove();
 
-            count = MathUtils.random(0,2);
-            for (int i = 0; i < count; i++) {
-                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.acorn), new Vector2(getPosition().x, getPosition().y)));
-            }
+                                int count = MathUtils.random(1,9);
+                                for (int i = 0; i < count; i++) {
+                                    getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.wood), new Vector2(getPosition().x, getPosition().y)));
+                                }
+
+                                count = MathUtils.random(0,2);
+                                for (int i = 0; i < count; i++) {
+                                    getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.acorn), new Vector2(getPosition().x, getPosition().y)));
+                                }
+
+                            }
+                        })
+            ));
         }
     }
 
@@ -180,6 +191,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         if (!falling) {
             drawShadow(batch);
         }
+        sprite.setRotation(getRotation());
         sprite.draw(batch);
     }
 

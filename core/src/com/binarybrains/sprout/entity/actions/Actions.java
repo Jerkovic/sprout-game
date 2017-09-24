@@ -1,6 +1,7 @@
 package com.binarybrains.sprout.entity.actions;
 
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.actions.*;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import com.binarybrains.sprout.entity.Entity;
@@ -68,6 +69,15 @@ public class Actions {
 
     static public BounceAction bounce() {
         BounceAction action = action(BounceAction.class);
+        return action;
+    }
+
+
+    static public RotateToAction rotateTo (float rotation, float duration, Interpolation interpolation) {
+        RotateToAction action = action(RotateToAction.class);
+        action.setRotation(rotation);
+        action.setDuration(duration);
+        action.setInterpolation(interpolation);
         return action;
     }
 

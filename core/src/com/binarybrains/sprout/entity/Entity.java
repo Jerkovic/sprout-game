@@ -20,12 +20,12 @@ public abstract class Entity {
     private Level level;
     private Vector2 position = new Vector2();
     private int width, height;
-    private float zIndex = 0;
     protected float stateTime = 0;
     protected Rectangle box = new Rectangle();
     protected Rectangle walkBox = new Rectangle(); // add more complex walkPolygon instead of box?
     public Boolean removed = false;
-
+    private Color color = new Color(1, 1, 1, 1);
+    private float rotation;
     private List<Entity> containsList = new ArrayList<Entity>();
     private final Array<Action> actions = new Array(0);
 
@@ -33,7 +33,6 @@ public abstract class Entity {
     public Entity(Level level, Vector2 position, float width, float height) {
         init(level);
         this.position = position;
-        this.zIndex = position.y;
         this.width = (int)width;
         this.height = (int)height;
         updateBoundingBox();
@@ -87,6 +86,25 @@ public abstract class Entity {
         }
     }
 
+    public float getRotation () {
+        return rotation;
+    }
+
+    public void setRotation (float degrees) {
+        if (this.rotation != degrees) {
+            this.rotation = degrees;
+            //rotationChanged();
+        }
+    }
+
+    /** Adds the specified rotation to the current rotation. */
+    public void rotateBy (float amountInDegrees) {
+        if (amountInDegrees != 0) {
+            rotation += amountInDegrees;
+            // rotationChanged();
+        }
+    }
+
     public float angleTo(Entity entity) {
         float angle = (float) Math.toDegrees(Math.atan2(entity.getX() - getX(), entity.getY() - getY()));
         return (float) (angle + Math.ceil( -angle / 360 ) * 360);
@@ -124,8 +142,6 @@ public abstract class Entity {
         renderer.setColor(restoreColor);
     }
 
-    private Color color = new Color(1, 1, 1, 1);
-
     public Color getColor () {
         return color;
     }
@@ -133,7 +149,6 @@ public abstract class Entity {
     public void setColor (Color color) {
         this.color = color;
     }
-
 
     public void init(Level level)
     {
