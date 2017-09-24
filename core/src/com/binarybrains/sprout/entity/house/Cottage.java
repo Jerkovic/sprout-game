@@ -99,7 +99,9 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
     public void draw(Batch batch, float parentAlpha) {
         // change sprite if isRepaired
         if (isRepaired) {
-            sprite.setAlpha(.5f);
+            //sprite.setColor(new Color(0f, 0f, 0f, 1f));
+            sprite.setAlpha(.9f);
+            // sprite.setTexture(fixedHouseTexture);
         }
         sprite.draw(batch);
 
