@@ -32,6 +32,7 @@ import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.Resources;
+import com.binarybrains.sprout.misc.BackgroundMusic;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
@@ -222,10 +223,15 @@ public class Level extends LevelEngine {
             }
         }
 
+        // goto caves - we need some state handling for where the player is
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            screen.hud.teleportPlayer(player, (int)cavePoint.x, (int)cavePoint.y);
+            BackgroundMusic.stop(); // fade out music
+            screen.pauseAmbience();
+        }
+
         // test PickupItem
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-
-            // generateCaves();
 
             SproutGame.playSound("magic_upgrade", .45f);
             player.setDirection(Mob.Direction.SOUTH);
