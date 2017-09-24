@@ -16,10 +16,6 @@ TODOS:
   - https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664
   - TODO! Cave exit and cave next level point
 
-* https://github.com/libgdx/libgdx/wiki/Interpolation
-
-* when hitting something .. we need to display the damage made like a textParticle
-
 * Prevent camera slides after hud window displays.
 
 * Add smashing/hit animation to item being pounded with tool.

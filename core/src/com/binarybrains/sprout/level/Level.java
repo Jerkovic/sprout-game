@@ -112,8 +112,8 @@ public class Level extends LevelEngine {
         // temp code
 
         // BitmapFont to use for text Particles
-        font = new BitmapFont(Gdx.files.internal("dpcomic.fnt"),
-                Gdx.files.internal("dpcomic.png"), false);
+        font = new BitmapFont(Gdx.files.internal("pixel.fnt"),
+                Gdx.files.internal("pixel.png"), false);
 
         loadMap(this, level);
 

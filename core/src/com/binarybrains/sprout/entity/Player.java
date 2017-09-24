@@ -268,6 +268,9 @@ public class Player extends Npc implements InputProcessor {
             return false;
         }
 
+
+
+            
         if (getActionState() != ActionState.EMPTY_NORMAL) {
             return false;
         }

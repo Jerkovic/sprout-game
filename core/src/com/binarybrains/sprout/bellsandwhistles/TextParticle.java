@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.actions.Actions;
@@ -51,10 +52,11 @@ public class TextParticle extends Entity {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+
+        //getLevel().font.getData().setScale(1f);
         getLevel().font.setUseIntegerPositions(false);
         shadow.set(shadow.r, shadow.g, shadow.b, getColor().a);
         getLevel().font.setColor(shadow);
-
         getLevel().font.draw(batch, text, getPosition().x+1, getPosition().y-1);
         getLevel().font.setColor(getColor());
         getLevel().font.draw(batch, text, getPosition().x, getPosition().y);
