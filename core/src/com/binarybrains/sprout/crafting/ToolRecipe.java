@@ -17,6 +17,7 @@ public class ToolRecipe extends Recipe {
 
     @Override
     public void craft(Inventory inventory) {
+        // remove recently upgraded tool?
         inventory.add(new ToolItem(tool, level));
     }
 

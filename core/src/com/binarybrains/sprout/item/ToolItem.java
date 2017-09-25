@@ -11,9 +11,7 @@ public class ToolItem extends Item {
     public int level;
 
     public static final int MAX_LEVEL = 3;
-    public static final String[] LEVEL_NAMES = { //
-            "Basic", "Iron", "Gold"//
-    };
+    public static final String[] LEVEL_NAMES = {"Basic", "Copper", "Iron", "Gold"};
 
     public ToolItem(Tool tool, int level) {
         this.tool = tool;
@@ -28,6 +26,7 @@ public class ToolItem extends Item {
      * @return
      */
     public int getDamage() {
+        System.out.println(level);
         return MathUtils.random((level+1) * 5, (level+2) * 5);
     }
 

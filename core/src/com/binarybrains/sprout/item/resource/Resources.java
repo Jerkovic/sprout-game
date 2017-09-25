@@ -9,6 +9,9 @@ public class Resources {
     public static Resource stick = new Resource("Stick", "A stick made of wood");
     public static Resource stone = new Resource("Stone", "Hard, solid, nonmetallic mineral matter especially \ngood as building material.");
 
+    public static Resource copperOre = new Resource("Copper Ore", " Rock with a brassy color");
+    public static Resource copperBar = new Resource("Copper Bar", "Solid bar of of copper");
+
     public static Resource ironOre = new Resource("Iron Ore", "Rock from which iron can be profitably extracted.");
     public static Resource ironBar = new Resource("Iron Bar", "Strong, hard magnetic silvery-gray metal");
 
