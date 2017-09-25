@@ -153,6 +153,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
                                 remove();
                                 getLevel().getCamera().shake();
 
+                                SproutGame.playSound("bump_against", .6f);
                                 int count = MathUtils.random(3,9);
                                 for (int i = 0; i < count; i++) {
                                     getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.wood), new Vector2(getPosition().x, getPosition().y)));
