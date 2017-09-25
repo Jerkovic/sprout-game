@@ -4,6 +4,7 @@ import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ListItem;
 import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.resource.Resource;
 
 import java.util.ArrayList;
@@ -13,12 +14,12 @@ import java.util.List;
 public abstract class Recipe implements ListItem {
     public List<Item> costs = new ArrayList<Item>();
     public boolean canCraft = false;
-    private Item resultTemplate;
+    private Item resultItem;
     public boolean isUnlocked = true;
     private boolean removeRecipeOnCraft = false;
 
     public Recipe(Item resultTemplate) {
-        this.resultTemplate = resultTemplate;
+        this.resultItem = resultTemplate;
     }
 
     public Recipe setLocked() {
@@ -45,10 +46,25 @@ public abstract class Recipe implements ListItem {
     }
 
     public Item getItem() {
-        return resultTemplate;
+        return resultItem;
     }
 
     public void checkCanCraft(Inventory inventory) {
+
+        if (this instanceof ToolUpgradeRecipe) {
+            // the inventory must have a previous level of that tool
+            ToolItem upgrade = ((ToolItem) this.resultItem);
+            ToolItem existTool = inventory.findToolByName(upgrade.getToolName());
+
+            if (existTool != null && existTool.level == upgrade.level - 1) {
+                // upgrade is legal ... check if we can afford it below
+            } else {
+                canCraft = false;
+                return;
+            }
+
+        }
+
         for (int i = 0; i < costs.size(); i++) {
             Item item = costs.get(i);
             if (item instanceof ResourceItem) {
@@ -80,10 +96,10 @@ public abstract class Recipe implements ListItem {
     }
 
     public String toString() {
-        return resultTemplate.getName() + "(" + canCraft + ")";
+        return resultItem.getName() + "(" + canCraft + ")";
     }
 
     public String getRegionId() {
-        return resultTemplate.getName();
+        return resultItem.getName();
     }
 }

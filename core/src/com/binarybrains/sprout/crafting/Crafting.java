@@ -27,12 +27,19 @@ public class Crafting {
             workbenchRecipes.add(new ResourceRecipe(Resources.stick).addCost(Resources.wood, 1));
 
             workbenchRecipes.add(new ToolRecipe(new Hoe(), 0).addCost(Resources.stone, 1).addCost(Resources.stick, 1));
-            workbenchRecipes.add(new ToolRecipe(new Axe(), 0).addCost(Resources.stone, 1).addCost(Resources.stick, 1));
+
+            // Axe upgrade recipes
+            workbenchRecipes.add(new ToolUpgradeRecipe(new Axe(), 1).addCost(Resources.stone, 1).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted());
+            workbenchRecipes.add(new ToolUpgradeRecipe(new Axe(), 2).addCost(Resources.stone, 1).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted());
+            workbenchRecipes.add(new ToolUpgradeRecipe(new Axe(), 3).addCost(Resources.stone, 1).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted());
+
             workbenchRecipes.add(new ToolRecipe(new PickAxe(), 0).addCost(Resources.stone, 2).addCost(Resources.stick, 1));
             workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Resources.ironBar, 5));
             workbenchRecipes.add(new ToolRecipe(new Scythe(), 0).addCost(Resources.ironBar, 2).addCost(Resources.stick, 2));
             workbenchRecipes.add(new ToolRecipe(new FishingPole(), 0).addCost(Resources.ironBar, 1).addCost(Resources.stick, 1).addCost(Resources.string, 1));
             workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Resources.ironBar, 2).setRemoveRecipeOnCrafted().setLocked());
+
+
 
             workbenchRecipes.add(new ResourceRecipe(Resources.cloth).addCost(Resources.wool, 3));
             workbenchRecipes.add(new ResourceRecipe(Resources.cider).addCost(Resources.apple, 17));
@@ -76,22 +83,6 @@ public class Crafting {
         return recipes;
     }
 
-    /**
-     * Finds a recipe by name
-     * @param name
-     * @return
-     */
-    public Recipe findRecipeByName(String name) {
-
-        for (int i = 0; i < getRecipes().size(); i++) {
-            Recipe recipe = getRecipes().get(i);
-            System.out.println(recipe.getItem().getName());
-            if (recipe.getItem().getName().equals(name)) {
-                return recipe;
-            }
-        }
-        return null;
-    }
 
     public boolean startCraft(Player player, int index) {
         Recipe recipe = recipes.get(index);

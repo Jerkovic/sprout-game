@@ -2,6 +2,7 @@ package com.binarybrains.sprout.item;
 
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.item.tool.Tool;
 
 public class ToolItem extends Item {
@@ -9,6 +10,7 @@ public class ToolItem extends Item {
     public Tool tool;
     public int count = 1;
     public int level;
+    private Vector2 damageRange;
 
     public static final int MAX_LEVEL = 3;
     public static final String[] LEVEL_NAMES = {"Basic", "Copper", "Iron", "Gold"};
@@ -16,6 +18,14 @@ public class ToolItem extends Item {
     public ToolItem(Tool tool, int level) {
         this.tool = tool;
         this.level = level;
+        damageRange = new Vector2(0f, 0f);
+        updateDamageRanage();
+
+    }
+
+    private void updateDamageRanage() {
+        damageRange.x = (level+1) * 5;
+        damageRange.y = (level+2) * 5;
     }
 
     /**
@@ -26,17 +36,25 @@ public class ToolItem extends Item {
      * @return
      */
     public int getDamage() {
-        System.out.println(level);
-        return MathUtils.random((level+1) * 5, (level+2) * 5);
+        return (int) MathUtils.random(damageRange.x, damageRange.y);
+    }
+
+    public String getDamageRange() {
+        return "Damage: " + damageRange.x + " - " + damageRange.y;
     }
 
     public String getRegionId() {
-
         String regid = LEVEL_NAMES[level] + "_" + tool.getName().replace(" ", "_");
         return regid.replace("Basic_", "");
     }
 
+    public String getToolName() {
+
+        return tool.getName();
+    }
+
     public String getName() {
+
         return LEVEL_NAMES[level] + " " + tool.getName();
     }
 
@@ -53,5 +71,15 @@ public class ToolItem extends Item {
     @Override
     public String getDescription() {
         return tool.getDescription();
+    }
+
+    public boolean upgrade(int level) {
+        if (level <= ToolItem.MAX_LEVEL) {
+            this.level = level;
+            updateDamageRanage();
+            return true;
+        }
+        return false;
+
     }
 }

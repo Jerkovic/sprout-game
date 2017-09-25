@@ -5,11 +5,11 @@ import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.tool.Tool;
 
 
-public class ToolRecipe extends Recipe {
+public class ToolUpgradeRecipe extends Recipe {
     private int level;
     private Tool tool;
 
-    public ToolRecipe(Tool tool, int level) {
+    public ToolUpgradeRecipe(Tool tool, int level) {
         super(new ToolItem(tool, level));
         this.level = level;
         this.tool = tool;
@@ -17,8 +17,7 @@ public class ToolRecipe extends Recipe {
 
     @Override
     public void craft(Inventory inventory) {
-
-        inventory.add(new ToolItem(tool, level));
+        inventory.upgradeTool(tool.getName(), level);
     }
 
     public String getDescription() {

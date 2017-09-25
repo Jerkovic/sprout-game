@@ -104,6 +104,10 @@ public class InventoryWindow extends Window {
         tooltipTable.add(item.getName()).left();
         tooltipTable.row();
         tooltipTable.add(item.getDescription()).left();
+        if (item instanceof ToolItem) {
+            tooltipTable.row();
+            tooltipTable.add(((ToolItem) item).getDamageRange()).left();
+        }
         tooltipTable.align(Align.left | Align.top);
         return tooltipTable;
     }

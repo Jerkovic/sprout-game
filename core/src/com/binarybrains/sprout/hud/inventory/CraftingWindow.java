@@ -101,6 +101,7 @@ public class CraftingWindow extends Dialog {
                         onCrafting();
                         // temp sound remake this.
                         ((Sound) SproutGame.assets.get("sfx/craft_complete.wav")).play(.1f);
+                        player.getLevel().screen.hud.refreshInventory();
                     } else {
                         player.getLevel().screen.hud.addToasterMessage("Inventory" ,"Inventory is full!");
                     }

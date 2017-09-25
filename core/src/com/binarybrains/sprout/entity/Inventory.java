@@ -4,6 +4,7 @@ package com.binarybrains.sprout.entity;
 import com.badlogic.gdx.Gdx;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.level.Level;
 
@@ -52,7 +53,6 @@ public class Inventory {
     }
 
     public Item replace(int slot, Item item) {
-        // what to do
         try {
             Item replacedItem = items.get(slot);
             items.remove(slot);
@@ -116,6 +116,24 @@ public class Inventory {
         ResourceItem ri = findResource(r);
         if (ri == null) return false;
         return ri.count >= count;
+    }
+
+    public boolean upgradeTool(String name, int level) {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) != null && items.get(i) instanceof ToolItem && ((ToolItem) items.get(i)).getToolName().equals(name)) {
+                return ((ToolItem) items.get(i)).upgrade(level);
+            }
+        }
+        return false;
+    }
+
+    public ToolItem findToolByName(String name) {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) != null && items.get(i) instanceof ToolItem && ((ToolItem) items.get(i)).getToolName().equals(name)) {
+                return ((ToolItem) items.get(i));
+            }
+        }
+        return null;
     }
 
     public boolean removeItem(Item item) {
@@ -232,10 +250,10 @@ public class Inventory {
 
     public void removeSlot(int checkedIndex) {
         items.remove(checkedIndex);
-        items.add(checkedIndex, null); // test empty slot
+        items.add(checkedIndex, null);
     }
 
-    public void setCapacity(int capacity) {
+    private void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
