@@ -29,9 +29,9 @@ public class Crafting {
             workbenchRecipes.add(new ToolRecipe(new Hoe(), 0).addCost(Resources.stone, 1).addCost(Resources.stick, 1));
 
             // Axe upgrade recipes
-            workbenchRecipes.add(new ToolUpgradeRecipe(new Axe(), 1).addCost(Resources.stone, 1).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted());
-            workbenchRecipes.add(new ToolUpgradeRecipe(new Axe(), 2).addCost(Resources.stone, 1).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted());
-            workbenchRecipes.add(new ToolUpgradeRecipe(new Axe(), 3).addCost(Resources.stone, 1).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted());
+            workbenchRecipes.add(new ToolUpgradeRecipe(Tools.axe, 1).addCost(Resources.copperBar, 4).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted());
+            workbenchRecipes.add(new ToolUpgradeRecipe(Tools.axe, 2).addCost(Resources.ironBar, 4).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted());
+            workbenchRecipes.add(new ToolUpgradeRecipe(Tools.axe, 3).addCost(Resources.goldIngot, 4).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted());
 
             workbenchRecipes.add(new ToolRecipe(new PickAxe(), 0).addCost(Resources.stone, 2).addCost(Resources.stick, 1));
             workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Resources.ironBar, 5));
@@ -69,7 +69,11 @@ public class Crafting {
             this.recipes.get(i).checkCanCraft(inventory);
         }
 
-        // this should probably move to its own method
+        sortRecipes();
+
+    }
+
+    public void sortRecipes() {
         Collections.sort(this.recipes, new Comparator<Recipe>() {
             public int compare(Recipe r1, Recipe r2) {
                 if (r1.canCraft && !r2.canCraft) return -1;

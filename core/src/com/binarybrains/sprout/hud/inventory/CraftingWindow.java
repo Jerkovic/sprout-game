@@ -83,6 +83,7 @@ public class CraftingWindow extends Dialog {
         //recipeRowTable.debug();
 
         int index = 0;
+        craft.sortRecipes();
         for (Recipe recipe : craft.getRecipes()) {
             recipe.checkCanCraft(player.getInventory());
 
