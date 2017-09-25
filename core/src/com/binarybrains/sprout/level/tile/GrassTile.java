@@ -22,22 +22,22 @@ public class GrassTile extends Tile {
     static
     {
         dirtAutoTiles = new HashMap<Integer, Integer>();
-        dirtAutoTiles.put(0, 1326);
-        dirtAutoTiles.put(1, 1326+1);
-        dirtAutoTiles.put(2, 1326+2);
-        dirtAutoTiles.put(3, 1326+3);
-        dirtAutoTiles.put(4, 1351);
-        dirtAutoTiles.put(5, 1351+1);
-        dirtAutoTiles.put(6, 1351+2);
-        dirtAutoTiles.put(7, 1351+3);
-        dirtAutoTiles.put(8, 1376);
-        dirtAutoTiles.put(9, 1376+1);
-        dirtAutoTiles.put(10, 1376+2);
-        dirtAutoTiles.put(11, 1376+3);
-        dirtAutoTiles.put(12, 1401);
-        dirtAutoTiles.put(13, 1401+1);
-        dirtAutoTiles.put(14, 1401+2);
-        dirtAutoTiles.put(15, 1401+3);
+        dirtAutoTiles.put(0, 1591);
+        dirtAutoTiles.put(1, 1591+1);
+        dirtAutoTiles.put(2, 1591+2);
+        dirtAutoTiles.put(3, 1591+3);
+        dirtAutoTiles.put(4, 1621);
+        dirtAutoTiles.put(5, 1621+1);
+        dirtAutoTiles.put(6, 1621+2);
+        dirtAutoTiles.put(7, 1621+3);
+        dirtAutoTiles.put(8, 1651);
+        dirtAutoTiles.put(9, 1651+1);
+        dirtAutoTiles.put(10, 1651+2);
+        dirtAutoTiles.put(11, 1651+3);
+        dirtAutoTiles.put(12, 1681);
+        dirtAutoTiles.put(13, 1681+1);
+        dirtAutoTiles.put(14, 1681+2);
+        dirtAutoTiles.put(15, 1681+3);
     }
 
     public GrassTile(int x, int y, Boolean mayPass) {

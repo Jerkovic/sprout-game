@@ -7,7 +7,7 @@ public class StairsTile extends Tile {
 
     public StairsTile(int x, int y) {
         super(x, y, false);
-        setTileSetIndex(1952);
+        setTileSetIndex(2342);
     }
 
     @Override

@@ -169,8 +169,6 @@ public class Level extends LevelEngine {
             }
         }
 
-
-
     }
 
     public void generateCaves() {

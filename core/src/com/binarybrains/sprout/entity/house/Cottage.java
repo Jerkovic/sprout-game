@@ -83,10 +83,7 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
             SproutGame.playSound("fancy_reward", 0.34f);
             player.getInventory().removeResource(Resources.wood, 500);
             player.getLevel().screen.hud.refreshInventory();
-            // give player something
-            // change house sprite
             sprite.setRegion(25*16, 71*16, (int)getWidth(), (int)getHeight());
-
             isRepaired = true;
         }
         return false;
