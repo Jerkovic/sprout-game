@@ -86,8 +86,13 @@ public class Stone extends Entity {
             }
 
             if (MathUtils.randomBoolean()) {
+                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.copperOre), getCenterPos()));
+            }
+
+            if (MathUtils.randomBoolean()) {
                 getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.ironOre), getCenterPos()));
             }
+
 
             if (MathUtils.random(1,4) == 1) {
                 getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.goldNugget), getCenterPos()));

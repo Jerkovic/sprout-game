@@ -69,7 +69,7 @@ public class InventoryManagementWindow extends Dialog {
         button.addListener(new ClickListener(Input.Buttons.LEFT) {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (getHeldItem() != null) {
+                if (getHeldItem() != null && !(getHeldItem() instanceof ToolItem)) {
                     setHeldItem(null);
                     SproutGame.playSound("garbage_can", .4f, MathUtils.random(0.8f, 1.1f), 1f);
                 }
