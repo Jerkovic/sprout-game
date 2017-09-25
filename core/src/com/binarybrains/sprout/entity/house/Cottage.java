@@ -2,6 +2,7 @@ package com.binarybrains.sprout.entity.house;
 
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -82,9 +83,10 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
             SproutGame.playSound("fancy_reward", 0.34f);
             player.getInventory().removeResource(Resources.wood, 500);
             player.getLevel().screen.hud.refreshInventory();
-
             // give player something
             // change house sprite
+            sprite.setRegion(25*16, 71*16, (int)getWidth(), (int)getHeight());
+
             isRepaired = true;
         }
         return false;
@@ -99,9 +101,7 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
     public void draw(Batch batch, float parentAlpha) {
         // change sprite if isRepaired
         if (isRepaired) {
-            //sprite.setColor(new Color(0f, 0f, 0f, 1f));
-            sprite.setAlpha(.9f);
-            // sprite.setTexture(fixedHouseTexture);
+
         }
         sprite.draw(batch);
 
