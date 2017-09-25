@@ -92,7 +92,7 @@ public class SproutGame extends Game {
     }
 
     public void loadAssets() {
-		assets.load("sfx/chopping_Wood_1.wav", Sound.class);
+        assets.load("sfx/chopping_Wood_1.wav", Sound.class);
         assets.load("sfx/chopping_Wood_2.wav", Sound.class);
 		assets.load("sfx/blop.wav", Sound.class);
         assets.load("sfx/door_open.wav", Sound.class);
