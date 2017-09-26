@@ -8,6 +8,8 @@ ________________________________________________________________________________
 
 TODOS:
 
+* Inventory Management - heldItem should display item stack to the mouse pointer
+
 * Mail queue
 
 * Bitwise auto-tiling in the mines.
@@ -27,8 +29,6 @@ TODOS:
 * PickupItems collide with water should *drown* and disappear
 
 * Shadow system. More generic or what should we do?
-
-* Inventory Management - heldItem should display item stack to the mouse pointer
 
 * AmbientLocationSounds Handler - Play sound louder if close to the source
 

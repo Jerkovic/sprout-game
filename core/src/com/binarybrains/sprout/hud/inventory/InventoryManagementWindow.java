@@ -140,8 +140,19 @@ public class InventoryManagementWindow extends Dialog {
         return tooltipTable;
     }
 
+    /**
+     * @todo We need to display stack counter as well
+     * @param item
+     */
     private void setHeldItem(Item item) {
         heldItem = item;
+        if (item != null) {
+            level.screen.hud.setMouseItem(item.getRegionId());
+        } else {
+            level.screen.hud.removeMouseItem();
+        }
+
+
     }
 
     private Item getHeldItem() {
