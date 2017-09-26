@@ -1,13 +1,13 @@
 package com.binarybrains.sprout.misc;
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.math.MathUtils;
+import com.binarybrains.sprout.SproutGame;
 
 public class BackgroundMusic {
 
-    // make it a Map?
-    static Music track1 = Gdx.audio.newMusic(Gdx.files.internal("music/track2.mp3"));
+    static Music currentTrack;
 
     static float FACTOR = .2f; // The bigger the factor, the faster the fade-out will be
     static float mVolume = 1.2f;
@@ -15,24 +15,25 @@ public class BackgroundMusic {
     static boolean isStopped = false;
 
     public static void start() {
+
+        changeTrack(MathUtils.random(1, 2));
         mIsPlaying = true;
         isStopped = false;
-        track1.setLooping(true);
-        track1.play();
+        currentTrack.setLooping(true);
+        currentTrack.play();
     }
 
     public static void changeTrack(int track) {
-        // todo change track
+        changeTrack("track" + track);
     }
 
     public static void setVolume(float volume) {
         mVolume = volume;
-        track1.setVolume(mVolume);
+        currentTrack.setVolume(mVolume);
     }
 
     public static void changeTrack(String newTrackName) {
-        // todo change track
-
+        currentTrack = SproutGame.assets.get("music/" + newTrackName + ".mp3");
     }
 
     public static boolean isPlaying() {
@@ -45,16 +46,16 @@ public class BackgroundMusic {
 
     public static void dispose() {
         // dispose tracks
-        track1.dispose();
+        currentTrack.dispose();
     }
 
     public static void update(float delta) {
         if (mIsPlaying && isStopped) {
             mVolume -= delta * FACTOR;
             if (mVolume > 0) {
-                track1.setVolume(mVolume);
+                currentTrack.setVolume(mVolume);
             } else {
-                track1.stop();
+                currentTrack.stop();
                 mIsPlaying = false;
             }
         }
