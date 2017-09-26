@@ -1,5 +1,6 @@
 package com.binarybrains.sprout.entity.terrain;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
@@ -24,6 +25,7 @@ public class Stone extends Entity {
     private int health = 50; // change
     private boolean isShaking = false;
     private long startShakeTimer;
+    private Color textParticleColor = new Color(1, 0.1f, 0.1f, 1f);
 
 
     public Stone(Level level, int tx, int ty) {
@@ -75,7 +77,7 @@ public class Stone extends Entity {
         health -= damage;
         shake();
 
-        getLevel().add(getLevel(), new TextParticle(getLevel(), getTopCenterPos(), "" + "+"  + damage));
+        getLevel().add(getLevel(), new TextParticle(getLevel(), getTopCenterPos(), "" + "+"  + damage, textParticleColor));
 
         if (health < 1) {
             SproutGame.playSound("break_stone", 0.9f);

@@ -132,6 +132,7 @@ public class SproutGame extends Game {
         // Open futuristic chest https://www.youtube.com/watch?v=n_Ug7hgd4kE
         // Open close chest https://www.youtube.com/watch?v=PnjKFzFQpfU
         // Rope stretch https://www.youtube.com/watch?v=UhtONqZ-nag
+		// Anvil sound https://www.youtube.com/watch?v=0L7Rsjyiqmc
 
         // Ambience sounds
         assets.load("ambience/forest_morning_ambience.mp3", Sound.class);

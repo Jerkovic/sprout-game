@@ -22,11 +22,10 @@ public class TextParticle extends Entity {
     private String text;
     private final Color shadow = new Color(0f, 0f, 0f, 1f);
 
-    public TextParticle(Level level, Vector2 position, String text) {
+    public TextParticle(Level level, Vector2 position, String text, Color color) {
         super(level, position, 20, 20);
         this.text = text;
-        setColor(new Color(1, 0.1f, 0.1f, 1f));
-        // meausure text todo
+        setColor(new Color(1f, 0f, 0f, 1f));
         fade();
     }
 

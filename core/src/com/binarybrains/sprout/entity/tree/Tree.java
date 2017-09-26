@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.bellsandwhistles.TextParticle;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.PickupItem;
@@ -38,9 +39,9 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
     private int damage = 0;
     private boolean falling = false;
     private boolean flipped = false;
-    private int time = 0;
     private boolean isShaking = false;
     private long startShakeTimer;
+    private Color textParticleColor = new Color(0f, 1f, 0f, 1f);
 
     public void shake() {
         startShakeTimer = TimeUtils.nanoTime();
@@ -71,28 +72,19 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
     @Override
     public void update(float delta) {
 
-
-        if (falling) { // timber!!
-            time+=delta * 100;
-
-            if (time >= 70) {
-                //remove();
-                //falling = false;
+        if (isShaking && !falling) {
+            if (TimeUtils.nanoTime() < startShakeTimer + 1000000000 * .3) {
+                float currentPower = 5 * delta;
+                float x = (MathUtils.random(0f, 1f) - 0.5f) * 2 * currentPower;
+                float y = (MathUtils.random(0f, 1f) - 0.5f) * 2 * currentPower;
+                sprite.translate(-x, -y);
             }
-        } else { // not falling
-            if (isShaking) {
-                if (TimeUtils.nanoTime() < startShakeTimer + 1000000000 * .3) {
-                    float currentPower = 5 * delta;
-                    float x = (MathUtils.random(0f, 1f) - 0.5f) * 2 * currentPower;
-                    float y = (MathUtils.random(0f, 1f) - 0.5f) * 2 * currentPower;
-                    sprite.translate(-x, -y);
-                }
-                else
-                {
-                    isShaking = false;
-                }
+            else
+            {
+                isShaking = false;
             }
         }
+
         super.update(delta);
 
     }
@@ -126,7 +118,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
     }
 
     public void containTrigger(Entity entity) {
-        sprite.setAlpha(.55f);
+        sprite.setAlpha(.75f);
     }
 
 
@@ -134,9 +126,11 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
     public void hurt(Entity e, int dmg) {
 
         if (falling) return;
-        super.hurt(e, dmg); // just debug
         damage += dmg;
         shake();
+
+        // change color when dealing with trees?
+        getLevel().add(getLevel(), new TextParticle(getLevel(), getBottomCenterPos(), "" + "+"  + dmg, textParticleColor));
 
         // todo implement tree falling both left and right.
 

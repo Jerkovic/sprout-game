@@ -215,6 +215,11 @@ public abstract class Entity {
         return new Vector2(position.x + (width / 2), position.y + (height ));
     }
 
+    public Vector2 getBottomCenterPos() {
+        return new Vector2(position.x + (width / 2), position.y);
+    }
+
+
     public Rectangle getBoundingBox() {
         return box;
     }

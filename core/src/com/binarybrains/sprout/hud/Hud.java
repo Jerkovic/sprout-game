@@ -101,6 +101,16 @@ public class Hud {
 
     }
 
+    public void fadeOutRunFadeInScreen(Runnable runnable) {
+        fadeActor.clearActions();
+        fadeActor.addAction(Actions.sequence(
+                Actions.alpha(0),
+                Actions.fadeIn(.6f, Interpolation.fade),
+                Actions.run(runnable),
+                Actions.fadeOut(.4f, Interpolation.fade)
+        ));
+    }
+
     public void teleportPlayer(final Player player, final int x, final int y) {
         player.releaseKeys();
         fadeActor.clearActions();
@@ -110,7 +120,7 @@ public class Hud {
                 Actions.run(new Runnable() { public void run(){
                     player.setTilePos(x,y);
                     player.getLevel().getCamera().setPosition(new Vector3(player.getX(), player.getY(), 0));
-                    SproutGame.playSound("door_close1");
+                    SproutGame.playSound("door_close1"); // todo different sounds
                 }}),
                 Actions.fadeOut(.3f, Interpolation.fade)
         ));

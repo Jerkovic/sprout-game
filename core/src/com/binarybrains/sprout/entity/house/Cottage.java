@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
@@ -83,7 +85,11 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
             SproutGame.playSound("fancy_reward", 0.34f);
             player.getInventory().removeResource(Resources.wood, 500);
             player.getLevel().screen.hud.refreshInventory();
-            sprite.setRegion(25*16, 71*16, (int)getWidth(), (int)getHeight());
+
+            player.getLevel().screen.hud.fadeOutRunFadeInScreen(new Runnable() { public void run(){
+                sprite.setRegion(25*16, 71*16, (int)getWidth(), (int)getHeight());
+            }});
+
             isRepaired = true;
         }
         return false;
@@ -100,7 +106,7 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
         if (isRepaired) {
 
         }
-        sprite.draw(batch);
+        sprite.draw(batch, getColor().a);
 
     }
 
