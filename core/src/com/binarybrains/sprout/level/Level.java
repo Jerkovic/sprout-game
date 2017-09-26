@@ -20,10 +20,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.achievement.Achievement;
-import com.binarybrains.sprout.bellsandwhistles.Sparkle;
-import com.binarybrains.sprout.bellsandwhistles.TextParticle;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
+import com.binarybrains.sprout.entity.enemy.Slime;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
@@ -144,6 +143,9 @@ public class Level extends LevelEngine {
         this.add(this, new Emma(this, new Vector2(5 * 16f, 1 * 16f), 16f, 16f));
 
         generateCaves(); // test
+
+        // Slime test
+        this.add(new Slime(this, new Vector2(20 * 16f, 30 * 16f), 16f, 16f));
 
     }
 
