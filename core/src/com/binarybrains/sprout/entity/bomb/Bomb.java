@@ -40,7 +40,9 @@ public class Bomb extends Entity implements Portable {
         atlas = SproutGame.assets.get("items2.txt");
         region = atlas.findRegion("Bomb");
         explosionAnimation = new Animation(1/12f, atlas.findRegions("Explosion"));
-        lifeTime = 60 * 2 + MathUtils.random(1, 2);
+        lifeTime = (60 * 2) + MathUtils.random(1, 5);
+
+        SproutGame.playSound("fuse", 1f, MathUtils.random(0.75f, 0.85f), 1f);
     }
 
     @Override

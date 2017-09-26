@@ -8,10 +8,6 @@ ________________________________________________________________________________
 
 TODOS:
 
-* Burning fuse sound for bomb
-
-* New bitmap font for the onMap text .. TextParticle for example http://www.dafont.com/silkscreen.font
-
 * Bitwise auto-tiling in the mines.
 
 * Slime enemy
