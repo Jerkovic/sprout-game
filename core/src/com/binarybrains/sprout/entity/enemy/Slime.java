@@ -2,7 +2,12 @@ package com.binarybrains.sprout.entity.enemy;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Mob;
+import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.item.Item;
+import com.binarybrains.sprout.item.ToolItem;
+import com.binarybrains.sprout.item.tool.Mace;
 import com.binarybrains.sprout.level.Level;
 
 public class Slime extends Mob {
@@ -11,6 +16,7 @@ public class Slime extends Mob {
 
     public Slime(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height);
+        setHealth(1000);
     }
 
     @Override
@@ -37,8 +43,33 @@ public class Slime extends Mob {
         } else {
             // what do todo when slime is stuck?
         }
-
     }
+
+    @Override
+    public void die() {
+        if (!this.removed) {
+            SproutGame.playSound("slime_splat");
+            // slime should drop something
+            super.remove();
+        }
+    }
+
+
+    @Override
+    public boolean interact(Player player, Item item, Direction attackDir) {
+
+        if (item instanceof ToolItem) {
+            ToolItem toolItem = (ToolItem) item;
+            if (toolItem.tool instanceof Mace && toolItem.tool.canUse()) {
+                SproutGame.playSound("menu_select", 1f, MathUtils.random(0.7f, 1.1f), 1f);
+                hurt(player, toolItem.getDamage(), player.getDirection()); // hurt slime
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 
 }

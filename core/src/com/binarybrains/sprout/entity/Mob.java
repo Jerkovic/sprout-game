@@ -94,7 +94,7 @@ public abstract class Mob extends Entity {
         this.speed = speed;
     }
 
-    protected void die() {
+    public void die() {
         if (!this.removed) {
             System.out.println(this + " died");
             super.remove();
@@ -131,19 +131,21 @@ public abstract class Mob extends Entity {
             System.out.println(mob + " gives " + damage + " damage to " + this + " " + direction + " health remaining: " + getHealth());
         }
 
-        // knockBackAction test
+        float knockBackForce = MathUtils.random(28f, 34f);
+        float knockBackTime = MathUtils.random(.212234f, .334242f);
+
         if (attackDir == Direction.SOUTH) {
-            addAction(Actions.moveTo(getX(), getY() - 16, .2f, Interpolation.exp5Out));
+            addAction(Actions.moveTo(getX(), getY() - knockBackForce, knockBackTime, Interpolation.exp5Out));
         }
         if (attackDir == Direction.NORTH) {
-            addAction(Actions.moveTo(getX(), getY() + 16, .2f, Interpolation.exp5Out));
+            addAction(Actions.moveTo(getX(), getY() + knockBackForce, knockBackTime, Interpolation.exp5Out));
         }
 
         if (attackDir == Direction.WEST) {
-            addAction(Actions.moveTo(getX()-16, getY(), .2f, Interpolation.exp5Out));
+            addAction(Actions.moveTo(getX()-knockBackForce, getY(), knockBackTime, Interpolation.exp5Out));
         }
         if (attackDir == Direction.EAST) {
-            addAction(Actions.moveTo(getX()+16, getY(), .2f, Interpolation.exp5Out));
+            addAction(Actions.moveTo(getX()+knockBackForce, getY(), knockBackTime, Interpolation.exp5Out));
         }
 
     }

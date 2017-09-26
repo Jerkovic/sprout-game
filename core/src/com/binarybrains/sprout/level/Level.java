@@ -145,7 +145,7 @@ public class Level extends LevelEngine {
         generateCaves(); // test
 
         // Slime test
-        this.add(new Slime(this, new Vector2(20 * 16f, 30 * 16f), 16f, 16f));
+        this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
 
     }
 
