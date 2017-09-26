@@ -117,6 +117,12 @@ public abstract class Entity {
         return (float) (Math.sqrt((dx*dx)+(dy*dy)));
     }
 
+    public float distanceToCenter(Entity entity) {
+        float dx = entity.getCenterPos().x - getCenterPos().x;
+        float dy = entity.getCenterPos().y - getCenterPos().y;
+        return (float) (Math.sqrt((dx*dx)+(dy*dy)));
+    }
+
 
     public Item getActiveItem() {
         return null;

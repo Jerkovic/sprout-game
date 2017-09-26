@@ -93,17 +93,14 @@ public abstract class LevelEngine {
         for (int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
             if (e.getWalkBox().overlaps(area)) {
-                e.setTempFloat(player.distanceTo(e));
+                e.setTempFloat(player.distanceToCenter(e));
                 result.add(e);
             }
         }
         Collections.sort(result, nearestSorter);
-        System.out.println(result);
         return result;
     }
 
-
-    // TODO: should probably need to another; get entities by a certain type/class
     public List<Entity> getEntities(Rectangle area) {
         List<Entity> result = new ArrayList<Entity>();
 
