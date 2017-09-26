@@ -21,6 +21,8 @@ import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.Tools;
 import com.binarybrains.sprout.level.Level;
+import com.binarybrains.sprout.mail.Mailbox;
+import com.binarybrains.sprout.mail.Message;
 
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +41,7 @@ public class Player extends Npc implements InputProcessor {
     public Portable carriedItem;
     public boolean CanMove = true;
     private Stats stats = new Stats();
+    private Mailbox mailBox = new Mailbox();
 
     private long lastUseTime = 0;
     private long coolDownUseTime = 900; // this is how long before in millis the player can perform use/view again
@@ -86,8 +89,13 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ResourceItem(Resources.apple, 12));
         getInventory().add(new ResourceItem(Resources.ladder, 1));
 
-        // setActiveItemByName
+        // todo setActiveItemByName?
         setActiveItem(getInventory().getItems().get(3));
+
+        // Mailbox
+        mailBox.add(new Message("Hello World", "This is the first mail sent to you"));
+        mailBox.add(new Message("Hello Again", "This is the second mail sent to you!"));
+
 
         // move this to a shadow system ?
         shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));

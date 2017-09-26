@@ -8,6 +8,8 @@ ________________________________________________________________________________
 
 TODOS:
 
+* Mail queue
+
 * Bitwise auto-tiling in the mines.
 
 * Slime enemy
