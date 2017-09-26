@@ -1,5 +1,8 @@
 package com.binarybrains.sprout.entity.enemy;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
@@ -13,10 +16,14 @@ import com.binarybrains.sprout.level.Level;
 public class Slime extends Mob {
 
     private float speed = .123133489879f;
+    private TextureRegion texture;
 
     public Slime(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height);
         setHealth(1000);
+        // Gem_Node temp sprite
+        TextureAtlas atlas = SproutGame.assets.get("items2.txt");
+        texture = atlas.findRegion("Gem_Node");
     }
 
     @Override
@@ -70,6 +77,10 @@ public class Slime extends Mob {
         return false;
     }
 
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        batch.draw(texture, getX(), getY(), 16, 16);
+    }
 
 
 }

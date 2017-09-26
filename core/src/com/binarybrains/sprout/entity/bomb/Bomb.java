@@ -24,7 +24,6 @@ import java.util.List;
 public class Bomb extends Entity implements Portable {
 
     boolean carried = true;
-    private TextureAtlas atlas; // move
     private TextureRegion region;
     private Animation explosionAnimation;
     private float elapsedTime = 0;
@@ -37,7 +36,7 @@ public class Bomb extends Entity implements Portable {
 
     public Bomb(Level level, int tx, int ty) {
         super(level, new Vector2(16f * tx, 16f * ty), 16, 16);
-        atlas = SproutGame.assets.get("items2.txt");
+        TextureAtlas atlas = SproutGame.assets.get("items2.txt");
         region = atlas.findRegion("Bomb");
         explosionAnimation = new Animation(1/12f, atlas.findRegions("Explosion"));
         lifeTime = (60 * 2) + MathUtils.random(1, 5);
