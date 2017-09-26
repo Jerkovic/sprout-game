@@ -16,7 +16,7 @@ public class BackgroundMusic {
 
     public static void start() {
 
-        changeTrack(MathUtils.random(1, 2));
+        changeTrack(MathUtils.random(1, 3)); // random select a track in our library
         mIsPlaying = true;
         isStopped = false;
         currentTrack.setLooping(true);
@@ -33,6 +33,7 @@ public class BackgroundMusic {
     }
 
     public static void changeTrack(String newTrackName) {
+        // load it here?
         currentTrack = SproutGame.assets.get("music/" + newTrackName + ".mp3");
     }
 
