@@ -178,7 +178,6 @@ public class Player extends Npc implements InputProcessor {
             y = getY();
             height = getHeight();
             width = getWidth();
-
         }
         if (getDirection()== Direction.NORTH) {
             x = getX();
@@ -217,15 +216,17 @@ public class Player extends Npc implements InputProcessor {
         }
 
         boolean done = false;
-        List<Entity> entities = getLevel().getEntities(getInteractBox());
+        // List<Entity> entities = getLevel().getEntities(getInteractBox());
+        List<Entity> entities = getLevel().getNearestEntity(this, getInteractBox());
         // should we really interact with all items here?
+        // maybe the items closest to the player?
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			if (e != this)
 				if (e.interact(this, activeItem, getDirection())) {
                     done = true; // we have encountered an entity in the interact box
                 }
-            if (done) return done; // move up in for loop?
+            if (done) return done;
 		}
 
         int tile_x = getTileX();

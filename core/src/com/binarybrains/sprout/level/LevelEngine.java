@@ -79,6 +79,30 @@ public abstract class LevelEngine {
         return entities;
     }
 
+    public Comparator<Entity> nearestSorter = new Comparator<Entity>() {
+        public int compare(Entity e0, Entity e1) {
+            if (e1.getTempFloat() < e0.getTempFloat()) return +1;
+            if (e1.getTempFloat() > e0.getTempFloat()) return -1;
+            return 0;
+        }
+    };
+
+    public List<Entity> getNearestEntity(Player player, Rectangle area) {
+        List<Entity> result = new ArrayList<Entity>();
+
+        for (int i = 0; i < entities.size(); i++) {
+            Entity e = entities.get(i);
+            if (e.getWalkBox().overlaps(area)) {
+                e.setTempFloat(player.distanceTo(e));
+                result.add(e);
+            }
+        }
+        Collections.sort(result, nearestSorter);
+        System.out.println(result);
+        return result;
+    }
+
+
     // TODO: should probably need to another; get entities by a certain type/class
     public List<Entity> getEntities(Rectangle area) {
         List<Entity> result = new ArrayList<Entity>();

@@ -129,15 +129,14 @@ Zelda
 
 
 -------------------------= Tech stuff --------------------------------
-- pixel fonts
-   https://github.com/gameover-fwk/gameover-fwk/blob/master/src/test/resources/simplest_font.png
 
 
 Crafting
 levels:
-1.basic
-2.steel iron
-3.gold
+1 basic
+2 copper
+3 iron
+4 gold
 
 
 Actions

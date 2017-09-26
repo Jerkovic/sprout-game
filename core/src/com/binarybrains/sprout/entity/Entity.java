@@ -28,6 +28,7 @@ public abstract class Entity {
     private float rotation;
     private List<Entity> containsList = new ArrayList<Entity>();
     private final Array<Action> actions = new Array(0);
+    private float temp;
 
 
     public Entity(Level level, Vector2 position, float width, float height) {
@@ -410,6 +411,14 @@ public abstract class Entity {
 
     public float getSortOrder() {
         return getY();
+    }
+
+    public float getTempFloat() {
+        return temp;
+    }
+
+    public void setTempFloat(float temp) {
+        this.temp = temp;
     }
 
     public void dispose() {
