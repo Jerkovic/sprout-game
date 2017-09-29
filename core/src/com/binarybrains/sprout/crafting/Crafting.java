@@ -4,6 +4,7 @@ import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.*;
 
@@ -40,9 +41,12 @@ public class Crafting {
             workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Resources.ironBar, 2).setRemoveRecipeOnCrafted().setLocked());
 
 
-
             workbenchRecipes.add(new ResourceRecipe(Resources.cloth).addCost(Resources.wool, 3));
             workbenchRecipes.add(new ResourceRecipe(Resources.cider).addCost(Resources.apple, 17));
+
+            workbenchRecipes.add(new ResourceRecipe(Resources.cider).addCost(Resources.apple, 17));
+            workbenchRecipes.add(new ResourceRecipe(Resources.cocktail).addCost(Resources.banana, 1).addCost(Resources.apple, 1).addCost(Resources.coconut, 1)); // todo add more
+
 
             // change to Furnace Recipes
             workbenchRecipes.add(new ResourceRecipe(Resources.bomb).addCost(Resources.ironOre, 4).addCost(Resources.coal, 2));

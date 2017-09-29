@@ -337,8 +337,7 @@ public class Npc extends Mob implements Telegraph {
         else if (getState() == State.WALKING) {
             animationMatrix[getActionState().ordinal()][animDirection.ordinal()].setPlayMode(Animation.PlayMode.LOOP);
             currentFrame = (TextureRegion) animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
-       }
-
+        }
         batch.draw(currentFrame, getX(), getY());
     }
 

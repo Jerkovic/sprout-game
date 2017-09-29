@@ -215,9 +215,19 @@ public class InventoryManagementWindow extends Dialog {
                 @Override
                 public void clicked(InputEvent event, float x, float y)
                 {
-                    System.out.println("right mouse button");
-                    // addActor(new Image());
+                    if (group.getCheckedIndex() > -1) {
+                        if (heldItem == null) {
+                            SproutGame.playSound("button_click", .4f, 0.9f, 1f);
+                            setHeldItem(inventory.getItems().get(group.getCheckedIndex()));
+                            // get from Inventory 1 from the stack
+                            //inventory.removeSlot(group.getCheckedIndex());
+                            System.out.println("heldItem" + heldItem);
+                            onInventoryChanged(inventory);
+                        } else if (heldItem != null) {
+                            SproutGame.playSound("button_click", .45f, 0.95f, 1f);
 
+                        }
+                    }
                 }
             });
 

@@ -47,7 +47,7 @@ public class BackgroundMusic {
 
     public static void dispose() {
         // dispose tracks
-        currentTrack.dispose();
+        if (currentTrack != null) currentTrack.dispose();
     }
 
     public static void update(float delta) {

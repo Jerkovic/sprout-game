@@ -20,7 +20,6 @@ import com.binarybrains.sprout.entity.house.Tower;
 import com.binarybrains.sprout.entity.tree.Bush;
 import com.binarybrains.sprout.entity.tree.SmallTree;
 import com.binarybrains.sprout.entity.tree.Tree;
-import com.binarybrains.sprout.level.caves.Map;
 import com.binarybrains.sprout.level.pathfind.Astar;
 import com.binarybrains.sprout.level.tile.*;
 import com.binarybrains.sprout.locations.Bed;

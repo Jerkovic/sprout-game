@@ -24,6 +24,7 @@ import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.enemy.Slime;
 import com.binarybrains.sprout.entity.furniture.Chest;
+import com.binarybrains.sprout.entity.misc.Mail;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.entity.terrain.Stone;
@@ -129,6 +130,9 @@ public class Level extends LevelEngine {
         add(this, player);
         add(this, new Chest(this, new Vector2(16 * 22, 16 * 110)));
 
+        // add player mail
+        // add(this, new Mail(this, new Vector2(13*16f,1540f)));
+
         tileMapRenderer = new OrthogonalTiledMapRenderer(map);
         tileMapRenderer.setView(camera);
 
@@ -153,8 +157,8 @@ public class Level extends LevelEngine {
 
     public void spawnStoneInCaves() {
 
-        // random exit points
-        for (int i = 0; i < 6; i++) {
+        // random exit points for player
+        for (int i = 0; i < 2; i++) {
             int xat = MathUtils.random(64,64+31);
             int yat = MathUtils.random(1,31);
             if (getTile(xat, yat).mayPass) {
@@ -176,6 +180,7 @@ public class Level extends LevelEngine {
     public void generateCaves() {
         Map cave = new Map();
         cave.generateMap();
+        cave.debug();
         cave.edges();
         int adjustmentX = 64;
 

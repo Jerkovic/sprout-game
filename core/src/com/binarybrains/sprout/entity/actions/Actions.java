@@ -42,6 +42,20 @@ public class Actions {
         return removeAction;
     }
 
+    static public RepeatAction repeat (int count, Action repeatedAction) {
+        RepeatAction action = action(RepeatAction.class);
+        action.setCount(count);
+        action.setAction(repeatedAction);
+        return action;
+    }
+
+    static public RepeatAction forever (Action repeatedAction) {
+        RepeatAction action = action(RepeatAction.class);
+        action.setCount(RepeatAction.FOREVER);
+        action.setAction(repeatedAction);
+        return action;
+    }
+
     static public MoveToAction moveTo (float x, float y, float duration, Interpolation interpolation) {
         MoveToAction action = action(MoveToAction.class);
         action.setPosition(x, y);

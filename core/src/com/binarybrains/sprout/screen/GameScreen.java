@@ -1,5 +1,6 @@
 package com.binarybrains.sprout.screen;
 
+import aurelienribon.tweenengine.equations.Back;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
@@ -53,6 +54,7 @@ public class GameScreen implements Screen {
         forestAmbienceSfx = SproutGame.assets.get("ambience/forest_morning_ambience.mp3");
 
 
+        /*
         Timer.schedule(new Timer.Task(){
             @Override
             public void run(){
@@ -62,7 +64,7 @@ public class GameScreen implements Screen {
                 }
             }
         }, 2.0f, 10);
-
+        */
     }
 
     private long soundID;
@@ -134,6 +136,7 @@ public class GameScreen implements Screen {
     public void pause() {
         level.player.releaseKeys();
         forestAmbienceSfx.pause();
+        //BackgroundMusic.stop();
         gameState = GameState.PAUSE;
         level.gameTimer.paus();
     }

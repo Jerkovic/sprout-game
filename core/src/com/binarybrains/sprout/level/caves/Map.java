@@ -79,7 +79,7 @@ public class Map
 
     public Integer[][] generateMap(){
 
-        for(int i=0; i< 50; i++){
+        for(int i=0; i< 200; i++){
             map = doSimulationStep(map);
         }
         return map;
