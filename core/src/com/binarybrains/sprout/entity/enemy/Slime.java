@@ -20,7 +20,7 @@ public class Slime extends Mob {
 
     public Slime(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height);
-        setHealth(1000);
+        setHealth(80);
         // Gem_Node temp sprite
         TextureAtlas atlas = SproutGame.assets.get("items2.txt");
         texture = atlas.findRegion("Gem_Node");
@@ -55,7 +55,7 @@ public class Slime extends Mob {
     @Override
     public void die() {
         if (!this.removed) {
-            SproutGame.playSound("slime_splat");
+            SproutGame.playSound("splat");
             // slime should drop something
             super.remove();
         }

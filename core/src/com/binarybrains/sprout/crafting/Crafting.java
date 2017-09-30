@@ -42,7 +42,6 @@ public class Crafting {
 
 
             workbenchRecipes.add(new ResourceRecipe(Resources.cloth).addCost(Resources.wool, 3));
-            workbenchRecipes.add(new ResourceRecipe(Resources.cider).addCost(Resources.apple, 17));
 
             workbenchRecipes.add(new ResourceRecipe(Resources.cider).addCost(Resources.apple, 17));
             workbenchRecipes.add(new ResourceRecipe(Resources.cocktail).addCost(Resources.banana, 1).addCost(Resources.apple, 1).addCost(Resources.coconut, 1)); // todo add more

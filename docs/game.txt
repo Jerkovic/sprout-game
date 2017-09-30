@@ -14,7 +14,7 @@ TODOS:
 
 * Bitwise auto-tiling in the mines.
 
-* Slime enemy
+* Slime enemy (started)
 
 * if player dies fade out and wake up in bed...some inventory items are gone and some money
 

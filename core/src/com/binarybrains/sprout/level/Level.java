@@ -29,6 +29,7 @@ import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.entity.terrain.Stone;
 import com.binarybrains.sprout.item.ArtifactItem;
+import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.Resources;
@@ -41,6 +42,7 @@ import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -177,12 +179,23 @@ public class Level extends LevelEngine {
 
     }
 
+    public List<Map> caveLevel = new ArrayList<Map>();
+
+    public void generateCaveLevels() {
+        for(int level= 0; level <= 100; level++) {
+            Map cave = new Map();
+            cave.generateMap();
+            cave.edges();
+            caveLevel.add(cave);
+        }
+    }
+
     public void generateCaves() {
         Map cave = new Map();
         cave.generateMap();
         cave.debug();
         cave.edges();
-        int adjustmentX = 64;
+        int adjustmentX = 64; // the adjustment on our tileMap
 
         for(int x = 0; x < cave.getWidth();x++) {
             for (int y = 0; y < cave.getHeight(); y++) {

@@ -218,9 +218,6 @@ public class InventoryManagementWindow extends Dialog {
                     if (group.getCheckedIndex() > -1) {
                         if (heldItem == null) {
                             SproutGame.playSound("button_click", .4f, 0.9f, 1f);
-                            setHeldItem(inventory.getItems().get(group.getCheckedIndex()));
-                            // get from Inventory 1 from the stack
-                            //inventory.removeSlot(group.getCheckedIndex());
                             System.out.println("heldItem" + heldItem);
                             onInventoryChanged(inventory);
                         } else if (heldItem != null) {

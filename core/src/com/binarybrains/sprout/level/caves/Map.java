@@ -97,10 +97,10 @@ public class Map
                 //The new value is based on our simulation rules
                 //First, if a cell is alive but has too few neighbours, kill it.
                 if(oldMap[x][y]== 1) {
-                    if(nbs < killFewNeighbours){
+                    if(nbs < killFewNeighbours) {
                         newMap[x][y] = 0;
                     }
-                    else{
+                    else {
                         newMap[x][y] = 1;
                     }
                 } //Otherwise, if the cell is dead now, check if it has the right number of neighbours to be 'born'
