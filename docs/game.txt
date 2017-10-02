@@ -12,6 +12,8 @@ TODOS:
 
 * Mail queue
 
+* watered ground should change color
+
 * Bitwise auto-tiling in the mines.
 
 * Slime enemy (started)

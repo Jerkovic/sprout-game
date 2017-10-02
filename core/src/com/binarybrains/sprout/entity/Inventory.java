@@ -248,6 +248,19 @@ public class Inventory {
         return items;
     }
 
+    public Item getMoveItemWithQuantity(int slotIndex, int quantity) {
+
+        if (items.get(slotIndex) != null && items.get(slotIndex) instanceof ResourceItem) {
+            if (count(items.get(slotIndex)) >= quantity) {
+                removeResource( ((ResourceItem) items.get(slotIndex)).resource, quantity);
+                // here we have to return a temporary heldItem
+                return new ResourceItem(new Resource("Potato", ""), quantity);
+            }
+        }
+        return null;
+
+    }
+
     public void removeSlot(int checkedIndex) {
         items.remove(checkedIndex);
         items.add(checkedIndex, null);
