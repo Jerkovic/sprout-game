@@ -221,15 +221,15 @@ public class InventoryManagementWindow extends Dialog {
                     if (group.getCheckedIndex() > -1) {
                         if (heldItem == null) {
                             button.setChecked(true);
-
-                            System.out.println(group.getCheckedIndex());
                             setHeldItem(inventory.getMoveItemWithQuantity(group.getCheckedIndex(), 1));
                             SproutGame.playSound("button_click", .4f, 0.9f, 1f);
                             System.out.println("heldItem -> " + heldItem);
                             onInventoryChanged(inventory);
                         } else {
                             SproutGame.playSound("button_click", .45f, 0.95f, 1f);
-
+                            inventory.add(group.getCheckedIndex(), heldItem);
+                            setHeldItem(null);
+                            onInventoryChanged(inventory);
                         }
                     }
                 }

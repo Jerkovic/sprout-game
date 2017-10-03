@@ -6,6 +6,7 @@ import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.resource.Resource;
+import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.ArrayList;
@@ -254,7 +255,7 @@ public class Inventory {
             if (count(items.get(slotIndex)) >= quantity) {
                 removeResource( ((ResourceItem) items.get(slotIndex)).resource, quantity);
                 // here we have to return a temporary heldItem
-                return new ResourceItem(new Resource("Potato", ""), quantity);
+                return new ResourceItem(Resources.wood, quantity);
             }
         }
         return null;
