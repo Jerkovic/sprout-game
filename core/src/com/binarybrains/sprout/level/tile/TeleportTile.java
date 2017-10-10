@@ -15,7 +15,7 @@ public class TeleportTile extends Tile {
         // improve this this is just test
         //player.getLevel().screen.hud.inventoryTop(); // a a test to make it align top
         player.getLevel().screen.hud.teleportPlayer(player, 18,91);
-        player.getLevel().screen.resumeAmbience(); // just temporary
+        // player.getLevel().screen.resumeAmbience(); // just temporary
 
         return false;
     }

@@ -36,6 +36,7 @@ import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.level.caves.Map;
 import com.binarybrains.sprout.level.tile.StairsTile;
 import com.binarybrains.sprout.level.tile.WallTile;
+import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
@@ -279,7 +280,7 @@ public class Level extends LevelEngine {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             screen.hud.teleportPlayer(player, (int)cavePoint.x, (int)cavePoint.y);
             BackgroundMusic.stop(); // fade out music
-            screen.pauseAmbience();
+            AmbienceSound.setSound("forest_night_ambience");
         }
 
         // test PickupItem

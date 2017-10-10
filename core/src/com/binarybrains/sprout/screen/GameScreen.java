@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.hud.Hud;
 import com.binarybrains.sprout.level.Level;
+import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 
 public class GameScreen implements Screen {
@@ -50,11 +51,9 @@ public class GameScreen implements Screen {
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
 
-        // todo we need a handling class for Ambience
-        forestAmbienceSfx = SproutGame.assets.get("ambience/forest_morning_ambience.mp3");
+        // handling class for Ambience
+        AmbienceSound.setSound("forest_morning_ambience");
 
-
-        /*
         Timer.schedule(new Timer.Task(){
             @Override
             public void run(){
@@ -64,24 +63,12 @@ public class GameScreen implements Screen {
                 }
             }
         }, 2.0f, 10);
-        */
     }
-
-    private long soundID;
 
     @Override
     public void show() {
-        soundID = forestAmbienceSfx.loop(.15f);
+        // AmbienceSound.start();
     }
-
-    public void pauseAmbience () {
-        forestAmbienceSfx.pause(soundID);
-    }
-
-    public void resumeAmbience () {
-        forestAmbienceSfx.resume(soundID);
-    }
-
 
     @Override
     public void render(float delta) {
@@ -135,8 +122,8 @@ public class GameScreen implements Screen {
     @Override
     public void pause() {
         level.player.releaseKeys();
-        forestAmbienceSfx.pause();
-        //BackgroundMusic.stop();
+        AmbienceSound.pause();
+        // BackgroundMusic.stop();
         gameState = GameState.PAUSE;
         level.gameTimer.paus();
     }
@@ -144,7 +131,7 @@ public class GameScreen implements Screen {
     @Override
     public void resume() {
         level.player.releaseKeys();
-        forestAmbienceSfx.resume();
+        AmbienceSound.resume();
         gameState = GameState.RUN;
         level.gameTimer.resume();
     }
@@ -159,5 +146,6 @@ public class GameScreen implements Screen {
         level.dispose();
         skin.dispose();
         BackgroundMusic.dispose();
+        AmbienceSound.dispose();
     }
 }

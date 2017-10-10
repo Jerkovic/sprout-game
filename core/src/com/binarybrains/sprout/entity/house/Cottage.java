@@ -18,6 +18,7 @@ import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.level.Level;
+import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 
 
@@ -72,7 +73,8 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
             SproutGame.playSound("door_open");
             getLevel().screen.hud.teleportPlayer(player, 4, 2);
             BackgroundMusic.stop(); // fade out music
-            getLevel().screen.pauseAmbience();
+            // getLevel().screen.pauseAmbience();
+            AmbienceSound.pause();
             return true;
         }
 
