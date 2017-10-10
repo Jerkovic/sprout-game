@@ -138,8 +138,7 @@ public class SproutGame extends Game {
         // Ambience sounds
         assets.load("ambience/forest_morning_ambience.mp3", Sound.class);
         assets.load("ambience/forest_night_ambience.mp3", Sound.class);
-        // https://www.youtube.com/watch?v=W8tVwiYsgHg
-        // todo cave ambience https://www.youtube.com/watch?v=PO7DwrEhVUw
+		assets.load("ambience/cave_ambience.mp3", Sound.class);
 
 
         // Music (check out Ross Bugden)

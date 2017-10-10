@@ -280,7 +280,7 @@ public class Level extends LevelEngine {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
             screen.hud.teleportPlayer(player, (int)cavePoint.x, (int)cavePoint.y);
             BackgroundMusic.stop(); // fade out music
-            AmbienceSound.setSound("forest_night_ambience");
+            AmbienceSound.setSound("cave_ambience");
         }
 
         // test PickupItem
