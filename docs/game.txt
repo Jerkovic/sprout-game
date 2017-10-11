@@ -225,3 +225,24 @@ Weapons(tools)
 - Spear = Spjut (wood + nån typ av sten)
 - slingshot = slangbella / slunga
 - crossbow = armborst
+
+---------------------------------------------
+Dialogue
+
+Dictionary<String,String>
+
+"H-how long have you been standing there?"
+"I miss moments like this more than anything."
+"Just give me my cut of the money and I'll be out of here."
+"He was unconscious when I found him"
+"What do you mean, he's escaped?"
+"She's been missing since Friday and you're not worried?"
+"Uh, not today..."
+"Spare some change, please?"
+"I've been waiting a long time for you."
+"It's been said that a pirate's ship, full of plundered gold, shipwrecked here a long time ago."
+"The forest is just a wonderful place"
+"Oh really? I'm surprised... "
+"Do you ever wonder what else is out there?"
+"We have to make sure and give %name% a bottle of vodka."
+"I'll find her and bring her home, I promise."

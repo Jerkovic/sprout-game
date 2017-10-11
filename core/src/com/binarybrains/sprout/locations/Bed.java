@@ -19,6 +19,7 @@ public class Bed extends Location {
             ((Player) entity).releaseKeys();
             // BackgroundMusic.stop();
             SproutGame.playSound("yawning");
+            // change some states
             // sleep? dialog
         }
     }
