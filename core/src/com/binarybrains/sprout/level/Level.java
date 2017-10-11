@@ -191,6 +191,8 @@ public class Level extends LevelEngine {
         }
     }
 
+
+    // this should put cave on screen
     public void generateCaves() {
         Map cave = new Map();
         cave.generateMap();

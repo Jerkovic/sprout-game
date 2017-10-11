@@ -3,6 +3,7 @@ package com.binarybrains.sprout.misc;
 
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.binarybrains.sprout.SproutGame;
 
 public class BackgroundMusic {
@@ -19,8 +20,15 @@ public class BackgroundMusic {
         changeTrack(MathUtils.random(1, 3)); // random select a track in our library
         mIsPlaying = true;
         isStopped = false;
-        currentTrack.setLooping(true);
-        currentTrack.play();
+        try {
+            currentTrack.setLooping(true);
+            currentTrack.play();
+        } catch (GdxRuntimeException e) {
+            System.out.println("============================================");
+            System.out.println("!Error! :" + e);
+            System.out.println("============================================");
+
+        }
     }
 
     public static void changeTrack(int track) {

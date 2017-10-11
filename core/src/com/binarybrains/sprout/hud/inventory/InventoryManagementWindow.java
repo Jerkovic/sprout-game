@@ -218,14 +218,21 @@ public class InventoryManagementWindow extends Dialog {
                 @Override
                 public void clicked(InputEvent event, float x, float y)
                 {
+
+                    button.setChecked(true);
                     if (group.getCheckedIndex() > -1) {
+                        
                         if (heldItem == null) {
-                            button.setChecked(true);
                             setHeldItem(inventory.getMoveItemWithQuantity(group.getCheckedIndex(), 1));
                             SproutGame.playSound("button_click", .4f, 0.9f, 1f);
                             System.out.println("heldItem -> " + heldItem);
                             onInventoryChanged(inventory);
                         } else {
+                            // fixa så att man inte kan höger klicka på en emtpySlot
+                            if (inventory.items.get(group.getCheckedIndex()) == null) {
+                                System.out.println("no allowed");
+                            }
+
                             SproutGame.playSound("button_click", .45f, 0.95f, 1f);
                             inventory.add(group.getCheckedIndex(), heldItem);
                             setHeldItem(null);
