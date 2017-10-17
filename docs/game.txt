@@ -67,9 +67,9 @@ TODOS:
 
 
 Sprout (working title)
---------------------------------------------------------------------------
-A game about crafting, breeding, farming, hunting, exploring and surviving.
----------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+A game about crafting, breeding, farming, hunting, exploring, foraging and surviving.
+-------------------------------------------------------------------------------------
 Plot. You have taken over the house where you were raised. Trough the game
 you will encounter and face your childhood memories, good and bad.
 
@@ -82,8 +82,7 @@ Ideas on what is going on in the game:
 - Key crafting recipe must be unlocked and key crafted
 - Key could unlock Motel (room 5)
 - Find Teddy and return it to its place.
-- Phone booth call the number found in/on X
-
+- Phone booth call the number found in/on X and get a secret clue or something
 
 Cave gen
 --------
@@ -253,12 +252,25 @@ Dictionary<String,String>
 -----------------------------------------------------
 XP Levels
 -----------------------------------------------------
+All xx grow 10% faster.  "Gardener"
+All xx worth 10% more. "Cropper"
++5 Axe  "Lumberer"
++5 Axe  "Chopper"
+A bigger chance for more stone "Stonemason"
+??"Crasher"
++5 Pickaxe "Troglodyte"
+bombs more efficient - "Blaster Master"
+All weapons have a shorter cooldown "Fencer"
+??? "Huntsman"
+All attacks deal 10% more damage "Sweeper"
+Fruits will become more nutritious (+more energy) - "Fruit picker"
+-----------------------------------------------------
 Lvl: 0 Points: 0
 Lvl: 1 Points: 1,000
 Lvl: 2 Points: 3,000
 Lvl: 3 Points: 6,000
 Lvl: 4 Points: 10,000
-Lvl: 5 Points: 15,000
+Lvl: 5 Points: 15,000 Unlocks: Bombs recipe
 Lvl: 6 Points: 21,000
 Lvl: 7 Points: 28,000
 Lvl: 8 Points: 36,000
