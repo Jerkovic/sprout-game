@@ -29,6 +29,7 @@ import com.binarybrains.sprout.entity.misc.Mail;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.entity.terrain.Stone;
+import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
@@ -231,6 +232,9 @@ public class Level extends LevelEngine {
 
         // check for achievement ...really here? timed event ?
         Achievement.checkAwards(player.getStats(), this);
+
+        // Level up check
+        LevelRank.getRankProgression(player.getStats("xp"));
 
         // Update all our entities
         for (int i = 0; i < entities.size(); i++) {

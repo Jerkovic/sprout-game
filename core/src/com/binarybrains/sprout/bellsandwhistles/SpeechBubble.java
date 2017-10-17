@@ -20,9 +20,7 @@ public class SpeechBubble extends Entity {
         layout = new GlyphLayout(); // Obviously stick this in a field to avoid allocation each frame.
         layout.setText(getLevel().font, text);
         setWidth((int) layout.width);
-        System.out.println(getWidth());
         fade();
-
     }
 
     public float getSortOrder() {
@@ -31,9 +29,9 @@ public class SpeechBubble extends Entity {
 
     private void fade() {
         addAction(Actions.sequence(
-                Actions.delay(MathUtils.random(7.5f, 9.298f)),
+                Actions.delay(MathUtils.random(17.5f, 19.298f)),
                 Actions.parallel(
-                        Actions.alpha(0.00f, 1.4f, Interpolation.fade)
+                        Actions.alpha(0.00f, 2.9f, Interpolation.fade)
                 ),
                 Actions.run((new Runnable() {
                             public void run () {

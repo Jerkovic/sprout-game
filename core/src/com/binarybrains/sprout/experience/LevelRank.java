@@ -12,8 +12,15 @@ public class LevelRank {
     public static void progressionChartDebug() {
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
 
-        for (int level = 0; level < 100; level++) {
+        for (int level = 0; level <= 100; level++) {
             System.out.println("Lvl: " + level + " Points: " + numberFormat.format(levelXP(level)));
         }
+    }
+
+    public static int getRankProgression(int xp) {
+        for (int level = 100; level >= 0; level--) {
+            if (xp >= levelXP(level)) return level;
+        }
+        return 100; // max rank?
     }
 }
