@@ -18,7 +18,6 @@ import com.binarybrains.sprout.level.Level;
  */
 public class TextParticle extends Entity {
 
-
     private String text;
     private final Color shadow = new Color(0f, 0f, 0f, 1f);
 

@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 import com.binarybrains.sprout.SproutGame;
@@ -124,6 +125,9 @@ public class GameScreen implements Screen {
         level.player.releaseKeys();
         AmbienceSound.pause();
         // BackgroundMusic.stop();
+        level.cameraFix();
+
+
         gameState = GameState.PAUSE;
         level.gameTimer.paus();
     }

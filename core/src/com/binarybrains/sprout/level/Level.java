@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.achievement.Achievement;
+import com.binarybrains.sprout.bellsandwhistles.SpeechBubble;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.enemy.Slime;
@@ -149,10 +150,14 @@ public class Level extends LevelEngine {
         setupPathFinding(); // construct the A.star
         this.add(this, new Emma(this, new Vector2(5 * 16f, 1 * 16f), 16f, 16f));
 
+
         generateCaves(); // test
 
         // Slime test
-        this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
+        // this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
+
+        // Speech Bouble bound to player test
+        add(this, new SpeechBubble(this, "I am hungry!"));
 
     }
 
@@ -437,4 +442,7 @@ public class Level extends LevelEngine {
     }
 
 
+    public void cameraFix() {
+        getCamera().reset();
+    }
 }

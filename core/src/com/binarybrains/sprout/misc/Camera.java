@@ -98,7 +98,6 @@ public class Camera extends OrthographicCamera {
     }
 
     public void setPosition(Vector3 pos) {
-        // position.set(pos);
         position.set((int)(pos.x),(int) pos.y, 0);
     }
 
@@ -108,5 +107,9 @@ public class Camera extends OrthographicCamera {
 
     public void enableFollow() {
         this.noFollow = false;
+    }
+
+    public void reset() {
+        // prevent camera pause glitch here?
     }
 }
