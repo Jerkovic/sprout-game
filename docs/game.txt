@@ -8,6 +8,9 @@ ________________________________________________________________________________
 
 TODOS:
 
+* Experience Points / Leveling Up -  XP gain is approximately linear. (Recipes unlock at Leveling up)
+  check out LevelRank.progressionChartDebug()
+
 * Inventory Management - heldItem should display item stack to the mouse pointer
 
 * Mail queue

@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.tweens.EntityAccessor;
+import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.hud.tweens.CameraAccessor;
 import com.binarybrains.sprout.misc.Camera;
@@ -33,6 +34,9 @@ public class SproutGame extends Game {
         Tween.registerAccessor(Entity.class, new EntityAccessor());
 		Tween.registerAccessor(Camera.class, new CameraAccessor());
 		loadAssets();
+
+		// exp level
+		LevelRank.progressionChartDebug();
 
 
 		setScreen(new GameScreen(this));

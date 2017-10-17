@@ -1,9 +1,5 @@
 package com.binarybrains.sprout.entity;
 
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
-
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
