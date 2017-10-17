@@ -36,7 +36,6 @@ public class Player extends Npc implements InputProcessor {
     public  Inventory inventory;
     public Item activeItem;
     public Vector3 clickedPos = new Vector3();
-    public int newX = 0, newY = 0;
     public int inventoryCapacity = 24;
     public Portable carriedItem;
     public boolean CanMove = true;
@@ -119,6 +118,11 @@ public class Player extends Npc implements InputProcessor {
     public void increaseFunds(int increment) {
         increaseStats("money", increment);
         getLevel().screen.hud.updateFunds(this);
+    }
+
+    public void increaseXP(int increment) {
+        increaseStats("xp", increment);
+        getLevel().screen.hud.updateXP(this);
     }
 
     public void setActiveItem(Item item) {

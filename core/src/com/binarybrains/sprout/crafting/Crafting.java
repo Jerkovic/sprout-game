@@ -25,14 +25,14 @@ public class Crafting {
 
     static {
         try {
-            workbenchRecipes.add(new ResourceRecipe(Resources.stick).addCost(Resources.wood, 1));
+            workbenchRecipes.add(new ResourceRecipe(Resources.stick).addCost(Resources.wood, 1).setXP(10));
 
             workbenchRecipes.add(new ToolRecipe(new Hoe(), 0).addCost(Resources.stone, 1).addCost(Resources.stick, 1));
 
             // Axe upgrade recipes
-            workbenchRecipes.add(new ToolUpgradeRecipe(Tools.axe, 1).addCost(Resources.copperBar, 4).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted());
-            workbenchRecipes.add(new ToolUpgradeRecipe(Tools.axe, 2).addCost(Resources.ironBar, 4).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted());
-            workbenchRecipes.add(new ToolUpgradeRecipe(Tools.axe, 3).addCost(Resources.goldIngot, 4).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted());
+            workbenchRecipes.add(new ToolUpgradeRecipe(Tools.axe, 1).addCost(Resources.copperBar, 4).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted().setXP(50));
+            workbenchRecipes.add(new ToolUpgradeRecipe(Tools.axe, 2).addCost(Resources.ironBar, 4).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted().setXP(100));
+            workbenchRecipes.add(new ToolUpgradeRecipe(Tools.axe, 3).addCost(Resources.goldIngot, 4).addCost(Resources.stick, 1).setRemoveRecipeOnCrafted().setXP(175));
 
             workbenchRecipes.add(new ToolRecipe(new PickAxe(), 0).addCost(Resources.stone, 2).addCost(Resources.stick, 1));
             workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Resources.ironBar, 5));
@@ -41,9 +41,9 @@ public class Crafting {
             workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Resources.ironBar, 2).setRemoveRecipeOnCrafted().setLocked());
 
 
-            workbenchRecipes.add(new ResourceRecipe(Resources.cloth).addCost(Resources.wool, 3));
+            workbenchRecipes.add(new ResourceRecipe(Resources.cloth).addCost(Resources.wool, 3).setXP(200));
 
-            workbenchRecipes.add(new ResourceRecipe(Resources.cider).addCost(Resources.apple, 17));
+            workbenchRecipes.add(new ResourceRecipe(Resources.cider).addCost(Resources.apple, 17).setXP(175));
             workbenchRecipes.add(new ResourceRecipe(Resources.cocktail).addCost(Resources.banana, 1).addCost(Resources.apple, 1).addCost(Resources.coconut, 1)); // todo add more
 
 
@@ -91,6 +91,12 @@ public class Crafting {
     }
 
 
+    /**
+     * start crafting mech
+     * @param player
+     * @param index
+     * @return
+     */
     public boolean startCraft(Player player, int index) {
         Recipe recipe = recipes.get(index);
         recipe.checkCanCraft(player.getInventory());
@@ -98,6 +104,7 @@ public class Crafting {
         if (recipe.canCraft && player.getInventory().hasSpaceFor(recipe.getItem())) {
             recipe.deductCost(player.getInventory());
             recipe.craft(player.getInventory());
+            player.increaseXP(recipe.getXpGain());
             if (recipe.shouldRemoveRecipeOnCrafted()) {
                 recipes.remove(index);
             }

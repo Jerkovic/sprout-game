@@ -137,6 +137,9 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         if (damage > 50 && !falling) {
 
             falling = true;
+
+            getLevel().player.increaseXP(10); // test increase XP
+
             SproutGame.playSound("tree_fall", .40f, .76f, 1f);
             addAction(
                     Actions.sequence(

@@ -249,3 +249,59 @@ Dictionary<String,String>
 "Do you ever wonder what else is out there?"
 "We have to make sure and give %name% a bottle of vodka."
 "I'll find her and bring her home, I promise."
+
+-----------------------------------------------------
+XP Levels
+-----------------------------------------------------
+Lvl: 0 Points: 0
+Lvl: 1 Points: 1,000
+Lvl: 2 Points: 3,000
+Lvl: 3 Points: 6,000
+Lvl: 4 Points: 10,000
+Lvl: 5 Points: 15,000
+Lvl: 6 Points: 21,000
+Lvl: 7 Points: 28,000
+Lvl: 8 Points: 36,000
+Lvl: 9 Points: 45,000
+Lvl: 10 Points: 55,000
+Lvl: 11 Points: 66,000
+Lvl: 12 Points: 78,000
+Lvl: 13 Points: 91,000
+Lvl: 14 Points: 105,000
+Lvl: 15 Points: 120,000
+Lvl: 16 Points: 136,000
+Lvl: 17 Points: 153,000
+Lvl: 18 Points: 171,000
+Lvl: 19 Points: 190,000
+Lvl: 20 Points: 210,000
+Lvl: 21 Points: 231,000
+Lvl: 22 Points: 253,000
+Lvl: 23 Points: 276,000
+Lvl: 24 Points: 300,000
+Lvl: 25 Points: 325,000
+Lvl: 26 Points: 351,000
+Lvl: 27 Points: 378,000
+Lvl: 28 Points: 406,000
+Lvl: 29 Points: 435,000
+Lvl: 30 Points: 465,000
+Lvl: 31 Points: 496,000
+Lvl: 32 Points: 528,000
+Lvl: 33 Points: 561,000
+Lvl: 34 Points: 595,000
+Lvl: 35 Points: 630,000
+Lvl: 36 Points: 666,000
+Lvl: 37 Points: 703,000
+Lvl: 38 Points: 741,000
+Lvl: 39 Points: 780,000
+Lvl: 40 Points: 820,000
+Lvl: 41 Points: 861,000
+Lvl: 42 Points: 903,000
+Lvl: 43 Points: 946,000
+Lvl: 44 Points: 990,000
+Lvl: 45 Points: 1,035,000
+Lvl: 46 Points: 1,081,000
+Lvl: 47 Points: 1,128,000
+Lvl: 48 Points: 1,176,000
+Lvl: 49 Points: 1,225,000
+Lvl: 50 Points: 1,275,000
+

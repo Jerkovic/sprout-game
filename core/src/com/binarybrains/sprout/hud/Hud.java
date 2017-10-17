@@ -396,6 +396,11 @@ public class Hud {
         moneyLabel.setText("" + player.getStats().get("money"));
     }
 
+    public void updateXP(Player player) {
+        // todo UI stuff here
+        System.out.println("Total XP:" + player.getStats().get("xp"));
+    }
+
     public void act(float delta) {
         timeLabel.setText(level.gameTimer.toString());
         fpsLabel.setText("fps: " + Gdx.graphics.getFramesPerSecond());

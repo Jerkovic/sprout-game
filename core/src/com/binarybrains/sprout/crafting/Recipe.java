@@ -16,6 +16,7 @@ public abstract class Recipe implements ListItem {
     public boolean canCraft = false;
     private Item resultItem;
     public boolean isUnlocked = true;
+    public int xp = 0;
     private boolean removeRecipeOnCraft = false;
 
     public Recipe(Item resultTemplate) {
@@ -26,6 +27,16 @@ public abstract class Recipe implements ListItem {
         this.isUnlocked = false;
         return this;
     }
+
+    public Recipe setXP(int xp) {
+        this.xp = xp;
+        return this;
+    }
+
+    public int getXpGain() {
+        return xp;
+    }
+
 
     public Recipe setRemoveRecipeOnCrafted() {
         this.removeRecipeOnCraft = true;

@@ -37,10 +37,8 @@ public class Stats implements Serializable {
     }
 
     private void saveFile(Map<String, Integer> users)  throws IOException  {
-
         ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(PATH));
         os.writeObject(users);
-
     }
 
     private Map<String, Integer> readFile()  throws ClassNotFoundException, IOException {
