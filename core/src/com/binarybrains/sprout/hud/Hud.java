@@ -25,6 +25,8 @@ import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.hud.tweens.CameraAccessor;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
+import com.binarybrains.sprout.misc.AmbienceSound;
+import com.binarybrains.sprout.misc.BackgroundMusic;
 import sun.rmi.server.InactiveGroupException;
 
 
@@ -35,6 +37,8 @@ public class Hud {
     Level level;
     Skin skin;
     Label fpsLabel;
+    ProgressBar healthBar;
+    ProgressBar levelBar;
 
     Image moneyIcon;
 
@@ -68,7 +72,6 @@ public class Hud {
         inventoryManagementWindow.setVisible(false);
         inventoryManagementWindow.hide();
         stage.addActor(inventoryManagementWindow);
-
 
 
         inventoryWindow = new InventoryWindow(level, skin);
@@ -123,6 +126,34 @@ public class Hud {
                     SproutGame.playSound("door_close1"); // todo different sounds
                 }}),
                 Actions.fadeOut(.3f, Interpolation.fade)
+        ));
+
+    }
+
+    public void playerPassedOut(final Player player) {
+        player.releaseKeys();
+        player.freezePlayerControl();
+        fadeActor.clearActions();
+
+        BackgroundMusic.stop();
+        AmbienceSound.pause();
+
+        fadeActor.addAction(Actions.sequence(
+                Actions.alpha(0),
+                Actions.fadeIn(.5f, Interpolation.fade),
+                Actions.delay(3f),
+                Actions.run(new Runnable() { public void run(){
+                    player.setTilePos(9,2); // bed
+                    player.getLevel().getCamera().setPosition(new Vector3(player.getX(), player.getY(), 0));
+                    //SproutGame.playSound("door_close1"); //
+                }}),
+                Actions.fadeOut(.9f, Interpolation.fade),
+                Actions.run(new Runnable() { public void run(){
+                    player.setHealth(90);
+                    player.getLevel().screen.hud.updateXP(player);
+                    player.getLevel().screen.hud.addToasterMessage("Oh no!", "You passed out and woke up in your bed...");
+                    player.unFreezePlayerControl();
+                }})
         ));
 
     }
@@ -360,8 +391,9 @@ public class Hud {
         );
         barStyle.knobBefore = barStyle.knob;
 
-        ProgressBar healthBar = new ProgressBar(0, 10f, 1f, false, barStyle);
-        healthBar.setValue(5f);
+        healthBar = new ProgressBar(0, 100f, 1f, false, barStyle);
+        healthBar.setAnimateDuration(1.5f);
+        healthBar.setValue(0f);
         hudTable.add(healthBar);
         hudTable.row();
 
@@ -398,6 +430,7 @@ public class Hud {
 
     public void updateXP(Player player) {
         // todo UI stuff here
+        healthBar.setValue((float) player.getHealth());
         System.out.println("Total XP:" + player.getStats().get("xp"));
     }
 

@@ -10,4 +10,8 @@ public class FoodResource extends Resource {
         this.staminaCost = 1;
     }
 
+    public int heal() {
+        return heal;
+    }
+
 }

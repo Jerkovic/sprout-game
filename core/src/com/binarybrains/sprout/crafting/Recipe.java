@@ -113,4 +113,9 @@ public abstract class Recipe implements ListItem {
     public String getRegionId() {
         return resultItem.getName();
     }
+
+    @Override
+    public boolean isFood() {
+        return false;
+    }
 }

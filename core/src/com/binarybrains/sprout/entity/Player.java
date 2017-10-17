@@ -18,6 +18,7 @@ import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
+import com.binarybrains.sprout.item.resource.FoodResource;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.Tools;
 import com.binarybrains.sprout.level.Level;
@@ -62,6 +63,7 @@ public class Player extends Npc implements InputProcessor {
 
         super(level, new Vector2(0, 0), 16f, 16f, 0);
         setSpeed(64);
+
 
         inventory = new Inventory(level, inventoryCapacity);
         getInventory().add(new ToolItem(Tools.hoe, 0));
@@ -118,6 +120,43 @@ public class Player extends Npc implements InputProcessor {
     public void increaseFunds(int increment) {
         increaseStats("money", increment);
         getLevel().screen.hud.updateFunds(this);
+    }
+
+    public void heal(int hp) {
+        super.setHealth(getHealth() + hp);
+        if (getHealth() + hp > 100) setHealth(100);
+        if(getLevel().screen.hud != null) {
+            getLevel().screen.hud.updateXP(this);
+        }
+    }
+
+    public void setHealth(int hp) {
+        super.setHealth(hp);
+        if(getLevel().screen.hud != null) {
+            getLevel().screen.hud.updateXP(this);
+        }
+    }
+
+    public boolean passedOut = false;
+
+    @Override
+    public void die() { // player cant die
+        if (passedOut) {
+            System.out.println("!!Player passed out!" + getHealth());
+            passedOut = false;
+            getLevel().screen.hud.updateXP(this);
+            getLevel().screen.hud.playerPassedOut(this);
+        }
+    }
+
+    public void payStamina(int hp) {
+        setHealth(getHealth() - hp);
+        if (getHealth() < 0) setHealth(0);
+        if (getHealth() < 1) {
+            passedOut = true;
+            die();
+        }
+        System.out.println("Health: " + getHealth());
     }
 
     public void increaseXP(int increment) {
@@ -406,6 +445,8 @@ public class Player extends Npc implements InputProcessor {
         }
     }
 
+
+
     @Override
     public void hurt(Mob mob, int dmg, Direction attackDir) {
         super.hurt(mob, dmg, attackDir);
@@ -516,6 +557,24 @@ public class Player extends Npc implements InputProcessor {
 
         float mouseWorldPosX = clickedPos.x;
         float mouseWorldPosY = clickedPos.y;
+
+        // player clicked himself
+        if (mouseWorldPosX <= getBoundingBox().getX() + getBoundingBox().getWidth() && mouseWorldPosX >= getBoundingBox().getX()
+                && mouseWorldPosY <= getBoundingBox().getY()+ getBoundingBox().getHeight() && mouseWorldPosY >= getBoundingBox().getY()) {
+            if (button == Input.Buttons.RIGHT && activeItem != null) {
+
+                if (activeItem.isFood()) {
+                    ResourceItem healItem = (ResourceItem) activeItem;
+                    heal(((FoodResource) healItem.resource).heal());
+                    getInventory().removeResource(((ResourceItem) activeItem).resource, 1);
+                    getLevel().screen.hud.refreshInventory();
+                }
+
+                return true;
+            }
+
+        }
+
 
         if (mouseWorldPosX <= getInteractBox().getX() + getInteractBox().getWidth() && mouseWorldPosX >= getInteractBox().getX()
                 && mouseWorldPosY <= getInteractBox().getY()+ getInteractBox().getHeight() && mouseWorldPosY >= getInteractBox().getY()) {

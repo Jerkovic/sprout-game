@@ -1,6 +1,7 @@
 package com.binarybrains.sprout.item;
 
 
+import com.binarybrains.sprout.item.resource.FoodResource;
 import com.binarybrains.sprout.item.resource.Resource;
 
 public class ResourceItem extends Item {
@@ -9,7 +10,6 @@ public class ResourceItem extends Item {
     public int count = 1;
 
     public ResourceItem(Resource resource) {
-
         this.resource = resource;
     }
 
@@ -26,6 +26,11 @@ public class ResourceItem extends Item {
     @Override
     public String getDescription() {
         return resource.description;
+    }
+
+    @Override
+    public boolean isFood() {
+        return (resource instanceof FoodResource);
     }
 
     public String getName() {

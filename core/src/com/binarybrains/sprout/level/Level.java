@@ -127,6 +127,7 @@ public class Level extends LevelEngine {
 
         player = new Player(this);
         player.setTilePos(13, 100);
+        player.setHealth(10);
 
 
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));

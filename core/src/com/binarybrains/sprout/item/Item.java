@@ -51,4 +51,9 @@ public abstract class Item implements ListItem {
     public String getNotificationText() {
         return getName();
     }
+
+    @Override
+    public boolean isFood() {
+        return false;
+    }
 }

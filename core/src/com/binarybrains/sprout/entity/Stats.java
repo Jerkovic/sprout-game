@@ -18,6 +18,10 @@ public class Stats implements Serializable {
         // debug();
     }
 
+    public void set(String statKey, Integer value) {
+        dataMap.put(statKey, value);
+    }
+
     public int get(String statKey) {
         if (dataMap.containsKey(statKey)) {
             return dataMap.get(statKey);

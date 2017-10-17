@@ -174,6 +174,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
             if (toolItem.tool instanceof Axe && toolItem.tool.canUse()) {
                 ((Axe) toolItem.tool).playRandomChopSound();
                 hurt(player, toolItem.getDamage()); // hurt the tree with the correct damage level
+                player.payStamina(toolItem.getDamage() / 2);
                 return true;
             }
         }

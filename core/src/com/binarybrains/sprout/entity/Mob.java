@@ -57,7 +57,7 @@ public abstract class Mob extends Entity {
 
     public void update(float delta) {
         super.update(delta);
-        if (getHealth() <= 0) {
+        if (getHealth() <= 0 && !(this instanceof Player)) {
             die();
         }
     }

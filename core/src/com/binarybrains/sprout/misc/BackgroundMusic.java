@@ -8,7 +8,7 @@ import com.binarybrains.sprout.SproutGame;
 
 public class BackgroundMusic {
 
-    static Music currentTrack;
+    static Music currentTrack; // make a map out of it?
 
     static float FACTOR = .2f; // The bigger the factor, the faster the fade-out will be
     static float mVolume = 1.2f;
@@ -41,7 +41,8 @@ public class BackgroundMusic {
     }
 
     public static void changeTrack(String newTrackName) {
-        // load it here?
+        // load it here this way?
+        // is this causing the crash
         currentTrack = SproutGame.assets.get("music/" + newTrackName + ".mp3");
     }
 
