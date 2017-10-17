@@ -264,6 +264,9 @@ All weapons have a shorter cooldown "Fencer"
 ??? "Huntsman"
 All attacks deal 10% more damage "Sweeper"
 Fruits will become more nutritious (+more energy) - "Fruit picker"
+"Blacksmith"
+"Goldsmith"
+"Alchemist"
 -----------------------------------------------------
 Lvl: 0 Points: 0
 Lvl: 1 Points: 1,000

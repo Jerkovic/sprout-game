@@ -83,13 +83,14 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
         if (item.getName().equals("Wood") && !player.getInventory().hasResources(Resources.wood, 500)) {
             getLevel().screen.hud.speakDialog("Repair house", "You need 500 wood to complete house repair. You currently have " + player.getInventory().count(item) + " wood. Chop chop!");
         } else if (item.getName().equals("Wood") && player.getInventory().hasResources(Resources.wood, 500)) {
-            getLevel().screen.hud.addToasterMessage("House fixed", "Congratulations! Your house is repaired.");
+
             SproutGame.playSound("fancy_reward", 0.34f);
             player.getInventory().removeResource(Resources.wood, 500);
             player.getLevel().screen.hud.refreshInventory();
 
             player.getLevel().screen.hud.fadeOutRunFadeInScreen(new Runnable() { public void run(){
                 sprite.setRegion(25*16, 71*16, (int)getWidth(), (int)getHeight());
+                getLevel().screen.hud.addToasterMessage("House fixed", "Congratulations! Your house is repaired.");
             }});
 
             isRepaired = true;
