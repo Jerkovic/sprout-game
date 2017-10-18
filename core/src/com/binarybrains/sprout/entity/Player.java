@@ -558,7 +558,7 @@ public class Player extends Npc implements InputProcessor {
                 if (activeItem.isFood() && canUse()) {
                     ResourceItem healItem = (ResourceItem) activeItem;
                     heal(((FoodResource) healItem.resource).heal());
-                    SproutGame.playSound("eating");
+                    SproutGame.playSound("eating", 1.5f);
                     getInventory().removeResource(((ResourceItem) activeItem).resource, 1);
                     getLevel().screen.hud.refreshInventory();
                 }

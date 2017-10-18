@@ -112,6 +112,7 @@ public class InventoryManagementWindow extends Dialog {
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                if (getHeldItem() != null) return;
                 hide();
                 player.getLevel().screen.hud.showInventory();
                 player.getLevel().screen.game.resume();

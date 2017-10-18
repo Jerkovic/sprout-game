@@ -11,7 +11,7 @@ public class BackgroundMusic {
     static Music currentTrack; // make a map out of it?
 
     static float FACTOR = .2f; // The bigger the factor, the faster the fade-out will be
-    static float mVolume = 1.2f;
+    static float mVolume = .8f;
     static boolean mIsPlaying = false;
     static boolean isStopped = false;
 
