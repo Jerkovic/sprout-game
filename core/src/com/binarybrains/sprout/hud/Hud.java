@@ -29,6 +29,9 @@ import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 import sun.rmi.server.InactiveGroupException;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 
 public class Hud {
 
@@ -425,7 +428,9 @@ public class Hud {
                 Actions.sizeTo(moneyIcon.getImageWidth()+10,moneyIcon.getImageHeight()+10, .15f, Interpolation.pow2),
                 Actions.sizeTo(oldW,oldH, .1f, Interpolation.fade)
         ));
-        moneyLabel.setText("" + player.getStats().get("money"));
+
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        moneyLabel.setText("" + numberFormat.format(player.getStats().get("money")));
     }
 
     public void updateXP(Player player) {

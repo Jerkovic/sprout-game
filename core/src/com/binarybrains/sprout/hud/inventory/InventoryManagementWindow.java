@@ -89,8 +89,12 @@ public class InventoryManagementWindow extends Dialog {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (getHeldItem() != null && !(getHeldItem() instanceof ToolItem)) {
+                    int sellingQuantity = 1;
+                    if (getHeldItem() instanceof ResourceItem) {
+                        sellingQuantity = ((ResourceItem) getHeldItem()).count;
+                    }
                     setHeldItem(null);
-                    player.increaseFunds(200);
+                    player.increaseFunds(200 * sellingQuantity);
                     SproutGame.playSound("cash_register", .8f, MathUtils.random(0.92f, 1.02f), 1f);
                 }
             }
