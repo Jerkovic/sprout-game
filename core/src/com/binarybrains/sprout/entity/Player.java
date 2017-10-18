@@ -72,9 +72,11 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ToolItem(Tools.axe, 0));
         getInventory().add(new ToolItem(Tools.pickaxe, 0));
         getInventory().add(new ToolItem(Tools.mace, 0));
+        getInventory().add(new ToolItem(Tools.hammer, 0));
 
         getInventory().add(new ResourceItem(Resources.bomb,392));
         getInventory().add(new ResourceItem(Resources.ironOre, 40));
+        getInventory().add(new ResourceItem(Resources.copperOre, 48));
         getInventory().add(new ResourceItem(Resources.seeds, 8));
         getInventory().add(new ResourceItem(Resources.wood, 501));
         getInventory().add(new ResourceItem(Resources.string, 3));
@@ -558,7 +560,7 @@ public class Player extends Npc implements InputProcessor {
                 if (activeItem.isFood() && canUse()) {
                     ResourceItem healItem = (ResourceItem) activeItem;
                     heal(((FoodResource) healItem.resource).heal());
-                    SproutGame.playSound("eating", 1.5f);
+                    SproutGame.playSound("eating", 1.6f);
                     getInventory().removeResource(((ResourceItem) activeItem).resource, 1);
                     getLevel().screen.hud.refreshInventory();
                 }

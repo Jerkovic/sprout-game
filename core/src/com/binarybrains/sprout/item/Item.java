@@ -8,6 +8,9 @@ public abstract class Item implements ListItem {
 
     public String category;
 
+    public int sellAmount;
+    public int buyAmount;
+
     public void setRegionId(String regionId) {
         this.regionId = regionId;
     }
