@@ -79,6 +79,27 @@ public class InventoryManagementWindow extends Dialog {
 
     }
 
+    private Button sellItem() {
+
+        Image image = new Image(atlas.findRegion("Cash_Register"));
+        Button button = new Button(skin, "default");
+        button.add(image);
+
+        button.addListener(new ClickListener(Input.Buttons.LEFT) {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (getHeldItem() != null && !(getHeldItem() instanceof ToolItem)) {
+                    setHeldItem(null);
+                    player.increaseFunds(200);
+                    SproutGame.playSound("cash_register", .8f, MathUtils.random(0.92f, 1.02f), 1f);
+                }
+            }
+        });
+        return button;
+
+    }
+
+
     public void centerMe() {
         setPosition(Gdx.graphics.getWidth() / 2 - getWidth() / 2, Gdx.graphics.getHeight() / 2 - getHeight()/2);
     }
@@ -105,8 +126,13 @@ public class InventoryManagementWindow extends Dialog {
         add(itemTable);
 
         row();
+        add(sellItem()).pad(15);
+
+        row();
+
         add(trashCan()).pad(15);
         row();
+        debug();
 
         TextButton buttonExit = new TextButton("   Close   ", skin);
         buttonExit.addListener(new ClickListener() {

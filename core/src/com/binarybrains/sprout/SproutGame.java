@@ -127,6 +127,7 @@ public class SproutGame extends Game {
 		assets.load("sfx/fuse.wav", Sound.class);
 		assets.load("sfx/splat.wav", Sound.class);
 		assets.load("sfx/eating.wav", Sound.class);
+		assets.load("sfx/cash_register.wav", Sound.class);
 
 		// todo find snoring
 		// Alot of different sounds https://www.youtube.com/watch?v=WL3AeICxSuU
