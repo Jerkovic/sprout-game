@@ -235,7 +235,10 @@ public class Level extends LevelEngine {
         Achievement.checkAwards(player.getStats(), this);
 
         // Level up check
-        LevelRank.getRankProgression(player.getStats("xp"));
+        if (player.getStats("rank") != LevelRank.getLevelRankByXP(player.getStats("xp"))) {
+            player.getStats().set("rank", LevelRank.getLevelRankByXP(player.getStats("xp")));
+            player.rankedUp(player.getStats("rank"));
+        }
 
         // Update all our entities
         for (int i = 0; i < entities.size(); i++) {
@@ -295,7 +298,6 @@ public class Level extends LevelEngine {
             AmbienceSound.setSound("cave_ambience");
         }
 
-        // test PickupItem
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
 
             SproutGame.playSound("pickup_fanfar", .45f);
@@ -320,6 +322,10 @@ public class Level extends LevelEngine {
             for (int i = 0; i < count; i++) {
                 add(this, new PickupItem(this, new ResourceItem(Resources.potato), new Vector2(player.getX()+85, player.getY())));
             }
+        }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_RIGHT)) {
+            player.increaseXP(900); // test
         }
 
 

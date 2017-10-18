@@ -8,10 +8,10 @@ ________________________________________________________________________________
 
 TODOS:
 
-* Be able to plant Acorn seeds for new trees
-
 * Experience Points / Leveling Up -  XP gain is approximately linear. (Recipes unlock at Leveling up)
   check out LevelRank.progressionChartDebug()
+
+* Be able to plant Acorn seeds for new trees
 
 * Inventory Management - heldItem should display item stack to the mouse pointer
 

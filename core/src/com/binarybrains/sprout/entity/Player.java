@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.Item;
@@ -315,30 +316,21 @@ public class Player extends Npc implements InputProcessor {
 
     //  use/check/investigate called on right click.. boolean return type?
     public boolean use() {
-        // can we really interact while carrying stuff?
-        // we need a use coolDown timer
         if (!canUse()) {
-            // System.out.println("cooldown use");
             return false;
         }
 
-
-
-            
         if (getActionState() != ActionState.EMPTY_NORMAL) {
             return false;
         }
 
         List<Entity> entities = getLevel().getEntities(getInteractBox());
-        // should we really interact with all items here?
         for (int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
             if (e != this)
                 return e.use(this, getDirection());
         }
-
         // can we right click a tile? if so implement that here
-
         return false;
     }
 
@@ -563,18 +555,16 @@ public class Player extends Npc implements InputProcessor {
                 && mouseWorldPosY <= getBoundingBox().getY()+ getBoundingBox().getHeight() && mouseWorldPosY >= getBoundingBox().getY()) {
             if (button == Input.Buttons.RIGHT && activeItem != null) {
 
-                if (activeItem.isFood()) {
+                if (activeItem.isFood() && canUse()) {
                     ResourceItem healItem = (ResourceItem) activeItem;
                     heal(((FoodResource) healItem.resource).heal());
+                    SproutGame.playSound("eating");
                     getInventory().removeResource(((ResourceItem) activeItem).resource, 1);
                     getLevel().screen.hud.refreshInventory();
                 }
-
                 return true;
             }
-
         }
-
 
         if (mouseWorldPosX <= getInteractBox().getX() + getInteractBox().getWidth() && mouseWorldPosX >= getInteractBox().getX()
                 && mouseWorldPosY <= getInteractBox().getY()+ getInteractBox().getHeight() && mouseWorldPosY >= getInteractBox().getY()) {
@@ -587,6 +577,18 @@ public class Player extends Npc implements InputProcessor {
         }
 
         return false;
+    }
+
+    public void rankedUp(final int level) {
+
+        addAction(Actions.sequence(
+                Actions.delay(.4f),
+                Actions.run(new Runnable() { public void run(){
+                    SproutGame.playSound("pickup_fanfar", .65f);
+                    getLevel().screen.hud.addToasterMessage("LEVEL UP", "You reached Level " + level);
+                }})
+        ));
+
     }
 
     @Override
