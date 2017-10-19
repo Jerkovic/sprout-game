@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -84,6 +85,9 @@ public class Level extends LevelEngine {
 
     private ShaderProgram defaultShader;
     private ShaderProgram finalShader;
+
+    ParticleEffect pe;
+
 
     /**
      * Setup Ambient light and shaders.
@@ -161,6 +165,12 @@ public class Level extends LevelEngine {
         // Speech Bouble bound to player test
         add(this, new SpeechBubble(this, "I am hungry!"));
 
+        // particle effects test
+        pe = new ParticleEffect();
+        pe.load(Gdx.files.internal("pfx/mysmoke1.p"),Gdx.files.internal(""));
+        pe.getEmitters().first().setPosition(player.getX(), player.getY());
+        pe.start();
+
     }
 
     public Vector2 cavePoint;
@@ -230,6 +240,11 @@ public class Level extends LevelEngine {
     public void update(float delta) {
 
         gameTimer.update();
+
+        // particles update
+        pe.update(delta);
+        if (pe.isComplete()) pe.reset();
+
 
         // check for achievement ...really here? timed event ?
         Achievement.checkAwards(player.getStats(), this);
@@ -396,6 +411,11 @@ public class Level extends LevelEngine {
         // debug mode
         if (debugMode) renderDebug(entities);
 
+        // render our particles test
+        tileMapRenderer.getBatch().begin();
+            pe.draw(tileMapRenderer.getBatch());
+        tileMapRenderer.getBatch().end();
+
         renderHighlightCell(); // mouse selection test
     }
 
@@ -443,6 +463,7 @@ public class Level extends LevelEngine {
         tileMapRenderer.dispose();
         debugRenderer.dispose();
 
+
         map.dispose();
         finalShader.dispose();
         defaultShader.dispose();
@@ -450,6 +471,7 @@ public class Level extends LevelEngine {
         spritesheet.dispose();
         charsheet.dispose();
         fbo.dispose();
+        pe.dispose();
     }
 
 

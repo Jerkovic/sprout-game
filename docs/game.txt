@@ -8,8 +8,6 @@ ________________________________________________________________________________
 
 TODOS:
 
-* Sell prices for items
-
 * Be able to plant Acorn seeds for new trees
 
 * Inventory Management - heldItem should display item stack to the mouse pointer
@@ -94,6 +92,7 @@ Game Name ideas
 ----------------------
 Farm bound
 Bearshade Creek (https://cdn.dribbble.com/users/75575/screenshots/936394/californiashot.png)
+Whisper Wind
 
 
 För att generera namn på farms.
