@@ -1,15 +1,18 @@
 package com.binarybrains.sprout.item.artifact;
 
 
-public class Artifact {
+import com.binarybrains.sprout.item.Saleable;
+
+public class Artifact implements Saleable{
 
     public final String name;
     public final String description;
+    public int sellPrice;
 
-    public Artifact(String name, String description) {
-        if (name.length() > 16) throw new RuntimeException("Artifact name cannot be longer than 16 characters!");
+    public Artifact(String name, String description, int sellPrice) {
         this.name = name;
         this.description = description;
+        this.sellPrice = sellPrice;
     }
 
     public String getName() {
@@ -18,5 +21,10 @@ public class Artifact {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public int getSellPrice() {
+        return sellPrice;
     }
 }

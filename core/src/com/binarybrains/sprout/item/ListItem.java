@@ -4,5 +4,6 @@ public interface ListItem {
 
     String getRegionId();
     boolean isFood();
+    int getSellPrice();
 
 }

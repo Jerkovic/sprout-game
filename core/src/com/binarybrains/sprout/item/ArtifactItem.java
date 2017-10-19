@@ -14,6 +14,11 @@ public class ArtifactItem extends Item implements Portable {
         this.artifact = artifact;
     }
 
+    @Override
+    public int getSellPrice() {
+        return artifact.getSellPrice();
+    }
+
     public String getName() {
         return artifact.getName();
     }

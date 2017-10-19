@@ -33,6 +33,11 @@ public class ResourceItem extends Item {
         return (resource instanceof FoodResource);
     }
 
+    @Override
+    public int getSellPrice() {
+        return this.resource.getSellPrice();
+    }
+
     public String getName() {
         return resource.name;
     }

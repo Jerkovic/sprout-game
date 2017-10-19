@@ -118,4 +118,9 @@ public abstract class Recipe implements ListItem {
     public boolean isFood() {
         return false;
     }
+
+    @Override
+    public int getSellPrice() {
+        return 0;
+    }
 }

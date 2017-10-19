@@ -11,6 +11,6 @@ public class Tools {
     public static Key goldenKey = new Key();
     public static Hammer hammer = new Hammer();
 
-    // Weapons??
+    // Weapons
     public static Mace mace = new Mace();
 }

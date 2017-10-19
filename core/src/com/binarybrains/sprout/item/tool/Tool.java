@@ -13,7 +13,6 @@ public abstract class Tool {
     private long coolDownTime = 0;
 
     public Tool(String name, String description) {
-        if (name.length() > 16) throw new RuntimeException("Tool name cannot be longer than 16 characters!");
         this.name = name;
         this.description = description;
     }

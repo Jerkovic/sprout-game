@@ -4,20 +4,22 @@ import com.binarybrains.sprout.entity.ItemEntity;
 
 public abstract class Item implements ListItem {
 
-    public String regionId;
+    private String regionId;
 
-    public String category;
+    private String category; // Tool, Artifact, Resource->Food|Plantable|Seed
 
     public int sellAmount;
     public int buyAmount;
+
+    public int getSellPrice() {
+        return 0;
+    }
 
     public void setRegionId(String regionId) {
         this.regionId = regionId;
     }
 
-    public void onTake(ItemEntity itemEntity) {
-
-    }
+    public void onTake(ItemEntity itemEntity) { }
 
     public void setCategory(String category) {
         this.category = category;
@@ -28,10 +30,6 @@ public abstract class Item implements ListItem {
     }
 
     public boolean interact() {
-        return false;
-    }
-
-    public boolean isDepleted() {
         return false;
     }
 

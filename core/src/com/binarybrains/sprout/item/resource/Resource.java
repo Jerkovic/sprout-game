@@ -1,15 +1,22 @@
 package com.binarybrains.sprout.item.resource;
 
 
-public class Resource {
+import com.binarybrains.sprout.item.Saleable;
+
+public class Resource implements Saleable {
 
     public final String name;
     public final String description;
+    public int sellPrice = 0;
 
-    public Resource(String name, String description) {
-        if (name.length() > 12) throw new RuntimeException("Name cannot be longer than 12 characters!");
+    public Resource(String name, String description, int sellPrice) {
         this.name = name;
         this.description = description;
+        this.sellPrice = sellPrice;
     }
 
+    @Override
+    public int getSellPrice() {
+        return sellPrice;
+    }
 }

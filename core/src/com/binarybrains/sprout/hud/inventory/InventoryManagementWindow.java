@@ -92,9 +92,9 @@ public class InventoryManagementWindow extends Dialog {
                     if (getHeldItem() instanceof ResourceItem) {
                         sellingQuantity = ((ResourceItem) getHeldItem()).count;
                     }
-                    setHeldItem(null);
-                    player.increaseFunds(200 * sellingQuantity);
+                    player.increaseFunds(getHeldItem().getSellPrice() * sellingQuantity);
                     SproutGame.playSound("cash_register", .8f, MathUtils.random(0.92f, 1.02f), 1f);
+                    setHeldItem(null);
                 }
             }
         });
