@@ -407,6 +407,7 @@ public class Hud {
     public void draw() {
 
         stage.draw();
+        if (mouseItem != null)  mouseItem.setZIndex(9000);
         float alpha = fadeActor.getColor().a;
 
         if (alpha != 0){

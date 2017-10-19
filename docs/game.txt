@@ -8,10 +8,7 @@ ________________________________________________________________________________
 
 TODOS:
 
-* Fix so you can't leave the Inventory Management Window with stuff attached to mouse move.
-
-* Experience Points / Leveling Up -  XP gain is approximately linear. (Recipes unlock at Leveling up)
-  check out LevelRank.progressionChartDebug()
+* Sell prices for items
 
 * Be able to plant Acorn seeds for new trees
 

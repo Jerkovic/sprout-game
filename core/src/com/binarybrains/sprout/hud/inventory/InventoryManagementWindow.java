@@ -49,7 +49,6 @@ public class InventoryManagementWindow extends Dialog {
         group = new ButtonGroup();
         group.uncheckAll();
 
-        // ignore clicking on the window
         InputListener ignoreTouchDown = new InputListener() {
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 event.cancel();
