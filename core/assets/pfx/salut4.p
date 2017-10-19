@@ -163,4 +163,4 @@ aligned: false
 additive: true
 behind: false
 - Image Path -
-images\\simple.png
+pfx/cloud_1_256x256.png

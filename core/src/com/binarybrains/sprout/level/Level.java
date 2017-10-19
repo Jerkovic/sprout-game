@@ -167,7 +167,7 @@ public class Level extends LevelEngine {
 
         // particle effects test
         pe = new ParticleEffect();
-        pe.load(Gdx.files.internal("pfx/mysmoke1.p"),Gdx.files.internal(""));
+        pe.load(Gdx.files.internal("pfx/mystars.p"),Gdx.files.internal("")); // effect dir and images dir
         pe.getEmitters().first().setPosition(player.getX(), player.getY());
         pe.start();
 
