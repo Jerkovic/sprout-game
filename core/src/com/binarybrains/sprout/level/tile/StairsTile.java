@@ -13,7 +13,8 @@ public class StairsTile extends Tile {
     @Override
     public boolean interact(Player player, int xt, int yt, Mob.Direction attackDir) {
         // leave caves
-        player.getLevel().screen.hud.teleportPlayer(player, 20, 120);
+        player.getLevel().screen.hud.teleportPlayer(player, 32,125);
+        player.setDirection(Mob.Direction.SOUTH);
         return true;
     }
 
