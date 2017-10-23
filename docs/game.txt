@@ -10,6 +10,10 @@ TODOS:
 
 * bug we sometimes have multiple music tracks playing at the same time
 
+
+* be able to sort inventory in manage window
+
+
 * Be able to plant Acorn seeds for new trees
 
 * Inventory Management - heldItem should display item stack to the mouse pointer
@@ -28,7 +32,7 @@ TODOS:
   - https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664
   - TODO! Cave exit and cave next level point
 
-* Prevent camera slides after hud window displays.
+* Bug! Prevent camera slides after hud window displays.
 
 * Add smashing/hit animation to item being pounded with tool.
 
@@ -40,7 +44,7 @@ TODOS:
 
 * Water shader (make waves)
 
-* Smoke particles (chimney)
+* Smoke particles (chimney) we have some ugly clouds for testing as of october 20 2017
 
 * Upgraded tools should be balanced when it comes to the speed (cooldown) and power (damage)
 
@@ -64,6 +68,14 @@ TODOS:
   * Enter the house
   * Look at the flower (create flower)
 
+
+
+--------------------------NPC charachters------------------------
+Emma
+Norman
+Howard
+Fred
+Liz
 
 
 
