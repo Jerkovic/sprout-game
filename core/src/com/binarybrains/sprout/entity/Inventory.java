@@ -10,10 +10,7 @@ import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.level.Level;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Inventory {
 
@@ -31,11 +28,7 @@ public class Inventory {
 
     public void sortInventory() {
 
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i) == null) {
-                items.remove(i);
-            }
-        }
+        items.removeAll(Collections.singletonList(null));
 
         Collections.sort(items, new Comparator<Item>() {
             @Override
@@ -48,11 +41,8 @@ public class Inventory {
                 return object1.getName().compareTo(object2.getName());
             }
         });
-
         fillEmptySlots();
-
     }
-
 
     /**
      * Upgrade Inventory
@@ -260,16 +250,15 @@ public class Inventory {
 
     public void renderDebug() {
         System.out.println("****************************************************************************");
-        System.out.println("Inventory  Resources: " + items.size() + " / " + capacity);
+        System.out.println("Inventory  Resources: " + items.size() + " / " + getCapacity());
         System.out.println("****************************************************************************");
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) != null) {
-                System.out.println("Slot: " + i + " " + items.get(i).getRegionId() + ", " + items.get(i).getName() + " x " + count(items.get(i)));
+                System.out.println("Slot: " + i + " " +  items.get(i).getName() + " x " + count(items.get(i)));
             } else {
-                System.out.println("Slot: " + i + " Empty");
+                System.out.println("Slot: " + i + " NULL");
             }
 
-            System.out.println("-----------------------------------------------------------------------------------");
         }
         System.out.println("****************************************************************************");
     }

@@ -95,8 +95,6 @@ public class InventoryManagementWindow extends Dialog {
                     player.increaseFunds(getHeldItem().getSellPrice() * sellingQuantity);
                     SproutGame.playSound("cash_register", .8f, MathUtils.random(0.92f, 1.02f), 1f);
                     setHeldItem(null);
-
-                    // player.getInventory().sortInventory();
                     onInventoryChanged(player.getInventory());
                 }
             }
