@@ -169,7 +169,7 @@ public class InventoryManagementWindow extends Dialog {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (getHeldItem() == null) {
-                    SproutGame.playSound("cash_register", .8f, MathUtils.random(0.92f, 1.02f), 1f);
+                    //SproutGame.playSound("cash_register", .8f, MathUtils.random(0.92f, 1.02f), 1f);
                     player.getInventory().sortInventory();
                     onInventoryChanged(player.getInventory());
                 }
