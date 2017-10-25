@@ -2,6 +2,7 @@ package com.binarybrains.sprout.entity;
 
 
 import com.badlogic.gdx.Gdx;
+import com.binarybrains.sprout.crafting.Recipe;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
@@ -10,6 +11,8 @@ import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Inventory {
@@ -26,13 +29,39 @@ public class Inventory {
         createEmptySlots(); // fill with empty slots
     }
 
+    public void sortInventory() {
+
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i) == null) {
+                items.remove(i);
+            }
+        }
+
+        Collections.sort(items, new Comparator<Item>() {
+            @Override
+            public int compare(final Item object1, final Item object2) {
+
+                if (object1 == null || object2 == null) {
+                    return 0;
+                }
+
+                return object1.getName().compareTo(object2.getName());
+            }
+        });
+
+        fillEmptySlots();
+
+    }
+
+
     /**
      * Upgrade Inventory
+     *
      * @return
      */
     public boolean upgrade() {
         if (Inventory.MAX_UPGRADE_SLOTS == getCapacity()) return false;
-        setCapacity(getCapacity()+ Inventory.UPGRADE_SLOTS);
+        setCapacity(getCapacity() + Inventory.UPGRADE_SLOTS);
         fillEmptySlots();
         return true;
     }
@@ -44,7 +73,7 @@ public class Inventory {
     }
 
     private void fillEmptySlots() {
-        for(int i = items.size(); i < getCapacity(); i++) {
+        for (int i = items.size(); i < getCapacity(); i++) {
             items.add(i, null);
         }
     }
@@ -159,10 +188,10 @@ public class Inventory {
     }
 
     /**
-     * @todo we acually have to check if when we craft something if that leaves a spot after crafting that we
-     * can grant that
      * @param item
      * @return
+     * @todo we acually have to check if when we craft something if that leaves a spot after crafting that we
+     * can grant that
      */
     public boolean hasSpaceFor(Item item) {
         if (item instanceof ResourceItem) {
@@ -193,7 +222,7 @@ public class Inventory {
 
     public int count(Item item) {
         if (item instanceof ResourceItem) {
-            ResourceItem ri = findResource(((ResourceItem)item).resource);
+            ResourceItem ri = findResource(((ResourceItem) item).resource);
             if (ri != null) return ri.count;
         } else {
             if (item == null) return 0;
@@ -253,7 +282,7 @@ public class Inventory {
 
         if (items.get(slotIndex) != null && items.get(slotIndex) instanceof ResourceItem) {
             if (count(items.get(slotIndex)) >= quantity) {
-                removeResource( ((ResourceItem) items.get(slotIndex)).resource, quantity);
+                removeResource(((ResourceItem) items.get(slotIndex)).resource, quantity);
                 // here we have to return a temporary heldItem
                 return new ResourceItem(Resources.wood, quantity);
             }

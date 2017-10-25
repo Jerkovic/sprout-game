@@ -95,6 +95,9 @@ public class InventoryManagementWindow extends Dialog {
                     player.increaseFunds(getHeldItem().getSellPrice() * sellingQuantity);
                     SproutGame.playSound("cash_register", .8f, MathUtils.random(0.92f, 1.02f), 1f);
                     setHeldItem(null);
+
+                    // player.getInventory().sortInventory();
+                    onInventoryChanged(player.getInventory());
                 }
             }
         });
@@ -129,6 +132,10 @@ public class InventoryManagementWindow extends Dialog {
         add(itemTable);
 
         row();
+        add(organize()).pad(15);
+
+
+        row();
         add(sellItem()).pad(15);
 
         row();
@@ -153,6 +160,24 @@ public class InventoryManagementWindow extends Dialog {
         add(buttonExit).pad(5);
 
         pack();
+    }
+
+    private Button organize() {
+        Image image = new Image(atlas.findRegion("Empty"));
+        Button button = new Button(skin, "default");
+        button.add(image);
+
+        button.addListener(new ClickListener(Input.Buttons.LEFT) {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if (getHeldItem() == null) {
+                    SproutGame.playSound("cash_register", .8f, MathUtils.random(0.92f, 1.02f), 1f);
+                    player.getInventory().sortInventory();
+                    onInventoryChanged(player.getInventory());
+                }
+            }
+        });
+        return button;
     }
 
     /**
@@ -181,8 +206,6 @@ public class InventoryManagementWindow extends Dialog {
         } else {
             level.screen.hud.removeMouseItem();
         }
-
-
     }
 
     private Item getHeldItem() {
@@ -280,7 +303,6 @@ public class InventoryManagementWindow extends Dialog {
                             SproutGame.playSound("button_click", .4f, 0.9f, 1f);
                             setHeldItem(inventory.getItems().get(group.getCheckedIndex()));
                             inventory.removeSlot(group.getCheckedIndex());
-                            System.out.println("heldItem" + heldItem);
                             onInventoryChanged(inventory);
                         } else {
                             SproutGame.playSound("button_click", .45f, 0.95f, 1f);
