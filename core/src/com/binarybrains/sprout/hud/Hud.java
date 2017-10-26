@@ -141,6 +141,8 @@ public class Hud {
         BackgroundMusic.stop();
         AmbienceSound.pause();
 
+        SproutGame.playSound("heartbeat", 0.9f);
+
         fadeActor.addAction(Actions.sequence(
                 Actions.alpha(0),
                 Actions.fadeIn(.5f, Interpolation.fade),

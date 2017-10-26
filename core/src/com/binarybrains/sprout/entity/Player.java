@@ -145,7 +145,6 @@ public class Player extends Npc implements InputProcessor {
     @Override
     public void die() { // player cant die
         if (passedOut) {
-            System.out.println("!!Player passed out!" + getHealth());
             passedOut = false;
             getLevel().screen.hud.updateXP(this);
             getLevel().screen.hud.playerPassedOut(this);
