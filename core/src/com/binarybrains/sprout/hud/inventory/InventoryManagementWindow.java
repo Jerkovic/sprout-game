@@ -161,7 +161,7 @@ public class InventoryManagementWindow extends Dialog {
     }
 
     private Button organize() {
-        Image image = new Image(atlas.findRegion("Empty"));
+        Image image = new Image(atlas.findRegion("Sort_Inventory"));
         Button button = new Button(skin, "default");
         button.add(image);
 

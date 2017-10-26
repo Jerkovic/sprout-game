@@ -45,6 +45,9 @@ public class Inventory {
                 return c;
             }
         });
+
+        Collections.reverse(items);
+
         fillEmptySlots();
     }
 

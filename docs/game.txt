@@ -1,4 +1,4 @@
-﻿Created by erikl on 27/06/16
+﻿﻿Created by erikl on 27/06/16
 
 ________________________________________________________________________________
 
@@ -8,10 +8,8 @@ ________________________________________________________________________________
 
 TODOS:
 
+
 * bug we sometimes have multiple music tracks playing at the same time
-
-
-* be able to sort inventory in manage window
 
 * Be able to plant Acorn seeds for new trees
 

@@ -46,6 +46,7 @@ public class WaterTile extends Tile {
 
             if (toolItem.tool instanceof WateringCan && toolItem.tool.use(this)) {
                 SproutGame.playSound("water_splash");
+                player.getLevel().screen.hud.refreshInventory();
                 return true;
             }
         }
