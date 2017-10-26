@@ -36,7 +36,7 @@ import java.util.Locale;
 public class Hud {
 
     Stage stage;
-    Label timeLabel, moneyLabel;
+    Label timeLabel, moneyLabel, xpLabel;
     Level level;
     Skin skin;
     Label fpsLabel;
@@ -347,19 +347,21 @@ public class Hud {
         timeLabel = new Label("Day 0 00:00", skin);
         fpsLabel = new Label("", skin);
         moneyLabel = new Label("0", skin);
+        xpLabel = new Label("XP:", skin);
+
         Table table = new Table(skin);
         table.bottom();
         table.setFillParent(false);
 
         Image icon = new Image(atlas.findRegion("Clock")); // time clock icon
-        table.add(icon);
-        table.add(timeLabel);
+        table.add(timeLabel).left();
         table.row();
-        moneyIcon = new Image(atlas.findRegion("Balubas")); // balubas icon
-        table.add(moneyIcon);
-        table.add(moneyLabel);
+        table.add(moneyLabel).left();
         table.row();
-        table.add(fpsLabel);
+        table.add(xpLabel).left();
+        table.row();
+        table.add(fpsLabel).left();
+        table.row();
         stage.addActor(table);
         Window window = new Window(SproutGame.name, skin);
         window.setKeepWithinStage(false);
@@ -422,6 +424,7 @@ public class Hud {
     }
 
     public void updateFunds(Player player) {
+        /*
         if (moneyIcon.hasActions()) return;
         float oldW = moneyIcon.getImageWidth();
         float oldH = moneyIcon.getImageHeight();
@@ -429,20 +432,21 @@ public class Hud {
                 Actions.sizeTo(moneyIcon.getImageWidth()+10,moneyIcon.getImageHeight()+10, .15f, Interpolation.pow2),
                 Actions.sizeTo(oldW,oldH, .1f, Interpolation.fade)
         ));
-
+        */
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
         moneyLabel.setText("" + numberFormat.format(player.getStats().get("money")));
     }
 
     public void updateXP(Player player) {
-        // todo UI stuff here
         healthBar.setValue((float) player.getHealth());
-        System.out.println("Total XP:" + player.getStats().get("xp"));
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        xpLabel.setText("XP: " + numberFormat.format(player.getStats().get("xp")));
     }
 
     public void act(float delta) {
         timeLabel.setText(level.gameTimer.toString());
-        fpsLabel.setText("fps: " + Gdx.graphics.getFramesPerSecond());
+        fpsLabel.setText("FPS: " + Gdx.graphics.getFramesPerSecond());
+
         // temp mouseItem
         if (mouseItem != null) {
             mouseItem.setPosition(Gdx.input.getX(), Gdx.app.getGraphics().getHeight() - Gdx.input.getY());
