@@ -38,7 +38,11 @@ public class Inventory {
                     return 0;
                 }
 
-                return object1.getName().compareTo(object2.getName());
+                int c = object1.getCategory().compareTo(object2.getCategory());
+                if (c == 0) {
+                    c = object1.getName().compareTo(object2.getName());
+                }
+                return c;
             }
         });
         fillEmptySlots();
