@@ -23,7 +23,6 @@ public class GameScreen implements Screen {
     public Float width;
     public Float height;
     public Hud hud;
-    public Sound forestAmbienceSfx; // temporary move to AmbienceSound handler class
     Skin skin;
 
     public enum GameState
@@ -53,7 +52,7 @@ public class GameScreen implements Screen {
         pm.dispose();
 
         // handling class for Ambience
-        AmbienceSound.setSound("forest_morning_ambience");
+        AmbienceSound.setSound("forest_night_ambience");
 
         Timer.schedule(new Timer.Task(){
             @Override

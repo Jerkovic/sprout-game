@@ -8,14 +8,17 @@ import com.binarybrains.sprout.SproutGame;
 
 public class BackgroundMusic {
 
-    static Music currentTrack; // make a map out of it?
+    private static Music currentTrack; // make a map out of it?
 
-    static float FACTOR = .2f; // The bigger the factor, the faster the fade-out will be
-    static float mVolume = .8f;
-    static boolean mIsPlaying = false;
-    static boolean isStopped = false;
+    private static float FACTOR = .2f; // The bigger the factor, the faster the fade-out will be
+    private static float mVolume = .8f;
+    private static boolean mIsPlaying = false;
+    private static boolean isStopped = false;
 
     public static void start() {
+
+        stop();
+        if (currentTrack != null && currentTrack.isPlaying()) currentTrack.stop();
 
         changeTrack(MathUtils.random(1, 3)); // random select a track in our library
         mIsPlaying = true;
