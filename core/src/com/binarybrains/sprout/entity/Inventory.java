@@ -254,7 +254,7 @@ public class Inventory {
         System.out.println("****************************************************************************");
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) != null) {
-                System.out.println("Slot: " + i + " " +  items.get(i).getName() + " x " + count(items.get(i)));
+                System.out.println("Slot: " + i + " " +  items.get(i).getName() + " (" + items.get(i).getCategory() + ") x " + count(items.get(i)));
             } else {
                 System.out.println("Slot: " + i + " NULL");
             }

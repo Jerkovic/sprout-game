@@ -38,6 +38,15 @@ public class ResourceItem extends Item {
         return this.resource.getSellPrice();
     }
 
+    @Override
+    public String getCategory() {
+        if (resource.getClass().getSimpleName().equals("Resource")) {
+            return "Resource";
+        } else {
+            return  resource.getClass().getSimpleName().replace("Resource", "");
+        }
+    }
+
     public String getName() {
         return resource.name;
     }

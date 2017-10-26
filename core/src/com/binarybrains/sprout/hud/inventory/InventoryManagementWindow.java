@@ -186,7 +186,7 @@ public class InventoryManagementWindow extends Dialog {
     private Table createTooltipTable(Item item) {
         Table tooltipTable = new Table(skin);
         tooltipTable.pad(10).background("default-round");
-        tooltipTable.add(item.getName()).left();
+        tooltipTable.add(item.getName() + " (" + item.getCategory() + ")").left();
         tooltipTable.row();
         tooltipTable.add(item.getDescription()).left();
         tooltipTable.align(Align.left | Align.top);

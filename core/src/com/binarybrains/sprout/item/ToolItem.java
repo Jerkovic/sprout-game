@@ -74,6 +74,11 @@ public class ToolItem extends Item {
         return tool.getDescription();
     }
 
+    @Override
+    public String getCategory() {
+        return "Tool";
+    }
+
     public boolean upgrade(int level) {
         if (level <= ToolItem.MAX_LEVEL) {
             this.level = level;

@@ -33,6 +33,12 @@ public class ArtifactItem extends Item implements Portable {
     }
 
     @Override
+    public String getCategory() {
+        return "Artifact";
+    }
+
+
+    @Override
     public String getDescription() {
         return artifact.getDescription();
     }

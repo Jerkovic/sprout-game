@@ -12,17 +12,16 @@ public class DesktopLauncher {
 
         Graphics.DisplayMode[] modes = LwjglApplicationConfiguration.getDisplayModes();
         System.out.println("Operating System: " + System.getProperty("os.name"));
-        // Windows 7 @ work
         System.out.println("======================Graphic Modes=========================");
         for (Graphics.DisplayMode mode: modes) {
             System.out.println(mode);
         }
         System.out.println("============================================================");
         Graphics.DisplayMode displayMode = LwjglApplicationConfiguration.getDesktopDisplayMode();
-        config.setFromDisplayMode(displayMode);
-        //config.width = 1024;
-        //config.height = 768;
-        config.fullscreen = true;
+        // config.setFromDisplayMode(displayMode);
+        config.width = 1024;
+        config.height = 768;
+        config.fullscreen = false;
         config.resizable = false;
         config.useGL30 = false;
 		config.title = SproutGame.name;

@@ -28,9 +28,27 @@ TODOS:
 
 * if player dies fade out and wake up in bed...some inventory items are gone and some money
 
+* Blob Tileset
+   Cool stuff - http://www.cr31.co.uk/stagecast/wang/blob.html
+
 * Cave level generation 3-4 rooms and connecting hallways
   - https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664
   - TODO! Cave exit and cave next level point
+  - pick a room on the top room to be the entrance
+  - Spelunky has the perfect mix between random and handcrafted.
+  - 4x4 rooms (every room is hand crafted and should have some meta data around it to be able to be randomized easy
+    into the cave level. most important is the data on where the corridor attacher is. a room in spelunky is 10x8 sized
+    in tiles.
+    A total of 40 tiles wide and 32 tiles high
+
+    0000000000
+    0000000000
+    0000000000
+    0000000000
+    0000000000
+    0000000000
+    0000000000
+    0000000000
 
 * Bug! Prevent camera slides after hud window displays.
 
