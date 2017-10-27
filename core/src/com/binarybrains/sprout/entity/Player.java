@@ -65,7 +65,6 @@ public class Player extends Npc implements InputProcessor {
         super(level, new Vector2(0, 0), 16f, 16f, 0);
         setSpeed(64);
 
-
         inventory = new Inventory(level, inventoryCapacity);
         getInventory().add(new ToolItem(Tools.hoe, 0));
         getInventory().add(new ToolItem(Tools.wateringcan, 0));

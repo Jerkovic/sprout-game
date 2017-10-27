@@ -10,9 +10,7 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.Item;
-import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
-import com.binarybrains.sprout.item.tool.Axe;
 import com.binarybrains.sprout.item.tool.Mace;
 import com.binarybrains.sprout.level.Level;
 
@@ -38,13 +36,13 @@ public class Emma extends Npc {
     public void updateWalkDirections(int x, int y) {
         clearFindPath();
         findPath = generatePathFindingDirections(generatePath(x, y));
-        // printMap(findPath);
+
     }
 
     // temp method
     public void leaveHouse() {
         setTilePos(18,91); // outside the house test
-        SproutGame.playSound("door_close1");
+        SproutGame.playSound("door_close1", 0.4f);
     }
 
     /**
@@ -63,9 +61,8 @@ public class Emma extends Npc {
             setState(State.WALKING);
             //findPath.remove(getPosHash());
         } else {
-            //System.out.println("Emma lost?");
+            // System.out.println("NPC lost?");
         }
-
 
         stateMachine.update();
     }
@@ -109,15 +106,17 @@ public class Emma extends Npc {
         }
 
         if (player.activeItem instanceof ArtifactItem && player.activeItem.getName().equals("Teddy")) {
-            stateMachine.changeState(EmmaState.WALK_HOME);
+
             player.getLevel().screen.hud.speakDialog(
                     this.getClass().getSimpleName(),
                     String.format("Ohh! Is that %s? I have really missed him! Thank you!", item.getName())
             );
+
             ArtifactItem ai = (ArtifactItem) player.activeItem;
             player.getInventory().removeItem(ai);
             player.getLevel().screen.hud.refreshInventory();
 
+            stateMachine.changeState(EmmaState.GOTO_LAMP_POST);
             return true;
         }
 
@@ -128,7 +127,7 @@ public class Emma extends Npc {
     public boolean blocks(Entity e) {
         if (e instanceof Emma) return false;
         if (e instanceof Player) {
-            return false; // true
+            return false;
         }
         return false;
     }

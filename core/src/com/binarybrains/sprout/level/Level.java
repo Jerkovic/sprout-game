@@ -130,7 +130,8 @@ public class Level extends LevelEngine {
         camera.setToOrtho(false, screen.width / 4, screen.height / 4); // we scale 16x16 to 64x64
 
         player = new Player(this);
-        player.setTilePos(13, 100);
+        //player.setTilePos(13, 100);
+        player.setTilePos(2, 5);
         player.setHealth(10);
 
 
@@ -154,7 +155,7 @@ public class Level extends LevelEngine {
 
         // test some path finding stuff.. move this!!
         setupPathFinding(); // construct the A.star
-        this.add(this, new Emma(this, new Vector2(5 * 16f, 1 * 16f), 16f, 16f));
+        this.add(this, new Emma(this, new Vector2(5 * 16f, 6 * 16f), 16f, 16f));
 
 
         generateCaves(); // test
