@@ -111,6 +111,8 @@ Ideas on what is going on in the game:
 - Key could unlock Motel (room 5)
 - Find Teddy and return it to its place.
 - Phone booth call the number found in/on X and get a secret clue or something
+- Remove the carpet to find the secret trap door leading into something
+- the legend of the lamprey (a big nejonöga living in theese waters)
 
 Cave gen
 --------
@@ -163,6 +165,8 @@ Crono Trigger
 Secrets of Mana
 Zelda
 Forager game
+Stranger things
+Sherlock Homes
 
 -------------------------= Tech stuff --------------------------------
 
