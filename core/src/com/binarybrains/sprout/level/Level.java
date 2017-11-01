@@ -143,9 +143,9 @@ public class Level extends LevelEngine {
         add(this, new Chest(this, new Vector2(16 * 22, 16 * 110)));
 
         for (int i = 0; i < 30; i++) {
-            float x = MathUtils.random(1,64);
-            float y = MathUtils.random(1,64);
-            add(this, new Grass(this, (15 * 22)+x, (15 * 105)+y));
+            float x = MathUtils.random(1,67);
+            float y = MathUtils.random(1,67);
+            add(this, new Grass(this, (10 * 22)+x, (16 * 105)+y));
 
         }
 
