@@ -29,6 +29,7 @@ import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.misc.Mail;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
+import com.binarybrains.sprout.entity.terrain.Grass;
 import com.binarybrains.sprout.entity.terrain.Stone;
 import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.item.ArtifactItem;
@@ -140,6 +141,13 @@ public class Level extends LevelEngine {
 
         add(this, player);
         add(this, new Chest(this, new Vector2(16 * 22, 16 * 110)));
+
+        for (int i = 0; i < 30; i++) {
+            float x = MathUtils.random(1,64);
+            float y = MathUtils.random(1,64);
+            add(this, new Grass(this, (15 * 22)+x, (15 * 105)+y));
+
+        }
 
         // add player mail
         // add(this, new Mail(this, new Vector2(13*16f,1540f)));

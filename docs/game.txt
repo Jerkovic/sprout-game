@@ -8,6 +8,7 @@ ________________________________________________________________________________
 
 TODOS:
 
+* make shaking grass (see grass)
 
 * bug we sometimes have multiple music tracks playing at the same time
 
