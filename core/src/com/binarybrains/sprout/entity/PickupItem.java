@@ -41,7 +41,7 @@ public class PickupItem extends ItemEntity {
 
         List<String> valuables = Arrays.asList("Gold Nugget", "Diamond");
 
-        List<String> fallfruit = Arrays.asList("Apple");
+        List<String> fallfruit = Arrays.asList("Apple", "Orange");
 
         if (fallfruit.contains(item.getName())) {
             bounce = false;
@@ -54,7 +54,7 @@ public class PickupItem extends ItemEntity {
             shadowFallingY = position.y-45;
             endPositionY = position.y-42;
 
-            addAction(Actions.moveTo(position.x, endPositionY, MathUtils.random(.9f, 1.2f), Interpolation.bounceOut));
+            addAction(Actions.moveTo(position.x, endPositionY, MathUtils.random(.98f, 1.1f), Interpolation.bounceOut));
         }
 
         // todo rareness level on item

@@ -33,7 +33,8 @@ public class Resources {
     public static Resource salmon = new FoodResource("Salmon", "Nice meatfish, grill it!", 100);
     public static Resource potato = new FoodResource("Potato", "Starchy, tuberous crop.", 6);
     public static Resource apple = new FoodResource("Apple", "A fruit", 5);
-    public static Resource banana = new FoodResource("Banana", "A yellow bended fruit", 8);
+    public static Resource banana = new FoodResource("Banana", "An edible fruit, botanically a berry", 8);
+    public static Resource orange = new FoodResource("Orange", "A citrus fruit.", 9);
     public static Resource coconut = new FoodResource("Coconut", "A fruit with a hard shell", 13);
     public static Resource chuckBerry = new FoodResource("Chuck Berry", "A very rare berry", 14);
     public static Resource cider = new FoodResource("Cider", "A very refreshing drink made of apples. Consume with care.", 22);

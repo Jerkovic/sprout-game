@@ -321,78 +321,92 @@ Gold_Nugget
 Grass
   rotate: false
   xy: 417, 395
-  size: 48, 48
-  orig: 48, 48
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
-  index: 1
+  index: -1
+Grass_Starter
+  rotate: false
+  xy: 435, 395
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 Hammer
   rotate: false
-  xy: 1, 493
+  xy: 453, 395
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Hoe
   rotate: false
-  xy: 51, 493
+  xy: 1, 493
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Iron_Axe
   rotate: false
-  xy: 101, 493
+  xy: 51, 493
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Iron_Bar
   rotate: false
-  xy: 151, 493
+  xy: 101, 493
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Iron_Ore
   rotate: false
-  xy: 201, 493
+  xy: 151, 493
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Key
   rotate: false
-  xy: 251, 493
+  xy: 201, 493
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Ladder
   rotate: false
-  xy: 301, 493
+  xy: 251, 493
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 LineArtLock
   rotate: false
-  xy: 351, 493
+  xy: 301, 493
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Mace
   rotate: false
-  xy: 401, 493
+  xy: 351, 493
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 Mineral_Stone
   rotate: false
-  xy: 451, 493
+  xy: 401, 493
   size: 32, 32
   orig: 32, 32
+  offset: 0, 0
+  index: -1
+Orange
+  rotate: false
+  xy: 435, 493
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: -1
 Pickaxe
