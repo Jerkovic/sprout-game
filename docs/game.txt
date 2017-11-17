@@ -84,6 +84,7 @@ TODOS:
   * Enter the house
   * Look at the flower (create flower)
 
+* Bug with NPC Pathfinding AI. Needs to be looked at.
 
 
 --------------------------NPC charachters------------------------

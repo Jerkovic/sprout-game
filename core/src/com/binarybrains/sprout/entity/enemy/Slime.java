@@ -61,7 +61,6 @@ public class Slime extends Mob {
         }
     }
 
-
     @Override
     public boolean interact(Player player, Item item, Direction attackDir) {
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
@@ -35,8 +36,16 @@ public class Emma extends Npc {
 
     public void updateWalkDirections(int x, int y) {
         clearFindPath();
-        findPath = generatePathFindingDirections(generatePath(x, y));
+        IntArray rawPath = generatePath(x, y);
+        System.out.println("Generate Path returned: " + rawPath.size);
+        findPath = generatePathFindingDirections(rawPath);
 
+        for (Map.Entry<Long, Direction> entry : findPath.entrySet()) {
+                Long index = entry.getKey();
+                Long tpY = index / 256;
+                Long tpX = index % 256;
+                System.out.println(tpX + "x" + tpY + " = " + entry.getValue());
+        }
     }
 
     // temp method
@@ -60,8 +69,6 @@ public class Emma extends Npc {
             // System.out.println("go " + getDirection() + " " + getPosHash());
             setState(State.WALKING);
             //findPath.remove(getPosHash());
-        } else {
-            // System.out.println("NPC lost?");
         }
 
         stateMachine.update();
