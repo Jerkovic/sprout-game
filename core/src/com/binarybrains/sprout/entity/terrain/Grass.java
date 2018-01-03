@@ -95,7 +95,7 @@ public class Grass extends Entity {
             ToolItem toolItem = (ToolItem) item;
 
             if (toolItem.tool instanceof Scythe && toolItem.tool.canUse()) {
-
+                //SproutGame.playSound("leaves_rustling", MathUtils.random(0.5f, 0.8f), MathUtils.random(0.9f, 1.1f), 1f);
                 hurt(player, toolItem.getDamage());
                 return true;
             }

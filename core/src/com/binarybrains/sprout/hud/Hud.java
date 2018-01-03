@@ -400,7 +400,7 @@ public class Hud {
 
         healthBar = new ProgressBar(0, 100f, 1f, false, barStyle);
         healthBar.setAnimateDuration(1.5f);
-        healthBar.setValue(0f);
+        healthBar.setValue(100f);
         hudTable.add(healthBar);
         hudTable.row();
 
