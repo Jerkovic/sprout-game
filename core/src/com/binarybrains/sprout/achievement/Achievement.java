@@ -1,6 +1,7 @@
 package com.binarybrains.sprout.achievement;
 
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.award.Award;
 import com.binarybrains.sprout.entity.Stats;
 import com.binarybrains.sprout.level.Level;
 
@@ -22,6 +23,7 @@ public class Achievement
             achievements.put("potatofarmer",
                     new Achievement("Potato Farmer", "get 10 potatoes")
                             .addUnlockCriteria("Get 10 potatoes", "Potato", 10)
+                            .addAward()
             );
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -31,12 +33,14 @@ public class Achievement
     private String name;
     private String desc;
     public ArrayList <UnlockCriteria> unlockCriterias;
+    public ArrayList <Award> awards;
     private boolean unlocked;
 
     public Achievement(String theId, String desc) {
         this.name = theId;
         this.desc = desc;
         this.unlockCriterias = new ArrayList<UnlockCriteria>();
+        this.awards = new ArrayList<Award>();
         this.unlocked = false;
     }
 
@@ -80,6 +84,11 @@ public class Achievement
 
     public Achievement addUnlockCriteria(String name, String statKey, int valueNeeded) {
         unlockCriterias.add(new UnlockCriteria(name, statKey, valueNeeded));
+        return this;
+    }
+
+    public Achievement addAward() { // todo params
+        awards.add(new Award());
         return this;
     }
 

@@ -90,9 +90,25 @@ public class Crafting {
         return recipes;
     }
 
+    /**
+     * Find recipe by uid
+     * @param id
+     * @return
+     */
+    public static Recipe findRecipeByIdentifier(List<Recipe> searchRecipes, String id) {
+
+        for (int i = 0; i < searchRecipes.size(); i++) {
+            Recipe recipe = searchRecipes.get(i);
+            if (recipe.getIdentifier().equals(id))
+            {
+                return recipe;
+            }
+        }
+        return null;
+    }
 
     /**
-     * start crafting mech
+     * start crafting
      * @param player
      * @param index
      * @return

@@ -18,8 +18,10 @@ public abstract class Recipe implements ListItem {
     public boolean isUnlocked = true;
     public int xp = 0;
     private boolean removeRecipeOnCraft = false;
+    private String identifier;
 
     public Recipe(Item resultTemplate) {
+        this.identifier = resultTemplate.toString().replaceAll(" ", "_").toLowerCase();
         this.resultItem = resultTemplate;
     }
 
@@ -28,6 +30,19 @@ public abstract class Recipe implements ListItem {
         return this;
     }
 
+    /**
+     * Unique identifier for recipe. for example "basic_scythe"
+     * @return String
+     */
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    /**
+     * Amount of Experience points gained when recipe is crafted
+     * @param xp
+     * @return
+     */
     public Recipe setXP(int xp) {
         this.xp = xp;
         return this;
