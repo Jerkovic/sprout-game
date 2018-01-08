@@ -1,5 +1,6 @@
 package com.binarybrains.sprout.entity.crop;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
@@ -48,10 +49,6 @@ public class Crop extends Entity {
             }
         }
         return false;
-    }
-
-    public void grow() {
-
     }
 
 
