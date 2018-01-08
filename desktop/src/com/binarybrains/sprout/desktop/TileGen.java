@@ -6,6 +6,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Generates a Template for bitmask tiles
+ */
 public class TileGen {
     static public void main(String args[]) throws Exception {
 

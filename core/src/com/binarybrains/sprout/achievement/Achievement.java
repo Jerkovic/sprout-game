@@ -88,7 +88,7 @@ public class Achievement
     }
 
     public Achievement addAward() { // todo params
-        awards.add(new Award());
+        awards.add(new Award()); //this unlocks the basic_key
         return this;
     }
 
@@ -102,6 +102,7 @@ public class Achievement
 
     public static void checkAwards(Stats player, Level level)
     {
+        // todo check all achievements
         if (achievements.get("potatofarmer").shallBeAwarded(player))
         {
             //SproutGame.playSound("");
@@ -120,6 +121,7 @@ public class Achievement
                 ", desc='" + desc + '\'' +
                 ", unlockCriterias=" + unlockCriterias +
                 ", unlocked=" + unlocked +
+                ", awards=" + awards +
                 '}';
     }
 }

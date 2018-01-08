@@ -6,9 +6,7 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -189,7 +187,8 @@ public abstract class LevelEngine {
         TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground_top");
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
 
-        cell.setTile(map.getTileSets().getTile(newTile.getTileSetIndex()));
+        TiledMapTile tile = map.getTileSets().getTile(newTile.getTileSetIndex());
+        cell.setTile(tile);
         layer.setCell(x, y, cell);
     }
 
