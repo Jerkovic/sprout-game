@@ -105,7 +105,9 @@ public class Emma extends Npc {
     @Override
     public boolean interact(Player player, Item item, Direction attackDir) {
         if (item instanceof ToolItem) {
+
             ToolItem toolItem = (ToolItem) item;
+
             if (toolItem.tool instanceof Mace && toolItem.tool.canUse()) {
                 hurt(player, toolItem.getDamage(), player.getDirection()); // hurt emma
                 return true;
