@@ -1,5 +1,5 @@
 package com.binarybrains.sprout.item;
 
-public interface Saleable {
+public interface Sellable {
     int getSellPrice();
 }
