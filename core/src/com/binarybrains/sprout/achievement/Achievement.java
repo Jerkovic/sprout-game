@@ -15,10 +15,10 @@ public class Achievement
 
     static {
         try {
-            achievements.put("zombieSlayer1",
-                    new Achievement("Zombie Slayer Level 1", "Prove you are a true zombie slayer.")
-                            .addUnlockCriteria("Kill 10 Zombies", "zombie_kills", 10)
-                            .addUnlockCriteria("Get 10 potatoes", "Potato", 10)
+            achievements.put("gardenerTest",
+                    new Achievement("Gardener test", "Prove you are a true zombie slayer.")
+                            .addUnlockCriteria("Collect an orange", "Orange", 1)
+                            .addUnlockCriteria("Get 10 potatoes", "Potato", 1)
             );
             achievements.put("potatofarmer",
                     new Achievement("Potato Farmer", "get 10 potatoes")
@@ -102,14 +102,13 @@ public class Achievement
 
     public static void checkAwards(Stats player, Level level)
     {
-        // todo check all achievements
-        if (achievements.get("potatofarmer").shallBeAwarded(player))
-        {
-            //SproutGame.playSound("");
-            String msg = achievements.get("potatofarmer").getName();
-            // System.out.println("New achievement:" + msg);
-            SproutGame.playSound("fancy_reward");
-            level.screen.hud.addToasterMessage("New achievement" ,msg);
+        for (Achievement achievement : achievements.values()) {
+            if (achievement.shallBeAwarded(player))
+            {
+                String msg = achievement.getName();
+                SproutGame.playSound("fancy_reward");
+                level.screen.hud.addToasterMessage("New achievement" , msg);
+            }
         }
 
     }

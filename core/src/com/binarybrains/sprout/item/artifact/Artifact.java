@@ -1,9 +1,9 @@
 package com.binarybrains.sprout.item.artifact;
 
 
-import com.binarybrains.sprout.item.Saleable;
+import com.binarybrains.sprout.item.Sellable;
 
-public class Artifact implements Saleable{
+public class Artifact implements Sellable {
 
     public final String name;
     public final String description;

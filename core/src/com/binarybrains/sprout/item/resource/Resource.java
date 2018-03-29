@@ -1,9 +1,9 @@
 package com.binarybrains.sprout.item.resource;
 
 
-import com.binarybrains.sprout.item.Saleable;
+import com.binarybrains.sprout.item.Sellable;
 
-public class Resource implements Saleable {
+public class Resource implements Sellable {
 
     public final String name;
     public final String description;
