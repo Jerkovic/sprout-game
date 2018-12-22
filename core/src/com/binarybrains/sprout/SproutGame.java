@@ -36,7 +36,7 @@ public class SproutGame extends Game {
 		loadAssets();
 
 		// exp level
-		LevelRank.progressionChartDebug();
+		//LevelRank.progressionChartDebug();
 
 
 		setScreen(new GameScreen(this));

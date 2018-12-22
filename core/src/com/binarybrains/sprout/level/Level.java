@@ -351,7 +351,7 @@ public class Level extends LevelEngine {
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT)) {
-            player.increaseXP(900); // test
+            player.increaseXP(100); // test
         }
 
 

@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryManagementWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryWindow;
@@ -351,6 +352,7 @@ public class Hud {
         moneyLabel = new Label("0", skin);
         xpLabel = new Label("XP:", skin);
 
+
         Table table = new Table(skin);
         table.bottom();
         table.setFillParent(false);
@@ -373,7 +375,11 @@ public class Hud {
         window.add(table).pad(4f);
         window.row();
         window.add(buildHealthMeters());
+        window.row();
+
+        window.add(buildLevelRankMeters()).pad(4f);
         window.pack();
+
         window.setPosition(10, Gdx.app.getGraphics().getHeight() - window.getHeight()-10);
         stage.addActor(window);
     }
@@ -381,6 +387,39 @@ public class Hud {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public Table buildLevelRankMeters() {
+        Table hudTable = new Table(skin);
+
+        Pixmap pixmap = new Pixmap(1, 10, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.WHITE);
+        pixmap.fill();
+        skin.add("default-hud-texture", new Texture(pixmap));
+        pixmap.dispose();
+
+        ProgressBar.ProgressBarStyle barStyle = new ProgressBar.ProgressBarStyle(
+                skin.newDrawable("default-hud-texture", Color.BLACK),
+                skin.newDrawable("default-hud-texture", Color.YELLOW)
+        );
+
+        barStyle.knobBefore = barStyle.knob;
+
+        barStyle.knobBefore.setLeftWidth(0f);
+        barStyle.knobBefore.setRightWidth(0f);
+        //barStyle.knobBefore = barStyle.knob;
+
+        //barStyle.knob = barStyle.knobBefore;
+        //barStyle.knobAfter = true;
+
+        levelBar = new ProgressBar(0, 99f, 1f, false, barStyle);
+        levelBar.setAnimateDuration(.25f);
+        levelBar.setValue(0f);
+        hudTable.add(levelBar);
+        hudTable.row();
+
+        return hudTable;
+
     }
 
 
@@ -391,6 +430,7 @@ public class Hud {
         pixmap.setColor(Color.WHITE);
         pixmap.fill();
         skin.add("default-hud-texture", new Texture(pixmap));
+        pixmap.dispose();
 
         ProgressBar.ProgressBarStyle barStyle = new ProgressBar.ProgressBarStyle(
                 skin.newDrawable("default-hud-texture", Color.BLACK),
@@ -442,7 +482,11 @@ public class Hud {
     public void updateXP(Player player) {
         healthBar.setValue((float) player.getHealth());
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        xpLabel.setText("XP: " + numberFormat.format(player.getStats().get("xp")));
+        int xp = player.getStats().get("xp");
+        LevelRank rank = LevelRank.getLevelProgression(xp);
+        xpLabel.setText("XP: " + numberFormat.format(xp) + " Level: " + rank.getCurrentLevel());
+
+        levelBar.setValue(rank.getProgress());
     }
 
     public void act(float delta) {

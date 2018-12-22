@@ -302,6 +302,23 @@ Fruits will become more nutritious (+more energy) - "Fruit picker"
 "Blacksmith"
 "Goldsmith"
 "Alchemist"
+
+xp input
+
+returns a  LevelRankProgression
+
+startThreshold
+endThreshold
+
+
+
+levelGap = endThreshold - startThreshold
+xpToNextLevel = (levelGap - (xp - startThreshold))
+percent = (xpToNextLevel / levelGap) * 100
+
+
+
+
 -----------------------------------------------------
 Lvl: 0 Points: 0
 Lvl: 1 Points: 1,000
