@@ -582,7 +582,7 @@ public class Player extends Npc implements InputProcessor {
     public void rankedUp(final int level) {
 
         addAction(Actions.sequence(
-                Actions.delay(.4f),
+                Actions.delay(1f),
                 Actions.run(new Runnable() { public void run(){
                     SproutGame.playSound("pickup_fanfar", .65f);
                     getLevel().screen.hud.addToasterMessage("LEVEL UP", "You reached Level " + level);

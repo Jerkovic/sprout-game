@@ -54,9 +54,11 @@ public class GrassTile extends Tile {
         Item item = player.getActiveItem();
         if (item instanceof ToolItem) {
             ToolItem toolItem = (ToolItem) item;
+            // this is too easy, now we can hoe places that are not allowed
             if (toolItem.tool instanceof Hoe && toolItem.tool.canUse() && mayPass) {
 
-                // (Hoe)toolItem.tool.playRandomSound
+                if (player.getLevel().getEntitiesAtTile(xt, yt).size() > 0) return false;
+
                 ((Hoe) toolItem.tool).playDigSound();
                 player.getLevel().setTile(xt, yt, new DirtTile(xt, yt));
                 player.getLevel().setAutoTile(xt, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitwiseIndex(xt,yt)));
@@ -88,8 +90,6 @@ public class GrassTile extends Tile {
                 return true;
             }
         }
-
-
         return false;
     }
 

@@ -28,7 +28,6 @@ import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.BackgroundMusic;
-import sun.rmi.server.InactiveGroupException;
 
 import java.text.NumberFormat;
 import java.util.Locale;

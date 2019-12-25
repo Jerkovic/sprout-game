@@ -24,7 +24,7 @@ public class TextParticle extends Entity {
     public TextParticle(Level level, Vector2 position, String text, Color color) {
         super(level, position, 20, 20);
         this.text = text;
-        setColor(new Color(1f, 0f, 0f, 1f));
+        setColor(new Color(1f, 1f, 1f, 1f));
         fade();
     }
 
@@ -34,10 +34,10 @@ public class TextParticle extends Entity {
 
     public void fade() {
         addAction(Actions.sequence(
-                Actions.delay(MathUtils.random(.1f, .298f)),
+                Actions.delay(MathUtils.random(.15f, .298f)),
                 Actions.parallel(
-                    Actions.moveTo(getPosition().x , getPosition().y + (getHeight() * 2) ,MathUtils.random(0.81f, 1.0f), Interpolation.exp5In),
-                    Actions.alpha(0.00f, 1f, Interpolation.fade)
+                    Actions.moveTo(getPosition().x , getPosition().y + (getHeight() * 2) ,MathUtils.random(0.91f, 1.4f), Interpolation.exp5In),
+                    Actions.alpha(0.00f, 1.3f, Interpolation.fade)
                 ),
                 Actions.run((new Runnable() {
                     public void run () {
