@@ -247,9 +247,9 @@ public class Hud {
         stage.addActor(window);
 
         // this should be grouped in some clever way.. no need to spawn 6 wood pickups
-        int hudPosition = (notificationsInHud++ * 70) + 70;
+        int hudPosition = (notificationsInHud++ * 75) + 75;
         //Tween.set(window, ActorAccessor.ALPHA).target(0f).start(SproutGame.getTweenManager());
-        Tween.to(window, ActorAccessor.POSITION_XY, 2.9f).target(20, hudPosition).ease(TweenEquations.easeOutElastic).delay(0.4f)
+        Tween.to(window, ActorAccessor.POSITION_XY, 2.1f).target(20, hudPosition).ease(TweenEquations.easeOutElastic).delay(0.4f)
         .setCallback(new TweenCallback() {
 
             @Override
@@ -287,6 +287,9 @@ public class Hud {
 
 
         window.setMovable(false);
+        window.row().fill().expandX();
+        window.add("").pad(6f);
+
         window.row().fill().expandX();
 
         Label notLabel = new Label(text, skin);

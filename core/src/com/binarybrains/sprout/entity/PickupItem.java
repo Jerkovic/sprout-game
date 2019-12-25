@@ -39,7 +39,7 @@ public class PickupItem extends ItemEntity {
         setCenterPos(position.x, position.y);
         lifeTime = 60 * 10 + MathUtils.random(1, 60);
 
-        List<String> valuables = Arrays.asList("Gold Nugget", "Diamond");
+        List<String> valuables = Arrays.asList("Gold Nugget", "Diamond", "Apple");
 
         List<String> fallfruit = Arrays.asList("Apple", "Orange");
 
@@ -102,6 +102,7 @@ public class PickupItem extends ItemEntity {
                 ((Player)entity).increaseStats(item.getName(), 1);
                 // test some money earning
                 getLevel().player.increaseFunds(10);
+                getLevel().screen.hud.addNotification(item);
             }
         }
     }
