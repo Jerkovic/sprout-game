@@ -468,15 +468,6 @@ public class Hud {
     }
 
     public void updateFunds(Player player) {
-        /*
-        if (moneyIcon.hasActions()) return;
-        float oldW = moneyIcon.getImageWidth();
-        float oldH = moneyIcon.getImageHeight();
-        moneyIcon.addAction(Actions.sequence(
-                Actions.sizeTo(moneyIcon.getImageWidth()+10,moneyIcon.getImageHeight()+10, .15f, Interpolation.pow2),
-                Actions.sizeTo(oldW,oldH, .1f, Interpolation.fade)
-        ));
-        */
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
         moneyLabel.setText("" + numberFormat.format(player.getStats().get("money")));
     }

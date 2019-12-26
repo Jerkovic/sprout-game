@@ -47,7 +47,6 @@ public class Player extends Npc implements InputProcessor {
     private long lastUseTime = 0;
     private long coolDownUseTime = 900; // this is how long before in millis the player can perform use/view again
 
-
     enum Keys {
         W, A, S, D
     }
@@ -61,7 +60,6 @@ public class Player extends Npc implements InputProcessor {
     }
 
     public Player(Level level) {
-
         super(level, new Vector2(0, 0), 16f, 16f, 0);
         setSpeed(64);
 
@@ -510,9 +508,7 @@ public class Player extends Npc implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
-
-        switch (keycode)
-        {
+        switch (keycode) {
             case Input.Keys.A:
                 keys.get(keys.put(Keys.A, false));
                 break;
