@@ -60,7 +60,6 @@ public class InventoryManagementWindow extends Dialog {
     }
 
     private Button trashCan() {
-
         Image image = new Image(atlas.findRegion("Garbage_Can")); // Trash Can todo
         Button button = new Button(skin, "default");
         button.add(image);
@@ -75,11 +74,9 @@ public class InventoryManagementWindow extends Dialog {
             }
         });
         return button;
-
     }
 
     private Button sellItem() {
-
         Image image = new Image(atlas.findRegion("Cash_Register"));
         Button button = new Button(skin, "default");
         button.add(image);
@@ -100,9 +97,7 @@ public class InventoryManagementWindow extends Dialog {
             }
         });
         return button;
-
     }
-
 
     public void centerMe() {
         setPosition(Gdx.graphics.getWidth() / 2 - getWidth() / 2, Gdx.graphics.getHeight() / 2 - getHeight()/2);
@@ -119,7 +114,6 @@ public class InventoryManagementWindow extends Dialog {
     }
 
     private void build() {
-
         Table itemTable = new Table(skin);
 
         for (int i = 0, n = group.getButtons().size; i < n; i++) {
@@ -127,20 +121,16 @@ public class InventoryManagementWindow extends Dialog {
             if ((i + 1) % 12 == 0) itemTable.row();
         }
 
+        Table buttonTable = new Table(skin);
+        buttonTable.add(organize()).pad(8);
+        buttonTable.add(sellItem()).pad(8);
+        buttonTable.add(trashCan()).pad(8);
+
         add(itemTable);
-
         row();
-        add(organize()).pad(15);
-
-
+        add(buttonTable);
         row();
-        add(sellItem()).pad(15);
-
-        row();
-
-        add(trashCan()).pad(15);
-        row();
-        debug();
+        //debug();
 
         TextButton buttonExit = new TextButton("   Close   ", skin);
         buttonExit.addListener(new ClickListener() {
