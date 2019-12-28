@@ -459,7 +459,6 @@ public class Level extends LevelEngine {
     }
 
     private void renderHighlightCell() {
-
         debugRenderer.setProjectionMatrix(camera.combined);
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);
         debugRenderer.setColor(Color.FIREBRICK);

@@ -236,6 +236,7 @@ public abstract class LevelEngine {
 
             if (object instanceof RectangleMapObject) {
 
+                // Todo: code below..blää.. this has to change!
                 String objType = (String) object.getProperties().get("type");
                 Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
                 if (objType.equals("bigtree")) {
@@ -286,15 +287,13 @@ public abstract class LevelEngine {
             for(int y = 0; y < layer.getHeight();y++) {
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
 
+                // Hmmm this is not good. We treating most Tiles as GrassTiles
                 if (cell != null && cell.getTile() != null) {
-
                     tile[x][y] = new GrassTile(x, y, true);
-
                     // custom property
                     if (cell.getTile().getProperties().containsKey("tileType") && (cell.getTile().getProperties().get("tileType").equals("teleporter"))) {
                         tile[x][y] = new TeleportTile(x, y);
                     }
-
                     if (cell.getTile().getProperties().containsKey("tileType") && (cell.getTile().getProperties().get("tileType").equals("Wood"))) {
                         tile[x][y] = new WoodTile(x, y);
                     }

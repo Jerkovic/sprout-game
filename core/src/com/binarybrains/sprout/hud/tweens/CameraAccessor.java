@@ -12,8 +12,7 @@ public class CameraAccessor implements TweenAccessor<Camera>
     @Override
     public int getValues(Camera target, int tweenType, float[] returnValues)
     {
-        switch (tweenType)
-        {
+        switch (tweenType) {
             case POSITION_XY:
                 returnValues[0] = target.getX();
                 returnValues[1] = target.getY();
@@ -27,8 +26,7 @@ public class CameraAccessor implements TweenAccessor<Camera>
     @Override
     public void setValues(Camera target, int tweenType, float[] newValues)
     {
-        switch (tweenType)
-        {
+        switch (tweenType) {
             case POSITION_XY:
                 target.setPosition(new Vector3(newValues[0], newValues[1], 0));
                 break;

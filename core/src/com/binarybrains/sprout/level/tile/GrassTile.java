@@ -2,6 +2,7 @@ package com.binarybrains.sprout.level.tile;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.PickupItem;
 import com.binarybrains.sprout.entity.Player;
@@ -12,6 +13,7 @@ import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.Hoe;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GrassTile extends Tile {
@@ -57,7 +59,9 @@ public class GrassTile extends Tile {
             // this is too easy, now we can hoe places that are not allowed
             if (toolItem.tool instanceof Hoe && toolItem.tool.canUse() && mayPass) {
 
-                if (player.getLevel().getEntitiesAtTile(xt, yt).size() > 0) return false;
+                List<Entity> entities = player.getLevel().getEntitiesAtTile(xt, yt);
+                entities.remove(player);
+                if (entities.size() > 0) return false;
 
                 ((Hoe) toolItem.tool).playDigSound();
                 player.getLevel().setTile(xt, yt, new DirtTile(xt, yt));

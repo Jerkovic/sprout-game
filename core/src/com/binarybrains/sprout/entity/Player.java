@@ -268,8 +268,8 @@ public class Player extends Npc implements InputProcessor {
         }
 
         boolean done = false;
-        // List<Entity> entities = getLevel().getEntities(getInteractBox());
-        List<Entity> entities = getLevel().getNearestEntity(this, getInteractBox());
+        List<Entity> entities = getLevel().getEntities(getInteractBox());
+        // List<Entity> entities = getLevel().getNearestEntity(this, getInteractBox());
         // should we really interact with all items here?
         // maybe the items closest to the player?
 		for (int i = 0; i < entities.size(); i++) {
@@ -281,23 +281,10 @@ public class Player extends Npc implements InputProcessor {
             if (done) return done;
 		}
 
-        int tile_x = getTileX();
-        int tile_y = getTileY();
+        int x = (int)this.getMouseSelectedTile().x;
+        int y = (int)this.getMouseSelectedTile().y;
 
-        if (getDirection() == WEST) {
-            tile_x -=1;
-        }
-        if (getDirection() == EAST) {
-            tile_x +=1;
-        }
-        if (getDirection() == NORTH) {
-            tile_y +=1;
-        }
-        if (getDirection() == SOUTH) {
-            tile_y -=1;
-        }
-
-        getLevel().interact(tile_x, tile_y, this);
+        getLevel().interact(x, y, this);
         return true;
     }
 
@@ -554,7 +541,7 @@ public class Player extends Npc implements InputProcessor {
                 if (activeItem.isFood() && canUse()) {
                     ResourceItem healItem = (ResourceItem) activeItem;
                     heal(((FoodResource) healItem.resource).heal());
-                    SproutGame.playSound("eating", 1.6f);
+                    SproutGame.playSound("eating", 1f);
                     getInventory().removeResource(((ResourceItem) activeItem).resource, 1);
                     getLevel().screen.hud.refreshInventory();
                 }
@@ -562,8 +549,12 @@ public class Player extends Npc implements InputProcessor {
             }
         }
 
-        if (mouseWorldPosX <= getInteractBox().getX() + getInteractBox().getWidth() && mouseWorldPosX >= getInteractBox().getX()
-                && mouseWorldPosY <= getInteractBox().getY()+ getInteractBox().getHeight() && mouseWorldPosY >= getInteractBox().getY()) {
+        if (mouseWorldPosX <= getInteractBox().getX() + getInteractBox().getWidth() &&
+            mouseWorldPosX >= getInteractBox().getX() &&
+            mouseWorldPosY <= getInteractBox().getY() + getInteractBox().getHeight() &&
+            mouseWorldPosY >= getInteractBox().getY()
+        ) {
+
             if (button == Input.Buttons.LEFT) {
                 return interactWithActiveItem();
             }
@@ -571,7 +562,6 @@ public class Player extends Npc implements InputProcessor {
                 return use();
             }
         }
-
         return false;
     }
 

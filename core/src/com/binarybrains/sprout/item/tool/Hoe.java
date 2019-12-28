@@ -10,6 +10,6 @@ public class Hoe extends Tool {
     }
 
     public void playDigSound() {
-        SproutGame.playSound("dirt_digging", .2f, MathUtils.random(0.7f, 1f), 0);
+        SproutGame.playSound("dirt_digging", .1f, MathUtils.random(0.7f, 1f), 0);
     }
 }
