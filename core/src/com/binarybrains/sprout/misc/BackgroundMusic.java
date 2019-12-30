@@ -20,7 +20,7 @@ public class BackgroundMusic {
         stop();
         if (currentTrack != null && currentTrack.isPlaying()) currentTrack.stop();
 
-        changeTrack(MathUtils.random(1, 3)); // random select a track in our library
+        changeTrack(MathUtils.random(1, 1)); // random select a track in our library
         mIsPlaying = true;
         isStopped = false;
         try {
@@ -44,7 +44,6 @@ public class BackgroundMusic {
     }
 
     public static void changeTrack(String newTrackName) {
-        // load it here this way?
         // is this causing the crash
         currentTrack = SproutGame.assets.get("music/" + newTrackName + ".mp3");
     }

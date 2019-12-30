@@ -126,7 +126,6 @@ public class GameScreen implements Screen {
         // BackgroundMusic.stop();
         level.cameraFix();
 
-
         gameState = GameState.PAUSE;
         level.gameTimer.paus();
     }

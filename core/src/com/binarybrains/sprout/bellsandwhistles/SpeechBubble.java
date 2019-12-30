@@ -31,7 +31,7 @@ public class SpeechBubble extends Entity {
         addAction(Actions.sequence(
                 Actions.delay(MathUtils.random(17.5f, 19.298f)),
                 Actions.parallel(
-                        Actions.alpha(0.00f, 2.9f, Interpolation.fade)
+                        Actions.alpha(0.00f, 2f, Interpolation.fade)
                 ),
                 Actions.run((new Runnable() {
                             public void run () {

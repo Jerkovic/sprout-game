@@ -71,8 +71,8 @@ public class Level extends LevelEngine {
     private Texture light;
     private FrameBuffer fbo;
 
-    public float ambientIntensity = .4f;
-    public static final Vector3 ambientColor = new Vector3(.3f, .3f, .8f); // .6 .6 .8
+    public float ambientIntensity = 1f;
+    public static final Vector3 ambientColor = new Vector3(.3f, .3f, 0f); // .6 .6 .8
 
     //used to make the light flicker
     public float zAngle;
@@ -114,7 +114,6 @@ public class Level extends LevelEngine {
 
 
     public Level(GameScreen screen, int level) {
-
         setupAmbientLight();
         this.screen = screen;
         spritesheet = new Texture(Gdx.files.internal("levels/stardew_valley_01.png"));
@@ -163,11 +162,10 @@ public class Level extends LevelEngine {
         setupPathFinding(); // construct the A.star
         this.add(this, new Emma(this, new Vector2(5 * 16f, 6 * 16f), 16f, 16f));
 
-
         generateCaves(); // test
 
         // Slime test
-        // this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
+        this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
 
         // Speech Bouble bound to player test
         add(this, new SpeechBubble(this, "I am hungry!"));
@@ -215,7 +213,6 @@ public class Level extends LevelEngine {
         }
     }
 
-
     // this should put cave on screen
     public void generateCaves() {
         Map cave = new Map();
@@ -247,18 +244,16 @@ public class Level extends LevelEngine {
     public void update(float delta) {
 
         gameTimer.update();
-
-        screen.hud.updateXP(player);
+        screen.hud.updateXP(player); // nope dont do this
 
         // particles update
         pe.update(delta);
         if (pe.isComplete()) pe.reset();
 
-
-        // check for achievement ...really here? timed event ?
+        // check for achievement ...really here? timed event check?
         Achievement.checkAwards(player.getStats(), this);
 
-        // Level up check
+        // Level up check timed event?
         if (player.getStats("rank") != LevelRank.getLevelRankByXP(player.getStats("xp"))) {
             player.getStats().set("rank", LevelRank.getLevelRankByXP(player.getStats("xp")));
             player.rankedUp(player.getStats("rank"));
@@ -288,18 +283,17 @@ public class Level extends LevelEngine {
 
     public void draw() {
         if(Gdx.input.isKeyJustPressed(Input.Keys.B)) {
-            ambientIntensity -= .05f;
+            ambientIntensity -= .1f;
             if (ambientIntensity < 0) ambientIntensity = 0;
             //System.out.println(ambientIntensity);
-
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.V)) {
-            ambientIntensity += .05f;
+            ambientIntensity += .1f;
             if (ambientIntensity > 1f) ambientIntensity = 1f;
         }
 
-        // Input ctrl should not be here!!
+        // Input ctrl should not be here in draw!!
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
             // todo show some sort of tabbed menu window
@@ -323,7 +317,6 @@ public class Level extends LevelEngine {
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-
             SproutGame.playSound("pickup_fanfar", .45f);
             player.setDirection(Mob.Direction.SOUTH);
             player.setCarriedItem(new TemporaryCarriedItem(player.getLevel(), new ArtifactItem(Artifacts.backpack)));
@@ -337,14 +330,15 @@ public class Level extends LevelEngine {
                         player.inventory.upgrade(); // test upgrade backpack
                         screen.hud.refreshInventory();
                         screen.hud.addToasterMessage("Inventory Upgrade", "You were awarded a backpack.");
-                        //screen.hud.moveCamera(600, 1000);
+                        // screen.hud.moveCamera(600, 1000);
 
                     }})
             ));
 
+            // POtato spawner test
             int count = MathUtils.random(1,3);
             for (int i = 0; i < count; i++) {
-                add(this, new PickupItem(this, new ResourceItem(Resources.potato), new Vector2(player.getX()+85, player.getY())));
+                // add(this, new PickupItem(this, new ResourceItem(Resources.potato), new Vector2(player.getX()+85, player.getY())));
             }
         }
 
@@ -352,23 +346,20 @@ public class Level extends LevelEngine {
             player.increaseXP(100); // test
         }
 
-
         zAngle += Gdx.app.getGraphics().getRawDeltaTime() * zSpeed;
         while(zAngle > PI2)
             zAngle -= PI2;
 
         //draw the light to the FBO
         // we have to get entities that emmits light here
-        if (ambientIntensity < 1f) {
-
+        if (ambientIntensity < .5) {
             finalShader.begin();
             finalShader.setUniformf("ambientColor", ambientColor.x, ambientColor.y,
                     ambientColor.z, ambientIntensity);
             finalShader.end();
 
             fbo.begin();
-
-            Gdx.gl.glClearColor(0f,0f,0f,0f);
+            Gdx.gl.glClearColor(0f,0f,0f,0);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             float lightSize = lightOscillate ? (75.0f + 3.25f * (float)Math.sin(zAngle) + .5f * MathUtils.random()):75.0f;
 
@@ -381,7 +372,7 @@ public class Level extends LevelEngine {
 
             tileMapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
             tileMapRenderer.getBatch().begin();
-            if (ambientIntensity <= .5f) {
+            if (ambientIntensity > 0f) { // how dark should it get before lights come on?
                 tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (85 * 16) - lightSize / 2, lightSize , lightSize);
                 tileMapRenderer.getBatch().draw(light,90, 1289, lightSize , lightSize);
                 tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2, player.getWalkBoxCenterY() - lightSize / 2, lightSize , lightSize);
@@ -389,17 +380,23 @@ public class Level extends LevelEngine {
 
             tileMapRenderer.getBatch().end();
             tileMapRenderer.getBatch().setBlendFunction(src, dest);
-
+            tileMapRenderer.getBatch().setShader(finalShader);
+            fbo.end();
+        } else {
+            fbo.begin();
+            Gdx.gl.glClearColor(0f,0f,0f,0);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            tileMapRenderer.getBatch().setShader(defaultShader);
             fbo.end();
         }
         // end draw lights to fbo
 
         // draw the screen
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        // Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         tileMapRenderer.setView(camera);
         tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
-        tileMapRenderer.getBatch().setShader(finalShader);
+        // tileMapRenderer.getBatch().setShader(finalShader);
 
         int[] bg_layers = {0,1,2}; // water, ground and ground_top
         tileMapRenderer.render(bg_layers);
@@ -448,7 +445,7 @@ public class Level extends LevelEngine {
         }
 
         // Player interact box
-        debugRenderer.setColor(Color.WHITE);
+        debugRenderer.setColor(Color.LIGHT_GRAY);
         debugRenderer.rect(player.getInteractBox().getX(), player.getInteractBox().getY(), player.getInteractBox().width, player.getInteractBox().height);
         debugRenderer.end();
     }

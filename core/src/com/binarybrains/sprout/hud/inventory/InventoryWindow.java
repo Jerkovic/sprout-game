@@ -81,9 +81,7 @@ public class InventoryWindow extends Window {
     }
 
     private void build() {
-
         Table itemTable = new Table(skin);
-
         for (int i = 0, n = group.getButtons().size; i < n; i++) {
             itemTable.add((Actor) group.getButtons().get(i));
             if ((i + 1) % 12 == 0) break; // itemTable.row();

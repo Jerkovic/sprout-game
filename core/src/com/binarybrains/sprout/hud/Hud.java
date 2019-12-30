@@ -263,10 +263,13 @@ public class Hud {
         //.addAction(forever(sequence(fadeOut(5), fadeIn(5))));
     }
 
+    /**
+     * Move camera
+     * @param targetX
+     * @param targetY
+     */
     public void moveCamera(float targetX, float targetY) {
-
         level.getCamera().disableFollow();
-
         Tween.to(level.getCamera(), CameraAccessor.POSITION_XY, 3f)
                 .target(targetX, targetY)
                 .ease(TweenEquations.easeOutSine).setCallback(new TweenCallback() {
