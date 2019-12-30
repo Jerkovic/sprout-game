@@ -21,8 +21,8 @@ public class DesktopLauncher {
         System.out.println("============================================================");
         Graphics.DisplayMode displayMode = LwjglApplicationConfiguration.getDesktopDisplayMode();
         config.setFromDisplayMode(displayMode);
-        config.width = 1920;
-        config.height = 1200;
+        config.width = 1280;
+        config.height = 800;
         config.fullscreen = false;
         config.resizable = false;
         config.useGL30 = false;

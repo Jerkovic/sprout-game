@@ -35,6 +35,8 @@ public class InventoryManagementWindow extends Dialog {
 
     public InventoryManagementWindow(Level level, Skin skin) {
         super("Inventory Management", skin);
+        getTitleLabel().setColor(0,0,0,.7f);
+        getTitleTable().setHeight(32);
 
         this.player = level.player;
         this.level = level;
@@ -133,11 +135,13 @@ public class InventoryManagementWindow extends Dialog {
         //debug();
 
         TextButton buttonExit = new TextButton("   Close   ", skin);
+        buttonExit.setColor(0,0,0, 1);
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (getHeldItem() != null) return;
                 hide();
+                SproutGame.playSound("inventory_close");
                 player.getLevel().screen.hud.showInventory();
                 player.getLevel().screen.game.resume();
                 player.getLevel().screen.hud.showMouseItem();
@@ -175,7 +179,7 @@ public class InventoryManagementWindow extends Dialog {
      */
     private Table createTooltipTable(Item item) {
         Table tooltipTable = new Table(skin);
-        tooltipTable.pad(10).background("default-round");
+        tooltipTable.pad(12).background("default-round");
         tooltipTable.add(item.getName() + " (" + item.getCategory() + ")").left();
         tooltipTable.row();
         tooltipTable.add(item.getDescription()).left();
@@ -223,7 +227,7 @@ public class InventoryManagementWindow extends Dialog {
             //button.debug();
             Label lc = new Label(counter, skin);
             lc.setAlignment(Align.bottomRight);
-            lc.setColor(Color.WHITE);
+            lc.setColor(Color.BROWN);
 
             Stack stack = new Stack();
 
@@ -248,7 +252,10 @@ public class InventoryManagementWindow extends Dialog {
 
             button.add(stack);
             if (item != null) {
-                button.addListener(new Tooltip(createTooltipTable(item)));
+                Tooltip toolTip = new Tooltip(createTooltipTable(item));
+                toolTip.getManager().animations = false;
+                toolTip.setInstant(true);
+                button.addListener(toolTip);
             }
             button.pack();
             slotIndex++;

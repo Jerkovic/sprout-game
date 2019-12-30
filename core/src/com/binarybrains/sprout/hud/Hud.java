@@ -185,6 +185,7 @@ public class Hud {
         hideInventory();
         level.screen.game.pause();
         level.player.releaseKeys();
+        SproutGame.playSound("inventory_bag_open");
         // inventoryManagementWindow.build(); // refresh content in window
         inventoryManagementWindow.setVisible(true);
         inventoryManagementWindow.show(getStage());
@@ -369,6 +370,7 @@ public class Hud {
         table.row();
         stage.addActor(table);
         Window window = new Window(SproutGame.name, skin);
+        window.getTitleLabel().setColor(0,0,0,.7f);
         window.setKeepWithinStage(false);
         window.setMovable(true);
         window.row().fill().expandX();
@@ -378,7 +380,7 @@ public class Hud {
         window.add(buildHealthMeters());
         window.row();
 
-        window.add(buildLevelRankMeters()).pad(4f);
+        window.add(buildLevelRankMeters()).pad(8f);
         window.pack();
 
         window.setPosition(10, Gdx.app.getGraphics().getHeight() - window.getHeight()-10);
@@ -420,7 +422,6 @@ public class Hud {
         hudTable.row();
 
         return hudTable;
-
     }
 
 
@@ -446,7 +447,6 @@ public class Hud {
         hudTable.row();
 
         return hudTable;
-
     }
 
     public void draw() {

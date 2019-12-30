@@ -1,6 +1,7 @@
 package com.binarybrains.sprout.hud.inventory;
 
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -30,6 +31,7 @@ public class CraftingWindow extends Dialog {
     public CraftingWindow(Player player, String title, Skin skin) {
         super("Workbench Crafting", skin);
 
+
         this.player = player;
         this.skin = skin;
         this.craft = new Crafting(Crafting.workbenchRecipes, player.getInventory());
@@ -43,7 +45,7 @@ public class CraftingWindow extends Dialog {
 
     public void build() {
         clearChildren();
-
+        getTitleLabel().setColor(0,0,0,.7f);
         Table recipesGroup = buildRecipesButtonGroup(skin);
         this.recipeTableScrollPane = new ScrollPane(recipesGroup, skin);
         recipeTableScrollPane.setFlickScroll(false);
@@ -62,6 +64,7 @@ public class CraftingWindow extends Dialog {
         row(); // recipe container
 
         TextButton buttonExit = new TextButton("   Close   ", skin);
+        buttonExit.setColor(Color.BLACK);
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

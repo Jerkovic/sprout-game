@@ -31,6 +31,7 @@ public class InventoryWindow extends Window {
 
     public InventoryWindow(Level level, Skin skin) {
         super("Inventory", skin);
+        getTitleLabel().setColor(0,0,0,.7f);
 
         this.level = level;
         this.skin = skin;
@@ -85,7 +86,7 @@ public class InventoryWindow extends Window {
 
         for (int i = 0, n = group.getButtons().size; i < n; i++) {
             itemTable.add((Actor) group.getButtons().get(i));
-            if ((i + 1) % 12 == 0) itemTable.row();
+            if ((i + 1) % 12 == 0) break; // itemTable.row();
         }
 
         add(itemTable);
@@ -113,9 +114,7 @@ public class InventoryWindow extends Window {
     }
 
     private void syncInventory(final Inventory inventory) {
-
         group.clear();
-
         String selected = "";
         if (level.player.activeItem != null) selected = level.player.activeItem.getName();
 
@@ -162,23 +161,22 @@ public class InventoryWindow extends Window {
 
             button.add(stack);
             if (item != null) {
-                button.addListener(new Tooltip(createTooltipTable(item)));
+                Tooltip toolTip = new Tooltip(createTooltipTable(item));
+                toolTip.getManager().animations = false;
+                toolTip.setInstant(true);
+                button.addListener(toolTip);
             }
             button.pack();
 
-            if (item != null && selected != null && item.getName().equals(selected))
-            {
+            if (item != null && selected != null && item.getName().equals(selected)) {
                 button.setChecked(true);
             }
 
-            button.addListener(new ClickListener(Input.Buttons.RIGHT)
-            {
+            button.addListener(new ClickListener(Input.Buttons.RIGHT) {
                 @Override
                 public void clicked(InputEvent event, float x, float y)
                 {
                     // System.out.println("right mouse button");
-                    // addActor(new Image());
-
                 }
             });
 
@@ -194,9 +192,7 @@ public class InventoryWindow extends Window {
             });
 
             group.add(button);
-
             level.player.setActiveItem(inventory.getItems().get(group.getCheckedIndex()));
-
         }
     }
 }
