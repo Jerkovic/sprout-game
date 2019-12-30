@@ -87,7 +87,7 @@ TODOS:
 * Bug with NPC Pathfinding AI. Needs to be looked at.
 
 
---------------------------NPC charachters------------------------
+--------------------------NPC characters------------------------
 Emma
 Norman
 Howard
