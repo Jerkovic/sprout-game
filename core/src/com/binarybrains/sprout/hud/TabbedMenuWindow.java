@@ -29,10 +29,11 @@ public class TabbedMenuWindow extends Dialog {
         tabbedPane.addTab(" Exit ", new Label("test 4", skin));
         tabbedPane.left().top();
 
-        add(tabbedPane).pad(1);
+        add(tabbedPane).pad(0);
 
         add().row();
-        //debug();
+        add().row();
+        debug();
         setKeepWithinStage(true);
         setMovable(false);
         setModal(true);

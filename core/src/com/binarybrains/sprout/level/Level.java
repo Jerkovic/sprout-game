@@ -71,7 +71,7 @@ public class Level extends LevelEngine {
     private Texture light;
     private FrameBuffer fbo;
 
-    public float ambientIntensity = 1f;
+    public float ambientIntensity = .4f;
     public static final Vector3 ambientColor = new Vector3(.3f, .3f, .8f); // .6 .6 .8
 
     //used to make the light flicker
@@ -104,8 +104,8 @@ public class Level extends LevelEngine {
                 ambientColor.z, ambientIntensity);
         finalShader.end();
 
-        light = new Texture("shader/light.png");
-        fbo = new FrameBuffer(Pixmap.Format.RGB888, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight(), false);
+        light = new Texture("shader/camAlphaMat.jpg");
+        fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight(), false);
 
         finalShader.begin();
         finalShader.setUniformf("resolution", Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
@@ -132,9 +132,7 @@ public class Level extends LevelEngine {
 
         player = new Player(this);
         player.setTilePos(13, 100);
-        // player.setTilePos(2, 5);
-        player.setHealth(100);
-
+        player.setHealth(1);
 
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();
@@ -369,31 +367,30 @@ public class Level extends LevelEngine {
             finalShader.end();
 
             fbo.begin();
+
+            Gdx.gl.glClearColor(0f,0f,0f,0f);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             float lightSize = lightOscillate ? (75.0f + 3.25f * (float)Math.sin(zAngle) + .5f * MathUtils.random()):75.0f;
 
             tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
             tileMapRenderer.getBatch().enableBlending();
             tileMapRenderer.getBatch().setShader(defaultShader);
-            // todo move int:s
 
             int src = tileMapRenderer.getBatch().getBlendSrcFunc();
             int dest = tileMapRenderer.getBatch().getBlendDstFunc();
 
-            tileMapRenderer.getBatch().setBlendFunction(GL20.GL_ONE, GL20.GL_ONE);
+            tileMapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
             tileMapRenderer.getBatch().begin();
-            if (ambientIntensity <= .3f) {
-                tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (85 * 16) - lightSize / 2, lightSize, lightSize);
-                //tileMapRenderer.getBatch().draw(light,90, 1289, lightSize, lightSize);
-                tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2, player.getWalkBoxCenterY() - lightSize / 2, lightSize, lightSize);
+            if (ambientIntensity <= .5f) {
+                tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (85 * 16) - lightSize / 2, lightSize , lightSize);
+                tileMapRenderer.getBatch().draw(light,90, 1289, lightSize , lightSize);
+                tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2, player.getWalkBoxCenterY() - lightSize / 2, lightSize , lightSize);
             }
 
             tileMapRenderer.getBatch().end();
             tileMapRenderer.getBatch().setBlendFunction(src, dest);
 
             fbo.end();
-
-
         }
         // end draw lights to fbo
 
@@ -402,9 +399,7 @@ public class Level extends LevelEngine {
 
         tileMapRenderer.setView(camera);
         tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
-        if (gameTimer.getGameTime().minute != 0 && ambientIntensity != 1f) {
-            tileMapRenderer.getBatch().setShader(finalShader);
-        }
+        tileMapRenderer.getBatch().setShader(finalShader);
 
         int[] bg_layers = {0,1,2}; // water, ground and ground_top
         tileMapRenderer.render(bg_layers);
@@ -473,7 +468,6 @@ public class Level extends LevelEngine {
         tileMapRenderer.dispose();
         debugRenderer.dispose();
 
-
         map.dispose();
         finalShader.dispose();
         defaultShader.dispose();
@@ -483,7 +477,6 @@ public class Level extends LevelEngine {
         fbo.dispose();
         pe.dispose();
     }
-
 
     public void cameraFix() {
         getCamera().reset();

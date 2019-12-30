@@ -87,11 +87,10 @@ public class Hud {
 
         gameTimeWindow();
 
-        /*
-        Dialog menuWindow = new TabbedMenuWindow(skin);
+        /* Dialog menuWindow = new TabbedMenuWindow(skin);
         menuWindow.setVisible(true);
-        stage.addActor(menuWindow);
-        */
+        stage.addActor(menuWindow); */
+
     }
 
     public void setMouseItem(String regionId) {
@@ -104,7 +103,6 @@ public class Hud {
         if (mouseItem != null)
             mouseItem.remove();
             mouseItem = null;
-
     }
 
     public void fadeOutRunFadeInScreen(Runnable runnable) {
@@ -191,11 +189,12 @@ public class Hud {
         inventoryManagementWindow.setVisible(true);
         inventoryManagementWindow.show(getStage());
         inventoryManagementWindow.onInventoryChanged(level.player.getInventory());
+        hideMouseItem();
     }
 
     public void refreshInventory()  {
         inventoryWindow.onInventoryChanged(level.player.getInventory());
-        removeMouseItem(); // ?
+        removeMouseItem();
     }
 
     public void inventoryTop() {
