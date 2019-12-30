@@ -213,29 +213,29 @@ public class Player extends Npc implements InputProcessor {
         float x=0, y=0, width =0, height=0;
 
         if (getDirection() == Direction.SOUTH) {
-            x = getX();
+            x = getX() - (getWidth() / 2);
             y = getY() - getHeight();
             height = getHeight();
-            width = getWidth();
+            width = getWidth() * 2;
         }
         if (getDirection() == Direction.WEST) {
             x = getX() - getWidth();
-            y = getY();
-            height = getHeight();
+            y = getY() - ((getHeight() / 2));
+            height = getHeight() * 2;
             width = getWidth();
 
         }
         if (getDirection() == Direction.EAST) {
             x = getX() + getWidth();
-            y = getY();
-            height = getHeight();
+            y = getY() - ((getHeight() / 2));
+            height = getHeight() * 2;
             width = getWidth();
         }
         if (getDirection()== Direction.NORTH) {
-            x = getX();
+            x = getX() - (getWidth() / 2);
             y = getY() + getWalkBox().getHeight();
             height = getHeight() + getWalkBox().getHeight();
-            width = getWidth();
+            width = getWidth() * 2;
         }
 
         return new Rectangle(x, y, width, height);
