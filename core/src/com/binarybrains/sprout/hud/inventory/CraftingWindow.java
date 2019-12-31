@@ -29,9 +29,8 @@ public class CraftingWindow extends Dialog {
     private float rememberScrollY = 0;
 
     public CraftingWindow(Player player, String title, Skin skin) {
-        super("Workbench Crafting", skin);
-
-
+        super("Workbench Crafting", skin.get("dialog", WindowStyle.class));
+        setSkin(skin);
         this.player = player;
         this.skin = skin;
         this.craft = new Crafting(Crafting.workbenchRecipes, player.getInventory());

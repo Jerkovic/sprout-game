@@ -8,13 +8,17 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.hud.TypeWriterDialog;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
@@ -34,7 +38,11 @@ public class InventoryManagementWindow extends Dialog {
     private Item heldItem;
 
     public InventoryManagementWindow(Level level, Skin skin) {
-        super("Inventory Management", skin);
+        super("Inventory Management", skin.get("dialog", WindowStyle.class));
+        setSkin(skin);
+        this.skin = skin;
+        initialize();
+
         getTitleLabel().setColor(0,0,0,.7f);
         getTitleTable().setHeight(32);
 
@@ -60,6 +68,16 @@ public class InventoryManagementWindow extends Dialog {
 
         this.addListener(ignoreTouchDown);
     }
+
+    private void initialize () {
+        setModal(true);
+        setMovable(false);
+
+        // defaults().space(32);
+        // this should also have a profile pic of the NPC
+
+    }
+
 
     private Button trashCan() {
         Image image = new Image(atlas.findRegion("Garbage_Can")); // Trash Can todo
@@ -135,7 +153,7 @@ public class InventoryManagementWindow extends Dialog {
         //debug();
 
         TextButton buttonExit = new TextButton("   Close   ", skin);
-        buttonExit.setColor(0,0,0, 1);
+        buttonExit.setColor(0,0,0, .75f);
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -150,7 +168,6 @@ public class InventoryManagementWindow extends Dialog {
             }
         });
         add(buttonExit).pad(5);
-
         pack();
     }
 
@@ -227,7 +244,7 @@ public class InventoryManagementWindow extends Dialog {
             //button.debug();
             Label lc = new Label(counter, skin);
             lc.setAlignment(Align.bottomRight);
-            lc.setColor(Color.BROWN);
+            lc.setColor(255, 255, 255, .8f);
 
             Stack stack = new Stack();
 

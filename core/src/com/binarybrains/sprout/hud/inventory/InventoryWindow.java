@@ -100,7 +100,11 @@ public class InventoryWindow extends Window {
     private Table createTooltipTable(Item item) {
         Table tooltipTable = new Table(skin);
         tooltipTable.pad(10).background("default-round");
-        tooltipTable.add(item.getName() + " (" + item.getCategory() + ")").left();
+        Label lbl = new Label(item.getName() + " (" + item.getCategory() + ")", skin);
+        lbl.setAlignment(Align.bottomRight);
+        lbl.setColor(0,0,0,0.95f);
+
+        tooltipTable.add(lbl).left();
         tooltipTable.row();
         tooltipTable.add(item.getDescription()).left();
         if (item instanceof ToolItem) {
