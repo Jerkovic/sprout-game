@@ -14,6 +14,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.npc.Npc;
+import com.binarybrains.sprout.events.TestEvent;
+import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
@@ -158,9 +160,20 @@ public class Player extends Npc implements InputProcessor {
         System.out.println("Health: " + getHealth());
     }
 
+    /**
+     *
+     * @param increment
+     */
     public void increaseXP(int increment) {
         increaseStats("xp", increment);
-        getLevel().screen.hud.updateXP(this);
+        // TODO: rename to IncreasedXpEvent
+        SproutGame.getEventManager().notify(new TestEvent(this));
+
+        if (getStats("rank") != LevelRank.getLevelRankByXP(getStats("xp"))) {
+            getStats().set("rank", LevelRank.getLevelRankByXP(getStats("xp")));
+            rankedUp(getStats("rank")); // TODO: raise event here instead
+        }
+
     }
 
     public void setActiveItem(Item item) {
@@ -333,6 +346,11 @@ public class Player extends Npc implements InputProcessor {
         super.update(delta);
         updateMovement();
         surfaceSoundEffect();
+
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            Gdx.app.exit();
+            // todo show some sort of tabbed menu window
+        }
     }
 
     private long walkSoundId = -1; // temp
@@ -353,7 +371,6 @@ public class Player extends Npc implements InputProcessor {
                 ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).pause(walkSoundId);
             }
         }
-
     }
 
     public void pausSurfaceSound() {
@@ -371,7 +388,6 @@ public class Player extends Npc implements InputProcessor {
     public void unFreezePlayerControl() {
         CanMove = true;
     }
-
 
     private void updateMovement() {
 
@@ -565,10 +581,11 @@ public class Player extends Npc implements InputProcessor {
         return false;
     }
 
+    // TODO: should not be here ...move to HUD
     public void rankedUp(final int level) {
 
         addAction(Actions.sequence(
-                Actions.delay(1f),
+                Actions.delay(.75f),
                 Actions.run(new Runnable() { public void run(){
                     SproutGame.playSound("pickup_fanfar", .65f);
                     getLevel().screen.hud.addToasterMessage("LEVEL UP", "You reached Level " + level);

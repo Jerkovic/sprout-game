@@ -67,7 +67,7 @@ public class Emma extends Npc {
         super.update(delta);
         if (findPath != null && findPath.containsKey(getPosHash())) {
             setDirection(findPath.get(getPosHash()));
-            System.out.println("go " + getDirection() + " " + getPosHash());
+            // System.out.println("go " + getDirection() + " " + getPosHash());
             setState(State.WALKING);
             //findPath.remove(getPosHash());
         }

@@ -36,15 +36,14 @@ public class LevelRank {
         int nextLevelXp = levelXP(currentLevel + 1);
         LevelRank levelRank = new LevelRank();
         levelRank.startThreshold = levelXP(currentLevel);
-        levelRank.endThreshold = nextLevelXp;
+        levelRank.endThreshold = nextLevelXp - 1;
         levelRank.currentLevel = currentLevel;
         levelRank.nextLevel = currentLevel + 1;
         levelRank.xp = xp;
 
         levelRank.levelGap = levelRank.endThreshold - levelRank.startThreshold;
         int xpToNextLevel = (levelRank.levelGap - (xp - levelRank.startThreshold));
-        levelRank.progress = ((float)(xp - levelRank.startThreshold)/ (float)levelRank.levelGap) * 100f;
-
+        levelRank.progress = ((float)(xp - levelRank.startThreshold) / (float)levelRank.levelGap) * 100f;
         return levelRank;
     }
 

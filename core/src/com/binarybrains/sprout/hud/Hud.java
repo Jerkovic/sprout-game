@@ -15,9 +15,14 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.events.EventListener;
+import com.binarybrains.sprout.events.EventManager;
+import com.binarybrains.sprout.events.IGameEvent;
+import com.binarybrains.sprout.events.TestEvent;
 import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryManagementWindow;
@@ -33,7 +38,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 
-public class Hud {
+public class Hud implements EventListener {
 
     Stage stage;
     Label timeLabel, moneyLabel, xpLabel;
@@ -59,6 +64,7 @@ public class Hud {
     public Hud(Skin skin, Level level) {
         this.skin = skin;
         this.level = level;
+
         stage = new Stage(new ScreenViewport());
         atlas = SproutGame.assets.get("items2.txt");
 
@@ -76,7 +82,6 @@ public class Hud {
         inventoryManagementWindow.hide();
         stage.addActor(inventoryManagementWindow);
 
-
         inventoryWindow = new InventoryWindow(level, skin);
         inventoryWindow.onInventoryChanged(level.player.getInventory());
         stage.addActor(inventoryWindow);
@@ -91,6 +96,16 @@ public class Hud {
         menuWindow.setVisible(true);
         stage.addActor(menuWindow); */
 
+        // Subscribe to events here
+        SproutGame.getEventManager().subscribe(TestEvent.class, this);
+
+    }
+
+    @Override
+    public void onReceivedEvent(IGameEvent event) {
+        System.out.println("Received event! " + event.toString());
+        TestEvent test = (TestEvent) event;
+        updateXP(test.player);
     }
 
     public void setMouseItem(String regionId) {
@@ -287,11 +302,13 @@ public class Hud {
         final Window window = new Window(title, skin);
         window.setRound(true);
         window.setKeepWithinStage(false);
-
-
         window.setMovable(false);
-        window.row().fill().expandX();
-        window.add("").pad(6f);
+
+        TextureAtlas.AtlasRegion icon = atlas.findRegion("Book");
+        if (icon != null) {
+            Image image = new Image(icon);
+            window.add(image).align(Align.center).pad(10);
+        }
 
         window.row().fill().expandX();
 
@@ -411,16 +428,9 @@ public class Hud {
 
         barStyle.knobBefore = barStyle.knob;
 
-        barStyle.knobBefore.setLeftWidth(0f);
-        barStyle.knobBefore.setRightWidth(0f);
-        //barStyle.knobBefore = barStyle.knob;
-
-        //barStyle.knob = barStyle.knobBefore;
-        //barStyle.knobAfter = true;
-
-        levelBar = new ProgressBar(0, 99f, 1f, false, barStyle);
-        levelBar.setAnimateDuration(.25f);
-        levelBar.setValue(0f);
+        levelBar = new ProgressBar(1, 100f, 1f, false, barStyle);
+        levelBar.setAnimateDuration(0);
+        levelBar.setValue(level.player.getStats().get("xp"));
         hudTable.add(levelBar);
         hudTable.row();
 
@@ -474,6 +484,7 @@ public class Hud {
         moneyLabel.setText("" + numberFormat.format(player.getStats().get("money")));
     }
 
+    // should be private
     public void updateXP(Player player) {
         healthBar.setValue((float) player.getHealth());
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
@@ -495,10 +506,11 @@ public class Hud {
 
         stage.act(delta);
         fadeActor.act(delta);
-
     }
 
     public void dispose() {
         //super.dispose();
+        SproutGame.getEventManager().unsubscribe(TestEvent.class, this);
     }
+
 }

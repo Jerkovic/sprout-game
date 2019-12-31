@@ -23,7 +23,7 @@ public class Achievement
             achievements.put("potatofarmer",
                     new Achievement("Potato Farmer", "get 10 potatoes")
                             .addUnlockCriteria("Get 10 potatoes", "Potato", 10)
-                            .addAward()
+                            // .addAward() // this award does not work... it gets awarded directly on creation here
             );
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -72,7 +72,6 @@ public class Achievement
                 return false;
             }
         }
-
         setUnlocked(true);
         return true;
     }

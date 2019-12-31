@@ -244,20 +244,14 @@ public class Level extends LevelEngine {
     public void update(float delta) {
 
         gameTimer.update();
-        screen.hud.updateXP(player); // nope dont do this
+
+        // also event based..check for achievement ...really here? timed event check?
+        Achievement.checkAwards(player.getStats(), this);
 
         // particles update
         pe.update(delta);
         if (pe.isComplete()) pe.reset();
 
-        // check for achievement ...really here? timed event check?
-        Achievement.checkAwards(player.getStats(), this);
-
-        // Level up check timed event?
-        if (player.getStats("rank") != LevelRank.getLevelRankByXP(player.getStats("xp"))) {
-            player.getStats().set("rank", LevelRank.getLevelRankByXP(player.getStats("xp")));
-            player.rankedUp(player.getStats("rank"));
-        }
 
         // Update all our entities
         for (int i = 0; i < entities.size(); i++) {
@@ -294,10 +288,7 @@ public class Level extends LevelEngine {
         }
 
         // Input ctrl should not be here in draw!!
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
-            // todo show some sort of tabbed menu window
-        }
+
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             debugMode = !debugMode;

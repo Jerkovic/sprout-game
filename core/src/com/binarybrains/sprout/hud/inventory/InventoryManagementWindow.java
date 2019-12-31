@@ -44,7 +44,6 @@ public class InventoryManagementWindow extends Dialog {
         initialize();
 
         getTitleLabel().setColor(0,0,0,.7f);
-        getTitleTable().setHeight(32);
 
         this.player = level.player;
         this.level = level;

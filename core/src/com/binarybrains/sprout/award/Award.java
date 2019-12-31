@@ -10,6 +10,7 @@ public class Award {
 
 
 
+    // this wont work :)
     public Award() {
 
         // move to some rewarder method

@@ -10,7 +10,6 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.tweens.EntityAccessor;
 import com.binarybrains.sprout.events.EventManager;
@@ -37,9 +36,7 @@ public class SproutGame extends Game {
         Tween.registerAccessor(Entity.class, new EntityAccessor());
 		Tween.registerAccessor(Camera.class, new CameraAccessor());
 
-		SproutGame.eventManager = new EventManager(
-
-		);
+		SproutGame.eventManager = new EventManager();
 		loadAssets();
 
 		// exp level
@@ -59,6 +56,10 @@ public class SproutGame extends Game {
 
 		return tweenManager;
 	}
+	public static EventManager getEventManager() {
+		return eventManager;
+	}
+
 
 	public BitmapFont getFont() {
 		return font;

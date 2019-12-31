@@ -6,33 +6,35 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EventManager {
-    Map<String, List<EventListener>> listeners = new HashMap<String, List<EventListener>>();
+    Map<Class<? extends IGameEvent>, List<EventListener>> registry = new HashMap<Class<? extends IGameEvent>, List<EventListener>>();
 
-    public EventManager(EventListener... operations) {
-        for (EventListener operation : operations) {
-            this.listeners.put(operation.getClass().getSimpleName(), new ArrayList<EventListener>());
+    public EventManager() {
+
+    }
+
+    public void subscribe(Class<? extends IGameEvent> clazz, EventListener listener) {
+        List<EventListener> listeners = registry.getOrDefault(clazz, new ArrayList<EventListener>());
+        if (!listeners.contains(listener)) {
+            listeners.add(listener);
         }
+        registry.put(clazz, listeners);
     }
 
-    public void subscribe(String eventType, EventListener listener) {
-        List<EventListener> users = listeners.get(eventType);
-        users.add(listener);
-    }
-
-    public void unsubscribe(String eventType, EventListener listener) {
-        List<EventListener> users = listeners.get(eventType);
-        users.remove(listener);
+    public void unsubscribe(Class<? extends IGameEvent> clazz, EventListener listener) {
+        List<EventListener> listeners = registry.get(clazz);
+        listeners.remove(listener);
+        registry.put(clazz, listeners);
     }
 
     /**
-     * @usage notify(PurseEvent(10));
+     * @usage
      * @param eventType
      * @param event
      */
     public void notify(IGameEvent event) {
-        List<EventListener> users = listeners.get(event.getClass().getSimpleName());
-        for (EventListener listener : users) {
-            listener.update(event);
+        List<EventListener> listeners = registry.get(event.getClass());
+        for (EventListener listener : listeners) {
+            listener.onReceivedEvent(event);
         }
     }
 }

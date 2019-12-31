@@ -51,7 +51,6 @@ public class GameScreen implements Screen {
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
 
-        // handling class for Ambience
         AmbienceSound.setSound("forest_night_ambience");
 
         Timer.schedule(new Timer.Task(){
@@ -145,6 +144,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
+        hud.dispose(); // just killing listeners at the moment
         level.dispose();
         skin.dispose();
         BackgroundMusic.dispose();
