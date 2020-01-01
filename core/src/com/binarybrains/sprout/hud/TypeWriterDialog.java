@@ -89,14 +89,18 @@ public class TypeWriterDialog extends Window {
         setModal(true);
         setMovable(false);
 
-        defaults().space(32);
+        // defaults().space(32);
         // this should also have a profile pic of the NPC
         contentTable = new Table(skin);
-        //add(new Label("icon", skin)).padLeft(30).width(100);
-        add(contentTable).expand().fill();
-        row();
-        add(buttonTable = new Table(skin));
+        contentTable.pad(10);
 
+        //add(new Label("icon", skin)).width(100);
+        add(contentTable).expand().fill(); // Label typerwrite will be injected to contentTable.
+        row();
+
+        buttonTable = new Table(skin);
+        buttonTable.padBottom(20);
+        add(buttonTable);
 
         buttonTable.addListener(new ChangeListener() {
             public void changed (ChangeEvent event, Actor actor) {
@@ -129,6 +133,8 @@ public class TypeWriterDialog extends Window {
                 }
             }
         };
+
+
     }
 
     protected void setStage (Stage stage) {

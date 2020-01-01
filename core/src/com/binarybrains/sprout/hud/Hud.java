@@ -352,7 +352,6 @@ public class Hud implements EventListener {
         hideMouseItem();
         TypeWriterDialog dialog = new TypeWriterDialog(title, skin, "dialog") {
             public void result(Object obj) {
-               // System.out.println("result "+obj);
                 level.screen.game.resume();
                 showMouseItem();
             }
