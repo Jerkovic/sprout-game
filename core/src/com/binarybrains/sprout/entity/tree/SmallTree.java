@@ -33,6 +33,10 @@ public class SmallTree extends Entity { // extends Vegitation or ?
         sprite.setSize(width, height);
         sprite.setPosition(getX(), getY());
 
+        this.walkBox.setWidth(32);
+        this.walkBox.setHeight(32);
+        this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
+
         // move to shadow System?
         shadow = new Sprite(level.spritesheet, 96, 0, (int)width, (int)height);
         shadow.setColor(Color.BLACK);
@@ -44,6 +48,17 @@ public class SmallTree extends Entity { // extends Vegitation or ?
     @Override
     public boolean blocks(Entity e) {
         return true;
+    }
+
+    @Override
+    public void updateBoundingBox() {
+        this.box.setWidth(getWidth());
+        this.box.setHeight(getHeight());
+        this.box.setPosition(getPosition());
+
+        this.walkBox.setWidth(28);
+        this.walkBox.setHeight(20);
+        this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
     }
 
     @Override

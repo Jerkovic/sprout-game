@@ -2,6 +2,8 @@ package com.binarybrains.sprout.entity.npc;
 
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
+import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -32,21 +34,18 @@ public class Emma extends Npc {
 
         stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.IDLE);
         stateMachine.changeState(EmmaState.WALK_LABYRINTH);
+    }
 
+    @Override
+    public boolean handleMessage(Telegram msg) {
+        System.out.println("Emma knows about" + msg);
+        return true;
     }
 
     public void updateWalkDirections(int x, int y) {
         clearFindPath();
         IntArray rawPath = generatePath(x, y);
-        System.out.println("Generate Path returned: " + rawPath.size);
         findPath = generatePathFindingDirections(rawPath);
-
-        for (Map.Entry<Long, Direction> entry : findPath.entrySet()) {
-                Long index = entry.getKey();
-                Long tpY = index / 256;
-                Long tpX = index % 256;
-                System.out.println(tpX + "x" + tpY + " = " + entry.getValue());
-        }
     }
 
     // temp method
@@ -67,19 +66,9 @@ public class Emma extends Npc {
         super.update(delta);
         if (findPath != null && findPath.containsKey(getPosHash())) {
             setDirection(findPath.get(getPosHash()));
-            // System.out.println("go " + getDirection() + " " + getPosHash());
             setState(State.WALKING);
-            //findPath.remove(getPosHash());
         }
-
         stateMachine.update();
-    }
-
-    public static <K, V> void printMap(Map<K, V> map) {
-        for (Map.Entry<K, V> entry : map.entrySet()) {
-            System.out.println("Key : " + entry.getKey()
-                    + " Value : " + entry.getValue());
-        }
     }
 
     @Override
@@ -143,10 +132,8 @@ public class Emma extends Npc {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return super.toString() + " StateMachine-> " + stateMachine.getCurrentState();
     }
-
 
 }

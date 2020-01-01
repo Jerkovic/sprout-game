@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
+import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.ArrayList;
@@ -22,17 +23,12 @@ import static com.binarybrains.sprout.entity.Mob.Direction.*;
 /**
  * This is the human class ..how about a dog whats is that animal class
  */
-public class Npc extends Mob implements Telegraph {
+public class Npc extends Mob {
 
     public List<Vector2> debugPathList;
 
     public int spriteRow = 0; // the row on the spriteSheet where the NPC starts on
     private ActionState actionState = ActionState.EMPTY_NORMAL; // Idle normal state
-
-    @Override
-    public boolean handleMessage(Telegram msg) {
-        return false;
-    }
 
     public static enum ActionState {
         EMPTY_NORMAL, CARRYING, THROWING, CHOPPING, ATTACKING
@@ -50,31 +46,28 @@ public class Npc extends Mob implements Telegraph {
         setupAnimations();
     }
 
-    @Override
     public long getPosHash() {
         int tile_x=0, tile_y=0;
 
-        // this method we might need to revisit some ugly hacks below
-
         if (getDirection() == Direction.EAST) {
-            tile_x = (int)(getCenterPos().x -7) >> 4;
+            tile_x = (int)(box.getX()) >> 4;
             tile_y = getTileY();
         }
         else if(getDirection() == Direction.WEST) {
-            tile_x = (int)(getCenterPos().x+7) >> 4; // 12 should be getWidht
+            tile_x = (int)(box.getX() + box.getWidth()) >> 4;
             tile_y = getTileY();
         }
         else if(getDirection() == Direction.SOUTH) {
             tile_x = getTileX();
-            tile_y = (int)(getCenterPos().y+7) >> 4;
+            tile_y = (int)(box.getY() + box.getHeight()) >> 4;
         }
         else if(getDirection() == Direction.NORTH) {
             tile_x = getTileX();
-            tile_y = (int)(getCenterPos().y-7) >> 4;
+            tile_y = (int)(box.getY()) >> 4;
         }
+        //System.out.println(tile_x + "x" + tile_y);
         return (long)(tile_x + (tile_y * 256)); // grid[x + y * width] d
     }
-
 
     /**
      * Generates the path finding array
@@ -97,7 +90,6 @@ public class Npc extends Mob implements Telegraph {
         return path;
     }
 
-
     /**
      * Returns a map containing the travel direction guide
      */
@@ -119,8 +111,6 @@ public class Npc extends Mob implements Telegraph {
             next_px = path.get(i + 3);
 
             debugPathList.add(new Vector2(px, py));
-            //debugPathList.add(new Vector2(next_px, next_py));
-
 
             if (next_py > py)
             {
@@ -140,11 +130,11 @@ public class Npc extends Mob implements Telegraph {
             }
             travelDirections.put((long)(px + (py * 256)), dir); // grid[x + y * width]
 
+            System.out.println(px + "x" + py + " turn " + dir);
             if (i == n - 4) {
                 break;
             }
         }
-
 
         return travelDirections;
     }
@@ -152,175 +142,25 @@ public class Npc extends Mob implements Telegraph {
     @Override
     public void update(float delta) {
         super.update(delta);
+        if (this instanceof Player) return;
 
-        int newX, newY;
         // update motion - move this?
+
         if (getDirection() == WEST && getState() == State.WALKING) {
-            newX = (int) (getWalkWest() - (getSpeed() * delta)) / 16;
-            newY = (int) (getWalkBoxCenterY() / 16);
-
-            float new2X = getWalkBox().x - (getSpeed() * delta);
-            float new2Y = getWalkBox().y;
-
-            int new2YBottom = (int) ((getWalkBox().getY()+ getWalkBox().getHeight()) / 16);
-            int new2YTop = (int) ((getWalkBox().getY()) / 16);
-
-            if (new2YBottom != new2YTop) {
-                if (canMoveToTile(newX, new2YTop) && canMoveToTile(newX, new2YBottom) && canMoveToPos(new2X, new2Y)) {
-                    getPosition().x -= getSpeed() * delta;
-                } else {
-                    setState(State.STANDING);
-                }
-
-            } else { // single tile movement
-                if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
-                    getPosition().x -= getSpeed() * delta;
-                } else {
-                    setState(State.STANDING);
-                }
-            }
-
-        }
-        else if (getDirection() == EAST && getState() == State.WALKING) {
-            newX = (int) (getWalkEast() + (getSpeed() * delta)) / 16;
-            newY = (int) (getWalkBoxCenterY() / 16);
-
-            float new2X = getWalkBox().x + (getSpeed() * delta);
-            float new2Y = getWalkBox().y;
-
-            int new2YBottom = (int) ((getWalkBox().getY()+ getWalkBox().getHeight()) / 16);
-            int new2YTop = (int) ((getWalkBox().getY()) / 16);
-
-            if (new2YBottom != new2YTop) {
-                if (canMoveToTile(newX, new2YTop) && canMoveToTile(newX, new2YBottom) && canMoveToPos(new2X, new2Y)) {
-                    getPosition().x += getSpeed() * delta;
-                } else {
-                    setState(State.STANDING);
-                }
-
-            } else { // single tile movement
-                if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
-                    getPosition().x += getSpeed() * delta;
-                } else {
-                    setState(State.STANDING);
-                }
-            }
-
-        }
-        else if (getDirection() == NORTH && getState() == State.WALKING) {
-            newX = (int) (getWalkBoxCenterX() / 16);
-            newY = (int) (getWalkNorth() + (getSpeed() * delta)) / 16;
-
-            float new2X = getWalkBox().x;
-            float new2Y = getWalkBox().y + (getSpeed() * delta);
-
-            int newXLeft = (int) (getWalkBox().getX() / 16);
-            int newXRight = (int) ((getWalkBox().getX()+ getWalkBox().getWidth()) / 16);
-
-            if (newXLeft != newXRight) {
-                if (canMoveToTile(newXLeft, newY) && canMoveToTile(newXRight, newY) && canMoveToPos(new2X, new2Y)) {
-                    getPosition().y += getSpeed() * delta;
-                } else {
-                    setState(State.STANDING);
-                }
-
-            } else { // single tile movement
-                if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
-                    getPosition().y += getSpeed() * delta;
-                } else {
-                    setState(State.STANDING);
-                }
-            }
-
-        }
-        else if (getDirection() == SOUTH && getState() == State.WALKING) {
-            newX = (int) (getWalkBoxCenterX() / 16);
-            newY = (int) (getWalkSouth() - (getSpeed() * delta)) / 16;
-
-            float new2X = getWalkBox().x;
-            float new2Y = getWalkBox().y - (getSpeed() * delta);
-
-            // test of the new multi tile collision
-            int newXLeft = (int) (getWalkBox().getX() / 16);
-            int newXRight = (int) ((getWalkBox().getX()+ getWalkBox().getWidth()) / 16);
-
-            if (newXLeft != newXRight) {
-                if (canMoveToTile(newXLeft, newY) && canMoveToTile(newXRight, newY) && canMoveToPos(new2X, new2Y)) {
-                    getPosition().y -= getSpeed() * delta;
-                } else {
-                    setState(State.STANDING);
-                }
-
-            } else { // single tile movement
-                if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
-                    getPosition().y -= getSpeed() * delta;
-                } else {
-                    setState(State.STANDING);
-                }
-            }
+            getPosition().x -= getSpeed() * delta;
         }
 
-        // Diagonal Movement - Read more: http://himeworks.com/2014/11/diagonal-movement-and-movement-speed/
-
-        if (getDirection() == SOUTH_EAST && getState() == State.WALKING) {
-            newX = (int) (getWalkEast() + (getSpeed() * delta)) / 16;
-            newY = (int) (getWalkSouth() - (getSpeed() * delta)) / 16;
-
-            float new2X = getWalkBox().x + (getSpeed() * delta);;
-            float new2Y = getWalkBox().y - (getSpeed() * delta);
-
-            if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
-                getPosition().y -= getSpeed() * delta;
-                getPosition().x += getSpeed() * delta;
-            } else {
-                setState(State.STANDING);
-            }
-        }
-        if (getDirection() == NORTH_EAST && getState() == State.WALKING) {
-            newX = (int) (getWalkEast() + (getSpeed() * delta)) / 16;
-            newY = (int) (getWalkSouth() + (getSpeed() * delta)) / 16;
-
-            float new2X = getWalkBox().x + (getSpeed() * delta);;
-            float new2Y = getWalkBox().y + (getSpeed() * delta);
-
-            if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
-                getPosition().y += getSpeed() * delta;
-                getPosition().x += getSpeed() * delta;
-            } else {
-                setState(State.STANDING);
-            }
+        if (getDirection() == EAST && getState() == State.WALKING) {
+            getPosition().x += getSpeed() * delta;
         }
 
-        if (getDirection() == NORTH_WEST && getState() == State.WALKING) {
-            newX = (int) (getWalkWest() - (getSpeed() * delta)) / 16;
-            newY = (int) (getWalkNorth() + (getSpeed() * delta)) / 16;
+        if (getDirection() == NORTH && getState() == State.WALKING) {
+            getPosition().y += getSpeed() * delta;
 
-            float new2X = getWalkBox().x - (getSpeed() * delta);;
-            float new2Y = getWalkBox().y + (getSpeed() * delta);
-
-            if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
-                getPosition().y += getSpeed() * delta;
-                getPosition().x -= getSpeed() * delta;
-            } else {
-                setState(State.STANDING);
-            }
         }
-
-        if (getDirection() == SOUTH_WEST && getState() == State.WALKING) {
-            newX = (int) (getWalkWest() - (getSpeed() * delta)) / 16;
-            newY = (int) (getWalkSouth() - (getSpeed() * delta)) / 16;
-
-            float new2X = getWalkBox().x - (getSpeed() * delta);;
-            float new2Y = getWalkBox().y - (getSpeed() * delta);
-
-            if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
-                getPosition().y -= getSpeed() * delta;
-                getPosition().x -= getSpeed() * delta;
-            } else {
-                setState(State.STANDING);
-            }
+        if (getDirection() == SOUTH && getState() == State.WALKING) {
+            getPosition().y -= getSpeed() * delta;
         }
-
     }
 
     public int getSpriteRow() {
@@ -339,7 +179,6 @@ public class Npc extends Mob implements Telegraph {
 
     public void draw(Batch batch, float parentAlpha) {
 
-        //drawShadow(batch, Gdx.app.getGraphics().getDeltaTime()); // move to ShadowSystem
         Direction animDirection = Direction.getAnimationDirection(getDirection());
 
         if (getState() == State.STANDING) { // IDLE - NOT Walking

@@ -48,8 +48,6 @@ public class Hud implements EventListener {
     ProgressBar healthBar;
     ProgressBar levelBar;
 
-    Image moneyIcon;
-
     private Actor fadeActor = new Actor();
     private ShapeRenderer fadeRenderer;
 

@@ -1,7 +1,9 @@
 package com.binarybrains.sprout.entity.npc;
 
 import com.badlogic.gdx.ai.fsm.State;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Mob;
 
 
@@ -27,13 +29,12 @@ public enum EmmaState implements State<Emma> {
         @Override
         public void exit(Emma emma) {
         }
-
-
     },
 
     WALK_LABYRINTH() {
         @Override
         public void update(Emma emma) {
+            // this has arrived check needs to be fixed
             if (emma.getTileX() == 1 && emma.getTileY() == 1) { // made the walking around in the house
                 emma.setState(Emma.State.STANDING);
                 emma.stateMachine.changeState(WALK_HOME);
@@ -62,6 +63,8 @@ public enum EmmaState implements State<Emma> {
         public void enter(Emma emma) {
             emma.updateWalkDirections(6, 86);
             emma.setState(Emma.State.WALKING);
+            // send a test messge
+            MessageManager.getInstance().dispatchMessage(emma, 0);
         }
 
         @Override
@@ -74,25 +77,18 @@ public enum EmmaState implements State<Emma> {
     IDLE() {
         @Override
         public void update(Emma emma) {
-            if (emma.distanceTo(emma.getLevel().player) < (16*4)) {
-                // System.out.println("Emma is close to the player make here stop and look at the player");
+            if (emma.distanceTo(emma.getLevel().player) < (16 * 4)) {
                 emma.lookAt(emma.getLevel().player);
-                // maybe another state
             }
         }
         @Override
         public void enter(Emma emma) {
-            System.out.println("===================================");
-            System.out.println("Enter state IDLE");
-            System.out.println("===================================");
             emma.setState(Emma.State.STANDING);
         }
 
         @Override
         public void exit(Emma emma) {
-            System.out.println("===================================");
-            System.out.println("Exit state IDLE");
-            System.out.println("===================================");
+
         }
     }; // end of states
 

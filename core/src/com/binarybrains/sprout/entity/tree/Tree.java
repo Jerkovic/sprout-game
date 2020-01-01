@@ -48,9 +48,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         isShaking = true;
     }
 
-
     public Tree(Level level, Vector2 position, float width, float height) {
-
         super(level, position, width, height);
         this.flipped = MathUtils.randomBoolean();
 

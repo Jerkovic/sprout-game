@@ -19,7 +19,6 @@ public abstract class Mob extends Entity {
         STANDING, WALKING, ATTACKING
     }
 
-
     public static enum Direction {
         SOUTH, EAST, NORTH, WEST, NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST;
 
@@ -147,9 +146,7 @@ public abstract class Mob extends Entity {
         if (attackDir == Direction.EAST) {
             addAction(Actions.moveTo(getX()+knockBackForce, getY(), knockBackTime, Interpolation.exp5Out));
         }
-
     }
-
 
     public void setDirection(Direction direction) {
         this.direction = direction;

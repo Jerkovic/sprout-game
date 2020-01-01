@@ -21,7 +21,7 @@ import com.binarybrains.sprout.screen.GameScreen;
 
 public class SproutGame extends Game {
 
-	public static String name = "Sprout";
+	public static String name = "Bearshade Creek";
 	private static TweenManager tweenManager;
 	private static EventManager eventManager;
 	public static AssetManager assets = new AssetManager();
@@ -158,8 +158,8 @@ public class SproutGame extends Game {
 
         // Music (check out Ross Bugden)
         assets.load("music/track1.mp3", Music.class);
-        assets.load("music/track2.mp3", Music.class); // https://www.youtube.com/watch?v=je9bnuIqVVc
-		assets.load("music/track3.mp3", Music.class);
+        // assets.load("music/track2.mp3", Music.class); // https://www.youtube.com/watch?v=je9bnuIqVVc
+		// assets.load("music/track3.mp3", Music.class);
         // https://www.youtube.com/watch?v=9qk-vZ1qicI
         // https://www.youtube.com/watch?v=BnmglWHoVrk
         // https://www.youtube.com/watch?v=XVHVFwwuOa0

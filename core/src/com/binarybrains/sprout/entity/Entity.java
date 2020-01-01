@@ -1,5 +1,7 @@
 package com.binarybrains.sprout.entity;
 
+import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -15,7 +17,7 @@ import java.util.List;
 
 // Our abstract GameObject class
 
-public abstract class Entity {
+public abstract class Entity implements Telegraph {
 
     private Level level;
     private Vector2 position = new Vector2();
@@ -37,6 +39,11 @@ public abstract class Entity {
         this.width = (int)width;
         this.height = (int)height;
         updateBoundingBox();
+    }
+
+    @Override
+    public boolean handleMessage(Telegram msg) {
+        return false;
     }
 
     /**
@@ -93,7 +100,6 @@ public abstract class Entity {
     public void setRotation (float degrees) {
         if (this.rotation != degrees) {
             this.rotation = degrees;
-            //rotationChanged();
         }
     }
 
@@ -101,7 +107,6 @@ public abstract class Entity {
     public void rotateBy (float amountInDegrees) {
         if (amountInDegrees != 0) {
             rotation += amountInDegrees;
-            // rotationChanged();
         }
     }
 
@@ -122,7 +127,6 @@ public abstract class Entity {
         return (float) (Math.sqrt((dx*dx)+(dy*dy)));
     }
 
-
     public Item getActiveItem() {
         return null;
     }
@@ -130,7 +134,7 @@ public abstract class Entity {
     public void renderDebug(ShapeRenderer renderer, Color walkBoxColor) {
         Color restoreColor = renderer.getColor();
 
-        renderer.setColor(Color.CYAN); // bounding box
+        renderer.setColor(Color.GOLDENROD); // bounding box
         renderer.rect(getBoundingBox().getX(),
                 getBoundingBox().getY(),
                 getBoundingBox().getWidth(),
@@ -177,8 +181,8 @@ public abstract class Entity {
         this.box.setWidth(width);
         this.box.setHeight(height);
         this.box.setPosition(position.x, position.y);
-        this.walkBox.setWidth(width / 3);
-        this.walkBox.setHeight(height / 4);
+        this.walkBox.setWidth(width );
+        this.walkBox.setHeight(height);
         this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), position.y);
     }
 
@@ -263,21 +267,9 @@ public abstract class Entity {
         setPosition(x- (getWidth() /2 ), y -(getHeight() /2));
     }
 
-    /**
-     * Return as hash based on pos to be able to get moving directions from Travel HashMap
-     * @return long
-     */
-    public long getPosHash() {
-        return (long)getTileX() + (getTileY() * 256); // grid[x + y * width]
-    }
-
     public void setTilePos(int x, int y) {
-        if (!getLevel().isBlockingEntitiesAtTile(this, x, y)) {
-            setTileX(x);
-            setTileY(y);
-        } else {
-            System.out.println("setTilePos failed for" + this + " : " + getLevel().getEntitiesAtTile(x, y));
-        }
+        setTileX(x);
+        setTileY(y);
     }
 
     public float getX() {

@@ -3,6 +3,8 @@ package com.binarybrains.sprout.entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -71,6 +73,8 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ToolItem(Tools.axe, 0));
         getInventory().add(new ToolItem(Tools.pickaxe, 0));
         getInventory().add(new ToolItem(Tools.mace, 0));
+
+        getInventory().add(new ArtifactItem(Artifacts.teddy));
         getInventory().add(new ToolItem(Tools.hammer, 0));
 
         getInventory().add(new ResourceItem(Resources.bomb,392));
@@ -85,7 +89,6 @@ public class Player extends Npc implements InputProcessor {
 
         getInventory().add(new ResourceItem(Resources.wool, 3));
 
-        getInventory().add(new ArtifactItem(Artifacts.teddy));
         //getInventory().add(new ArtifactItem(Artifacts.backpack));
 
         getInventory().add(new ResourceItem(Resources.coal, 21));
@@ -97,14 +100,17 @@ public class Player extends Npc implements InputProcessor {
         // todo setActiveItemByName?
         setActiveItem(getInventory().getItems().get(3));
 
-        // Mailbox
-        mailBox.add(new Message("Hello World", "This is the first mail sent to you"));
-        mailBox.add(new Message("Hello Again", "This is the second mail sent to you!"));
-
+        // Setup me as a Listener
+        MessageManager.getInstance().addListener(this, 0);
 
         // move this to a shadow system ?
         shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
+    }
 
+    @Override
+    public boolean handleMessage(Telegram msg) {
+        System.out.println("Emma sent player a " + msg);
+        return true;
     }
 
     public Stats getStats() {
@@ -157,7 +163,6 @@ public class Player extends Npc implements InputProcessor {
             passedOut = true;
             die();
         }
-        System.out.println("Health: " + getHealth());
     }
 
     /**
@@ -345,7 +350,178 @@ public class Player extends Npc implements InputProcessor {
 
     public void update(float delta) {
         super.update(delta);
+
+        int newX, newY;
+        // update motion - move this?
+        if (getDirection() == WEST && getState() == State.WALKING) {
+            newX = (int) (getWalkWest() - (getSpeed() * delta)) / 16;
+            newY = (int) (getWalkBoxCenterY() / 16);
+
+            float new2X = getWalkBox().x - (getSpeed() * delta);
+            float new2Y = getWalkBox().y;
+
+            int new2YBottom = (int) ((getWalkBox().getY()+ getWalkBox().getHeight()) / 16);
+            int new2YTop = (int) ((getWalkBox().getY()) / 16);
+
+            if (new2YBottom != new2YTop) {
+                if (canMoveToTile(newX, new2YTop) && canMoveToTile(newX, new2YBottom) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().x -= getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
+
+            } else { // single tile movement
+                if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().x -= getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
+            }
+
+        }
+        else if (getDirection() == EAST && getState() == State.WALKING) {
+            newX = (int) (getWalkEast() + (getSpeed() * delta)) / 16;
+            newY = (int) (getWalkBoxCenterY() / 16);
+
+            float new2X = getWalkBox().x + (getSpeed() * delta);
+            float new2Y = getWalkBox().y;
+
+            int new2YBottom = (int) ((getWalkBox().getY()+ getWalkBox().getHeight()) / 16);
+            int new2YTop = (int) ((getWalkBox().getY()) / 16);
+
+            if (new2YBottom != new2YTop) {
+                if (canMoveToTile(newX, new2YTop) && canMoveToTile(newX, new2YBottom) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().x += getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
+
+            } else { // single tile movement
+                if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().x += getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
+            }
+
+        }
+        else if (getDirection() == NORTH && getState() == State.WALKING) {
+            newX = (int) (getWalkBoxCenterX() / 16);
+            newY = (int) (getWalkNorth() + (getSpeed() * delta)) / 16;
+
+            float new2X = getWalkBox().x;
+            float new2Y = getWalkBox().y + (getSpeed() * delta);
+
+            int newXLeft = (int) (getWalkBox().getX() / 16);
+            int newXRight = (int) ((getWalkBox().getX()+ getWalkBox().getWidth()) / 16);
+
+            if (newXLeft != newXRight) {
+                if (canMoveToTile(newXLeft, newY) && canMoveToTile(newXRight, newY) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().y += getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
+
+            } else { // single tile movement
+                if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().y += getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
+            }
+
+        }
+        else if (getDirection() == SOUTH && getState() == State.WALKING) {
+            newX = (int) (getWalkBoxCenterX() / 16);
+            newY = (int) (getWalkSouth() - (getSpeed() * delta)) / 16;
+
+            float new2X = getWalkBox().x;
+            float new2Y = getWalkBox().y - (getSpeed() * delta);
+
+            // test of the new multi tile collision
+            int newXLeft = (int) (getWalkBox().getX() / 16);
+            int newXRight = (int) ((getWalkBox().getX()+ getWalkBox().getWidth()) / 16);
+
+            if (newXLeft != newXRight) {
+                if (canMoveToTile(newXLeft, newY) && canMoveToTile(newXRight, newY) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().y -= getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
+
+            } else { // single tile movement
+                if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
+                    getPosition().y -= getSpeed() * delta;
+                } else {
+                    setState(State.STANDING);
+                }
+            }
+        }
+
+        // Diagonal Movement - Read more: http://himeworks.com/2014/11/diagonal-movement-and-movement-speed/
+        if (getDirection() == SOUTH_EAST && getState() == State.WALKING) {
+            newX = (int) (getWalkEast() + (getSpeed() * delta)) / 16;
+            newY = (int) (getWalkSouth() - (getSpeed() * delta)) / 16;
+
+            float new2X = getWalkBox().x + (getSpeed() * delta);;
+            float new2Y = getWalkBox().y - (getSpeed() * delta);
+
+            if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
+                getPosition().y -= getSpeed() * delta;
+                getPosition().x += getSpeed() * delta;
+            } else {
+                setState(State.STANDING);
+            }
+        }
+        if (getDirection() == NORTH_EAST && getState() == State.WALKING) {
+            newX = (int) (getWalkEast() + (getSpeed() * delta)) / 16;
+            newY = (int) (getWalkSouth() + (getSpeed() * delta)) / 16;
+
+            float new2X = getWalkBox().x + (getSpeed() * delta);;
+            float new2Y = getWalkBox().y + (getSpeed() * delta);
+
+            if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
+                getPosition().y += getSpeed() * delta;
+                getPosition().x += getSpeed() * delta;
+            } else {
+                setState(State.STANDING);
+            }
+        }
+
+        if (getDirection() == NORTH_WEST && getState() == State.WALKING) {
+            newX = (int) (getWalkWest() - (getSpeed() * delta)) / 16;
+            newY = (int) (getWalkNorth() + (getSpeed() * delta)) / 16;
+
+            float new2X = getWalkBox().x - (getSpeed() * delta);;
+            float new2Y = getWalkBox().y + (getSpeed() * delta);
+
+            if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
+                getPosition().y += getSpeed() * delta;
+                getPosition().x -= getSpeed() * delta;
+            } else {
+                setState(State.STANDING);
+            }
+        }
+
+        if (getDirection() == SOUTH_WEST && getState() == State.WALKING) {
+            newX = (int) (getWalkWest() - (getSpeed() * delta)) / 16;
+            newY = (int) (getWalkSouth() - (getSpeed() * delta)) / 16;
+
+            float new2X = getWalkBox().x - (getSpeed() * delta);;
+            float new2Y = getWalkBox().y - (getSpeed() * delta);
+
+            if (canMoveToTile(newX, newY) && canMoveToPos(new2X, new2Y)) {
+                getPosition().y -= getSpeed() * delta;
+                getPosition().x -= getSpeed() * delta;
+            } else {
+                setState(State.STANDING);
+            }
+        }
+        // super.update(delta);
         updateMovement();
+
+
+
         surfaceSoundEffect();
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
