@@ -24,7 +24,17 @@ public class Bush extends Entity {
         sprite = new Sprite(level.spritesheet, 13 * 16, 0, (int)width, (int)height);
         sprite.setSize(width, height);
         sprite.setPosition(getX(), getY());
+    }
 
+    @Override
+    public void updateBoundingBox() {
+        this.box.setWidth(getWidth());
+        this.box.setHeight(getHeight());
+        this.box.setPosition(getPosition());
+
+        this.walkBox.setWidth(32);
+        this.walkBox.setHeight(16);
+        this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
     }
     @Override
     public boolean use(Player player, Mob.Direction attackDir) {
