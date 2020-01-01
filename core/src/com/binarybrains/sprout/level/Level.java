@@ -432,7 +432,19 @@ public class Level extends LevelEngine {
         }
 
         for (Entity entity : entities) {
-            entity.renderDebug(debugRenderer, Color.BLACK);
+            entity.renderDebug(debugRenderer, Color.BLUE);
+
+            // Debug pathfinding
+            debugRenderer.setColor(Color.ORANGE);
+            if ((entity instanceof Npc) && ((Npc) entity).debugPathList != null) {
+                List<Vector2> positions = ((Npc) entity).debugPathList;
+                for(int ind = 0; ind < positions.size(); ind++) {
+                    float x = positions.get(ind).x;
+                    float y = positions.get(ind).y;
+                    Rectangle pathtile = new Rectangle(x*16, y*16, 16, 16);
+                    debugRenderer.rect(pathtile.getX(), pathtile.getY(), pathtile.width, pathtile.height);
+                }
+            }
         }
 
         // Player interact box

@@ -12,6 +12,7 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.level.Level;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,8 @@ import static com.binarybrains.sprout.entity.Mob.Direction.*;
  * This is the human class ..how about a dog whats is that animal class
  */
 public class Npc extends Mob implements Telegraph {
+
+    public List<Vector2> debugPathList;
 
     public int spriteRow = 0; // the row on the spriteSheet where the NPC starts on
     private ActionState actionState = ActionState.EMPTY_NORMAL; // Idle normal state
@@ -42,6 +45,7 @@ public class Npc extends Mob implements Telegraph {
 
     public Npc(Level level, Vector2 position, float width, float height, int spriteRow) {
         super(level, position, width, height);
+        this.debugPathList = new ArrayList<Vector2>();
         setSpriteRow(spriteRow);
         setupAnimations();
     }
@@ -93,11 +97,12 @@ public class Npc extends Mob implements Telegraph {
         return path;
     }
 
+
     /**
      * Returns a map containing the travel direction guide
      */
     public Map<Long, Direction> generatePathFindingDirections(IntArray path) {
-
+        this.debugPathList.clear();
         Map<Long, Direction> travelDirections = new HashMap<Long, Direction>();
 
         Mob.Direction dir = Mob.Direction.WEST;
@@ -112,6 +117,10 @@ public class Npc extends Mob implements Telegraph {
             px = path.get(i + 1);
             next_py = path.get(i + 2);
             next_px = path.get(i + 3);
+
+            debugPathList.add(new Vector2(px, py));
+            //debugPathList.add(new Vector2(next_px, next_py));
+
 
             if (next_py > py)
             {
@@ -135,6 +144,8 @@ public class Npc extends Mob implements Telegraph {
                 break;
             }
         }
+
+
         return travelDirections;
     }
 

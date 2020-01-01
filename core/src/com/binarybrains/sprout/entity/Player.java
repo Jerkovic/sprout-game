@@ -273,7 +273,7 @@ public class Player extends Npc implements InputProcessor {
             }
 
             if (carriedItem != null) carriedItem.deleteCarried();
-            entity.setPosition(getInteractBox().getX(), getInteractBox().getY());
+            entity.setPosition(getInteractBox().getX()+16, getInteractBox().getY());
             getLevel().add(getLevel(), entity);
             carriedItem = null;
             setActionState(ActionState.EMPTY_NORMAL);
@@ -296,6 +296,7 @@ public class Player extends Npc implements InputProcessor {
 
         int x = (int)this.getMouseSelectedTile().x;
         int y = (int)this.getMouseSelectedTile().y;
+        System.out.println("Clicked Tiled: " + x + "x" + y);
 
         getLevel().interact(x, y, this);
         return true;
@@ -548,6 +549,10 @@ public class Player extends Npc implements InputProcessor {
 
         float mouseWorldPosX = clickedPos.x;
         float mouseWorldPosY = clickedPos.y;
+
+        int x = (int)this.getMouseSelectedTile().x;
+        int y = (int)this.getMouseSelectedTile().y;
+        System.out.println("Tile coordinates: " + x + "x" + y);
 
         // player clicked himself
         if (mouseWorldPosX <= getBoundingBox().getX() + getBoundingBox().getWidth() && mouseWorldPosX >= getBoundingBox().getX()

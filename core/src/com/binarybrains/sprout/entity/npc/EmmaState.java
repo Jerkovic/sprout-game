@@ -53,16 +53,14 @@ public enum EmmaState implements State<Emma> {
     GOTO_LAMP_POST() {
         @Override
         public void update(Emma emma) {
-            //if (emma.getTileX() == 51 && emma.getTileY() == 102)
-            if (emma.getTileX() == 18 && emma.getTileY() == 86) {
+            if (emma.getTileX() == 6 && emma.getTileY() == 86) {
                 emma.stateMachine.changeState(EmmaState.IDLE);
                 emma.clearFindPath();
             }
         }
         @Override
         public void enter(Emma emma) {
-            //emma.updateWalkDirections(51,102);
-            emma.updateWalkDirections(18, 86);
+            emma.updateWalkDirections(6, 86);
             emma.setState(Emma.State.WALKING);
         }
 
@@ -97,7 +95,6 @@ public enum EmmaState implements State<Emma> {
             System.out.println("===================================");
         }
     }; // end of states
-
 
 
     @Override
