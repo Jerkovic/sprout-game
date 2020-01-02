@@ -137,7 +137,7 @@ public class Level extends LevelEngine {
         camera.update();
 
         add(this, player);
-        add(this, new Chest(this, new Vector2(16 * 22, 16 * 110)));
+        add(this, new Chest(this, new Vector2(16 * 2, 16 * 4)));
 
         for (int i = 0; i < 30; i++) {
             float x = MathUtils.random(1,67);
@@ -173,15 +173,14 @@ public class Level extends LevelEngine {
         // particle effects test
         pe = new ParticleEffect();
         pe.load(Gdx.files.internal("pfx/mysmoke1.p"),Gdx.files.internal("")); // effect dir and images dir
-        pe.getEmitters().first().setPosition(player.getX(), player.getY());
-        //pe.start();
+        pe.getEmitters().first().setPosition(10, 40);
+        pe.start();
 
     }
 
     public Vector2 cavePoint;
 
     public void spawnStoneInCaves() {
-
         // random exit points for player
         for (int i = 0; i < 2; i++) {
             int xat = MathUtils.random(64,64+31);
@@ -348,8 +347,9 @@ public class Level extends LevelEngine {
             finalShader.end();
 
             fbo.begin();
-            Gdx.gl.glClearColor(0f,0f,0f,0);
+            Gdx.gl.glClearColor(0f,0f,0f,1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
             float lightSize = lightOscillate ? (75.0f + 3.25f * (float)Math.sin(zAngle) + .5f * MathUtils.random()):75.0f;
 
             tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
@@ -381,7 +381,8 @@ public class Level extends LevelEngine {
         // end draw lights to fbo
 
         // draw the screen
-        // Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClearColor(0f,0f,0f,1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         tileMapRenderer.setView(camera);
         tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);

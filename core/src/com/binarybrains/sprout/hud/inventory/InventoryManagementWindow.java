@@ -27,6 +27,8 @@ import com.binarybrains.sprout.item.tool.Tool;
 import com.binarybrains.sprout.item.tool.WateringCan;
 import com.binarybrains.sprout.level.Level;
 
+import java.util.function.Function;
+
 
 public class InventoryManagementWindow extends Dialog {
 
@@ -34,6 +36,7 @@ public class InventoryManagementWindow extends Dialog {
     private ButtonGroup group;
     private TextureAtlas atlas;
     private Level level;
+    private Function closeCallback;
 
     private Player player;
     private Item heldItem;
@@ -43,9 +46,7 @@ public class InventoryManagementWindow extends Dialog {
         setSkin(skin);
         this.skin = skin;
         initialize();
-
         getTitleLabel().setColor(0,0,0,.7f);
-
         this.player = level.player;
         this.level = level;
         this.skin = skin;
@@ -69,15 +70,14 @@ public class InventoryManagementWindow extends Dialog {
         this.addListener(ignoreTouchDown);
     }
 
+    public void setCloseCallback(Function func) {
+        this.closeCallback = func;
+    }
+
     private void initialize () {
         setModal(true);
         setMovable(false);
-
-        // defaults().space(32);
-        // this should also have a profile pic of the NPC
-
     }
-
 
     private Button trashCan() {
         Image image = new Image(atlas.findRegion("Garbage_Can")); // Trash Can todo
@@ -133,9 +133,11 @@ public class InventoryManagementWindow extends Dialog {
         centerMe();
     }
 
+    /**
+     * Build UI
+     */
     private void build() {
         Table itemTable = new Table(skin);
-
         for (int i = 0, n = group.getButtons().size; i < n; i++) {
             itemTable.add((Actor) group.getButtons().get(i));
             if ((i + 1) % 12 == 0) itemTable.row();
@@ -150,7 +152,6 @@ public class InventoryManagementWindow extends Dialog {
         row();
         add(buttonTable);
         row();
-        //debug();
 
         TextButton buttonExit = new TextButton("   Close   ", skin);
         buttonExit.setColor(0,0,0, .75f);
@@ -164,7 +165,6 @@ public class InventoryManagementWindow extends Dialog {
                 player.getLevel().screen.game.resume();
                 player.getLevel().screen.hud.showMouseItem();
                 player.getLevel().screen.hud.refreshInventory();
-
             }
         });
         add(buttonExit).pad(5);
@@ -207,13 +207,11 @@ public class InventoryManagementWindow extends Dialog {
     }
 
     private void syncInventory(final Inventory inventory) {
-
         group.clear();
         getTitleLabel().setText("Inventory Management");
         int slotIndex = 0;
 
         for (Item item : inventory.getItems()) {
-
             final Button button = new Button(skin, "default");
             button.setName("" + slotIndex); //set the slotIndex
             String counter = "";
@@ -226,10 +224,9 @@ public class InventoryManagementWindow extends Dialog {
                 counter = "" + ((WateringCan) tool).getWater() + "%";
             }
 
-            //button.debug();
             Label lc = new Label(counter, skin);
             lc.setAlignment(Align.bottomRight);
-            lc.setColor(255, 255, 255, .8f);
+            lc.setColor(255, 255, 255, 1f);
 
             Stack stack = new Stack();
 
@@ -270,25 +267,6 @@ public class InventoryManagementWindow extends Dialog {
                 public void clicked(InputEvent event, float x, float y)
                 {
 
-/* buggy shit code
-                    if (group.getCheckedIndex() > -1) {
-                        if (heldItem == null) {
-                            setHeldItem(inventory.getMoveItemWithQuantity(group.getCheckedIndex(), 1));
-                            SproutGame.playSound("button_click", .4f, 0.9f, 1f);
-                            onInventoryChanged(inventory);
-                        } else {
-                            // fixa så att man inte kan höger klicka på en emtpySlot
-                            if (inventory.items.get(group.getCheckedIndex()) == null) {
-                                System.out.println("no allowed");
-                            }
-
-                            SproutGame.playSound("button_click", .45f, 0.95f, 1f);
-                            inventory.add(group.getCheckedIndex(), heldItem);
-                            setHeldItem(null);
-                            onInventoryChanged(inventory);
-                        }
-                    }
-*/
                 }
             });
 
@@ -310,9 +288,7 @@ public class InventoryManagementWindow extends Dialog {
                     }
                 }
             });
-
             group.add(button);
-
         }
     }
 }

@@ -8,6 +8,13 @@ ________________________________________________________________________________
 
 TODOS:
 
+new - Add icons in Inventory tween/animate if incre/decre?
+new - Chest Inventory // Splitpanels?
+new - Fast action slots. keyboard 1-12
+new  Smoke particles (chimney) we have some ugly clouds for testing as of october 20 2017
+      see / https://github.com/raeleus/Particle-Park/tree/master/particles/packs
+
+----------------------
 * make shaking grass (see grass)
 
 * bug we sometimes have multiple music tracks playing at the same time
@@ -52,15 +59,13 @@ TODOS:
 
 * Add smashing/hit animation to item being pounded with tool.
 
-* PickupItems collide with water should *drown* and disappear
+* PickupItems collide with sprites and tiles? in water should *drown* and disappear
 
 * Shadow system. More generic or what should we do?
 
 * AmbientLocationSounds Handler - Play sound louder if close to the source
 
 * Water shader (make waves)
-
-* Smoke particles (chimney) we have some ugly clouds for testing as of october 20 2017
 
 * Upgraded tools should be balanced when it comes to the speed (cooldown) and power (damage)
 

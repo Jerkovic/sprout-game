@@ -10,24 +10,28 @@ import com.binarybrains.sprout.level.Level;
 
 /**
  * A chest is a furniture that can be moved around.
- * It also serves as a inventory space
+ * It also serves as a inventory container space
  */
 public class Chest extends Entity implements Portable { // extends Furniture that implements Portable instead?
 
     TextureRegion[][] frames;
     private boolean isOpen = false;
-    public Inventory inventory;
+    public Inventory container; // container
     private boolean carried = false;
     private TextureRegion openRegion, closedRegion;
 
     public Chest(Level level, Vector2 position) {
         super(level, position, 16, 16);
-        int capacity = 12;
-        inventory = new Inventory(level, capacity); // the chest is a inventory
+        int capacity = 24;
+        container = new Inventory(capacity); // the chest is an inventory
 
         frames = TextureRegion.split(getLevel().spritesheet, 16, 16);
         closedRegion = frames[48][23];
         openRegion = frames[48][24];
+    }
+
+    public Inventory getInventory() {
+        return container;
     }
 
     @Override
@@ -48,16 +52,16 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
         if (!carried) {
             isOpen = !isOpen;
             SproutGame.playSound("door_open");
+            if (isOpen) player.getLevel().screen.hud.showInventoryManagementWindow();
         }
-
         return true;
     }
 
     @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
         if (!carried) {
-            player.setCarriedItem(this);
-            remove();
+            //player.setCarriedItem(this);
+            //remove();
         }
         return true;
     }

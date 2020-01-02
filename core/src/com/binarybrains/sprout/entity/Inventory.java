@@ -1,27 +1,24 @@
 package com.binarybrains.sprout.entity;
 
 
-import com.badlogic.gdx.Gdx;
-import com.binarybrains.sprout.crafting.Recipe;
+import com.badlogic.gdx.ai.msg.MessageManager;
+import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.resource.Resources;
-import com.binarybrains.sprout.level.Level;
 
 import java.util.*;
 
 public class Inventory {
 
-    public Level level;
     public List<Item> items = new ArrayList<Item>();
     private static int UPGRADE_SLOTS = 12;
     private static int MAX_UPGRADE_SLOTS = 36;
     private int capacity;
 
-    public Inventory(Level level, int capacity) {
-        this.level = level;
+    public Inventory(int capacity) {
         setCapacity(capacity);
         createEmptySlots(); // fill with empty slots
     }
@@ -118,15 +115,9 @@ public class Inventory {
                 return false;
             }
         }
-
-        // move the code below
-        try {
-            level.screen.hud.refreshInventory();
-        } catch (NullPointerException e) {
-            //
-        }
+        // refreshInventory
+        MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_UPDATED);
         return true;
-
     }
 
     private ResourceItem findResource(Resource resource) {

@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -93,6 +95,19 @@ public class InventoryWindow extends Window {
         pack();
     }
 
+    /**
+     *
+     * @param actor
+     */
+    private void testAnimate(Actor actor) {
+        actor.clearActions();
+        actor.setOrigin(Align.center);
+        actor.addAction(Actions.sequence(
+                Actions.scaleTo(1.25f, 1.25f, .25f),
+                Actions.scaleTo(1f, 1f, .20f)
+        ));
+    }
+
     private void syncInventory(final Inventory inventory) {
         group.clear();
         String selected = "";
@@ -127,6 +142,7 @@ public class InventoryWindow extends Window {
             }
             if (icon != null) {
                 Image image = new Image(icon);
+                testAnimate(image);
                 stack.add(image);
             } else {
                 stack.add(new Label("n/a", skin)); // should not happen
@@ -170,6 +186,7 @@ public class InventoryWindow extends Window {
 
             group.add(button);
             level.player.setActiveItem(inventory.getItems().get(group.getCheckedIndex()));
+
         }
     }
 }

@@ -67,7 +67,7 @@ public class Player extends Npc implements InputProcessor {
         super(level, new Vector2(0, 0), 16f, 16f, 0);
         setSpeed(64);
 
-        inventory = new Inventory(level, inventoryCapacity);
+        inventory = new Inventory(inventoryCapacity);
         getInventory().add(new ToolItem(Tools.hoe, 0));
         getInventory().add(new ToolItem(Tools.wateringcan, 0));
         getInventory().add(new ToolItem(Tools.axe, 0));
@@ -253,11 +253,8 @@ public class Player extends Npc implements InputProcessor {
 
     //  called on left click, boolean return type?
     private boolean interactWithActiveItem() {
-
         if (getActionState() == ActionState.CARRYING) {
-
             Entity entity = (Entity)carriedItem;
-
             List<Entity> entities = getLevel().getEntities(getInteractBox());
             if (entities.size() > 0) {
                 return false;

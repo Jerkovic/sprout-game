@@ -37,8 +37,6 @@ import com.binarybrains.sprout.misc.BackgroundMusic;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-import static com.binarybrains.sprout.entity.actions.Actions.addAction;
-
 
 public class Hud implements Telegraph {
 
@@ -104,6 +102,8 @@ public class Hud implements Telegraph {
                 TelegramType.PLAYER_CRAFTING_SUCCESS,
                 TelegramType.PLAYER_CRAFTING_FAILURE,
 
+                TelegramType.PLAYER_INVENTORY_UPDATED,
+
                 TelegramType.TIME_MINUTE_INC
         );
     }
@@ -122,6 +122,9 @@ public class Hud implements Telegraph {
                 break;
             case TelegramType.PLAYER_PASSED_OUT:
                 playerPassedOut((Player) msg.sender);
+                break;
+            case TelegramType.PLAYER_INVENTORY_UPDATED:
+                refreshInventory();
                 break;
             case TelegramType.TIME_MINUTE_INC:
                 timeLabel.setText(msg.extraInfo.toString());
@@ -228,6 +231,7 @@ public class Hud implements Telegraph {
         SproutGame.playSound("inventory_bag_open");
         inventoryManagementWindow.setVisible(true);
         inventoryManagementWindow.show(getStage());
+        // inventoryManagementWindow.setCloseCallback();
         inventoryManagementWindow.onInventoryChanged(level.player.getInventory());
         hideMouseItem();
     }
