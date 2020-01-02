@@ -101,12 +101,17 @@ public class Hud implements Telegraph {
                 TelegramType.PLAYER_STATS_RANK_INCREASED,
                 TelegramType.PLAYER_PASSED_OUT,
 
+                TelegramType.PLAYER_CRAFTING_SUCCESS,
+                TelegramType.PLAYER_CRAFTING_FAILURE,
+
                 TelegramType.TIME_MINUTE_INC
         );
     }
 
     @Override
     public boolean handleMessage(Telegram msg) {
+
+        System.out.println("HUD got msg " + msg.message);
 
         switch(msg.message) {
             case TelegramType.PLAYER_STATS_RANK_INCREASED:

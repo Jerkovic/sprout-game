@@ -55,6 +55,7 @@ public class ItemEntity extends Entity {
         this.walkBox.setWidth(4);
         this.walkBox.setHeight(4);
         this.walkBox.setPosition(getCenterPos().x - 2, getCenterPos().y-2);
+
     }
 
     @Override

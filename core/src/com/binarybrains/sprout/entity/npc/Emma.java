@@ -114,16 +114,6 @@ public class Emma extends Npc {
     @Override
     public boolean interact(Player player, Item item, Direction attackDir) {
 
-        if (item instanceof ToolItem) {
-
-            ToolItem toolItem = (ToolItem) item;
-
-            if (toolItem.tool instanceof Mace && toolItem.tool.canUse()) {
-                hurt(player, toolItem.getDamage(), player.getDirection()); // hurt emma
-                return true;
-            }
-        }
-
         if (player.activeItem instanceof ArtifactItem && player.activeItem.getName().equals("Teddy")) {
 
             player.getLevel().screen.hud.speakDialog(
@@ -137,6 +127,12 @@ public class Emma extends Npc {
 
             stateMachine.changeState(EmmaState.GOTO_TREE);
             return true;
+        } else {
+            player.getLevel().screen.hud.speakDialog(
+                    this.getClass().getSimpleName(),
+                    String.format("Scram Creep!")
+            );
+
         }
 
         return false;

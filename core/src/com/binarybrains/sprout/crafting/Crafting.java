@@ -1,7 +1,9 @@
 package com.binarybrains.sprout.crafting;
 
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.resource.Resource;
@@ -121,12 +123,16 @@ public class Crafting {
             recipe.deductCost(player.getInventory());
             recipe.craft(player.getInventory());
             player.increaseXP(recipe.getXpGain());
+
+            MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_CRAFTING_SUCCESS, recipe);
+
             if (recipe.shouldRemoveRecipeOnCrafted()) {
                 recipes.remove(index);
             }
             return true;
         }
 
+        MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_CRAFTING_FAILURE, recipe);
         return false;
     }
 

@@ -1,5 +1,8 @@
 package com.binarybrains.sprout.hud.inventory;
 
+import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -14,12 +17,13 @@ import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.crafting.Crafting;
 import com.binarybrains.sprout.crafting.Recipe;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.screen.GameScreen;
 
 
-public class CraftingWindow extends Dialog {
+public class CraftingWindow extends Dialog implements Telegraph {
 
     TextureAtlas atlas;
     Skin skin;
@@ -92,7 +96,7 @@ public class CraftingWindow extends Dialog {
             // add error handling getRegion may throw NullPointerException
             Image icon = new Image(atlas.findRegion(recipe.getItem().getRegionId()));
             if (!recipe.canCraft) icon.setColor(0,0,0,.55f);
-            if (!recipe.isUnlocked) icon.setColor(0,0,0,.15f);
+            if (!recipe.isUnlocked) icon.setColor(0,0,0,.05f);
 
             Button button = new Button(icon, skin, "default");
             if (!recipe.canCraft) button.setDisabled(true);
@@ -105,6 +109,7 @@ public class CraftingWindow extends Dialog {
                         // temp sound remake this.
                         ((Sound) SproutGame.assets.get("sfx/craft_complete.wav")).play(.1f);
                         player.getLevel().screen.hud.refreshInventory();
+
                         // player.getLevel().screen.hud.updateXP(player); // merge more of UI-refresh stuff?
                     } else {
                         player.getLevel().screen.hud.addToasterMessage("Inventory" ,"Inventory is full!");
@@ -150,5 +155,10 @@ public class CraftingWindow extends Dialog {
 
     public void setScrollFocus(Stage stage) {
         stage.setScrollFocus(recipeTableScrollPane);
+    }
+
+    @Override
+    public boolean handleMessage(Telegram msg) {
+        return false;
     }
 }

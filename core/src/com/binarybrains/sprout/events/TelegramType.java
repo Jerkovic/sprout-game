@@ -8,8 +8,8 @@ public class TelegramType {
     public static final int PLAYER_STATS_HEALTH_DECREASED = 20;
     public static final int PLAYER_PASSED_OUT = 30;
 
-    public static final int PLAYER_CRAFTING_SUCCESS = 30;
-    public static final int PLAYER_CRAFTING_FAILURE = 31;
+    public static final int PLAYER_CRAFTING_SUCCESS = 100;
+    public static final int PLAYER_CRAFTING_FAILURE = 101;
 
     // Some others
     public static final int TIME_MINUTE_INC = 1001;

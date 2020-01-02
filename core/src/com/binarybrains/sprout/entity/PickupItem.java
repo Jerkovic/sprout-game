@@ -46,7 +46,7 @@ public class PickupItem extends ItemEntity {
         if (fallfruit.contains(item.getName())) {
             bounce = false;
             if (MathUtils.randomBoolean())
-                setX(getX()+MathUtils.random(8, 20));
+                setX(getX() + MathUtils.random(8, 20));
             else
                 setX(getX()-MathUtils.random(8,20));
 
@@ -80,11 +80,8 @@ public class PickupItem extends ItemEntity {
             xa = random.nextGaussian() * 0.3;
             ya = random.nextGaussian() * 0.2;
             za = random.nextFloat() * 0.7 + 2;
-
         }
-
     }
-
 
     @Override
     public boolean remove() {
@@ -100,8 +97,6 @@ public class PickupItem extends ItemEntity {
                 remove();
                 SproutGame.playSound("blop", .4f, MathUtils.random(0.8f, 1.2f), 1f);
                 ((Player)entity).increaseStats(item.getName(), 1);
-                // test some money earning
-                getLevel().player.increaseFunds(10);
                 getLevel().screen.hud.addNotification(item);
             }
         }
