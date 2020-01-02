@@ -181,7 +181,7 @@ public class Hud implements Telegraph {
                 Actions.fadeIn(.5f, Interpolation.fade),
                 Actions.delay(3f),
                 Actions.run(new Runnable() { public void run(){
-                    player.setTilePos(9,2); // bed
+                    player.setTilePos(9,2); // bed hardcoded
                     player.getLevel().getCamera().setPosition(new Vector3(player.getX(), player.getY(), 0));
                     //SproutGame.playSound("door_close1"); //
                 }}),
@@ -189,7 +189,7 @@ public class Hud implements Telegraph {
                 Actions.run(new Runnable() { public void run(){
                     player.setHealth(90);
                     player.getLevel().screen.hud.updateXP(player);
-                    player.getLevel().screen.hud.addToasterMessage("Oh no!", "You passed out and woke up in your bed...");
+                    player.getLevel().screen.hud.addToasterMessage("Oh no!", "You passed out and woke up in your bed...What happend?");
                     player.unFreezePlayerControl();
                 }})
         ));
@@ -221,7 +221,6 @@ public class Hud implements Telegraph {
         level.screen.game.pause();
         level.player.releaseKeys();
         SproutGame.playSound("inventory_bag_open");
-        // inventoryManagementWindow.build(); // refresh content in window
         inventoryManagementWindow.setVisible(true);
         inventoryManagementWindow.show(getStage());
         inventoryManagementWindow.onInventoryChanged(level.player.getInventory());
@@ -341,6 +340,7 @@ public class Hud implements Telegraph {
 
         Label notLabel = new Label(text, skin);
         notLabel.setWrap(false);
+        notLabel.setColor(0,0, 0, .6f);
         notLabel.setWidth(600);
 
         notLabel.setEllipsis(true);
