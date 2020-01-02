@@ -5,6 +5,7 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Mob;
+import com.binarybrains.sprout.misc.GameTime;
 
 
 public enum EmmaState implements State<Emma> {
@@ -12,7 +13,7 @@ public enum EmmaState implements State<Emma> {
     WALK_HOME() {
         @Override
         public void update(Emma emma) {
-            if (emma.getTileX() == 5 && emma.getTileY() == 1) { // is by the door
+            if (emma.hasArrivedToTile(5, 1)) { // is by the door
                 emma.setDirection(Mob.Direction.SOUTH);
                 emma.clearFindPath();
                 emma.leaveHouse();
@@ -34,8 +35,7 @@ public enum EmmaState implements State<Emma> {
     WALK_LABYRINTH() {
         @Override
         public void update(Emma emma) {
-            // this has arrived check needs to be fixed
-            if (emma.getTileX() == 1 && emma.getTileY() == 1) { // made the walking around in the house
+            if (emma.hasArrivedToTile(1, 1)) {
                 emma.setState(Emma.State.STANDING);
                 emma.stateMachine.changeState(WALK_HOME);
             }
@@ -54,17 +54,36 @@ public enum EmmaState implements State<Emma> {
     GOTO_LAMP_POST() {
         @Override
         public void update(Emma emma) {
-            if (emma.getTileX() == 6 && emma.getTileY() == 86) {
-                emma.stateMachine.changeState(EmmaState.IDLE);
-                emma.clearFindPath();
+            if (emma.hasArrivedToTile(6, 86)) {
+                // emma.clearFindPath();
+                emma.stateMachine.changeState(GOTO_TREE);
             }
         }
         @Override
         public void enter(Emma emma) {
             emma.updateWalkDirections(6, 86);
             emma.setState(Emma.State.WALKING);
-            // send a test messge
-            MessageManager.getInstance().dispatchMessage(emma, 0);
+            // send a test message
+        }
+
+        @Override
+        public void exit(Emma emma) {
+            emma.setDirection(Mob.Direction.EAST);
+        }
+    },
+
+    GOTO_TREE() {
+        @Override
+        public void update(Emma emma) {
+            if (emma.hasArrivedToTile(27, 92)) {
+                emma.stateMachine.changeState(EmmaState.IDLE);
+                emma.clearFindPath();
+            }
+        }
+        @Override
+        public void enter(Emma emma) {
+            emma.updateWalkDirections(27, 92);
+            emma.setState(Emma.State.WALKING);
         }
 
         @Override

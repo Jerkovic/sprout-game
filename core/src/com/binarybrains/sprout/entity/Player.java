@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.npc.Npc;
-import com.binarybrains.sprout.events.TestEvent;
+import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.Item;
@@ -28,7 +28,6 @@ import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.Tools;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.mail.Mailbox;
-import com.binarybrains.sprout.mail.Message;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +47,7 @@ public class Player extends Npc implements InputProcessor {
     private Stats stats = new Stats();
     private Mailbox mailBox = new Mailbox();
 
+    public boolean passedOut = false;
     private long lastUseTime = 0;
     private long coolDownUseTime = 900; // this is how long before in millis the player can perform use/view again
 
@@ -100,8 +100,8 @@ public class Player extends Npc implements InputProcessor {
         // todo setActiveItemByName?
         setActiveItem(getInventory().getItems().get(3));
 
-        // Setup me as a Listener
-        MessageManager.getInstance().addListener(this, 0);
+        // Setup Player as a Listener
+
 
         // move this to a shadow system ?
         shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
@@ -109,7 +109,7 @@ public class Player extends Npc implements InputProcessor {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        System.out.println("Emma sent player a " + msg);
+        System.out.println("Player got a msg " + msg);
         return true;
     }
 
@@ -134,24 +134,22 @@ public class Player extends Npc implements InputProcessor {
         super.setHealth(getHealth() + hp);
         if (getHealth() + hp > 100) setHealth(100);
         if(getLevel().screen.hud != null) {
-            getLevel().screen.hud.updateXP(this);
+            // getLevel().screen.hud.updateXP(this);
         }
     }
 
     public void setHealth(int hp) {
         super.setHealth(hp);
         if(getLevel().screen.hud != null) {
-            getLevel().screen.hud.updateXP(this);
+            // getLevel().screen.hud.updateXP(this);
         }
     }
 
-    public boolean passedOut = false;
-
     @Override
-    public void die() { // player cant die
+    public void die() { // player cant die but pass out
         if (passedOut) {
             passedOut = false;
-            getLevel().screen.hud.updateXP(this);
+            // getLevel().screen.hud.updateXP(this);
             getLevel().screen.hud.playerPassedOut(this);
         }
     }
@@ -171,14 +169,13 @@ public class Player extends Npc implements InputProcessor {
      */
     public void increaseXP(int increment) {
         increaseStats("xp", increment);
-        // TODO: rename to IncreasedXpEvent
-        SproutGame.getEventManager().notify(new TestEvent(this));
+
+        MessageManager.getInstance().dispatchMessage(this, TelegramType.PLAYER_STATS_XP_INCREASED);
 
         if (getStats("rank") != LevelRank.getLevelRankByXP(getStats("xp"))) {
             getStats().set("rank", LevelRank.getLevelRankByXP(getStats("xp")));
-            rankedUp(getStats("rank")); // TODO: raise event here instead
+            MessageManager.getInstance().dispatchMessage(this, TelegramType.PLAYER_STATS_RANK_INCREASED, getStats("rank"));
         }
-
     }
 
     public void setActiveItem(Item item) {
@@ -288,8 +285,6 @@ public class Player extends Npc implements InputProcessor {
         boolean done = false;
         List<Entity> entities = getLevel().getEntities(getInteractBox());
         // List<Entity> entities = getLevel().getNearestEntity(this, getInteractBox());
-        // should we really interact with all items here?
-        // maybe the items closest to the player?
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			if (e != this)
@@ -329,8 +324,7 @@ public class Player extends Npc implements InputProcessor {
         }
 
         List<Entity> entities = getLevel().getEntities(getInteractBox());
-        for (int i = 0; i < entities.size(); i++) {
-            Entity e = entities.get(i);
+        for (Entity e : entities) {
             if (e != this)
                 return e.use(this, getDirection());
         }
@@ -762,18 +756,6 @@ public class Player extends Npc implements InputProcessor {
         return false;
     }
 
-    // TODO: should not be here ...move to HUD
-    public void rankedUp(final int level) {
-
-        addAction(Actions.sequence(
-                Actions.delay(.75f),
-                Actions.run(new Runnable() { public void run(){
-                    SproutGame.playSound("pickup_fanfar", .65f);
-                    getLevel().screen.hud.addToasterMessage("LEVEL UP", "You reached Level " + level);
-                }})
-        ));
-
-    }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {

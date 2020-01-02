@@ -46,6 +46,13 @@ public class Npc extends Mob {
         setupAnimations();
     }
 
+    public boolean hasArrivedToTile(int tile_x,  int tile_y) {
+        if (getLevel().getTileBounds(tile_x, tile_y).contains(getAiBox())) {
+            return true;
+        }
+        return false;
+    }
+
     public long getPosHash() {
         int tile_x=0, tile_y=0;
 
@@ -65,7 +72,6 @@ public class Npc extends Mob {
             tile_x = getTileX();
             tile_y = (int)(box.getY()) >> 4;
         }
-        //System.out.println(tile_x + "x" + tile_y);
         return (long)(tile_x + (tile_y * 256)); // grid[x + y * width] d
     }
 
@@ -143,8 +149,6 @@ public class Npc extends Mob {
     public void update(float delta) {
         super.update(delta);
         if (this instanceof Player) return;
-
-        // update motion - move this?
 
         if (getDirection() == WEST && getState() == State.WALKING) {
             getPosition().x -= getSpeed() * delta;

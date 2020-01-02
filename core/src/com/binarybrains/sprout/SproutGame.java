@@ -12,8 +12,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.tweens.EntityAccessor;
-import com.binarybrains.sprout.events.EventManager;
-import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.hud.tweens.CameraAccessor;
 import com.binarybrains.sprout.misc.Camera;
@@ -23,7 +21,6 @@ public class SproutGame extends Game {
 
 	public static String name = "Bearshade Creek";
 	private static TweenManager tweenManager;
-	private static EventManager eventManager;
 	public static AssetManager assets = new AssetManager();
 	private BitmapFont font;
 
@@ -36,10 +33,8 @@ public class SproutGame extends Game {
         Tween.registerAccessor(Entity.class, new EntityAccessor());
 		Tween.registerAccessor(Camera.class, new CameraAccessor());
 
-		SproutGame.eventManager = new EventManager();
 		loadAssets();
 
-		// exp level
 		//LevelRank.progressionChartDebug();
 		setScreen(new GameScreen(this));
 	}
@@ -53,13 +48,8 @@ public class SproutGame extends Game {
 	}
 
 	public static TweenManager getTweenManager() {
-
 		return tweenManager;
 	}
-	public static EventManager getEventManager() {
-		return eventManager;
-	}
-
 
 	public BitmapFont getFont() {
 		return font;

@@ -32,6 +32,9 @@ public abstract class Entity implements Telegraph {
     private final Array<Action> actions = new Array(0);
     private float temp;
 
+    // should be one tile in size
+    protected Rectangle aiBox = new Rectangle();
+
 
     public Entity(Level level, Vector2 position, float width, float height) {
         init(level);
@@ -181,9 +184,17 @@ public abstract class Entity implements Telegraph {
         this.box.setWidth(width);
         this.box.setHeight(height);
         this.box.setPosition(position.x, position.y);
-        this.walkBox.setWidth(width );
+        this.walkBox.setWidth(width);
         this.walkBox.setHeight(height);
         this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), position.y);
+    }
+
+    public Rectangle getAiBox() {
+        aiBox.height = getBoundingBox().getHeight() - 2;
+        aiBox.width = getBoundingBox().getWidth() - 2;
+        aiBox.setX(getBoundingBox().getX() + 1);
+        aiBox.setY(getBoundingBox().getY() + 1);
+        return aiBox;
     }
 
     public float getWalkWest() {
@@ -392,7 +403,7 @@ public abstract class Entity implements Telegraph {
     @Override
     public String toString()
     {
-        return "[" + this.getClass().getSimpleName() +  this.hashCode() + "@Pos:" + position + "]";
+        return "[" + this.getClass().getCanonicalName() + "@Pos:" + position + "]";
     }
 
     public int getWidth() {

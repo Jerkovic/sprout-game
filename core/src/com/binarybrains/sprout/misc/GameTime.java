@@ -1,18 +1,29 @@
 package com.binarybrains.sprout.misc;
 
+import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.binarybrains.sprout.events.TelegramType;
 
 import java.util.concurrent.TimeUnit;
 
-public class GameTime
+public class GameTime implements Telegraph
 {
     private long start;
     private boolean paused = false;
-    private long previousSecond;
+    private long previousSecond = -1;
+    private long previousMinute = -1;
+    private long previousHour = -1;
     private long duration = 0;
     private Gdt gdt;
 
-    public class Gdt {
+    @Override
+    public boolean handleMessage(Telegram msg) {
+        return false;
+    }
+
+    private class Gdt {
         public long year = 1;
         public long season = 1; // if season > 4 then year +1
         public long day = 1; // if day > 28 then season +1
@@ -26,6 +37,10 @@ public class GameTime
             this.hour = hour;
             this.minute = minute;
         }
+
+        public String toString() {
+            return String.format("Day %d %02d:%02d", gdt.day, gdt.hour, gdt.minute);
+        }
     }
 
     // make Singleton?
@@ -34,7 +49,6 @@ public class GameTime
         gdt = new Gdt(year, season, day, hour, minute);
     }
 
-    // use for fast forward time,mostly debug purposes
     public void setDuration(long dur) {
         duration = dur;
     }
@@ -46,13 +60,22 @@ public class GameTime
 
     public void update() {
         if (!paused && currentSecond() != previousSecond) {
-            duration++; // seconds duration since the timer started
+            duration++; // seconds duration since the game (timer) started
         }
 
-        long seconds = duration; // make seconds to minutes
-        gdt.day = TimeUnit.SECONDS.toDays(seconds);
-        gdt.hour = TimeUnit.SECONDS.toHours(seconds) - TimeUnit.DAYS.toHours(gdt.day);
-        gdt.minute = TimeUnit.SECONDS.toMinutes(seconds) - TimeUnit.DAYS.toMinutes(gdt.day) - TimeUnit.HOURS.toMinutes(gdt.hour);
+        gdt.day = TimeUnit.SECONDS.toDays(duration);
+        gdt.hour = TimeUnit.SECONDS.toHours(duration) - TimeUnit.DAYS.toHours(gdt.day);
+        gdt.minute = TimeUnit.SECONDS.toMinutes(duration) - TimeUnit.DAYS.toMinutes(gdt.day) - TimeUnit.HOURS.toMinutes(gdt.hour);
+
+        if (previousMinute != gdt.minute) {
+            MessageManager.getInstance().dispatchMessage(TelegramType.TIME_MINUTE_INC, gdt);
+        }
+        if (previousHour != gdt.hour) {
+            MessageManager.getInstance().dispatchMessage(TelegramType.TIME_HOUR_INC, gdt);
+        }
+
+        previousMinute = gdt.minute;
+        previousHour = gdt.hour;
     }
 
     public long currentSecond() {
@@ -67,12 +90,7 @@ public class GameTime
         return gdt;
     }
 
-    public void paus() {
+    public void pause() {
         paused = true;
     }
-
-    public String toString() {
-        return String.format("Day %d %02d:%02d", gdt.day, gdt.hour, gdt.minute); // => "6:30 AM 1:00 PM"
-    }
-
 }

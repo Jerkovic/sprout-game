@@ -1,13 +1,10 @@
 package com.binarybrains.sprout.screen;
 
-import aurelienribon.tweenengine.equations.Back;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Timer;
 import com.binarybrains.sprout.SproutGame;
@@ -61,7 +58,7 @@ public class GameScreen implements Screen {
                     BackgroundMusic.setVolume(0.12f);
                 }
             }
-        }, 2.0f, 10);
+        }, 20.0f, 10);
     }
 
     @Override
@@ -126,7 +123,7 @@ public class GameScreen implements Screen {
         level.cameraFix();
 
         gameState = GameState.PAUSE;
-        level.gameTimer.paus();
+        level.gameTimer.pause();
     }
 
     @Override

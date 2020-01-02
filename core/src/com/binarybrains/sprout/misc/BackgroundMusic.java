@@ -16,8 +16,8 @@ public class BackgroundMusic {
     private static boolean isStopped = false;
 
     public static void start() {
-
         stop();
+        
         if (currentTrack != null && currentTrack.isPlaying()) currentTrack.stop();
 
         changeTrack(MathUtils.random(1, 1)); // random select a track in our library
@@ -30,7 +30,6 @@ public class BackgroundMusic {
             System.out.println("============================================");
             System.out.println("!Error! :" + e);
             System.out.println("============================================");
-
         }
     }
 

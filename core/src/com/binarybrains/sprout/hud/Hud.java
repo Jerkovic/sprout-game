@@ -6,6 +6,9 @@ import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -19,10 +22,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Player;
-import com.binarybrains.sprout.events.EventListener;
-import com.binarybrains.sprout.events.EventManager;
-import com.binarybrains.sprout.events.IGameEvent;
-import com.binarybrains.sprout.events.TestEvent;
+import com.binarybrains.sprout.events.*;
 import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryManagementWindow;
@@ -37,8 +37,10 @@ import com.binarybrains.sprout.misc.BackgroundMusic;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import static com.binarybrains.sprout.entity.actions.Actions.addAction;
 
-public class Hud implements EventListener {
+
+public class Hud implements Telegraph {
 
     Stage stage;
     Label timeLabel, moneyLabel, xpLabel;
@@ -95,15 +97,32 @@ public class Hud implements EventListener {
         stage.addActor(menuWindow); */
 
         // Subscribe to events here
-        SproutGame.getEventManager().subscribe(TestEvent.class, this);
+        MessageManager.getInstance().addListeners(this,
+                TelegramType.PLAYER_STATS_XP_INCREASED,
+                TelegramType.PLAYER_STATS_RANK_INCREASED,
 
+                TelegramType.TIME_MINUTE_INC
+        );
     }
 
     @Override
-    public void onReceivedEvent(IGameEvent event) {
-        System.out.println("Received event! " + event.toString());
-        TestEvent test = (TestEvent) event;
-        updateXP(test.player);
+    public boolean handleMessage(Telegram msg) {
+
+        switch(msg.message) {
+            case TelegramType.PLAYER_STATS_RANK_INCREASED:
+                rankedUp((int) msg.extraInfo);
+                break;
+            case TelegramType.PLAYER_STATS_XP_INCREASED:
+                updateXP((Player) msg.sender);
+                break;
+            case TelegramType.TIME_MINUTE_INC:
+                timeLabel.setText(msg.extraInfo.toString());
+                fpsLabel.setText("FPS: " + Gdx.graphics.getFramesPerSecond());
+                break;
+            default:
+                // code block
+        }
+        return false;
     }
 
     public void setMouseItem(String regionId) {
@@ -295,9 +314,27 @@ public class Hud implements EventListener {
                 }).start(SproutGame.getTweenManager());
     }
 
+    /**
+     *
+     * @param level
+     */
+    private void rankedUp(int level) {
+        System.out.println("Play ranked up celebration for level" + level);
+        addToasterMessage("LEVEL UP", "You reached Level " + level);
+        addAction(com.binarybrains.sprout.entity.actions.Actions.sequence(
+                com.binarybrains.sprout.entity.actions.Actions.delay(.1f),
+                com.binarybrains.sprout.entity.actions.Actions.run(new Runnable() { public void run(){
+                    SproutGame.playSound("pickup_fanfar", .65f);
+
+                }})
+        ));
+
+    }
+
     // a test right now, we need some graphics
     public void addToasterMessage(String title, String text) {
         final Window window = new Window(title, skin);
+        window.setVisible(false);
         window.setRound(true);
         window.setKeepWithinStage(false);
         window.setMovable(false);
@@ -329,9 +366,9 @@ public class Hud implements EventListener {
 
         window.addAction(Actions.sequence(
                 Actions.alpha(0f),
-
+                Actions.visible(true),
                 Actions.parallel(
-                        Actions.alpha(1f, .8f, Interpolation.fade),
+                        Actions.alpha(1f, 1f, Interpolation.fade),
                         Actions.moveBy(0, -moveBy, 1.5f, Interpolation.fade)
                 ),
 
@@ -459,8 +496,10 @@ public class Hud implements EventListener {
         return hudTable;
     }
 
+    /**
+     * Draw method
+     */
     public void draw() {
-
         stage.draw();
         if (mouseItem != null)  mouseItem.setZIndex(9000);
         float alpha = fadeActor.getColor().a;
@@ -481,8 +520,7 @@ public class Hud implements EventListener {
         moneyLabel.setText("" + numberFormat.format(player.getStats().get("money")));
     }
 
-    // should be private
-    public void updateXP(Player player) {
+    private void updateXP(Player player) {
         healthBar.setValue((float) player.getHealth());
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
         int xp = player.getStats().get("xp");
@@ -493,8 +531,6 @@ public class Hud implements EventListener {
     }
 
     public void act(float delta) {
-        timeLabel.setText(level.gameTimer.toString());
-        fpsLabel.setText("FPS: " + Gdx.graphics.getFramesPerSecond());
 
         // temp mouseItem
         if (mouseItem != null) {
@@ -507,7 +543,8 @@ public class Hud implements EventListener {
 
     public void dispose() {
         //super.dispose();
-        SproutGame.getEventManager().unsubscribe(TestEvent.class, this);
+        MessageManager.getInstance().clearListeners();
     }
+
 
 }
