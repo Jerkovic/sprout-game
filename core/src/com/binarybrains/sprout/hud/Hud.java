@@ -319,16 +319,8 @@ public class Hud implements Telegraph {
      * @param level
      */
     private void rankedUp(int level) {
-        System.out.println("Play ranked up celebration for level" + level);
         addToasterMessage("LEVEL UP", "You reached Level " + level);
-        addAction(com.binarybrains.sprout.entity.actions.Actions.sequence(
-                com.binarybrains.sprout.entity.actions.Actions.delay(.1f),
-                com.binarybrains.sprout.entity.actions.Actions.run(new Runnable() { public void run(){
-                    SproutGame.playSound("pickup_fanfar", .65f);
-
-                }})
-        ));
-
+        SproutGame.playSound("pickup_fanfar", .45f);
     }
 
     // a test right now, we need some graphics

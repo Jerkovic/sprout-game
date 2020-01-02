@@ -94,6 +94,7 @@ public class Emma extends Npc {
 
     @Override
     public boolean interact(Player player, Item item, Direction attackDir) {
+
         if (item instanceof ToolItem) {
 
             ToolItem toolItem = (ToolItem) item;
@@ -108,14 +109,14 @@ public class Emma extends Npc {
 
             player.getLevel().screen.hud.speakDialog(
                     this.getClass().getSimpleName(),
-                    String.format("Ohh! Is that %s? I have really missed him! Thank you!", item.getName())
+                    String.format("Ohh! Is that my long lost %s? I have really missed him! Thank you!", item.getName())
             );
 
             ArtifactItem ai = (ArtifactItem) player.activeItem;
             player.getInventory().removeItem(ai);
             player.getLevel().screen.hud.refreshInventory();
 
-            stateMachine.changeState(EmmaState.GOTO_LAMP_POST);
+            stateMachine.changeState(EmmaState.GOTO_TREE);
             return true;
         }
 

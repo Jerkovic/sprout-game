@@ -155,7 +155,7 @@ public class Level extends LevelEngine {
         debugRenderer = new ShapeRenderer();
 
         gameTimer = new GameTime(0, 0, 1, 0, 0);
-        gameTimer.setDuration( (60 * 60 * 26) * 28);
+        gameTimer.setDuration( ((60 * 60 * 26) * 27) + 34242 );
         gameTimer.start();
 
         // test some path finding stuff.. move this!!
