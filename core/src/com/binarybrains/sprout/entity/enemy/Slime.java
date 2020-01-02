@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.bellsandwhistles.TextParticle;
+import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
@@ -21,16 +23,13 @@ public class Slime extends Mob {
     public Slime(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height);
         setHealth(80);
-        // Gem_Node temp sprite
         TextureAtlas atlas = SproutGame.assets.get("items2.txt");
         texture = atlas.findRegion("Gem_Node");
     }
 
     @Override
     public void update(float deltaTime) {
-
         super.update(deltaTime);
-
         speed = MathUtils.random(.13240234f, .97459395395f);
 
         lookAt(getLevel().player); // determine the slimes looking/walk dir
@@ -63,7 +62,6 @@ public class Slime extends Mob {
 
     @Override
     public boolean interact(Player player, Item item, Direction attackDir) {
-
         if (item instanceof ToolItem) {
             ToolItem toolItem = (ToolItem) item;
             if (toolItem.tool instanceof Mace && toolItem.tool.canUse()) {

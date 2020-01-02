@@ -14,8 +14,7 @@ public enum EmmaState implements State<Emma> {
     WALK_HOME() {
         @Override
         public void update(Emma emma) {
-            if (emma.hasArrivedToTile(5, 1)) { // is by the door
-                emma.setDirection(Mob.Direction.SOUTH);
+            if (emma.hasArrivedToTile(4, 0)) { // is by the door
                 emma.clearFindPath();
                 emma.leaveHouse();
                 emma.stateMachine.changeState(EmmaState.IDLE);
@@ -24,7 +23,7 @@ public enum EmmaState implements State<Emma> {
 
         @Override
         public void enter(final Emma emma) {
-            emma.updateWalkDirections(5,1);
+            emma.updateWalkDirections(4,0);
             emma.setState(Emma.State.WALKING);
         }
 

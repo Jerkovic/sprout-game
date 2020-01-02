@@ -2,7 +2,7 @@
 <tileset version="1.2" tiledversion="1.3.1" name="sdv" tilewidth="16" tileheight="16" tilecount="2370" columns="30">
  <image source="stardew_valley_01.png" trans="ffffff" width="480" height="1264"/>
  <terraintypes>
-  <terrain name="New Terrain" tile="0"/>
+  <terrain name="test" tile="0"/>
   <terrain name="Dirt" tile="0"/>
  </terraintypes>
  <tile id="258">
@@ -143,9 +143,9 @@
    <property name="blocked" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="635" terrain="1,1,1,"/>
- <tile id="636" terrain="1,1,,"/>
- <tile id="637" terrain="1,1,,1"/>
+ <tile id="635" terrain="1,1,1,0"/>
+ <tile id="636" terrain="1,1,0,0"/>
+ <tile id="637" terrain="1,1,0,1"/>
  <tile id="646">
   <properties>
    <property name="blocked" type="bool" value="true"/>
@@ -166,11 +166,12 @@
    <property name="blocked" type="bool" value="true"/>
   </properties>
  </tile>
- <tile id="665" terrain="1,,1,"/>
- <tile id="667" terrain=",1,,1"/>
- <tile id="695" terrain="1,,1,1"/>
- <tile id="696" terrain=",,1,1"/>
- <tile id="697" terrain=",1,1,1"/>
+ <tile id="665" terrain="1,0,1,0"/>
+ <tile id="666" terrain="0,0,0,0"/>
+ <tile id="667" terrain="0,1,0,1"/>
+ <tile id="695" terrain="1,0,1,1"/>
+ <tile id="696" terrain="0,0,1,1"/>
+ <tile id="697" terrain="0,1,1,1"/>
  <tile id="702" terrain="1,1,1,1"/>
  <tile id="762">
   <animation>

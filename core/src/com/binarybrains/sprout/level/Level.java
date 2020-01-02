@@ -130,7 +130,7 @@ public class Level extends LevelEngine {
         camera.setToOrtho(false, screen.width / 4, screen.height / 4); // we scale 16x16 to 64x64
 
         player = new Player(this);
-        player.setTilePos(13, 80);
+        player.setTilePos(3, 5);
         player.setHealth(1);
 
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
@@ -168,13 +168,13 @@ public class Level extends LevelEngine {
         this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
 
         // Speech Bouble bound to player test
-        add(this, new SpeechBubble(this, "I am hungry!"));
+        // add(this, new SpeechBubble(this, "I am hungry!"));
 
         // particle effects test
         pe = new ParticleEffect();
         pe.load(Gdx.files.internal("pfx/mysmoke1.p"),Gdx.files.internal("")); // effect dir and images dir
         pe.getEmitters().first().setPosition(player.getX(), player.getY());
-        pe.start();
+        //pe.start();
 
     }
 

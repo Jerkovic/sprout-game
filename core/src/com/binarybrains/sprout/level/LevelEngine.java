@@ -58,12 +58,11 @@ public abstract class LevelEngine {
         // should be the size of the map
         astar = new Astar(256, 128) {
             protected boolean isValid (int x, int y) {
-                return getTile(x,y).mayPass && getEntitiesAtTile(x, y).size() == 0;
+                return getTile(x, y).mayPass && getEntitiesAtTile(x, y).size() == 0;
             }
         };
     }
 
-    // should this take Entity?
     public IntArray getPath(int startX, int startY, int targetX, int targetY) {
         return astar.getPath(startX, startY, targetX, targetY);
     }
