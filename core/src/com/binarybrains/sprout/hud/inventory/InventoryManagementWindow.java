@@ -263,14 +263,15 @@ public class InventoryManagementWindow extends Dialog {
             slotIndex++;
 
 
+            // Right click
             button.addListener(new ClickListener(Input.Buttons.RIGHT)
             {
                 @Override
                 public void clicked(InputEvent event, float x, float y)
                 {
-                    button.setChecked(true);
+
+/* buggy shit code
                     if (group.getCheckedIndex() > -1) {
-                        
                         if (heldItem == null) {
                             setHeldItem(inventory.getMoveItemWithQuantity(group.getCheckedIndex(), 1));
                             SproutGame.playSound("button_click", .4f, 0.9f, 1f);
@@ -287,6 +288,7 @@ public class InventoryManagementWindow extends Dialog {
                             onInventoryChanged(inventory);
                         }
                     }
+*/
                 }
             });
 
