@@ -1,6 +1,7 @@
 package com.binarybrains.sprout.entity.npc;
 
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
+import com.badlogic.gdx.ai.fsm.State;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
+import com.badlogic.gdx.utils.Timer;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
@@ -32,7 +34,7 @@ public class Emma extends Npc {
         setDirection(Direction.EAST);
         setSpeed(32f);
 
-        stateMachine = new DefaultStateMachine<Emma, EmmaState>(this, EmmaState.IDLE);
+        stateMachine = new DefaultStateMachine<>(this, EmmaState.IDLE);
         stateMachine.changeState(EmmaState.WALK_LABYRINTH);
     }
 
@@ -41,6 +43,23 @@ public class Emma extends Npc {
         System.out.println("Emma knows about" + msg);
         return true;
     }
+
+    /**
+     *
+     * @param secondsDelay
+     * @param state
+     */
+    public void changeStateDelayed(int secondsDelay, EmmaState state) {
+        System.out.println("Scheduled state change in" + secondsDelay);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                System.out.println("Run scheduled state change");
+                stateMachine.changeState(state);
+            }
+        }, secondsDelay);
+    }
+
 
     public void updateWalkDirections(int x, int y) {
         clearFindPath();

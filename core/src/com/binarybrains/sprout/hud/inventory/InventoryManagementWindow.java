@@ -19,6 +19,7 @@ import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.hud.TypeWriterDialog;
+import com.binarybrains.sprout.hud.utils.ItemTip;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
@@ -189,21 +190,6 @@ public class InventoryManagementWindow extends Dialog {
     }
 
     /**
-     * Creates a tooltip table for an item
-     * @param item
-     * @return
-     */
-    private Table createTooltipTable(Item item) {
-        Table tooltipTable = new Table(skin);
-        tooltipTable.pad(12).background("default-round");
-        tooltipTable.add(item.getName() + " (" + item.getCategory() + ")").left();
-        tooltipTable.row();
-        tooltipTable.add(item.getDescription()).left();
-        tooltipTable.align(Align.left | Align.top);
-        return tooltipTable;
-    }
-
-    /**
      * @todo We need to display stack counter as well
      * @param item
      */
@@ -268,7 +254,7 @@ public class InventoryManagementWindow extends Dialog {
 
             button.add(stack);
             if (item != null) {
-                Tooltip toolTip = new Tooltip(createTooltipTable(item));
+                Tooltip toolTip = new Tooltip(ItemTip.createTooltipTable(skin, item));
                 toolTip.getManager().animations = false;
                 toolTip.setInstant(true);
                 button.addListener(toolTip);

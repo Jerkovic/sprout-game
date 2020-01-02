@@ -242,7 +242,6 @@ public class Level extends LevelEngine {
     }
 
     public void update(float delta) {
-
         gameTimer.update();
 
         // also event based..check for achievement ...really here? timed event check?
@@ -279,7 +278,6 @@ public class Level extends LevelEngine {
         if(Gdx.input.isKeyJustPressed(Input.Keys.B)) {
             ambientIntensity -= .1f;
             if (ambientIntensity < 0) ambientIntensity = 0;
-            //System.out.println(ambientIntensity);
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.V)) {

@@ -280,7 +280,6 @@ public class Hud implements Telegraph {
 
         // this should be grouped in some clever way.. no need to spawn 6 wood pickups
         int hudPosition = (notificationsInHud++ * 75) + 75;
-        //Tween.set(window, ActorAccessor.ALPHA).target(0f).start(SproutGame.getTweenManager());
         Tween.to(window, ActorAccessor.POSITION_XY, 2.1f).target(20, hudPosition).ease(TweenEquations.easeOutElastic).delay(0.4f)
         .setCallback(new TweenCallback() {
 
@@ -291,8 +290,6 @@ public class Hud implements Telegraph {
             }
 
         }).start(SproutGame.getTweenManager());
-        //Tween.to(window, ActorAccessor.ALPHA, 2).target(1f).start(SproutGame.getTweenManager());
-        //.addAction(forever(sequence(fadeOut(5), fadeIn(5))));
     }
 
     /**
@@ -523,12 +520,10 @@ public class Hud implements Telegraph {
     }
 
     public void act(float delta) {
-
         // temp mouseItem
         if (mouseItem != null) {
             mouseItem.setPosition(Gdx.input.getX(), Gdx.app.getGraphics().getHeight() - Gdx.input.getY());
         }
-
         stage.act(delta);
         fadeActor.act(delta);
     }
@@ -537,6 +532,4 @@ public class Hud implements Telegraph {
         //super.dispose();
         MessageManager.getInstance().clearListeners();
     }
-
-
 }

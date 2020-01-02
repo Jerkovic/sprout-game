@@ -98,7 +98,7 @@ public class PickupItem extends ItemEntity {
         if (entity instanceof Player) {
             if (((Player)entity).getInventory().add(item)) {
                 remove();
-                SproutGame.playSound("blop", 1f, MathUtils.random(0.6f, 1.2f), 1f);
+                SproutGame.playSound("blop", .4f, MathUtils.random(0.8f, 1.2f), 1f);
                 ((Player)entity).increaseStats(item.getName(), 1);
                 // test some money earning
                 getLevel().player.increaseFunds(10);

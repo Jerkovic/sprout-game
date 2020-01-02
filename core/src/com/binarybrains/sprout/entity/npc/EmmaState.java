@@ -3,6 +3,7 @@ package com.binarybrains.sprout.entity.npc;
 import com.badlogic.gdx.ai.fsm.State;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.utils.Timer;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.misc.GameTime;
@@ -55,7 +56,7 @@ public enum EmmaState implements State<Emma> {
         @Override
         public void update(Emma emma) {
             if (emma.hasArrivedToTile(6, 86)) {
-                // emma.clearFindPath();
+                emma.clearFindPath();
                 emma.stateMachine.changeState(GOTO_TREE);
             }
         }
@@ -100,9 +101,11 @@ public enum EmmaState implements State<Emma> {
                 emma.lookAt(emma.getLevel().player);
             }
         }
+
         @Override
         public void enter(Emma emma) {
             emma.setState(Emma.State.STANDING);
+
         }
 
         @Override

@@ -66,13 +66,12 @@ public class TypeWriterDialog extends Window {
         }
         if (charCountThisFrame > charCountLastFrame && charCountThisFrame < dialogText.length() && charCountThisFrame % 2 == 0) {
             SproutGame.playSound("speaker_blip", .34f, MathUtils.random(0.5f, 1.2f), 1f);
-            //System.out.println("play" + charCountThisFrame);
         }
 
-        if (charCountThisFrame > dialogText.length())
-        {
+        if (charCountThisFrame > dialogText.length()) {
             charCountThisFrame = dialogText.length();
         }
+
         if (textLabel != null) {
             textLabel.setText(dialogText.substring(0, charCountThisFrame));
         }
@@ -89,6 +88,7 @@ public class TypeWriterDialog extends Window {
         setModal(true);
         setMovable(false);
 
+        getTitleLabel().setColor(0,0,0,.7f);
         // defaults().space(32);
         // this should also have a profile pic of the NPC
         contentTable = new Table(skin);
@@ -162,7 +162,9 @@ public class TypeWriterDialog extends Window {
 
     /** Adds a label to the content table. */
     public TypeWriterDialog text (String text, Label.LabelStyle labelStyle) {
-        return text(new Label(text, labelStyle));
+        Label lbl = new Label(text, labelStyle);
+        lbl.setColor(0,0,0,1);
+        return text(lbl);
     }
 
     /** Adds the given Label to the content table */

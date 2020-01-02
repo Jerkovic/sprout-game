@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Inventory;
+import com.binarybrains.sprout.hud.utils.ItemTip;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
@@ -92,29 +93,6 @@ public class InventoryWindow extends Window {
         pack();
     }
 
-    /**
-     * Creates a tooltip table for an item
-     * @param item
-     * @return
-     */
-    private Table createTooltipTable(Item item) {
-        Table tooltipTable = new Table(skin);
-        tooltipTable.pad(10).background("default-round");
-        Label lbl = new Label(item.getName() + " (" + item.getCategory() + ")", skin);
-        lbl.setAlignment(Align.bottomRight);
-        lbl.setColor(0,0,0,0.95f);
-
-        tooltipTable.add(lbl).left();
-        tooltipTable.row();
-        tooltipTable.add(item.getDescription()).left();
-        if (item instanceof ToolItem) {
-            tooltipTable.row();
-            tooltipTable.add(((ToolItem) item).getDamageRange()).left();
-        }
-        tooltipTable.align(Align.left | Align.top);
-        return tooltipTable;
-    }
-
     private void syncInventory(final Inventory inventory) {
         group.clear();
         String selected = "";
@@ -138,8 +116,6 @@ public class InventoryWindow extends Window {
             //button.debug();
             Label lc = new Label(counter, skin);
             lc.setAlignment(Align.bottomRight);
-            lc.setColor(Color.WHITE);
-
             Stack stack = new Stack();
 
             TextureAtlas.AtlasRegion icon;
@@ -163,7 +139,7 @@ public class InventoryWindow extends Window {
 
             button.add(stack);
             if (item != null) {
-                Tooltip toolTip = new Tooltip(createTooltipTable(item));
+                Tooltip toolTip = new Tooltip(ItemTip.createTooltipTable(skin, item));
                 toolTip.getManager().animations = false;
                 toolTip.setInstant(true);
                 button.addListener(toolTip);
