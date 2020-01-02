@@ -1,8 +1,6 @@
 package com.binarybrains.sprout.hud.utils;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ToolItem;
