@@ -132,7 +132,6 @@ public class InventoryWindow extends Window {
                 stack.add(new Label("n/a", skin)); // should not happen
             }
 
-            //Second add wrapped overlay object
             Table overlay = new Table();
             overlay.add(lc).expand().fillX().bottom().left();
             stack.add(overlay);

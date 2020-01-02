@@ -133,24 +133,19 @@ public class Player extends Npc implements InputProcessor {
     public void heal(int hp) {
         super.setHealth(getHealth() + hp);
         if (getHealth() + hp > 100) setHealth(100);
-        if(getLevel().screen.hud != null) {
-            // getLevel().screen.hud.updateXP(this);
-        }
+        // SEND SOME EVENT
     }
 
     public void setHealth(int hp) {
         super.setHealth(hp);
-        if(getLevel().screen.hud != null) {
-            // getLevel().screen.hud.updateXP(this);
-        }
+        // SEND EVENT
     }
 
     @Override
     public void die() { // player cant die but pass out
         if (passedOut) {
             passedOut = false;
-            // getLevel().screen.hud.updateXP(this);
-            getLevel().screen.hud.playerPassedOut(this);
+            MessageManager.getInstance().dispatchMessage(this, TelegramType.PLAYER_PASSED_OUT);
         }
     }
 

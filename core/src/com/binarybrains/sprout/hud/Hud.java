@@ -73,7 +73,6 @@ public class Hud implements Telegraph {
         craftingWindow.hide();
         stage.addActor(craftingWindow);
 
-
         craftingWindow.setPosition(Gdx.graphics.getWidth() / 2 - craftingWindow.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - craftingWindow.getHeight()/2);
 
@@ -100,6 +99,7 @@ public class Hud implements Telegraph {
         MessageManager.getInstance().addListeners(this,
                 TelegramType.PLAYER_STATS_XP_INCREASED,
                 TelegramType.PLAYER_STATS_RANK_INCREASED,
+                TelegramType.PLAYER_PASSED_OUT,
 
                 TelegramType.TIME_MINUTE_INC
         );
@@ -114,6 +114,9 @@ public class Hud implements Telegraph {
                 break;
             case TelegramType.PLAYER_STATS_XP_INCREASED:
                 updateXP((Player) msg.sender);
+                break;
+            case TelegramType.PLAYER_PASSED_OUT:
+                playerPassedOut((Player) msg.sender);
                 break;
             case TelegramType.TIME_MINUTE_INC:
                 timeLabel.setText(msg.extraInfo.toString());

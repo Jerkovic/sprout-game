@@ -12,6 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
+import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.Portable;
 import com.binarybrains.sprout.level.Level;
 
@@ -65,7 +66,6 @@ public class Bomb extends Entity implements Portable {
                 Entity e = entities.get(i);
                 if (e != this) e.hurt(this, getDamage()); // get damage value from bomb or not?
             }
-
         }
     }
 
@@ -75,6 +75,7 @@ public class Bomb extends Entity implements Portable {
 
     @Override
     public boolean blocks(Entity e) {
+        if (e instanceof Player) return false;
         return true;
     }
 
