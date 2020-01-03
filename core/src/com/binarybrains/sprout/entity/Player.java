@@ -286,8 +286,8 @@ public class Player extends Npc implements InputProcessor {
             if (done) return done;
 		}
 
-        int x = (int)this.getMouseSelectedTile().x;
-        int y = (int)this.getMouseSelectedTile().y;
+        int x = (int) this.getMouseSelectedTile().x;
+        int y = (int) this.getMouseSelectedTile().y;
         System.out.println("Clicked Tiled: " + x + "x" + y);
 
         getLevel().interact(x, y, this);
@@ -696,7 +696,7 @@ public class Player extends Npc implements InputProcessor {
         clickedPos.set(screenX, screenY, 0);
         float deltaX = (float)Gdx.input.getDeltaX();
         float deltaY = (float)Gdx.input.getDeltaY();
-        getLevel().getCamera().translate(-deltaX, deltaY, 0);
+        // getLevel().getCamera().translate(-deltaX, deltaY, 0);
         clickedPos = getLevel().getCamera().unproject(clickedPos);
 
         float mouseWorldPosX = clickedPos.x;

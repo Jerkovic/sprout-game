@@ -30,14 +30,11 @@ import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
-import com.binarybrains.sprout.misc.AmbienceSound;
-import com.binarybrains.sprout.misc.BackgroundMusic;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 

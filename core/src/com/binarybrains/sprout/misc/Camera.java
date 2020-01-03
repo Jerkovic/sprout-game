@@ -34,13 +34,14 @@ public class Camera extends OrthographicCamera {
     }
 
 
+    Vector3 temp = position;
+
     public void followPosition(Vector2 followPos, float deltaTime) {
 
         if (noFollow) return; // disabled
-        Vector3 temp = position;
-        float lerp = 3.5f;
-        temp.x += (followPos.x - position.x) * lerp * deltaTime;
-        temp.y += (followPos.y - position.y) * lerp * deltaTime;
+
+        temp.x += (followPos.x - position.x) *  deltaTime;
+        temp.y += (followPos.y - position.y) * deltaTime;
         temp.z = 0;
         position.set(temp);
 
@@ -48,9 +49,7 @@ public class Camera extends OrthographicCamera {
             if (TimeUtils.nanoTime() < startShakeTimer + 1000000000 * .3) {
                 position.x += MathUtils.random(-60f, 60f) * deltaTime;
                 position.y += MathUtils.random(-60f, 60f) * deltaTime;
-            }
-            else
-            {
+            } else {
                 isShaking = false;
             }
         }
@@ -58,7 +57,6 @@ public class Camera extends OrthographicCamera {
 
     @Override
     public void update() {
-
         float cameraHalfWidth = viewportWidth * .5f;
         float cameraHalfHeight = viewportHeight * .5f;
         float cameraLeft = position.x - cameraHalfWidth;
@@ -88,9 +86,8 @@ public class Camera extends OrthographicCamera {
             position.y = cameraHalfHeight;
         }
 
-        position.set((int)(position.x),(int) position.y, 0);
+        position.set((int) position.x, (int) position.y, 0);
         super.update();
-
     }
 
     public boolean isCameraBottomWorld() {
@@ -98,7 +95,7 @@ public class Camera extends OrthographicCamera {
     }
 
     public void setPosition(Vector3 pos) {
-        position.set((int)(pos.x),(int) pos.y, 0);
+        position.set((int) pos.x,(int) pos.y, 0);
     }
 
     public void disableFollow() {
