@@ -315,7 +315,7 @@ public class Player extends Npc implements InputProcessor {
             return false;
         }
 
-        List<Entity> entities = getLevel().getEntities(getInteractBox());
+        List<Entity> entities = getLevel().getNearestEntity(this, getInteractBox());
         for (Entity e : entities) {
             if (e != this)
                 return e.use(this, getDirection());
