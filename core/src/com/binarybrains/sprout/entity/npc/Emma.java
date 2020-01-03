@@ -21,6 +21,9 @@ import com.binarybrains.sprout.level.Level;
 
 import java.util.Map;
 
+import static com.binarybrains.sprout.entity.Mob.Direction.*;
+import static com.binarybrains.sprout.entity.Mob.Direction.SOUTH;
+
 public class Emma extends Npc {
 
     public StateMachine<Emma, EmmaState> stateMachine;
@@ -82,13 +85,16 @@ public class Emma extends Npc {
 
     @Override
     public void update(float delta) {
+        if (getLevel().getTileBounds(getTileX(), getTileY()).contains(getAiBox()))
+        {
+            long hash = getTileX() + (getTileY() * 256); // grid[x + y * width]
+            if (findPath != null && findPath.containsKey(hash)) {
+                setDirection(findPath.get(hash));
+                setState(State.WALKING);
+            }
+        }
         super.update(delta);
         stateMachine.update();
-
-        if (findPath != null && findPath.containsKey(getPosHash())) {
-            setDirection(findPath.get(getPosHash()));
-            setState(State.WALKING);
-        }
     }
 
     @Override

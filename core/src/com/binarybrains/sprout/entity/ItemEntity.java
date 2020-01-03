@@ -27,7 +27,6 @@ public class ItemEntity extends Entity {
         img = new Image(atlas.findRegion(item.getRegionId()));
         img.setSize(16, 16); // scale our items down
         img.setPosition(position.x, position.y);
-
         setupShadow();
     }
 
@@ -50,12 +49,10 @@ public class ItemEntity extends Entity {
 
 
     public void updateBoundingBox() {
-
         super.updateBoundingBox();
         this.walkBox.setWidth(4);
         this.walkBox.setHeight(4);
         this.walkBox.setPosition(getCenterPos().x - 2, getCenterPos().y-2);
-
     }
 
     @Override

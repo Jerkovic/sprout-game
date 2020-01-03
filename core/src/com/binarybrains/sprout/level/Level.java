@@ -136,7 +136,7 @@ public class Level extends LevelEngine {
 
         // test some path finding stuff.. move this!!
         setupPathFinding(); // construct the A.star
-        this.add(this, new Emma(this, new Vector2(5 * 16f, 6 * 16f), 16f, 16f));
+        this.add(this, new Emma(this, new Vector2(6 * 16f, 6 * 16f), 16f, 16f));
 
         // Slime test
         this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));

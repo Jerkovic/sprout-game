@@ -49,6 +49,7 @@ public class Npc extends Mob {
     public boolean hasArrivedToTile(int tile_x,  int tile_y) {
         if (getLevel().getTileBounds(tile_x, tile_y).contains(getAiBox())) {
             System.out.println("Has arrived to " + tile_x + "x" + tile_y);
+            setTilePos(tile_x, tile_y); // test adjust
             return true;
         }
         return false;
@@ -73,6 +74,8 @@ public class Npc extends Mob {
             tile_x = getTileX();
             tile_y = (int)(box.getY()) >> 4;
         }
+
+        System.out.println("tile:" + tile_x + "x" + tile_y);
         return (long)(tile_x + (tile_y * 256)); // grid[x + y * width]wd
     }
 
