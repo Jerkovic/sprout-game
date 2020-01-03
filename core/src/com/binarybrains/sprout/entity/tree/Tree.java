@@ -183,20 +183,11 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
     public boolean use(Player player, Mob.Direction attackDir) {
         shake();
         SproutGame.playSound("leaves_rustling", MathUtils.random(0.5f, 0.8f), MathUtils.random(0.9f, 1.1f), 1f);
-        int fruit = MathUtils.random(0,1);
         int count = MathUtils.random(0,1);
-        if (fruit == 1) {
-            for (int i = 0; i < count; i++) {
-                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.apple), new Vector2(getCenterPos().x, getCenterPos().y)));
-            }
-
-        } else {
-            for (int i = 0; i < count; i++) {
-                getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.orange), new Vector2(getCenterPos().x, getCenterPos().y)));
-            }
+        for (int i = 0; i < count; i++) {
+            getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.apple), new Vector2(getCenterPos().x, getCenterPos().y)));
         }
         return true;
-
     }
 
     public void draw(Batch batch, float parentAlpha) {

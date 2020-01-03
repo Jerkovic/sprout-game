@@ -39,9 +39,9 @@ public class PickupItem extends ItemEntity {
         setCenterPos(position.x, position.y);
         lifeTime = 60 * 10 + MathUtils.random(1, 60);
 
-        List<String> valuables = Arrays.asList("Gold Nugget", "Diamond", "Apple");
+        List<String> valuables = Arrays.asList("Gold Nugget", "Diamond");
 
-        List<String> fallfruit = Arrays.asList("Apple", "Orange");
+        List<String> fallfruit = Arrays.asList("Apple");
 
         if (fallfruit.contains(item.getName())) {
             bounce = false;
