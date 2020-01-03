@@ -15,6 +15,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -93,6 +95,14 @@ public class Hud implements Telegraph {
         menuWindow.setVisible(true);
         stage.addActor(menuWindow); */
 
+        stage.addListener(new InputListener() {
+            @Override
+            public boolean keyDown(InputEvent event, int keycode) {
+                inventoryWindow.activateSlotByShortcutKey(keycode);
+                return super.keyUp(event, keycode);
+            }
+        });
+
         // Subscribe to events here
         MessageManager.getInstance().addListeners(this,
                 TelegramType.PLAYER_STATS_XP_INCREASED,
@@ -110,9 +120,7 @@ public class Hud implements Telegraph {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-
-        System.out.println("HUD got msg " + msg.message);
-
+        // System.out.println("HUD got msg " + msg.message);
         switch(msg.message) {
             case TelegramType.PLAYER_STATS_RANK_INCREASED:
                 rankedUp((int) msg.extraInfo);
@@ -304,7 +312,7 @@ public class Hud implements Telegraph {
     }
 
     /**
-     * Move camera
+     * Move camera...should not be here?
      * @param targetX
      * @param targetY
      */
@@ -491,7 +499,6 @@ public class Hud implements Telegraph {
         healthBar.setValue(level.player.getHealth());
         hudTable.add(healthBar);
         hudTable.row();
-
         return hudTable;
     }
 

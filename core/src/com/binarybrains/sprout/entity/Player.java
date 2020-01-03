@@ -716,7 +716,6 @@ public class Player extends Npc implements InputProcessor {
         if (mouseWorldPosX <= getBoundingBox().getX() + getBoundingBox().getWidth() && mouseWorldPosX >= getBoundingBox().getX()
                 && mouseWorldPosY <= getBoundingBox().getY()+ getBoundingBox().getHeight() && mouseWorldPosY >= getBoundingBox().getY()) {
             if (button == Input.Buttons.RIGHT && activeItem != null) {
-
                 if (activeItem.isFood() && canUse()) {
                     ResourceItem healItem = (ResourceItem) activeItem;
                     heal(((FoodResource) healItem.resource).heal());

@@ -2,19 +2,22 @@ package com.binarybrains.sprout.hud.inventory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Inventory;
+import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.hud.utils.ItemTip;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
@@ -22,6 +25,9 @@ import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.tool.Tool;
 import com.binarybrains.sprout.item.tool.WateringCan;
 import com.binarybrains.sprout.level.Level;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class InventoryWindow extends Window {
@@ -32,6 +38,22 @@ public class InventoryWindow extends Window {
     Level level;
     Float yPos;
 
+    static Map<Integer, Integer> slotKeysMapping = new HashMap<Integer, Integer>();
+    static {
+        slotKeysMapping.put(Input.Keys.NUM_1, 0);
+        slotKeysMapping.put(Input.Keys.NUM_2, 1);
+        slotKeysMapping.put(Input.Keys.NUM_3, 2);
+        slotKeysMapping.put(Input.Keys.NUM_4, 3);
+        slotKeysMapping.put(Input.Keys.NUM_5, 4);
+        slotKeysMapping.put(Input.Keys.NUM_6, 5);
+        slotKeysMapping.put(Input.Keys.NUM_7, 6);
+        slotKeysMapping.put(Input.Keys.NUM_8, 7);
+        slotKeysMapping.put(Input.Keys.NUM_9, 8);
+        slotKeysMapping.put(Input.Keys.NUM_0, 9);
+        slotKeysMapping.put(Input.Keys.EQUALS, 10);
+        slotKeysMapping.put(Input.Keys.LEFT_BRACKET, 11);
+    }
+
     public InventoryWindow(Level level, Skin skin) {
         super("Inventory", skin);
         getTitleLabel().setColor(0,0,0,.7f);
@@ -40,7 +62,7 @@ public class InventoryWindow extends Window {
         this.skin = skin;
         setKeepWithinStage(true);
         setMovable(false);
-        setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2)-getWidth(), getMinHeight() + 5);
+        setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2)-getWidth(), getMinHeight() + 8);
         row().fill().expandX();
 
         atlas = SproutGame.assets.get("items2.txt");
@@ -54,20 +76,38 @@ public class InventoryWindow extends Window {
                 return false;
             }
         };
-
         this.addListener(ignoreTouchDown);
     }
 
+    /**
+     * Activate inventory slot by shortcut key
+     * @param keycode
+     * @return
+     */
+    public boolean activateSlotByShortcutKey (int keycode) {
+        if (!slotKeysMapping.containsKey(keycode) || slotKeysMapping.get(keycode) == group.getCheckedIndex()) return false;
+        Array<Button> buttons = group.getButtons();
+        Button btn = buttons.get(slotKeysMapping.get(keycode));
+        Array<EventListener> listeners = btn.getListeners();
+        for(int i = 0; i < listeners.size; i++) {
+            if(listeners.get(i) instanceof ClickListener) {
+                MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_CHANGED_SELECTED_SLOT);
+                // SproutGame.playSound("Laser_Shoot8", .05f, MathUtils.random(1.1f, 1.2f), 1f);
+                ((ClickListener)listeners.get(i)).clicked(null, 0, 0);
+            }
+        }
+        return true;
+    }
+
     public void setWindowTop() {
-        yPos = (float )Gdx.app.getGraphics().getHeight() - (getHeight()+5);
+        yPos = (float )Gdx.app.getGraphics().getHeight() - (getHeight() + 8);
         centerMe();
     }
 
     public void setWindowBottom() {
-        yPos = 5f;
+        yPos = 8f;
         centerMe();
     }
-
 
     public void centerMe() {
         setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2), yPos);
@@ -116,8 +156,8 @@ public class InventoryWindow extends Window {
         getTitleLabel().setText("Inventory " + inventory.count() + "/" + inventory.getCapacity());
 
         for (Item item : inventory.getItems()) {
-
             Button button = new Button(skin, "toggle");
+
             String counter = "";
             if (item instanceof ResourceItem && inventory.count(item) > 1) {
                 counter = "" + inventory.count(item);
@@ -164,14 +204,6 @@ public class InventoryWindow extends Window {
             if (item != null && selected != null && item.getName().equals(selected)) {
                 button.setChecked(true);
             }
-
-            button.addListener(new ClickListener(Input.Buttons.RIGHT) {
-                @Override
-                public void clicked(InputEvent event, float x, float y)
-                {
-                    // System.out.println("right mouse button");
-                }
-            });
 
             button.addListener(new ClickListener(Input.Buttons.LEFT) {
                 @Override

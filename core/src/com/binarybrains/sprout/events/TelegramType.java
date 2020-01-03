@@ -11,6 +11,7 @@ public class TelegramType {
     public static final int PLAYER_CRAFTING_SUCCESS = 100;
     public static final int PLAYER_CRAFTING_FAILURE = 101;
     public static final int PLAYER_INVENTORY_UPDATED = 102;
+    public static final int PLAYER_INVENTORY_CHANGED_SELECTED_SLOT = 110;
 
     // Some others
     public static final int TIME_MINUTE_INC = 1001;
