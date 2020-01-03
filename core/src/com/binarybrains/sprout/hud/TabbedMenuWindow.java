@@ -23,13 +23,13 @@ public class TabbedMenuWindow extends Dialog {
         clearChildren();
 
         tabbedPane = new TabbedPane(skin);
-        tabbedPane.addTab(" Inventory ", new Label("test 1\ntodo more", skin));
-        tabbedPane.addTab(" Crafting ", new Label("test 2", skin));
-        tabbedPane.addTab(" Options ", new Label("test 3", skin));
+        tabbedPane.addTab(" Inventory ", new Label("test 1\ntodo more\ntodo more\ntodo more", skin));
+        tabbedPane.addTab(" Crafting ", new Label("test 2skfskfksfjlsfjklsjklfkjsfd sfkaalfkldaklfalkflkdaflkkl af kafka f", skin));
+        tabbedPane.addTab(" Options ", new Label("test 3\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more\ntodo more", skin));
         tabbedPane.addTab(" Exit ", new Label("test 4", skin));
         tabbedPane.left().top();
 
-        add(tabbedPane).pad(0);
+        add(tabbedPane).pad(5);
 
         add().row();
         add().row();

@@ -3,6 +3,8 @@ package com.binarybrains.sprout.level;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.ai.GdxAI;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -250,6 +252,8 @@ public class Level extends LevelEngine {
         pe.update(delta);
         if (pe.isComplete()) pe.reset();
 
+        // AI time piece
+        GdxAI.getTimepiece().update(delta);
 
         // Update all our entities
         for (int i = 0; i < entities.size(); i++) {
@@ -271,6 +275,9 @@ public class Level extends LevelEngine {
                 screen.hud.inventoryBottom();
             }
         }
+
+        // Dispatch any delayed messages
+        MessageManager.getInstance().update();
     }
 
     public void draw() {

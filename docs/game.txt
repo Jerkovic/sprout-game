@@ -9,12 +9,15 @@ ________________________________________________________________________________
 TODOS:
 
 new - Add icons in Inventory tween/animate if incre/decre?
+
 new - Chest Inventory // Splitpanels?
-new - Fast action slots. keyboard 1-12
+
 new  Smoke particles (chimney) we have some ugly clouds for testing as of october 20 2017
       see / https://github.com/raeleus/Particle-Park/tree/master/particles/packs
 
 ----------------------
+* Shortcut keys Inventory slots (Fixed)
+
 * make shaking grass (see grass)
 
 * bug we sometimes have multiple music tracks playing at the same time

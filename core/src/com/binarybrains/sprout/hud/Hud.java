@@ -91,15 +91,15 @@ public class Hud implements Telegraph {
 
         gameTimeWindow();
 
-        /* Dialog menuWindow = new TabbedMenuWindow(skin);
+        Dialog menuWindow = new TabbedMenuWindow(skin);
         menuWindow.setVisible(true);
-        stage.addActor(menuWindow); */
+        stage.addActor(menuWindow);
 
         stage.addListener(new InputListener() {
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
                 inventoryWindow.activateSlotByShortcutKey(keycode);
-                return super.keyUp(event, keycode);
+                return false;
             }
         });
 

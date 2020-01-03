@@ -92,7 +92,7 @@ public class InventoryWindow extends Window {
         for(int i = 0; i < listeners.size; i++) {
             if(listeners.get(i) instanceof ClickListener) {
                 MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_CHANGED_SELECTED_SLOT);
-                // SproutGame.playSound("Laser_Shoot8", .05f, MathUtils.random(1.1f, 1.2f), 1f);
+                SproutGame.playSound("Laser_Shoot8", .05f, MathUtils.random(1.0f, 1.2f), 1f);
                 ((ClickListener)listeners.get(i)).clicked(null, 0, 0);
             }
         }

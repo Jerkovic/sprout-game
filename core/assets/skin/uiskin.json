@@ -10,7 +10,7 @@ com.badlogic.gdx.graphics.Color: {
 	black: { a: 1, b: 0, g: 0, r: 0 },
 },
 com.binarybrains.sprout.hud.TabbedPane$TabbedPaneStyle: {
-	default: { font: default-font, fontColor: white, checkedFontColor: white, titleBegin: tab-title-begin, titleEnd: tab-title-end, bodyBackground: tab-body, titleButtonUnselected: tab-title-unchecked, titleButtonSelected: tab-title-checked }
+	default: { font: default-font, fontColor: black, checkedFontColor: white, titleBegin: tab-title-begin, titleEnd: tab-title-end, bodyBackground: tab-body, titleButtonUnselected: tab-title-unchecked, titleButtonSelected: tab-title-checked }
 },
 com.badlogic.gdx.scenes.scene2d.ui.Skin$TintedDrawable: {
 	dialogDim: { name: white, color: { r: 0, g: 0, b: 0, a: 0.45 } },
