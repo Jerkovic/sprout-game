@@ -137,7 +137,7 @@ public abstract class Entity implements Telegraph {
     public void renderDebug(ShapeRenderer renderer, Color walkBoxColor) {
         Color restoreColor = renderer.getColor();
 
-        renderer.setColor(Color.GOLDENROD); // bounding box
+        renderer.setColor(new Color(255, 30, 30, .65f)); // bounding box
         renderer.rect(getBoundingBox().getX(),
                 getBoundingBox().getY(),
                 getBoundingBox().getWidth(),
@@ -304,17 +304,6 @@ public abstract class Entity implements Telegraph {
 
     public boolean canMoveToTile(int tx, int ty) {
         if (getLevel().isTileBlocked(tx, ty, this)) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean canMoveToTile2(float new2X, float new2Y) {
-        Rectangle newWalkPos = new Rectangle(new2X, new2Y, getWalkBox().getWidth(), getWalkBox().getHeight());
-        // surrounding tiles
-        // East
-        if (newWalkPos.overlaps(getLevel().getTileBounds(getWBTileX()+1, getWBTileY()))) {
-            //System.out.println("canMoveToTile2 false" + newWalkPos + " " + getLevel().getTileBounds(getTileX(), getTileY()));
             return false;
         }
         return true;

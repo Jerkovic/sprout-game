@@ -694,9 +694,6 @@ public class Player extends Npc implements InputProcessor {
         }
 
         clickedPos.set(screenX, screenY, 0);
-        float deltaX = (float)Gdx.input.getDeltaX();
-        float deltaY = (float)Gdx.input.getDeltaY();
-        // getLevel().getCamera().translate(-deltaX, deltaY, 0);
         clickedPos = getLevel().getCamera().unproject(clickedPos);
 
         float mouseWorldPosX = clickedPos.x;

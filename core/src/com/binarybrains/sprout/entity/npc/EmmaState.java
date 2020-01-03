@@ -11,11 +11,11 @@ import com.binarybrains.sprout.misc.GameTime;
 
 public enum EmmaState implements State<Emma> {
 
-    WALK_HOME() {
+     WALK_HOME() {
         @Override
         public void update(Emma emma) {
             if (emma.hasArrivedToTile(4, 0)) { // is by the door
-                emma.clearFindPath();
+                System.out.println("Arrived to 4x0");
                 emma.leaveHouse();
                 emma.stateMachine.changeState(EmmaState.IDLE);
             }
@@ -36,14 +36,16 @@ public enum EmmaState implements State<Emma> {
         @Override
         public void update(Emma emma) {
             if (emma.hasArrivedToTile(1, 1)) {
-                emma.setState(Emma.State.STANDING);
+                System.out.println("Reached 1x1");
                 emma.stateMachine.changeState(WALK_HOME);
             }
         }
 
         @Override
         public void enter(Emma emma) {
+            System.out.println("Enter walk to 1x1");
             emma.updateWalkDirections(1,1);
+
         }
 
         @Override
@@ -75,14 +77,13 @@ public enum EmmaState implements State<Emma> {
     GOTO_TREE() {
         @Override
         public void update(Emma emma) {
-            if (emma.hasArrivedToTile(27, 92)) {
+            if (emma.hasArrivedToTile(35, 94)) {
                 emma.stateMachine.changeState(EmmaState.IDLE);
-                emma.clearFindPath();
             }
         }
         @Override
         public void enter(Emma emma) {
-            emma.updateWalkDirections(27, 92);
+            emma.updateWalkDirections(35, 94);
             emma.setState(Emma.State.WALKING);
         }
 

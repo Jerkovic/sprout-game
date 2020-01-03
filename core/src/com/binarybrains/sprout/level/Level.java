@@ -345,12 +345,12 @@ public class Level extends LevelEngine {
         }
         debugRenderer.end();
 
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         debugRenderer.setAutoShapeType(true);
         debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
         for (Entity entity : entities) {
-            // entity.renderDebug(debugRenderer, Color.BLUE);
-
-            Color c = new Color(50,50, 50, .1f);
+            Color c = new Color(50,50, 50, .6f);
             debugRenderer.setColor(c);
 
             if ((entity instanceof Npc) && ((Npc) entity).debugPathList != null) {
@@ -363,8 +363,10 @@ public class Level extends LevelEngine {
                     debugRenderer.rect(pathtile.getX(), pathtile.getY(), pathtile.width, pathtile.height);
                 }
             }
+            entity.renderDebug(debugRenderer, new Color(250,10, 10, .3f));
         }
         debugRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
 
         // Player interact box
         debugRenderer.setAutoShapeType(false);

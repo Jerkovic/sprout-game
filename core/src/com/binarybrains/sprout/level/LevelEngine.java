@@ -1,5 +1,6 @@
 package com.binarybrains.sprout.level;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -58,7 +59,7 @@ public abstract class LevelEngine {
         // should be the size of the map
         astar = new Astar(256, 128) {
             protected boolean isValid (int x, int y) {
-                return getTile(x, y).mayPass && getEntitiesAtTile(x, y).size() == 0;
+                return getTile(x, y).mayPass; // && getEntitiesAtTile(x, y).size() == 0
             }
         };
     }
@@ -163,7 +164,6 @@ public abstract class LevelEngine {
         } else east_tile = 0;
 
         return north_tile + (2 * west_tile) + (4 * east_tile) + (8 * south_tile);
-
     }
 
     /**
@@ -173,7 +173,6 @@ public abstract class LevelEngine {
      * @param tilesetIndex
      */
     public void setAutoTile(int x, int y, int tilesetIndex) {
-
         TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground_top");
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
         cell.setTile(map.getTileSets().getTile(tilesetIndex));

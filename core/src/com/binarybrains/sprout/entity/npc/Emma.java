@@ -30,7 +30,7 @@ public class Emma extends Npc {
         super(level, position, width, height, 3); // 3 is the spriteRow used
 
         setHealth(100);
-        setState(State.WALKING);
+        setState(State.STANDING);
         setDirection(Direction.EAST);
         setSpeed(32f);
 
@@ -83,11 +83,12 @@ public class Emma extends Npc {
     @Override
     public void update(float delta) {
         super.update(delta);
+        stateMachine.update();
+
         if (findPath != null && findPath.containsKey(getPosHash())) {
             setDirection(findPath.get(getPosHash()));
             setState(State.WALKING);
         }
-        stateMachine.update();
     }
 
     @Override
