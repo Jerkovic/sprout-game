@@ -202,7 +202,7 @@ public class Player extends Npc implements InputProcessor {
     public boolean blocks(Entity e) {
         if (this.equals(e)) return false;
         if (e instanceof Npc) {
-            return true;
+            return false; // Changed to false 3 Jan 2020
         }
         return false;
     }
@@ -503,11 +503,8 @@ public class Player extends Npc implements InputProcessor {
                 setState(State.STANDING);
             }
         }
-        // super.update(delta);
+
         updateMovement();
-
-
-
         surfaceSoundEffect();
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
@@ -600,7 +597,6 @@ public class Player extends Npc implements InputProcessor {
             setState(State.STANDING);
         }
     }
-
 
 
     @Override
@@ -727,8 +723,8 @@ public class Player extends Npc implements InputProcessor {
                     SproutGame.playSound("eating", 1f);
                     getInventory().removeResource(((ResourceItem) activeItem).resource, 1);
                     getLevel().screen.hud.refreshInventory();
+                    return true;
                 }
-                return true;
             }
         }
 
