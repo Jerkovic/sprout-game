@@ -145,9 +145,9 @@ public class Level extends LevelEngine {
 
         // particle effects test
         pe = new ParticleEffect();
-        //pe.load(Gdx.files.internal("pfx/mysmoke1.p"),Gdx.files.internal("")); // effect dir and images dir
-        //pe.getEmitters().first().setPosition(10, 40);
-        //pe.start();
+        pe.load(Gdx.files.internal("pfx/fire.p"),Gdx.files.internal("pfx/images")); // effect dir and images dir
+        pe.getEmitters().first().setPosition(146, 110);
+        pe.start();
     }
 
 
@@ -169,8 +169,8 @@ public class Level extends LevelEngine {
         Achievement.checkAwards(player.getStats(), this);
 
         // particles update
-        //pe.update(delta);
-        //if (pe.isComplete()) pe.reset();
+        pe.update(delta);
+        if (pe.isComplete()) pe.reset();
 
         // AI time piece
         GdxAI.getTimepiece().update(delta);
@@ -254,7 +254,7 @@ public class Level extends LevelEngine {
 
         //draw the light to the FBO
         // we have to get entities that emmits light here
-        if (ambientIntensity < .5) {
+        if (ambientIntensity < .9) {
             finalShader.begin();
             finalShader.setUniformf("ambientColor", ambientColor.x, ambientColor.y,
                     ambientColor.z, ambientIntensity);
@@ -264,7 +264,7 @@ public class Level extends LevelEngine {
             Gdx.gl.glClearColor(0f,0f,0f,1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-            float lightSize = lightOscillate ? (75.0f + 3.25f * (float)Math.sin(zAngle) + .5f * MathUtils.random()):75.0f;
+            float lightSize = lightOscillate ? (175.0f + 3.25f * (float)Math.sin(zAngle) + .677f * MathUtils.random()):175.0f;
 
             tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
             tileMapRenderer.getBatch().enableBlending();
@@ -310,18 +310,17 @@ public class Level extends LevelEngine {
 
         tileMapRenderer.getBatch().begin();
             sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
+            pe.draw(tileMapRenderer.getBatch());
         tileMapRenderer.getBatch().end();
 
         int[] fg_layers = {3,5};
         tileMapRenderer.render(fg_layers);
 
+        // render our particles test
+
         // debug mode
         if (debugMode) renderDebug(entities);
 
-        // render our particles test
-        tileMapRenderer.getBatch().begin();
-            // pe.draw(tileMapRenderer.getBatch());
-        tileMapRenderer.getBatch().end();
 
         renderHighlightCell(); // mouse selection test
     }

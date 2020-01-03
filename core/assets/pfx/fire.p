@@ -2,16 +2,16 @@ Untitled
 - Delay -
 active: false
 - Duration - 
-lowMin: 60000.0
-lowMax: 60000.0
+lowMin: 30000.0
+lowMax: 30000.0
 - Count - 
 min: 2
 max: 6
 - Emission - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 10.0
-highMax: 10.0
+highMin: 5.0
+highMax: 5.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -20,8 +20,8 @@ timeline0: 0.0
 - Life - 
 lowMin: 0.0
 lowMax: 0.0
-highMin: 500.0
-highMax: 500.0
+highMin: 400.0
+highMax: 400.0
 relative: false
 scalingCount: 1
 scaling0: 1.0
@@ -73,8 +73,8 @@ timeline2: 1.0
 active: true
 lowMin: 0.0
 lowMax: 0.0
-highMin: 65.0
-highMax: 65.0
+highMin: 25.0
+highMax: 35.0
 relative: false
 scalingCount: 2
 scaling0: 0.74509805
@@ -105,8 +105,8 @@ colors0: 1.0
 colors1: 0.85882354
 colors2: 0.14509805
 colors3: 1.0
-colors4: 0.0
-colors5: 0.0
+colors4: 0.03
+colors5: 0.01
 timelineCount: 2
 timeline0: 0.0
 timeline1: 1.0
@@ -133,4 +133,4 @@ aligned: false
 additive: true
 behind: false
 - Image Path -
-particle.png
+fire.png
