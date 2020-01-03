@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.level;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.GdxAI;
@@ -23,25 +22,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.achievement.Achievement;
-import com.binarybrains.sprout.bellsandwhistles.SpeechBubble;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.enemy.Slime;
 import com.binarybrains.sprout.entity.furniture.Chest;
-import com.binarybrains.sprout.entity.misc.Mail;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
-import com.binarybrains.sprout.entity.terrain.Grass;
-import com.binarybrains.sprout.entity.terrain.Stone;
-import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.item.ArtifactItem;
-import com.binarybrains.sprout.item.Item;
-import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
-import com.binarybrains.sprout.item.resource.Resources;
-import com.binarybrains.sprout.level.caves.Map;
-import com.binarybrains.sprout.level.tile.StairsTile;
-import com.binarybrains.sprout.level.tile.WallTile;
 import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 import com.binarybrains.sprout.misc.Camera;
@@ -141,19 +129,8 @@ public class Level extends LevelEngine {
         add(this, player);
         add(this, new Chest(this, new Vector2(16 * 2, 16 * 4)));
 
-        for (int i = 0; i < 30; i++) {
-            float x = MathUtils.random(1,67);
-            float y = MathUtils.random(1,67);
-            add(this, new Grass(this, (10 * 22)+x, (16 * 105)+y));
-
-        }
-
-        // add player mail
-        // add(this, new Mail(this, new Vector2(13*16f,1540f)));
-
         tileMapRenderer = new OrthogonalTiledMapRenderer(map);
         tileMapRenderer.setView(camera);
-
         debugRenderer = new ShapeRenderer();
 
         gameTimer = new GameTime(0, 0, 1, 0, 0);
@@ -164,73 +141,19 @@ public class Level extends LevelEngine {
         setupPathFinding(); // construct the A.star
         this.add(this, new Emma(this, new Vector2(5 * 16f, 6 * 16f), 16f, 16f));
 
-        generateCaves(); // test
-
         // Slime test
         this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
 
-        // Speech Bouble bound to player test
         // add(this, new SpeechBubble(this, "I am hungry!"));
 
         // particle effects test
         pe = new ParticleEffect();
-        pe.load(Gdx.files.internal("pfx/mysmoke1.p"),Gdx.files.internal("")); // effect dir and images dir
-        pe.getEmitters().first().setPosition(10, 40);
-        pe.start();
-
+        //pe.load(Gdx.files.internal("pfx/mysmoke1.p"),Gdx.files.internal("")); // effect dir and images dir
+        //pe.getEmitters().first().setPosition(10, 40);
+        //pe.start();
     }
 
-    public Vector2 cavePoint;
 
-    public void spawnStoneInCaves() {
-        // random exit points for player
-        for (int i = 0; i < 2; i++) {
-            int xat = MathUtils.random(64,64+31);
-            int yat = MathUtils.random(1,31);
-            if (getTile(xat, yat).mayPass) {
-                setTile(xat, yat, new StairsTile(xat, yat));
-            }
-        }
-
-        // stones
-        for (int i = 0; i < 100; i++) {
-            int xt = MathUtils.random(64,64+31);
-            int yt = MathUtils.random(1,31);
-            if (getTile(xt, yt).mayPass && getEntitiesAtTile(xt, yt).size() < 1 && (cavePoint.x != xt && cavePoint.y != yt)) {
-                add(this, new Stone(this, xt, yt));
-            }
-        }
-
-    }
-
-    public List<Map> caveLevel = new ArrayList<Map>();
-
-    public void generateCaveLevels() {
-        for(int level= 0; level <= 100; level++) {
-            Map cave = new Map();
-            cave.generateMap();
-            cave.edges();
-            caveLevel.add(cave);
-        }
-    }
-
-    // this should put cave on screen
-    public void generateCaves() {
-        Map cave = new Map();
-        cave.generateMap();
-        cave.debug();
-        cave.edges();
-        int adjustmentX = 64; // the adjustment on our tileMap
-
-        for(int x = 0; x < cave.getWidth();x++) {
-            for (int y = 0; y < cave.getHeight(); y++) {
-                if (cave.map[x][y] == 1) setTile(x+ adjustmentX, y, new WallTile(x+ adjustmentX, y));
-            }
-        }
-        this.cavePoint = cave.getPlayerStaringPos(adjustmentX);
-        spawnStoneInCaves();
-
-    }
 
     public void add(Entity entity) {
         entity.removed = false;
@@ -249,8 +172,8 @@ public class Level extends LevelEngine {
         Achievement.checkAwards(player.getStats(), this);
 
         // particles update
-        pe.update(delta);
-        if (pe.isComplete()) pe.reset();
+        //pe.update(delta);
+        //if (pe.isComplete()) pe.reset();
 
         // AI time piece
         GdxAI.getTimepiece().update(delta);
@@ -304,13 +227,6 @@ public class Level extends LevelEngine {
             }
         }
 
-        // goto caves - we need some state handling for where the player is
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-            screen.hud.teleportPlayer(player, (int)cavePoint.x, (int)cavePoint.y);
-            BackgroundMusic.stop(); // fade out music
-            AmbienceSound.setSound("cave_ambience");
-        }
-
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             SproutGame.playSound("pickup_fanfar", .45f);
             player.setDirection(Mob.Direction.SOUTH);
@@ -329,12 +245,6 @@ public class Level extends LevelEngine {
 
                     }})
             ));
-
-            // POtato spawner test
-            int count = MathUtils.random(1,3);
-            for (int i = 0; i < count; i++) {
-                // add(this, new PickupItem(this, new ResourceItem(Resources.potato), new Vector2(player.getX()+85, player.getY())));
-            }
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT)) {
@@ -413,7 +323,7 @@ public class Level extends LevelEngine {
 
         // render our particles test
         tileMapRenderer.getBatch().begin();
-            pe.draw(tileMapRenderer.getBatch());
+            // pe.draw(tileMapRenderer.getBatch());
         tileMapRenderer.getBatch().end();
 
         renderHighlightCell(); // mouse selection test
@@ -436,24 +346,32 @@ public class Level extends LevelEngine {
                 }
             }
         }
+        debugRenderer.end();
 
+        debugRenderer.setAutoShapeType(true);
+        debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
         for (Entity entity : entities) {
-            entity.renderDebug(debugRenderer, Color.BLUE);
+            // entity.renderDebug(debugRenderer, Color.BLUE);
 
-            // Debug pathfinding
-            debugRenderer.setColor(Color.ORANGE);
+            Color c = new Color(50,50, 50, .1f);
+            debugRenderer.setColor(c);
+
             if ((entity instanceof Npc) && ((Npc) entity).debugPathList != null) {
                 List<Vector2> positions = ((Npc) entity).debugPathList;
                 for(int ind = 0; ind < positions.size(); ind++) {
                     float x = positions.get(ind).x;
                     float y = positions.get(ind).y;
+
                     Rectangle pathtile = new Rectangle(x*16, y*16, 16, 16);
                     debugRenderer.rect(pathtile.getX(), pathtile.getY(), pathtile.width, pathtile.height);
                 }
             }
         }
+        debugRenderer.end();
 
         // Player interact box
+        debugRenderer.setAutoShapeType(false);
+        debugRenderer.begin(ShapeRenderer.ShapeType.Line);
         debugRenderer.setColor(Color.LIGHT_GRAY);
         debugRenderer.rect(player.getInteractBox().getX(), player.getInteractBox().getY(), player.getInteractBox().width, player.getInteractBox().height);
         debugRenderer.end();
