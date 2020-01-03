@@ -72,7 +72,7 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ToolItem(Tools.wateringcan, 0));
         getInventory().add(new ToolItem(Tools.axe, 0));
         getInventory().add(new ToolItem(Tools.pickaxe, 0));
-        getInventory().add(new ToolItem(Tools.mace, 0));
+        getInventory().add(new ToolItem(Tools.neptuneSword, 0));
 
         getInventory().add(new ArtifactItem(Artifacts.teddy));
         getInventory().add(new ToolItem(Tools.hammer, 0));
@@ -611,10 +611,8 @@ public class Player extends Npc implements InputProcessor {
     }
 
     public void draw(Batch batch, float parentAlpha) {
-
         drawShadow(batch, Gdx.app.getGraphics().getDeltaTime());
         super.draw(batch, 1f);
-        // draw carried item
         if (carriedItem != null) {
             Entity carried = (Entity)carriedItem;
             if (!(carriedItem instanceof TemporaryCarriedItem)) {
@@ -634,13 +632,9 @@ public class Player extends Npc implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
+        if (!CanMove) return false;
 
-        if (!CanMove) {
-            return false;
-        }
-
-        switch (keycode)
-        {
+        switch (keycode) {
             case Input.Keys.A:
                 keys.get(keys.put(Keys.A, true));
                 break;
@@ -732,7 +726,6 @@ public class Player extends Npc implements InputProcessor {
             mouseWorldPosY <= getInteractBox().getY() + getInteractBox().getHeight() &&
             mouseWorldPosY >= getInteractBox().getY()
         ) {
-
             if (button == Input.Buttons.LEFT) {
                 return interactWithActiveItem();
             }
@@ -743,7 +736,6 @@ public class Player extends Npc implements InputProcessor {
         return false;
     }
 
-
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         return false;
@@ -751,7 +743,7 @@ public class Player extends Npc implements InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
+        return true;
     }
 
     @Override

@@ -13,4 +13,5 @@ public class Tools {
 
     // Weapons
     public static Mace mace = new Mace();
+    public static NeptuneSword neptuneSword = new NeptuneSword();
 }
