@@ -403,12 +403,10 @@ public class Hud implements Telegraph {
     }
 
     public void gameTimeWindow() {
-
         timeLabel = new Label("Day 0 00:00", skin);
         fpsLabel = new Label("", skin);
         moneyLabel = new Label("0", skin);
         xpLabel = new Label("XP:", skin);
-
 
         Table table = new Table(skin);
         table.bottom();
@@ -490,7 +488,7 @@ public class Hud implements Telegraph {
 
         healthBar = new ProgressBar(0, 100f, 1f, false, barStyle);
         healthBar.setAnimateDuration(1.5f);
-        healthBar.setValue(100f);
+        healthBar.setValue(level.player.getHealth());
         hudTable.add(healthBar);
         hudTable.row();
 
