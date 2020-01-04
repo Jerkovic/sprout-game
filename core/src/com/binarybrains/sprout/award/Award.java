@@ -4,11 +4,9 @@ import com.binarybrains.sprout.crafting.Crafting;
 import com.binarybrains.sprout.crafting.Recipe;
 
 /**
- * Created by erikl on 04/01/18.
+ * NEEDS TO BE REWRITTEN! Created by erikl on 04/01/18.
  */
 public class Award {
-
-
 
     // this wont work :)
     public Award() {

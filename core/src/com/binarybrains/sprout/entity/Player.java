@@ -121,13 +121,23 @@ public class Player extends Npc implements InputProcessor {
         return stats.get(statKey);
     }
 
+    /**
+     *
+     * @param statKey
+     * @param increment
+     */
     public void increaseStats(String statKey, int increment) {
         stats.increase(statKey, increment);
+        MessageManager.getInstance().dispatchMessage(this, TelegramType.PLAYER_STATS_UPDATED);
     }
 
+    /**
+     * Inc money
+     * @param increment
+     */
     public void increaseFunds(int increment) {
         increaseStats("money", increment);
-        getLevel().screen.hud.updateFunds(this);
+        MessageManager.getInstance().dispatchMessage(this, TelegramType.PLAYER_STATS_MONEY_UPDATED, getStats("money"));
     }
 
     public void heal(int hp) {

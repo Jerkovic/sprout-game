@@ -48,7 +48,7 @@ public class GameScreen implements Screen {
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
 
-        AmbienceSound.setSound("forest_night_ambience");
+        AmbienceSound.setSoundAndStart("forest_night_ambience");
 
         Timer.schedule(new Timer.Task(){
             @Override
@@ -63,7 +63,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        // AmbienceSound.start();
     }
 
     @Override
@@ -100,7 +99,7 @@ public class GameScreen implements Screen {
             if (gameState == GameState.RUN) {
                 pause();
                 hud.showInventoryManagementWindow();
-                level.player.inventory.renderDebug();
+                // level.player.inventory.renderDebug();
             } else {
                 resume();
             }

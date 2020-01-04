@@ -2,6 +2,7 @@ package com.binarybrains.sprout.level.tile;
 
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.misc.AmbienceSound;
 
 
 public class TeleportTile extends Tile {
@@ -16,6 +17,7 @@ public class TeleportTile extends Tile {
         //player.getLevel().screen.hud.inventoryTop(); // a a test to make it align top
         player.getLevel().screen.hud.teleportPlayer(player, 18,91);
         // player.getLevel().screen.resumeAmbience(); // just temporary
+        AmbienceSound.setSoundAndStart("forest_morning_ambience");
 
         return false;
     }

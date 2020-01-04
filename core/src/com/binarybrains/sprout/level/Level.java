@@ -139,7 +139,7 @@ public class Level extends LevelEngine {
         this.add(this, new Emma(this, new Vector2(6 * 16f, 6 * 16f), 16f, 16f));
 
         // Slime test
-        this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
+        // this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
 
         // add(this, new SpeechBubble(this, "I am hungry!"));
 
@@ -149,8 +149,6 @@ public class Level extends LevelEngine {
         pe.getEmitters().first().setPosition(146, 110);
         pe.start();
     }
-
-
 
     public void add(Entity entity) {
         entity.removed = false;
@@ -164,9 +162,6 @@ public class Level extends LevelEngine {
 
     public void update(float delta) {
         gameTimer.update();
-
-        // also event based..check for achievement ...really here? timed event check?
-        Achievement.checkAwards(player.getStats(), this);
 
         // particles update
         pe.update(delta);
@@ -195,7 +190,6 @@ public class Level extends LevelEngine {
                 screen.hud.inventoryBottom();
             }
         }
-
         // Dispatch any delayed messages
         MessageManager.getInstance().update();
     }
@@ -212,8 +206,6 @@ public class Level extends LevelEngine {
         }
 
         // Input ctrl should not be here in draw!!
-
-
         if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             debugMode = !debugMode;
             // save game test

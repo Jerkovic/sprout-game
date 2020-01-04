@@ -1,15 +1,20 @@
 package com.binarybrains.sprout.achievement;
 
+import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.ai.msg.Telegraph;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.award.Award;
+import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.Stats;
+import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Achievement
+public class Achievement implements Telegraph
 {
     public  static final Map<String, Achievement> achievements = new HashMap<String,Achievement>();
 
@@ -42,29 +47,37 @@ public class Achievement
         this.unlockCriterias = new ArrayList<UnlockCriteria>();
         this.awards = new ArrayList<Award>();
         this.unlocked = false;
+
+        MessageManager.getInstance().addListeners(this,
+                TelegramType.PLAYER_STATS_UPDATED
+        );
     }
 
     public String getName() {
         return name;
     }
 
-    public boolean shallBeAwarded(Stats stats)
+    /**
+     *
+     * @param stats
+     * @return
+     */
+    private boolean shallBeAwarded(Stats stats)
     {
         if (unlocked) return false;
 
         for (UnlockCriteria criteria : unlockCriterias) {
             try {
-                Object value = stats.get(criteria.getStatKey());
-                criteria.setCurrentValue((Integer) value);
+                Integer value = stats.get(criteria.getStatKey());
+                criteria.setCurrentValue(value);
                 Float temp = ((float)criteria.getCurrentValue() / (float)criteria.getValueNeeded());
                 criteria.progression = Math.min(temp, 1.0f);
-                if ((Integer) value >= criteria.getValueNeeded()) {
+                if (value >= criteria.getValueNeeded()) {
                     criteria.setUnlocked();
                 }
             } catch (Exception e) {
                 // e.printStackTrace();
             }
-
         }
         for (UnlockCriteria criteria : unlockCriterias) {
             if (!criteria.isUnlocked()) {
@@ -99,17 +112,17 @@ public class Achievement
         this.unlocked = unlocked;
     }
 
-    public static void checkAwards(Stats player, Level level)
+    /**
+     *
+     * @param player
+     */
+    public static void checkAwards(Player player)
     {
         for (Achievement achievement : achievements.values()) {
-            if (achievement.shallBeAwarded(player))
-            {
-                String msg = achievement.getName();
-                SproutGame.playSound("fancy_reward");
-                level.screen.hud.addToasterMessage("New achievement" , msg);
+            if (achievement.shallBeAwarded(player.getStats())) {
+                MessageManager.getInstance().dispatchMessage(achievement, TelegramType.PLAYER_ACHIEVEMENT_UNLOCKED);
             }
         }
-
     }
 
     @Override
@@ -121,5 +134,15 @@ public class Achievement
                 ", unlocked=" + unlocked +
                 ", awards=" + awards +
                 '}';
+    }
+
+    @Override
+    public boolean handleMessage(Telegram msg) {
+
+        if (msg.message == TelegramType.PLAYER_STATS_UPDATED) {
+            Achievement.checkAwards((Player) msg.sender);
+            return true;
+        }
+        return false;
     }
 }

@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.house.Cottage;
@@ -56,10 +57,9 @@ public abstract class LevelEngine {
      * Setups and create A*star
      */
     public void setupPathFinding() {
-        // should be the size of the map
-        astar = new Astar(256, 128) {
+        astar = new Astar(width, height) {
             protected boolean isValid (int x, int y) {
-                return getTile(x, y).mayPass && getEntitiesAtTile(x, y).size() == 0;
+                return getTile(x, y).mayPass && getEntitiesAtTile(x, y).size() == 0; //BUGGY
             }
         };
     }
@@ -220,6 +220,11 @@ public abstract class LevelEngine {
         return tileRect;
     }
 
+    /**
+     *
+     * @param level
+     * @param i
+     */
     public void loadMap(Level level, int i) {
         map = new TmxMapLoader().load("levels/sdv_level" + i + ".tmx");
 
@@ -333,6 +338,4 @@ public abstract class LevelEngine {
         tilePixelWidth = properties.get("tilewidth", Integer.class);
         tilePixelHeight = properties.get("tileheight", Integer.class);
     }
-
-
 }

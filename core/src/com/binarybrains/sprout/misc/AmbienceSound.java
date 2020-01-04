@@ -16,14 +16,13 @@ public class AmbienceSound {
         if (currentAmbience != null) AmbienceSound.soundId = currentAmbience.loop(.15f);
     }
 
-    public static void setSound(String soundName) {
+    public static void setSoundAndStart(String soundName) {
         if (currentAmbience != null) {
             currentAmbience.stop(AmbienceSound.soundId);
             currentAmbience.dispose();
         }
         currentAmbience = SproutGame.assets.get("ambience/" + soundName+ ".mp3", Sound.class);
         AmbienceSound.start();
-
     }
 
     public static void setVolume(float volume) {
@@ -34,7 +33,8 @@ public class AmbienceSound {
         currentAmbience.pause(AmbienceSound.soundId);
     }
 
-    public static void resume() {
+    public static void resume()
+    {
         currentAmbience.resume(AmbienceSound.soundId);
     }
 

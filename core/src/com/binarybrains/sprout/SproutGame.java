@@ -20,6 +20,9 @@ import com.binarybrains.sprout.screen.GameScreen;
 public class SproutGame extends Game {
 
 	public static String name = "Bearshade Creek";
+	public static int WORLD_WIDTH = 256;
+	public static int WORLD_HEIGHT = 128;
+
 	private static TweenManager tweenManager;
 	public static AssetManager assets = new AssetManager();
 	private BitmapFont font;
@@ -34,8 +37,6 @@ public class SproutGame extends Game {
 		Tween.registerAccessor(Camera.class, new CameraAccessor());
 
 		loadAssets();
-
-		//LevelRank.progressionChartDebug();
 		setScreen(new GameScreen(this));
 	}
 

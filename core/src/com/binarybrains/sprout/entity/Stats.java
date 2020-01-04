@@ -1,10 +1,13 @@
 package com.binarybrains.sprout.entity;
 
+import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.ai.msg.Telegraph;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Stats implements Serializable {
+public class Stats implements Serializable, Telegraph {
 
     private Map<String, Integer> dataMap = new HashMap<String, Integer>();
     private static final String PATH = "saved_game.txt";
@@ -48,5 +51,10 @@ public class Stats implements Serializable {
     private Map<String, Integer> readFile()  throws ClassNotFoundException, IOException {
         ObjectInputStream is = new ObjectInputStream(new FileInputStream(PATH));
         return (Map<String, Integer>) is.readObject();
+    }
+
+    @Override
+    public boolean handleMessage(Telegram msg) {
+        return false;
     }
 }

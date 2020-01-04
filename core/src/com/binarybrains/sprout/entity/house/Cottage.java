@@ -72,8 +72,8 @@ public class Cottage extends Entity { // extend House that extends StaticEntity
         if (player.getInteractBox().overlaps(door) && player.getDirection().equals(Mob.Direction.NORTH)) {
             SproutGame.playSound("door_open");
             getLevel().screen.hud.teleportPlayer(player, 4, 2);
+
             BackgroundMusic.stop(); // fade out music
-            // getLevel().screen.pauseAmbience();
             AmbienceSound.pause();
             return true;
         }

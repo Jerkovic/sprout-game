@@ -23,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.achievement.Achievement;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.events.*;
 import com.binarybrains.sprout.experience.LevelRank;
@@ -105,6 +106,7 @@ public class Hud implements Telegraph {
                 TelegramType.PLAYER_STATS_RANK_INCREASED,
                 TelegramType.PLAYER_PASSED_OUT,
 
+                TelegramType.PLAYER_ACHIEVEMENT_UNLOCKED,
                 TelegramType.PLAYER_CRAFTING_SUCCESS,
                 TelegramType.PLAYER_CRAFTING_FAILURE,
 
@@ -124,11 +126,20 @@ public class Hud implements Telegraph {
             case TelegramType.PLAYER_STATS_XP_INCREASED:
                 updateXP((Player) msg.sender);
                 break;
+            case TelegramType.PLAYER_ACHIEVEMENT_UNLOCKED:
+                Achievement achievement = ((Achievement) msg.extraInfo);
+                SproutGame.playSound("fancy_reward");
+                addToasterMessage("New Achievement" , achievement.getName());
+                // Add awards ...etc to ui?
+                break;
             case TelegramType.PLAYER_PASSED_OUT:
                 playerPassedOut((Player) msg.sender);
                 break;
             case TelegramType.PLAYER_INVENTORY_UPDATED:
                 refreshInventory();
+                break;
+            case TelegramType.PLAYER_STATS_MONEY_UPDATED:
+                updateFunds((int) msg.extraInfo);
                 break;
             case TelegramType.TIME_MINUTE_INC:
                 timeLabel.setText(msg.extraInfo.toString());
@@ -186,22 +197,23 @@ public class Hud implements Telegraph {
         BackgroundMusic.stop();
         AmbienceSound.pause();
 
-        SproutGame.playSound("heartbeat", 0.9f);
+        SproutGame.playSound("heartbeat", 1f);
 
         fadeActor.addAction(Actions.sequence(
                 Actions.alpha(0),
-                Actions.fadeIn(.5f, Interpolation.fade),
-                Actions.delay(3f),
+                Actions.fadeIn(1f, Interpolation.fade),
+                Actions.delay(3.5f),
                 Actions.run(new Runnable() { public void run(){
                     player.setTilePos(9,2); // bed hardcoded
                     player.getLevel().getCamera().setPosition(new Vector3(player.getX(), player.getY(), 0));
                     //SproutGame.playSound("door_close1"); //
+
                 }}),
-                Actions.fadeOut(.9f, Interpolation.fade),
+                Actions.fadeOut(1f, Interpolation.fade),
                 Actions.run(new Runnable() { public void run(){
                     player.setHealth(90);
-                    player.getLevel().screen.hud.updateXP(player);
-                    player.getLevel().screen.hud.addToasterMessage("Oh no!", "You passed out and woke up in your bed...What happend?");
+                    updateXP(player);
+                    addToasterMessage("Oh no!", "You passed out and woke up in your bed...What happend?");
                     player.unFreezePlayerControl();
                 }})
         ));
@@ -517,9 +529,9 @@ public class Hud implements Telegraph {
         }
     }
 
-    public void updateFunds(Player player) {
+    public void updateFunds(int money) {
         NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
-        moneyLabel.setText("" + numberFormat.format(player.getStats().get("money")));
+        moneyLabel.setText("" + numberFormat.format(money));
     }
 
     private void updateXP(Player player) {
