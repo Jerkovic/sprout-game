@@ -172,7 +172,6 @@ public class Hud implements Telegraph {
         ));
     }
 
-
     public void fadeOutRunFadeInScreen(Runnable runnable) {
         fadeActor.clearActions();
         fadeActor.addAction(Actions.sequence(
@@ -293,31 +292,33 @@ public class Hud implements Telegraph {
 
     // a test right now
     public void buildNotificationsWindow(Item item) {
-        final Window window = new Window("YOU PICKED UP", skin);
+        final Window window = new Window("Picked up", skin);
+        window.getTitleLabel().setColor(0,0,0,.65f);
         window.setRound(false);
         window.setKeepWithinStage(false);
         window.setPosition(20, -90);
         window.setMovable(false);
-        window.row().fill().expandX();
+        window.row();
 
         Image icon = new Image(atlas.findRegion(item.getRegionId()));
 
         Label notLabel = new Label(item.getNotificationText(), skin);
+        notLabel.setColor(0,0,0, .65f);
         notLabel.setWrap(false);
-        notLabel.setWidth(150);
+        notLabel.setWidth(260);
         notLabel.setEllipsis(true);
         notLabel.pack();
 
-        window.add(icon);
-        window.add(notLabel).pad(6f);
+        window.add(icon).width(48);
+        window.add(notLabel).pad(8f).expandX().fillX();
         window.row();
         window.pack();
 
         stage.addActor(window);
 
         // this should be grouped in some clever way.. no need to spawn 6 wood pickups
-        int hudPosition = (notificationsInHud++ * 75) + 75;
-        Tween.to(window, ActorAccessor.POSITION_XY, 2.1f).target(20, hudPosition).ease(TweenEquations.easeOutElastic).delay(0.4f)
+        int hudPosition = (notificationsInHud++ * 75) + 90;
+        Tween.to(window, ActorAccessor.POSITION_XY, 2.1f).target(20, hudPosition).ease(TweenEquations.easeOutElastic).delay(0.25f)
         .setCallback(new TweenCallback() {
 
             @Override
