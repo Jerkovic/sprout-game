@@ -60,6 +60,8 @@ public class BackgroundMusic {
         if (currentTrack != null) currentTrack.dispose();
     }
 
+    // setOnCompletionListener <- should look into this.
+
     public static void update(float delta) {
         if (mIsPlaying && isStopped) {
             mVolume -= delta * FACTOR;

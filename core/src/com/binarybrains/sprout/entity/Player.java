@@ -28,6 +28,8 @@ import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.Tools;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.mail.Mailbox;
+import com.binarybrains.sprout.misc.AmbienceSound;
+import com.binarybrains.sprout.misc.BackgroundMusic;
 
 import java.util.HashMap;
 import java.util.List;
@@ -518,7 +520,7 @@ public class Player extends Npc implements InputProcessor {
         surfaceSoundEffect();
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            // getLevel().
+            BackgroundMusic.stop();
             getLevel().screen.hud.fadeOutRun(new Runnable() { public void run(){
                 Gdx.app.exit();
             }});

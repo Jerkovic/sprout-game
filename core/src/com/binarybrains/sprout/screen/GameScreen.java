@@ -58,7 +58,7 @@ public class GameScreen implements Screen {
                     BackgroundMusic.setVolume(0.12f);
                 }
             }
-        }, 240.0f, 10);
+        }, 20.0f, 60);
     }
 
     @Override
