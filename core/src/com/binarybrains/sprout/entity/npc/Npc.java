@@ -54,31 +54,6 @@ public class Npc extends Mob {
         }
         return false;
     }
-
-    public long getPosHash() {
-        int tile_x=0, tile_y=0;
-
-        if (getDirection() == Direction.EAST) {
-            tile_x = (int)(box.getX()) >> 4;
-            tile_y = getTileY();
-        }
-        else if(getDirection() == Direction.WEST) {
-            tile_x = (int)(box.getX() + box.getWidth()) >> 4;
-            tile_y = getTileY();
-        }
-        else if(getDirection() == Direction.SOUTH) {
-            tile_x = getTileX();
-            tile_y = (int)(box.getY() + box.getHeight()) >> 4;
-        }
-        else if(getDirection() == Direction.NORTH) {
-            tile_x = getTileX();
-            tile_y = (int)(box.getY()) >> 4;
-        }
-
-        System.out.println("tile:" + tile_x + "x" + tile_y);
-        return (long)(tile_x + (tile_y * 256)); // grid[x + y * width]wd
-    }
-
     /**
      * Generates the path finding array
      * @param targetX
@@ -223,6 +198,8 @@ public class Npc extends Mob {
                 animationMatrix[a][d] = new Animation(animSpeed, currentAnimFrames);
             }
         }
+
+        System.out.println("done");
     }
 
     @Override
