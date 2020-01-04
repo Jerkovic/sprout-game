@@ -163,6 +163,16 @@ public class Hud implements Telegraph {
             mouseItem = null;
     }
 
+    public void fadeOutRun(Runnable runnable) {
+        fadeActor.clearActions();
+        fadeActor.addAction(Actions.sequence(
+                Actions.alpha(0),
+                Actions.fadeIn(.6f, Interpolation.fade),
+                Actions.run(runnable)
+        ));
+    }
+
+
     public void fadeOutRunFadeInScreen(Runnable runnable) {
         fadeActor.clearActions();
         fadeActor.addAction(Actions.sequence(

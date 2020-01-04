@@ -518,8 +518,11 @@ public class Player extends Npc implements InputProcessor {
         surfaceSoundEffect();
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
-            // todo show some sort of tabbed menu window
+            // getLevel().
+            getLevel().screen.hud.fadeOutRun(new Runnable() { public void run(){
+                Gdx.app.exit();
+            }});
+
         }
     }
 
