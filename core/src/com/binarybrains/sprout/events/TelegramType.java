@@ -17,9 +17,15 @@ public class TelegramType {
     public static final int PLAYER_INVENTORY_UPDATED = 102;
     public static final int PLAYER_INVENTORY_CHANGED_SELECTED_SLOT = 110;
 
+    // Weather
+    public static final int WEATHER_RAIN_FLASH = 401;
+    public static final int WEATHER_THUNDER = 402;
+
+
     // Some others
     public static final int TIME_MINUTE_INC = 1001;
     public static final int TIME_HOUR_INC = 1002;
     public static final int TIME_DAY_INC = 1003;
+    public static final int TIME_MONTH_INC = 1004;
 
 }

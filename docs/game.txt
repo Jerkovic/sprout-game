@@ -39,7 +39,7 @@ new  Smoke particles (chimney) we have some ugly clouds for testing as of octobe
 * Blob Tileset
    Cool stuff - http://www.cr31.co.uk/stagecast/wang/blob.html
 
-* Cave level generation 3-4 rooms and connecting hallways
+* Cave/Vault level generation 3-4 rooms and connecting hallways
   - https://gamedevelopment.tutsplus.com/tutorials/generate-random-cave-levels-using-cellular-automata--gamedev-9664
   - TODO! Cave exit and cave next level point
   - pick a room on the top room to be the entrance
@@ -64,7 +64,7 @@ new  Smoke particles (chimney) we have some ugly clouds for testing as of octobe
 
 * PickupItems collide with sprites and tiles? in water should *drown* and disappear
 
-* Shadow system. More generic or what should we do?
+* Shadow system. More generic or what should we do? See pixel art tutorials Pixel Pete for example.
 
 * AmbientLocationSounds Handler - Play sound louder if close to the source
 
@@ -81,7 +81,7 @@ new  Smoke particles (chimney) we have some ugly clouds for testing as of octobe
 
 * if a bomb explodes trees we need to see where the force came from to make the proper falling dir of the tree.
 
-* Weather conditions
+* Weather conditions - flash thunder, rain
 
 * Day night cycle handler
 
@@ -111,7 +111,10 @@ A game about crafting, breeding, farming, hunting, exploring, foraging and survi
 Plot. You have taken over the house where you were raised. Trough the game
 you will encounter and face your childhood memories, good and bad.
 
+
 Ideas on what is going on in the game:
+- The cold war
+- Nuclear bombs
 - Secret tree house
 - Fix the flag for the flagpole. For this you need to craft textile. (http://piq.codeus.net/static/media/userpics/piq_81080_400x400.png)
 - Fix the bridge (500 wood)
@@ -123,6 +126,7 @@ Ideas on what is going on in the game:
 - Phone booth call the number found in/on X and get a secret clue or something
 - Remove the carpet to find the secret trap door leading into something
 - the legend of the lamprey (a big nejonöga living in theese waters)
+- the vault.
 
 Cave gen
 --------
@@ -164,9 +168,11 @@ ocean
 the manor
 the village
 the farm/your house
+the nuclear vault.
 
 Inspiration by
 -----------------
+Lost
 Mine(i)craft
 Stardew Valley
 Harvest Moon
@@ -177,6 +183,8 @@ Zelda
 Forager game
 Stranger things
 Sherlock Homes
+Indiana Jones
+Uncharted
 
 -------------------------= Tech stuff --------------------------------
 
@@ -204,6 +212,8 @@ Furniture (some can be carried by the player?)
 - Workbench
 -Others
 - Chest (like a inventory to store stuff 24 items?)
+
+- Radio with old music. "Good morning, goodmorning to you"
 
 Inventory (backpack or trunk)
 -Basic 12 slots
@@ -248,8 +258,6 @@ Mill (grind vete to powder)
 Dog house
 Hen house
 
-
-
 items:
 ------------------------
 Tools
@@ -274,10 +282,10 @@ Weapons(tools)
 ---------------------------------------------
 Dialogue
 
-Dictionary<String,String>
+// Tree ---Dictionary<String,String>
 
 "H-how long have you been standing there?"
-"I miss moments like this more than anything."
+"I miss moments like theese more than anything."
 "Just give me my cut of the money and I'll be out of here."
 "He was unconscious when I found him"
 "What do you mean, he's escaped?"
@@ -291,6 +299,7 @@ Dictionary<String,String>
 "Do you ever wonder what else is out there?"
 "We have to make sure and give %name% a bottle of vodka."
 "I'll find her and bring her home, I promise."
+"I used to be an adventurer like you but then I took a XXX in the knee"
 
 -----------------------------------------------------
 XP Levels
@@ -311,25 +320,10 @@ Fruits will become more nutritious (+more energy) - "Fruit picker"
 "Goldsmith"
 "Alchemist"
 
-xp input
-
-returns a  LevelRankProgression
-
-startThreshold
-endThreshold
-
-
-
-levelGap = endThreshold - startThreshold
-xpToNextLevel = (levelGap - (xp - startThreshold))
-percent = (xpToNextLevel / levelGap) * 100
-
-
-
 
 -----------------------------------------------------
 Lvl: 0 Points: 0
-Lvl: 1 Points: 1,000
+Lvl: 1 Points: 1,000 Unlocks: ???
 Lvl: 2 Points: 3,000
 Lvl: 3 Points: 6,000
 Lvl: 4 Points: 10,000

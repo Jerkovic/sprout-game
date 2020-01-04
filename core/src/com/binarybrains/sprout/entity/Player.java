@@ -9,6 +9,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -103,8 +104,6 @@ public class Player extends Npc implements InputProcessor {
         setActiveItem(getInventory().getItems().get(3));
 
         // Setup Player as a Listener
-
-
         // move this to a shadow system ?
         shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
     }
@@ -143,13 +142,12 @@ public class Player extends Npc implements InputProcessor {
     }
 
     public void heal(int hp) {
-        super.setHealth(getHealth() + hp);
-        if (getHealth() + hp > 100) setHealth(100);
-        // SEND SOME EVENT
+        super.setHealth(Math.max(getHealth() + hp, 100));
+        // SEND SOME healing EVENT
     }
 
     public void setHealth(int hp) {
-        super.setHealth(hp);
+        super.setHealth(Math.max(hp, 0));
         // SEND EVENT
     }
 
@@ -621,7 +619,7 @@ public class Player extends Npc implements InputProcessor {
 
     public void drawShadow(Batch batch, float delta) {
         shadow.setX(getX());
-        shadow.setY(getY()-5); // if we want the player to jump ... we should decrease the y value.
+        shadow.setY(getY() - 2); // if we want the player to jump ... we should decrease the y value.
         shadow.draw(batch, 0.55f);
     }
 

@@ -125,6 +125,7 @@ public class Hud implements Telegraph {
                 break;
             case TelegramType.PLAYER_STATS_XP_INCREASED:
                 updateXP((Player) msg.sender);
+                flash();
                 break;
             case TelegramType.PLAYER_ACHIEVEMENT_UNLOCKED:
                 Achievement achievement = ((Achievement) msg.extraInfo);
@@ -161,6 +162,16 @@ public class Hud implements Telegraph {
         if (mouseItem != null)
             mouseItem.remove();
             mouseItem = null;
+    }
+
+    public void flash() {
+        fadeActor.clearActions();
+        fadeActor.addAction(Actions.sequence(
+                Actions.alpha(0),
+                Actions.fadeIn(.01f, Interpolation.fade),
+                Actions.fadeOut(.8f, Interpolation.fade)
+
+        ));
     }
 
     public void fadeOutRun(Runnable runnable) {
@@ -534,6 +545,7 @@ public class Hud implements Telegraph {
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
             fadeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             fadeRenderer.setColor(new Color(0f, 0f, 0.031f, alpha));
+            // Flash effect - fadeRenderer.setColor(new Color(255f, 255f, 255f, alpha));
             fadeRenderer.rect(0, 0, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
             fadeRenderer.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
