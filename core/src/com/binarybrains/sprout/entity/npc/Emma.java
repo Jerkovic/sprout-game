@@ -76,7 +76,13 @@ public class Emma extends Npc {
             PointDirection pd = findPath.get(i);
             System.out.println(pd.x +  "x"  + pd.y +  " - " + pd.direction);
             Rectangle temp = getLevel().getTileBounds(pd.x, pd.y);
-            seq.addAction(Actions.moveTo(temp.x, temp.y, .1f, Interpolation.linear));
+            seq.addAction(Actions.moveTo(temp.x, temp.y, 1f, Interpolation.linear));
+            seq.addAction(Actions.run((new Runnable() {
+                        public void run () {
+                            setDirection(pd.direction);
+                        }
+                    })
+            ));
         }
 
         seq.addAction(Actions.run((new Runnable() {
@@ -86,6 +92,8 @@ public class Emma extends Npc {
             })
         ));
 
+        setState(State.WALKING);
+
         this.addAction(seq);
     }
 
@@ -93,6 +101,7 @@ public class Emma extends Npc {
     public void leaveHouse() {
         setTilePos(18,91); // outside the house test
         SproutGame.playSound("door_close1", 0.4f);
+        stateMachine.changeState(EmmaState.IDLE);
     }
 
     /**
@@ -106,18 +115,6 @@ public class Emma extends Npc {
     public void update(float delta) {
         super.update(delta);
         stateMachine.update();
-    }
-
-    @Override
-    public void renderDebug(ShapeRenderer renderer, Color walkBoxColor) {
-        super.renderDebug(renderer, walkBoxColor);
-
-        renderer.setColor(Color.YELLOW); // AI box
-        renderer.rect(getAiBox().getX(),
-                getAiBox().getY(),
-                getAiBox().getWidth(),
-                getAiBox().getHeight());
-
     }
 
     @Override

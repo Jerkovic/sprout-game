@@ -70,6 +70,7 @@ public enum EmmaState implements State<Emma> {
         public void enter(Emma emma) {
             emma.setState(Emma.State.STANDING);
             emma.leaveHouse();
+
         }
 
         @Override
@@ -81,6 +82,7 @@ public enum EmmaState implements State<Emma> {
     IDLE() {
         @Override
         public void update(Emma emma) {
+
             if (emma.distanceTo(emma.getLevel().player) < (16 * 4)) {
                 emma.lookAt(emma.getLevel().player);
             }
@@ -88,6 +90,7 @@ public enum EmmaState implements State<Emma> {
 
         @Override
         public void enter(Emma emma) {
+            System.out.println("Enter idle state");
             emma.setState(Emma.State.STANDING);
         }
 
