@@ -125,11 +125,10 @@ public class Hud implements Telegraph {
                 break;
             case TelegramType.PLAYER_STATS_XP_INCREASED:
                 updateXP((Player) msg.sender);
-                flash();
                 break;
             case TelegramType.PLAYER_ACHIEVEMENT_UNLOCKED:
                 Achievement achievement = ((Achievement) msg.extraInfo);
-                SproutGame.playSound("fancy_reward");
+                SproutGame.playSound("fancy_reward", .6f);
                 addToasterMessage("New Achievement" , achievement.getName());
                 // Add awards ...etc to ui?
                 break;

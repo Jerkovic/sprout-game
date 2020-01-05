@@ -48,7 +48,7 @@ public class GameScreen implements Screen {
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
 
-        AmbienceSound.setSoundAndStart("forest_night_ambience");
+        // AmbienceSound.setSoundAndStart("forest_night_ambience");
 
         Timer.schedule(new Timer.Task(){
             @Override
@@ -64,6 +64,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         hud.fadeIn();
+        SproutGame.playSound("god_morning", .5f);
     }
 
     @Override
@@ -75,7 +76,7 @@ public class GameScreen implements Screen {
                 BackgroundMusic.update(delta);
                 level.update(Math.min(delta, 1 / 60f));
                 break;
-            case PAUSE:
+            case PAUSE: // ESC
                 // System.out.println("paused");
                 // todo indicate in hud that the game is paused
                 break;
