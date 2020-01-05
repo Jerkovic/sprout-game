@@ -59,7 +59,7 @@ public abstract class LevelEngine {
     public void setupPathFinding() {
         astar = new Astar(width, height) {
             protected boolean isValid (int x, int y) {
-                return getTile(x, y).mayPass && getEntitiesAtTile(x, y).size() == 0; //BUGGY
+                return getTile(x, y).mayPass; // && getEntitiesAtTile(x, y).size() == 0; //BUGGY
             }
         };
     }

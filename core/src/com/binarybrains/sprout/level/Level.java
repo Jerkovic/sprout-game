@@ -59,7 +59,7 @@ public class Level extends LevelEngine {
     private FrameBuffer fbo;
 
     public float ambientIntensity = 1f;
-    public static final Vector3 ambientColor = new Vector3(.3f, .3f, 0f); // .6 .6 .8
+    public static final Vector3 ambientColor = new Vector3(.6f, .6f, .8f); // .6 .6 .8
 
     //used to make the light flicker
     public float zAngle;
@@ -136,7 +136,7 @@ public class Level extends LevelEngine {
 
         // test some path finding stuff.. move this!!
         setupPathFinding(); // construct the A.star
-        this.add(this, new Emma(this, new Vector2(6 * 16f, 6 * 16f), 16f, 16f));
+        this.add(this, new Emma(this, new Vector2(6 * 16f, 6 * 16f), 16f, 32f));
 
         // Slime test
         // this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
@@ -301,7 +301,7 @@ public class Level extends LevelEngine {
         light.bind(0);
 
         tileMapRenderer.getBatch().begin();
-            sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
+            // sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
             pe.draw(tileMapRenderer.getBatch());
         tileMapRenderer.getBatch().end();
 
@@ -313,12 +313,13 @@ public class Level extends LevelEngine {
         // debug mode
         if (debugMode) renderDebug(entities);
 
-
         renderHighlightCell(); // mouse selection test
     }
 
     private void renderDebug (List<Entity> entities) {
         debugRenderer.setProjectionMatrix(camera.combined);
+
+        /*
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);
 
         TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground");
@@ -336,12 +337,14 @@ public class Level extends LevelEngine {
         }
         debugRenderer.end();
 
+         */
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+
         debugRenderer.setAutoShapeType(true);
         debugRenderer.begin(ShapeRenderer.ShapeType.Filled);
         for (Entity entity : entities) {
-            Color c = new Color(50,50, 50, .6f);
+            Color c = new Color(0,0, 0, .6f);
             debugRenderer.setColor(c);
 
             if ((entity instanceof Npc) && ((Npc) entity).debugPathList != null) {
@@ -354,14 +357,20 @@ public class Level extends LevelEngine {
                     debugRenderer.rect(pathtile.getX(), pathtile.getY(), pathtile.width, pathtile.height);
                 }
             }
-            entity.renderDebug(debugRenderer, new Color(250,10, 10, .3f));
         }
+
         debugRenderer.end();
+
         Gdx.gl.glDisable(GL20.GL_BLEND);
 
-        // Player interact box
         debugRenderer.setAutoShapeType(false);
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);
+
+        for (Entity entity : entities) {
+            entity.renderDebug(debugRenderer, new Color(250,100, 10, 1f));
+        }
+
+        // Player interact box
         debugRenderer.setColor(Color.LIGHT_GRAY);
         debugRenderer.rect(player.getInteractBox().getX(), player.getInteractBox().getY(), player.getInteractBox().width, player.getInteractBox().height);
         debugRenderer.end();

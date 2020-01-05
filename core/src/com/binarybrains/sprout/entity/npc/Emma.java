@@ -21,9 +21,6 @@ import com.binarybrains.sprout.level.Level;
 
 import java.util.Map;
 
-import static com.binarybrains.sprout.entity.Mob.Direction.*;
-import static com.binarybrains.sprout.entity.Mob.Direction.SOUTH;
-
 public class Emma extends Npc {
 
     public StateMachine<Emma, EmmaState> stateMachine;
@@ -35,7 +32,7 @@ public class Emma extends Npc {
         setHealth(100);
         setState(State.STANDING);
         setDirection(Direction.EAST);
-        setSpeed(40f);
+        setSpeed(24);
 
         stateMachine = new DefaultStateMachine<>(this, EmmaState.IDLE);
         stateMachine.changeState(EmmaState.WALK_LABYRINTH);
@@ -63,7 +60,6 @@ public class Emma extends Npc {
         }, secondsDelay);
     }
 
-
     public void updateWalkDirections(int x, int y) {
         clearFindPath();
         IntArray rawPath = generatePath(x, y);
@@ -83,34 +79,41 @@ public class Emma extends Npc {
         findPath = null;
     }
 
+    public int getWBTileY() {
+        return (int)(getPosition().y + 8f) >> 4;
+    }
+
+    public int getWBTileX() {
+        return (int)(getPosition().x + 8f) >> 4;
+    }
     @Override
     public void update(float delta) {
-        if (getLevel().getTileBounds(getTileX(), getTileY()).contains(getAiBox()))
-        {
-            long hash = getTileX() + (getTileY() * 256); // grid[x + y * width]
+        super.update(delta);
+        stateMachine.update();
+        if (getLevel().getTileBounds(getWBTileX(), getWBTileY()).contains(getAiBox())) {
+            long hash = getWBTileX() + (getWBTileY() * 256); // grid[x + y * width]
             if (findPath != null && findPath.containsKey(hash)) {
                 setDirection(findPath.get(hash));
                 setState(State.WALKING);
             }
+            else {
+                setState(State.STANDING);
+            }
         }
-        super.update(delta);
-        stateMachine.update();
-    }
 
-    @Override
-    public void updateBoundingBox() {
-        this.box.setWidth(getWidth());
-        this.box.setHeight(getHeight());
-        this.box.setPosition(getPosition());
 
-        this.walkBox.setWidth(12);
-        this.walkBox.setHeight(6);
-        this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
     }
 
     @Override
     public void renderDebug(ShapeRenderer renderer, Color walkBoxColor) {
         super.renderDebug(renderer, walkBoxColor);
+
+        renderer.setColor(Color.YELLOW); // AI box
+        renderer.rect(getAiBox().getX(),
+                getAiBox().getY(),
+                getAiBox().getWidth(),
+                getAiBox().getHeight());
+
     }
 
     @Override

@@ -34,7 +34,6 @@ public class Npc extends Mob {
         EMPTY_NORMAL, CARRYING, THROWING, CHOPPING, ATTACKING
     }
 
-    // this needs to be dynamic X,Y ??
     public Animation animationMatrix[][] = new Animation[2][4]; // action, direction
     TextureRegion currentFrame;
 
@@ -44,6 +43,17 @@ public class Npc extends Mob {
         this.debugPathList = new ArrayList<Vector2>();
         setSpriteRow(spriteRow);
         setupAnimations();
+    }
+
+    @Override
+    public void updateBoundingBox() {
+        this.box.setWidth(16);
+        this.box.setHeight(32);
+        this.box.setPosition(getPosition());
+        // this.walkBox
+        this.walkBox.setWidth(16);
+        this.walkBox.setHeight(16);
+        this.walkBox.setPosition(getPosition().x, getPosition().y);
     }
 
     public boolean hasArrivedToTile(int tile_x,  int tile_y) {
@@ -115,7 +125,6 @@ public class Npc extends Mob {
             }
             travelDirections.put((long)(px + (py * 256)), dir); // grid[x + y * width]
 
-            System.out.println(px + "x" + py + " turn " + dir);
             if (i == n - 4) {
                 break;
             }
@@ -154,16 +163,17 @@ public class Npc extends Mob {
         this.spriteRow = spriteRow;
     }
 
-
     public String getFeetSurface() {
         return "surfaceTile: " + getLevel().getTile(getTileX(), getTileY());
     }
 
-
+    /**
+     *
+     * @param batch
+     * @param parentAlpha
+     */
     public void draw(Batch batch, float parentAlpha) {
-
         Direction animDirection = Direction.getAnimationDirection(getDirection());
-
         if (getState() == State.STANDING) { // IDLE - NOT Walking
             currentFrame = (TextureRegion)animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrames()[0];
         }
@@ -182,9 +192,11 @@ public class Npc extends Mob {
         this.actionState = state;
     }
 
+    /**
+     * Setup animations
+     */
     public void setupAnimations() {
-
-        TextureRegion[][] frames = TextureRegion.split(getLevel().charsheet, 16, 16);
+        TextureRegion[][] frames = TextureRegion.split(getLevel().charsheet, getWidth(), getHeight());
 
         for (int a = ActionState.EMPTY_NORMAL.ordinal(); a <= ActionState.CARRYING.ordinal(); a++) {
             int col = 0; // column counter
@@ -207,7 +219,6 @@ public class Npc extends Mob {
     {
         return super.toString() + " ActionState: " + getActionState();
     }
-
 
     public void dispose() {
         // todo disposal

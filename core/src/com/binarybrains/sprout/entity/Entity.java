@@ -137,21 +137,18 @@ public abstract class Entity implements Telegraph {
     public void renderDebug(ShapeRenderer renderer, Color walkBoxColor) {
         Color restoreColor = renderer.getColor();
 
-        renderer.setColor(new Color(255, 30, 30, .65f)); // bounding box
+        renderer.setColor(new Color(0, 0, 0, 1f)); // bounding box
         renderer.rect(getBoundingBox().getX(),
                 getBoundingBox().getY(),
                 getBoundingBox().getWidth(),
                 getBoundingBox().getHeight());
 
-        renderer.setColor(walkBoxColor); // our walkbox
+        renderer.setColor(Color.YELLOW); // walk box
         renderer.rect(getWalkBox().getX(),
                 getWalkBox().getY(),
                 getWalkBox().getWidth(),
                 getWalkBox().getHeight());
 
-        renderer.setColor(Color.BLACK); // center cross hair
-        renderer.line(getCenterPos().x - 1, getCenterPos().y, getCenterPos().x + 1, getCenterPos().y);
-        renderer.line(getCenterPos().x, getCenterPos().y - 1, getCenterPos().x, getCenterPos().y + 1);
         renderer.setColor(restoreColor);
     }
 
@@ -184,16 +181,17 @@ public abstract class Entity implements Telegraph {
         this.box.setWidth(width);
         this.box.setHeight(height);
         this.box.setPosition(position.x, position.y);
+
         this.walkBox.setWidth(width);
         this.walkBox.setHeight(height);
-        this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), position.y);
+        this.walkBox.setPosition(position.x, position.y);
     }
 
     public Rectangle getAiBox() {
-        aiBox.height = getBoundingBox().getHeight() - 2;
-        aiBox.width = getBoundingBox().getWidth() - 2;
-        aiBox.setX(getBoundingBox().getX() + 1);
-        aiBox.setY(getBoundingBox().getY() + 1);
+        aiBox.height = 14;
+        aiBox.width = 14;
+        aiBox.setX(getWalkBox().getX() + 1);
+        aiBox.setY(getWalkBox().getY() + 1);
         return aiBox;
     }
 
@@ -251,19 +249,12 @@ public abstract class Entity implements Telegraph {
     }
 
     public int getTileX() {
-        return (int)getCenterPos().x >> 4;
+        return (int)getPosition().x >> 4;
     }
 
-    public int getWBTileY() {
-        return (int)getWalkBox().y >> 4;
-    }
-
-    public int getWBTileX() {
-        return (int)getWalkBox().x >> 4;
-    }
 
     public int getTileY() {
-        return (int)getCenterPos().y >> 4;
+        return (int)getPosition().y >> 4;
     }
 
     public void setTileX(float x) {
@@ -275,7 +266,7 @@ public abstract class Entity implements Telegraph {
     }
 
     public void setCenterPos(float x, float y) {
-        setPosition(x- (getWidth() /2 ), y -(getHeight() /2));
+        setPosition(x- (getWidth() / 2f), y -(getHeight() / 2f));
     }
 
     public void setTilePos(int x, int y) {
@@ -426,7 +417,4 @@ public abstract class Entity implements Telegraph {
     public void dispose() {
 
     }
-
-
-
 }

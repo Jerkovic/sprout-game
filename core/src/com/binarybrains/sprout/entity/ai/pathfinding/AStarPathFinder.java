@@ -194,6 +194,7 @@ public class AStarPathFinder implements PathFinder
 		
 		// thats it, we have our path 
 
+
 		return path;
 	}
 
