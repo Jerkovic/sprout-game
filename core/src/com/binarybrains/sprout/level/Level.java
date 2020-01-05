@@ -301,14 +301,12 @@ public class Level extends LevelEngine {
         light.bind(0);
 
         tileMapRenderer.getBatch().begin();
-            // sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
+            sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
             pe.draw(tileMapRenderer.getBatch());
         tileMapRenderer.getBatch().end();
 
         int[] fg_layers = {3,5};
         tileMapRenderer.render(fg_layers);
-
-        // render our particles test
 
         // debug mode
         if (debugMode) renderDebug(entities);

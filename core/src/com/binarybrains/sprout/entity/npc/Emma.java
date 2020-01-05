@@ -7,24 +7,28 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
 import com.badlogic.gdx.utils.Timer;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.actions.Action;
+import com.binarybrains.sprout.entity.actions.Actions;
+import com.binarybrains.sprout.entity.actions.SequenceAction;
 import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.Item;
-import com.binarybrains.sprout.item.ToolItem;
-import com.binarybrains.sprout.item.tool.Mace;
 import com.binarybrains.sprout.level.Level;
 
+import java.util.List;
 import java.util.Map;
 
 public class Emma extends Npc {
 
     public StateMachine<Emma, EmmaState> stateMachine;
-    public Map<Long, Direction> findPath;
+    public List<PointDirection> findPath;
 
     public Emma(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height, 3); // 3 is the spriteRow used
@@ -60,10 +64,29 @@ public class Emma extends Npc {
         }, secondsDelay);
     }
 
-    public void updateWalkDirections(int x, int y) {
+    public void updateWalkDirections(int x, int y, EmmaState state) {
+        this.clearActions();
         clearFindPath();
         IntArray rawPath = generatePath(x, y);
-        findPath = generatePathFindingDirections(rawPath);
+        findPath = generatePathFindingDirections2(rawPath);
+
+        SequenceAction seq = new SequenceAction();
+
+        for (int i = 0; i < findPath.size(); i++) {
+            PointDirection pd = findPath.get(i);
+            System.out.println(pd.x +  "x"  + pd.y +  " - " + pd.direction);
+            Rectangle temp = getLevel().getTileBounds(pd.x, pd.y);
+            seq.addAction(Actions.moveTo(temp.x, temp.y, .1f, Interpolation.linear));
+        }
+
+        seq.addAction(Actions.run((new Runnable() {
+               public void run () {
+                   stateMachine.changeState(state);
+               }
+            })
+        ));
+
+        this.addAction(seq);
     }
 
     // temp method
@@ -79,29 +102,10 @@ public class Emma extends Npc {
         findPath = null;
     }
 
-    public int getWBTileY() {
-        return (int)(getPosition().y + 8f) >> 4;
-    }
-
-    public int getWBTileX() {
-        return (int)(getPosition().x + 8f) >> 4;
-    }
     @Override
     public void update(float delta) {
         super.update(delta);
         stateMachine.update();
-        if (getLevel().getTileBounds(getWBTileX(), getWBTileY()).contains(getAiBox())) {
-            long hash = getWBTileX() + (getWBTileY() * 256); // grid[x + y * width]
-            if (findPath != null && findPath.containsKey(hash)) {
-                setDirection(findPath.get(hash));
-                setState(State.WALKING);
-            }
-            else {
-                setState(State.STANDING);
-            }
-        }
-
-
     }
 
     @Override
