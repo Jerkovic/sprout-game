@@ -1,12 +1,12 @@
 package com.binarybrains.sprout.entity.npc;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
-import com.badlogic.gdx.ai.fsm.State;
 import com.badlogic.gdx.ai.fsm.StateMachine;
-import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -15,7 +15,6 @@ import com.badlogic.gdx.utils.Timer;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
-import com.binarybrains.sprout.entity.actions.Action;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.actions.SequenceAction;
 import com.binarybrains.sprout.item.ArtifactItem;
@@ -23,16 +22,15 @@ import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.List;
-import java.util.Map;
 
 public class Emma extends Npc {
 
     public StateMachine<Emma, EmmaState> stateMachine;
     public List<PointDirection> findPath;
+    private Texture spriteSheet;
 
     public Emma(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height, 3); // 3 is the spriteRow used
-
         setHealth(100);
         setState(State.STANDING);
         setDirection(Direction.EAST);
@@ -74,12 +72,12 @@ public class Emma extends Npc {
 
         for (int i = 0; i < findPath.size(); i++) {
             PointDirection pd = findPath.get(i);
-            System.out.println(pd.x +  "x"  + pd.y +  " - " + pd.direction);
             Rectangle temp = getLevel().getTileBounds(pd.x, pd.y);
-            seq.addAction(Actions.moveTo(temp.x, temp.y, 1f, Interpolation.linear));
+            seq.addAction(Actions.moveTo(temp.x, temp.y, .5f, Interpolation.linear));
             seq.addAction(Actions.run((new Runnable() {
                         public void run () {
                             setDirection(pd.direction);
+                            setState(State.WALKING);
                         }
                     })
             ));
@@ -87,12 +85,11 @@ public class Emma extends Npc {
 
         seq.addAction(Actions.run((new Runnable() {
                public void run () {
+                   setState(State.STANDING);
                    stateMachine.changeState(state);
                }
             })
         ));
-
-        setState(State.WALKING);
 
         this.addAction(seq);
     }

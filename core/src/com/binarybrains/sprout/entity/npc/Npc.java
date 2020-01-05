@@ -55,15 +55,6 @@ public class Npc extends Mob {
         this.walkBox.setPosition(getPosition().x, getPosition().y);
     }
 
-    public boolean hasArrivedToTile(int tile_x,  int tile_y) {
-        System.out.println("check has arrived");
-        if (getLevel().getTileBounds(tile_x, tile_y).contains(getAiBox())) {
-            System.out.println("Has arrived to " + tile_x + "x" + tile_y);
-            setTilePos(tile_x, tile_y); // test adjust
-            return true;
-        }
-        return false;
-    }
     /**
      * Generates the path finding array
      * @param targetX
@@ -83,54 +74,6 @@ public class Npc extends Mob {
         path.add(startY);
         path.reverse();
         return path;
-    }
-
-    /**
-     * Returns a map containing the travel direction guide
-     */
-    public Map<Long, Direction> generatePathFindingDirections(IntArray path) {
-        this.debugPathList.clear();
-        Map<Long, Direction> travelDirections = new HashMap<Long, Direction>();
-
-        Mob.Direction dir = Mob.Direction.WEST;
-
-        if (path.size < 4) { // there must be at least two pos(x,y) to be able to generate travel directions
-            throw new RuntimeException("There must be at least two pos(x,y) to be able to generate travel directions");
-        }
-        int py, px, next_py, next_px;
-
-        for (int i = 0, n = path.size; i < n; i += 2) {
-            py = path.get(i);
-            px = path.get(i + 1);
-            next_py = path.get(i + 2);
-            next_px = path.get(i + 3);
-
-            debugPathList.add(new Vector2(px, py));
-
-            if (next_py > py)
-            {
-                dir = Mob.Direction.NORTH;
-            }
-            if (next_py < py)
-            {
-                dir = Mob.Direction.SOUTH;
-            }
-            if (next_px > px)
-            {
-                dir = Mob.Direction.EAST;
-            }
-            if (next_px < px)
-            {
-                dir = Mob.Direction.WEST;
-            }
-            travelDirections.put((long)(px + (py * 256)), dir); // grid[x + y * width]
-
-            if (i == n - 4) {
-                break;
-            }
-        }
-
-        return travelDirections;
     }
 
     public List<PointDirection> generatePathFindingDirections2(IntArray path) {

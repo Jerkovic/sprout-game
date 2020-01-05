@@ -24,6 +24,7 @@ public enum EmmaState implements State<Emma> {
 
         @Override
         public void exit(Emma emma) {
+            emma.setState(Mob.State.STANDING);
         }
     },
 
@@ -40,6 +41,7 @@ public enum EmmaState implements State<Emma> {
 
         @Override
         public void exit(Emma emma) {
+            emma.setState(Mob.State.STANDING);
         }
     },
 
@@ -55,6 +57,7 @@ public enum EmmaState implements State<Emma> {
 
         @Override
         public void exit(Emma emma) {
+            emma.setState(Mob.State.STANDING);
             emma.setDirection(Mob.Direction.WEST);
         }
 
@@ -82,7 +85,6 @@ public enum EmmaState implements State<Emma> {
     IDLE() {
         @Override
         public void update(Emma emma) {
-
             if (emma.distanceTo(emma.getLevel().player) < (16 * 4)) {
                 emma.lookAt(emma.getLevel().player);
             }
@@ -90,7 +92,6 @@ public enum EmmaState implements State<Emma> {
 
         @Override
         public void enter(Emma emma) {
-            System.out.println("Enter idle state");
             emma.setState(Emma.State.STANDING);
         }
 
