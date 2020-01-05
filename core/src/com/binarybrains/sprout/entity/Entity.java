@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.binarybrains.sprout.entity.actions.Action;
 import com.binarybrains.sprout.item.Item;
@@ -114,7 +115,12 @@ public abstract class Entity implements Telegraph {
     }
 
     public float angleTo(Entity entity) {
-        float angle = (float) Math.toDegrees(Math.atan2(entity.getX() - getX(), entity.getY() - getY()));
+        float angle = (float) Math.toDegrees(Math.atan2(entity.getBottomCenterPos().x - getBottomCenterPos().x, entity.getBottomCenterPos().y - getBottomCenterPos().y));
+        return (float) (angle + Math.ceil( -angle / 360 ) * 360);
+    }
+
+    public float angleTo(Vector3 pos) {
+        float angle = (float) Math.toDegrees(Math.atan2(pos.x - getBottomCenterPos().x, pos.y - getBottomCenterPos().y));
         return (float) (angle + Math.ceil( -angle / 360 ) * 360);
     }
 

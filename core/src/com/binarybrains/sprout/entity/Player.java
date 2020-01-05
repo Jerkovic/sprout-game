@@ -712,9 +712,15 @@ public class Player extends Npc implements InputProcessor {
         float mouseWorldPosX = clickedPos.x;
         float mouseWorldPosY = clickedPos.y;
 
+
+        lookAt(clickedPos);
+
         int x = (int)this.getMouseSelectedTile().x;
         int y = (int)this.getMouseSelectedTile().y;
         System.out.println("Tile coordinates: " + x + "x" + y);
+
+        // is adjacent tiles..
+        // if so make Turn to this tile.
 
         // player clicked himself
         if (mouseWorldPosX <= getBoundingBox().getX() + getBoundingBox().getWidth() && mouseWorldPosX >= getBoundingBox().getX()

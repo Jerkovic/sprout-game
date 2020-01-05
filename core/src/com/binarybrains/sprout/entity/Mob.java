@@ -3,6 +3,7 @@ package com.binarybrains.sprout.entity;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.level.Level;
 
@@ -47,7 +48,6 @@ public abstract class Mob extends Entity {
 
 
     public Mob(Level level, Vector2 position, float width, float height) {
-
         super(level, position, width, height);
         setState(State.STANDING);
         setDirection(Direction.SOUTH);
@@ -80,14 +80,28 @@ public abstract class Mob extends Entity {
         }
     }
 
+    public void lookAt(Vector3 pos) {
+        float angle = angleTo(pos);
+        String directions[] = {"NORTH", "EAST",  "SOUTH", "WEST"};
+        String direction = directions[Math.round((Math.abs(angle)) / 90) % 4];
+
+        if (direction.equals("WEST")) {
+            setDirection(Direction.WEST);
+
+        } else if (direction.equals("EAST")) {
+            setDirection(Direction.EAST);
+
+        } else if (direction.equals("NORTH")) {
+            setDirection(Direction.NORTH);
+
+        } else if (direction.equals("SOUTH")) {
+            setDirection(Direction.SOUTH);
+        }
+    }
+
     public float getSpeed() {
         return speed;
     }
-
-    /*
-    public float getDiagonalSpeed() {
-        return speed / 1.41421356237f;
-    } */
 
     public void setSpeed(float speed) {
         this.speed = speed;
