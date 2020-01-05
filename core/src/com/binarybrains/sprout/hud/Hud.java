@@ -174,6 +174,14 @@ public class Hud implements Telegraph {
         ));
     }
 
+    public void fadeIn() {
+        fadeActor.clearActions();
+        fadeActor.addAction(Actions.sequence(
+                Actions.alpha(1f),
+                Actions.fadeOut(2f, Interpolation.fade)
+        ));
+    }
+
     public void fadeOutRun(Runnable runnable) {
         fadeActor.clearActions();
         fadeActor.addAction(Actions.sequence(

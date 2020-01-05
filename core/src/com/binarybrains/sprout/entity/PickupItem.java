@@ -149,7 +149,7 @@ public class PickupItem extends ItemEntity {
         if (distance < 32 && getActions().size < 1 && magnet && getLevel().player.inventory.hasSpaceFor(this.item)) {
             // item in state of being sucked to the player
             addAction(Actions.sequence(
-                    Actions.moveTo(getLevel().player.getX(), getLevel().player.getY()-8, .3f, Interpolation.pow3),
+                    Actions.moveTo(getLevel().player.getCenterPos().x, getLevel().player.getCenterPos().y, .5f, Interpolation.pow3),
                     Actions.run((new Runnable() {
                         public void run () {
                             touchedBy(getLevel().player);
