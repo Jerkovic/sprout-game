@@ -3,8 +3,10 @@ package com.binarybrains.sprout.entity.npc;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -39,10 +41,13 @@ public class Npc extends Mob {
     public Animation animationMatrix[][] = new Animation[2][4]; // action, direction
     TextureRegion currentFrame;
 
+    Sprite shadow;
+
     public Npc(Level level, Vector2 position, float width, float height, int spriteRow) {
         super(level, position, width, height);
         this.debugPathList = new ArrayList<Vector2>();
         setSpriteRow(spriteRow);
+        shadow = new Sprite((Texture) SproutGame.assets.get("sprites/shadow.png"));
         setupAnimations();
     }
 
@@ -56,6 +61,13 @@ public class Npc extends Mob {
         this.walkBox.setHeight(16);
         this.walkBox.setPosition(getPosition().x, getPosition().y);
     }
+
+    public void drawShadow(Batch batch, float delta) {
+        shadow.setX(getX());
+        shadow.setY(getY() - 2);
+        shadow.draw(batch, 0.55f);
+    }
+
 
     /**
      * Generates the path finding array
@@ -137,8 +149,12 @@ public class Npc extends Mob {
         this.spriteRow = spriteRow;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getFeetSurface() {
-        return "surfaceTile: " + getLevel().getTile(getTileX(), getTileY());
+        return getLevel().getTile(getTileX(), getTileY()).getClass().getSimpleName();
     }
 
     /**
@@ -147,6 +163,9 @@ public class Npc extends Mob {
      * @param parentAlpha
      */
     public void draw(Batch batch, float parentAlpha) {
+
+        drawShadow(batch, Gdx.app.getGraphics().getDeltaTime());
+
         Direction animDirection = Direction.getAnimationDirection(getDirection());
         if (getState() == State.STANDING) { // IDLE - NOT Walking
             currentFrame = (TextureRegion)animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrames()[0];
@@ -158,6 +177,7 @@ public class Npc extends Mob {
         if (currentFrame == null) {
             Gdx.app.log(this.getClass().getName(), "Frame not found state: " + getState() + " actionState: " + getActionState() + " Dir:" + animDirection.name());
         }
+
         batch.draw(currentFrame, getX(), getY());
     }
 

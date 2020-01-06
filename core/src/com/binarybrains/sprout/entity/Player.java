@@ -42,7 +42,6 @@ import static com.binarybrains.sprout.entity.Mob.Direction.*;
 
 public class Player extends Npc implements InputProcessor {
 
-    private Sprite shadow;
     public  Inventory inventory;
     public Item activeItem;
     public Vector3 clickedPos = new Vector3();
@@ -103,11 +102,10 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ResourceItem(Resources.ladder, 1));
 
         // todo setActiveItemByName?
-        setActiveItem(getInventory().getItems().get(3));
+        setActiveItem(getInventory().getItems().get(0));
 
-        // Setup Player as a Listener
-        // move this to a shadow system ?
-        shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
+        // Setup Player as a Listener HERE?
+
     }
 
     @Override
@@ -251,7 +249,7 @@ public class Player extends Npc implements InputProcessor {
     }
 
     // move to NPC ?
-    // this should be smaller and close to the player
+    // THIS needs to be more like in sdv..being able to interact with everything around adjacents tiles.
     public Rectangle getInteractBox() {
         float x=0, y=0, width =0, height=0;
 
@@ -309,7 +307,6 @@ public class Player extends Npc implements InputProcessor {
 
         boolean done = false;
         List<Entity> entities = getLevel().getEntities(getInteractBox());
-        // List<Entity> entities = getLevel().getNearestEntity(this, getInteractBox());
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
 			if (e != this)
@@ -556,7 +553,7 @@ public class Player extends Npc implements InputProcessor {
         // https://www.youtube.com/watch?v=wYREdw4nz4E
         //
         if (getState() == State.WALKING) {
-            // System.out.println("Sound effect Surface : " + getFeetSurface());
+            System.out.println("Sound effect Surface : " + getFeetSurface());
             if (walkSoundId < 0) {
                 walkSoundId = ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).loop(.15f);
             } else {
@@ -640,14 +637,9 @@ public class Player extends Npc implements InputProcessor {
         super.hurt(mob, dmg, attackDir);
     }
 
-    public void drawShadow(Batch batch, float delta) {
-        shadow.setX(getX());
-        shadow.setY(getY() - 2); // if we want the player to jump ... we should decrease the y value.
-        shadow.draw(batch, 0.55f);
-    }
 
     public void draw(Batch batch, float parentAlpha) {
-        drawShadow(batch, Gdx.app.getGraphics().getDeltaTime());
+
         super.draw(batch, 1f);
         if (carriedItem != null) {
             Entity carried = (Entity)carriedItem;

@@ -9,6 +9,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.binarybrains.sprout.entity.Entity;
@@ -99,6 +100,8 @@ public class SproutGame extends Game {
 	public void loadAssets() {
     	assets.load("spritesheet.png", Texture.class);
 		assets.load("haley-sheet.png", Texture.class);
+		assets.load("sprites/shadow.png", Texture.class);
+
 
         assets.load("sfx/chopping_Wood_1.wav", Sound.class);
         assets.load("sfx/chopping_Wood_2.wav", Sound.class);
