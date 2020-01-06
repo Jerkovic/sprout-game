@@ -6,7 +6,7 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
-import com.binarybrains.sprout.item.resource.Resource;
+import com.binarybrains.sprout.item.artifact.Key;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.*;
 
@@ -40,7 +40,7 @@ public class Crafting {
             workbenchRecipes.add(new ToolRecipe(new WateringCan(), 0).addCost(Resources.ironBar, 5));
             workbenchRecipes.add(new ToolRecipe(new Scythe(), 0).addCost(Resources.ironBar, 2).addCost(Resources.stick, 2));
             workbenchRecipes.add(new ToolRecipe(new FishingPole(), 0).addCost(Resources.ironBar, 1).addCost(Resources.stick, 1).addCost(Resources.string, 1));
-            workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Resources.ironBar, 2).setRemoveRecipeOnCrafted().setLocked());
+            // workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Resources.ironBar, 2).setRemoveRecipeOnCrafted().setLocked());
 
 
             workbenchRecipes.add(new ResourceRecipe(Resources.cloth).addCost(Resources.wool, 3).setXP(200));
@@ -51,9 +51,9 @@ public class Crafting {
 
             // change to Furnace Recipes
             workbenchRecipes.add(new ResourceRecipe(Resources.bomb).addCost(Resources.ironOre, 4).addCost(Resources.coal, 2));
-            workbenchRecipes.add(new ResourceRecipe(Resources.copperBar).addCost(Resources.copperOre, 4).addCost(Resources.coal, 1));
-            workbenchRecipes.add(new ResourceRecipe(Resources.ironBar).addCost(Resources.ironOre, 4).addCost(Resources.coal, 1));
-            workbenchRecipes.add(new ResourceRecipe(Resources.goldIngot).addCost(Resources.goldNugget, 4).addCost(Resources.coal, 1));
+            workbenchRecipes.add(new ResourceRecipe(Resources.copperBar).addCost(Resources.copperOre, 2).addCost(Resources.coal, 1));
+            workbenchRecipes.add(new ResourceRecipe(Resources.ironBar).addCost(Resources.ironOre, 6).addCost(Resources.coal, 3));
+            workbenchRecipes.add(new ResourceRecipe(Resources.goldIngot).addCost(Resources.goldNugget, 10).addCost(Resources.coal, 5));
 
 
             workbenchRecipes.add(new ResourceRecipe(Resources.woodFence).addCost(Resources.wood, 1));

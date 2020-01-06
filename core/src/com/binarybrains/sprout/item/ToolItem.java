@@ -54,7 +54,6 @@ public class ToolItem extends Item {
     }
 
     public String getName() {
-
         return LEVEL_NAMES[level] + " " + tool.getName();
     }
 

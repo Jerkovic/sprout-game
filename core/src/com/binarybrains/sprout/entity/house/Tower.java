@@ -69,7 +69,7 @@ public class Tower extends Entity { // extend House that extends StaticEntity
             return true;
         }
 
-        if (player.getInteractBox().overlaps(door) && item.getName().equals("Basic Key") && player.getDirection().equals(Mob.Direction.NORTH)) {
+        if (player.getInteractBox().overlaps(door) && item.getName().equals("Key") && player.getDirection().equals(Mob.Direction.NORTH)) {
             isLocked = false;
             BackgroundMusic.stop(); // fade out music
             SproutGame.playSound("fancy_reward", 0.34f);

@@ -1,6 +1,8 @@
 package com.binarybrains.sprout.item.tool;
 
-public class NeptuneSword extends Tool {
+import com.binarybrains.sprout.item.weapon.Weapon;
+
+public class NeptuneSword extends Weapon {
 
     public NeptuneSword() {
         super("Neptune Sword", "The all mighty Neptune Sword");

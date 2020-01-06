@@ -21,14 +21,12 @@ import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.experience.LevelRank;
-import com.binarybrains.sprout.item.ArtifactItem;
-import com.binarybrains.sprout.item.Item;
-import com.binarybrains.sprout.item.ResourceItem;
-import com.binarybrains.sprout.item.ToolItem;
+import com.binarybrains.sprout.item.*;
 import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.FoodResource;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.Tools;
+import com.binarybrains.sprout.item.weapon.Weapons;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.mail.Mailbox;
 import com.binarybrains.sprout.misc.AmbienceSound;
@@ -76,7 +74,7 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ToolItem(Tools.wateringcan, 0));
         getInventory().add(new ToolItem(Tools.axe, 0));
         getInventory().add(new ToolItem(Tools.pickaxe, 0));
-        getInventory().add(new ToolItem(Tools.neptuneSword, 0));
+        getInventory().add(new WeaponItem(Weapons.neptuneSword, 0));
 
         getInventory().add(new ArtifactItem(Artifacts.teddy));
         getInventory().add(new ToolItem(Tools.hammer, 0));
@@ -95,8 +93,8 @@ public class Player extends Npc implements InputProcessor {
 
         //getInventory().add(new ArtifactItem(Artifacts.backpack));
 
-        getInventory().add(new ResourceItem(Resources.coal, 21));
-        getInventory().add(new ResourceItem(Resources.stone, 12));
+        getInventory().add(new ResourceItem(Resources.coal, 999));
+        getInventory().add(new ResourceItem(Resources.stone, 102));
         getInventory().add(new ResourceItem(Resources.goldNugget, 13));
         getInventory().add(new ResourceItem(Resources.apple, 12));
         getInventory().add(new ResourceItem(Resources.ladder, 1));
