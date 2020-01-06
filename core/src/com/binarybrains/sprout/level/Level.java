@@ -104,8 +104,8 @@ public class Level extends LevelEngine {
         setupAmbientLight();
         this.screen = screen;
         spritesheet = new Texture(Gdx.files.internal("levels/stardew_valley_01.png"));
-        charsheet = new Texture(Gdx.files.internal("spritesheet.png"));
-        // temp code
+        //charsheet = new Texture(Gdx.files.internal("spritesheet.png"));
+        this.charsheet = SproutGame.assets.get("spritesheet.png");
 
         // BitmapFont to use for text Particles
         font = new BitmapFont(Gdx.files.internal("pixel.fnt"),
@@ -118,7 +118,7 @@ public class Level extends LevelEngine {
 
         player = new Player(this);
         player.setTilePos(3, 5);
-        player.setHealth(1);
+        player.setHealth(50);
 
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();

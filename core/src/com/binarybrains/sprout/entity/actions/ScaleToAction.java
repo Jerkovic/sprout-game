@@ -1,5 +1,7 @@
 package com.binarybrains.sprout.entity.actions;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 public class ScaleToAction extends TemporalAction {
     private float startX, startY;
     private float endX, endY;
@@ -11,6 +13,8 @@ public class ScaleToAction extends TemporalAction {
 
     protected void update (float percent) {
         // todoo
+        // target.setScale(startX + (endX - startX) * percent, startY + (endY - startY) * percent);
+        throw new NotImplementedException();
     }
 
     public void setScale (float x, float y) {

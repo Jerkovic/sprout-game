@@ -1,5 +1,6 @@
 package com.binarybrains.sprout.entity.npc;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -8,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
@@ -153,6 +155,9 @@ public class Npc extends Mob {
             animationMatrix[getActionState().ordinal()][animDirection.ordinal()].setPlayMode(Animation.PlayMode.LOOP);
             currentFrame = (TextureRegion) animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
         }
+        if (currentFrame == null) {
+            Gdx.app.log(this.getClass().getName(), "Frame not found state: " + getState() + " actionState: " + getActionState() + " Dir:" + animDirection.name());
+        }
         batch.draw(currentFrame, getX(), getY());
     }
 
@@ -168,22 +173,18 @@ public class Npc extends Mob {
      * Setup animations
      */
     public void setupAnimations() {
-        TextureRegion[][] frames = TextureRegion.split(getLevel().charsheet, getWidth(), getHeight());
+        TextureRegion[][] frames = TextureRegion.split(SproutGame.assets.get("haley-sheet.png"), getWidth(), getHeight());
 
-        for (int a = ActionState.EMPTY_NORMAL.ordinal(); a <= ActionState.CARRYING.ordinal(); a++) {
-            int col = 0; // column counter
-            for (int d = Direction.SOUTH.ordinal(); d <= Direction.WEST.ordinal(); d++) { // directions
-                Object[] currentAnimFrames = new TextureRegion[4];
-                for (int f = 0; f < 4; f++) {
-                    currentAnimFrames[f] = frames[getSpriteRow() + a][col];
-                    col++;
-                }
-                float animSpeed = .14f; // maybe we need getSpeed() for animations?
-                animationMatrix[a][d] = new Animation(animSpeed, currentAnimFrames);
+        int row = 0;
+        for (int d = Direction.SOUTH.ordinal(); d <= Direction.WEST.ordinal(); d++) { // directions
+            Object[] currentAnimFrames = new TextureRegion[4];
+            for (int col = 0; col < 4; col++) {
+                currentAnimFrames[col] = frames[row][col];
             }
+            row++;
+            float animSpeed = .14f; // maybe we need getSpeed() for animations?
+            animationMatrix[ActionState.EMPTY_NORMAL.ordinal()][d] = new Animation(animSpeed, currentAnimFrames);
         }
-
-        System.out.println("done");
     }
 
     @Override

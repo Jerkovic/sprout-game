@@ -30,11 +30,13 @@ public class AmbienceSound {
     }
 
     public static void pause() {
+        if (currentAmbience == null) return;
         currentAmbience.pause(AmbienceSound.soundId);
     }
 
     public static void resume()
     {
+        if (currentAmbience == null) return;
         currentAmbience.resume(AmbienceSound.soundId);
     }
 

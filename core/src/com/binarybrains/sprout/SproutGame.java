@@ -7,6 +7,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -92,7 +93,13 @@ public class SproutGame extends Game {
         ((Sound) SproutGame.assets.get("sfx/" + name + ".wav")).play(volume, pitch, pan);
     }
 
-    public void loadAssets() {
+	/**
+	 * Load all assets
+	 */
+	public void loadAssets() {
+    	assets.load("spritesheet.png", Texture.class);
+		assets.load("haley-sheet.png", Texture.class);
+
         assets.load("sfx/chopping_Wood_1.wav", Sound.class);
         assets.load("sfx/chopping_Wood_2.wav", Sound.class);
 		assets.load("sfx/blop.wav", Sound.class);
@@ -145,8 +152,8 @@ public class SproutGame extends Game {
 
         // Ambience sounds
         assets.load("ambience/forest_morning_ambience.mp3", Sound.class);
-        assets.load("ambience/forest_night_ambience.mp3", Sound.class);
-		assets.load("ambience/cave_ambience.mp3", Sound.class);
+        //assets.load("ambience/forest_night_ambience.mp3", Sound.class);
+		//assets.load("ambience/cave_ambience.mp3", Sound.class);
 
 
         // Music (check out Ross Bugden)
@@ -163,9 +170,7 @@ public class SproutGame extends Game {
         assets.load("items2.txt", TextureAtlas.class);
 
 		SproutGame.assets.finishLoading();
-
 	}
-
 }
 
 
