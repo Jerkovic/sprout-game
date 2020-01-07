@@ -25,8 +25,10 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.achievement.Achievement;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.events.*;
 import com.binarybrains.sprout.experience.LevelRank;
+import com.binarybrains.sprout.hud.inventory.ChestWindow;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryManagementWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryWindow;
@@ -58,6 +60,7 @@ public class Hud implements Telegraph {
     CraftingWindow craftingWindow;
     InventoryWindow inventoryWindow;
     InventoryManagementWindow inventoryManagementWindow;
+    ChestWindow chestManagementWindow;
 
     public int notificationsInHud = 0;
     public Image mouseItem;
@@ -85,6 +88,11 @@ public class Hud implements Telegraph {
         inventoryWindow = new InventoryWindow(level, skin);
         inventoryWindow.onInventoryChanged(level.player.getInventory());
         stage.addActor(inventoryWindow);
+
+        chestManagementWindow = new ChestWindow(level.player, skin);
+        chestManagementWindow.setVisible(false);
+        chestManagementWindow.hide();
+        stage.addActor(chestManagementWindow);
 
         fadeRenderer = new ShapeRenderer();
         fadeActor.clearActions();
@@ -224,7 +232,7 @@ public class Hud implements Telegraph {
         BackgroundMusic.stop();
         AmbienceSound.pause();
 
-        SproutGame.playSound("heartbeat", 1f);
+        SproutGame.playSound("heartbeat", 1.1f);
 
         fadeActor.addAction(Actions.sequence(
                 Actions.alpha(0),
@@ -276,6 +284,21 @@ public class Hud implements Telegraph {
         inventoryManagementWindow.show(getStage());
         // inventoryManagementWindow.setCloseCallback();
         inventoryManagementWindow.onInventoryChanged(level.player.getInventory());
+        hideMouseItem();
+    }
+
+    /**
+     *
+     *
+     */
+    public void showChestManagementWindow(Chest chest) {
+        hideInventory();
+        level.screen.game.pause();
+        level.player.releaseKeys();
+
+        chestManagementWindow.setVisible(true);
+        chestManagementWindow.show(getStage());
+        chestManagementWindow.openChest(chest);
         hideMouseItem();
     }
 

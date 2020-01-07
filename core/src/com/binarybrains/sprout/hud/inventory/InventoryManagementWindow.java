@@ -134,7 +134,7 @@ public class InventoryManagementWindow extends Dialog {
     }
 
     /**
-     * Build UI
+     * Build UI moved to Container
      */
     private void build() {
         Table itemTable = new Table(skin);
@@ -244,7 +244,6 @@ public class InventoryManagementWindow extends Dialog {
                 stack.add(new Label("n/a", skin)); // should not happen
             }
 
-            //Second add wrapped overlay object
             Table overlay = new Table();
             overlay.add(lc).expand().fillX().bottom().left();
             stack.add(overlay);
@@ -259,7 +258,7 @@ public class InventoryManagementWindow extends Dialog {
             button.pack();
             slotIndex++;
 
-
+            // Actions listeners
             // Right click
             button.addListener(new ClickListener(Input.Buttons.RIGHT)
             {
@@ -270,6 +269,7 @@ public class InventoryManagementWindow extends Dialog {
                 }
             });
 
+            // left
             button.addListener(new ClickListener(Input.Buttons.LEFT) {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {

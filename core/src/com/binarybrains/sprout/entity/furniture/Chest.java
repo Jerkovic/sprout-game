@@ -5,25 +5,30 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.*;
+import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.Item;
+import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.level.Level;
 
 /**
  * A chest is a furniture that can be moved around.
  * It also serves as a inventory container space
+ * But some chests are only for looting not storing?
  */
 public class Chest extends Entity implements Portable { // extends Furniture that implements Portable instead?
 
     TextureRegion[][] frames;
     private boolean isOpen = false;
-    public Inventory container; // container
+    private Inventory container; // container
     private boolean carried = false;
     private TextureRegion openRegion, closedRegion;
 
     public Chest(Level level, Vector2 position) {
         super(level, position, 16, 16);
+
         int capacity = 24;
         container = new Inventory(capacity); // the chest is an inventory
+        container.add(new ArtifactItem(Artifacts.teddy));
 
         frames = TextureRegion.split(getLevel().spritesheet, 16, 16);
         closedRegion = frames[48][23];
@@ -52,7 +57,7 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
         if (!carried) {
             isOpen = !isOpen;
             SproutGame.playSound("door_open");
-            if (isOpen) player.getLevel().screen.hud.showInventoryManagementWindow();
+            if (isOpen) player.getLevel().screen.hud.showChestManagementWindow(this);
         }
         return true;
     }

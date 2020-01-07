@@ -109,6 +109,9 @@ public class InventoryWindow extends Window {
         centerMe();
     }
 
+    /**
+     * Generic method...move?
+     */
     public void centerMe() {
         setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2), yPos);
     }

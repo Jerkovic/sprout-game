@@ -25,7 +25,7 @@ public class Container extends Table {
     public Container(Skin skin) {
         this.skin = skin;
         this.atlas = SproutGame.assets.get("items2.txt");
-        this.group = new ButtonGroup();
+        this.group = new ButtonGroup<>();
         build();
     }
 
@@ -33,14 +33,14 @@ public class Container extends Table {
      *
      * @param inventory
      */
-    public void onInventoryChanged(Inventory inventory) {
+    public void connectInventory(Inventory inventory) {
         clearChildren();
         syncInventory(inventory);
         build();
     }
 
     /**
-     *
+     * Run this after syncInventory
      * @return
      */
     private Table build() {
@@ -63,21 +63,23 @@ public class Container extends Table {
         for (Item item : inventory.getItems()) {
             final Button button = new Button(skin, "default");
             button.setName("" + slotIndex); //set the slotIndex
+
+            boolean showStack = false;
+
             String counter = "";
             if (item instanceof ResourceItem && inventory.count(item) > 1) {
                 counter = "" + inventory.count(item);
+                showStack = true;
             }
 
             if (item instanceof ToolItem && ((ToolItem) item).tool instanceof WateringCan) {
                 Tool tool = ((ToolItem) item).tool;
                 counter = "" + ((WateringCan) tool).getWater() + "%";
+                showStack = true;
             }
 
-            Label lc = new Label(counter, skin);
-            lc.setAlignment(Align.bottomRight);
-            lc.setColor(255, 255, 255, 1f);
-
             Stack stack = new Stack();
+
 
             TextureAtlas.AtlasRegion icon;
             if (item != null) {
@@ -88,22 +90,27 @@ public class Container extends Table {
             if (icon != null) {
                 Image image = new Image(icon);
                 stack.add(image);
-            } else {
-                stack.add(new Label("n/a", skin)); // should not happen
             }
 
-            Table overlay = new Table();
-            overlay.add(lc).expand().fillX().bottom().left();
-            stack.add(overlay);
+            if (showStack) {
+                Label lc = new Label(counter, skin);
+                lc.setAlignment(Align.bottomRight);
+                lc.setColor(255, 255, 255, 1f);
 
+                Table overlay = new Table();
+                overlay.add(lc).expand().fillX().bottom().left();
+                stack.add(overlay);
+            }
+            stack.layout();
             button.add(stack);
+
             if (item != null) {
                 Tooltip toolTip = new Tooltip(ItemTip.createTooltipTable(skin, item));
                 toolTip.getManager().animations = false;
                 toolTip.setInstant(true);
+                toolTip.hide();
                 button.addListener(toolTip);
             }
-            button.pack();
             slotIndex++;
 
             // Right click
@@ -122,8 +129,9 @@ public class Container extends Table {
 
                 }
             });
-
+            button.pack();
             group.add(button);
+
         }
     }
 }
