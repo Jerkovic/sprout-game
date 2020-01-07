@@ -8,7 +8,7 @@ import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 
 // A Trigger point, location
-abstract class Location extends Entity implements Trigger {
+abstract class Location extends Entity {
 
     public String name, description;
 
@@ -17,6 +17,9 @@ abstract class Location extends Entity implements Trigger {
         this.name = name;
         this.description = description;
     }
+
+
+
 
 
 }

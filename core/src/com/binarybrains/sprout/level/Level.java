@@ -59,7 +59,7 @@ public class Level extends LevelEngine {
     private FrameBuffer fbo;
 
     public float ambientIntensity = 1f;
-    public static final Vector3 ambientColor = new Vector3(.6f, .6f, .8f); // .6 .6 .8
+    public static final Vector3 ambientColor = new Vector3(.1f, .1f, .5f); // .6 .6 .8
 
     //used to make the light flicker
     public float zAngle;

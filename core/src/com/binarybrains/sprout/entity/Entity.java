@@ -12,13 +12,14 @@ import com.badlogic.gdx.utils.Array;
 import com.binarybrains.sprout.entity.actions.Action;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
+import com.binarybrains.sprout.locations.Trigger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // Our abstract GameObject class
 
-public abstract class Entity implements Telegraph {
+public abstract class Entity implements Telegraph, Trigger {
 
     private Level level;
     private Vector2 position = new Vector2();
