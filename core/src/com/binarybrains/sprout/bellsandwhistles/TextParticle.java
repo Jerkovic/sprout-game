@@ -29,15 +29,15 @@ public class TextParticle extends Entity {
     }
 
     public float getSortOrder() {
-        return 0;
+        return -100f;
     }
 
     public void fade() {
         addAction(Actions.sequence(
-                Actions.delay(MathUtils.random(.15f, .298f)),
+                Actions.delay(MathUtils.random(0f, .15f)),
                 Actions.parallel(
-                    Actions.moveTo(getPosition().x , getPosition().y + (getHeight() * 2) ,MathUtils.random(0.91f, 1.4f), Interpolation.exp5In),
-                    Actions.alpha(0.00f, 1.3f, Interpolation.fade)
+                    Actions.moveTo(getPosition().x , getPosition().y + (getHeight() * 2) , 1f, Interpolation.exp5In),
+                    Actions.alpha(0.01f, 1f, Interpolation.fade)
                 ),
                 Actions.run((new Runnable() {
                     public void run () {
@@ -47,11 +47,8 @@ public class TextParticle extends Entity {
         )));
     }
 
-
     @Override
     public void draw(Batch batch, float parentAlpha) {
-
-        //getLevel().font.getData().setScale(1f);
         getLevel().font.setUseIntegerPositions(false);
         shadow.set(shadow.r, shadow.g, shadow.b, getColor().a);
         getLevel().font.setColor(shadow);

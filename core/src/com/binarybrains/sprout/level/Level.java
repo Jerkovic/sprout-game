@@ -54,6 +54,7 @@ public class Level extends LevelEngine {
     public GameScreen screen;
 
     // shader test
+    public static final Color FLAME = new Color(0xe25822);
     private boolean lightOscillate = true;
     private Texture light;
     private FrameBuffer fbo;
@@ -91,6 +92,7 @@ public class Level extends LevelEngine {
                 ambientColor.z, ambientIntensity);
         finalShader.end();
 
+        // dont load like this
         light = new Texture("shader/camAlphaMat.jpg");
         fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight(), false);
 
@@ -103,8 +105,9 @@ public class Level extends LevelEngine {
     public Level(GameScreen screen, int level) {
         setupAmbientLight();
         this.screen = screen;
+        // dont load sprites like this.
         spritesheet = new Texture(Gdx.files.internal("levels/stardew_valley_01.png"));
-        //charsheet = new Texture(Gdx.files.internal("spritesheet.png"));
+
         this.charsheet = SproutGame.assets.get("spritesheet.png");
 
         // BitmapFont to use for text Particles
@@ -230,7 +233,7 @@ public class Level extends LevelEngine {
                         player.inventory.upgrade(); // test upgrade backpack
                         screen.hud.refreshInventory();
                         screen.hud.addToasterMessage("Inventory Upgrade", "You were awarded a backpack.");
-                        // screen.hud.moveCamera(600, 1000);
+                        screen.hud.moveCamera(600, 1000);
 
                     }})
             ));
@@ -253,10 +256,10 @@ public class Level extends LevelEngine {
             finalShader.end();
 
             fbo.begin();
-            Gdx.gl.glClearColor(0f,0f,0f,1);
+            Gdx.gl.glClearColor(0f,0f,0f,1f);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-            float lightSize = lightOscillate ? (175.0f + 3.25f * (float)Math.sin(zAngle) + .677f * MathUtils.random()):175.0f;
+            float lightSize = lightOscillate ? (105.0f + 3.25f * (float)Math.sin(zAngle) + .677f * MathUtils.random()):105.0f;
 
             tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
             tileMapRenderer.getBatch().enableBlending();
@@ -267,10 +270,15 @@ public class Level extends LevelEngine {
 
             tileMapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
             tileMapRenderer.getBatch().begin();
+
             if (ambientIntensity > 0f) { // how dark should it get before lights come on?
+                Color color = tileMapRenderer.getBatch().getColor();
+
+                tileMapRenderer.getBatch().setColor(FLAME);
                 tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (85 * 16) - lightSize / 2, lightSize , lightSize);
                 tileMapRenderer.getBatch().draw(light,90, 1289, lightSize , lightSize);
                 tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2, player.getWalkBoxCenterY() - lightSize / 2, lightSize , lightSize);
+                tileMapRenderer.getBatch().setColor(color);
             }
 
             tileMapRenderer.getBatch().end();
@@ -279,7 +287,7 @@ public class Level extends LevelEngine {
             fbo.end();
         } else {
             fbo.begin();
-            Gdx.gl.glClearColor(0f,0f,0f,0);
+            Gdx.gl.glClearColor(0f,0f,0f,1f);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             tileMapRenderer.getBatch().setShader(defaultShader);
             fbo.end();

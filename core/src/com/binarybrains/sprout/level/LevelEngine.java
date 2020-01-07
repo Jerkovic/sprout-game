@@ -39,12 +39,10 @@ public abstract class LevelEngine {
     public Astar astar; // should this be here?
     public Tile tile[][] = new Tile[256][128];
 
-    public Comparator<Entity> spriteSorter = new Comparator<Entity>() {
-        public int compare(Entity e0, Entity e1) {
-            if (e1.getSortOrder() < e0.getSortOrder()) return -1;
-            if (e1.getSortOrder() > e0.getSortOrder()) return +1;
-            return 0;
-        }
+    public Comparator<Entity> spriteSorter = (e0, e1) -> {
+        if (e1.getSortOrder() < e0.getSortOrder()) return -1;
+        if (e1.getSortOrder() > e0.getSortOrder()) return +1;
+        return 0;
     };
 
     public void add(Level level, Entity entity) {

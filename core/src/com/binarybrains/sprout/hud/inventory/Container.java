@@ -30,7 +30,7 @@ public class Container extends Table {
     }
 
     /**
-     *
+     * Connects UI to any external Inventory space the player should be able to interact with.
      * @param inventory
      */
     public void connectInventory(Inventory inventory) {

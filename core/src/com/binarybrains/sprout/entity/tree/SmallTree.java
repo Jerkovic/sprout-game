@@ -15,7 +15,6 @@ import com.binarybrains.sprout.level.Level;
 
 public class SmallTree extends Entity { // extends Vegitation or ?
 
-
     private Sprite sprite;
     private Sprite shadow;
 
