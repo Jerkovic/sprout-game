@@ -14,12 +14,18 @@ public class TelegramType {
     public static final int PLAYER_ACHIEVEMENT_UNLOCKED = 99;
     public static final int PLAYER_CRAFTING_SUCCESS = 100;
     public static final int PLAYER_CRAFTING_FAILURE = 101;
+
     public static final int PLAYER_INVENTORY_UPDATED = 102;
     public static final int PLAYER_INVENTORY_CHANGED_SELECTED_SLOT = 110;
+
+    public static final int PLAYER_LOCATION_REACHED = 140;
+    public static final int PLAYER_LOCATION_LEAVES = 141;
 
     // Weather
     public static final int WEATHER_RAIN_FLASH = 401;
     public static final int WEATHER_THUNDER = 402;
+
+
 
 
     // Some others

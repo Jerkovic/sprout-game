@@ -24,6 +24,7 @@ import com.binarybrains.sprout.level.pathfind.Astar;
 import com.binarybrains.sprout.level.tile.*;
 import com.binarybrains.sprout.locations.Bed;
 import com.binarybrains.sprout.locations.Bridge;
+import com.binarybrains.sprout.locations.Location;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -252,16 +253,18 @@ public abstract class LevelEngine {
                     add(level, tower);
                 } else if (objType.equals("BridgeTrigger")) { // location triggers
                     String desc = object.getProperties().get("description").toString();
-                    //String name = object.getProperties().get("Name").toString();
                     add(level, new Bridge(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(),"Bridge trigger", desc));
                 } else if (objType.equals("BedTrigger")) { // location triggers
                     String desc = object.getProperties().get("description").toString();
-                    //String name = object.getProperties().get("Name").toString();
                     add(level, new Bed(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(),"Go to bed", desc));
                 } else if (objType.equals("SmallTree")) {
                     add(level, new SmallTree(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
                 } else if (objType.equals("Bush")) {
                     add(level, new Bush(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
+                } else if (objType.equals("AreaLocation")) {
+                    System.out.println("Name of Area Location" + object.getName());
+                    add(level, new Location(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(), object.getName(), "todo descr"));
+
                 }
                 // System.out.println("type:" + object.getClass() + " " + object.getProperties().get("type") + " " + rectangle);
                 // EntityFactory.createEntityFromTileMapObject(Object obj)

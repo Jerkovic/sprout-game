@@ -1,14 +1,16 @@
 package com.binarybrains.sprout.locations;
 
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 
 // A Trigger point, location
-abstract class Location extends Entity {
+public class Location extends Entity {
 
     public String name, description;
 
@@ -18,8 +20,18 @@ abstract class Location extends Entity {
         this.description = description;
     }
 
+    @Override
+    public void containTrigger(Entity entity) {
+        if (entity instanceof Player) {
+            MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_LOCATION_REACHED, this);
+        }
+    }
 
-
-
+    @Override
+    public void leftContainTrigger(Entity entity) {
+        if (entity instanceof Player) {
+            MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_LOCATION_LEAVES, this);
+        }
+    }
 
 }

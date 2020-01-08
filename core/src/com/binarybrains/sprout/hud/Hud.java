@@ -36,6 +36,7 @@ import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.hud.tweens.CameraAccessor;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
+import com.binarybrains.sprout.locations.Location;
 import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 
@@ -114,6 +115,8 @@ public class Hud implements Telegraph {
                 TelegramType.PLAYER_STATS_RANK_INCREASED,
                 TelegramType.PLAYER_PASSED_OUT,
 
+                TelegramType.PLAYER_LOCATION_REACHED,
+
                 TelegramType.PLAYER_ACHIEVEMENT_UNLOCKED,
                 TelegramType.PLAYER_CRAFTING_SUCCESS,
                 TelegramType.PLAYER_CRAFTING_FAILURE,
@@ -153,6 +156,13 @@ public class Hud implements Telegraph {
                 timeLabel.setText(msg.extraInfo.toString());
                 fpsLabel.setText("FPS: " + Gdx.graphics.getFramesPerSecond());
                 break;
+            case TelegramType.PLAYER_LOCATION_REACHED:
+                Location location = (Location) msg.extraInfo;
+                speakDialog(location.name, location.description);
+                level.player.releaseKeys();
+                BackgroundMusic.stop();
+                break;
+
             default:
                 // code block
         }
@@ -214,11 +224,11 @@ public class Hud implements Telegraph {
         fadeActor.addAction(Actions.sequence(
                 Actions.alpha(0),
                 Actions.fadeIn(.5f, Interpolation.fade),
-                Actions.run(new Runnable() { public void run(){
+                Actions.run(() -> {
                     player.setTilePos(x,y);
                     player.getLevel().getCamera().setPosition(new Vector3(player.getX(), player.getY(), 0));
                     SproutGame.playSound("door_close1"); // todo different sounds
-                }}),
+                }),
                 Actions.fadeOut(.3f, Interpolation.fade)
         ));
 
@@ -238,19 +248,18 @@ public class Hud implements Telegraph {
                 Actions.alpha(0),
                 Actions.fadeIn(1f, Interpolation.fade),
                 Actions.delay(3.5f),
-                Actions.run(new Runnable() { public void run(){
+                Actions.run(() -> {
                     player.setTilePos(9,2); // bed hardcoded
                     player.getLevel().getCamera().setPosition(new Vector3(player.getX(), player.getY(), 0));
-                    //SproutGame.playSound("door_close1"); //
 
-                }}),
+                }),
                 Actions.fadeOut(1f, Interpolation.fade),
-                Actions.run(new Runnable() { public void run(){
+                Actions.run(() -> {
                     player.setHealth(90);
                     updateXP(player);
                     addToasterMessage("Oh no!", "You passed out and woke up in your bed...What happend?");
                     player.unFreezePlayerControl();
-                }})
+                })
         ));
 
     }
