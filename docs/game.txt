@@ -6,9 +6,14 @@ https://github.com/sndcode/stardewvalleycode/tree/master/Stardew%20Valley
 
 ________________________________________________________________________________
 
-TODOS: 
+TODOS:
+
+Bug in chest. Cannot close with activeItem in hand.
 
 Add missing wav files to git
+
+Graveyard_Keeper_ graphics_effects:
+https://www.gamasutra.com/blogs/SvyatoslavCherkasov/20181023/329151/Graveyard_Keeper_How_the_graphics_effects_are_made.php
 
 2d lights with "sprite lamp" normals
 
