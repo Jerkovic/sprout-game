@@ -8,9 +8,13 @@ ________________________________________________________________________________
 
 TODOS:
 
-Bug in chest. Cannot close with activeItem in hand.
+* Group "Picked up items"
 
-Add missing wav files to git
+* GrassTile, DirtTile etc etc.... how should we make a decision of what is what?
+
+* Add missing wav files to git
+
+* Inventory Management - heldItem should display item stack to the mouse pointer
 
 Graveyard_Keeper_ graphics_effects:
 https://www.gamasutra.com/blogs/SvyatoslavCherkasov/20181023/329151/Graveyard_Keeper_How_the_graphics_effects_are_made.php
@@ -30,15 +34,15 @@ new  Smoke particles (chimney) we have some ugly clouds for testing as of octobe
       see / https://github.com/raeleus/Particle-Park/tree/master/particles/packs
 
 
+* Bug in chest. Cannot close with activeItem in hand. (Fixed)
+
 * Shortcut keys Inventory slots (Fixed)
 
-* make shaking grass (see grass)
+* make shaking grass (we can do with shader?)(see grass)
 
-* bug we sometimes have multiple music tracks playing at the same time
+* bug we sometimes have multiple music tracks playing at the same time (CNR?)
 
 * Be able to plant Acorn seeds for new trees
-
-* Inventory Management - heldItem should display item stack to the mouse pointer
 
 * Mail queue
 
