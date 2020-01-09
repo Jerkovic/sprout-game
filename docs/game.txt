@@ -6,16 +6,25 @@ https://github.com/sndcode/stardewvalleycode/tree/master/Stardew%20Valley
 
 ________________________________________________________________________________
 
-TODOS:
+TODOS: 
 
-new - Add icons in Inventory tween/animate if incre/decre?
+Add missing wav files to git
 
-new - Chest Inventory // Splitpanels?
+2d lights with "sprite lamp" normals
 
+https://github.com/jacobbrunson/BasicLighting/blob/master/src/Main.java
+
+Generate village:
+https://watabou.itch.io/medieval-fantasy-city-generator
+
+Tiles:
+https://opengameart.org/content/grass-tileset-16x16
+
+----------------------
 new  Smoke particles (chimney) we have some ugly clouds for testing as of october 20 2017
       see / https://github.com/raeleus/Particle-Park/tree/master/particles/packs
 
-----------------------
+
 * Shortcut keys Inventory slots (Fixed)
 
 * make shaking grass (see grass)
@@ -77,7 +86,7 @@ new  Smoke particles (chimney) we have some ugly clouds for testing as of octobe
     * Carrying animation
     * Axe chopping(?)
 
-* New Emma animations
+* New Emma animations (Stole Haley Fixed)s
 
 * if a bomb explodes trees we need to see where the force came from to make the proper falling dir of the tree.
 
@@ -92,7 +101,7 @@ new  Smoke particles (chimney) we have some ugly clouds for testing as of octobe
   * Enter the house
   * Look at the flower (create flower)
 
-* Bug with NPC Pathfinding AI. Needs to be looked at.
+* Bug with NPC Pathfinding AI. Needs to be looked at. (Fixed)
 
 
 --------------------------NPC characters------------------------
