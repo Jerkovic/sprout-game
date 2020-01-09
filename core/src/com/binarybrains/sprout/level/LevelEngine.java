@@ -17,6 +17,7 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.house.Cottage;
 import com.binarybrains.sprout.entity.house.Tower;
+import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.entity.tree.Bush;
 import com.binarybrains.sprout.entity.tree.SmallTree;
 import com.binarybrains.sprout.entity.tree.Tree;
@@ -55,10 +56,10 @@ public abstract class LevelEngine {
     /**
      * Setups and create A*star
      */
-    public void setupPathFinding() {
+    public void setupPathFinding(Npc npc) {
         astar = new Astar(width, height) {
             protected boolean isValid (int x, int y) {
-                return getTile(x, y).mayPass; // && getEntitiesAtTile(x, y).size() == 0; //BUGGY
+                return getTile(x, y).mayPass && !isBlockingEntitiesAtTile(npc, x, y);
             }
         };
     }

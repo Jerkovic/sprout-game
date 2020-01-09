@@ -37,7 +37,6 @@ public class Emma extends Npc {
         setSpeed(24);
 
         stateMachine = new DefaultStateMachine<>(this, EmmaState.IDLE);
-        stateMachine.changeState(EmmaState.WALK_LABYRINTH);
     }
 
     @Override
