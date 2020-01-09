@@ -65,8 +65,6 @@ public class ChestWindow extends Dialog implements Telegraph {
         }
     }
 
-
-
     public void openChest(Chest chest) {
         clearChildren();
         container = new Container(skin);
@@ -121,7 +119,7 @@ public class ChestWindow extends Dialog implements Telegraph {
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // if (getHeldItem() != null) return;
+                if (heldItem != null) return;
                 hide();
                 player.getLevel().screen.hud.showInventory();
                 player.getLevel().screen.game.resume();
