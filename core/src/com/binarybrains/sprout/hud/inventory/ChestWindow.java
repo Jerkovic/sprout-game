@@ -5,16 +5,13 @@ import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.ButtonGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.binarybrains.sprout.SproutGame;
-import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
-import com.binarybrains.sprout.level.Level;
+import com.binarybrains.sprout.item.Item;
 
 public class ChestWindow extends Dialog implements Telegraph {
 
@@ -22,6 +19,8 @@ public class ChestWindow extends Dialog implements Telegraph {
     Player player;
     Container container;
     Container playerInventoryContainer;
+
+    private Item heldItem = null;
 
     public ChestWindow(Player player, Skin skin) {
         super("Chest", skin.get("dialog", WindowStyle.class));
@@ -32,6 +31,7 @@ public class ChestWindow extends Dialog implements Telegraph {
         this.player = player;
         this.skin = skin;
         setKeepWithinStage(true);
+
 
         // initialize ?
         setMovable(false);
@@ -56,14 +56,40 @@ public class ChestWindow extends Dialog implements Telegraph {
         setPosition(Gdx.graphics.getWidth() / 2 - getWidth() / 2, Gdx.graphics.getHeight() / 2 - getHeight()/2);
     }
 
+    private void setHeldItem(Item item) {
+        heldItem = item;
+        if (heldItem != null) {
+            player.getLevel().screen.hud.setMouseItem(item.getRegionId());
+        } else {
+            player.getLevel().screen.hud.removeMouseItem();
+        }
+    }
 
     public void openChest(Chest chest) {
         clearChildren();
-        this.container = new Container(skin);
-        this.container.connectInventory(chest.getInventory()); // hook up and refresh container table
+        container = new Container(skin);
+        container.refreshInventory(chest.getInventory()); // hook up and refresh container table
+        container.SetLeftClick(() -> {
+            int selected = container.getButtonGroup().getCheckedIndex();
+
+            if (heldItem != null) {
+                chest.getInventory().add(selected, heldItem);
+                container.refreshInventory(chest.getInventory());
+                setHeldItem(null);
+            }
+
+        });
 
         playerInventoryContainer = new Container(skin);
-        playerInventoryContainer.connectInventory(player.getInventory());
+        playerInventoryContainer.refreshInventory(player.getInventory());
+        playerInventoryContainer.SetLeftClick(() -> {
+            int selected = playerInventoryContainer.getButtonGroup().getCheckedIndex();
+            if (heldItem == null) {
+                setHeldItem(player.getInventory().getItems().get(selected));
+                player.getInventory().replace(playerInventoryContainer.getButtonGroup().getCheckedIndex(), null);
+                playerInventoryContainer.refreshInventory(player.getInventory());
+            }
+        });
 
         build(chest);
         centerMe();

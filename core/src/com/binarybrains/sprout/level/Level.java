@@ -290,9 +290,9 @@ public class Level extends LevelEngine {
             fbo.end();
         } else {
             fbo.begin();
-            Gdx.gl.glClearColor(0f,0f,0f,1f);
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            tileMapRenderer.getBatch().setShader(defaultShader);
+                Gdx.gl.glClearColor(0f,0f,0f,1f);
+                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+                tileMapRenderer.getBatch().setShader(defaultShader);
             fbo.end();
         }
         // end draw lights to fbo

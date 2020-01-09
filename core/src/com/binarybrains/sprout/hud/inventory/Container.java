@@ -22,6 +22,8 @@ public class Container extends Table {
     private ButtonGroup group;
     private TextureAtlas atlas;
 
+    private Runnable onLeftClick;
+
     public Container(Skin skin) {
         this.skin = skin;
         this.atlas = SproutGame.assets.get("items2.txt");
@@ -29,18 +31,27 @@ public class Container extends Table {
         build();
     }
 
+
     /**
-     * Connects UI to any external Inventory space the player should be able to interact with.
+     *
+     * @param runnable
+     */
+    public void SetLeftClick(Runnable runnable) {
+        onLeftClick = runnable;
+    }
+
+    /**
+     * Refresh / Connects UI to any external Inventory space the player should be able to interact with.
      * @param inventory
      */
-    public void connectInventory(Inventory inventory) {
+    public void refreshInventory(Inventory inventory) {
         clearChildren();
         syncInventory(inventory);
         build();
     }
 
     /**
-     * Run this after syncInventory
+     * Run this after refresh/syncInventory
      * @return
      */
     private Table build() {
@@ -49,6 +60,14 @@ public class Container extends Table {
             if ((i + 1) % 12 == 0) row();
         }
         return this;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public ButtonGroup getButtonGroup() {
+        return group;
     }
 
     /**
@@ -126,7 +145,10 @@ public class Container extends Table {
             button.addListener(new ClickListener(Input.Buttons.LEFT) {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-
+                    if (group.getCheckedIndex() > -1) {
+                        SproutGame.playSound("button_click", .5f, 0.9f, 1f);
+                        if (onLeftClick!= null) onLeftClick.run();
+                    }
                 }
             });
             button.pack();

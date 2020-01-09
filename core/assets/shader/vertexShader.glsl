@@ -10,3 +10,4 @@ void main() {
 	vTexCoord = a_texCoord0;
 	gl_Position = u_projTrans * a_position;		
 }
+

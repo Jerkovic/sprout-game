@@ -97,11 +97,6 @@ public class Hud implements Telegraph {
         inventoryWindow.onInventoryChanged(level.player.getInventory());
         stage.addActor(inventoryWindow);
 
-        chestManagementWindow = new ChestWindow(level.player, skin);
-        chestManagementWindow.setVisible(false);
-        chestManagementWindow.hide();
-        stage.addActor(chestManagementWindow);
-
         fadeRenderer = new ShapeRenderer();
         fadeActor.clearActions();
         fadeActor.setColor(Color.CLEAR);
@@ -115,6 +110,12 @@ public class Hud implements Telegraph {
                 return false;
             }
         });
+
+        chestManagementWindow = new ChestWindow(level.player, skin);
+        chestManagementWindow.setVisible(false);
+        chestManagementWindow.hide();
+        stage.addActor(chestManagementWindow);
+
 
         // Subscribe to events here
         MessageManager.getInstance().addListeners(this,
