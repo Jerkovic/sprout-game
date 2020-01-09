@@ -8,13 +8,15 @@ ________________________________________________________________________________
 
 TODOS:
 
+* Add missing wav files to git
+
 * Group "Picked up items"
 
 * GrassTile, DirtTile etc etc.... how should we make a decision of what is what?
 
-* Add missing wav files to git
-
 * Inventory Management - heldItem should display item stack to the mouse pointer
+
+* Wiki - Main story/quest, Characters, Maps, places, quests, weapons, items, dialogs etc.
 
 Graveyard_Keeper_ graphics_effects:
 https://www.gamasutra.com/blogs/SvyatoslavCherkasov/20181023/329151/Graveyard_Keeper_How_the_graphics_effects_are_made.php
@@ -391,4 +393,52 @@ Lvl: 47 Points: 1,128,000
 Lvl: 48 Points: 1,176,000
 Lvl: 49 Points: 1,225,000
 Lvl: 50 Points: 1,275,000
+
+----Secret Doors--------
+A trap door in the floor leads to a cellar/cave/dungeon
+A stone column and section of wall pivots open when a command word is spoken
+The door is located near the ceiling and opened by standing on a small floor tile switch
+A stone statue and section of wall pivots smoothly
+The door is located above a small stone dais and designed to make noise when opened
+A bookcase and section of wall pivots smoothly
+A section of wall makes a loud grinding noise as it pivots open
+A stone statue and section of wall makes a loud grinding noise as it pivots open
+The door is opened by twisting an iron ring
+
+----Dungeon walls graffiti------------
+"Trespassers will be flayed alive"
+"Sharpen thy axe and ready thy shield"
+"Gali was here"
+"Lili was here"
+"right, right, straight, right, left and then right again. "
+"I've forgotten my name"
+"The Steel Cup is wreathed in flames"
+"Banke Arundson died here"
+"Homer was not here"
+
+----Weapons---
+Demoncutter, an ornate battleaxe engraved with runes of destruction. It is said to have once belonged to a forgotten god of war.
+Skytooth, a magical ???trident which was created by a Dwarf for his most loyal hero.
+Flamecleaver, a finely crafted scythe which was taken from the hoard of the dragon Bala.
+Skullbiter, a shortbow engraved with the holy symbol of an undead goddess. It once belonged to the dwarf warrior Zaghor,
+Ethernal Tyrant - a masterwork mace engraved with the some ancient marks. It is said to lead the one who wields it to wealth and glory.
+Warslicer, a legendary sword engraved with words of vengeance. No one really knows where it comes from.
+
+---Quests-----
+Find the dwarf named Zaghor.
+A wanderer called Eston seeks a company of adventurers to hunt down and capture the notorious highwayman known as The Panther last seen in the woods. (However, his information is completely wrong).
+A "priest" (a thief) seeks your company  to steal a caravan of exotic goods from a rival.
+
+
+NPCs
+------------------
+Alvar - Male Human Peasant, Good. Altes is short and heavyset, with long white hair and narrow green eyes. He wears modest garments and carries a willow staff. Alvar is a pack-rat, and carries a satchel of random junk.
+
+Elen: Female Human Merchant, Evil. Elen is overweight, with matted brown hair and blue eyes. She wears plain clothing and riding boots.
+
+Lasym: Male Human Entertainer, Sneaky. Lasym is short, with matted golden hair and dark amber eyes. He wears expensive clothing and silk gloves. Lasym is haunted by the memories of a past life.
+
+Eston: Male Human Bounty hunter. He is a Poor hunter.
+
+Poniosost - A thief, a very good thief.
 
