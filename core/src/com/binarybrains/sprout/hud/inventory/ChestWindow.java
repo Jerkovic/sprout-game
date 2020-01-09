@@ -65,6 +65,8 @@ public class ChestWindow extends Dialog implements Telegraph {
         }
     }
 
+
+
     public void openChest(Chest chest) {
         clearChildren();
         container = new Container(skin);
@@ -73,22 +75,40 @@ public class ChestWindow extends Dialog implements Telegraph {
             int selected = container.getButtonGroup().getCheckedIndex();
 
             if (heldItem != null) {
-                chest.getInventory().add(selected, heldItem);
-                container.refreshInventory(chest.getInventory());
-                setHeldItem(null);
-            }
+                if (chest.getInventory().getItems().get(selected) == null) {
+                    chest.getInventory().add(selected, heldItem);
+                    setHeldItem(null);
+                } else {
+                    Item item = chest.getInventory().replace(selected, heldItem);
+                    setHeldItem(item);
+                }
+            } else {
+                setHeldItem(chest.getInventory().getItems().get(selected));
+                chest.getInventory().replace(container.getButtonGroup().getCheckedIndex(), null);
 
+            }
+            container.refreshInventory(chest.getInventory());
         });
 
         playerInventoryContainer = new Container(skin);
         playerInventoryContainer.refreshInventory(player.getInventory());
         playerInventoryContainer.SetLeftClick(() -> {
             int selected = playerInventoryContainer.getButtonGroup().getCheckedIndex();
+
             if (heldItem == null) {
                 setHeldItem(player.getInventory().getItems().get(selected));
                 player.getInventory().replace(playerInventoryContainer.getButtonGroup().getCheckedIndex(), null);
-                playerInventoryContainer.refreshInventory(player.getInventory());
+
+            } else {
+                if (player.getInventory().getItems().get(selected) == null) {
+                    player.getInventory().add(selected, heldItem);
+                    setHeldItem(null);
+                } else {
+                    Item item = player.getInventory().replace(selected, heldItem);
+                    setHeldItem(item);
+                }
             }
+            playerInventoryContainer.refreshInventory(player.getInventory());
         });
 
         build(chest);
