@@ -28,6 +28,7 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.events.*;
 import com.binarybrains.sprout.experience.LevelRank;
+import com.binarybrains.sprout.hud.components.LocationLabel;
 import com.binarybrains.sprout.hud.inventory.ChestWindow;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryManagementWindow;
@@ -63,6 +64,8 @@ public class Hud implements Telegraph {
     InventoryManagementWindow inventoryManagementWindow;
     ChestWindow chestManagementWindow;
 
+    private LocationLabel locationLabel; // location area indicator label
+
     public int notificationsInHud = 0;
     public Image mouseItem;
 
@@ -72,6 +75,10 @@ public class Hud implements Telegraph {
 
         stage = new Stage(new ScreenViewport());
         atlas = SproutGame.assets.get("items2.txt");
+
+        locationLabel = new LocationLabel("Welcome to xx", skin, "default");
+        locationLabel.setVisible(true);
+        stage.addActor(locationLabel);
 
         craftingWindow = new CraftingWindow(level.player,"Crafting", skin);
         craftingWindow.setVisible(false);
@@ -158,9 +165,11 @@ public class Hud implements Telegraph {
                 break;
             case TelegramType.PLAYER_LOCATION_REACHED:
                 Location location = (Location) msg.extraInfo;
-                speakDialog(location.name, location.description);
-                level.player.releaseKeys();
-                BackgroundMusic.stop();
+                locationLabel.setText(location.name);
+                locationLabel.setVisible(true);
+                // speakDialog(location.name, location.description);
+                // level.player.releaseKeys();
+                // BackgroundMusic.stop();
                 break;
 
             default:
@@ -516,7 +525,6 @@ public class Hud implements Telegraph {
         window.setPosition(10, Gdx.app.getGraphics().getHeight() - window.getHeight()-10);
         stage.addActor(window);
     }
-
 
     public Stage getStage() {
         return stage;

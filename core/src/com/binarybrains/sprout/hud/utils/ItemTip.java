@@ -24,7 +24,6 @@ public class ItemTip {
         Label lbld = new Label(item.getDescription(), skin);
         lbld.setColor(0,0,0,0.85f);
 
-
         tooltipTable.add(lbl).expandX().left();
         tooltipTable.row();
         tooltipTable.add(lbld).left();
