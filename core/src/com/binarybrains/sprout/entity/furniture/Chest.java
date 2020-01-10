@@ -57,8 +57,12 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
         System.out.println("Use chest");
         if (!carried) {
             isOpen = !isOpen;
-            SproutGame.playSound("open_chest", .4f);
-            if (isOpen) player.getLevel().screen.hud.showChestManagementWindow(this);
+            if (isOpen) {
+                SproutGame.playSound("open_chest", .4f);
+                player.getLevel().screen.hud.showChestManagementWindow(this);
+            } else {
+                SproutGame.playSound("close_chest", .5f);
+            }
         }
         return true;
     }
