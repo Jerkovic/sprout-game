@@ -8,7 +8,10 @@ ________________________________________________________________________________
 
 TODOS:
 
-* Add missing wav files to git
+* Fonts
+  - Rittswood Redstar (window longer text)
+  - SF Willamette (Window title, buttons)
+
 
 * Skin composer. Create new ui skin theme?
 
@@ -24,6 +27,9 @@ TODOS:
 * Inventory Management - heldItem should display item stack to the mouse pointer
 
 * Wiki - for Main story/quest, Characters, Maps, places, quests, weapons, items, dialogs etc.
+
+* Add missing wav files to git (Fixed)
+
 
 Graveyard_Keeper_ graphics_effects:
 https://www.gamasutra.com/blogs/SvyatoslavCherkasov/20181023/329151/Graveyard_Keeper_How_the_graphics_effects_are_made.php
