@@ -59,7 +59,7 @@ public class ChestWindow extends Dialog implements Telegraph {
     private void setHeldItem(Item item) {
         heldItem = item;
         if (heldItem != null) {
-            player.getLevel().screen.hud.setMouseItem(item.getRegionId());
+            player.getLevel().screen.hud.setMouseItem(item.getRegionId(), "");
         } else {
             player.getLevel().screen.hud.removeMouseItem();
         }

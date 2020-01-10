@@ -51,7 +51,7 @@ import java.util.Map;
 public class Hud implements Telegraph {
 
     Stage stage;
-    Label timeLabel, moneyLabel, xpLabel;
+    Label timeLabel, moneyLabel, xpLabel, lc;
     Level level;
     Skin skin;
     Label fpsLabel;
@@ -81,7 +81,16 @@ public class Hud implements Telegraph {
 
         locationLabel = new LocationLabel("Welcome to Bearshade Creek", skin, "default");
         locationLabel.setVisible(true);
+
         stage.addActor(locationLabel);
+
+        // mouse
+        lc = new Label("", skin);
+        lc.setAlignment(Align.bottomRight);
+        lc.setColor(250, 250, 250, 1f);
+        stage.addActor(lc);
+
+
 
         craftingWindow = new CraftingWindow(level.player,"Crafting", skin);
         craftingWindow.setVisible(false);
@@ -138,6 +147,15 @@ public class Hud implements Telegraph {
         );
     }
 
+    /**
+     *
+     * @param text
+     */
+    public void setMousePointerLabel(String text) {
+        lc.setText(text);
+        lc.setVisible(true);
+    }
+
     @Override
     public boolean handleMessage(Telegram msg) {
         // System.out.println("HUD got msg " + msg.message);
@@ -182,16 +200,19 @@ public class Hud implements Telegraph {
         return false;
     }
 
-    public void setMouseItem(String regionId) {
+    public void setMouseItem(String regionId, String mpLabel) {
         removeMouseItem();
         mouseItem = new Image(atlas.findRegion(regionId));
+        setMousePointerLabel(mpLabel);
         getStage().addActor(mouseItem);
     }
 
     public void removeMouseItem() {
-        if (mouseItem != null)
+        if (mouseItem != null) {
+            lc.setVisible(false);
             mouseItem.remove();
             mouseItem = null;
+        }
     }
 
     public void flash() {
@@ -280,11 +301,13 @@ public class Hud implements Telegraph {
     public void hideMouseItem() {
         if (mouseItem == null) return;
         mouseItem.setVisible(false);
+        lc.setVisible(true);
     }
 
     public void showMouseItem() {
         if (mouseItem == null) return;
         mouseItem.setVisible(true);
+        lc.setVisible(true);
     }
 
     public void showCraftingWindow() {
@@ -612,14 +635,16 @@ public class Hud implements Telegraph {
         int xp = player.getStats().get("xp");
         LevelRank rank = LevelRank.getLevelProgression(xp);
         xpLabel.setText("XP: " + numberFormat.format(xp) + " Level: " + rank.getCurrentLevel());
-
         levelBar.setValue(rank.getProgress());
     }
 
     public void act(float delta) {
         // temp mouseItem
         if (mouseItem != null) {
+
             mouseItem.setPosition(Gdx.input.getX(), Gdx.app.getGraphics().getHeight() - Gdx.input.getY());
+            lc.setZIndex(100);
+            lc.setPosition(Gdx.input.getX(), Gdx.app.getGraphics().getHeight() - Gdx.input.getY());
         }
         stage.act(delta);
         fadeActor.act(delta);

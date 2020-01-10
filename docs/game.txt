@@ -8,7 +8,10 @@ ________________________________________________________________________________
 
 TODOS:
 
-*  jrebel (hot reload)
+*  jrebel (hot reload) look into
+
+* Inventory Management - heldItem should display item stack to the mouse pointer
+    - Make merge to class mouseItem and lc label in HUd
 
 * Cleanup hud
 
@@ -25,7 +28,7 @@ TODOS:
 
 * GrassTile, DirtTile etc etc.... how should we make a decision of what is what?
 
-* Inventory Management - heldItem should display item stack to the mouse pointer
+
 
 * Wiki - for Main story/quest, Characters, Maps, places, quests, weapons, items, dialogs etc.
 

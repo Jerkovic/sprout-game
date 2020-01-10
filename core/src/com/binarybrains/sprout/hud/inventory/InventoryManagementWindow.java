@@ -196,7 +196,7 @@ public class InventoryManagementWindow extends Dialog {
     private void setHeldItem(Item item) {
         heldItem = item;
         if (item != null) {
-            level.screen.hud.setMouseItem(item.getRegionId());
+            level.screen.hud.setMouseItem(item.getRegionId(), "");
         } else {
             level.screen.hud.removeMouseItem();
         }
