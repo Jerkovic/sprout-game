@@ -17,7 +17,7 @@ public class ActorAccessor implements TweenAccessor<Actor>
             case POSITION_XY:
                 returnValues[0] = target.getX();
                 returnValues[1] = target.getY();
-                return 2;
+                return 1;
 
             case SCALE_XY:
                 returnValues[0] = target.getX();
@@ -25,7 +25,7 @@ public class ActorAccessor implements TweenAccessor<Actor>
                 return 2;
             case ALPHA:
                 returnValues[0] = target.getColor().a;
-                return 1;
+                return 3;
             default:
                 assert false;
                 return -1;

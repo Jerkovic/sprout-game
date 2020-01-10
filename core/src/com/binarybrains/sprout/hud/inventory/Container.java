@@ -119,8 +119,6 @@ public class Container extends Table {
                 overlay.add(lc).expand().fillX().bottom().left();
                 stack.add(overlay);
             }
-            stack.layout();
-            button.add(stack);
 
             if (item != null) {
                 Tooltip toolTip = new Tooltip(ItemTip.createTooltipTable(skin, item));
@@ -129,6 +127,10 @@ public class Container extends Table {
                 toolTip.hide();
                 button.addListener(toolTip);
             }
+
+            stack.layout();
+            button.add(stack);
+
             slotIndex++;
 
             // Right click

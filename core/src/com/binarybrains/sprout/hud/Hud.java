@@ -5,7 +5,6 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
@@ -20,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
@@ -28,12 +28,13 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.events.*;
 import com.binarybrains.sprout.experience.LevelRank;
+import com.binarybrains.sprout.hud.components.ItemButton;
+import com.binarybrains.sprout.hud.components.ItemToaster;
 import com.binarybrains.sprout.hud.components.LocationLabel;
 import com.binarybrains.sprout.hud.inventory.ChestWindow;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryManagementWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryWindow;
-import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.hud.tweens.CameraAccessor;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
@@ -42,7 +43,9 @@ import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 
 import java.text.NumberFormat;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class Hud implements Telegraph {
@@ -347,47 +350,45 @@ public class Hud implements Telegraph {
         // action que from our Pinball game will do
         // the newest should be rendered from the top down
         // and a window should disappear after 4 secs
+        // use Pooling here
         buildNotificationsWindow(item);
     }
 
-    // a test right now
+
+    private Map<String, ItemToaster> itemNotifications = new HashMap<String, ItemToaster>();
+
+
+    // a test right now- should be pooled
     public void buildNotificationsWindow(Item item) {
-        final Window window = new Window("Picked up", skin);
-        window.getTitleLabel().setColor(0,0,0,.65f);
-        window.setRound(false);
-        window.setKeepWithinStage(false);
-        window.setPosition(20, -90);
-        window.setMovable(false);
-        window.row();
 
-        Image icon = new Image(atlas.findRegion(item.getRegionId()));
+        if (!itemNotifications.containsKey(item.getName())) {
 
-        Label notLabel = new Label(item.getNotificationText(), skin);
-        notLabel.setColor(0,0,0, .65f);
-        notLabel.setWrap(false);
-        notLabel.setWidth(260);
-        notLabel.setEllipsis(true);
-        notLabel.pack();
+            TextureAtlas.AtlasRegion icon = atlas.findRegion(item.getRegionId());
+            ItemToaster notificationToaster = new ItemToaster(skin, item, new Image(icon), (notificationsInHud++ * 75) + 90);
+            stage.addActor(notificationToaster);
+            itemNotifications.put(item.getName(), notificationToaster);
 
-        window.add(icon).width(48);
-        window.add(notLabel).pad(8f).expandX().fillX();
-        window.row();
-        window.pack();
+            notificationToaster.addAction(Actions.sequence(
+                    Actions.alpha(0f),
+                    Actions.visible(true),
+                    Actions.parallel(
+                            Actions.alpha(1f, .4f, Interpolation.fade)
+                    ),
+                    Actions.delay(2f),
+                    Actions.parallel(
+                            Actions.alpha(0f, .2f, Interpolation.fade)
+                    ),
+                    Actions.run(() -> {
+                        notificationToaster.remove();
+                        notificationsInHud--;
+                        itemNotifications.remove(item.getName());
+                    })
+            ));
+        } else {
+            ItemToaster it = itemNotifications.get(item.getName());
+            it.increaseItemCounter(1);
+        }
 
-        stage.addActor(window);
-
-        // this should be grouped in some clever way.. no need to spawn 6 wood pickups
-        int hudPosition = (notificationsInHud++ * 75) + 90;
-        Tween.to(window, ActorAccessor.POSITION_XY, 2.1f).target(20, hudPosition).ease(TweenEquations.easeOutElastic).delay(0.25f)
-        .setCallback(new TweenCallback() {
-
-            @Override
-            public void onEvent(int type, BaseTween<?> source) {
-                window.remove();
-                notificationsInHud = -1;
-            }
-
-        }).start(SproutGame.getTweenManager());
     }
 
     /**
