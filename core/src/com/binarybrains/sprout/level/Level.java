@@ -30,7 +30,9 @@ import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.EmmaState;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.item.ArtifactItem;
+import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
+import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
@@ -223,7 +225,7 @@ public class Level extends LevelEngine {
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            SproutGame.playSound("pickup_fanfar", .45f);
+            // SproutGame.playSound("pickup_fanfar", .45f);
             player.setDirection(Mob.Direction.SOUTH);
             player.setCarriedItem(new TemporaryCarriedItem(player.getLevel(), new ArtifactItem(Artifacts.backpack)));
             player.freezePlayerControl();
@@ -236,10 +238,13 @@ public class Level extends LevelEngine {
                         player.inventory.upgrade(); // test upgrade backpack
                         screen.hud.refreshInventory();
                         screen.hud.addToasterMessage("Inventory Upgrade", "You were awarded a backpack.");
-                        screen.hud.moveCamera(600, 1000);
-
                     }})
             ));
+
+            int count = MathUtils.random(2, 6);
+            for (int i = 0; i < count; i++) {
+                player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resources.cloth), new Vector2(player.getPosition().x, player.getPosition().y)));
+            }
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT)) {
