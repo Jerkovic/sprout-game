@@ -29,7 +29,6 @@ TODOS:
 * GrassTile, DirtTile etc etc.... how should we make a decision of what is what?
 
 
-
 * Wiki - for Main story/quest, Characters, Maps, places, quests, weapons, items, dialogs etc.
 
 * Add missing wav files to git (Fixed)

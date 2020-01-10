@@ -20,7 +20,7 @@ public class Resources {
 
     public static Resource diamond = new Resource("Diamond", "A very valuable gem.", 15850);
 
-    public static Resource acorn = new Resource("Acorn", "Fruit of the oak, a smooth oval nut in a rough cuplike base.", 1);
+
 
     public static Resource wool = new Resource("Wool", "Wool is the textile fiber obtained from sheep.", 40);
     public static Resource cloth = new Resource("Cloth", "Textile obtained from whool", 200);
@@ -41,5 +41,6 @@ public class Resources {
     public static Resource cocktail = new FoodResource("Cocktail", "The trinity cocktail will heal you.", 30);
 
     public static Resource seeds = new SeedResource("Seed Bag", "A bag of mixed seeds", 21);
+    public static Resource acorn = new SeedResource("Acorn", "Fruit of the oak, a smooth oval nut in a rough cuplike base.", 1);
 
 }
