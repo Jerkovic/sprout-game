@@ -57,7 +57,7 @@ public class Bomb extends Entity implements Portable {
         time++;
         if (!explode && time >= lifeTime) {
             explode = true;
-            SproutGame.playSound("bomb_explosion");
+            SproutGame.playSound("bomb_explosion", .5f);
             getLevel().getCamera().shake();
 
             List<Entity> entities = getLevel().getEntities(new Rectangle(getCenterPos().x - 48,getCenterPos().y -48, 48*2, 48*2));
