@@ -146,14 +146,22 @@ public class Emma extends Npc {
                     this.getClass().getSimpleName(),
                     String.format("Ohh! Is that my long lost %s? I have really missed him! Thank you!", item.getName())
             ); */
+            // this is a bunch of states right?
 
-            jump();
+            addAction(Actions.sequence(
+                    Actions.run(() -> {
+                        jump();
+                        ArtifactItem ai = (ArtifactItem) player.activeItem;
+                        player.getInventory().removeItem(ai);
+                        player.getLevel().screen.hud.refreshInventory();
 
-            ArtifactItem ai = (ArtifactItem) player.activeItem;
-            //player.getInventory().removeItem(ai);
-            player.getLevel().screen.hud.refreshInventory();
+                    }),
+                    Actions.delay(5),
+                    Actions.run(() -> {
+                        stateMachine.changeState(EmmaState.GOTO_TREE);
+                    })
+            ));
 
-            //stateMachine.changeState(EmmaState.GOTO_TREE);
             return true;
         } else {
             player.getLevel().screen.hud.speakDialog(

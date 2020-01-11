@@ -25,6 +25,10 @@ public abstract class Recipe implements ListItem {
         this.resultItem = resultTemplate;
     }
 
+    /**
+     * Not good enough? do we need criterias here like achievements?
+     * @return
+     */
     public Recipe setLocked() {
         this.isUnlocked = false;
         return this;
@@ -52,7 +56,6 @@ public abstract class Recipe implements ListItem {
         return xp;
     }
 
-
     public Recipe setRemoveRecipeOnCrafted() {
         this.removeRecipeOnCraft = true;
         return this;
@@ -75,8 +78,11 @@ public abstract class Recipe implements ListItem {
         return resultItem;
     }
 
+    /**
+     * Check that the incoming container has all the stuffs needed for crafting
+     * @param inventory
+     */
     public void checkCanCraft(Inventory inventory) {
-
         if (this instanceof ToolUpgradeRecipe) {
             // the inventory must have a previous level of that tool
             ToolItem upgrade = ((ToolItem) this.resultItem);
@@ -88,9 +94,7 @@ public abstract class Recipe implements ListItem {
                 canCraft = false;
                 return;
             }
-
         }
-
         for (int i = 0; i < costs.size(); i++) {
             Item item = costs.get(i);
             if (item instanceof ResourceItem) {
@@ -101,7 +105,6 @@ public abstract class Recipe implements ListItem {
                 }
             }
         }
-
         canCraft = true;
     }
 

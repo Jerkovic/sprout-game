@@ -6,8 +6,14 @@ public class FurnitureItem extends Item {
 
     Furniture furniture;
 
-    public FurnitureItem(Furniture furniture, int level) {
+    public FurnitureItem(Furniture furniture, int level)
+    {
         this.furniture = furniture;
+    }
+
+    @Override
+    public boolean interact() {
+        return false;
     }
 
     @Override
@@ -29,6 +35,7 @@ public class FurnitureItem extends Item {
     public String getCategory() {
         return "Crafting Station";
     }
+
 
 }
 

@@ -10,12 +10,14 @@ TODOS:
 
 * NPC jump can be fucked up by interac with it.
 
-*  jrebel (hot reload) look into
+* jrebel (hot reload) look into
 
 * Inventory Management - heldItem should display item stack to the mouse pointer
     - Make merge to class mouseItem and lc label in HUd
 
 * Cleanup hud
+
+* Implement jump sound.
 
 * Added pooling where needed.
 
@@ -114,7 +116,7 @@ new  Smoke particles (chimney) we have some ugly clouds for testing as of octobe
     * Carrying animation
     * Axe chopping(?)
 
-* New Emma animations (Stole Haley Fixed)s
+* New Emma animations (Stole Haley - Fixed)
 
 * if a bomb explodes trees we need to see where the force came from to make the proper falling dir of the tree.
 

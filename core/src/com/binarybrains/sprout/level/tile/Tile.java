@@ -1,6 +1,7 @@
 package com.binarybrains.sprout.level.tile;
 
 
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
@@ -68,9 +69,14 @@ public class Tile {
         if (item != null) {
             System.out.println(player + " Interact with tile " + this + " using " + item);
 
+            item.interact();
+
+            // Does they implement the interface we need to see if
             // portables instead of getname?
             if (item.getName().equals("Bomb") && mayPass &&  !player.getLevel().isBlockingEntitiesAtTile(player, xt, yt)) {
                 // move this into a player method ?
+                SproutGame.playSound("bump_against", .6f);
+
                 player.getInventory().removeResource(((ResourceItem) item).resource, 1);
                 player.getLevel().screen.hud.refreshInventory();
 
@@ -80,7 +86,11 @@ public class Tile {
 
             if (item.getName().equals("Furnace") && mayPass && player.getLevel().getEntitiesAtTile(xt, yt).size() == 0) {
                 // move this into a player method ?
+                SproutGame.playSound("bump_against", .6f);
+
                 player.getLevel().add(player.getLevel(), new Furnace(player.getLevel(), xt, yt));
+                player.getInventory().removeItem(player.getActiveItem());
+                player.getLevel().screen.hud.refreshInventory();
                 return true;
             }
         }

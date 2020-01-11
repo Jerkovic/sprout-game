@@ -6,10 +6,7 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
-import com.binarybrains.sprout.item.artifact.Key;
-import com.binarybrains.sprout.item.furniture.Furniture;
 import com.binarybrains.sprout.item.furniture.Furnitures;
-import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.*;
 

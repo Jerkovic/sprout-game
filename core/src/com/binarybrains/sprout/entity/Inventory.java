@@ -3,9 +3,11 @@ package com.binarybrains.sprout.entity;
 
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.binarybrains.sprout.events.TelegramType;
+import com.binarybrains.sprout.item.FurnitureItem;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
+import com.binarybrains.sprout.item.furniture.Furniture;
 import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.resource.Resources;
 
@@ -198,17 +200,16 @@ public class Inventory {
             if (ri != null) {
                 return true;
             }
-
             // new resource
             if (!isFull()) {
                 return true;
             }
-        } else {
+        } else { // other than resource items
             int count = 0;
             for (int i = 0; i < items.size(); i++) {
                 if (items.get(i) != null && items.get(i).matches(item)) count++;
             }
-            if (count > 0) {
+            if (count > 0 && !(item instanceof FurnitureItem)) {
                 return false;
             }
 

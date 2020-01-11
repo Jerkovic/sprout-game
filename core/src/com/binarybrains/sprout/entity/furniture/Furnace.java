@@ -39,7 +39,7 @@ public class Furnace extends Entity implements Portable {
     @Override
     public boolean use(Player player, Mob.Direction attackDir) {
         player.getLevel().screen.hud.showCraftingWindow();
-        SproutGame.playSound("fuse", 1f, MathUtils.random(0.75f, 0.85f), 1f);
+        // SproutGame.playSound("fuse", 1f, MathUtils.random(0.75f, 0.85f), 1f);
         return true;
     }
 
