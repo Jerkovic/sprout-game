@@ -48,7 +48,6 @@ public class ItemToaster extends Table {
         itemLabel.setColor(0,0, 0, .6f);
         itemLabel.setAlignment(Align.left);
 
-
         pad(5).background("default-round");
         setWidth(260);
         setHeight(48);

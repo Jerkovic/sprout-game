@@ -8,7 +8,6 @@ public class ArtifactItem extends Item implements Portable {
 
     private Artifact artifact;
     private boolean carried = false;
-    private TextureRegion region;
 
     public ArtifactItem(Artifact artifact) {
         this.artifact = artifact;

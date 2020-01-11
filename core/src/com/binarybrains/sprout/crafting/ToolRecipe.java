@@ -17,7 +17,6 @@ public class ToolRecipe extends Recipe {
 
     @Override
     public void craft(Inventory inventory) {
-
         inventory.add(new ToolItem(tool, level));
     }
 

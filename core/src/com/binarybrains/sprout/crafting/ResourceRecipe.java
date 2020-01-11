@@ -13,7 +13,6 @@ public class ResourceRecipe extends Recipe {
     }
 
     public void craft(Inventory inventory) {
-
         inventory.add(new ResourceItem(resource, 1));
     }
 

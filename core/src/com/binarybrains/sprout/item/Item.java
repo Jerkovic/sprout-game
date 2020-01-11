@@ -5,9 +5,7 @@ import com.binarybrains.sprout.entity.ItemEntity;
 public abstract class Item implements ListItem {
 
     private String regionId;
-
     private String category; // Tool, Artifact, Resource->Food|Plantable|Seed
-
     public int sellAmount;
     public int buyAmount;
 

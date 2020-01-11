@@ -54,7 +54,6 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
 
     @Override
     public boolean use(Player player, Mob.Direction attackDir) {
-        System.out.println("Use chest");
         if (!carried) {
             isOpen = !isOpen;
             if (isOpen) {

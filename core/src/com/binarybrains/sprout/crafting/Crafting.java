@@ -7,6 +7,9 @@ import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.artifact.Key;
+import com.binarybrains.sprout.item.furniture.Furniture;
+import com.binarybrains.sprout.item.furniture.Furnitures;
+import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.*;
 
@@ -42,8 +45,13 @@ public class Crafting {
             workbenchRecipes.add(new ToolRecipe(new FishingPole(), 0).addCost(Resources.ironBar, 1).addCost(Resources.stick, 1).addCost(Resources.string, 1));
             // workbenchRecipes.add(new ToolRecipe(new Key(), 0).addCost(Resources.ironBar, 2).setRemoveRecipeOnCrafted().setLocked());
 
+            // basic furnace
+            workbenchRecipes.add(new FurnitureRecipe(Furnitures.furnace, 0).addCost(Resources.wood, 30).addCost(Resources.stone, 20).setXP(500));
+
 
             workbenchRecipes.add(new ResourceRecipe(Resources.cloth).addCost(Resources.wool, 3).setXP(200));
+
+
 
             workbenchRecipes.add(new ResourceRecipe(Resources.cider).addCost(Resources.apple, 17).setXP(175));
             workbenchRecipes.add(new ResourceRecipe(Resources.cocktail).addCost(Resources.banana, 1).addCost(Resources.apple, 1).addCost(Resources.coconut, 1)); // todo add more
