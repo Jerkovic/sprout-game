@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.item.furniture;
 
-import com.binarybrains.sprout.item.resource.Resource;
 
 public class Furnitures {
 

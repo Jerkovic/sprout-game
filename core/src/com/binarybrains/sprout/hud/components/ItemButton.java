@@ -1,5 +1,8 @@
 package com.binarybrains.sprout.hud.components;
 
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.hud.utils.ItemTip;
@@ -16,11 +19,16 @@ public class ItemButton extends Button {
     private Item item;
     private Image icon;
     private int cnt = 0;
-    private boolean tooltip = true;
-
     private Label lc;
 
-
+    /**
+     *
+     * @param skin
+     * @param item
+     * @param icon
+     * @param cnt
+     * @param slotIndex
+     */
     public ItemButton(Skin skin, Item item, Image icon, int cnt, int slotIndex) {
         super(skin, "default");
         this.item = item;
@@ -30,16 +38,19 @@ public class ItemButton extends Button {
         init();
     }
 
-    public void setCountLabel(int val) {
-        lc.setText("" + val);
+    private void animate(Actor actor) {
+        actor.clearActions();
+        actor.setOrigin(Align.center);
+        actor.addAction(Actions.sequence(
+                Actions.scaleTo(1.25f, 1.25f, .35f, Interpolation.pow2Out),
+                Actions.scaleTo(1f, 1f, .25f, Interpolation.pow2In)
+        ));
     }
 
-    /**
-     * Use tooltip for this button
-     * @param tooltip
-     */
-    public void setTooltip(boolean tooltip) {
-        this.tooltip = tooltip;
+    public void setCountLabel(int val)
+    {
+        lc.setText("" + val);
+        animate(icon);
     }
 
     /**
@@ -52,12 +63,6 @@ public class ItemButton extends Button {
         String counter = "";
         if (item instanceof ResourceItem && cnt > 0) { // > 0 here but > 1 elsewhere
             counter = "" + cnt;
-            showStack = true;
-        }
-
-        if (item instanceof ToolItem && ((ToolItem) item).tool instanceof WateringCan) {
-            Tool tool = ((ToolItem) item).tool;
-            counter = "" + ((WateringCan) tool).getWater() + "%";
             showStack = true;
         }
 
@@ -75,15 +80,6 @@ public class ItemButton extends Button {
             overlay.add(lc).expand().fillX().bottom().left();
             stack.add(overlay);
         }
-
-        if (item != null && tooltip) {
-            Tooltip toolTip = new Tooltip(ItemTip.createTooltipTable(skin, item));
-            toolTip.getManager().animations = false;
-            toolTip.setInstant(true);
-            toolTip.hide();
-            addListener(toolTip);
-        }
-
         stack.layout();
         add(stack);
     }

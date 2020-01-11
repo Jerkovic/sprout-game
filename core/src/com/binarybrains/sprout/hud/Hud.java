@@ -396,9 +396,9 @@ public class Hud implements Telegraph {
                     Actions.parallel(
                             Actions.alpha(1f, .4f, Interpolation.fade)
                     ),
-                    Actions.delay(2f),
+                    Actions.delay(3f),
                     Actions.parallel(
-                            Actions.alpha(0f, .2f, Interpolation.fade)
+                            Actions.alpha(0f, .1f, Interpolation.fade)
                     ),
                     Actions.run(() -> {
                         notificationToaster.remove();
@@ -411,6 +411,15 @@ public class Hud implements Telegraph {
             it.increaseItemCounter(1);
         }
 
+    }
+
+    private void testAnimate(Actor actor) {
+        actor.clearActions();
+        actor.setOrigin(Align.center);
+        actor.addAction(Actions.sequence(
+                Actions.scaleTo(1.25f, 1.25f, .15f),
+                Actions.scaleTo(1f, 1f, .10f)
+        ));
     }
 
     /**

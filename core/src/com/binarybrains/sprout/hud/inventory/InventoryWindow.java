@@ -134,18 +134,9 @@ public class InventoryWindow extends Window {
     }
 
     /**
-     *
-     * @param actor
+     * Sync inv
+     * @param inventory
      */
-    private void testAnimate(Actor actor) {
-        actor.clearActions();
-        actor.setOrigin(Align.center);
-        actor.addAction(Actions.sequence(
-                Actions.scaleTo(1.25f, 1.25f, .25f),
-                Actions.scaleTo(1f, 1f, .20f)
-        ));
-    }
-
     private void syncInventory(final Inventory inventory) {
         group.clear();
         String selected = "";
@@ -180,7 +171,7 @@ public class InventoryWindow extends Window {
             }
             if (icon != null) {
                 Image image = new Image(icon);
-                testAnimate(image);
+                // testAnimate(image);
                 stack.add(image);
             } else {
                 stack.add(new Label("n/a", skin)); // should not happen

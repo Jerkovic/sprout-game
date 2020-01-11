@@ -5,6 +5,7 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.bomb.Bomb;
+import com.binarybrains.sprout.entity.furniture.Furnace;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.level.Level;
@@ -67,12 +68,19 @@ public class Tile {
         if (item != null) {
             System.out.println(player + " Interact with tile " + this + " using " + item);
 
+            // portables instead of getname?
             if (item.getName().equals("Bomb") && mayPass &&  !player.getLevel().isBlockingEntitiesAtTile(player, xt, yt)) {
                 // move this into a player method ?
                 player.getInventory().removeResource(((ResourceItem) item).resource, 1);
                 player.getLevel().screen.hud.refreshInventory();
 
                 player.getLevel().add(player.getLevel(), new Bomb(player.getLevel(), xt, yt));
+                return true;
+            }
+
+            if (item.getName().equals("Furnace") && mayPass && player.getLevel().getEntitiesAtTile(xt, yt).size() == 0) {
+                // move this into a player method ?
+                player.getLevel().add(player.getLevel(), new Furnace(player.getLevel(), xt, yt));
                 return true;
             }
         }
