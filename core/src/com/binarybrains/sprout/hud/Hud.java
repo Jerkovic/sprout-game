@@ -168,7 +168,7 @@ public class Hud implements Telegraph {
                 break;
             case TelegramType.PLAYER_ACHIEVEMENT_UNLOCKED:
                 Achievement achievement = ((Achievement) msg.extraInfo);
-                // SproutGame.playSound("magic_swish", .6f);
+                SproutGame.playSound("magic_swish", .6f);
                 addToasterMessage("New Achievement" , achievement.getName());
                 // Add awards ...etc to ui?
                 break;
@@ -447,7 +447,7 @@ public class Hud implements Telegraph {
      */
     private void rankedUp(int level) {
         addToasterMessage("LEVEL UP", "You reached Level " + level);
-        // SproutGame.playSound("magic_swish", .6f);
+        SproutGame.playSound("magic_swish", .6f);
     }
 
     // a test right now, we need some graphics

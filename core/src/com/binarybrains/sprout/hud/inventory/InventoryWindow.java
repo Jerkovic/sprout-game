@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -87,7 +88,7 @@ public class InventoryWindow extends Window {
         for(int i = 0; i < listeners.size; i++) {
             if(listeners.get(i) instanceof ClickListener) {
                 MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_CHANGED_SELECTED_SLOT);
-                // SproutGame.playSound("blop2", .3f, MathUtils.random(1.0f, 1.1f), 1f);
+                SproutGame.playSound("blop2", .3f, MathUtils.random(1.0f, 1.1f), 1f);
                 ((ClickListener)listeners.get(i)).clicked(null, 0, 0);
             }
         }
