@@ -5,20 +5,13 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Player;
-import com.binarybrains.sprout.hud.TypeWriterDialog;
 import com.binarybrains.sprout.hud.utils.ItemTip;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
@@ -36,7 +29,7 @@ public class InventoryManagementWindow extends Dialog {
     private ButtonGroup group;
     private TextureAtlas atlas;
     private Level level;
-    private Function closeCallback;
+    private Runnable closeCallback;
 
     private Player player;
     private Item heldItem;
@@ -44,6 +37,7 @@ public class InventoryManagementWindow extends Dialog {
     public InventoryManagementWindow(Level level, Skin skin) {
         super("Inventory Management", skin.get("dialog", WindowStyle.class));
         setSkin(skin);
+        // key(Input.Keys.ENTER, true);
         this.skin = skin;
         initialize();
         getTitleLabel().setColor(0,0,0,.7f);
@@ -70,7 +64,7 @@ public class InventoryManagementWindow extends Dialog {
         this.addListener(ignoreTouchDown);
     }
 
-    public void setCloseCallback(Function func) {
+    public void setCloseCallback(Runnable func) {
         this.closeCallback = func;
     }
 

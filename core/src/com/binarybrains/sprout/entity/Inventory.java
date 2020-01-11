@@ -154,6 +154,11 @@ public class Inventory {
         return null;
     }
 
+    /**
+     * Completly deletes all items of and rearranges inventory by filling empty slots
+     * @param item
+     * @return
+     */
     public boolean removeItem(Item item) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) != null && items.get(i).matches(item)) {
@@ -165,6 +170,12 @@ public class Inventory {
         return false;
     }
 
+    /**
+     * Removes stackable resources.
+     * @param r
+     * @param count
+     * @return
+     */
     public boolean removeResource(Resource r, int count) {
         ResourceItem ri = findResource(r);
         if (ri == null) return false;

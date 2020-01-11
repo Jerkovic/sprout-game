@@ -8,6 +8,8 @@ ________________________________________________________________________________
 
 TODOS:
 
+* lockshadow on npc .
+
 *  jrebel (hot reload) look into
 
 * Inventory Management - heldItem should display item stack to the mouse pointer

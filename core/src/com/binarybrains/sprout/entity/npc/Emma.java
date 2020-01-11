@@ -5,8 +5,6 @@ import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -113,6 +111,26 @@ public class Emma extends Npc {
         stateMachine.update();
     }
 
+
+
+    // move to any npc
+
+    /**
+     * Performs a happy jump
+     */
+    public void jump() {
+        float ground_y = getY();
+        float jump_to_y = getY() + 16;
+
+        lockShadowY = ground_y;
+
+        addAction(Actions.sequence(
+                Actions.moveTo(getX(), jump_to_y, .3f, Interpolation.pow2),
+                Actions.moveTo(getX(), ground_y, .15f, Interpolation.exp5),
+                Actions.run(() -> { lockShadowY = 0; })
+        ));
+    }
+
     @Override
     public void touchedBy(Entity entity) {
         if ((entity instanceof Emma)) return;
@@ -123,16 +141,19 @@ public class Emma extends Npc {
 
         if (player.activeItem instanceof ArtifactItem && player.activeItem.getName().equals("Teddy")) {
 
+            /*
             player.getLevel().screen.hud.speakDialog(
                     this.getClass().getSimpleName(),
                     String.format("Ohh! Is that my long lost %s? I have really missed him! Thank you!", item.getName())
-            );
+            ); */
+
+            jump();
 
             ArtifactItem ai = (ArtifactItem) player.activeItem;
-            player.getInventory().removeItem(ai);
+            //player.getInventory().removeItem(ai);
             player.getLevel().screen.hud.refreshInventory();
 
-            stateMachine.changeState(EmmaState.GOTO_TREE);
+            //stateMachine.changeState(EmmaState.GOTO_TREE);
             return true;
         } else {
             player.getLevel().screen.hud.speakDialog(

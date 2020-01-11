@@ -42,6 +42,8 @@ public class Npc extends Mob {
     TextureRegion currentFrame;
 
     Sprite shadow;
+    public float lockShadowY = 0;
+
 
     public Npc(Level level, Vector2 position, float width, float height, int spriteRow) {
         super(level, position, width, height);
@@ -49,6 +51,11 @@ public class Npc extends Mob {
         setSpriteRow(spriteRow);
         shadow = new Sprite((Texture) SproutGame.assets.get("sprites/shadow.png"));
         setupAnimations();
+    }
+
+    @Override
+    public float getSortOrder() {
+        return lockShadowY > 0 ? lockShadowY : getY(); // prevents jump in y-axis fuck up sortOrder
     }
 
     @Override
@@ -62,12 +69,22 @@ public class Npc extends Mob {
         this.walkBox.setPosition(getPosition().x, getPosition().y);
     }
 
+    /**
+     * Draw shadow
+     * @param batch
+     * @param delta
+     */
     public void drawShadow(Batch batch, float delta) {
         shadow.setX(getX());
-        shadow.setY(getY() - 2);
+        if (lockShadowY > 0) {
+            shadow.setY(lockShadowY -3);
+        }
+        else {
+            shadow.setY(getY() - 3);
+        }
+
         shadow.draw(batch, 0.55f);
     }
-
 
     /**
      * Generates the path finding array
@@ -208,8 +225,7 @@ public class Npc extends Mob {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return super.toString() + " ActionState: " + getActionState();
     }
 
