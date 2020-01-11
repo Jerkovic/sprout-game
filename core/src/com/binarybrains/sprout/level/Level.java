@@ -332,8 +332,6 @@ public class Level extends LevelEngine {
 
     private void renderDebug (List<Entity> entities) {
         debugRenderer.setProjectionMatrix(camera.combined);
-
-        /*
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);
 
         TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground");
@@ -351,7 +349,6 @@ public class Level extends LevelEngine {
         }
         debugRenderer.end();
 
-         */
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 

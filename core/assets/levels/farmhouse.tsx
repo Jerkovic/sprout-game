@@ -126,6 +126,11 @@
    <property name="tileType" value="teleporter"/>
   </properties>
  </tile>
+ <tile id="138">
+  <properties>
+   <property name="blocked" type="bool" value="true"/>
+  </properties>
+ </tile>
  <tile id="145">
   <properties>
    <property name="blocked" type="bool" value="false"/>

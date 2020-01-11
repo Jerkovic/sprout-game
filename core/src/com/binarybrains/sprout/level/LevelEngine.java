@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.level;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
@@ -12,7 +11,6 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
-import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.house.Cottage;
@@ -320,8 +318,7 @@ public abstract class LevelEngine {
                 TiledMapTileLayer.Cell cell2 = layer2.getCell(x, y);
 
                 if (cell2 != null && cell2.getTile() != null) {
-                    // custom property .. wooden stuff
-
+                    // custom property ..
                     if (cell2.getTile().getProperties().containsKey("tileType") && (cell2.getTile().getProperties().get("tileType").equals("Wood"))) {
                         tile[x][y] = new WoodTile(x, y);
                     }
@@ -329,6 +326,10 @@ public abstract class LevelEngine {
                 // check for tileType
                 if (cell2 != null && cell2.getTile().getProperties().containsKey("blocked") ) {
                     tile[x][y] = new GrassTile(x, y, false); // mayNot pass could be a fence or alike
+                }
+
+                if (cell2 != null && cell2.getTile().getProperties().containsKey("tileType") && (cell2.getTile().getProperties().get("tileType").equals("teleporter"))) {
+                    tile[x][y] = new TeleportTile(x, y);
                 }
 
             }

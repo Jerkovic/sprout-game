@@ -9,7 +9,7 @@ import com.binarybrains.sprout.item.Item;
 
 public class ItemToaster extends Table {
 
-    private int cnt = 0;
+    private int cnt = 1;
     private ItemButton itemButton;
     private Item item;
     private Image icon;

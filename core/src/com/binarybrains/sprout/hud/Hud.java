@@ -385,7 +385,6 @@ public class Hud implements Telegraph {
     public void buildNotificationsWindow(Item item) {
 
         if (!itemNotifications.containsKey(item.getName())) {
-
             TextureAtlas.AtlasRegion icon = atlas.findRegion(item.getRegionId());
             ItemToaster notificationToaster = new ItemToaster(skin, item, new Image(icon), (notificationsInHud++ * 75) + 90);
             stage.addActor(notificationToaster);
