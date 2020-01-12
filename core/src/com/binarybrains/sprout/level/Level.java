@@ -105,8 +105,9 @@ public class Level extends LevelEngine {
 
         // dont load like this
         light = new Texture("shader/camAlphaMat.jpg");
-        fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight(), false);
 
+        // the fbo of the lights
+        fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight(), false);
     }
 
 
@@ -141,7 +142,7 @@ public class Level extends LevelEngine {
         debugRenderer = new ShapeRenderer();
 
         gameTimer = new GameTime(0, 0, 1, 0, 0);
-        gameTimer.setDuration( ((60 * 60 * 26) * 27) + 34242 );
+        gameTimer.setDuration( ((60 * 60 * 26) * 27) + 10 );
         gameTimer.start();
 
         // test some path finding stuff.. move this!!
@@ -329,7 +330,7 @@ public class Level extends LevelEngine {
         int[] water_layers = {0}; // water
 
         tileMapRenderer.render(water_layers);
-        // tileMapRenderer.getBatch().flush();
+        tileMapRenderer.getBatch().flush();
 
         //tileMapRenderer.getBatch().setShader(defaultShader);
         tileMapRenderer.getBatch().setShader(finalShader);
