@@ -299,7 +299,7 @@ public class Level extends LevelEngine {
         if (ambientIntensity > 0f) { // how dark should it get before lights come on?
             Color color = tileMapRenderer.getBatch().getColor();
 
-            tileMapRenderer.getBatch().setColor(Color.YELLOW);
+            tileMapRenderer.getBatch().setColor(Color.WHITE);
             tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (85 * 16) - lightSize / 2, lightSize , lightSize);
             tileMapRenderer.getBatch().draw(light,90, 1289, lightSize , lightSize);
             tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2, player.getWalkBoxCenterY() - lightSize / 2, lightSize , lightSize);
@@ -308,7 +308,7 @@ public class Level extends LevelEngine {
 
         tileMapRenderer.getBatch().end();
         tileMapRenderer.getBatch().setBlendFunction(src, dest);
-        tileMapRenderer.getBatch().setShader(finalShader);
+
         fbo.end();
         // end draw lights to fbo
 
@@ -331,7 +331,9 @@ public class Level extends LevelEngine {
         tileMapRenderer.render(water_layers);
         // tileMapRenderer.getBatch().flush();
 
-        tileMapRenderer.getBatch().setShader(defaultShader);
+        //tileMapRenderer.getBatch().setShader(defaultShader);
+        tileMapRenderer.getBatch().setShader(finalShader);
+
         //render the other layers using the default shader
         int[] bg_layers = {1,2}; // water, ground and ground_top
         tileMapRenderer.render(bg_layers);
