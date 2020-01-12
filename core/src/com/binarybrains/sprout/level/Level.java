@@ -62,7 +62,7 @@ public class Level extends LevelEngine {
     private Texture light;
     private FrameBuffer fbo;
 
-    public float ambientIntensity = 1f;
+    public float ambientIntensity = .6f;
     public static final Vector3 ambientColor = new Vector3(.11f, .11f, .58f); // .6 .6 .8
 
     //used to make the light flicker
@@ -70,16 +70,22 @@ public class Level extends LevelEngine {
     public static final float zSpeed = 4.0f;
     public static final float PI2 = 3.1415926535897932384626433832795f * 2.0f;
 
+    // sea waves
+    private float					amplitudeWave = 1.15342f;
+    private float					angleWave = 0.0f;
+    private float					angleWaveSpeed = 2.0f;
+
     //read our shader files
     final String vertexShader = new FileHandle("shader/vertexShader.glsl").readString();
     final String defaultPixelShader = new FileHandle("shader/defaultPixelShader.glsl").readString();
     final String finalPixelShader =  new FileHandle("shader/pixelShader.glsl").readString();
+    final String waterVertexShader =  new FileHandle("shader/waterVertexShader.glsl").readString();
 
     private ShaderProgram defaultShader;
     private ShaderProgram finalShader;
+    private ShaderProgram waterShader;
 
     ParticleEffect pe;
-
 
     /**
      * Setup Ambient light and shaders.
@@ -88,8 +94,10 @@ public class Level extends LevelEngine {
         ShaderProgram.pedantic = false;
         defaultShader = new ShaderProgram(vertexShader, defaultPixelShader);
         finalShader = new ShaderProgram(vertexShader, finalPixelShader);
+        waterShader = new ShaderProgram(waterVertexShader, defaultPixelShader);
 
         finalShader.begin();
+        finalShader.setUniformf("resolution", Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
         finalShader.setUniformi("u_lightmap", 1);
         finalShader.setUniformf("ambientColor", ambientColor.x, ambientColor.y,
                 ambientColor.z, ambientIntensity);
@@ -99,9 +107,6 @@ public class Level extends LevelEngine {
         light = new Texture("shader/camAlphaMat.jpg");
         fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight(), false);
 
-        finalShader.begin();
-        finalShader.setUniformf("resolution", Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
-        finalShader.end();
     }
 
 
@@ -110,7 +115,6 @@ public class Level extends LevelEngine {
         this.screen = screen;
         // dont load sprites like this.
         spritesheet = new Texture(Gdx.files.internal("levels/stardew_valley_01.png"));
-
         this.charsheet = SproutGame.assets.get("spritesheet.png");
 
         // BitmapFont to use for text Particles
@@ -151,7 +155,7 @@ public class Level extends LevelEngine {
 
         // add(this, new SpeechBubble(this, "I am hungry!"));
 
-        // particle effects test
+        // particle effects test ...need to make pools?
         pe = new ParticleEffect();
         pe.load(Gdx.files.internal("pfx/fire.p"),Gdx.files.internal("pfx/images")); // effect dir and images dir
         pe.getEmitters().first().setPosition(146, 110);
@@ -251,55 +255,61 @@ public class Level extends LevelEngine {
             player.increaseXP(100); // test
         }
 
-        zAngle += Gdx.app.getGraphics().getRawDeltaTime() * zSpeed;
+        final float dt = Gdx.graphics.getRawDeltaTime();
+
+        // sea
+        angleWave += dt * angleWaveSpeed;
+        while(angleWave > PI2)
+            angleWave -= PI2;
+
+        // fires
+        zAngle += dt * zSpeed;
         while(zAngle > PI2)
             zAngle -= PI2;
 
+
         //draw the light to the FBO
         // we have to get entities that emmits light here
-        if (ambientIntensity < .9) {
-            finalShader.begin();
-            finalShader.setUniformf("ambientColor", ambientColor.x, ambientColor.y,
-                    ambientColor.z, ambientIntensity);
-            finalShader.end();
 
-            fbo.begin();
-            Gdx.gl.glClearColor(0f,0f,0f,1f);
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-            float lightSize = lightOscillate ? (105.0f + 3.25f * (float)Math.sin(zAngle) + .677f * MathUtils.random()):105.0f;
+        fbo.begin();
 
-            tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
-            tileMapRenderer.getBatch().enableBlending();
-            tileMapRenderer.getBatch().setShader(defaultShader);
+        finalShader.begin();
+        finalShader.setUniformf("ambientColor", ambientColor.x, ambientColor.y,
+                ambientColor.z, ambientIntensity);
+        finalShader.end();
 
-            int src = tileMapRenderer.getBatch().getBlendSrcFunc();
-            int dest = tileMapRenderer.getBatch().getBlendDstFunc();
+        float lightSize = lightOscillate ? (105.0f + 3.25f * (float)Math.sin(zAngle) + .677f * MathUtils.random()):105.0f;
 
-            tileMapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
-            tileMapRenderer.getBatch().begin();
+        tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
+        tileMapRenderer.setView(camera);
 
-            if (ambientIntensity > 0f) { // how dark should it get before lights come on?
-                Color color = tileMapRenderer.getBatch().getColor();
+        Gdx.gl.glClearColor(0f,0f,0f,1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-                tileMapRenderer.getBatch().setColor(FLAME);
-                tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (85 * 16) - lightSize / 2, lightSize , lightSize);
-                tileMapRenderer.getBatch().draw(light,90, 1289, lightSize , lightSize);
-                tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2, player.getWalkBoxCenterY() - lightSize / 2, lightSize , lightSize);
-                tileMapRenderer.getBatch().setColor(color);
-            }
+        tileMapRenderer.getBatch().enableBlending();
+        tileMapRenderer.getBatch().setShader(defaultShader);
 
-            tileMapRenderer.getBatch().end();
-            tileMapRenderer.getBatch().setBlendFunction(src, dest);
-            tileMapRenderer.getBatch().setShader(finalShader);
-            fbo.end();
-        } else {
-            fbo.begin();
-                Gdx.gl.glClearColor(0f,0f,0f,1f);
-                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                tileMapRenderer.getBatch().setShader(defaultShader);
-            fbo.end();
+        int src = tileMapRenderer.getBatch().getBlendSrcFunc();
+        int dest = tileMapRenderer.getBatch().getBlendDstFunc();
+
+        tileMapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
+        tileMapRenderer.getBatch().begin();
+
+        if (ambientIntensity > 0f) { // how dark should it get before lights come on?
+            Color color = tileMapRenderer.getBatch().getColor();
+
+            tileMapRenderer.getBatch().setColor(Color.YELLOW);
+            tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (85 * 16) - lightSize / 2, lightSize , lightSize);
+            tileMapRenderer.getBatch().draw(light,90, 1289, lightSize , lightSize);
+            tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2, player.getWalkBoxCenterY() - lightSize / 2, lightSize , lightSize);
+            tileMapRenderer.getBatch().setColor(color);
         }
+
+        tileMapRenderer.getBatch().end();
+        tileMapRenderer.getBatch().setBlendFunction(src, dest);
+        tileMapRenderer.getBatch().setShader(finalShader);
+        fbo.end();
         // end draw lights to fbo
 
         // draw the screen
@@ -308,20 +318,38 @@ public class Level extends LevelEngine {
 
         tileMapRenderer.setView(camera);
         tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
-        // tileMapRenderer.getBatch().setShader(finalShader);
 
-        int[] bg_layers = {0,1,2}; // water, ground and ground_top
+        //feed the shader with the new data
+        waterShader.begin();
+            waterShader.setUniformf("waveData", angleWave, amplitudeWave);
+        waterShader.end();
+
+        //render the first layer (the water) using our special vertex shader
+        tileMapRenderer.getBatch().setShader(waterShader);
+        int[] water_layers = {0}; // water
+
+        tileMapRenderer.render(water_layers);
+        // tileMapRenderer.getBatch().flush();
+
+        tileMapRenderer.getBatch().setShader(defaultShader);
+        //render the other layers using the default shader
+        int[] bg_layers = {1,2}; // water, ground and ground_top
         tileMapRenderer.render(bg_layers);
 
+        tileMapRenderer.getBatch().begin();
+
+        //bind the FBO to the 2nd texture unit
+        //we force the binding of a texture on first texture unit to avoid artefacts
+        //this is because our default and ambiant shader dont use multi texturing...
+        //youc can basically bind anything, it doesnt matter
         fbo.getColorBufferTexture().bind(1);
         light.bind(0);
+        sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
+        pe.draw(tileMapRenderer.getBatch());
 
-        tileMapRenderer.getBatch().begin();
-            sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
-            pe.draw(tileMapRenderer.getBatch());
         tileMapRenderer.getBatch().end();
 
-        int[] fg_layers = {3,5};
+        int[] fg_layers = {3, 5};
         tileMapRenderer.render(fg_layers);
 
         // debug mode
