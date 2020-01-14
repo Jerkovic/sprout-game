@@ -74,6 +74,7 @@ public class ItemButton extends Button {
 
         if (showStack) {
             lc = new Label(counter, skin);
+            lc.setStyle(skin.get("small", Label.LabelStyle.class));
             lc.setAlignment(Align.bottomRight);
             lc.setColor(250, 250, 250, 1f);
             Table overlay = new Table();

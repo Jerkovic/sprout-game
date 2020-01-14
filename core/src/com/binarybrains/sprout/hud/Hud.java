@@ -86,6 +86,7 @@ public class Hud implements Telegraph {
 
         // mouse
         lc = new Label("", skin);
+
         lc.setAlignment(Align.bottomRight);
         lc.setColor(250, 250, 250, 1f);
         stage.addActor(lc);
@@ -649,7 +650,6 @@ public class Hud implements Telegraph {
     public void act(float delta) {
         // temp mouseItem
         if (mouseItem != null) {
-
             mouseItem.setPosition(Gdx.input.getX(), Gdx.app.getGraphics().getHeight() - Gdx.input.getY());
             lc.setZIndex(100);
             lc.setPosition(Gdx.input.getX(), Gdx.app.getGraphics().getHeight() - Gdx.input.getY());

@@ -160,6 +160,7 @@ public class InventoryWindow extends Window {
 
             //button.debug();
             Label lc = new Label(counter, skin);
+            lc.setStyle(skin.get("small", Label.LabelStyle.class));
             lc.setAlignment(Align.bottomRight);
             Stack stack = new Stack();
 

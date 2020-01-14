@@ -112,8 +112,9 @@ public class Container extends Table {
 
             if (showStack) {
                 Label lc = new Label(counter, skin);
+                lc.setStyle(skin.get("small", Label.LabelStyle.class));
                 lc.setAlignment(Align.bottomRight);
-                lc.setColor(255, 255, 255, 1f);
+                //lc.setColor(255, 255, 255, 1f);
 
                 Table overlay = new Table();
                 overlay.add(lc).expand().fillX().bottom().left();

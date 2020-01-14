@@ -219,6 +219,7 @@ public class InventoryManagementWindow extends Dialog {
             }
 
             Label lc = new Label(counter, skin);
+            lc.setStyle(skin.get("small", Label.LabelStyle.class));
             lc.setAlignment(Align.bottomRight);
             lc.setColor(255, 255, 255, 1f);
 
