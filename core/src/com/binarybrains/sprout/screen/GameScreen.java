@@ -64,7 +64,7 @@ public class GameScreen implements Screen {
     @Override
     public void show() {
         hud.fadeIn();
-        SproutGame.playSound("god_morning", .5f);
+        // SproutGame.playSound("god_morning", .5f);
     }
 
     @Override

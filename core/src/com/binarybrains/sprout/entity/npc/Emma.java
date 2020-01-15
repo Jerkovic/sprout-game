@@ -123,7 +123,7 @@ public class Emma extends Npc {
         float jump_to_y = getY() + 16;
 
         lockShadowY = ground_y;
-
+        SproutGame.playSound("jump", 0.5f);
         addAction(Actions.sequence(
                 Actions.moveTo(getX(), jump_to_y, .3f, Interpolation.pow2),
                 Actions.moveTo(getX(), ground_y, .15f, Interpolation.exp5),

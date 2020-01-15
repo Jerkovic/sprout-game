@@ -17,13 +17,13 @@ TODOS:
 
 * Cleanup hud
 
-* Implement jump sound.
+* Implement jump sound. (Fixed)
 
-* Added pooling where needed.
+* Add pooling where needed.
 
 * Fonts
     small, medium , large (gradient and dropshadow)
-    xsmall pixel font with outline.
+    xsmall pixel font with outline. (Fixed)
   - Rittswood Redstar (window longer text) (Downloaded to fonts)
 
 * Skin composer. Create new ui skin theme?
