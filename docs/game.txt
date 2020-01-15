@@ -17,6 +17,8 @@ TODOS:
 
 * Cleanup hud
 
+* Handle AI pathfinding is triggered inside a house we need her/him go to the door and leave then start
+
 * there is a bug with player surface sound continuing when not walking.
 
 * Implement jump sound. (Fixed)
