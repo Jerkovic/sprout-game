@@ -17,6 +17,8 @@ TODOS:
 
 * Cleanup hud
 
+* there is a bug with player surface sound continuing when not walking.
+
 * Implement jump sound. (Fixed)
 
 * Add pooling where needed.

@@ -1,7 +1,7 @@
 package com.binarybrains.sprout.entity.actions;
 
 
-/** Moves an actor from its current position to a specific position.*/
+/** Moves an actor from its current position to a specific position. */
 public class MoveToAction extends TemporalAction {
     private float startX, startY;
     private float endX, endY;

@@ -25,7 +25,6 @@ public class Emma extends Npc {
 
     public StateMachine<Emma, EmmaState> stateMachine;
     public List<PointDirection> findPath;
-    private Texture spriteSheet;
 
     public Emma(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height, 3); // 3 is the spriteRow used
@@ -33,7 +32,6 @@ public class Emma extends Npc {
         setState(State.STANDING);
         setDirection(Direction.EAST);
         setSpeed(24);
-
         stateMachine = new DefaultStateMachine<>(this, EmmaState.IDLE);
     }
 
@@ -43,22 +41,7 @@ public class Emma extends Npc {
         return true;
     }
 
-    /**
-     *
-     * @param secondsDelay
-     * @param state
-     */
-    public void changeStateDelayed(int secondsDelay, EmmaState state) {
-        System.out.println("Scheduled state change in" + secondsDelay);
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                System.out.println("Run scheduled state change");
-                stateMachine.changeState(state);
-            }
-        }, secondsDelay);
-    }
-
+    // move to NPC
     public void updateWalkDirections(int x, int y, EmmaState state) {
         this.clearActions();
         clearFindPath();
@@ -79,7 +62,6 @@ public class Emma extends Npc {
                     })
             ));
         }
-
         seq.addAction(Actions.run((new Runnable() {
                public void run () {
                    setState(State.STANDING);
@@ -110,8 +92,6 @@ public class Emma extends Npc {
         super.update(delta);
         stateMachine.update();
     }
-
-
 
     // move to any npc
 
@@ -168,7 +148,6 @@ public class Emma extends Npc {
                     this.getClass().getSimpleName(),
                     String.format("Scram Creep!")
             );
-
         }
 
         return false;
@@ -182,10 +161,4 @@ public class Emma extends Npc {
         }
         return false;
     }
-
-    @Override
-    public String toString() {
-        return super.toString() + " StateMachine-> " + stateMachine.getCurrentState();
-    }
-
 }
