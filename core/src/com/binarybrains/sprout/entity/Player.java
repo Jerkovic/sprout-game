@@ -546,10 +546,6 @@ public class Player extends Npc implements InputProcessor {
     private long walkSoundId = -1; // temp
 
     private void surfaceSoundEffect() {
-        // plays different walking sounds here.
-        // https://www.youtube.com/watch?v=wYREdw4nz4E
-        //
-        System.out.println(getState());
         if (getState() == State.WALKING) {
             if (walkSoundId < 0) {
                 walkSoundId = ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).loop(.15f);

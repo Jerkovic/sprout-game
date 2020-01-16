@@ -19,7 +19,11 @@ TODOS:
 
 * Cleanup hud
 
+* Footsteps         // plays different walking sounds here. // https://www.youtube.com/watch?v=wYREdw4nz4E
+
+
 * Handle AI pathfinding is triggered inside a house we need her/him go to the door and leave then start
+(do we need something that tells if the location is inside or outside?)
 
 * there is a bug with player surface sound continuing when not walking. (Fixed)
 

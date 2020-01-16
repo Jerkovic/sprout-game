@@ -235,7 +235,6 @@ public class Level extends LevelEngine {
         // Input ctrl should not be here in draw!!
         if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             debugMode = !debugMode;
-            // save game test
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.Z)) {

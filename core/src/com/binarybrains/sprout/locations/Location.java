@@ -18,6 +18,7 @@ public class Location extends Entity {
         super(level, pos, width, height);
         this.name = name;
         this.description = description;
+        // do we need something here that tells if the location is inside or outside?
     }
 
     @Override

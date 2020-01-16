@@ -137,6 +137,7 @@ public class Hud implements Telegraph {
                 TelegramType.PLAYER_PASSED_OUT,
 
                 TelegramType.PLAYER_LOCATION_REACHED,
+                TelegramType.PLAYER_LOCATION_LEAVES,
 
                 TelegramType.PLAYER_ACHIEVEMENT_UNLOCKED,
                 TelegramType.PLAYER_CRAFTING_SUCCESS,
@@ -194,7 +195,10 @@ public class Hud implements Telegraph {
                 // level.player.releaseKeys();
                 // BackgroundMusic.stop();
                 break;
-
+             case TelegramType.PLAYER_LOCATION_LEAVES:
+                 locationLabel.setText("...");
+                 locationLabel.setVisible(false);
+                 break;
             default:
                 // code block
         }
