@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.GdxAI;
 import com.badlogic.gdx.ai.msg.MessageManager;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -21,10 +22,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.binarybrains.sprout.SproutGame;
-import com.binarybrains.sprout.achievement.Achievement;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
-import com.binarybrains.sprout.entity.enemy.Slime;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.EmmaState;
@@ -33,12 +32,12 @@ import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.Resources;
+import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.EnviroManager;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
 
-import java.io.IOException;
 import java.util.List;
 
 
@@ -240,11 +239,14 @@ public class Level extends LevelEngine {
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
-            setAmbientColor(EnviroManager.DAWN_COLOR);
+            setAmbientColor(EnviroManager.DAWN__COLOR);
+            AmbienceSound.setSoundAndStart("forest_morning_ambience");
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.X)) {
             setAmbientColor(EnviroManager.DAY_COLOR);
+            AmbienceSound.setSoundAndStart("forest_morning_ambience");
+
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
@@ -252,6 +254,7 @@ public class Level extends LevelEngine {
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.V)) {
             setAmbientColor(EnviroManager.NIGHT_COLOR);
+            AmbienceSound.setSoundAndStart("forest_night_ambience");
         }
 
 
@@ -324,7 +327,7 @@ public class Level extends LevelEngine {
         tileMapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
         tileMapRenderer.getBatch().begin();
 
-        if (ambientColor.x <= 50f  / 255f) { // how dark should it get before lights come on?
+        if (ambientColor.x <= 100f  / 255f) { // how dark should it get before lights come on?
             Color color = tileMapRenderer.getBatch().getColor();
 
             tileMapRenderer.getBatch().setColor(Color.WHITE);

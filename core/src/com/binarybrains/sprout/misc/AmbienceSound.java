@@ -13,7 +13,7 @@ public class AmbienceSound {
     static long soundId;
 
     public static void start() {
-        if (currentAmbience != null) AmbienceSound.soundId = currentAmbience.loop(.15f);
+        if (currentAmbience != null) AmbienceSound.soundId = currentAmbience.loop(.19f);
     }
 
     public static void setSoundAndStart(String soundName) {

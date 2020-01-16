@@ -13,15 +13,15 @@ public class EnviroManager implements Telegraph {
     private static final EnviroManager instance = new EnviroManager();
 
     public final static long DAWN_TIME = 6; // 6:00 am
-    public final static long DAY_TIME = 10; // noon 12:00pm
+    public final static long DAY_TIME = 10; // 10:00pm
     public final static long DUSK_TIME = 18; // 6:00 pm
     public final static long NIGHT_TIME = 20; // 8:00 pm
 
 
-    public final static Color DAWN_COLOR = new Color(102f / 255f,150f  / 255f,186f  / 255f, 1f);
-    public final static Color DAY_COLOR = new Color(255f  / 255f,255f  / 255f,255f  / 255f, 1f); // Correct
-    public final static Color DUSK_COLOR = new Color(126f  / 255f,75f  / 255f,104f / 255f, .5f);
-    public final static Color NIGHT_COLOR = new Color(50f  / 255f,50f  / 255f,164f / 255f , .9f);
+    public final static Color DAWN__COLOR = new Color(102f / 255f,150f  / 255f,186f  / 255f, 1f);
+    public final static Color DAY_COLOR = new Color(255f  / 255f,255f  / 255f,255f  / 255f, 10); // Correct
+    public final static Color DUSK_COLOR = new Color(126f  / 255f,105f  / 255f,104f / 255f, .7f);
+    public final static Color NIGHT_COLOR = new Color(100f  / 255f,100f  / 255f,184f / 255f , .99f);
 
     private Level level;
 
@@ -48,7 +48,7 @@ public class EnviroManager implements Telegraph {
                 GameTime.Gdt gameTime = (GameTime.Gdt) msg.extraInfo;
 
                 if (gameTime.hour == DAWN_TIME) {
-                    level.setAmbientColor(DAWN_COLOR);
+                    level.setAmbientColor(DAWN__COLOR);
                 }
                 if (gameTime.hour == DAY_TIME) {
                     level.setAmbientColor(DAY_COLOR);
