@@ -94,7 +94,7 @@ public class Level extends LevelEngine {
         ShaderProgram.pedantic = false;
         defaultShader = new ShaderProgram(vertexShader, defaultPixelShader);
         finalShader = new ShaderProgram(vertexShader, finalPixelShader);
-        waterShader = new ShaderProgram(waterVertexShader, defaultPixelShader);
+        waterShader = new ShaderProgram(waterVertexShader, finalPixelShader);
 
         finalShader.begin();
         finalShader.setUniformf("resolution", Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
@@ -102,6 +102,14 @@ public class Level extends LevelEngine {
         finalShader.setUniformf("ambientColor", ambientColor.x, ambientColor.y,
                 ambientColor.z, ambientIntensity);
         finalShader.end();
+
+        waterShader.begin();
+            waterShader.setUniformf("resolution", Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight());
+            waterShader.setUniformi("u_lightmap", 1);
+            waterShader.setUniformf("ambientColor", ambientColor.x, ambientColor.y,
+                ambientColor.z, ambientIntensity);
+        waterShader.end();
+
 
         // dont load like this
         light = new Texture("shader/camAlphaMat.jpg");
@@ -280,12 +288,17 @@ public class Level extends LevelEngine {
                 ambientColor.z, ambientIntensity);
         finalShader.end();
 
+        waterShader.begin();
+        waterShader.setUniformf("ambientColor", ambientColor.x, ambientColor.y,
+                ambientColor.z, ambientIntensity);
+        waterShader.end();
+
         float lightSize = lightOscillate ? (105.0f + 3.25f * (float)Math.sin(zAngle) + .677f * MathUtils.random()):105.0f;
 
         tileMapRenderer.getBatch().setProjectionMatrix(camera.combined);
         tileMapRenderer.setView(camera);
 
-        Gdx.gl.glClearColor(0f,0f,0f,1f);
+        Gdx.gl.glClearColor(0f,0f,0f,0f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         tileMapRenderer.getBatch().enableBlending();
@@ -314,7 +327,7 @@ public class Level extends LevelEngine {
         // end draw lights to fbo
 
         // draw the screen
-        Gdx.gl.glClearColor(0f,0f,0f,1);
+        Gdx.gl.glClearColor(0f,0f,0f,0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         tileMapRenderer.setView(camera);
@@ -330,9 +343,7 @@ public class Level extends LevelEngine {
         int[] water_layers = {0}; // water
 
         tileMapRenderer.render(water_layers);
-        tileMapRenderer.getBatch().flush();
 
-        //tileMapRenderer.getBatch().setShader(defaultShader);
         tileMapRenderer.getBatch().setShader(finalShader);
 
         //render the other layers using the default shader

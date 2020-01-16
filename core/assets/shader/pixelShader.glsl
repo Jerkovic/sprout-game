@@ -10,7 +10,7 @@ varying vec2 vTexCoord;
 
 //texture samplers
 uniform sampler2D u_texture; //diffuse map
-uniform sampler2D u_lightmap;   //light map
+uniform sampler2D u_lightmap;
 
 //additional parameters for the shader
 uniform vec2 resolution; //resolution of screen

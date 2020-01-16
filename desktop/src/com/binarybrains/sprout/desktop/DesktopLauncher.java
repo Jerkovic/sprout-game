@@ -24,7 +24,7 @@ public class DesktopLauncher {
         config.width = 1920;
         config.height = 1200;
         config.fullscreen = false;
-        config.resizable = true;
+        config.resizable = false;
         config.useGL30 = false;
 		config.title = SproutGame.name;
         config.vSyncEnabled = true;
