@@ -8,6 +8,8 @@ ________________________________________________________________________________
 
 TODOS:
 
+* Day night cycle handler (Started)
+
 * NPC jump can be fucked up by interac with it.
 
 * jrebel (hot reload) look into
@@ -19,7 +21,7 @@ TODOS:
 
 * Handle AI pathfinding is triggered inside a house we need her/him go to the door and leave then start
 
-* there is a bug with player surface sound continuing when not walking.
+* there is a bug with player surface sound continuing when not walking. (Fixed)
 
 * Implement jump sound. (Fixed)
 
@@ -125,8 +127,6 @@ new  Smoke particles (chimney) we have some ugly clouds for testing as of octobe
 * if a bomb explodes trees we need to see where the force came from to make the proper falling dir of the tree.
 
 * Weather conditions - flash thunder, rain
-
-* Day night cycle handler
 
 * NPC AI - introduce more behaviours to Emma.
   * Get teddy...

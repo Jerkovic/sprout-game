@@ -549,22 +549,21 @@ public class Player extends Npc implements InputProcessor {
         // plays different walking sounds here.
         // https://www.youtube.com/watch?v=wYREdw4nz4E
         //
+        System.out.println(getState());
         if (getState() == State.WALKING) {
-            // System.out.println("Sound effect Surface : " + getFeetSurface());
             if (walkSoundId < 0) {
                 walkSoundId = ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).loop(.15f);
+                if (walkSoundId < 0) throw new RuntimeException("Error sound engine.");
             } else {
                 ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).resume(walkSoundId);
             }
         } else {
-            if (walkSoundId > 0L) {
-                ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).pause(walkSoundId);
-            }
+            pausSurfaceSound();
         }
     }
 
     public void pausSurfaceSound() {
-        if (walkSoundId > 0L) {
+        if (walkSoundId > -1L) {
             ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).pause(walkSoundId);
         }
     }
