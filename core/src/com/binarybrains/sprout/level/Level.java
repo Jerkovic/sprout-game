@@ -34,6 +34,7 @@ import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.misc.Camera;
+import com.binarybrains.sprout.misc.EnviroManager;
 import com.binarybrains.sprout.misc.GameTime;
 import com.binarybrains.sprout.screen.GameScreen;
 
@@ -183,16 +184,18 @@ public class Level extends LevelEngine {
 
     /**
      * Set Ambience Color
-     * @param r
-     * @param g
-     * @param b
-     * @param ambientIntensity
+     * @param Color color
      */
-    public void setAmbientColor(int r, int g, int b, float ambientIntensity) {
-        Level.ambientColor.x = (float) r / 255;
-        Level.ambientColor.y = (float) g / 255;
-        Level.ambientColor.z = (float) b / 255;
-        this.ambientIntensity = ambientIntensity;
+    public void setAmbientColor(Color color) {
+
+        Level.ambientColor.x = color.r;
+        Level.ambientColor.y = color.g;
+        Level.ambientColor.z = color.b;
+        ambientIntensity = color.a;
+
+        System.out.println(Level.ambientColor);
+        System.out.println(color);
+
     }
 
     public void update(float delta) {
@@ -234,12 +237,23 @@ public class Level extends LevelEngine {
         if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             debugMode = !debugMode;
             // save game test
-            try {
-                player.getStats().save();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.Z)) {
+            setAmbientColor(EnviroManager.DAWN_COLOR);
+        }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+            setAmbientColor(EnviroManager.DAY_COLOR);
+        }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+            setAmbientColor(EnviroManager.DUSK_COLOR);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.V)) {
+            setAmbientColor(EnviroManager.NIGHT_COLOR);
+        }
+
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             // SproutGame.playSound("pickup_fanfar", .45f);
@@ -310,7 +324,7 @@ public class Level extends LevelEngine {
         tileMapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
         tileMapRenderer.getBatch().begin();
 
-        if (ambientColor.x < 1) { // how dark should it get before lights come on?
+        if (ambientColor.x <= 50f  / 255f) { // how dark should it get before lights come on?
             Color color = tileMapRenderer.getBatch().getColor();
 
             tileMapRenderer.getBatch().setColor(Color.WHITE);
