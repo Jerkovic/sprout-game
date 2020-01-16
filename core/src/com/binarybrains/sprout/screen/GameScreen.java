@@ -12,6 +12,7 @@ import com.binarybrains.sprout.hud.Hud;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.BackgroundMusic;
+import com.binarybrains.sprout.misc.EnviroManager;
 
 public class GameScreen implements Screen {
 
@@ -38,6 +39,8 @@ public class GameScreen implements Screen {
         level = new Level(this, 1);
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         hud = new Hud(skin, level);
+
+        EnviroManager.getInstance().init(level);
 
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(hud.getStage());

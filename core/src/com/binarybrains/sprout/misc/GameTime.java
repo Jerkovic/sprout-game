@@ -23,7 +23,7 @@ public class GameTime implements Telegraph
         return false;
     }
 
-    private class Gdt {
+    public class Gdt {
         public long year = 1;
         public long season = 1; // if season > 4 then year +1
         public long day = 1; // if day > 28 then season +1

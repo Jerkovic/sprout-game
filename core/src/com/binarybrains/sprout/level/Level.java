@@ -62,8 +62,8 @@ public class Level extends LevelEngine {
     private Texture light;
     private FrameBuffer fbo;
 
-    public float ambientIntensity = .6f;
-    public static final Vector3 ambientColor = new Vector3(.11f, .11f, .58f); // .6 .6 .8
+    public float ambientIntensity = 1f;
+    public static Vector3 ambientColor = new Vector3(1f, 1f, 1f); // .6 .6 .8
 
     //used to make the light flicker
     public float zAngle;
@@ -181,6 +181,20 @@ public class Level extends LevelEngine {
         return camera;
     }
 
+    /**
+     * Set Ambience Color
+     * @param r
+     * @param g
+     * @param b
+     * @param ambientIntensity
+     */
+    public void setAmbientColor(int r, int g, int b, float ambientIntensity) {
+        Level.ambientColor.x = (float) r / 255;
+        Level.ambientColor.y = (float) g / 255;
+        Level.ambientColor.z = (float) b / 255;
+        this.ambientIntensity = ambientIntensity;
+    }
+
     public void update(float delta) {
         gameTimer.update();
 
@@ -216,16 +230,6 @@ public class Level extends LevelEngine {
     }
 
     public void draw() {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.B)) {
-            ambientIntensity -= .1f;
-            if (ambientIntensity < 0) ambientIntensity = 0;
-        }
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.V)) {
-            ambientIntensity += .1f;
-            if (ambientIntensity > 1f) ambientIntensity = 1f;
-        }
-
         // Input ctrl should not be here in draw!!
         if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
             debugMode = !debugMode;
@@ -277,10 +281,6 @@ public class Level extends LevelEngine {
             zAngle -= PI2;
 
 
-        //draw the light to the FBO
-        // we have to get entities that emmits light here
-
-
         fbo.begin();
 
         finalShader.begin();
@@ -310,7 +310,7 @@ public class Level extends LevelEngine {
         tileMapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
         tileMapRenderer.getBatch().begin();
 
-        if (ambientIntensity > 0f) { // how dark should it get before lights come on?
+        if (ambientColor.x < 1) { // how dark should it get before lights come on?
             Color color = tileMapRenderer.getBatch().getColor();
 
             tileMapRenderer.getBatch().setColor(Color.WHITE);
