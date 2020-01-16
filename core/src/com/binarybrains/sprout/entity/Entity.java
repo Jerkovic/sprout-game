@@ -33,6 +33,7 @@ public abstract class Entity implements Telegraph, Trigger {
     private List<Entity> containsList = new ArrayList<Entity>();
     private final Array<Action> actions = new Array(0);
     private float temp;
+    private boolean interactable = true;
 
     // should be one tile in size
     protected Rectangle aiBox = new Rectangle();
@@ -51,6 +52,16 @@ public abstract class Entity implements Telegraph, Trigger {
         return false;
     }
 
+    /**
+     * flag the location so that it doesn't blocks Player interactions.
+     */
+    public void setNonInteractable() {
+        this.interactable = false;
+    }
+
+    public boolean isInteractable() {
+        return this.interactable;
+    }
     /**
      * Add action to our entity
      * @param action

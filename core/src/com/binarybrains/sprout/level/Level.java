@@ -245,7 +245,6 @@ public class Level extends LevelEngine {
         if(Gdx.input.isKeyJustPressed(Input.Keys.X)) {
             setAmbientColor(EnviroManager.DAY_COLOR);
             AmbienceSound.setSoundAndStart("forest_morning_ambience");
-
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {

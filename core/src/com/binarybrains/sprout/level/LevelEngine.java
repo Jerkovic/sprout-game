@@ -87,7 +87,7 @@ public abstract class LevelEngine {
 
         for (int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
-            if (e.getWalkBox().overlaps(area)) {
+            if (e.getWalkBox().overlaps(area) && e.isInteractable()) {
                 e.setTempFloat(player.distanceToCenter(e));
                 result.add(e);
             }
@@ -110,14 +110,21 @@ public abstract class LevelEngine {
 
     public List<Entity> getEntitiesAtTile(int tile_x, int tile_y) {
         Rectangle rect = new Rectangle(tile_x * 16 , tile_y * 16, 16, 16);
-        return getEntities(rect);
+        List<Entity> entities =  getEntities(rect);
+        for (int i = 0; i < entities.size(); i++) {
+            Entity e = entities.get(i);
+            if (!e.isInteractable()) {
+                entities.remove(e);
+            }
+        }
+        return entities;
     }
 
     public boolean isBlockingEntitiesAtTile(Entity ent, int tile_x, int tile_y) {
         List<Entity> tile_entities = getEntitiesAtTile(tile_x, tile_y);
         for (int i = 0; i < tile_entities.size(); i++) {
             Entity e = tile_entities.get(i);
-            if (e.blocks(ent)) {
+            if (e.blocks(ent) && e.isInteractable()) {
                 return true;
             }
         }

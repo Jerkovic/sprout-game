@@ -18,6 +18,7 @@ public class Location extends Entity {
         super(level, pos, width, height);
         this.name = name;
         this.description = description;
+        this.setNonInteractable(); // flag the location so that it doesn't blocks Player interactions.
         // do we need something here that tells if the location is inside or outside?
     }
 
