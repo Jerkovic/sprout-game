@@ -267,6 +267,19 @@ public class InventoryManagementWindow extends Dialog {
             // left
             button.addListener(new ClickListener(Input.Buttons.LEFT) {
                 @Override
+                public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                    super.enter(event, x, y, pointer, fromActor);
+                    if (event.getTarget() instanceof Button) {
+                        // SproutGame.playSound("button_click", .1f, 2.0f, 1f);
+                    }
+                }
+
+                @Override
+                public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                    super.exit(event, x, y, pointer, toActor);
+                }
+
+                @Override
                 public void clicked(InputEvent event, float x, float y) {
                     if (group.getCheckedIndex() > -1) {
                         if (heldItem == null) {

@@ -10,7 +10,7 @@ TODOS:
 
 * Day night cycle handler (Started)
 
-* NPC jump can be fucked up by interac with it.
+* NPC jump can be fucked up by interact with it.
 
 * jrebel (hot reload) look into
 
@@ -29,7 +29,12 @@ TODOS:
 
 * Implement jump sound. (Fixed)
 
+
+========Optimization======
 * Add pooling where needed.
+* Are we disposing everything?
+* Concat strings -- Dont! Use stringbuilder instead.
+
 
 * Fonts
     small, medium , large (gradient and dropshadow)
@@ -149,6 +154,9 @@ Norman
 Howard
 Fred
 Liz
+
+
+
 
 
 
@@ -332,7 +340,8 @@ Weapons(tools)
 ---------------------------------------------
 Dialogue
 
-// Tree ---Dictionary<String,String>
+https://github.com/patrickhoey/BludBourne/tree/master/core/src/com/packtpub/libgdx/bludbourne/dialog
+
 
 "H-how long have you been standing there?"
 "I miss moments like theese more than anything."
