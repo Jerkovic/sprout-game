@@ -1,10 +1,12 @@
 package com.binarybrains.sprout.hud.inventory;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -18,6 +20,7 @@ import com.binarybrains.sprout.crafting.Crafting;
 import com.binarybrains.sprout.crafting.Recipe;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.events.TelegramType;
+import com.binarybrains.sprout.hud.utils.ItemTip;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.screen.GameScreen;
@@ -64,7 +67,7 @@ public class CraftingWindow extends Dialog implements Telegraph {
 
         row();
         add(recipeContainer);
-        row(); // recipe container
+        row();
 
         TextButton buttonExit = new TextButton("   Close   ", skin);
         buttonExit.setColor(Color.BLACK);
@@ -81,12 +84,16 @@ public class CraftingWindow extends Dialog implements Telegraph {
         pack();
     }
 
+    /**
+     *
+     * @param skin
+     * @return
+     */
     public Table buildRecipesButtonGroup(Skin skin) {
 
         Table recipeRowTable = new Table(skin);
         recipeRowTable.setWidth(600);
         recipeRowTable.left().top();
-        //recipeRowTable.debug();
 
         int index = 0;
         craft.sortRecipes();
@@ -110,9 +117,8 @@ public class CraftingWindow extends Dialog implements Telegraph {
                         ((Sound) SproutGame.assets.get("sfx/craft_complete.wav")).play(.1f);
                         player.getLevel().screen.hud.refreshInventory();
 
-                        // player.getLevel().screen.hud.updateXP(player); // merge more of UI-refresh stuff?
                     } else {
-                        player.getLevel().screen.hud.addToasterMessage("Inventory" ,"Inventory is full!");
+                        player.getLevel().screen.hud.addToasterMessage("Crafting" ,"Inventory is full!");
                     }
                 }
             });
@@ -123,7 +129,6 @@ public class CraftingWindow extends Dialog implements Telegraph {
             Label lc = new Label(recipe.getItem().getName() + " (Recipe unlocked: " + recipe.isUnlocked + ")", skin);
             lc.setAlignment(Align.left);
             recipeRowTable.add(lc).padLeft(8).left(); // this made my evening. the left() made the table look better!
-
             for (int ci = 0; ci < recipe.getCost().size(); ci++) {
                 Item cost = recipe.getCost().get(ci);
                 int cost_count = 1;
@@ -131,7 +136,7 @@ public class CraftingWindow extends Dialog implements Telegraph {
                 {
                     cost_count = ((ResourceItem) cost).count;
                 }
-                recipeRowTable.add(makeIngredientLabel(cost.toString() + " x" + cost_count)).padLeft(30).left();
+                recipeRowTable.add(makeIngredientIconStack(cost.getRegionId(), cost_count)).padLeft(20).left();
             }
             recipeRowTable.row();
         }
@@ -141,10 +146,25 @@ public class CraftingWindow extends Dialog implements Telegraph {
 
     }
 
-    private Label makeIngredientLabel(String text) {
-        Label il = new Label(text, skin);
-        il.setAlignment(Align.left);
-        return il;
+    private Stack makeIngredientIconStack(String name, int counter) {
+        Stack stack = new Stack();
+
+        TextureAtlas.AtlasRegion icon;
+
+        icon = atlas.findRegion(name);
+        Image image = new Image(icon);
+        stack.add(image);
+
+        Label lc = new Label(counter +"", skin);
+        lc.setStyle(skin.get("small", Label.LabelStyle.class));
+        lc.setAlignment(Align.bottomRight);
+
+        Table overlay = new Table();
+        overlay.add(lc).expand().fillX().bottom().left();
+        stack.add(overlay);
+
+        stack.layout();
+        return stack;
     }
 
     private void onCrafting() {

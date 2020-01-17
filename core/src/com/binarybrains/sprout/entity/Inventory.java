@@ -117,7 +117,7 @@ public class Inventory {
                 return false;
             }
         }
-        // refreshInventory
+        MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_ADD_ITEM, item);
         MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_UPDATED);
         return true;
     }

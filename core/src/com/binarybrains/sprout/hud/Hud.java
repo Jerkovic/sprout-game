@@ -19,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.Layout;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
@@ -28,7 +27,6 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.events.*;
 import com.binarybrains.sprout.experience.LevelRank;
-import com.binarybrains.sprout.hud.components.ItemButton;
 import com.binarybrains.sprout.hud.components.ItemToaster;
 import com.binarybrains.sprout.hud.components.LocationLabel;
 import com.binarybrains.sprout.hud.inventory.ChestWindow;
@@ -91,8 +89,6 @@ public class Hud implements Telegraph {
         lc.setColor(250, 250, 250, 1f);
         stage.addActor(lc);
 
-
-
         craftingWindow = new CraftingWindow(level.player,"Crafting", skin);
         craftingWindow.setVisible(false);
         craftingWindow.hide();
@@ -136,6 +132,9 @@ public class Hud implements Telegraph {
                 TelegramType.PLAYER_STATS_RANK_INCREASED,
                 TelegramType.PLAYER_PASSED_OUT,
 
+                TelegramType.PLAYER_STATS_HEALTH_DECREASED,
+                TelegramType.PLAYER_STATS_HEALTH_INCREASED,
+
                 TelegramType.PLAYER_LOCATION_REACHED,
                 TelegramType.PLAYER_LOCATION_LEAVES,
 
@@ -144,6 +143,7 @@ public class Hud implements Telegraph {
                 TelegramType.PLAYER_CRAFTING_FAILURE,
 
                 TelegramType.PLAYER_INVENTORY_UPDATED,
+                TelegramType.PLAYER_INVENTORY_ADD_ITEM,
 
                 TelegramType.TIME_MINUTE_INC
         );
@@ -168,6 +168,10 @@ public class Hud implements Telegraph {
             case TelegramType.PLAYER_STATS_XP_INCREASED:
                 updateXP((Player) msg.sender);
                 break;
+            case TelegramType.PLAYER_STATS_HEALTH_DECREASED:
+            case TelegramType.PLAYER_STATS_HEALTH_INCREASED:
+                updateHealth((Player) msg.sender);
+                break;
             case TelegramType.PLAYER_ACHIEVEMENT_UNLOCKED:
                 Achievement achievement = ((Achievement) msg.extraInfo);
                 SproutGame.playSound("magic_swish", .6f);
@@ -180,6 +184,10 @@ public class Hud implements Telegraph {
             case TelegramType.PLAYER_INVENTORY_UPDATED:
                 refreshInventory();
                 break;
+            case TelegramType.PLAYER_INVENTORY_ADD_ITEM:
+                 Item item = ((Item) msg.extraInfo);
+                 addNotification(item);
+                 break;
             case TelegramType.PLAYER_STATS_MONEY_UPDATED:
                 updateFunds((int) msg.extraInfo);
                 break;
@@ -197,7 +205,7 @@ public class Hud implements Telegraph {
                 break;
              case TelegramType.PLAYER_LOCATION_LEAVES:
                  locationLabel.setText("...");
-                 locationLabel.setVisible(false);
+                 // locationLabel.setVisible(false);
                  break;
             default:
                 // code block
@@ -374,17 +382,12 @@ public class Hud implements Telegraph {
     }
 
     public void addNotification(Item item) {
-        // here we need a queue or something
-        // action que from our Pinball game will do
-        // the newest should be rendered from the top down
-        // and a window should disappear after 4 secs
-        // use Pooling here
+        // Todo: use Pooling here
         buildNotificationsWindow(item);
     }
 
 
     private Map<String, ItemToaster> itemNotifications = new HashMap<String, ItemToaster>();
-
 
     // a test right now- should be pooled
     public void buildNotificationsWindow(Item item) {
@@ -642,12 +645,14 @@ public class Hud implements Telegraph {
         moneyLabel.setText("" + numberFormat.format(money));
     }
 
-    private void updateXP(Player player) {
+    private void updateHealth(Player player) {
         healthBar.setValue((float) player.getHealth());
-        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+    }
+
+    private void updateXP(Player player) {
         int xp = player.getStats().get("xp");
         LevelRank rank = LevelRank.getLevelProgression(xp);
-        xpLabel.setText("XP: " + numberFormat.format(xp) + " Level: " + rank.getCurrentLevel());
+        xpLabel.setText("XP: " + NumberFormat.getNumberInstance(Locale.US).format(xp) + " Level: " + rank.getCurrentLevel());
         levelBar.setValue(rank.getProgress());
     }
 

@@ -127,6 +127,7 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         damage += dmg;
         shake();
 
+        getLevel().player.increaseXP(Math.max(dmg, 20)); // test increase XP with dmg points
         // change color when dealing with trees?
         getLevel().add(getLevel(), new TextParticle(getLevel(), getBottomCenterPos(), "" + "+"  + dmg, textParticleColor));
 
@@ -135,10 +136,13 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         if (damage > 50 && !falling) {
 
             falling = true;
-
-            getLevel().player.increaseXP(10); // test increase XP
-
+            if (e.getActiveItem() != null &&  e.getActiveItem() instanceof ToolItem) {
+                getLevel().player.increaseXP((((ToolItem) e.getActiveItem()).getUpgradeLevel() + 1) * 10);
+            } else {
+                getLevel().player.increaseXP(100); // bomb?
+            }
             SproutGame.playSound("tree_fall", .40f, .76f, 1f);
+
             addAction(
                     Actions.sequence(
                         Actions.delay(MathUtils.random(0.0001f, 0.1238f)),
@@ -149,7 +153,8 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
                                 getLevel().getCamera().shake();
 
                                 SproutGame.playSound("bump_against", .6f);
-                                int count = MathUtils.random(3,9);
+                                // ((ToolItem) e.getActiveItem()).getLevel()
+                                int count = MathUtils.random(3, 9); // change this
                                 for (int i = 0; i < count; i++) {
                                     getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.wood), new Vector2(getPosition().x, getPosition().y)));
                                 }

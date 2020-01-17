@@ -270,13 +270,16 @@ public class InventoryManagementWindow extends Dialog {
                 public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                     super.enter(event, x, y, pointer, fromActor);
                     if (event.getTarget() instanceof Button) {
-                        // SproutGame.playSound("button_click", .1f, 2.0f, 1f);
+                        System.out.println("Entered " + event.getTarget().getName());
                     }
                 }
 
                 @Override
                 public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
                     super.exit(event, x, y, pointer, toActor);
+                    if (event.getTarget() instanceof Button) {
+                        System.out.println("Exited " + event.getTarget().getName());
+                    }
                 }
 
                 @Override

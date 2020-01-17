@@ -9,6 +9,7 @@ public class TelegramType {
 
     public static final int PLAYER_STATS_RANK_INCREASED = 10;
     public static final int PLAYER_STATS_HEALTH_DECREASED = 20;
+    public static final int PLAYER_STATS_HEALTH_INCREASED = 25;
     public static final int PLAYER_PASSED_OUT = 30;
 
     public static final int PLAYER_ACHIEVEMENT_UNLOCKED = 99;
@@ -16,6 +17,7 @@ public class TelegramType {
     public static final int PLAYER_CRAFTING_FAILURE = 101;
 
     public static final int PLAYER_INVENTORY_UPDATED = 102;
+    public static final int PLAYER_INVENTORY_ADD_ITEM = 103;
     public static final int PLAYER_INVENTORY_CHANGED_SELECTED_SLOT = 110;
 
     public static final int PLAYER_LOCATION_REACHED = 140;

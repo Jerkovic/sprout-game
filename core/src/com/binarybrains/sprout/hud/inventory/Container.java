@@ -98,7 +98,6 @@ public class Container extends Table {
 
             Stack stack = new Stack();
 
-
             TextureAtlas.AtlasRegion icon;
             if (item != null) {
                 icon = atlas.findRegion(item.getRegionId());

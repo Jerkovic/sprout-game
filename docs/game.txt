@@ -347,6 +347,9 @@ Weapons(tools)
 ---------------------------------------------
 Dialogue
 
+https://github.com/pdtyreus/conversation-kit
+
+and/or
 https://github.com/patrickhoey/BludBourne/tree/master/core/src/com/packtpub/libgdx/bludbourne/dialog
 
 

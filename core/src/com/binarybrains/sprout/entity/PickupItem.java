@@ -97,7 +97,7 @@ public class PickupItem extends ItemEntity {
                 remove();
                 SproutGame.playSound("blop", .4f, MathUtils.random(0.8f, 1.2f), 1f);
                 ((Player)entity).increaseStats(item.getName(), 1);
-                getLevel().screen.hud.addNotification(item);
+
             }
         }
     }

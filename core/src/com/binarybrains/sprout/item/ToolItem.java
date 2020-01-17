@@ -9,7 +9,7 @@ public class ToolItem extends Item {
 
     public Tool tool;
     public int count = 1;
-    public int level;
+    public int level = 0;
     private Vector2 damageRange;
 
     public static final int MAX_LEVEL = 3;
@@ -19,13 +19,16 @@ public class ToolItem extends Item {
         this.tool = tool;
         this.level = level;
         damageRange = new Vector2(0f, 0f);
-        updateDamageRanage();
+        updateDamageRange();
 
     }
 
-    private void updateDamageRanage() {
-        damageRange.x = (level+1) * 5;
-        damageRange.y = (level+2) * 5;
+    /**
+     *
+     */
+    private void updateDamageRange() {
+        damageRange.x = (level + 1) * 5;
+        damageRange.y = (level + 2) * 5;
     }
 
     /**
@@ -46,6 +49,14 @@ public class ToolItem extends Item {
     public String getRegionId() {
         String regid = LEVEL_NAMES[level] + "_" + tool.getName().replace(" ", "_");
         return regid.replace("Basic_", "");
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getUpgradeLevel() {
+        return level;
     }
 
     public String getToolName() {
@@ -81,7 +92,7 @@ public class ToolItem extends Item {
     public boolean upgrade(int level) {
         if (level <= ToolItem.MAX_LEVEL) {
             this.level = level;
-            updateDamageRanage();
+            updateDamageRange();
             return true;
         }
         return false;

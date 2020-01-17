@@ -136,14 +136,17 @@ public class Player extends Npc implements InputProcessor {
         MessageManager.getInstance().dispatchMessage(this, TelegramType.PLAYER_STATS_MONEY_UPDATED, getStats("money"));
     }
 
+    /**
+     *
+     * @param hp
+     */
     public void heal(int hp) {
-        super.setHealth(Math.max(getHealth() + hp, 100));
-        // SEND SOME healing EVENT
+        setHealth(Math.max(getHealth() + hp, 100)); // todo Max health should be dynamic right?
+        MessageManager.getInstance().dispatchMessage(this, TelegramType.PLAYER_STATS_HEALTH_INCREASED);
     }
 
     public void setHealth(int hp) {
         super.setHealth(Math.max(hp, 0));
-        // SEND EVENT
     }
 
     @Override
@@ -156,6 +159,7 @@ public class Player extends Npc implements InputProcessor {
 
     public void payStamina(int hp) {
         setHealth(getHealth() - hp);
+        MessageManager.getInstance().dispatchMessage(this, TelegramType.PLAYER_STATS_HEALTH_DECREASED);
         if (getHealth() < 0) setHealth(0);
         if (getHealth() < 1) {
             passedOut = true;
