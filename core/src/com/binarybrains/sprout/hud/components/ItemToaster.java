@@ -38,8 +38,7 @@ public class ItemToaster extends Table {
     public void init() {
         Skin skin = getSkin();
         itemButton = new ItemButton(skin, item, icon, 1, 0);
-        itemButton.setHeight(48);
-        itemButton.setWidth(48);
+
         itemButton.setVisible(true);
 
         Label itemLabel = new Label(item.getName(), skin);

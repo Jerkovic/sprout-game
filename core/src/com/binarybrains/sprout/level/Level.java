@@ -28,6 +28,7 @@ import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.EmmaState;
 import com.binarybrains.sprout.entity.npc.Npc;
+import com.binarybrains.sprout.entity.terrain.Stone;
 import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
@@ -145,6 +146,7 @@ public class Level extends LevelEngine {
         add(this, player);
         add(this, new Chest(this, new Vector2(16 * 2, 16 * 4)));
 
+
         tileMapRenderer = new OrthogonalTiledMapRenderer(map);
         tileMapRenderer.setView(camera);
         debugRenderer = new ShapeRenderer();
@@ -158,6 +160,10 @@ public class Level extends LevelEngine {
         this.add(this, emma);
         setupPathFinding(emma); // construct the A.star
         emma.stateMachine.changeState(EmmaState.WALK_LABYRINTH);
+
+        add(this, new Stone(this, 20, 77));
+        add(this, new Stone(this, 20, 75));
+        add(this, new Stone(this, 29, 60));
 
         // Slime test
         // this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));

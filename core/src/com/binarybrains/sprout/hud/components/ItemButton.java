@@ -33,6 +33,7 @@ public class ItemButton extends Button {
         super(skin, "default");
         this.item = item;
         this.icon = icon;
+        this.icon.setSize(48,48);
         this.cnt = cnt;
         setName("" + slotIndex);
         init();
@@ -47,8 +48,7 @@ public class ItemButton extends Button {
         ));
     }
 
-    public void setCountLabel(int val)
-    {
+    public void setCountLabel(int val) {
         lc.setText("" + val);
         animate(icon);
     }

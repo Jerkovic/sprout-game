@@ -29,14 +29,11 @@ public class Stone extends Entity {
 
 
     public Stone(Level level, int tx, int ty) {
-
         super(level, new Vector2(0,0), 16, 16);
-
         setTilePos(tx, ty);
         sprite = new Sprite(level.spritesheet, 0 * 16, 78 * 16, 16, 16);
         sprite.setSize(16, 16);
         sprite.setPosition(getX(), getY());
-
     }
 
     public void shake() {
@@ -75,13 +72,14 @@ public class Stone extends Entity {
     @Override
     public void hurt(Entity ent, int damage) {
         health -= damage;
+
+        SproutGame.playSound("pickaxe_stone", 0.5f, MathUtils.random(0.98f, 1.18f), 1f);
         shake();
 
         getLevel().add(getLevel(), new TextParticle(getLevel(), getTopCenterPos(), "" + "+"  + damage, textParticleColor));
 
         if (health < 1) {
             SproutGame.playSound("break_stone", 0.9f);
-            getLevel().getCamera().shake();
 
             for (int i = 0; i <  MathUtils.random(2,3); i++) {
                 getLevel().add(getLevel(), new PickupItem(getLevel(), new ResourceItem(Resources.stone), getCenterPos()));
@@ -110,20 +108,17 @@ public class Stone extends Entity {
 
             remove();
 
-        } else {
-            SproutGame.playSound("metal_hit", 0.5f, MathUtils.random(0.68f, .78f), 1f);
         }
 
     }
 
-        @Override
+    @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
 
         if (item instanceof ToolItem) {
             ToolItem toolItem = (ToolItem) item;
 
             if (toolItem.tool instanceof PickAxe && toolItem.tool.canUse()) {
-
                 hurt(player, toolItem.getDamage());
                 return true;
             }
@@ -132,7 +127,6 @@ public class Stone extends Entity {
     }
 
     public void draw(Batch batch, float parentAlpha) {
-        // shadow?
         sprite.draw(batch);
     }
 

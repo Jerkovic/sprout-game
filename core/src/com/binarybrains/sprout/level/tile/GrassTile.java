@@ -63,7 +63,6 @@ public class GrassTile extends Tile {
                 entities.remove(player);
                 if (entities.size() > 0) return false;
 
-                ((Hoe) toolItem.tool).playDigSound();
                 player.getLevel().setTile(xt, yt, new DirtTile(xt, yt));
                 player.getLevel().setAutoTile(xt, yt, GrassTile.dirtAutoTiles.get(player.getLevel().getTileBitwiseIndex(xt,yt)));
 
