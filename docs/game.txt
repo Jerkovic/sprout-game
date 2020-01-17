@@ -20,7 +20,7 @@ TODOS:
 * Cleanup hud
 
 * Footsteps         // plays different walking sounds here. // https://www.youtube.com/watch?v=wYREdw4nz4E
-
+sd
 
 * Handle AI pathfinding is triggered inside a house we need her/him go to the door and leave then start
 (do we need something that tells if the location is inside or outside?)
@@ -35,6 +35,13 @@ TODOS:
 * Are we disposing everything?
 * Concat strings -- Dont! Use stringbuilder instead.
 
+---
+StringBuilder outputString = new StringBuilder();
+outputString.append(String.format("[%s]: ", id));
+outputString.append(System.getProperty("line.separator"));
+outputString.append(String.format("Number conversations: %d", conversations.size()));
+outputString.append(String.format(", Number of choices: %d", numberTotalChoices));
+return outputString.toString();
 
 * Fonts
     small, medium , large (gradient and dropshadow)

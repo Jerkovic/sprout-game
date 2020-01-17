@@ -18,6 +18,6 @@ public class InventoryTest {
 
     @Test
     public void testAdd() throws Exception {
-        assertTrue(true);
+        assertTrue(false);
     }
 }
