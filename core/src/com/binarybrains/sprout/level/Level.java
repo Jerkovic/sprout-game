@@ -21,6 +21,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.*;
@@ -120,7 +122,7 @@ public class Level extends LevelEngine {
         fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight(), false);
     }
 
-    Window ww;
+    Table ww;
 
     public Level(GameScreen screen, int level) {
         setupAmbientLight();
@@ -145,11 +147,11 @@ public class Level extends LevelEngine {
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();
 
-        ww = new Window("test", screen.skin);
-        ww.add("Hej jag är ett fönster i wordl");
-
-        ww.setSize(100f, 100f);
-        ww.setKeepWithinStage(false);
+        // test world ui 
+        ww = new Table(screen.skin);
+        ww.add("Hello world!");
+        ww.pad(10).background("default-round");
+        ww.setSize(120f, 30f);
         addActor(ww);
 
         add(this, player);
