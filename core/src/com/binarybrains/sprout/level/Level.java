@@ -21,6 +21,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
@@ -119,6 +120,7 @@ public class Level extends LevelEngine {
         fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight(), false);
     }
 
+    Window ww;
 
     public Level(GameScreen screen, int level) {
         setupAmbientLight();
@@ -142,6 +144,13 @@ public class Level extends LevelEngine {
 
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();
+
+        ww = new Window("test", screen.skin);
+        ww.add("Hej jag är ett fönster i wordl");
+
+        ww.setSize(100f, 100f);
+        ww.setKeepWithinStage(false);
+        addActor(ww);
 
         add(this, player);
         add(this, new Chest(this, new Vector2(16 * 2, 16 * 4)));
@@ -233,6 +242,11 @@ public class Level extends LevelEngine {
                 screen.hud.inventoryBottom();
             }
         }
+
+        // Test render a window in world space
+        Vector3 testPos = getCamera().project(new Vector3(player.getX()-16f, player.getY() + 16f, 0));
+        ww.setPosition(testPos.x, testPos.y);
+
         // Dispatch any delayed messages
         MessageManager.getInstance().update();
     }
@@ -391,6 +405,8 @@ public class Level extends LevelEngine {
         if (debugMode) renderDebug(entities);
 
         renderHighlightCell(); // mouse selection test
+
+        super.draw();
     }
 
     private void renderDebug (List<Entity> entities) {

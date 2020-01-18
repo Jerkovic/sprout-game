@@ -21,7 +21,7 @@ public class GameScreen implements Screen {
     public Float width;
     public Float height;
     public Hud hud;
-    Skin skin;
+    public Skin skin;
 
     public enum GameState
     {
@@ -36,8 +36,9 @@ public class GameScreen implements Screen {
         width = (float) Gdx.graphics.getWidth();
         height = (float) Gdx.graphics.getHeight();
 
-        level = new Level(this, 1);
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+
+        level = new Level(this, 1);
         hud = new Hud(skin, level);
 
         EnviroManager.getInstance().init(level);

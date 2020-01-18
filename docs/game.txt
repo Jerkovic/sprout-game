@@ -8,6 +8,16 @@ ________________________________________________________________________________
 
 TODOS:
 
+* Be able to have in world UI-elements.
+
+* Make a nice patch speech bubble
+
+* Make pickupItem behave like Slime follow instead.
+
+* ADD missing sfx file in knivsta.
+
+* Be able to right click to move whole stack to chest. ?
+
 * Day night cycle handler (Started)
 
 * NPC jump can be fucked up by interact with it.
