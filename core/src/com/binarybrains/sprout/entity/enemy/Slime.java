@@ -13,16 +13,17 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.tool.Mace;
+import com.binarybrains.sprout.item.weapon.Weapon;
 import com.binarybrains.sprout.level.Level;
 
 public class Slime extends Mob {
 
-    private float speed = .123133489879f;
     private TextureRegion texture;
 
     public Slime(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height);
         setHealth(80);
+        setSpeed(MathUtils.random(5f, 9f));
         TextureAtlas atlas = SproutGame.assets.get("items2.txt");
         texture = atlas.findRegion("Gem_Node");
     }
@@ -30,7 +31,7 @@ public class Slime extends Mob {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        speed = MathUtils.random(.13240234f, .97459395395f);
+        //speed = MathUtils.random(.13240234f, .97459395395f);
 
         lookAt(getLevel().player); // determine the slimes looking/walk dir
 
@@ -39,17 +40,14 @@ public class Slime extends Mob {
 
         float angle = (float)Math.atan2(diffY, diffX);
 
-        float newX = getPosition().x + (float) (speed * Math.cos(angle));
-        float newY = getPosition().y + (float) (speed * Math.sin(angle));
+        float newX = getPosition().x + (float) (getSpeed() * Math.cos(angle));
+        float newY = getPosition().y + (float) (getSpeed() * Math.sin(angle));
 
         // collision basics
         if (canMoveToPos(newX, newY)) {
-            getPosition().x += speed * Math.cos(angle);
-            getPosition().y += speed * Math.sin(angle);
-        } else {
-            // what do todo when slime is stuck?
-        }
-    }
+            getPosition().x += getSpeed() * Math.cos(angle);
+            getPosition().y += getSpeed() * Math.sin(angle);
+        }    }
 
     @Override
     public void die() {
@@ -64,7 +62,7 @@ public class Slime extends Mob {
     public boolean interact(Player player, Item item, Direction attackDir) {
         if (item instanceof ToolItem) {
             ToolItem toolItem = (ToolItem) item;
-            if (toolItem.tool instanceof Mace && toolItem.tool.canUse()) {
+            if (toolItem.tool instanceof Weapon && toolItem.tool.canUse()) {
                 SproutGame.playSound("menu_select", 1f, MathUtils.random(0.7f, 1.1f), 1f);
                 hurt(player, toolItem.getDamage(), player.getDirection()); // hurt slime
                 return true;
