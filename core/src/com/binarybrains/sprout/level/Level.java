@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.GdxAI;
 import com.badlogic.gdx.ai.msg.MessageManager;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -22,14 +21,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Widget;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
-import com.binarybrains.sprout.entity.npc.EmmaState;
+import com.binarybrains.sprout.entity.npc.NpcState;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.entity.terrain.Stone;
 import com.binarybrains.sprout.item.ArtifactItem;
@@ -170,7 +167,7 @@ public class Level extends LevelEngine {
         Emma emma = new Emma(this, new Vector2(6 * 16f, 6 * 16f), 16f, 32f);
         this.add(this, emma);
         setupPathFinding(emma); // construct the A.star
-        emma.stateMachine.changeState(EmmaState.WALK_LABYRINTH);
+        emma.stateMachine.changeState(NpcState.WALK_LABYRINTH);
 
         add(this, new Stone(this, 20, 77));
         add(this, new Stone(this, 20, 75));

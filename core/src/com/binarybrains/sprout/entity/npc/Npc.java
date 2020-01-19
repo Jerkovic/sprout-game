@@ -1,28 +1,26 @@
 package com.binarybrains.sprout.entity.npc;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ai.msg.Telegram;
-import com.badlogic.gdx.ai.msg.Telegraph;
+import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
+import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.SproutGame;
-import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.actions.Actions;
+import com.binarybrains.sprout.entity.actions.SequenceAction;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static com.binarybrains.sprout.entity.Mob.Direction.*;
 
 /**
  * This is the human class ..how about a dog whats is that animal class
@@ -30,6 +28,8 @@ import static com.binarybrains.sprout.entity.Mob.Direction.*;
 public class Npc extends Mob {
 
     public List<Vector2> debugPathList;
+    public List<PointDirection> findPath;
+    public StateMachine<Npc, NpcState> stateMachine;
 
     public int spriteRow = 0; // the row on the spriteSheet where the NPC starts on
     private ActionState actionState = ActionState.EMPTY_NORMAL; // Idle normal state
@@ -44,19 +44,83 @@ public class Npc extends Mob {
     Sprite shadow;
     public float lockShadowY = 0;
 
-
     public Npc(Level level, Vector2 position, float width, float height, int spriteRow) {
         super(level, position, width, height);
+        stateMachine = new DefaultStateMachine<>(this, NpcState.IDLE);
         this.debugPathList = new ArrayList<Vector2>();
         setSpriteRow(spriteRow);
         shadow = new Sprite((Texture) SproutGame.assets.get("sprites/shadow.png"));
         setupAnimations();
     }
 
+    /**
+     * Performs a happy jump
+     */
+    public void jump() {
+        float ground_y = getY();
+        float jump_to_y = getY() + 16;
+
+        lockShadowY = ground_y;
+        SproutGame.playSound("jump", 0.8f);
+        addAction(Actions.sequence(
+                Actions.moveTo(getX(), jump_to_y, .3f, Interpolation.pow2),
+                Actions.moveTo(getX(), ground_y, .15f, Interpolation.exp5),
+                Actions.run(() -> { lockShadowY = 0; })
+        ));
+    }
+
     @Override
     public float getSortOrder() {
         return lockShadowY > 0 ? lockShadowY : getY(); // prevents jump in y-axis fuck up sortOrder
     }
+
+    // temp method for an npc to leave players house
+    public void leaveHouse() {
+        setTilePos(18,91); // outside the house test
+        SproutGame.playSound("door_close1", 0.4f);
+        stateMachine.changeState(NpcState.IDLE);
+    }
+
+    /**
+     *
+     * @param x
+     * @param y
+     * @param state
+     */
+    public void updateWalkDirections(int x, int y, NpcState state) {
+        this.clearActions();
+        clearFindPath();
+        IntArray rawPath = generatePath(x, y);
+        findPath = generatePathFindingDirections2(rawPath);
+
+        SequenceAction seq = new SequenceAction();
+
+        for (int i = 0; i < findPath.size(); i++) {
+            PointDirection pd = findPath.get(i);
+            Rectangle temp = getLevel().getTileBounds(pd.x, pd.y);
+            seq.addAction(Actions.moveTo(temp.x, temp.y, .5f, Interpolation.linear));
+            seq.addAction(Actions.run((() -> {
+                setDirection(pd.direction);
+                setState(State.WALKING);
+            })
+            ));
+        }
+        seq.addAction(Actions.run((() -> {
+            setState(State.STANDING);
+            stateMachine.changeState(state);
+        })
+        ));
+
+        this.addAction(seq);
+    }
+
+    /**
+     * Use this to clear this Mob's path finding route
+     */
+    public void clearFindPath() {
+        findPath = null;
+    }
+
 
     @Override
     public void updateBoundingBox() {
@@ -155,7 +219,8 @@ public class Npc extends Mob {
     @Override
     public void update(float delta) {
         super.update(delta);
-        if (this instanceof Player) return;
+        stateMachine.update();
+        // if (this instanceof Player) return;
     }
 
     public int getSpriteRow() {

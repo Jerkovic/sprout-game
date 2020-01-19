@@ -37,7 +37,7 @@ import static com.binarybrains.sprout.entity.Mob.Direction.*;
 
 public class Player extends Npc implements InputProcessor {
 
-    public  Inventory inventory;
+    public Inventory inventory;
     public Item activeItem;
     public Vector3 clickedPos = new Vector3();
     public int inventoryCapacity = 24;
