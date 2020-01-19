@@ -167,7 +167,14 @@ public class Level extends LevelEngine {
         Emma emma = new Emma(this, new Vector2(6 * 16f, 6 * 16f), 16f, 32f);
         this.add(this, emma);
         setupPathFinding(emma); // construct the A.star
-        emma.stateMachine.changeState(NpcState.WALK_LABYRINTH);
+        emma.stateMachine.changeState(NpcState.WALK_SOME_IN_PLAYER_HOUSE);
+
+        // TEST 
+        Emma emma2 = new Emma(this, new Vector2(8 * 16f, 6 * 16f), 16f, 32f);
+        this.add(this, emma2);
+        setupPathFinding(emma2); // construct the A.star
+        emma2.stateMachine.changeState(NpcState.WALK_TO_FRONT_DOOR);
+
 
         add(this, new Stone(this, 20, 77));
         add(this, new Stone(this, 20, 75));

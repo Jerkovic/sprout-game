@@ -37,7 +37,7 @@ public enum NpcState implements State<Npc> {
         }
     },
 
-    WALK_LABYRINTH() {
+    WALK_SOME_IN_PLAYER_HOUSE() {
         @Override
         public void enter(Npc entity) {
             entity.updateWalkDirections(1,1, WALK_TO_FRONT_DOOR);

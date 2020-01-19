@@ -14,7 +14,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Mob;
-import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.actions.SequenceAction;
 import com.binarybrains.sprout.level.Level;
