@@ -8,6 +8,10 @@ ________________________________________________________________________________
 
 TODOS:
 
+* Cinematic view
+
+* Post processing effecs
+
 * Be able to have in world UI-elements.
 
 * Make a nice patch speech bubble

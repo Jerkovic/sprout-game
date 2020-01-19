@@ -628,7 +628,7 @@ public class Hud implements Telegraph {
         if (mouseItem != null)  mouseItem.setZIndex(9000);
         float alpha = fadeActor.getColor().a;
 
-        if (alpha != 0){
+        if (alpha != 0) {
             Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND);
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
             fadeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -638,6 +638,22 @@ public class Hud implements Telegraph {
             fadeRenderer.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
         }
+    }
+
+    /**
+     *
+     */
+    public void renderCutSceneFrame() {
+        // Cut Scene 16:9 animation
+        Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        fadeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        fadeRenderer.setColor(new Color(0f, 0f, 0.031f, 1));
+        fadeRenderer.rect(0, 0, Gdx.app.getGraphics().getWidth(), 80);
+        fadeRenderer.rect(0, Gdx.app.getGraphics().getHeight() - 80, Gdx.app.getGraphics().getWidth(),
+                80);
+        fadeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
     }
 
     public void updateFunds(int money) {
