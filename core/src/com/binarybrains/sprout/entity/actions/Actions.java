@@ -64,6 +64,14 @@ public class Actions {
         return action;
     }
 
+    static public FollowTargetToAction followTargetToAction (Entity follow, float duration, Interpolation interpolation) {
+        FollowTargetToAction action = action(FollowTargetToAction.class);
+        action.setFollow(follow);
+        action.setDuration(duration);
+        action.setInterpolation(interpolation);
+        return action;
+    }
+
     static public ScaleToAction scaleTo (float x, float y, float duration, Interpolation interpolation) {
         ScaleToAction action = action(ScaleToAction.class);
         action.setScale(x, y);

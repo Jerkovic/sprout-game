@@ -147,7 +147,7 @@ public class Level extends LevelEngine {
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();
 
-        // test world ui 
+        // test world ui speech / action window
         ww = new Table(screen.skin);
         ww.add("Hello world!");
         ww.pad(10).background("default-round");

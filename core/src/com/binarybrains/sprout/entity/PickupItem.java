@@ -71,8 +71,7 @@ public class PickupItem extends ItemEntity {
 
         shadow = new Sprite(new Texture(Gdx.files.internal("sprites/shadow.png")));
         // bounce
-        if (bounce)
-        {
+        if (bounce) {
             Random random = new Random();
             xx = position.x;
             yy = position.y;
@@ -146,16 +145,11 @@ public class PickupItem extends ItemEntity {
         }
 
         float distance = distanceTo(getLevel().player);
-        if (distance < 32 && getActions().size < 1 && magnet && getLevel().player.inventory.hasSpaceFor(this.item)) {
+        if (distance < 48 && getActions().size < 1 && magnet && getLevel().player.inventory.hasSpaceFor(this.item)) {
             // item in state of being sucked to the player
             addAction(Actions.sequence(
-                    Actions.moveTo(getLevel().player.getCenterPos().x, getLevel().player.getCenterPos().y, .5f, Interpolation.pow3),
-                    Actions.run((new Runnable() {
-                        public void run () {
-                            touchedBy(getLevel().player);
-                        }
-                    })
-
+                    Actions.followTargetToAction(getLevel().player,.6f, Interpolation.circleIn),
+                    Actions.run((() -> touchedBy(getLevel().player))
             )));
         }
 
