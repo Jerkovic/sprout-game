@@ -24,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
+import com.binarybrains.sprout.entity.enemy.Slime;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.NpcState;
@@ -169,7 +170,7 @@ public class Level extends LevelEngine {
         setupPathFinding(emma); // construct the A.star
         emma.stateMachine.changeState(NpcState.WALK_SOME_IN_PLAYER_HOUSE);
 
-        // TEST 
+        // TEST
         Emma emma2 = new Emma(this, new Vector2(8 * 16f, 6 * 16f), 16f, 32f);
         this.add(this, emma2);
         setupPathFinding(emma2); // construct the A.star
@@ -181,6 +182,10 @@ public class Level extends LevelEngine {
         add(this, new Stone(this, 29, 60));
 
         // Slime test
+        for (int i = 0; i < 0; i++) {
+            this.add(new Slime(this, new Vector2((22+i) * 16f, 107 * 16f), 16f, 16f));
+        }
+
         // this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
 
         // add(this, new SpeechBubble(this, "I am hungry!"));
@@ -212,10 +217,6 @@ public class Level extends LevelEngine {
         Level.ambientColor.y = color.g;
         Level.ambientColor.z = color.b;
         ambientIntensity = color.a;
-
-        System.out.println(Level.ambientColor);
-        System.out.println(color);
-
     }
 
     public void update(float delta) {
