@@ -57,30 +57,20 @@ public class ItemButton extends Button {
      * Init
      */
     private void init() {
-        boolean showStack = false;
         Skin skin = getSkin();
 
         String counter = "";
-        if (item instanceof ResourceItem && cnt > 0) { // > 0 here but > 1 elsewhere
-            counter = "" + cnt;
-            showStack = true;
-        }
+        counter = "" + cnt;
 
         Stack stack = new Stack();
-
-        if (icon != null) {
-            stack.add(icon);
-        }
-
-        if (showStack) {
-            lc = new Label(counter, skin);
-            lc.setStyle(skin.get("small", Label.LabelStyle.class));
-            lc.setAlignment(Align.bottomRight);
-            lc.setColor(250, 250, 250, 1f);
-            Table overlay = new Table();
-            overlay.add(lc).expand().fillX().bottom().left();
-            stack.add(overlay);
-        }
+        stack.add(icon);
+        lc = new Label(counter, skin);
+        lc.setStyle(skin.get("small", Label.LabelStyle.class));
+        lc.setAlignment(Align.bottomRight);
+        lc.setColor(250, 250, 250, 1f);
+        Table overlay = new Table();
+        overlay.add(lc).expand().fillX().bottom().left();
+        stack.add(overlay);
         stack.layout();
         add(stack);
     }

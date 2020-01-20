@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -114,7 +115,8 @@ public class CraftingWindow extends Dialog implements Telegraph {
                     if (craft.startCraft(player, Integer.parseInt(event.getTarget().getName()))) {
                         onCrafting();
                         // temp sound remake this.
-                        ((Sound) SproutGame.assets.get("sfx/craft_complete.wav")).play(.1f);
+                        SproutGame.playSound("menu_select", 1f, MathUtils.random(0.7f, 1.1f), 1f);
+                        // ((Sound) SproutGame.assets.get("sfx/craft_complete.wav")).play(.1f);
                         player.getLevel().screen.hud.refreshInventory();
 
                     } else {

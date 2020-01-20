@@ -51,7 +51,7 @@ public class Inventory {
     }
 
     /**
-     * Upgrade Inventory
+     * Upgrade Inventory with 12 new slots
      *
      * @return
      */
