@@ -3,13 +3,10 @@ package com.binarybrains.sprout;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.binarybrains.sprout.entity.Entity;
@@ -17,7 +14,7 @@ import com.binarybrains.sprout.entity.tweens.EntityAccessor;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.hud.tweens.CameraAccessor;
 import com.binarybrains.sprout.misc.Camera;
-import com.binarybrains.sprout.screen.GameScreen;
+import com.binarybrains.sprout.screen.LoadingScreen;
 
 public class SproutGame extends Game {
 
@@ -27,19 +24,18 @@ public class SproutGame extends Game {
 
 	private static TweenManager tweenManager;
 	public static AssetManager assets = new AssetManager();
-	private BitmapFont font;
 
 	@Override
 	public void create() {
-        Gdx.app.log("LibGdx version:", com.badlogic.gdx.Version.VERSION);
+        // Gdx.app.log("LibGdx version:", com.badlogic.gdx.Version.VERSION);
 		setTweenManager(new TweenManager());
 		Tween.setCombinedAttributesLimit(4);
 		Tween.registerAccessor(Actor.class, new ActorAccessor());
         Tween.registerAccessor(Entity.class, new EntityAccessor());
 		Tween.registerAccessor(Camera.class, new CameraAccessor());
 
-		loadAssets();
-		setScreen(new GameScreen(this));
+		// set screen
+		setScreen(new LoadingScreen(this));
 	}
 
 	public SproutGame() {
@@ -54,9 +50,6 @@ public class SproutGame extends Game {
 		return tweenManager;
 	}
 
-	public BitmapFont getFont() {
-		return font;
-	}
 
 	@Override
 	public void dispose() {
@@ -177,7 +170,7 @@ public class SproutGame extends Game {
         //  Sprite items
         assets.load("items2.txt", TextureAtlas.class);
 
-		SproutGame.assets.finishLoading();
+		// SproutGame.assets.finishLoading();
 	}
 }
 
