@@ -10,7 +10,7 @@ TODOS:
 
 * Cinematic view
 
-* Post processing effecs
+* Post processing effecs (see https://github.com/manuelbua/libgdx-contribs/tree/master/postprocessing-demo)
 
 * Be able to have in world UI-elements.
 

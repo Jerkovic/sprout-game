@@ -2,7 +2,9 @@ package com.binarybrains.sprout;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
@@ -28,6 +30,8 @@ public class SproutGame extends Game {
 	@Override
 	public void create() {
         // Gdx.app.log("LibGdx version:", com.badlogic.gdx.Version.VERSION);
+        boolean isDesktop = (Gdx.app.getType() == Application.ApplicationType.Desktop);
+        System.out.println("Desktop: " + isDesktop);
 		setTweenManager(new TweenManager());
 		Tween.setCombinedAttributesLimit(4);
 		Tween.registerAccessor(Actor.class, new ActorAccessor());
