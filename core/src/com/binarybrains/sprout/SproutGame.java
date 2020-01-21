@@ -11,6 +11,8 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.Json;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.tweens.EntityAccessor;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
@@ -27,9 +29,11 @@ public class SproutGame extends Game {
 	private static TweenManager tweenManager;
 	public static AssetManager assets = new AssetManager();
 
+	private Skin skin;
+
 	@Override
 	public void create() {
-        // Gdx.app.log("LibGdx version:", com.badlogic.gdx.Version.VERSION);
+        Gdx.app.log("LibGdx version:", com.badlogic.gdx.Version.VERSION);
         boolean isDesktop = (Gdx.app.getType() == Application.ApplicationType.Desktop);
         System.out.println("Desktop: " + isDesktop);
 		setTweenManager(new TweenManager());
@@ -38,6 +42,7 @@ public class SproutGame extends Game {
         Tween.registerAccessor(Entity.class, new EntityAccessor());
 		Tween.registerAccessor(Camera.class, new CameraAccessor());
 
+		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
 		// set screen
 		setScreen(new LoadingScreen(this));
 	}
@@ -54,6 +59,9 @@ public class SproutGame extends Game {
 		return tweenManager;
 	}
 
+	public Skin getSkin() {
+		return skin;
+	}
 
 	@Override
 	public void dispose() {
@@ -95,7 +103,9 @@ public class SproutGame extends Game {
 	 * Load all assets
 	 */
 	public void loadAssets() {
-    	assets.load("spritesheet.png", Texture.class);
+    	assets.load("skin/uiskin.json", Skin.class);
+
+		assets.load("spritesheet.png", Texture.class);
 		assets.load("haley-sheet.png", Texture.class);
 		assets.load("sprites/shadow.png", Texture.class);
 

@@ -386,7 +386,6 @@ public class Hud implements Telegraph {
         buildNotificationsWindow(item);
     }
 
-
     private Map<String, ItemToaster> itemNotifications = new HashMap<String, ItemToaster>();
 
     // a test right now- should be pooled

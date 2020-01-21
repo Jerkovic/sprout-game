@@ -8,7 +8,7 @@ ________________________________________________________________________________
 
 TODOS:
 
-* Fixed camera bug not following player centered top and right.
+* camera bug not following player centered top and right. (Fixed)
 
 * Cinematic view
 
