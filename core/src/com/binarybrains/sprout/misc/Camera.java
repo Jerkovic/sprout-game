@@ -40,8 +40,8 @@ public class Camera extends OrthographicCamera {
 
         if (noFollow) return; // disabled
 
-        temp.x += (followPos.x - position.x) *  deltaTime;
-        temp.y += (followPos.y - position.y) * deltaTime;
+        temp.x = followPos.x;
+        temp.y = followPos.y;
         temp.z = 0;
         position.set(temp);
 
@@ -57,6 +57,7 @@ public class Camera extends OrthographicCamera {
 
     @Override
     public void update() {
+        // System.out.println( viewportWidth + "x " + viewportHeight); 200x150
         float cameraHalfWidth = viewportWidth * .5f;
         float cameraHalfHeight = viewportHeight * .5f;
         float cameraLeft = position.x - cameraHalfWidth;
@@ -67,8 +68,7 @@ public class Camera extends OrthographicCamera {
         float mapTop =  level.height * level.tilePixelHeight;
         float mapRight = level.width * level.tilePixelWidth;
 
-        if (cameraLeft <= 0)
-        {
+        if (cameraLeft <= 0) {
             position.x = cameraHalfWidth;
         }
 

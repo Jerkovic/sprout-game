@@ -8,6 +8,8 @@ ________________________________________________________________________________
 
 TODOS:
 
+* Fixed camera bug not following player centered top and right.
+
 * Cinematic view
 
 * Post processing effecs (see https://github.com/manuelbua/libgdx-contribs/tree/master/postprocessing-demo)
@@ -105,7 +107,7 @@ new  Smoke particles (chimney) we have some ugly clouds for testing as of octobe
 
 * watered ground should change color
 
-* Bitwise auto-tiling in the mines.
+* Bitwise auto-tiling in the mines/dungeons.
 
 * Slime enemy (started)
 
