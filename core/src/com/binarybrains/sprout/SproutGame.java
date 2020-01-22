@@ -43,7 +43,7 @@ public class SproutGame extends Game {
 		Tween.registerAccessor(Camera.class, new CameraAccessor());
 
 		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-		// set screen
+
 		setScreen(new LoadingScreen(this));
 	}
 

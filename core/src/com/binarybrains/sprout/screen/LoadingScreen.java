@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -19,7 +20,7 @@ import com.binarybrains.sprout.SproutGame;
 
 public class LoadingScreen implements Screen {
 
-    public static String LOGO_IMAGE = "game_logo.png";
+    public static String LOGO_IMAGE = "place-holder-logo2.png";
     private Stage stage;
     private float percent;
     private SproutGame game;
@@ -54,7 +55,7 @@ public class LoadingScreen implements Screen {
 
         loadingBar.setPosition(
                 (Gdx.graphics.getWidth() - loadingBar.getWidth()) / 2f,
-                (Gdx.graphics.getHeight() - loadingBar.getHeight()) / 2f - 100
+                (Gdx.graphics.getHeight() - loadingBar.getHeight()) / 2f - 150
         );
     }
 
@@ -84,7 +85,7 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.01f, 0.01f, .1f, 1);
+        Gdx.gl.glClearColor(0.01f, 0.01f, .03f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (SproutGame.assets.update()) {

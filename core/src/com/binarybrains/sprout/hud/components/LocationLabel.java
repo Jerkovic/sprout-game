@@ -30,7 +30,9 @@ public class LocationLabel extends Table {
         setWidth(300);
         setHeight(30);
         setVisible(false);
-        setPosition(Gdx.app.getGraphics().getWidth() - getWidth() - 30, Gdx.app.getGraphics().getHeight() - getHeight() - 30);
+        setPosition(
+                Gdx.app.getGraphics().getWidth() - getWidth() - 30,
+                Gdx.app.getGraphics().getHeight() - getHeight() - 30);
     }
 
     /**
