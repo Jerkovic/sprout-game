@@ -6,6 +6,10 @@ https://github.com/sndcode/stardewvalleycode/tree/master/Stardew%20Valley
 
 ________________________________________________________________________________
 
+Art stuff:
+
+https://www.deviantart.com/d-e-n-a/art/Pixel-Tree-Tutorial-133166821
+
 TODOS:
 
 * camera bug not following player centered top and right. (Fixed)
