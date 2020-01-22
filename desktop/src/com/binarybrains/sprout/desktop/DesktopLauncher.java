@@ -6,8 +6,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.util.SheetGenerator;
 
-import java.awt.*;
-
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
@@ -21,15 +19,14 @@ public class DesktopLauncher {
         System.out.println("============================================================");
         Graphics.DisplayMode displayMode = LwjglApplicationConfiguration.getDesktopDisplayMode();
         config.setFromDisplayMode(displayMode);
-        config.width = 1920;
+        config.width = 1900;
         config.height = 1200;
-        config.fullscreen = false;
+        config.fullscreen =  true;
         config.resizable = false;
         config.useGL30 = false;
 		config.title = SproutGame.name;
         config.vSyncEnabled = true;
-        config.forceExit = false;
-
+        config.forceExit = true;
         // Window icons: 128x128(Mac), 32x32 (for Win and Linux), and 16x16 (for Win).
         // config.addIcon("some icon", Files.FileType.Local);
         new LwjglApplication(new SproutGame(), config);
