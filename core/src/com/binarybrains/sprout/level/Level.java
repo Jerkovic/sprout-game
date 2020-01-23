@@ -139,18 +139,20 @@ public class Level extends LevelEngine {
         camera.setToOrtho(false, screen.width / 3, screen.height / 3); // we scale 16x16 to 64x64
 
         player = new Player(this);
-        player.setTilePos(3, 5);
+        player.setTilePos(21, 81); //21x81
         player.setHealth(50);
 
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();
 
         // test world ui speech / action window
+        /*
         ww = new Table(screen.skin);
         ww.add("Hello world!");
         ww.pad(10).background("default-round");
         ww.setSize(120f, 30f);
         addActor(ww);
+        */
 
         add(this, player);
         add(this, new Chest(this, new Vector2(16 * 2, 16 * 4)));
@@ -251,8 +253,8 @@ public class Level extends LevelEngine {
         }
 
         // Test render a window in world space
-        Vector3 testPos = getCamera().project(new Vector3(player.getX()-16f, player.getY() + 16f, 0));
-        ww.setPosition(testPos.x, testPos.y);
+        // Vector3 testPos = getCamera().project(new Vector3(player.getX()-16f, player.getY() + 16f, 0));
+        //ww.setPosition(testPos.x, testPos.y);
 
         // Dispatch any delayed messages
         MessageManager.getInstance().update();
