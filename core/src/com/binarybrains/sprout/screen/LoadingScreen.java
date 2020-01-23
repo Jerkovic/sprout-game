@@ -7,12 +7,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
@@ -43,7 +41,7 @@ public class LoadingScreen implements Screen {
 
         ProgressBar.ProgressBarStyle barStyle = new ProgressBar.ProgressBarStyle(
                 skin.newDrawable("default-hud-texture", Color.DARK_GRAY),
-                skin.newDrawable("default-hud-texture", Color.RED)
+                skin.newDrawable("default-hud-texture", Color.FIREBRICK)
         );
         barStyle.knobBefore = barStyle.knob;
 
@@ -89,8 +87,7 @@ public class LoadingScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (SproutGame.assets.update()) {
-            // Transition to MainMenuScreen here
-            game.setScreen(new GameScreen(game));
+            game.setScreen(new MainMenuScreen(game));
         }
 
         percent = Interpolation.linear.apply(percent, SproutGame.assets.getProgress(), 0.5f);

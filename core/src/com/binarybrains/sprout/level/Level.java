@@ -136,7 +136,7 @@ public class Level extends LevelEngine {
         loadMap(this, level);
 
         camera = new Camera(this);
-        camera.setToOrtho(false, screen.width / 3, screen.height / 3); // we scale 16x16 to 64x64
+        camera.setToOrtho(false, screen.width / 4, screen.height / 4); // we scale 16x16 to 64x64
 
         player = new Player(this);
         player.setTilePos(21, 81); //21x81
