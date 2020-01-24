@@ -73,7 +73,7 @@ public class Stone extends Entity {
     public void hurt(Entity ent, int damage) {
         health -= damage;
 
-        // SproutGame.playSound("pickaxe_stone", 0.5f, MathUtils.random(0.98f, 1.18f), 1f);
+        SproutGame.playSound("pickaxe_stone", 0.45f, MathUtils.random(0.98f, 1.12f), 1f);
         shake();
 
         getLevel().add(getLevel(), new TextParticle(getLevel(), getTopCenterPos(), "" + "+"  + damage, textParticleColor));

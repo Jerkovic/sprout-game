@@ -132,7 +132,7 @@ public class SproutGame extends Game {
 		assets.load("sfx/speaker_blip.wav", Sound.class);
 		assets.load("sfx/break_stone.wav", Sound.class);
 		assets.load("sfx/swing_03.wav", Sound.class);
-		// assets.load("sfx/pickaxe_stone.wav", Sound.class);
+		assets.load("sfx/pickaxe_stone.wav", Sound.class);
 		assets.load("sfx/small_ground_hit.wav", Sound.class);
 		assets.load("sfx/tree_fall.wav", Sound.class);
 		assets.load("sfx/bump_against.wav", Sound.class);
