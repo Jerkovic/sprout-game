@@ -29,16 +29,18 @@ public class MainMenuScreen implements Screen {
 
         Skin skin = game.getSkin();
 
-        // dont load like this
-        skin.add("button-black", new Texture( Gdx.files.internal("raw_ui_components/button_normal.png")));
-        skin.add("button-black-hover", new Texture( Gdx.files.internal("raw_ui_components/button_hoverl.png")));
+
+        skin.add("button-black", new Texture( Gdx.files.internal("new-design-button.png")));
+        skin.add("main-menu-background", new Texture( Gdx.files.internal("menu_bg.png")));
+
 
         TextureRegion buttonRegion1 = new TextureRegion(skin.get("button-black", Texture.class));
-        TextureRegion buttonRegion2 = new TextureRegion(skin.get("button-black-hover", Texture.class));
+        // TextureRegion buttonRegion2 = new TextureRegion(skin.get("button-black-hover", Texture.class));
+
 
         TextButton.TextButtonStyle button1 = new TextButton.TextButtonStyle(
                 new TextureRegionDrawable(buttonRegion1),
-                new TextureRegionDrawable(buttonRegion2),
+                new TextureRegionDrawable(buttonRegion1),
                 new TextureRegionDrawable(buttonRegion1),
                 skin.getFont("default-font")
         );
@@ -58,7 +60,6 @@ public class MainMenuScreen implements Screen {
         play.addListener(new InputListener() {
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                SproutGame.playSound("speaker_blip", 1f, MathUtils.random(.6f, .9f), 1f);
             }
 
             @Override
@@ -117,7 +118,7 @@ public class MainMenuScreen implements Screen {
 
 
         Table buttonTable = new Table(skin);
-        buttonTable.setBackground("default-select-selection");
+        // buttonTable.setBackground("default-select-selection");
         buttonTable.add(play).pad(12);
         buttonTable.row();
         buttonTable.add(opt).pad(12);
@@ -135,6 +136,8 @@ public class MainMenuScreen implements Screen {
         buttonTable.pack();
 
         stage = new Stage();
+        TextureRegion bg = new TextureRegion(skin.get("main-menu-background", Texture.class));
+        stage.addActor(new Image(bg));
         Gdx.input.setInputProcessor(stage);
         stage.addActor(buttonTable);
     }
