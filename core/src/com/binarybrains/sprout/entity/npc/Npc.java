@@ -26,12 +26,12 @@ import java.util.List;
  */
 public class Npc extends Mob {
 
+    private Texture framesTexture;
+    private ActionState actionState = ActionState.EMPTY_NORMAL; // Idle normal state
+
     public List<Vector2> debugPathList;
     public List<PointDirection> findPath;
     public StateMachine<Npc, NpcState> stateMachine;
-
-    public int spriteRow = 0; // the row on the spriteSheet where the NPC starts on
-    private ActionState actionState = ActionState.EMPTY_NORMAL; // Idle normal state
 
     public static enum ActionState {
         EMPTY_NORMAL, CARRYING, THROWING, CHOPPING, ATTACKING
@@ -43,13 +43,22 @@ public class Npc extends Mob {
     Sprite shadow;
     public float lockShadowY = 0;
 
-    public Npc(Level level, Vector2 position, float width, float height, int spriteRow) {
+    public Npc(Level level, Vector2 position, float width, float height, Texture framesTexture) {
         super(level, position, width, height);
-        stateMachine = new DefaultStateMachine<>(this, NpcState.IDLE);
+        this.stateMachine = new DefaultStateMachine<>(this, NpcState.IDLE);
         this.debugPathList = new ArrayList<Vector2>();
-        setSpriteRow(spriteRow);
-        shadow = new Sprite((Texture) SproutGame.assets.get("sprites/shadow.png"));
+        this.shadow = new Sprite((Texture) SproutGame.assets.get("sprites/shadow.png"));
+        this.framesTexture = framesTexture;
         setupAnimations();
+    }
+
+
+    /**
+     * Sets the sprite sheet frame texture
+     * @param texture
+     */
+    public void setFramesTexture(Texture texture) {
+        this.framesTexture = texture;
     }
 
     /**
@@ -219,15 +228,6 @@ public class Npc extends Mob {
     public void update(float delta) {
         super.update(delta);
         stateMachine.update();
-        // if (this instanceof Player) return;
-    }
-
-    public int getSpriteRow() {
-        return spriteRow;
-    }
-
-    public void setSpriteRow(int spriteRow) {
-        this.spriteRow = spriteRow;
     }
 
     /**
@@ -274,7 +274,7 @@ public class Npc extends Mob {
      * Setup animations
      */
     public void setupAnimations() {
-        TextureRegion[][] frames = TextureRegion.split(SproutGame.assets.get("haley-sheet.png"), getWidth(), getHeight());
+        TextureRegion[][] frames = TextureRegion.split(this.framesTexture, getWidth(), getHeight());
 
         int row = 0;
         for (int d = Direction.SOUTH.ordinal(); d <= Direction.WEST.ordinal(); d++) { // directions

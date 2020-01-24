@@ -107,8 +107,8 @@ public class SproutGame extends Game {
 
 		assets.load("spritesheet.png", Texture.class);
 		assets.load("haley-sheet.png", Texture.class);
+		assets.load("player/player_temp.png", Texture.class);
 		assets.load("sprites/shadow.png", Texture.class);
-
 
         assets.load("sfx/chopping_Wood_1.wav", Sound.class);
         assets.load("sfx/chopping_Wood_2.wav", Sound.class);

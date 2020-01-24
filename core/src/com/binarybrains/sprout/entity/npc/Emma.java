@@ -15,7 +15,7 @@ import com.binarybrains.sprout.level.Level;
 public class Emma extends Npc {
 
     public Emma(Level level, Vector2 position, float width, float height) {
-        super(level, position, width, height, 3); // 3 is the spriteRow used
+        super(level, position, width, height, SproutGame.assets.get("haley-sheet.png"));
         setHealth(100);
         setState(State.STANDING);
         setDirection(Direction.EAST);

@@ -54,8 +54,6 @@ public class Level extends LevelEngine {
     public BitmapFont font;
 
     public Texture spritesheet; // 400x1264 pixels 25 tiles bred och 79 hög
-    public Texture charsheet;
-
     public GameScreen screen;
 
     // shader test
@@ -127,7 +125,6 @@ public class Level extends LevelEngine {
         this.screen = screen;
         // dont load sprites like this.
         spritesheet = new Texture(Gdx.files.internal("levels/stardew_valley_01.png"));
-        this.charsheet = SproutGame.assets.get("spritesheet.png");
 
         // BitmapFont to use for text Particles
         font = new BitmapFont(Gdx.files.internal("pixel.fnt"),
@@ -495,7 +492,6 @@ public class Level extends LevelEngine {
         defaultShader.dispose();
         light.dispose();
         spritesheet.dispose();
-        charsheet.dispose();
         fbo.dispose();
         pe.dispose();
     }

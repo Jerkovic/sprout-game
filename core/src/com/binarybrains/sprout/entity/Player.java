@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -63,7 +64,12 @@ public class Player extends Npc implements InputProcessor {
     }
 
     public Player(Level level) {
-        super(level, new Vector2(0, 0), 16f, 16f, 0);
+        super(level,
+                new Vector2(0, 0),
+                16f,
+                32f,
+                SproutGame.assets.get("player/player_temp.png", Texture.class)
+        );
         setSpeed(64);
 
         inventory = new Inventory(inventoryCapacity);
@@ -164,27 +170,6 @@ public class Player extends Npc implements InputProcessor {
         if (getHealth() < 1) {
             passedOut = true;
             die();
-        }
-    }
-
-    /**
-     * temporary setup our small player and anims
-     */
-    @Override
-    public void setupAnimations() {
-        TextureRegion[][] frames = TextureRegion.split(SproutGame.assets.get("spritesheet.png"), getWidth(), getHeight());
-
-        for (int a = ActionState.EMPTY_NORMAL.ordinal(); a <= ActionState.CARRYING.ordinal(); a++) {
-            int col = 0; // column counter
-            for (int d = Direction.SOUTH.ordinal(); d <= Direction.WEST.ordinal(); d++) { // directions
-                Object[] currentAnimFrames = new TextureRegion[4];
-                for (int f = 0; f < 4; f++) {
-                    currentAnimFrames[f] = frames[getSpriteRow() + a][col];
-                    col++;
-                }
-                float animSpeed = .14f; // maybe we need getSpeed() for animations?
-                animationMatrix[a][d] = new Animation(animSpeed, currentAnimFrames);
-            }
         }
     }
 
