@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.SproutGame;
 
 public class MainMenuScreen implements Screen {
@@ -29,14 +30,11 @@ public class MainMenuScreen implements Screen {
 
         Skin skin = game.getSkin();
 
-
         skin.add("button-black", new Texture( Gdx.files.internal("new-design-button.png")));
         skin.add("main-menu-background", new Texture( Gdx.files.internal("menu_bg.png")));
 
-
         TextureRegion buttonRegion1 = new TextureRegion(skin.get("button-black", Texture.class));
         // TextureRegion buttonRegion2 = new TextureRegion(skin.get("button-black-hover", Texture.class));
-
 
         TextButton.TextButtonStyle button1 = new TextButton.TextButtonStyle(
                 new TextureRegionDrawable(buttonRegion1),
@@ -127,17 +125,22 @@ public class MainMenuScreen implements Screen {
         buttonTable.row();
         buttonTable.add(exit).pad(12);
         buttonTable.row();
-        buttonTable.setWidth(200);
         buttonTable.setHeight(300);
+        buttonTable.pack();
         buttonTable.setPosition(
                 Gdx.graphics.getWidth() / 2 - buttonTable.getWidth() / 2,
                 Gdx.graphics.getHeight() / 2 - buttonTable.getHeight()/2
         );
-        buttonTable.pack();
+
 
         stage = new Stage();
+        stage.setDebugAll(true);
         TextureRegion bg = new TextureRegion(skin.get("main-menu-background", Texture.class));
-        stage.addActor(new Image(bg));
+        Image backdrop = new Image(bg);
+        backdrop.setFillParent(true);
+        backdrop.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        backdrop.setAlign(Align.center);
+        stage.addActor(backdrop);
         Gdx.input.setInputProcessor(stage);
         stage.addActor(buttonTable);
     }
