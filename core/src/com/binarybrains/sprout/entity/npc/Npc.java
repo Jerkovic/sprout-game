@@ -39,10 +39,10 @@ public class Npc extends Mob {
     public StateMachine<Npc, NpcState> stateMachine;
 
     public static enum ActionState {
-        EMPTY_NORMAL, CARRYING, THROWING, CHOPPING, ATTACKING
+        EMPTY_NORMAL, CARRYING, HOBBY, CHOPPING, ATTACKING
     }
 
-    public Animation animationMatrix[][] = new Animation[2][4]; // actions, directions
+    public Animation animationMatrix[][] = new Animation[3][4]; // actions, directions
     private TextureRegion currentFrame;
 
     Sprite shadow;
@@ -265,10 +265,15 @@ public class Npc extends Mob {
         drawShadow(batch, Gdx.app.getGraphics().getDeltaTime());
 
         Direction animDirection = Direction.getAnimationDirection(getDirection());
-        if (getState() == State.STANDING) { // IDLE - NOT Walking
+        if (getState() == State.STANDING && getActionState() == ActionState.EMPTY_NORMAL) { // IDLE - NOT Walking
             currentFrame = (TextureRegion)animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrames()[0];
         }
         else if (getState() == State.WALKING) {
+            animationMatrix[getActionState().ordinal()][animDirection.ordinal()].setPlayMode(Animation.PlayMode.LOOP);
+            currentFrame = (TextureRegion) animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
+        }
+        else if (getActionState() == ActionState.HOBBY) { // test juggling with football
+            System.out.println("stateTime" + stateTime);
             animationMatrix[getActionState().ordinal()][animDirection.ordinal()].setPlayMode(Animation.PlayMode.LOOP);
             currentFrame = (TextureRegion) animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
         }
@@ -303,6 +308,19 @@ public class Npc extends Mob {
             float animSpeed = .14f; // maybe we need getSpeed() for animations?
             animationMatrix[ActionState.EMPTY_NORMAL.ordinal()][d] = new Animation(animSpeed, currentAnimFrames);
         }
+
+        // dummy extended animation 2 rows / 4 frames
+        Object[] currentAnimFrames = new TextureRegion[8]; // hardcoded really?
+        int cnt = 0;
+        for (row = 4; row <= 5; row++) {
+            for (int col = 0; col < 4; col++) {
+                currentAnimFrames[cnt++] = framesRegions[row][col];
+            }
+        }
+
+        animationMatrix[ActionState.HOBBY.ordinal()][0] = new Animation(.10f, currentAnimFrames);
+
+
     }
 
     @Override

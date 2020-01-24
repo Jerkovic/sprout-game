@@ -7,9 +7,7 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -18,7 +16,6 @@ import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
-import com.binarybrains.sprout.entity.npc.NpcState;
 import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.item.*;
@@ -29,7 +26,6 @@ import com.binarybrains.sprout.item.tool.Tools;
 import com.binarybrains.sprout.item.weapon.Weapons;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.mail.Mailbox;
-import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 
 import java.util.HashMap;
@@ -37,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 
 import static com.binarybrains.sprout.entity.Mob.Direction.*;
-import static com.binarybrains.sprout.entity.npc.NpcState.IDLE;
 
 public class Player extends Npc implements InputProcessor {
 
@@ -136,17 +131,16 @@ public class Player extends Npc implements InputProcessor {
                 }),
                 Actions.run(() -> {
                     setDirection(SOUTH); // make sure he is looking south
+                    setActionState(ActionState.HOBBY);
                 }),
-                Actions.delay(2),
+                Actions.delay(20),
                 Actions.run(() -> {
-                    // Maybe return a new action sequence here??
-                    // updateWalkDirections(35, 99, IDLE);
-                }),
-                Actions.run(() -> {
-                    setDirection(NORTH);
+                    setDirection(SOUTH); // make sure he is looking south
+                    setActionState(ActionState.HOBBY);
                 }),
                 Actions.delay(6),
                 Actions.run(() -> {
+                    setActionState(ActionState.EMPTY_NORMAL);
                     unFreezePlayerControl();
                     getLevel().screen.hud.endCinemaMode();
                     getLevel().screen.hud.showHud();

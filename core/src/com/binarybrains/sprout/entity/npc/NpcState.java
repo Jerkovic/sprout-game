@@ -54,11 +54,19 @@ public enum NpcState implements State<Npc> {
         }
     },
 
+    WAVE() {
+        @Override
+        public void enter(Npc entity) {
+            entity.setDirection(Mob.Direction.SOUTH);
+            entity.setActionState(Npc.ActionState.HOBBY);
+        }
+    },
+
     GOTO_SEWER_HATCH() {
         @Override
         public void enter(Npc entity)
         {
-            entity.updateWalkDirections(35, 94, IDLE);
+            entity.updateWalkDirections(35, 94, WAVE);
         }
 
         @Override
