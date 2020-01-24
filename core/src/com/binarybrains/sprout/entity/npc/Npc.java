@@ -3,6 +3,7 @@ package com.binarybrains.sprout.entity.npc;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
+import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -16,6 +17,7 @@ import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.actions.SequenceAction;
+import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.level.Level;
 
 import java.util.ArrayList;
@@ -37,8 +39,8 @@ public class Npc extends Mob {
         EMPTY_NORMAL, CARRYING, THROWING, CHOPPING, ATTACKING
     }
 
-    public Animation animationMatrix[][] = new Animation[2][4]; // action, direction
-    TextureRegion currentFrame;
+    public Animation animationMatrix[][] = new Animation[2][4]; // actions, directions
+    private TextureRegion currentFrame;
 
     Sprite shadow;
     public float lockShadowY = 0;
@@ -115,7 +117,12 @@ public class Npc extends Mob {
         }
         seq.addAction(Actions.run((() -> {
             setState(State.STANDING);
+            setDirection(Direction.SOUTH); // should this be here even?
             stateMachine.changeState(state);
+            MessageManager.getInstance().dispatchMessage(
+                    this,
+                    TelegramType.NPC_MESSAGE,
+                    new PointDirection(x, y, getDirection()));
         })
         ));
 
@@ -149,7 +156,7 @@ public class Npc extends Mob {
     public void drawShadow(Batch batch, float delta) {
         shadow.setX(getX());
         if (lockShadowY > 0) {
-            shadow.setY(lockShadowY -3);
+            shadow.setY(lockShadowY - 3);
         }
         else {
             shadow.setY(getY() - 3);
@@ -271,16 +278,16 @@ public class Npc extends Mob {
     }
 
     /**
-     * Setup animations
+     * Setup simple animations (4 directional for idle, walk)
      */
     public void setupAnimations() {
-        TextureRegion[][] frames = TextureRegion.split(this.framesTexture, getWidth(), getHeight());
+        TextureRegion[][] framesRegions = TextureRegion.split(this.framesTexture, getWidth(), getHeight());
 
         int row = 0;
         for (int d = Direction.SOUTH.ordinal(); d <= Direction.WEST.ordinal(); d++) { // directions
-            Object[] currentAnimFrames = new TextureRegion[4];
+            Object[] currentAnimFrames = new TextureRegion[4]; // hardcoded really?
             for (int col = 0; col < 4; col++) {
-                currentAnimFrames[col] = frames[row][col];
+                currentAnimFrames[col] = framesRegions[row][col];
             }
             row++;
             float animSpeed = .14f; // maybe we need getSpeed() for animations?

@@ -154,7 +154,6 @@ public class Level extends LevelEngine {
         add(this, player);
         add(this, new Chest(this, new Vector2(16 * 2, 16 * 4)));
 
-
         tileMapRenderer = new OrthogonalTiledMapRenderer(map);
         tileMapRenderer.setView(camera);
         debugRenderer = new ShapeRenderer();
@@ -164,16 +163,10 @@ public class Level extends LevelEngine {
         gameTimer.start();
 
         // test some path finding stuff.. move this!!
-        Emma emma = new Emma(this, new Vector2(6 * 16f, 6 * 16f), 16f, 32f);
+        Emma emma = new Emma(this, new Vector2(23 * 16f,  79f * 16f), 16f, 32f);
         this.add(this, emma);
-        setupPathFinding(emma); // construct the A.star
-        emma.stateMachine.changeState(NpcState.WALK_SOME_IN_PLAYER_HOUSE);
-
-        // TEST
-        Emma emma2 = new Emma(this, new Vector2(8 * 16f, 6 * 16f), 16f, 32f);
-        this.add(this, emma2);
-        setupPathFinding(emma2); // construct the A.star
-        emma2.stateMachine.changeState(NpcState.WALK_TO_FRONT_DOOR);
+        setupPathFinding(emma);
+        emma.stateMachine.changeState(NpcState.IDLE);
 
 
         add(this, new Stone(this, 20, 77));
@@ -181,12 +174,11 @@ public class Level extends LevelEngine {
         add(this, new Stone(this, 29, 60));
 
         // Slime test
-        for (int i = 0; i < 0; i++) {
-            this.add(new Slime(this, new Vector2((22+i) * 16f, 107 * 16f), 16f, 16f));
+        for (int i = 0; i < 500; i++) {
+            // this.add(new Slime(this, new Vector2((22+i) * 16f, 107 * 16f), 16f, 16f));
         }
 
         // this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
-
         // add(this, new SpeechBubble(this, "I am hungry!"));
 
         // particle effects test ...need to make pools?
@@ -283,20 +275,19 @@ public class Level extends LevelEngine {
 
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            // SproutGame.playSound("pickup_fanfar", .45f);
             player.setDirection(Mob.Direction.SOUTH);
-            player.setCarriedItem(new TemporaryCarriedItem(player.getLevel(), new ArtifactItem(Artifacts.backpack)));
+            // player.setCarriedItem(new TemporaryCarriedItem(player.getLevel(), new ArtifactItem(Artifacts.backpack)));
             player.freezePlayerControl();
             player.addAction(Actions.sequence(
-                    Actions.delay(1.3f),
-                    Actions.run(new Runnable() { public void run(){
+                    Actions.delay(.5f),
+                    Actions.run(() -> {
                         player.setActionState(Npc.ActionState.EMPTY_NORMAL);
-                        player.setCarriedItem(null);
+                        // player.setCarriedItem(null);
                         player.unFreezePlayerControl();
                         player.inventory.upgrade(); // test upgrade backpack
                         screen.hud.refreshInventory();
-                        screen.hud.addToasterMessage("Inventory Upgrade", "You were awarded a backpack.");
-                    }})
+                        screen.hud.addToasterMessage("Inventory Upgrade", "You were awarded a bigger backpack.");
+                    })
             ));
 
             int count = MathUtils.random(2, 6);

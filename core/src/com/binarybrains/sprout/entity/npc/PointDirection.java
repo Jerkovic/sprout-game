@@ -3,7 +3,7 @@ package com.binarybrains.sprout.entity.npc;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.entity.Mob;
 
-public class PointDirection {
+public class PointDirection extends Object {
     public Integer x, y;
     public Mob.Direction direction;
 
@@ -16,5 +16,15 @@ public class PointDirection {
         this.x = x;
         this.y = y;
         this.direction = direction;
+    }
+
+
+    @Override
+    public String toString() {
+        return "PointDirection{" +
+                "x=" + x +
+                ", y=" + y +
+                ", direction=" + direction +
+                '}';
     }
 }

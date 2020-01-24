@@ -56,7 +56,8 @@ public enum NpcState implements State<Npc> {
 
     GOTO_SEWER_HATCH() {
         @Override
-        public void enter(Npc entity) {
+        public void enter(Npc entity)
+        {
             entity.updateWalkDirections(35, 94, IDLE);
         }
 

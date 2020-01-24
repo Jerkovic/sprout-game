@@ -16,7 +16,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.actions.Actions;
+import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.Npc;
+import com.binarybrains.sprout.entity.npc.NpcState;
 import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.item.*;
@@ -105,13 +107,47 @@ public class Player extends Npc implements InputProcessor {
         // todo setActiveItemByName?
         setActiveItem(getInventory().getItems().get(0));
 
-        // Setup Player as a Listener HERE?
+        // Setup Player as a Listener to numerous interesting events
+        MessageManager.getInstance().addListeners(this,
+                TelegramType.NPC_MESSAGE
+        );
 
     }
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        System.out.println("Player got a msg " + msg);
+        System.out.println("Player got a msg " + msg.extraInfo + " " + msg.sender);
+
+        // ugly check
+        if (!(msg.sender instanceof Emma)) return false;
+
+        freezePlayerControl();
+        getLevel().screen.hud.cutSceneMode = true;
+        getLevel().screen.hud.hideHud();
+        addAction(Actions.sequence(
+                Actions.run(() -> {
+                    // do some
+                    setDirection(NORTH);
+                    System.out.println("testing cut scenes"); // Move to cut scene class ?
+                }),
+                Actions.delay(2),
+                Actions.run(() -> {
+                    jump();
+                }),
+                Actions.run(() -> {
+                    setDirection(SOUTH); // make sure he is looking south
+                }),
+                Actions.delay(2),
+                Actions.run(() -> {
+                    // set ball playing anim
+                }),
+                Actions.delay(2),
+                Actions.run(() -> {
+                    unFreezePlayerControl();
+                    getLevel().screen.hud.cutSceneMode = false;
+                    getLevel().screen.hud.showHud();
+                })
+        ));
         return true;
     }
 

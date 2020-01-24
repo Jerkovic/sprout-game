@@ -28,6 +28,8 @@ public class TelegramType {
     public static final int WEATHER_THUNDER = 402;
 
 
+    // NPC Message
+    public static final int NPC_MESSAGE = 500;
 
 
     // Some others

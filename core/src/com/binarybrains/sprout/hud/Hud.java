@@ -58,14 +58,17 @@ public class Hud implements Telegraph {
 
     private Actor fadeActor = new Actor();
     private ShapeRenderer fadeRenderer;
+    public Boolean cutSceneMode = false;
 
     TextureAtlas atlas;
+
+    // Hud gui major actors.
+    Window gameTimeWindow;
     CraftingWindow craftingWindow;
-    InventoryWindow inventoryWindow;
+    LocationLabel locationLabel; // location area indicator label
+    InventoryWindow inventoryWindow; // our Inventory fast reachable slots
     InventoryManagementWindow inventoryManagementWindow;
     ChestWindow chestManagementWindow;
-
-    private LocationLabel locationLabel; // location area indicator label
 
     public int notificationsInHud = 0;
     public Image mouseItem;
@@ -110,7 +113,7 @@ public class Hud implements Telegraph {
         fadeActor.clearActions();
         fadeActor.setColor(Color.CLEAR);
 
-        gameTimeWindow();
+        createGameTimeWindow();
 
         stage.addListener(new InputListener() {
             @Override
@@ -365,6 +368,18 @@ public class Hud implements Telegraph {
         removeMouseItem();
     }
 
+    public void hideHud() {
+        inventoryWindow.setVisible(false);
+        locationLabel.setVisible(false);
+        gameTimeWindow.setVisible(false);
+    }
+
+    public void showHud() {
+        inventoryWindow.setVisible(true);
+        locationLabel.setVisible(true);
+        gameTimeWindow.setVisible(true);
+    }
+
     public void inventoryTop() {
         inventoryWindow.setWindowTop();
     }
@@ -528,17 +543,21 @@ public class Hud implements Telegraph {
         dialog.show(stage);
     }
 
-    public void gameTimeWindow() {
+
+    /**
+     * Move this sucker to own class
+     */
+    public void createGameTimeWindow() {
         timeLabel = new Label("Day 0 00:00", skin);
         fpsLabel = new Label("", skin);
-        moneyLabel = new Label("0", skin);
+        moneyLabel = new Label("000000", skin);
         xpLabel = new Label("XP:", skin);
 
         Table table = new Table(skin);
         table.bottom();
         table.setFillParent(false);
 
-        Image icon = new Image(atlas.findRegion("Clock")); // time clock icon
+        // Image icon = new Image(atlas.findRegion("Clock")); // time clock icon
         table.add(timeLabel).left();
         table.row();
         table.add(moneyLabel).left();
@@ -548,22 +567,22 @@ public class Hud implements Telegraph {
         table.add(fpsLabel).left();
         table.row();
         stage.addActor(table);
-        Window window = new Window(SproutGame.name, skin);
-        window.getTitleLabel().setColor(0,0,0,.7f);
-        window.setKeepWithinStage(false);
-        window.setMovable(true);
-        window.row().fill().expandX();
+        gameTimeWindow = new Window(SproutGame.name, skin);
+        gameTimeWindow.getTitleLabel().setColor(0,0,0,.7f);
+        gameTimeWindow.setKeepWithinStage(true);
+        gameTimeWindow.setMovable(true);
+        gameTimeWindow.row().fill().expandX();
         timeLabel.setWrap(false);
-        window.add(table).pad(4f);
-        window.row();
-        window.add(buildHealthMeters());
-        window.row();
+        gameTimeWindow.add(table).pad(4f);
+        gameTimeWindow.row();
+        gameTimeWindow.add(buildHealthMeters());
+        gameTimeWindow.row();
 
-        window.add(buildLevelRankMeters()).pad(8f);
-        window.pack();
+        gameTimeWindow.add(buildLevelRankMeters()).pad(8f);
+        gameTimeWindow.pack();
 
-        window.setPosition(10, Gdx.app.getGraphics().getHeight() - window.getHeight()-10);
-        stage.addActor(window);
+        gameTimeWindow.setPosition(10, Gdx.app.getGraphics().getHeight() - gameTimeWindow.getHeight()-10);
+        stage.addActor(gameTimeWindow);
     }
 
     public Stage getStage() {
@@ -637,10 +656,14 @@ public class Hud implements Telegraph {
             fadeRenderer.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
         }
+
+        if (cutSceneMode) {
+            renderCutSceneFrame();
+        }
     }
 
     /**
-     *
+     * Make actor out of this
      */
     public void renderCutSceneFrame() {
         // Cut Scene 16:9 animation
@@ -648,9 +671,9 @@ public class Hud implements Telegraph {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         fadeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         fadeRenderer.setColor(new Color(0f, 0f, 0.031f, 1));
-        fadeRenderer.rect(0, 0, Gdx.app.getGraphics().getWidth(), 80);
-        fadeRenderer.rect(0, Gdx.app.getGraphics().getHeight() - 80, Gdx.app.getGraphics().getWidth(),
-                80);
+        fadeRenderer.rect(0, 0, Gdx.app.getGraphics().getWidth(), 120);
+        fadeRenderer.rect(0, Gdx.app.getGraphics().getHeight() - 120, Gdx.app.getGraphics().getWidth(),
+                120);
         fadeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
     }

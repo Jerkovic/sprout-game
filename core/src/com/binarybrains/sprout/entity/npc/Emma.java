@@ -43,7 +43,6 @@ public class Emma extends Npc {
                         ArtifactItem ai = (ArtifactItem) player.activeItem;
                         player.getInventory().removeItem(ai);
                         player.getLevel().screen.hud.refreshInventory();
-
                     }),
                     Actions.delay(5),
                     Actions.run(() -> {
