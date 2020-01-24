@@ -28,6 +28,7 @@ import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.events.*;
 import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.hud.components.ItemToaster;
+import com.binarybrains.sprout.hud.components.LetterBoxing;
 import com.binarybrains.sprout.hud.components.LocationLabel;
 import com.binarybrains.sprout.hud.inventory.ChestWindow;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
@@ -73,6 +74,8 @@ public class Hud implements Telegraph {
     public int notificationsInHud = 0;
     public Image mouseItem;
 
+    public LetterBoxing letterboxing;
+
     public Hud(Skin skin, Level level) {
         this.skin = skin;
         this.level = level;
@@ -84,6 +87,7 @@ public class Hud implements Telegraph {
         locationLabel.setVisible(true);
 
         stage.addActor(locationLabel);
+
 
         // mouse
         lc = new Label("", skin);
@@ -128,6 +132,9 @@ public class Hud implements Telegraph {
         chestManagementWindow.hide();
         stage.addActor(chestManagementWindow);
 
+        // Letter boxing Cinema Mode actor
+        letterboxing = new LetterBoxing(stage, new Color(0f, 0f, 0.031f, 1), 200, .95f);
+        stage.addActor(letterboxing);
 
         // Subscribe to events here
         MessageManager.getInstance().addListeners(this,
@@ -346,6 +353,14 @@ public class Hud implements Telegraph {
         // inventoryManagementWindow.setCloseCallback();
         inventoryManagementWindow.onInventoryChanged(level.player.getInventory());
         hideMouseItem();
+    }
+
+    public void startCinemaMode() {
+        letterboxing.start();
+    }
+
+    public void endCinemaMode() {
+        letterboxing.end();
     }
 
     /**
@@ -656,10 +671,6 @@ public class Hud implements Telegraph {
             fadeRenderer.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
         }
-
-        if (cutSceneMode) {
-            renderCutSceneFrame();
-        }
     }
 
     /**
@@ -667,8 +678,8 @@ public class Hud implements Telegraph {
      */
     public void renderCutSceneFrame() {
         // Cut Scene 16:9 animation
-        Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND);
-        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        // Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND);
+        //Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         fadeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         fadeRenderer.setColor(new Color(0f, 0f, 0.031f, 1));
         fadeRenderer.rect(0, 0, Gdx.app.getGraphics().getWidth(), 120);

@@ -123,13 +123,12 @@ public class Player extends Npc implements InputProcessor {
         if (!(msg.sender instanceof Emma)) return false;
 
         freezePlayerControl();
-        getLevel().screen.hud.cutSceneMode = true;
+        getLevel().screen.hud.startCinemaMode();
         getLevel().screen.hud.hideHud();
         addAction(Actions.sequence(
                 Actions.run(() -> {
                     // do some
                     setDirection(NORTH);
-                    System.out.println("testing cut scenes"); // Move to cut scene class ?
                 }),
                 Actions.delay(2),
                 Actions.run(() -> {
@@ -146,10 +145,10 @@ public class Player extends Npc implements InputProcessor {
                 Actions.run(() -> {
                     setDirection(NORTH);
                 }),
-                Actions.delay(3),
+                Actions.delay(6),
                 Actions.run(() -> {
                     unFreezePlayerControl();
-                    getLevel().screen.hud.cutSceneMode = false;
+                    getLevel().screen.hud.endCinemaMode();
                     getLevel().screen.hud.showHud();
                 })
         ));
