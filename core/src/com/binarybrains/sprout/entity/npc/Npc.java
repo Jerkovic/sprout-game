@@ -272,8 +272,7 @@ public class Npc extends Mob {
             animationMatrix[getActionState().ordinal()][animDirection.ordinal()].setPlayMode(Animation.PlayMode.LOOP);
             currentFrame = (TextureRegion) animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
         }
-        else if (getActionState() == ActionState.HOBBY) { // test juggling with football
-            System.out.println("stateTime" + stateTime);
+        else if (getActionState() == ActionState.HOBBY) { // test juggling with football or dancing
             animationMatrix[getActionState().ordinal()][animDirection.ordinal()].setPlayMode(Animation.PlayMode.LOOP);
             currentFrame = (TextureRegion) animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
         }
