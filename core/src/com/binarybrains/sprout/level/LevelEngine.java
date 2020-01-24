@@ -11,7 +11,6 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.house.Cottage;
@@ -37,7 +36,7 @@ public abstract class LevelEngine extends Stage {
     public OrthogonalTiledMapRenderer tileMapRenderer;
     public int tilePixelWidth, tilePixelHeight, width, height = 0;
     public List<Entity> entities = new ArrayList<Entity>();
-    public Astar astar; // should this be here?
+    // public Astar astar; // should this be here?
     public Tile tile[][] = new Tile[256][128];
 
     public Comparator<Entity> spriteSorter = (e0, e1) -> {
@@ -55,16 +54,12 @@ public abstract class LevelEngine extends Stage {
     /**
      * Setups and create A*star
      */
-    public void setupPathFinding(Npc npc) {
-        astar = new Astar(width, height) {
+    public Astar createPathFinding(Npc npc) {
+        return new Astar(width, height) {
             protected boolean isValid (int x, int y) {
                 return getTile(x, y).mayPass && !isBlockingEntitiesAtTile(npc, x, y);
             }
         };
-    }
-
-    public IntArray getPath(int startX, int startY, int targetX, int targetY) {
-        return astar.getPath(startX, startY, targetX, targetY);
     }
 
     public void remove(Entity e) {

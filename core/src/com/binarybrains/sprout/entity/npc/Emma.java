@@ -14,6 +14,13 @@ import com.binarybrains.sprout.level.Level;
 
 public class Emma extends Npc {
 
+    /**
+     *
+     * @param level
+     * @param position
+     * @param width
+     * @param height
+     */
     public Emma(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height, SproutGame.assets.get("haley-sheet.png"));
         setHealth(100);

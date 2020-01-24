@@ -21,18 +21,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
-import com.binarybrains.sprout.entity.enemy.Slime;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.NpcState;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.entity.terrain.Stone;
-import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.ResourceItem;
-import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.Camera;
@@ -65,6 +61,8 @@ public class Level extends LevelEngine {
     public float ambientIntensity = 1f;
     public static Vector3 ambientColor = new Vector3(1f, 1f, 1f); // .6 .6 .8
 
+    Table ww; //  test world ui speech / action window
+
     //used to make the light flicker
     public float zAngle;
     public static final float zSpeed = 4.0f;
@@ -73,7 +71,7 @@ public class Level extends LevelEngine {
     // sea waves
     private float					amplitudeWave = 1.15342f;
     private float					angleWave = 0.0f;
-    private float					angleWaveSpeed = 2.0f;
+    private float					angleWaveSpeed = 4.0f;
 
     //read our shader files
     final String vertexShader = new FileHandle("shader/vertexShader.glsl").readString();
@@ -117,8 +115,6 @@ public class Level extends LevelEngine {
         // the fbo of the lights
         fbo = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.app.getGraphics().getWidth(), Gdx.app.getGraphics().getHeight(), false);
     }
-
-    Table ww;
 
     public Level(GameScreen screen, int level) {
         setupAmbientLight();
@@ -165,9 +161,8 @@ public class Level extends LevelEngine {
         // test some path finding stuff.. move this!!
         Emma emma = new Emma(this, new Vector2(23 * 16f,  79f * 16f), 16f, 32f);
         this.add(this, emma);
-        setupPathFinding(emma);
+        createPathFinding(emma);
         emma.stateMachine.changeState(NpcState.IDLE);
-
 
         add(this, new Stone(this, 20, 77));
         add(this, new Stone(this, 20, 75));

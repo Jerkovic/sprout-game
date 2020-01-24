@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.binarybrains.sprout.entity.Mob.Direction.*;
+import static com.binarybrains.sprout.entity.npc.NpcState.IDLE;
 
 public class Player extends Npc implements InputProcessor {
 
@@ -139,9 +140,13 @@ public class Player extends Npc implements InputProcessor {
                 }),
                 Actions.delay(2),
                 Actions.run(() -> {
-                    // set ball playing anim
+                    // Maybe return a new action sequence here??
+                    // updateWalkDirections(35, 99, IDLE);
                 }),
-                Actions.delay(2),
+                Actions.run(() -> {
+                    setDirection(NORTH);
+                }),
+                Actions.delay(3),
                 Actions.run(() -> {
                     unFreezePlayerControl();
                     getLevel().screen.hud.cutSceneMode = false;

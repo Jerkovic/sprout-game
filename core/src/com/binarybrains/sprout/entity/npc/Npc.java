@@ -15,10 +15,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Mob;
+import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.actions.SequenceAction;
 import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.level.Level;
+import com.binarybrains.sprout.level.pathfind.Astar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,7 @@ public class Npc extends Mob {
     private Texture framesTexture;
     private ActionState actionState = ActionState.EMPTY_NORMAL; // Idle normal state
 
+    public Astar astar;
     public List<Vector2> debugPathList;
     public List<PointDirection> findPath;
     public StateMachine<Npc, NpcState> stateMachine;
@@ -92,13 +95,13 @@ public class Npc extends Mob {
     }
 
     /**
-     *
+     * Clears all entity actions in the queue and walks to spot
      * @param x
      * @param y
      * @param state
      */
     public void updateWalkDirections(int x, int y, NpcState state) {
-        this.clearActions();
+        // this.clearActions();
         clearFindPath();
         IntArray rawPath = generatePath(x, y);
         findPath = generatePathFindingDirections2(rawPath);
@@ -115,15 +118,19 @@ public class Npc extends Mob {
             })
             ));
         }
-        seq.addAction(Actions.run((() -> {
-            setState(State.STANDING);
-            setDirection(Direction.SOUTH); // should this be here even?
-            stateMachine.changeState(state);
-            MessageManager.getInstance().dispatchMessage(
-                    this,
-                    TelegramType.NPC_MESSAGE,
-                    new PointDirection(x, y, getDirection()));
-        })
+        seq.addAction(
+                Actions.run((() -> {
+                setState(State.STANDING);
+                setDirection(Direction.SOUTH); // should this be here even?
+                stateMachine.changeState(state);
+                if (!(this instanceof Player)) {
+                    MessageManager.getInstance().dispatchMessage(
+                            this,
+                            TelegramType.NPC_MESSAGE,
+                            new PointDirection(x, y, getDirection())
+                    );
+                }
+            })
         ));
 
         this.addAction(seq);
@@ -172,9 +179,11 @@ public class Npc extends Mob {
      * @return IntArray
      */
     public IntArray generatePath(int targetX, int targetY) {
+        astar = null;
+        astar = getLevel().createPathFinding(this); // regenerate this
         int startX = getTileX();
         int startY = getTileY();
-        IntArray path = getLevel().getPath(startX, startY, targetX, targetY);
+        IntArray path = astar.getPath(startX, startY, targetX, targetY);
 
         if (path.size < 1) {
             path.add(targetX);
@@ -186,15 +195,20 @@ public class Npc extends Mob {
         return path;
     }
 
+    /**
+     *
+     * @param path
+     * @return
+     */
     public List<PointDirection> generatePathFindingDirections2(IntArray path) {
         this.debugPathList.clear();
         List<PointDirection> travelDirections = new ArrayList<PointDirection>();
-
         Mob.Direction dir = Mob.Direction.WEST;
 
         if (path.size < 4) { // there must be at least two pos(x,y) to be able to generate travel directions
             throw new RuntimeException("There must be at least two pos(x,y) to be able to generate travel directions");
         }
+
         int py, px, next_py, next_px;
 
         for (int i = 0, n = path.size; i < n; i += 2) {
@@ -205,20 +219,16 @@ public class Npc extends Mob {
 
             debugPathList.add(new Vector2(px, py));
 
-            if (next_py > py)
-            {
+            if (next_py > py) {
                 dir = Mob.Direction.NORTH;
             }
-            if (next_py < py)
-            {
+            if (next_py < py) {
                 dir = Mob.Direction.SOUTH;
             }
-            if (next_px > px)
-            {
+            if (next_px > px) {
                 dir = Mob.Direction.EAST;
             }
-            if (next_px < px)
-            {
+            if (next_px < px) {
                 dir = Mob.Direction.WEST;
             }
             travelDirections.add(new PointDirection(px, py, dir));
