@@ -30,6 +30,7 @@ public class MainMenuScreen implements Screen {
 
         Skin skin = game.getSkin();
 
+        // dont load like this
         skin.add("button-black", new Texture( Gdx.files.internal("new-design-button.png")));
         skin.add("main-menu-background", new Texture( Gdx.files.internal("menu_bg.png")));
 
@@ -40,13 +41,16 @@ public class MainMenuScreen implements Screen {
                 new TextureRegionDrawable(buttonRegion1),
                 new TextureRegionDrawable(buttonRegion1),
                 new TextureRegionDrawable(buttonRegion1),
-                skin.getFont("default-font")
+                skin.getFont("ruin-font")
         );
+
 
         button1.fontColor = Color.LIGHT_GRAY;
         button1.overFontColor = Color.YELLOW;
 
-        Button play = new TextButton("Play Game", button1);
+        // ver 0.23a
+        TextButton play = new TextButton("START GAME", button1);
+        play.debug();
 
         play.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -66,7 +70,7 @@ public class MainMenuScreen implements Screen {
         });
 
         // Options
-        Button opt = new TextButton("Options", button1);
+        Button opt = new TextButton("OPTIONS", button1);
 
         opt.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -82,7 +86,7 @@ public class MainMenuScreen implements Screen {
         });
 
         // Credits
-        Button credits = new TextButton("Credits", button1);
+        Button credits = new TextButton("CREDITS", button1);
 
         credits.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -98,7 +102,7 @@ public class MainMenuScreen implements Screen {
         });
 
         // Exit
-        Button exit = new TextButton("Exit Game", button1);
+        Button exit = new TextButton("EXIT TO DESKTOP", button1);
 
         exit.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -116,16 +120,15 @@ public class MainMenuScreen implements Screen {
 
 
         Table buttonTable = new Table(skin);
-        // buttonTable.setBackground("default-select-selection");
-        buttonTable.add(play).pad(12);
+        buttonTable.setBackground("default-select-selection");
+        buttonTable.add(play).pad(10);
         buttonTable.row();
-        buttonTable.add(opt).pad(12);
+        buttonTable.add(opt).pad(10);
         buttonTable.row();
-        buttonTable.add(credits).pad(12);
+        buttonTable.add(credits).pad(10);
         buttonTable.row();
-        buttonTable.add(exit).pad(12);
+        buttonTable.add(exit).pad(10);
         buttonTable.row();
-        buttonTable.setHeight(300);
         buttonTable.pack();
         buttonTable.setPosition(
                 Gdx.graphics.getWidth() / 2 - buttonTable.getWidth() / 2,
@@ -134,7 +137,6 @@ public class MainMenuScreen implements Screen {
 
 
         stage = new Stage();
-        stage.setDebugAll(true);
         TextureRegion bg = new TextureRegion(skin.get("main-menu-background", Texture.class));
         Image backdrop = new Image(bg);
         backdrop.setFillParent(true);
