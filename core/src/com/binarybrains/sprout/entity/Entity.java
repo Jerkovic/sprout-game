@@ -22,7 +22,7 @@ import java.util.List;
 public abstract class Entity implements Telegraph, Trigger {
 
     private Level level;
-    private Vector2 position = new Vector2();
+    private Vector2 position;
     private int width, height;
     protected float stateTime = 0;
     protected Rectangle box = new Rectangle();

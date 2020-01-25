@@ -20,6 +20,7 @@ import com.binarybrains.sprout.entity.tree.Bush;
 import com.binarybrains.sprout.entity.tree.SmallTree;
 import com.binarybrains.sprout.entity.tree.Tree;
 import com.binarybrains.sprout.level.pathfind.Astar;
+import com.binarybrains.sprout.level.renderer.LevelMapRenderer;
 import com.binarybrains.sprout.level.tile.*;
 import com.binarybrains.sprout.locations.Bed;
 import com.binarybrains.sprout.locations.Bridge;
@@ -33,10 +34,9 @@ import java.util.List;
 public abstract class LevelEngine extends Stage {
 
     public TiledMap map;
-    public OrthogonalTiledMapRenderer tileMapRenderer;
+    public LevelMapRenderer tileMapRenderer;
     public int tilePixelWidth, tilePixelHeight, width, height = 0;
     public List<Entity> entities = new ArrayList<Entity>();
-    // public Astar astar; // should this be here?
     public Tile tile[][] = new Tile[256][128];
 
     public Comparator<Entity> spriteSorter = (e0, e1) -> {
@@ -45,6 +45,11 @@ public abstract class LevelEngine extends Stage {
         return 0;
     };
 
+    /**
+     *
+     * @param level
+     * @param entity
+     */
     public void add(Level level, Entity entity) {
         entity.removed = false;
         entities.add(entity);
@@ -118,8 +123,7 @@ public abstract class LevelEngine extends Stage {
 
     public boolean isBlockingEntitiesAtTile(Entity ent, int tile_x, int tile_y) {
         List<Entity> tile_entities = getEntitiesAtTile(tile_x, tile_y);
-        for (int i = 0; i < tile_entities.size(); i++) {
-            Entity e = tile_entities.get(i);
+        for (Entity e : tile_entities) {
             if (e.blocks(ent) && e.isInteractable()) {
                 return true;
             }
@@ -127,8 +131,13 @@ public abstract class LevelEngine extends Stage {
         return false;
     }
 
+    /**
+     *
+     * @param entities
+     * @param batch
+     */
     public void sortAndRender(List<Entity> entities, Batch batch) {
-        Collections.sort(entities, spriteSorter);
+        entities.sort(spriteSorter);
         for (int i = 0; i < entities.size(); i++) {
             entities.get(i).draw(batch, 1f);
         }
@@ -182,7 +191,6 @@ public abstract class LevelEngine extends Stage {
 
     public void setTile(int x, int y, Tile newTile) {
         tile[x][y] =  newTile;
-
         TiledMapTileLayer layer = (TiledMapTileLayer)map.getLayers().get("ground_top");
         TiledMapTileLayer.Cell cell = new TiledMapTileLayer.Cell();
 

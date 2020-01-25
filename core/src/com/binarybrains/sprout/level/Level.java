@@ -31,6 +31,7 @@ import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.entity.terrain.Stone;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.resource.Resources;
+import com.binarybrains.sprout.level.renderer.LevelMapRenderer;
 import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.misc.EnviroManager;
@@ -151,7 +152,7 @@ public class Level extends LevelEngine {
         add(this, player);
         add(this, new Chest(this, new Vector2(16 * 2, 16 * 4)));
 
-        tileMapRenderer = new OrthogonalTiledMapRenderer(map);
+        tileMapRenderer = new LevelMapRenderer(map);
         tileMapRenderer.setView(camera);
         debugRenderer = new ShapeRenderer();
 
@@ -375,7 +376,8 @@ public class Level extends LevelEngine {
         tileMapRenderer.getBatch().setShader(finalShader);
 
         //render the other layers using the default shader
-        int[] bg_layers = {1,2}; // water, ground and ground_top
+        int[] bg_layers = {1,2}; // ground and ground_top (flat)
+
         tileMapRenderer.render(bg_layers);
 
         tileMapRenderer.getBatch().begin();
@@ -386,12 +388,15 @@ public class Level extends LevelEngine {
         //youc can basically bind anything, it doesnt matter
         fbo.getColorBufferTexture().bind(1);
         light.bind(0);
-        sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
+
+        tileMapRenderer.renderSortedRowTileLayer(entities, (TiledMapTileLayer) map.getLayers().get(3));
+
+        // sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
         pe.draw(tileMapRenderer.getBatch());
 
         tileMapRenderer.getBatch().end();
 
-        int[] fg_layers = {3, 5};
+        int[] fg_layers = {5}; // layerIndex 3 should be broken up
         tileMapRenderer.render(fg_layers);
 
         // debug mode
