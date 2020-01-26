@@ -50,7 +50,7 @@ public class MainMenuScreen implements Screen {
 
         // ver 0.23a
         TextButton play = new TextButton("START GAME", button1);
-        play.debug();
+        // play.debug();
 
         play.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
@@ -117,7 +117,6 @@ public class MainMenuScreen implements Screen {
 
             }
         });
-
 
         Table buttonTable = new Table(skin);
         buttonTable.setBackground("default-select-selection");

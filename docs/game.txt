@@ -14,7 +14,7 @@ TODOS:
 
 * camera bug not following player centered top and right. (Fixed)
 
-* Cinematic view
+* Cinematic view (Fixed)
 
 * Post processing effecs (see https://github.com/manuelbua/libgdx-contribs/tree/master/postprocessing-demo)
 
@@ -22,9 +22,9 @@ TODOS:
 
 * Make a nice patch speech bubble
 
-* Make pickupItem behave like Slime follow instead.
+* Make pickupItem behave like Slime follow instead. (Fixed)
 
-* ADD missing sfx file in knivsta.
+* ADD missing sfx file in knivsta. /Fixed)
 
 * Be able to right click to move whole stack to chest. ?
 

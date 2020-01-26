@@ -20,7 +20,6 @@ public class LetterBoxing extends Actor {
         this.shrinkHeight = shrinkHeight;
         this.duration = duration;
 
-
         rectBottom = new FilledRectangle(
                 0,
                 -shrinkHeight, // hidden mode

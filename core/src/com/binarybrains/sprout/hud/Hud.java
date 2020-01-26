@@ -133,7 +133,8 @@ public class Hud implements Telegraph {
         stage.addActor(chestManagementWindow);
 
         // Letter boxing Cinema Mode actor
-        letterboxing = new LetterBoxing(stage, new Color(0f, 0f, 0.031f, 1), 200, .95f);
+        float barHeight = Gdx.app.getGraphics().getHeight() * .1f;
+        letterboxing = new LetterBoxing(stage, new Color(0f, 0f, 0.031f, 1), barHeight, .95f);
         stage.addActor(letterboxing);
 
         // Subscribe to events here
