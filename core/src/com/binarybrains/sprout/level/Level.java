@@ -110,7 +110,6 @@ public class Level extends LevelEngine {
                 ambientColor.z, ambientIntensity);
         waterShader.end();
 
-
         // dont load like this
         light = new Texture("shader/camAlphaMat.jpg");
 

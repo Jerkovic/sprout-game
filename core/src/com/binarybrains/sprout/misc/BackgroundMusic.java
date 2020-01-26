@@ -20,7 +20,7 @@ public class BackgroundMusic {
         
         if (currentTrack != null && currentTrack.isPlaying()) currentTrack.stop();
 
-        changeTrack(MathUtils.random(1, 1)); // random select a track in our library
+        changeTrack(MathUtils.random(4, 4)); // random select a track in our library
         mIsPlaying = true;
         isStopped = false;
         try {
