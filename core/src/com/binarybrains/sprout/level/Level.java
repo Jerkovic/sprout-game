@@ -162,7 +162,6 @@ public class Level extends LevelEngine {
         // test some path finding stuff.. move this!!
         Emma emma = new Emma(this, new Vector2(23 * 16f,  79f * 16f), 16f, 32f);
         this.add(this, emma);
-        createPathFinding(emma);
         emma.stateMachine.changeState(NpcState.IDLE);
 
         add(this, new Stone(this, 20, 77));
