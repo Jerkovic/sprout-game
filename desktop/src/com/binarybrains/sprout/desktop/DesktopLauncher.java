@@ -21,9 +21,9 @@ public class DesktopLauncher {
         System.out.println("============================================================");
         Graphics.DisplayMode displayMode = LwjglApplicationConfiguration.getDesktopDisplayMode();
         config.setFromDisplayMode(displayMode);
-        config.width = 1900;
-        config.height = 1200;
-        config.fullscreen = true;
+        config.width = 1200;
+        config.height = 800;
+        config.fullscreen = false;
         config.resizable = false;
         config.useGL30 = false;
 		config.title = SproutGame.name;
