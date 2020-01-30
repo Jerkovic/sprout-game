@@ -59,7 +59,6 @@ public class InventoryWindow extends Window {
         setKeepWithinStage(true);
         setMovable(false);
         setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2)-getWidth(), getMinHeight() + 8);
-        row().fill().expandX();
 
         atlas = SproutGame.assets.get("items2.txt");
         group = new ButtonGroup();
@@ -123,14 +122,13 @@ public class InventoryWindow extends Window {
     }
 
     private void build() {
-        Table itemTable = new Table(skin);
+        Table itemTable = new Table();
         for (int i = 0, n = group.getButtons().size; i < n; i++) {
             itemTable.add((Actor) group.getButtons().get(i));
             if ((i + 1) % 12 == 0) break; // itemTable.row();
         }
-
+        itemTable.pack();
         add(itemTable);
-        row();
         pack();
     }
 
@@ -146,7 +144,7 @@ public class InventoryWindow extends Window {
         getTitleLabel().setText("Inventory " + inventory.count() + "/" + inventory.getCapacity());
 
         for (Item item : inventory.getItems()) {
-            Button button = new Button(skin, "toggle");
+            ImageButton button = new ImageButton(skin, "inventory-slot-btn");
 
             String counter = "";
             if (item instanceof ResourceItem && inventory.count(item) > 1) {

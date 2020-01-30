@@ -77,7 +77,7 @@ public class InventoryManagementWindow extends Dialog {
 
     private Button trashCan() {
         Image image = new Image(atlas.findRegion("Garbage_Can")); // Trash Can todo
-        Button button = new Button(skin, "default");
+        ImageButton button = new ImageButton(skin, "inventory-slot-btn");
         button.add(image);
 
         button.addListener(new ClickListener(Input.Buttons.LEFT) {
@@ -94,7 +94,7 @@ public class InventoryManagementWindow extends Dialog {
 
     private Button sellItem() {
         Image image = new Image(atlas.findRegion("Cash_Register"));
-        Button button = new Button(skin, "default");
+        ImageButton button = new ImageButton(skin, "inventory-slot-btn");
         button.add(image);
 
         button.addListener(new ClickListener(Input.Buttons.LEFT) {
@@ -169,7 +169,7 @@ public class InventoryManagementWindow extends Dialog {
 
     private Button organize() {
         Image image = new Image(atlas.findRegion("Sort_Inventory"));
-        Button button = new Button(skin, "default");
+        ImageButton button = new ImageButton(skin, "inventory-slot-btn");
         button.add(image);
 
         button.addListener(new ClickListener(Input.Buttons.LEFT) {
@@ -208,7 +208,7 @@ public class InventoryManagementWindow extends Dialog {
         int slotIndex = 0;
 
         for (Item item : inventory.getItems()) {
-            final Button button = new Button(skin, "default");
+            ImageButton button = new ImageButton(skin, "inventory-slot-btn");
             button.setName("" + slotIndex); //set the slotIndex
             String counter = "";
             if (item instanceof ResourceItem && inventory.count(item) > 1) {

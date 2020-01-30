@@ -88,7 +88,6 @@ public class Hud implements Telegraph {
 
         stage.addActor(locationLabel);
 
-
         // mouse
         lc = new Label("", skin);
 
@@ -96,7 +95,7 @@ public class Hud implements Telegraph {
         lc.setColor(250, 250, 250, 1f);
         stage.addActor(lc);
 
-        craftingWindow = new CraftingWindow(level.player,"Crafting", skin);
+        craftingWindow = new CraftingWindow(level.player,"CRAFTING", skin);
         craftingWindow.setVisible(false);
         craftingWindow.hide();
         stage.addActor(craftingWindow);

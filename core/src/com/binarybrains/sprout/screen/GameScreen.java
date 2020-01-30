@@ -36,9 +36,7 @@ public class GameScreen implements Screen {
         width = (float) Gdx.graphics.getWidth();
         height = (float) Gdx.graphics.getHeight();
 
-        // skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         skin = this.game.getSkin();
-
         level = new Level(this, 1);
         hud = new Hud(skin, level);
 
@@ -52,7 +50,6 @@ public class GameScreen implements Screen {
         Pixmap pm = new Pixmap(Gdx.files.internal("mouse_pointer.png"));
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
-
 
         Timer.schedule(new Timer.Task(){
             @Override

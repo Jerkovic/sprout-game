@@ -34,7 +34,7 @@ public class CraftingWindow extends Dialog implements Telegraph {
     private float rememberScrollY = 0;
 
     public CraftingWindow(Player player, String title, Skin skin) {
-        super("Workbench Crafting", skin.get("dialog", WindowStyle.class));
+        super("CRAFTING STATION", skin.get("new-ui-win", WindowStyle.class));
         setSkin(skin);
 
         this.player = player;
@@ -50,7 +50,6 @@ public class CraftingWindow extends Dialog implements Telegraph {
 
     public void build() {
         clearChildren();
-        // getTitleLabel().setColor(0,0,0,.7f);
         Table recipesGroup = buildRecipesButtonGroup(skin);
         this.recipeTableScrollPane = new ScrollPane(recipesGroup, skin);
         recipeTableScrollPane.setFlickScroll(false);
@@ -104,7 +103,9 @@ public class CraftingWindow extends Dialog implements Telegraph {
             if (!recipe.canCraft) icon.setColor(0,0,0,.55f);
             if (!recipe.isUnlocked) icon.setColor(0,0,0,.05f);
 
-            Button button = new Button(icon, skin, "default");
+            ImageButton button = new ImageButton(skin, "inventory-slot-btn");
+            button.add(icon);
+
             if (!recipe.canCraft) button.setDisabled(true);
             button.setName("" + index++);
             button.addListener(new ChangeListener() {

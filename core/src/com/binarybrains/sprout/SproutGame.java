@@ -8,15 +8,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Window;
-import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
-import com.badlogic.gdx.utils.Json;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.tweens.EntityAccessor;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
@@ -106,16 +101,11 @@ public class SproutGame extends Game {
         ((Sound) SproutGame.assets.get("sfx/" + name + ".wav")).play(volume, pitch, pan);
     }
 
-
 	/**
 	 * Load all assets
 	 */
 	public void loadAssets() {
-
-
 		assets.load("new_ui_experiment/ui.atlas", TextureAtlas.class);
-
-
 
 		assets.load("spritesheet.png", Texture.class);
 		assets.load("haley-sheet.png", Texture.class);
@@ -166,24 +156,14 @@ public class SproutGame extends Game {
 		assets.load("sfx/jump.wav", Sound.class);
 
 		// todo find snoring
-		// Alot of different sounds https://www.youtube.com/watch?v=WL3AeICxSuU
-		// Magic wand ..wingggg https://www.youtube.com/watch?v=rvtiLLJEMGs
-		// Magic spell https://www.youtube.com/watch?v=cJ8TOsuiH08
-		// Magic blast https://www.youtube.com/watch?v=JRZYh-ZO9HY
-		// Bubble pop https://www.youtube.com/watch?v=5ZCahoiTIds
-        // More footsteps https://www.youtube.com/watch?v=wYREdw4nz4E
-        // Open futuristic chest https://www.youtube.com/watch?v=n_Ug7hgd4kE
-        // Open close chest https://www.youtube.com/watch?v=PnjKFzFQpfU
-        // Rope stretch https://www.youtube.com/watch?v=UhtONqZ-nag
-		// Anvil sound https://www.youtube.com/watch?v=0L7Rsjyiqmc
+		// More footsteps https://www.youtube.com/watch?v=wYREdw4nz4E
+        // Anvil sound https://www.youtube.com/watch?v=0L7Rsjyiqmc
 
         // Ambience sounds
         assets.load("ambience/forest_morning_ambience.mp3", Sound.class);
         assets.load("ambience/forest_night_ambience.mp3", Sound.class);
 		//assets.load("ambience/cave_ambience.mp3", Sound.class);
 
-
-        // Music (check out Ross Bugden)
 		// Wolfman Sachs
 		// And https://www.youtube.com/watch?v=Ic-a585qFMM&list=PL9aCqI0yupNZIeh9JlgZKOHii5OQTuCS6&index=13
         assets.load("music/track4.mp3", Music.class);
@@ -197,10 +177,6 @@ public class SproutGame extends Game {
 
         //  Sprite items
         assets.load("items2.txt", TextureAtlas.class);
-
-
-
-		// SproutGame.assets.finishLoading();
 	}
 }
 

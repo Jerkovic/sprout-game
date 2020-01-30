@@ -30,15 +30,15 @@ public class MainMenuScreen implements Screen {
     }
 
     private void buildWindow() {
-
         Skin skin = game.getSkin();
-
         extendSkinStyles(skin);
 
         TextureAtlas atlas = SproutGame.assets.get("new_ui_experiment/ui.atlas");
         TextureAtlas.AtlasRegion winTemplate = atlas.findRegion("window");
+        TextureAtlas.AtlasRegion buttonTemplate = atlas.findRegion("button");
 
         NinePatch ninePatch = new NinePatch(winTemplate, 16, 16, 41, 41);
+        NinePatch buttonPatch = new NinePatch(buttonTemplate, 8, 8, 8, 8);
 
         Window.WindowStyle windowStyle = new Window.WindowStyle();
         windowStyle.background = new NinePatchDrawable(ninePatch);
@@ -46,17 +46,30 @@ public class MainMenuScreen implements Screen {
         windowStyle.titleFontColor = Color.WHITE;
         skin.addRegions(atlas);
 
-        Window window = new Window("YARD WORKBENCH", windowStyle);
+        Window window = new Window("Change log", windowStyle);
         window.setResizable(true);
         window.setPosition(100, 100);
         window.setVisible(true);
         window.setMovable(true);
         window.setSize(600, 200);
+
+
+        ImageButton.ImageButtonStyle ibs = new ImageButton.ImageButtonStyle();
+        ibs.down = new NinePatchDrawable(buttonPatch);
+        ibs.up = new NinePatchDrawable(buttonPatch);
+
+        Button btn = new ImageButton(ibs);
+        btn.setSize(48, 48);
+
+        skin.add("inventory-slot-btn", ibs);
+
+        window.add(btn);
+
         stage.addActor(window);
     }
 
     /**
-     *
+     * Todo Move this!
      * @return
      */
     public void extendSkinStyles(Skin skin) {
@@ -65,8 +78,8 @@ public class MainMenuScreen implements Screen {
         TextureAtlas.AtlasRegion winTemplate = atlas.findRegion("window");
         TextureAtlas.AtlasRegion winBorderlessTemplate = atlas.findRegion("label");
 
-        NinePatch window9Patch = new NinePatch(winTemplate, 16, 16, 41, 41);
-        NinePatch widget9Patch = new NinePatch(winBorderlessTemplate, 16, 16, 41, 41);
+        NinePatch window9Patch = new NinePatch(winTemplate, 16, 16, 41, 16);
+        NinePatch widget9Patch = new NinePatch(winBorderlessTemplate, 16, 16, 16, 16);
 
         // Create Window with title bar
         Window.WindowStyle windowStyle = new Window.WindowStyle();
@@ -74,10 +87,12 @@ public class MainMenuScreen implements Screen {
         windowStyle.titleFont = skin.getFont("ruin-font");
         windowStyle.titleFontColor = Color.WHITE;
 
+        // without title bar
+        skin.add("test-draw", new NinePatchDrawable(widget9Patch));
+
         // Added the styling
         skin.add("new-ui-win", windowStyle);
     }
-
 
     private void buildUI() {
 
@@ -101,9 +116,9 @@ public class MainMenuScreen implements Screen {
         button1.fontColor = Color.LIGHT_GRAY;
         button1.overFontColor = Color.YELLOW;
 
-        // ver 0.23a
+        // Label with "ver 0.23a"
+
         TextButton play = new TextButton("START GAME", button1);
-        // play.debug();
 
         play.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {

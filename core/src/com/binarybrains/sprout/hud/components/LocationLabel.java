@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 
 public class LocationLabel extends Table {
@@ -22,21 +23,16 @@ public class LocationLabel extends Table {
         super(skin);
 
         locationLabel = new Label(title, skin);
+        locationLabel.getStyle().font = skin.getFont("ruin-font");
         locationLabel.setWrap(false);
         locationLabel.setWidth(300);
-        locationLabel.setColor(0,0, 0, .6f);
+        locationLabel.setHeight(50);
         locationLabel.setAlignment(Align.center);
 
-        for (String test : skin.getAll(Drawable.class).keys())
-        {
-            System.out.println("" + test);
-        }
-
-        //Window.WindowStyle ws = skin.get("new-ui-win", Window.WindowStyle.class);
-        //pad(10).background(ws.background);
+        background(skin.get("test-draw", NinePatchDrawable.class));
         add(locationLabel);
         setWidth(300);
-        setHeight(30);
+        setHeight(60);
         setVisible(false);
         setPosition(
                 Gdx.app.getGraphics().getWidth() - getWidth() - 30,
