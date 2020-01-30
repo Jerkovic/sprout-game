@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
@@ -487,9 +488,10 @@ public class Hud implements Telegraph {
         SproutGame.playSound("magic_swish", .6f);
     }
 
-    // a test right now, we need some graphics
+    // a test right now, we need some graphics and this has to move out of hud class
     public void addToasterMessage(String title, String text) {
         final Window window = new Window(title, skin);
+        window.setStyle(skin.get("new-ui-win", Window.WindowStyle.class));
         window.setVisible(false);
         window.setRound(true);
         window.setKeepWithinStage(false);
@@ -504,8 +506,9 @@ public class Hud implements Telegraph {
         window.row().fill().expandX();
 
         Label notLabel = new Label(text, skin);
+        notLabel.getStyle().font = skin.getFont("ruin-font");
         notLabel.setWrap(false);
-        notLabel.setColor(0,0, 0, .6f);
+        notLabel.setColor(Color.YELLOW);
         notLabel.setWidth(600);
 
         notLabel.setEllipsis(true);

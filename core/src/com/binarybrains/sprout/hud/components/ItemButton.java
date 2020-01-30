@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.hud.utils.ItemTip;
 import com.binarybrains.sprout.item.Item;
@@ -13,7 +14,7 @@ import com.binarybrains.sprout.item.tool.Tool;
 import com.binarybrains.sprout.item.tool.WateringCan;
 
 
-public class ItemButton extends Button {
+public class ItemButton extends ImageButton {
 
     private int slotIndex = 0;
     private Item item;
@@ -30,10 +31,9 @@ public class ItemButton extends Button {
      * @param slotIndex
      */
     public ItemButton(Skin skin, Item item, Image icon, int cnt, int slotIndex) {
-        super(skin, "default");
+        super(skin, "inventory-slot-btn");
         this.item = item;
         this.icon = icon;
-        this.icon.setSize(48,48);
         this.cnt = cnt;
         setName("" + slotIndex);
         init();

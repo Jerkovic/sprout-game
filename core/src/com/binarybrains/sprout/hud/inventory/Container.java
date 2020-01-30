@@ -79,7 +79,7 @@ public class Container extends Table {
         group.clear();
 
         for (Item item : inventory.getItems()) {
-            final Button button = new Button(skin, "default");
+            ImageButton button = new ImageButton(skin, "inventory-slot-btn");
             button.setName("" + slotIndex); //set the slotIndex
 
             boolean showStack = false;

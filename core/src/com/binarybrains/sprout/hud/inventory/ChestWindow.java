@@ -132,7 +132,7 @@ public class ChestWindow extends Dialog implements Telegraph {
         row();
         add(this.container);
         row();
-        add("Inventory").center();
+        add("Inventory"); //.center();
         row();
         add(this.playerInventoryContainer);
         row();

@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.item.Item;
 
@@ -37,24 +38,24 @@ public class ItemToaster extends Table {
      */
     public void init() {
         Skin skin = getSkin();
-        itemButton = new ItemButton(skin, item, icon, 1, 0);
 
+        itemButton = new ItemButton(skin, item, icon, 1, 0);
         itemButton.setVisible(true);
 
         Label itemLabel = new Label(item.getName(), skin);
+        itemLabel.getStyle().font = skin.getFont("ruin-font");
         itemLabel.setWrap(false);
         itemLabel.setWidth(200);
-        itemLabel.setColor(0,0, 0, .6f);
         itemLabel.setAlignment(Align.left);
 
-        pad(5).background("default-round");
-        setWidth(260);
-        setHeight(48);
+        pad(10);
+        background(skin.get("test-draw", NinePatchDrawable.class));
+        setWidth(300);
         setClip(false);
         setVisible(true);
 
         setPosition(10, y + 5);
-        add(itemButton).width(48);
+        add(itemButton);
         add(itemLabel).pad(2f).expandX().fillX();
         pack();
     }

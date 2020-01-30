@@ -1,6 +1,8 @@
 package com.binarybrains.sprout.hud.utils;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ToolItem;
@@ -16,13 +18,15 @@ public class ItemTip {
     public static Table createTooltipTable(Skin skin, Item item) {
         Table tooltipTable = new Table(skin);
         tooltipTable.setWidth(140);
-        tooltipTable.pad(10).background("default-round");
+        tooltipTable.pad(20).background(skin.get("test-draw", NinePatchDrawable.class));
+
         Label lbl = new Label(item.getName() + " (" + item.getCategory() + ")", skin);
+        lbl.getStyle().font = skin.getFont("ruin-font");
         lbl.setAlignment(Align.bottomRight);
-        lbl.setColor(0,0,0,0.95f);
+        lbl.setColor(Color.YELLOW);
 
         Label lbld = new Label(item.getDescription(), skin);
-        lbld.setColor(0,0,0,0.85f);
+        lbld.getStyle().font = skin.getFont("ruin-font");
 
         tooltipTable.add(lbl).expandX().left();
         tooltipTable.row();

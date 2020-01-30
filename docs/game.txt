@@ -12,6 +12,10 @@ https://www.deviantart.com/d-e-n-a/art/Pixel-Tree-Tutorial-133166821
 
 TODOS:
 
+* fix dimDialog and hover and selected state for buttons
+
+* Make a nice patch speech bubble
+
 * camera bug not following player centered top and right. (Fixed)
 
 * Cinematic view (Fixed)
@@ -20,11 +24,10 @@ TODOS:
 
 * Be able to have in world UI-elements.
 
-* Make a nice patch speech bubble
 
 * Make pickupItem behave like Slime follow instead. (Fixed)
 
-* ADD missing sfx file in knivsta. /Fixed)
+* ADD missing sfx file in knivsta. (Fixed)
 
 * Be able to right click to move whole stack to chest. ?
 
@@ -37,7 +40,7 @@ TODOS:
 * Inventory Management - heldItem should display item stack to the mouse pointer
     - Make merge to class mouseItem and lc label in HUd
 
-* Cleanup hud
+* Cleanup hud class. Move out notificationToaster etc
 
 * Footsteps         // plays different walking sounds here. // https://www.youtube.com/watch?v=wYREdw4nz4E
 sd
