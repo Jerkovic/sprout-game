@@ -12,7 +12,7 @@ https://www.deviantart.com/d-e-n-a/art/Pixel-Tree-Tutorial-133166821
 
 TODOS:
 
-* fix dimDialog and hover and selected state for buttons
+* fix dimDialog and hover and selected state for buttons, speakdialog
 
 * Make a nice patch speech bubble
 

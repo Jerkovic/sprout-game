@@ -36,9 +36,11 @@ public class MainMenuScreen implements Screen {
         TextureAtlas atlas = SproutGame.assets.get("new_ui_experiment/ui.atlas");
         TextureAtlas.AtlasRegion winTemplate = atlas.findRegion("window");
         TextureAtlas.AtlasRegion buttonTemplate = atlas.findRegion("button");
+        TextureAtlas.AtlasRegion buttonHoverTemplate = atlas.findRegion("button-hover");
 
         NinePatch ninePatch = new NinePatch(winTemplate, 16, 16, 41, 41);
         NinePatch buttonPatch = new NinePatch(buttonTemplate, 8, 8, 8, 8);
+        NinePatch buttonHoverPatch = new NinePatch(buttonHoverTemplate, 8, 8, 8, 8);
 
         Window.WindowStyle windowStyle = new Window.WindowStyle();
         windowStyle.background = new NinePatchDrawable(ninePatch);
@@ -57,6 +59,8 @@ public class MainMenuScreen implements Screen {
         ImageButton.ImageButtonStyle ibs = new ImageButton.ImageButtonStyle();
         ibs.down = new NinePatchDrawable(buttonPatch);
         ibs.up = new NinePatchDrawable(buttonPatch);
+        ibs.over = new NinePatchDrawable(buttonHoverPatch);
+
 
         Button btn = new ImageButton(ibs);
         btn.setSize(48, 48);

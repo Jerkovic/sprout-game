@@ -3,9 +3,16 @@ size: 48, 196
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-button
+button-hover
   rotate: false
   xy: 0, 172
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+button
+  rotate: false
+  xy: 24, 172
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
