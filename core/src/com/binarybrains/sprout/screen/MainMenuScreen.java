@@ -46,6 +46,7 @@ public class MainMenuScreen implements Screen {
         windowStyle.background = new NinePatchDrawable(ninePatch);
         windowStyle.titleFont = skin.getFont("ruin-font");
         windowStyle.titleFontColor = Color.WHITE;
+
         skin.addRegions(atlas);
 
         Window window = new Window("Change log", windowStyle);
@@ -85,17 +86,23 @@ public class MainMenuScreen implements Screen {
         NinePatch window9Patch = new NinePatch(winTemplate, 16, 16, 41, 16);
         NinePatch widget9Patch = new NinePatch(winBorderlessTemplate, 16, 16, 16, 16);
 
+        // Dim dialog dialogDim
+        Skin.TintedDrawable tintedDrawable = new Skin.TintedDrawable();
+        tintedDrawable.color = new Color(0,0,0, .8f);
+        tintedDrawable.name = "dialogDim";
+        skin.add("dialogDim", tintedDrawable);
+
         // Create Window with title bar
         Window.WindowStyle windowStyle = new Window.WindowStyle();
         windowStyle.background = new NinePatchDrawable(window9Patch);
         windowStyle.titleFont = skin.getFont("ruin-font");
         windowStyle.titleFontColor = Color.WHITE;
+        windowStyle.stageBackground = null; // we need a style for dimmed win.
+        skin.add("new-ui-win", windowStyle);
 
-        // without title bar
+        // without title bar no need for dm
         skin.add("test-draw", new NinePatchDrawable(widget9Patch));
 
-        // Added the styling
-        skin.add("new-ui-win", windowStyle);
     }
 
     private void buildUI() {
