@@ -16,6 +16,10 @@ TODOS:
 
 * Make a nice patch speech bubble
 
+* Rittswood Redstar (window longer text) (Downloaded to fonts, 16 pixels color #130a0f for sp. bubble match)
+
+
+
 * camera bug not following player centered top and right. (Fixed)
 
 * Cinematic view (Fixed)
@@ -69,7 +73,7 @@ return outputString.toString();
 * Fonts
     small, medium , large (gradient and dropshadow)
     xsmall pixel font with outline. (Fixed)
-  - Rittswood Redstar (window longer text) (Downloaded to fonts)
+  - Rittswood Redstar (window longer text) (Downloaded to fonts, 16 pixels color #130a0f for sp. bubble match)
 
 * Skin composer. Create new ui skin theme?
 
