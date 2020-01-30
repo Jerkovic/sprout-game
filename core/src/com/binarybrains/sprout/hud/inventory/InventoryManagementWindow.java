@@ -35,15 +35,17 @@ public class InventoryManagementWindow extends Dialog {
     private Item heldItem;
 
     public InventoryManagementWindow(Level level, Skin skin) {
-        super("Inventory Management", skin.get("dialog", WindowStyle.class));
-        setSkin(skin);
-        // key(Input.Keys.ENTER, true);
+        super("INVENTORY MANAGEMENT", skin);
         this.skin = skin;
+        setSkin(skin);
+        setStyle(skin.get("new-ui-win", WindowStyle.class));
+
         initialize();
-        getTitleLabel().setColor(0,0,0,.7f);
+        this.skin = skin;
         this.player = level.player;
         this.level = level;
-        this.skin = skin;
+
+
         setKeepWithinStage(true);
         setMovable(false);
         setModal(true);

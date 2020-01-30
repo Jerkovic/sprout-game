@@ -20,11 +20,8 @@ import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.crafting.Crafting;
 import com.binarybrains.sprout.crafting.Recipe;
 import com.binarybrains.sprout.entity.Player;
-import com.binarybrains.sprout.events.TelegramType;
-import com.binarybrains.sprout.hud.utils.ItemTip;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
-import com.binarybrains.sprout.screen.GameScreen;
 
 
 public class CraftingWindow extends Dialog implements Telegraph {
@@ -39,6 +36,7 @@ public class CraftingWindow extends Dialog implements Telegraph {
     public CraftingWindow(Player player, String title, Skin skin) {
         super("Workbench Crafting", skin.get("dialog", WindowStyle.class));
         setSkin(skin);
+
         this.player = player;
         this.skin = skin;
         this.craft = new Crafting(Crafting.workbenchRecipes, player.getInventory());
@@ -52,7 +50,7 @@ public class CraftingWindow extends Dialog implements Telegraph {
 
     public void build() {
         clearChildren();
-        getTitleLabel().setColor(0,0,0,.7f);
+        // getTitleLabel().setColor(0,0,0,.7f);
         Table recipesGroup = buildRecipesButtonGroup(skin);
         this.recipeTableScrollPane = new ScrollPane(recipesGroup, skin);
         recipeTableScrollPane.setFlickScroll(false);

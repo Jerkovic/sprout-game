@@ -584,7 +584,7 @@ public class Hud implements Telegraph {
         table.row();
         stage.addActor(table);
         gameTimeWindow = new Window(SproutGame.name, skin);
-        gameTimeWindow.getTitleLabel().setColor(0,0,0,.7f);
+        gameTimeWindow.setStyle(skin.get("new-ui-win", Window.WindowStyle.class));
         gameTimeWindow.setKeepWithinStage(true);
         gameTimeWindow.setMovable(true);
         gameTimeWindow.row().fill().expandX();

@@ -5,6 +5,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -13,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.binarybrains.sprout.SproutGame;
@@ -25,6 +28,56 @@ public class MainMenuScreen implements Screen {
     public MainMenuScreen(SproutGame game) {
         this.game = game;
     }
+
+    private void buildWindow() {
+
+        Skin skin = game.getSkin();
+
+        extendSkinStyles(skin);
+
+        TextureAtlas atlas = SproutGame.assets.get("new_ui_experiment/ui.atlas");
+        TextureAtlas.AtlasRegion winTemplate = atlas.findRegion("window");
+
+        NinePatch ninePatch = new NinePatch(winTemplate, 16, 16, 41, 41);
+
+        Window.WindowStyle windowStyle = new Window.WindowStyle();
+        windowStyle.background = new NinePatchDrawable(ninePatch);
+        windowStyle.titleFont = skin.getFont("ruin-font");
+        windowStyle.titleFontColor = Color.WHITE;
+        skin.addRegions(atlas);
+
+        Window window = new Window("YARD WORKBENCH", windowStyle);
+        window.setResizable(true);
+        window.setPosition(100, 100);
+        window.setVisible(true);
+        window.setMovable(true);
+        window.setSize(600, 200);
+        stage.addActor(window);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public void extendSkinStyles(Skin skin) {
+        TextureAtlas atlas = SproutGame.assets.get("new_ui_experiment/ui.atlas");
+
+        TextureAtlas.AtlasRegion winTemplate = atlas.findRegion("window");
+        TextureAtlas.AtlasRegion winBorderlessTemplate = atlas.findRegion("label");
+
+        NinePatch window9Patch = new NinePatch(winTemplate, 16, 16, 41, 41);
+        NinePatch widget9Patch = new NinePatch(winBorderlessTemplate, 16, 16, 41, 41);
+
+        // Create Window with title bar
+        Window.WindowStyle windowStyle = new Window.WindowStyle();
+        windowStyle.background = new NinePatchDrawable(window9Patch);
+        windowStyle.titleFont = skin.getFont("ruin-font");
+        windowStyle.titleFontColor = Color.WHITE;
+
+        // Added the styling
+        skin.add("new-ui-win", windowStyle);
+    }
+
 
     private void buildUI() {
 
@@ -144,6 +197,8 @@ public class MainMenuScreen implements Screen {
         stage.addActor(backdrop);
         Gdx.input.setInputProcessor(stage);
         stage.addActor(buttonTable);
+
+        buildWindow();
     }
 
 

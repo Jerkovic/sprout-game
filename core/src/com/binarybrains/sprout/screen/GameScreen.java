@@ -36,7 +36,8 @@ public class GameScreen implements Screen {
         width = (float) Gdx.graphics.getWidth();
         height = (float) Gdx.graphics.getHeight();
 
-        skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        // skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        skin = this.game.getSkin();
 
         level = new Level(this, 1);
         hud = new Hud(skin, level);

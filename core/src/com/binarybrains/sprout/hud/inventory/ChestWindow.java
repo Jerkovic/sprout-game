@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.item.Item;
@@ -26,12 +27,11 @@ public class ChestWindow extends Dialog implements Telegraph {
         super("Chest", skin.get("dialog", WindowStyle.class));
         setSkin(skin);
         this.skin = skin;
-        // initialize();
-        getTitleLabel().setColor(0,0,0,.7f);
         this.player = player;
         this.skin = skin;
-        setKeepWithinStage(true);
 
+        setStyle(skin.get("new-ui-win", WindowStyle.class));
+        setKeepWithinStage(true);
 
         // initialize ?
         setMovable(false);

@@ -8,10 +8,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Json;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.tweens.EntityAccessor;
@@ -25,6 +29,7 @@ public class SproutGame extends Game {
 	public static String name = "Bearshade Creek";
 	public static int WORLD_WIDTH = 256;
 	public static int WORLD_HEIGHT = 128;
+	public static String SKIN_FILE = "skin/uiskin.json";
 
 	private static TweenManager tweenManager;
 	public static AssetManager assets = new AssetManager();
@@ -42,7 +47,9 @@ public class SproutGame extends Game {
         Tween.registerAccessor(Entity.class, new EntityAccessor());
 		Tween.registerAccessor(Camera.class, new CameraAccessor());
 
-		skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+		assets.load(SKIN_FILE, Skin.class);
+		assets.finishLoadingAsset(SKIN_FILE);
+		this.skin = assets.get(SKIN_FILE, Skin.class);
 
 		setScreen(new LoadingScreen(this));
 	}
@@ -99,11 +106,16 @@ public class SproutGame extends Game {
         ((Sound) SproutGame.assets.get("sfx/" + name + ".wav")).play(volume, pitch, pan);
     }
 
+
 	/**
 	 * Load all assets
 	 */
 	public void loadAssets() {
-    	assets.load("skin/uiskin.json", Skin.class);
+
+
+		assets.load("new_ui_experiment/ui.atlas", TextureAtlas.class);
+
+
 
 		assets.load("spritesheet.png", Texture.class);
 		assets.load("haley-sheet.png", Texture.class);
@@ -185,6 +197,8 @@ public class SproutGame extends Game {
 
         //  Sprite items
         assets.load("items2.txt", TextureAtlas.class);
+
+
 
 		// SproutGame.assets.finishLoading();
 	}
