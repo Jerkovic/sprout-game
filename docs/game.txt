@@ -12,13 +12,13 @@ https://www.deviantart.com/d-e-n-a/art/Pixel-Tree-Tutorial-133166821
 
 TODOS:
 
-* fix dimDialog and hover and selected state for buttons, speakdialog
+* fix dimDialog and hover and selected state for buttons, speakdialog (Fixed)
 
 * Make a nice patch speech bubble, ingame and hud?
 
 * Rittswood Redstar (window longer text) (Downloaded to fonts, 16 pixels color #130a0f for sp. bubble match)
 
-
+* New mouse pointer (Fixed)
 
 * camera bug not following player centered top and right. (Fixed)
 

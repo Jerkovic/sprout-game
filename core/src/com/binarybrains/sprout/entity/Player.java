@@ -72,6 +72,7 @@ public class Player extends Npc implements InputProcessor {
 
         inventory = new Inventory(inventoryCapacity);
         getInventory().add(new ResourceItem(Resources.ladder, 1));
+        getInventory().add(new ArtifactItem(Artifacts.teddy));
         /*
         getInventory().add(new ToolItem(Tools.hoe, 0));
         getInventory().add(new ToolItem(Tools.wateringcan, 0));
@@ -79,7 +80,7 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ToolItem(Tools.pickaxe, 0));
         getInventory().add(new WeaponItem(Weapons.neptuneSword, 0));
 
-        getInventory().add(new ArtifactItem(Artifacts.teddy));
+
         getInventory().add(new ToolItem(Tools.hammer, 0));
 
         getInventory().add(new ResourceItem(Resources.bomb,392));

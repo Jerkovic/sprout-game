@@ -65,7 +65,7 @@ public class TypeWriterDialog extends Window {
             charCountThisFrame = dialogText.length();
         }
         if (charCountThisFrame > charCountLastFrame && charCountThisFrame < dialogText.length() && charCountThisFrame % 2 == 0) {
-            SproutGame.playSound("speaker_blip", .34f, MathUtils.random(0.5f, 1.2f), 1f);
+            if (MathUtils.random(1, 5) == 3)  SproutGame.playSound("speaker_blip", .34f, MathUtils.random(0.05f, .3f), 1f);
         }
 
         if (charCountThisFrame > dialogText.length()) {
@@ -88,13 +88,11 @@ public class TypeWriterDialog extends Window {
         setModal(true);
         setMovable(false);
 
-        // defaults().space(32);
-        // this should also have a profile pic of the NPC
         contentTable = new Table(skin);
-        contentTable.pad(10);
+        contentTable.pad(20);
+        contentTable.setHeight(400);
 
-        //add(new Label("icon", skin)).width(100);
-        add(contentTable).expand().fill(); // Label typerwrite will be injected to contentTable.
+        add(contentTable).expandX().fill();
         row();
 
         buttonTable = new Table(skin);
@@ -160,6 +158,7 @@ public class TypeWriterDialog extends Window {
     /** Adds a label to the content table. */
     public TypeWriterDialog text (String text, Label.LabelStyle labelStyle) {
         Label lbl = new Label(text, labelStyle);
+        lbl.setWrap(true);
         return text(lbl);
     }
 

@@ -46,13 +46,21 @@ public class Emma extends Npc {
         if (player.activeItem instanceof ArtifactItem && player.activeItem.getName().equals("Teddy")) {
             addAction(Actions.sequence(
                     Actions.run(() -> {
+                        lookAt(player);
                         jump();
                         ArtifactItem ai = (ArtifactItem) player.activeItem;
                         player.getInventory().removeItem(ai);
                         player.getLevel().screen.hud.refreshInventory();
                     }),
-                    Actions.delay(5),
+                    Actions.delay(2f),
                     Actions.run(() -> {
+                        player.getLevel().screen.hud.speakDialog(
+                                "Teddy is back",
+                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \n Sed placerat eget diam eu venenatis. Fusce eros diam," +
+                                        " \n tristique vitae arcu vel, sollicitudin auctor velit.\n" +
+                                        "\n Proin at dignissim purus Proin eu sapien pulvinar,"
+
+                        );
                         stateMachine.changeState(NpcState.GOTO_SEWER_HATCH);
                     })
             ));
