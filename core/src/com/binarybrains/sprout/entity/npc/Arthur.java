@@ -13,6 +13,7 @@ import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.tool.Tools;
 import com.binarybrains.sprout.level.Level;
+import com.binarybrains.sprout.misc.BackgroundMusic;
 
 
 public class Arthur extends Npc {
@@ -47,6 +48,7 @@ public class Arthur extends Npc {
             addAction(Actions.sequence(
                     Actions.run(() -> {
                         lookAt(player);
+                        BackgroundMusic.stop();
                     }),
                     Actions.delay(1.3f),
                     Actions.run(() -> {
@@ -71,6 +73,7 @@ public class Arthur extends Npc {
                         SproutGame.playSound("blop", .7f, MathUtils.random(0.9f, 1.2f), 1f);
                         player.getInventory().upgradeTool("Axe", 1);
                         getLevel().screen.hud.refreshInventory();
+                        BackgroundMusic.changeTrack(4);
                     })
             ));
             return true;

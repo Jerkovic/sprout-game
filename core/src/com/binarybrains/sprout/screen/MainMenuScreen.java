@@ -134,11 +134,17 @@ public class MainMenuScreen implements Screen {
 
         Skin skin = game.getSkin();
 
-        // dont load like this
+        // dont load like this!!!!!!!!!!!
         skin.add("button-black", new Texture( Gdx.files.internal("new-design-button.png")));
-        skin.add("main-menu-background", new Texture( Gdx.files.internal("menu_bg.png")));
+        skin.add("main-menu-background", new Texture( Gdx.files.internal("menu_bg2.png")));
+
+
 
         TextureRegion buttonRegion1 = new TextureRegion(skin.get("button-black", Texture.class));
+
+        Texture logotext = new Texture(Gdx.files.internal("farmbound.png"));
+        Image logoImg = new Image(logotext);
+
         // TextureRegion buttonRegion2 = new TextureRegion(skin.get("button-black-hover", Texture.class));
 
         TextButton.TextButtonStyle button1 = new TextButton.TextButtonStyle(
@@ -223,7 +229,9 @@ public class MainMenuScreen implements Screen {
         });
 
         Table buttonTable = new Table(skin);
-        buttonTable.setBackground("default-select-selection");
+        // buttonTable.setBackground("default-select-selection");
+        buttonTable.add(logoImg).pad(20);
+        buttonTable.row();
         buttonTable.add(play).pad(10);
         buttonTable.row();
         buttonTable.add(opt).pad(10);

@@ -20,7 +20,6 @@ public class BackgroundMusic {
         
         if (currentTrack != null && currentTrack.isPlaying()) currentTrack.stop();
 
-        changeTrack(MathUtils.random(4, 4)); // random select a track in our library
         mIsPlaying = true;
         isStopped = false;
         try {
@@ -44,7 +43,15 @@ public class BackgroundMusic {
 
     public static void changeTrack(String newTrackName) {
         // is this causing the crash
+        if (currentTrack != null) currentTrack.stop();
+        stop();
+
         currentTrack = SproutGame.assets.get("music/" + newTrackName + ".mp3");
+        mIsPlaying = true;
+        isStopped = false;
+        currentTrack.setLooping(true);
+        currentTrack.play();
+
     }
 
     public static boolean isPlaying() {
@@ -62,6 +69,7 @@ public class BackgroundMusic {
 
     // setOnCompletionListener <- should look into this.
 
+    // todo We are missing a fade up
     public static void update(float delta) {
         if (mIsPlaying && isStopped) {
             mVolume -= delta * FACTOR;

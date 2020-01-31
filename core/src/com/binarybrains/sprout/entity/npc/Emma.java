@@ -11,6 +11,7 @@ import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.item.tool.Tools;
 import com.binarybrains.sprout.level.Level;
+import com.binarybrains.sprout.misc.BackgroundMusic;
 
 
 public class Emma extends Npc {
@@ -47,6 +48,8 @@ public class Emma extends Npc {
         if (player.activeItem instanceof ArtifactItem && player.activeItem.getName().equals("Teddy")) {
             addAction(Actions.sequence(
                     Actions.run(() -> {
+                        BackgroundMusic.setVolume(.5f);
+                        BackgroundMusic.changeTrack(3);
                         lookAt(player);
                         jump();
                         ArtifactItem ai = (ArtifactItem) player.activeItem;

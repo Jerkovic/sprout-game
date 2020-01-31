@@ -55,7 +55,7 @@ public class GameScreen implements Screen {
             @Override
             public void run(){
                 if (!BackgroundMusic.isPlaying()) {
-                    BackgroundMusic.start();
+                    BackgroundMusic.changeTrack(2);
                     BackgroundMusic.setVolume(0.12f);
                 }
             }
