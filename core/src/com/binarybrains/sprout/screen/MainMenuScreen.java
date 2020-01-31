@@ -35,17 +35,36 @@ public class MainMenuScreen implements Screen {
 
         TextureAtlas atlas = SproutGame.assets.get("new_ui_experiment/ui.atlas");
         TextureAtlas.AtlasRegion winTemplate = atlas.findRegion("window");
+        // Slots button
         TextureAtlas.AtlasRegion buttonTemplate = atlas.findRegion("button");
         TextureAtlas.AtlasRegion buttonHoverTemplate = atlas.findRegion("button-hover");
+
+        // Action buttons
+        TextureAtlas.AtlasRegion bigButtonTemplate = atlas.findRegion("big-button-normal");
+        TextureAtlas.AtlasRegion bigButtonHoverTemplate = atlas.findRegion("big-button-hover");
 
         NinePatch ninePatch = new NinePatch(winTemplate, 16, 16, 41, 41);
         NinePatch buttonPatch = new NinePatch(buttonTemplate, 8, 8, 8, 8);
         NinePatch buttonHoverPatch = new NinePatch(buttonHoverTemplate, 8, 8, 8, 8);
 
+        NinePatch bigButtonPatch = new NinePatch(bigButtonTemplate, 12, 12, 8, 8);
+        NinePatch bugButtonHoverPatch = new NinePatch(bigButtonHoverTemplate, 12, 12, 8, 8);
+
+        TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.down = new NinePatchDrawable(bigButtonPatch);
+        textButtonStyle.up = new NinePatchDrawable(bigButtonPatch);
+        textButtonStyle.over = new NinePatchDrawable(bugButtonHoverPatch);
+        textButtonStyle.font = skin.getFont("ruin-font");
+        textButtonStyle.fontColor = Color.WHITE;
+        textButtonStyle.overFontColor = Color.YELLOW;
+        skin.add("text-button-default", textButtonStyle);
+
+
         Window.WindowStyle windowStyle = new Window.WindowStyle();
         windowStyle.background = new NinePatchDrawable(ninePatch);
         windowStyle.titleFont = skin.getFont("ruin-font");
         windowStyle.titleFontColor = Color.WHITE;
+
 
         skin.addRegions(atlas);
 
@@ -57,18 +76,22 @@ public class MainMenuScreen implements Screen {
         window.setSize(600, 200);
 
 
+        // Image button style used for slots
         ImageButton.ImageButtonStyle ibs = new ImageButton.ImageButtonStyle();
         ibs.down = new NinePatchDrawable(buttonPatch);
         ibs.up = new NinePatchDrawable(buttonPatch);
         ibs.over = new NinePatchDrawable(buttonHoverPatch);
-
-
-        Button btn = new ImageButton(ibs);
-        btn.setSize(48, 48);
-
+        ibs.disabled = new NinePatchDrawable(buttonPatch);
         skin.add("inventory-slot-btn", ibs);
 
-        window.add(btn);
+        ImageButton btn = new ImageButton(ibs);
+        btn.setSize(48, 48);
+
+
+        TextButton btn2 = new TextButton("Save Game", textButtonStyle);
+        btn2.setSize(48, 48);
+
+        window.add(btn2);
 
         stage.addActor(window);
     }
@@ -99,6 +122,14 @@ public class MainMenuScreen implements Screen {
         windowStyle.titleFontColor = Color.WHITE;
         windowStyle.stageBackground = null; // we need a style for dimmed win.
         skin.add("new-ui-win", windowStyle);
+
+
+        Window.WindowStyle dialogStyle = new Window.WindowStyle();
+        dialogStyle.background = new NinePatchDrawable(window9Patch);
+        dialogStyle.titleFont = skin.getFont("ruin-font");
+        dialogStyle.titleFontColor = Color.WHITE;
+        dialogStyle.stageBackground = skin.getDrawable("dialogDim");
+        skin.add("new-ui-dialog", dialogStyle);
 
         // without title bar no need for dm
         skin.add("test-draw", new NinePatchDrawable(widget9Patch));

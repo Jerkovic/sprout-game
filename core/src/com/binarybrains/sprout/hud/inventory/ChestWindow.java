@@ -9,14 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.item.Item;
 
 public class ChestWindow extends Dialog implements Telegraph {
 
-    Skin skin;
     Player player;
     Container container;
     Container playerInventoryContainer;
@@ -24,13 +22,11 @@ public class ChestWindow extends Dialog implements Telegraph {
     private Item heldItem = null;
 
     public ChestWindow(Player player, Skin skin) {
-        super("Chest", skin.get("dialog", WindowStyle.class));
+        super("Chest", skin.get("new-ui-dialog", WindowStyle.class));
         setSkin(skin);
-        this.skin = skin;
         this.player = player;
-        this.skin = skin;
+        // debug();
 
-        setStyle(skin.get("new-ui-win", WindowStyle.class));
         setKeepWithinStage(true);
 
         // initialize ?
@@ -67,7 +63,7 @@ public class ChestWindow extends Dialog implements Telegraph {
 
     public void openChest(Chest chest) {
         clearChildren();
-        container = new Container(skin);
+        container = new Container(getSkin());
         container.refreshInventory(chest.getInventory()); // hook up and refresh container table
         container.SetLeftClick(() -> {
             int selected = container.getButtonGroup().getCheckedIndex();
@@ -88,7 +84,7 @@ public class ChestWindow extends Dialog implements Telegraph {
             container.refreshInventory(chest.getInventory());
         });
 
-        playerInventoryContainer = new Container(skin);
+        playerInventoryContainer = new Container(getSkin());
         playerInventoryContainer.refreshInventory(player.getInventory());
         playerInventoryContainer.SetLeftClick(() -> {
             int selected = playerInventoryContainer.getButtonGroup().getCheckedIndex();
@@ -114,8 +110,9 @@ public class ChestWindow extends Dialog implements Telegraph {
     }
 
     private void build(Chest chest) {
-        TextButton buttonExit = new TextButton("   Close   ", skin);
-        buttonExit.setColor(0,0,0, .75f);
+
+        TextButton buttonExit = new TextButton("   Close   ", getSkin(), "text-button-default");
+
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -131,8 +128,6 @@ public class ChestWindow extends Dialog implements Telegraph {
 
         row();
         add(this.container);
-        row();
-        add("Inventory"); //.center();
         row();
         add(this.playerInventoryContainer);
         row();

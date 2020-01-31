@@ -88,7 +88,6 @@ public class TypeWriterDialog extends Window {
         setModal(true);
         setMovable(false);
 
-        getTitleLabel().setColor(0,0,0,.7f);
         // defaults().space(32);
         // this should also have a profile pic of the NPC
         contentTable = new Table(skin);
@@ -133,8 +132,6 @@ public class TypeWriterDialog extends Window {
                 }
             }
         };
-
-
     }
 
     protected void setStage (Stage stage) {
@@ -163,7 +160,6 @@ public class TypeWriterDialog extends Window {
     /** Adds a label to the content table. */
     public TypeWriterDialog text (String text, Label.LabelStyle labelStyle) {
         Label lbl = new Label(text, labelStyle);
-        lbl.setColor(0,0,0,1);
         return text(lbl);
     }
 

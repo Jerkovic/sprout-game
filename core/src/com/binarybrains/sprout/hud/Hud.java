@@ -19,7 +19,6 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.binarybrains.sprout.SproutGame;
@@ -129,7 +128,7 @@ public class Hud implements Telegraph {
 
         chestManagementWindow = new ChestWindow(level.player, skin);
         chestManagementWindow.setVisible(false);
-        chestManagementWindow.hide();
+        // chestManagementWindow.hide();
         stage.addActor(chestManagementWindow);
 
         // Letter boxing Cinema Mode actor
@@ -490,8 +489,7 @@ public class Hud implements Telegraph {
 
     // a test right now, we need some graphics and this has to move out of hud class
     public void addToasterMessage(String title, String text) {
-        final Window window = new Window(title, skin);
-        window.setStyle(skin.get("new-ui-win", Window.WindowStyle.class));
+        final Window window = new Window(title, skin.get("new-ui-win", Window.WindowStyle.class));
         window.setVisible(false);
         window.setRound(true);
         window.setKeepWithinStage(false);
@@ -547,7 +545,7 @@ public class Hud implements Telegraph {
     public void speakDialog(String title, String say) {
         level.screen.game.pause();
         hideMouseItem();
-        TypeWriterDialog dialog = new TypeWriterDialog(title, skin, "dialog") {
+        TypeWriterDialog dialog = new TypeWriterDialog(title, skin, "new-ui-dialog") {
             public void result(Object obj) {
                 level.screen.game.resume();
                 showMouseItem();
@@ -555,7 +553,7 @@ public class Hud implements Telegraph {
         };
 
         dialog.text(say);
-        dialog.button("  OK  ", true); //sends "true" as the result
+        dialog.button("  OK  ", true, skin.get("text-button-default", TextButton.TextButtonStyle.class)); //sends "true" as the result
         dialog.center();
         //dialog.key(Input.Keys.Enter, true); //sends "true" when the ENTER key is pressed
         dialog.show(stage);
@@ -585,8 +583,7 @@ public class Hud implements Telegraph {
         table.add(fpsLabel).left();
         table.row();
         stage.addActor(table);
-        gameTimeWindow = new Window(SproutGame.name, skin);
-        gameTimeWindow.setStyle(skin.get("new-ui-win", Window.WindowStyle.class));
+        gameTimeWindow = new Window(SproutGame.name, skin.get("new-ui-win", Window.WindowStyle.class));
         gameTimeWindow.setKeepWithinStage(true);
         gameTimeWindow.setMovable(true);
         gameTimeWindow.row().fill().expandX();

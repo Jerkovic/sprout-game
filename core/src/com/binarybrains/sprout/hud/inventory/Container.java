@@ -152,6 +152,7 @@ public class Container extends Table {
                     }
                 }
             });
+
             button.pack();
             group.add(button);
 

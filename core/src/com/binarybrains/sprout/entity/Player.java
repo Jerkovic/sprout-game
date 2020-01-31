@@ -71,6 +71,8 @@ public class Player extends Npc implements InputProcessor {
         setSpeed(64);
 
         inventory = new Inventory(inventoryCapacity);
+        getInventory().add(new ResourceItem(Resources.ladder, 1));
+        /*
         getInventory().add(new ToolItem(Tools.hoe, 0));
         getInventory().add(new ToolItem(Tools.wateringcan, 0));
         getInventory().add(new ToolItem(Tools.axe, 0));
@@ -98,7 +100,9 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ResourceItem(Resources.stone, 102));
         getInventory().add(new ResourceItem(Resources.goldNugget, 13));
         getInventory().add(new ResourceItem(Resources.apple, 12));
-        getInventory().add(new ResourceItem(Resources.ladder, 1));
+
+        */
+
 
         // todo setActiveItemByName?
         setActiveItem(getInventory().getItems().get(0));

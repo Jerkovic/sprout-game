@@ -35,16 +35,13 @@ public class InventoryManagementWindow extends Dialog {
     private Item heldItem;
 
     public InventoryManagementWindow(Level level, Skin skin) {
-        super("INVENTORY MANAGEMENT", skin);
+        super("INVENTORY MANAGEMENT", skin.get("new-ui-dialog", WindowStyle.class));
         this.skin = skin;
-        setSkin(skin);
-        setStyle(skin.get("new-ui-win", WindowStyle.class));
 
         initialize();
-        this.skin = skin;
+
         this.player = level.player;
         this.level = level;
-
 
         setKeepWithinStage(true);
         setMovable(false);
@@ -89,6 +86,7 @@ public class InventoryManagementWindow extends Dialog {
                 }
             }
         });
+        button.pack();
         return button;
     }
 
@@ -112,6 +110,7 @@ public class InventoryManagementWindow extends Dialog {
                 }
             }
         });
+        button.pack();
         return button;
     }
 
@@ -133,13 +132,13 @@ public class InventoryManagementWindow extends Dialog {
      * Build UI moved to Container
      */
     private void build() {
-        Table itemTable = new Table(skin);
+        Table itemTable = new Table();
         for (int i = 0, n = group.getButtons().size; i < n; i++) {
             itemTable.add((Actor) group.getButtons().get(i));
             if ((i + 1) % 12 == 0) itemTable.row();
         }
 
-        Table buttonTable = new Table(skin);
+        Table buttonTable = new Table();
         buttonTable.add(organize()).pad(8);
         buttonTable.add(sellItem()).pad(8);
         buttonTable.add(trashCan()).pad(8);
@@ -149,8 +148,7 @@ public class InventoryManagementWindow extends Dialog {
         add(buttonTable);
         row();
 
-        TextButton buttonExit = new TextButton("   Close   ", skin);
-        buttonExit.setColor(0,0,0, .75f);
+        TextButton buttonExit = new TextButton("Close", skin, "text-button-default");
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -163,6 +161,7 @@ public class InventoryManagementWindow extends Dialog {
                 player.getLevel().screen.hud.refreshInventory();
             }
         });
+        buttonExit.pack();
         add(buttonExit).pad(5);
         pack();
     }
@@ -272,7 +271,7 @@ public class InventoryManagementWindow extends Dialog {
                 public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                     super.enter(event, x, y, pointer, fromActor);
                     if (event.getTarget() instanceof Button) {
-                        System.out.println("Entered " + event.getTarget().getName());
+
                     }
                 }
 
@@ -280,7 +279,7 @@ public class InventoryManagementWindow extends Dialog {
                 public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
                     super.exit(event, x, y, pointer, toActor);
                     if (event.getTarget() instanceof Button) {
-                        System.out.println("Exited " + event.getTarget().getName());
+
                     }
                 }
 

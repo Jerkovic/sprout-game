@@ -51,11 +51,11 @@ public class InventoryWindow extends Window {
     }
 
     public InventoryWindow(Level level, Skin skin) {
-        super("Inventory", skin);
+        super("Inventory", skin.get("new-ui-win", WindowStyle.class));
 
         this.level = level;
         this.skin = skin;
-        setStyle(skin.get("new-ui-win", WindowStyle.class));
+        // setStyle(skin.get("new-ui-win", WindowStyle.class));
         setKeepWithinStage(true);
         setMovable(false);
         setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2)-getWidth(), getMinHeight() + 8);

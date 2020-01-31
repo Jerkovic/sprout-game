@@ -67,8 +67,7 @@ public class CraftingWindow extends Dialog implements Telegraph {
         add(recipeContainer);
         row();
 
-        TextButton buttonExit = new TextButton("   Close   ", skin);
-        buttonExit.setColor(Color.BLACK);
+        TextButton buttonExit = new TextButton("Close", skin, "text-button-default");
         buttonExit.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
