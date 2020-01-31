@@ -81,15 +81,12 @@ public class MainMenuScreen implements Screen {
         ibs.up = new NinePatchDrawable(buttonPatch);
         ibs.over = new NinePatchDrawable(buttonHoverPatch);
         ibs.disabled = new NinePatchDrawable(buttonPatch);
+        ibs.checked = new NinePatchDrawable(buttonHoverPatch);
         skin.add("inventory-slot-btn", ibs);
 
         ImageButton btn = new ImageButton(ibs);
         btn.setSize(48, 48);
 
-        TextButton btn2 = new TextButton("  Save Game  ", textButtonStyle);
-        btn2.setSize(48, 48);
-
-        window.add(btn2);
         stage.addActor(window);
     }
 
@@ -120,7 +117,7 @@ public class MainMenuScreen implements Screen {
         windowStyle.stageBackground = null; // we need a style for dimmed win.
         skin.add("new-ui-win", windowStyle);
 
-
+        // Window dialog with stage dimmer
         Window.WindowStyle dialogStyle = new Window.WindowStyle();
         dialogStyle.background = new NinePatchDrawable(window9Patch);
         dialogStyle.titleFont = skin.getFont("ruin-font");

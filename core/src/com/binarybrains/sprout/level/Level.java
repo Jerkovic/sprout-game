@@ -21,6 +21,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.enemy.Slime;
@@ -141,16 +142,15 @@ public class Level extends LevelEngine {
         camera.update();
 
         // test world ui speech / action window
-        /*
+
         ww = new Table(screen.skin);
-        ww.add("Hello world!");
-        ww.pad(10).background("default-round");
-        ww.setSize(120f, 30f);
-        addActor(ww);
-        */
+        ww.add("lets get som text going");
+        ww.pad(10).background(screen.skin.get("test-draw", NinePatchDrawable.class));
+        ww.setSize(60f, 30f);
+        // addActor(ww);
 
         add(this, player);
-        add(this, new Chest(this, new Vector2(16 * 2, 16 * 4)));
+        add(this, new Chest(this, new Vector2(16 * 10, 16 * 65)));
 
         tileMapRenderer = new LevelMapRenderer(map);
         tileMapRenderer.setView(camera);
@@ -244,8 +244,8 @@ public class Level extends LevelEngine {
         }
 
         // Test render a window in world space
-        // Vector3 testPos = getCamera().project(new Vector3(player.getX()-16f, player.getY() + 16f, 0));
-        //ww.setPosition(testPos.x, testPos.y);
+        Vector3 testPos = getCamera().project(new Vector3(player.getX()-16f, player.getY() + 46f, 0));
+        ww.setPosition(testPos.x, testPos.y);
 
         // Dispatch any delayed messages
         MessageManager.getInstance().update();
