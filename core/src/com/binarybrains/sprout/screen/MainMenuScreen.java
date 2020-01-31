@@ -47,8 +47,8 @@ public class MainMenuScreen implements Screen {
         NinePatch buttonPatch = new NinePatch(buttonTemplate, 8, 8, 8, 8);
         NinePatch buttonHoverPatch = new NinePatch(buttonHoverTemplate, 8, 8, 8, 8);
 
-        NinePatch bigButtonPatch = new NinePatch(bigButtonTemplate, 12, 12, 8, 8);
-        NinePatch bugButtonHoverPatch = new NinePatch(bigButtonHoverTemplate, 12, 12, 8, 8);
+        NinePatch bigButtonPatch = new NinePatch(bigButtonTemplate, 16, 16, 8, 8);
+        NinePatch bugButtonHoverPatch = new NinePatch(bigButtonHoverTemplate, 16, 16, 8, 8);
 
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.down = new NinePatchDrawable(bigButtonPatch);
@@ -70,11 +70,10 @@ public class MainMenuScreen implements Screen {
 
         Window window = new Window("Change log", windowStyle);
         window.setResizable(true);
-        window.setPosition(100, 100);
+        window.setPosition(0, 0);
         window.setVisible(true);
         window.setMovable(true);
         window.setSize(600, 200);
-
 
         // Image button style used for slots
         ImageButton.ImageButtonStyle ibs = new ImageButton.ImageButtonStyle();
@@ -87,12 +86,10 @@ public class MainMenuScreen implements Screen {
         ImageButton btn = new ImageButton(ibs);
         btn.setSize(48, 48);
 
-
-        TextButton btn2 = new TextButton("Save Game", textButtonStyle);
+        TextButton btn2 = new TextButton("  Save Game  ", textButtonStyle);
         btn2.setSize(48, 48);
 
         window.add(btn2);
-
         stage.addActor(window);
     }
 
