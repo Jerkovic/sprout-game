@@ -20,40 +20,6 @@ public enum NpcState implements State<Npc> {
         public void enter(Npc npc) {
         }
     },
-    WALK_TO_FRONT_DOOR() {
-        @Override
-        public void update(Npc npc) {
-
-        }
-
-        @Override
-        public void enter(final Npc npc) {
-            npc.updateWalkDirections(4,0, LEAVE_HOUSE);
-        }
-
-        @Override
-        public void exit(Npc npc) {
-            npc.setState(Mob.State.STANDING);
-        }
-    },
-
-    WALK_SOME_IN_PLAYER_HOUSE() {
-        @Override
-        public void enter(Npc entity) {
-            entity.updateWalkDirections(1,1, WALK_TO_FRONT_DOOR);
-        }
-
-        @Override
-        public void update(Npc entity) {
-
-        }
-
-        @Override
-        public void exit(Npc entity) {
-
-        }
-    },
-
     WAVE() {
         @Override
         public void enter(Npc entity) {
@@ -62,11 +28,11 @@ public enum NpcState implements State<Npc> {
         }
     },
 
-    GOTO_SEWER_HATCH() {
+    GOTO_ARTHUR() {
         @Override
         public void enter(Npc entity)
         {
-            entity.updateWalkDirections(35, 94, WAVE);
+            entity.updateWalkDirections(39, 31, WAVE);
         }
 
         @Override
@@ -78,15 +44,6 @@ public enum NpcState implements State<Npc> {
         public void exit(Npc entity) {
 
         }
-    },
-
-    LEAVE_HOUSE() {
-        @Override
-        public void enter(Npc npc) {
-            npc.setState(Npc.State.STANDING);
-            npc.leaveHouse();
-        }
-
     };
 
    // end of states

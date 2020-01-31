@@ -109,6 +109,7 @@ public class SproutGame extends Game {
 
 		assets.load("spritesheet.png", Texture.class);
 		assets.load("haley-sheet.png", Texture.class);
+		assets.load("willy.png", Texture.class);
 		assets.load("player/player_temp.png", Texture.class);
 		assets.load("sprites/shadow.png", Texture.class);
 
@@ -154,6 +155,7 @@ public class SproutGame extends Game {
 		assets.load("sfx/open_chest.wav", Sound.class);
 		assets.load("sfx/close_chest.wav", Sound.class);
 		assets.load("sfx/jump.wav", Sound.class);
+		assets.load("sfx/slap_iron_clatter.wav", Sound.class);
 
 		// todo find snoring
 		// More footsteps https://www.youtube.com/watch?v=wYREdw4nz4E

@@ -55,7 +55,6 @@ public class InventoryWindow extends Window {
 
         this.level = level;
         this.skin = skin;
-        // setStyle(skin.get("new-ui-win", WindowStyle.class));
         setKeepWithinStage(true);
         setMovable(false);
         setPosition((Gdx.app.getGraphics().getWidth() / 2 - getWidth() / 2)-getWidth(), getMinHeight() + 8);
@@ -87,7 +86,7 @@ public class InventoryWindow extends Window {
         for(int i = 0; i < listeners.size; i++) {
             if(listeners.get(i) instanceof ClickListener) {
                 MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_CHANGED_SELECTED_SLOT);
-                SproutGame.playSound("blop2", .3f, MathUtils.random(1.0f, 1.1f), 1f);
+                SproutGame.playSound("blop2", .3f, MathUtils.random(.9f, .95f), 1f);
                 ((ClickListener)listeners.get(i)).clicked(null, 0, 0);
             }
         }

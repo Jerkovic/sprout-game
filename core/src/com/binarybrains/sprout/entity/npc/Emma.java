@@ -1,7 +1,6 @@
 package com.binarybrains.sprout.entity.npc;
 
 import com.badlogic.gdx.ai.msg.Telegram;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
@@ -9,6 +8,8 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.Item;
+import com.binarybrains.sprout.item.ToolItem;
+import com.binarybrains.sprout.item.tool.Tools;
 import com.binarybrains.sprout.level.Level;
 
 
@@ -26,7 +27,7 @@ public class Emma extends Npc {
         setHealth(100);
         setState(State.STANDING);
         setDirection(Direction.EAST);
-        setSpeed(24);
+        setSpeed(24*2);
     }
 
     @Override
@@ -56,12 +57,11 @@ public class Emma extends Npc {
                     Actions.run(() -> {
                         player.getLevel().screen.hud.speakDialog(
                                 "Teddy is back",
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. \n Sed placerat eget diam eu venenatis. Fusce eros diam," +
-                                        " \n tristique vitae arcu vel, sollicitudin auctor velit.\n" +
-                                        "\n Proin at dignissim purus Proin eu sapien pulvinar,"
+                                "You are sooo kind! Maybe you could help my old grandpa. \nHe needs some help chopping down trees.\n Here is an old axe I used to kill cats with..\n Follow me I will lead you to him."
 
                         );
-                        stateMachine.changeState(NpcState.GOTO_SEWER_HATCH);
+                        player.getInventory().add(new ToolItem(Tools.axe, 0));
+                        stateMachine.changeState(NpcState.GOTO_ARTHUR);
                     })
             ));
             return true;

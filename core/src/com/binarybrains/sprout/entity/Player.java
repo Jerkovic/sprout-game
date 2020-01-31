@@ -21,9 +21,6 @@ import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.item.*;
 import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.FoodResource;
-import com.binarybrains.sprout.item.resource.Resources;
-import com.binarybrains.sprout.item.tool.Tools;
-import com.binarybrains.sprout.item.weapon.Weapons;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.mail.Mailbox;
 import com.binarybrains.sprout.misc.BackgroundMusic;
@@ -71,12 +68,13 @@ public class Player extends Npc implements InputProcessor {
         setSpeed(64);
 
         inventory = new Inventory(inventoryCapacity);
-        getInventory().add(new ResourceItem(Resources.ladder, 1));
+
         getInventory().add(new ArtifactItem(Artifacts.teddy));
         /*
+        getInventory().add(new ResourceItem(Resources.ladder, 1));
         getInventory().add(new ToolItem(Tools.hoe, 0));
         getInventory().add(new ToolItem(Tools.wateringcan, 0));
-        getInventory().add(new ToolItem(Tools.axe, 0));
+
         getInventory().add(new ToolItem(Tools.pickaxe, 0));
         getInventory().add(new WeaponItem(Weapons.neptuneSword, 0));
 
@@ -130,20 +128,20 @@ public class Player extends Npc implements InputProcessor {
                     // do some
                     setDirection(NORTH);
                 }),
-                Actions.delay(2),
+                Actions.delay(1),
                 Actions.run(() -> {
                     jump();
                 }),
+                Actions.delay(2f),
                 Actions.run(() -> {
                     setDirection(SOUTH); // make sure he is looking south
-                    setActionState(ActionState.HOBBY);
+                    getLevel().screen.hud.speakDialog(
+                            "Good deeds!",
+                            "Emma got Teddy back. Good deeds pay off indeed. \n Now approach Arthur the old \"hobo\"..."
+
+                    );
+                    //setActionState(ActionState.HOBBY);
                 }),
-                Actions.delay(20),
-                Actions.run(() -> {
-                    setDirection(SOUTH); // make sure he is looking south
-                    setActionState(ActionState.HOBBY);
-                }),
-                Actions.delay(6),
                 Actions.run(() -> {
                     setActionState(ActionState.EMPTY_NORMAL);
                     unFreezePlayerControl();

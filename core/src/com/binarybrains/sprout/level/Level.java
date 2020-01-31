@@ -25,6 +25,7 @@ import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.enemy.Slime;
 import com.binarybrains.sprout.entity.furniture.Chest;
+import com.binarybrains.sprout.entity.npc.Arthur;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.NpcState;
 import com.binarybrains.sprout.entity.npc.Npc;
@@ -164,6 +165,10 @@ public class Level extends LevelEngine {
         this.add(this, emma);
         emma.stateMachine.changeState(NpcState.IDLE);
 
+        Arthur arthur = new Arthur(this, new Vector2(40 * 16f,  30f * 16f), 16f, 32f);
+        this.add(this, arthur);
+
+
         add(this, new Stone(this, 20, 77));
         add(this, new Stone(this, 20, 75));
         add(this, new Stone(this, 29, 60));
@@ -177,10 +182,12 @@ public class Level extends LevelEngine {
         // add(this, new SpeechBubble(this, "I am hungry!"));
 
         // particle effects test ...need to make pools?
-        pe = new ParticleEffect();
-        pe.load(Gdx.files.internal("pfx/fire.p"),Gdx.files.internal("pfx/images")); // effect dir and images dir
-        pe.getEmitters().first().setPosition(146, 110);
-        pe.start();
+        // pe = new ParticleEffect();
+        //pe.load(Gdx.files.internal("pfx/fire.p"),Gdx.files.internal("pfx/images")); // effect dir and images dir
+        //pe.getEmitters().first().setPosition(146, 110);
+        //pe.start();
+
+        showIntroDialog();
     }
 
     public void add(Entity entity) {
@@ -208,9 +215,9 @@ public class Level extends LevelEngine {
     public void update(float delta) {
         gameTimer.update();
 
-        // particles update
-        pe.update(delta);
-        if (pe.isComplete()) pe.reset();
+        // particles update!!
+        // pe.update(delta);
+        // if (pe.isComplete()) pe.reset();
 
         // AI time piece
         GdxAI.getTimepiece().update(delta);
@@ -244,6 +251,22 @@ public class Level extends LevelEngine {
         MessageManager.getInstance().update();
     }
 
+    public void showIntroDialog() {
+        player.freezePlayerControl();
+        player.addAction(Actions.sequence(
+                Actions.delay(1f),
+                Actions.run(() -> {
+                    player.setActionState(Npc.ActionState.EMPTY_NORMAL);
+
+                    player.unFreezePlayerControl();
+                    screen.hud.speakDialog(
+                            "Intro",
+                            "The game starts here. \n All you got is this old teddy bear you found in the playing ground. A note on it says 'Emma'. \n Return to it to the poor girl..."
+                    );
+                })
+        ));
+    }
+
     public void draw() {
         // Input ctrl should not be here in draw!!
         if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
@@ -270,25 +293,14 @@ public class Level extends LevelEngine {
 
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            player.setDirection(Mob.Direction.SOUTH);
-            // player.setCarriedItem(new TemporaryCarriedItem(player.getLevel(), new ArtifactItem(Artifacts.backpack)));
-            player.freezePlayerControl();
-            player.addAction(Actions.sequence(
-                    Actions.delay(.5f),
-                    Actions.run(() -> {
-                        player.setActionState(Npc.ActionState.EMPTY_NORMAL);
-                        // player.setCarriedItem(null);
-                        player.unFreezePlayerControl();
-                        player.inventory.upgrade(); // test upgrade backpack
-                        screen.hud.refreshInventory();
-                        screen.hud.addToasterMessage("Inventory Upgrade", "You were awarded a bigger backpack.");
-                    })
-            ));
 
+
+            /*
             int count = MathUtils.random(2, 6);
             for (int i = 0; i < count; i++) {
                 player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resources.cloth), new Vector2(player.getPosition().x, player.getPosition().y)));
             }
+            */
         }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT)) {
@@ -390,7 +402,7 @@ public class Level extends LevelEngine {
         tileMapRenderer.renderSortedRowTileLayer(entities, (TiledMapTileLayer) map.getLayers().get(3));
 
         // sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
-        pe.draw(tileMapRenderer.getBatch());
+        //pe.draw(tileMapRenderer.getBatch());
 
         tileMapRenderer.getBatch().end();
 

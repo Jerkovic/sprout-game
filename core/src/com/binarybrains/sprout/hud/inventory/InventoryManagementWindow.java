@@ -203,7 +203,6 @@ public class InventoryManagementWindow extends Dialog {
 
     private void syncInventory(final Inventory inventory) {
         group.clear();
-        getTitleLabel().setText("Inventory Management");
         int slotIndex = 0;
 
         for (Item item : inventory.getItems()) {
