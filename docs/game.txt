@@ -18,7 +18,7 @@ TODOS:
 
 * Make a nice patch speech bubble, ingame and hud?
 
-* Rittswood Redstar (window longer text) (Downloaded to fonts, 16 pixels color #130a0f for sp. bubble match)
+* Rittswood Redstar (window longer text) named classic.fnt  (Fixed)
 
 * fix dimDialog and hover and selected state for buttons, speakdialog (Fixed)
 

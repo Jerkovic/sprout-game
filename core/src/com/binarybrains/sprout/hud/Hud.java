@@ -489,6 +489,7 @@ public class Hud implements Telegraph {
 
     // a test right now, we need some graphics and this has to move out of hud class
     public void addToasterMessage(String title, String text) {
+        // should not create a new every time, make small pool
         final Window window = new Window(title, skin.get("new-ui-win", Window.WindowStyle.class));
         window.setVisible(false);
         window.setRound(true);
