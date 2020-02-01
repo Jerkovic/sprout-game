@@ -46,6 +46,14 @@ public class Arthur extends Npc {
         // A LeafTask - is a terminal task of a behavior tree, contains action or condition logic, can not have any
         // child.
 
+        // Actions -
+        // which cause the execution of methods or functions on the game world,
+        // e.g. move a character, decrease health, etc...
+        //
+        // Conditions -
+        // which query the state of objects in the game world, e.g. location of character, inventory content,
+        // amount of health, etc...
+
         /**
          * A Selector is a branch task that runs every children until one of them succeeds. If a
          * child task fails, the selector * will start and run the next child task. * * @param <E> type
