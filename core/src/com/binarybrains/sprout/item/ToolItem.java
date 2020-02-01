@@ -12,6 +12,11 @@ public class ToolItem extends Item {
     public int level = 0;
     private Vector2 damageRange;
 
+    public static final int BASIC = 0;
+    public static final int COPPER = 1;
+    public static final int IRON = 2;
+    public static final int GOLD = 3;
+
     public static final int MAX_LEVEL = 3;
     public static final String[] LEVEL_NAMES = {"Basic", "Copper", "Iron", "Gold"};
 
@@ -20,7 +25,6 @@ public class ToolItem extends Item {
         this.level = level;
         damageRange = new Vector2(0f, 0f);
         updateDamageRange();
-
     }
 
     /**
@@ -89,8 +93,13 @@ public class ToolItem extends Item {
         return "Tool";
     }
 
+    /**
+     * Upgrade a Tool to next level
+     * @param level
+     * @return
+     */
     public boolean upgrade(int level) {
-        if (level <= ToolItem.MAX_LEVEL) {
+        if (level <= ToolItem.MAX_LEVEL && this.level == (level - 1)) {
             this.level = level;
             updateDamageRange();
             return true;

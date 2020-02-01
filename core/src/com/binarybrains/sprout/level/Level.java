@@ -495,7 +495,7 @@ public class Level extends LevelEngine {
         light.dispose();
         spritesheet.dispose();
         fbo.dispose();
-        pe.dispose();
+        // pe.dispose();
     }
 
     public void cameraFix() {

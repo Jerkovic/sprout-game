@@ -57,6 +57,7 @@ public class CraftingWindow extends Dialog implements Telegraph {
         recipeTableScrollPane.setForceScroll(false, true);
         recipeTableScrollPane.setWidth(500);
 
+
         // container for our recipe scrollPane
         Table recipeContainer = new Table();
         recipeContainer.align(Align.top);
@@ -79,6 +80,8 @@ public class CraftingWindow extends Dialog implements Telegraph {
         });
         add(buttonExit).pad(5);
         pack();
+
+        recipeTableScrollPane.scrollTo(0, 200, 0, 200);
     }
 
     /**

@@ -37,6 +37,7 @@ public class BackgroundMusic {
     }
 
     public static void setVolume(float volume) {
+        if (currentTrack == null) return;
         mVolume = volume;
         currentTrack.setVolume(mVolume);
     }
@@ -45,13 +46,7 @@ public class BackgroundMusic {
         // is this causing the crash
         if (currentTrack != null) currentTrack.stop();
         stop();
-
         currentTrack = SproutGame.assets.get("music/" + newTrackName + ".mp3");
-        mIsPlaying = true;
-        isStopped = false;
-        currentTrack.setLooping(true);
-        currentTrack.play();
-
     }
 
     public static boolean isPlaying() {

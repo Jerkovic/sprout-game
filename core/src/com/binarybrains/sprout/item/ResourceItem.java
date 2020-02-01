@@ -51,9 +51,7 @@ public class ResourceItem extends Item {
         return resource.name;
     }
 
-    public void onTake() {
-    }
-
+    public void onTake() { }
 
     public boolean isDepleted() {
         return count <= 0;

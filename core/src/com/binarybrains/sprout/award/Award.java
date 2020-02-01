@@ -8,7 +8,9 @@ import com.binarybrains.sprout.crafting.Recipe;
  */
 public class Award {
 
-    // this wont work :)
+    // ArrayList of ItemStack
+    // Recipe unlocks
+    // Upgrade tools player.getInventory().upgradeTool("Axe", ToolItem.AXE);
     public Award() {
 
         // move to some rewarder method

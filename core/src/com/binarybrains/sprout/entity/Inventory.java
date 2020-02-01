@@ -26,9 +26,7 @@ public class Inventory {
     }
 
     public void sortInventory() {
-
         items.removeAll(Collections.singletonList(null));
-
         Collections.sort(items, new Comparator<Item>() {
             @Override
             public int compare(final Item object1, final Item object2) {
