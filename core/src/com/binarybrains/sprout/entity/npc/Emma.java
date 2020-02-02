@@ -28,7 +28,7 @@ public class Emma extends Npc {
         setHealth(100);
         setState(State.STANDING);
         setDirection(Direction.EAST);
-        setSpeed(24*2);
+        setSpeed(700);
     }
 
     @Override

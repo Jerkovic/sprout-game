@@ -1,7 +1,10 @@
 package com.binarybrains.sprout.entity.npc;
 
+import com.badlogic.gdx.ai.GdxAI;
+import com.badlogic.gdx.ai.btree.branch.RandomSelector;
 import com.badlogic.gdx.ai.btree.branch.Selector;
 import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.ai.utils.random.ConstantIntegerDistribution;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
@@ -9,6 +12,7 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.npc.btree.AttackTask;
+import com.binarybrains.sprout.entity.npc.btree.PatrolTask;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ToolItem;
 import com.binarybrains.sprout.level.Level;
@@ -39,8 +43,13 @@ public class Arthur extends Npc {
 
         // Sequence is a branch task that runs every children until one of them fails. If a child task
         // succeeds, the selector will start and run the next child task.
+        // Npc is the blackboard object,
         BranchTask<Npc> sequence = new Sequence<Npc>();
-        sequence.addChild(new AttackTask());
+
+        AttackTask attack = new AttackTask();
+        attack.times = ConstantIntegerDistribution.ONE;
+
+        PatrolTask patrol = new PatrolTask();
 
         // A BranchTask defines a behavior tree branch, contains logic of starting or running sub-branches and leaves
         // A LeafTask - is a terminal task of a behavior tree, contains action or condition logic, can not have any
@@ -59,13 +68,23 @@ public class Arthur extends Npc {
          * child task fails, the selector * will start and run the next child task. * * @param <E> type
          * of the blackboard object that tasks use to read or modify game state
          */
-        Selector<Npc> selector = new Selector<Npc>();
+        RandomSelector<Npc> selector = new RandomSelector<>();
+        selector.addChild(attack);
+        selector.addChild(patrol);
+
+
         // selector.childFail();
         // selector.childSuccess();
+        sequence.addChild(attack);
+        sequence.addChild(selector);
+
 
         behaviorTree = new BehaviorTree<>();
-        behaviorTree.addChild(sequence);
+        behaviorTree.addChild(sequence); // btree root
+
         // com/badlogic/gdx/ai/tests/btree/tests/ParallelVsSequenceTest.java
+
+        behaviorTree.setObject(this);
     }
 
     public BehaviorTree<Npc> getBehaviorTree () {
@@ -87,6 +106,13 @@ public class Arthur extends Npc {
     }
 
     @Override
+    public void update(float delta) {
+        super.update(delta);
+        GdxAI.getTimepiece().update(delta);
+        getBehaviorTree().step();
+    }
+
+    @Override
     public boolean interact(Player player, Item item, Direction attackDir) {
             // Quest line
             // this is a Part dependent on that the TeddyBear Quest is done and he got the axe
@@ -105,7 +131,7 @@ public class Arthur extends Npc {
                         BackgroundMusic.stop();
                     }),
                     Actions.repeat(5, Actions.run(() -> {
-                        System.out.println("test");
+                        // System.out.println("test");
                     })),
                     Actions.delay(1.3f),
                     Actions.run(() -> {

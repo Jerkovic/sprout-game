@@ -12,15 +12,27 @@ public class AttackTask extends LeafTask<Npc> {
     @TaskAttribute
     public IntegerDistribution times = ConstantIntegerDistribution.ONE;
 
+    private int t;
+
     @Override
     public Status execute() {
         //
         // Task.Status - Status.SUCCEEDED;
-        return Status.RUNNING;
+        // loop times t
+        System.out.println("Run attack task! " + getObject());
+        // call getObject().attack();
+        return Status.SUCCEEDED;
     }
 
     @Override
     protected Task<Npc> copyTo(Task<Npc> task) {
         return null;
+    }
+
+    @Override
+    public void reset() {
+        times = ConstantIntegerDistribution.ONE;
+        t = 0;
+        super.reset();
     }
 }
