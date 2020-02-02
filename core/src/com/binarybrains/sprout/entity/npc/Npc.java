@@ -101,7 +101,6 @@ public class Npc extends Mob {
      * @param state
      */
     public void updateWalkDirections(int x, int y, NpcState state) {
-        // this.clearActions();
         clearFindPath();
         IntArray rawPath = generatePath(x, y);
         findPath = generatePathFindingDirections2(rawPath);
@@ -111,7 +110,7 @@ public class Npc extends Mob {
         for (int i = 0; i < findPath.size(); i++) {
             PointDirection pd = findPath.get(i);
             Rectangle temp = getLevel().getTileBounds(pd.x, pd.y);
-            seq.addAction(Actions.moveTo(temp.x, temp.y, .5f, Interpolation.linear));
+            seq.addAction(Actions.moveTo(temp.x, temp.y, .25f, Interpolation.linear));
             seq.addAction(Actions.run((() -> {
                 setDirection(pd.direction);
                 setState(State.WALKING);
@@ -149,7 +148,6 @@ public class Npc extends Mob {
         this.box.setWidth(16);
         this.box.setHeight(32);
         this.box.setPosition(getPosition());
-        // this.walkBox
         this.walkBox.setWidth(16);
         this.walkBox.setHeight(16);
         this.walkBox.setPosition(getPosition().x, getPosition().y);
