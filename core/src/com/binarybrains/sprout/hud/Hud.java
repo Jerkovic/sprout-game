@@ -378,6 +378,9 @@ public class Hud implements Telegraph {
         hideMouseItem();
     }
 
+    /**
+     *
+     */
     public void refreshInventory()  {
         inventoryWindow.onInventoryChanged(level.player.getInventory());
         removeMouseItem();

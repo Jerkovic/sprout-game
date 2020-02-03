@@ -340,7 +340,6 @@ public abstract class Entity implements Telegraph, Trigger {
     public void update(float deltaTime) {
         stateTime += deltaTime;
         tickActions(deltaTime); // we need our actions to update
-
         updateBoundingBox();
     }
 

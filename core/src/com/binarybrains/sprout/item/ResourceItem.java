@@ -14,7 +14,6 @@ public class ResourceItem extends Item {
     }
 
     public ResourceItem(Resource resource, int count) {
-
         this.resource = resource;
         this.count = count;
     }

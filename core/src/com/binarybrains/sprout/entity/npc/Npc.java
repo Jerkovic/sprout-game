@@ -61,6 +61,15 @@ public class Npc extends Mob {
     }
 
     /**
+     *
+     * @param title
+     * @param say
+     */
+    public void speak(String title, String say) {
+        getLevel().screen.hud.speakDialog(title, say);
+    }
+
+    /**
      * Performs a happy jump
      */
     public void jump() {

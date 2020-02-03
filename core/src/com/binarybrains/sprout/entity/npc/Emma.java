@@ -1,6 +1,7 @@
 package com.binarybrains.sprout.entity.npc;
 
 import com.badlogic.gdx.ai.msg.Telegram;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.Entity;
@@ -45,7 +46,8 @@ public class Emma extends Npc {
     @Override
     public boolean interact(Player player, Item item, Direction attackDir) {
 
-        if (player.activeItem instanceof ArtifactItem && player.activeItem.getName().equals("Teddy")) {
+        // QuestManager.getInstance().npcInteraction(player, this)
+        if (player.activeItem != null && player.activeItem.getName().equals("Teddy")) {
             addAction(Actions.sequence(
                     Actions.run(() -> {
                         BackgroundMusic.setVolume(.5f);
@@ -58,12 +60,13 @@ public class Emma extends Npc {
                     }),
                     Actions.delay(2f),
                     Actions.run(() -> {
-                        player.getLevel().screen.hud.speakDialog(
+                        speak(
                                 "Teddy is back",
                                 "You are sooo kind! Maybe you could help my old grandpa. \nHe needs some help chopping down trees.\n Here is an old axe I used to kill cats with..\n Follow me I will lead you to him."
 
                         );
                         player.getInventory().add(new ToolItem(Tools.axe, 0));
+                        SproutGame.playSound("blop", .7f, MathUtils.random(0.9f, 1.2f), 1f);
                         stateMachine.changeState(NpcState.GOTO_ARTHUR);
                     })
             ));

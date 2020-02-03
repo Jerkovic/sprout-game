@@ -20,7 +20,10 @@ import com.binarybrains.sprout.entity.npc.btree.AttackTask;
 import com.binarybrains.sprout.entity.npc.btree.PatrolTask;
 import com.binarybrains.sprout.entity.npc.btree.PlayerCloseCondition;
 import com.binarybrains.sprout.item.Item;
+import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
+import com.binarybrains.sprout.item.resource.Resource;
+import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
@@ -69,21 +72,18 @@ public class Arthur extends Npc {
          * of the blackboard object that tasks use to read or modify game state
          */
 
-
         // https://github.com/jsjolund/GdxDemo3D/blob/master/android/assets/btrees/dog.btree
 
         // Conditional
 
         // com/badlogic/gdx/ai/tests/btree/tests/ParallelVsSequenceTest.java
-        //setupAI();
-
-
+        setupAI();
     }
 
     private void registerBehavior (BehaviorTreeLibrary library) {
 
         Include<Npc> include = new Include<>();
-        include.lazy = false;
+        include.lazy = true;
         include.subtree = "npc.actual";
 
         BehaviorTree<Npc> includeBehavior = new BehaviorTree<>(include);
@@ -141,62 +141,72 @@ public class Arthur extends Npc {
     public void update(float delta) {
         super.update(delta);
         GdxAI.getTimepiece().update(delta);
-        //getBehaviorTree().step();
+        getBehaviorTree().step();
     }
 
     @Override
     public boolean interact(Player player, Item item, Direction attackDir) {
 
-            // Arthur upgrade Tool
-            // Wait for 50 woods
+        // Waiting state -
+        // Quests System storage?
+        if (player.getInventory().hasResources(Resources.wood, 10))
+        {
+            player.getInventory().removeResource(Resources.wood, 10);
+            speak(
+                    "Arthur",
+                    "Thanks young man *cough* Here is something for you.."
+            );
+            player.getInventory().add(new ResourceItem(Resources.seeds, 16));
+        }
+        // Arthur upgrade Tool
+        // Wait for 50 woods
+        // Quest line
+        // this is a Part dependent on that the TeddyBear Quest is done and he got the axe
+        // it also needs to be fullfilled that the player has seen the "Approach Arthur message"
+        if (!player.getInventory().upgradeTool("Axe", ToolItem.COPPER)) {
+            speak(
+                    "Arthur",
+                    "Aaargh What do you want from me? argh *cough*"
+            );
+            return false;
+        }
 
+        // animation, sound and dialog
+        addAction(Actions.sequence(
+                Actions.run(() -> {
+                    lookAt(player);
 
-            // Quest line
-            // this is a Part dependent on that the TeddyBear Quest is done and he got the axe
-            // it also needs to be fullfilled that the player has seen the "Approach Arthur message"
-            if (!player.getInventory().upgradeTool("Axe", ToolItem.COPPER)) {
-                player.getLevel().screen.hud.speakDialog(
-                        "Arthur",
-                        "Aaargh What do you want from me? argh *cough*"
-                );
-                return false;
-            }
-
-            addAction(Actions.sequence(
-                    Actions.run(() -> {
-                        lookAt(player);
-
-                    }),
-                    Actions.repeat(5, Actions.run(() -> {
-                        // System.out.println("test");
-                    })),
-                    Actions.delay(1.3f),
-                    Actions.run(() -> {
-                        player.getLevel().screen.hud.speakDialog(
-                                "Arthur",
-                                "Arghh! *cough* Nice to meet you fellow.\n *cough* Chop me some wood young lad.\n  I need 10 logs to build me some *cough* shelter. Let me fix that shitty axe you got there. *cough*"
-                        );
-                    }),
-                    Actions.delay(1.6f),
-                    // Take axe from player inventory?
-                    Actions.run(() -> {
-                        SproutGame.playSound("slap_iron_clatter", .5f);
-                    }),
-                    Actions.delay(1.5f),
-                    Actions.run(() -> {
-                        SproutGame.playSound("slap_iron_clatter", .6f,  MathUtils.random(.8f, 1f), 1f);
-                    }),
-                    Actions.delay(1f),
-                    Actions.run(() -> {
-                        SproutGame.playSound("slap_iron_clatter", .6f,  MathUtils.random(.8f, 1.2f), 1f);
-                    }),
-                    Actions.run(() -> {
-                        SproutGame.playSound("blop", .7f, MathUtils.random(0.9f, 1.2f), 1f);
-                        getLevel().screen.hud.refreshInventory();
-                        BackgroundMusic.changeTrack(4);
-                    })
-            ));
-            return true;
+                }),
+                Actions.repeat(5, Actions.run(() -> {
+                    // System.out.println("test");
+                })),
+                Actions.delay(1.3f),
+                Actions.run(() -> {
+                    speak(
+                            "Arthur",
+                            "Arghh! *cough* Nice to meet you fellow.\n *cough* Chop me some wood young lad.\n  I need 10 logs to build me some *cough* shelter. Let me fix that shitty axe you got there. *cough*"
+                    );
+                }),
+                Actions.delay(1.6f),
+                // Take axe from player inventory?
+                Actions.run(() -> {
+                    SproutGame.playSound("slap_iron_clatter", .5f);
+                }),
+                Actions.delay(1.5f),
+                Actions.run(() -> {
+                    SproutGame.playSound("slap_iron_clatter", .6f,  MathUtils.random(.8f, 1f), 1f);
+                }),
+                Actions.delay(1f),
+                Actions.run(() -> {
+                    SproutGame.playSound("slap_iron_clatter", .6f,  MathUtils.random(.8f, 1.2f), 1f);
+                }),
+                Actions.run(() -> {
+                    SproutGame.playSound("blop", .7f, MathUtils.random(0.9f, 1.2f), 1f);
+                    getLevel().screen.hud.refreshInventory();
+                    BackgroundMusic.changeTrack(4);
+                })
+        ));
+        return true;
     }
 
     @Override

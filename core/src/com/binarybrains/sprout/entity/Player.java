@@ -44,7 +44,7 @@ public class Player extends Npc implements InputProcessor {
 
     public boolean passedOut = false;
     private long lastUseTime = 0;
-    private long coolDownUseTime = 900; // this is how long before in millis the player can perform use/view again
+    private long coolDownUseTime = 500; // this is how long before in millis the player can perform use/view again
 
     enum Keys {
         W, A, S, D
@@ -99,9 +99,7 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ResourceItem(Resources.stone, 102));
         getInventory().add(new ResourceItem(Resources.goldNugget, 13));
         getInventory().add(new ResourceItem(Resources.apple, 12));
-
         */
-
 
         // todo setActiveItemByName?
         setActiveItem(getInventory().getItems().get(0));
@@ -117,7 +115,7 @@ public class Player extends Npc implements InputProcessor {
     public boolean handleMessage(Telegram msg) {
         System.out.println("Player got a msg " + msg.extraInfo + " " + msg.sender);
 
-        // ugly check
+        // ugly check for Emma Message
         if (!(msg.sender instanceof Emma)) return false;
 
         freezePlayerControl();

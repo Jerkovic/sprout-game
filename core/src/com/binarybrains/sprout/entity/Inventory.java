@@ -115,6 +115,7 @@ public class Inventory {
                 return false;
             }
         }
+        // if resource item we need to be able to send correct amount here.
         MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_ADD_ITEM, item);
         MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_UPDATED);
         return true;
@@ -136,6 +137,12 @@ public class Inventory {
         return ri.count >= count;
     }
 
+    /**
+     *
+     * @param name
+     * @param level
+     * @return
+     */
     public boolean upgradeTool(String name, int level) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) != null && items.get(i) instanceof ToolItem && ((ToolItem) items.get(i)).getToolName().equals(name)) {
@@ -145,6 +152,11 @@ public class Inventory {
         return false;
     }
 
+    /**
+     * Find tool by name
+     * @param name
+     * @return
+     */
     public ToolItem findToolByName(String name) {
         for (int i = 0; i < items.size(); i++) {
             if (items.get(i) != null && items.get(i) instanceof ToolItem && ((ToolItem) items.get(i)).getToolName().equals(name)) {
