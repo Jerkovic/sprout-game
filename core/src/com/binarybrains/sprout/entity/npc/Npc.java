@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.actions.Actions;
@@ -37,6 +38,7 @@ public class Npc extends Mob {
     public List<Vector2> debugPathList;
     public List<PointDirection> findPath;
     public StateMachine<Npc, NpcState> stateMachine;
+    private Inventory inventory;
 
     public static enum ActionState {
         EMPTY_NORMAL, CARRYING, HOBBY, CHOPPING, ATTACKING
@@ -51,19 +53,11 @@ public class Npc extends Mob {
     public Npc(Level level, Vector2 position, float width, float height, Texture framesTexture) {
         super(level, position, width, height);
         this.stateMachine = new DefaultStateMachine<>(this, NpcState.IDLE);
-        this.debugPathList = new ArrayList<Vector2>();
+        this.debugPathList = new ArrayList<>();
+        this.inventory = new Inventory(10);
         this.shadow = new Sprite((Texture) SproutGame.assets.get("sprites/shadow.png"));
         this.framesTexture = framesTexture;
         setupAnimations();
-    }
-
-
-    /**
-     * Sets the sprite sheet frame texture
-     * @param texture
-     */
-    public void setFramesTexture(Texture texture) {
-        this.framesTexture = texture;
     }
 
     /**
@@ -85,13 +79,6 @@ public class Npc extends Mob {
     @Override
     public float getSortOrder() {
         return lockShadowY > 0 ? lockShadowY : getY(); // prevents jump in y-axis fuck up sortOrder
-    }
-
-    // temp method for an npc to leave players house
-    public void leaveHouse() {
-        setTilePos(18,91); // outside the house test
-        SproutGame.playSound("door_close1", 0.4f);
-        stateMachine.changeState(NpcState.IDLE);
     }
 
     /**

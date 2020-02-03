@@ -18,6 +18,6 @@ public class PatrolTask extends LeafTask<Npc> {
 
     @Override
     protected Task<Npc> copyTo(Task<Npc> task) {
-        return null;
+        return task;
     }
 }
