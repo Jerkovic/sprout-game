@@ -21,7 +21,7 @@ public class Crafting {
     public static final List<Recipe> anvilRecipes = new ArrayList<Recipe>();
     public static final List<Recipe> cookingRecipes = new ArrayList<Recipe>();
     public static final List<Recipe> furnaceRecipes = new ArrayList<Recipe>();
-    public static final List<Recipe> workbenchRecipes = new ArrayList<Recipe>();
+    public static final List<Recipe> workbenchRecipes = new ArrayList<>();
 
     private List<Recipe> recipes;
 
@@ -45,14 +45,9 @@ public class Crafting {
             // basic furnace
             workbenchRecipes.add(new FurnitureRecipe(Furnitures.furnace, 0).addCost(Resources.wood, 30).addCost(Resources.stone, 20).setXP(500));
 
-
             workbenchRecipes.add(new ResourceRecipe(Resources.cloth).addCost(Resources.wool, 3).setXP(200));
-
-
-
             workbenchRecipes.add(new ResourceRecipe(Resources.cider).addCost(Resources.apple, 17).setXP(175));
             workbenchRecipes.add(new ResourceRecipe(Resources.cocktail).addCost(Resources.banana, 1).addCost(Resources.apple, 1).addCost(Resources.coconut, 1)); // todo add more
-
 
             // change to Furnace Recipes
             workbenchRecipes.add(new ResourceRecipe(Resources.bomb).addCost(Resources.ironOre, 4).addCost(Resources.coal, 2));
@@ -72,27 +67,35 @@ public class Crafting {
         }
     }
 
+    /**
+     *
+     * @param recipes
+     * @param inventory
+     */
     public Crafting(List<Recipe> recipes, Inventory inventory) {
         this.recipes = new ArrayList<Recipe>(recipes);
 
         for (int i = 0; i < recipes.size(); i++) {
             this.recipes.get(i).checkCanCraft(inventory);
         }
-
         sortRecipes();
-
     }
 
+    /**
+     *
+     */
     public void sortRecipes() {
-        Collections.sort(this.recipes, new Comparator<Recipe>() {
-            public int compare(Recipe r1, Recipe r2) {
-                if (r1.canCraft && !r2.canCraft) return -1;
-                if (!r1.canCraft && r2.canCraft) return 1;
-                return 0;
-            }
+        Collections.sort(this.recipes, (r1, r2) -> {
+            if (r1.canCraft && !r2.canCraft) return -1;
+            if (!r1.canCraft && r2.canCraft) return 1;
+            return 0;
         });
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Recipe> getRecipes() {
         return recipes;
     }
@@ -139,21 +142,6 @@ public class Crafting {
 
         MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_CRAFTING_FAILURE, recipe);
         return false;
-    }
-
-    public void debugCrafting() {
-        for (int i = 0; i < getRecipes().size(); i++) {
-            Recipe recipe = getRecipes().get(i);
-            for (int ci = 0; ci < recipe.getCost().size(); ci++) {
-                Item cost = recipe.getCost().get(ci);
-                int cost_count = 1;
-                if (cost instanceof ResourceItem)
-                {
-                    cost_count = ((ResourceItem) cost).count;
-                }
-                System.out.println("-" + cost.toString() + " x" + cost_count);
-            }
-        }
     }
 
 }

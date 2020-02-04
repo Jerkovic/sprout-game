@@ -1,16 +1,22 @@
 package com.binarybrains.sprout.structs;
 
+import com.binarybrains.sprout.crafting.Crafting;
+import com.binarybrains.sprout.crafting.Recipe;
+import com.binarybrains.sprout.item.resource.Resources;
+
 /*
  * See https://github.com/gt4dev/yet-another-tree-structure/blob/master/java/src/com/tree/SampleIterating.java
  */
 class SampleData {
 
+    // Unlock tree
     // Ability
     // Crafting Recipe
     //
     public static TreeNode<String> getSet1() {
         TreeNode<String> root = new TreeNode<String>("Woodwork");
         {
+            
             TreeNode<String> node0 = root.addChild("Coppar Axe - Item");
             TreeNode<String> node1 = root.addChild("Wooden stick - Recipe");
             TreeNode<String> node2 = root.addChild("");

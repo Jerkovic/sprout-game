@@ -46,7 +46,6 @@ public class EnviroManager implements Telegraph {
             case TelegramType.TIME_HOUR_INC:
 
                 GameTime.Gdt gameTime = (GameTime.Gdt) msg.extraInfo;
-
                 if (gameTime.hour == DAWN_TIME) {
                     level.setAmbientColor(DAWN__COLOR);
                 }
