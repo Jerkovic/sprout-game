@@ -1,9 +1,5 @@
 package com.binarybrains.sprout.hud;
 
-import aurelienribon.tweenengine.BaseTween;
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenCallback;
-import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
@@ -59,7 +55,6 @@ public class Hud implements Telegraph {
 
     private Actor fadeActor = new Actor();
     private ShapeRenderer fadeRenderer;
-    public Boolean cutSceneMode = false;
 
     TextureAtlas atlas;
 
@@ -288,7 +283,6 @@ public class Hud implements Telegraph {
                 }),
                 Actions.fadeOut(.3f, Interpolation.fade)
         ));
-
     }
 
     public void playerPassedOut(final Player player) {
@@ -318,7 +312,6 @@ public class Hud implements Telegraph {
                     player.unFreezePlayerControl();
                 })
         ));
-
     }
 
     public void hideMouseItem() {
@@ -350,7 +343,6 @@ public class Hud implements Telegraph {
         SproutGame.playSound("inventory_bag_open");
         inventoryManagementWindow.setVisible(true);
         inventoryManagementWindow.show(getStage());
-        // inventoryManagementWindow.setCloseCallback();
         inventoryManagementWindow.onInventoryChanged(level.player.getInventory());
         hideMouseItem();
     }
@@ -451,34 +443,6 @@ public class Hud implements Telegraph {
             it.increaseItemCounter(1);
         }
 
-    }
-
-    private void testAnimate(Actor actor) {
-        actor.clearActions();
-        actor.setOrigin(Align.center);
-        actor.addAction(Actions.sequence(
-                Actions.scaleTo(1.25f, 1.25f, .15f),
-                Actions.scaleTo(1f, 1f, .10f)
-        ));
-    }
-
-    /**
-     * Move camera...should not be here?
-     * @param targetX
-     * @param targetY
-     */
-    public void moveCamera(float targetX, float targetY) {
-        level.getCamera().disableFollow();
-        Tween.to(level.getCamera(), CameraAccessor.POSITION_XY, 3f)
-                .target(targetX, targetY)
-                .ease(TweenEquations.easeOutSine).setCallback(new TweenCallback() {
-
-                    @Override
-                    public void onEvent(int type, BaseTween<?> source) {
-                        level.getCamera().enableFollow();
-                    }
-
-                }).start(SproutGame.getTweenManager());
     }
 
     /**
@@ -675,22 +639,6 @@ public class Hud implements Telegraph {
             fadeRenderer.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
         }
-    }
-
-    /**
-     * Make actor out of this
-     */
-    public void renderCutSceneFrame() {
-        // Cut Scene 16:9 animation
-        // Gdx.graphics.getGL20().glEnable(GL20.GL_BLEND);
-        //Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        fadeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        fadeRenderer.setColor(new Color(0f, 0f, 0.031f, 1));
-        fadeRenderer.rect(0, 0, Gdx.app.getGraphics().getWidth(), 120);
-        fadeRenderer.rect(0, Gdx.app.getGraphics().getHeight() - 120, Gdx.app.getGraphics().getWidth(),
-                120);
-        fadeRenderer.end();
-        Gdx.gl.glDisable(GL20.GL_BLEND);
     }
 
     public void updateFunds(int money) {
