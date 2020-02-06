@@ -14,6 +14,11 @@ TODOS:
 
 * TreeNode (Unlock Tree)
 
+* Music Player
+    Create events. // What should decide :location, time of day, weather,
+    Definining effects such as fade in or fade out for transitions.
+    Decoupling music code from other game logic
+
 * Fix speakDialog content bug. Pushing close button down.
 
 * Fix ScrollPane bars to fit new interface look.
