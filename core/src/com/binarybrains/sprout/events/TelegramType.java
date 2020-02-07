@@ -23,6 +23,8 @@ public class TelegramType {
     public static final int PLAYER_LOCATION_REACHED = 140;
     public static final int PLAYER_LOCATION_LEAVES = 141;
 
+    public static final int PLAYER_NPC_START_INTERACTION = 200;
+
     // Weather
     public static final int WEATHER_RAIN_FLASH = 401;
     public static final int WEATHER_THUNDER = 402;

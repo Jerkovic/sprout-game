@@ -147,10 +147,12 @@ public class Arthur extends Npc {
     @Override
     public boolean interact(Player player, Item item, Direction attackDir) {
 
+        super.interact(player,item, attackDir);
+
+        // Move to QuestLine or
         // Waiting state -
         // Quests System storage?
-        if (player.getInventory().hasResources(Resources.wood, 10))
-        {
+        if (player.getInventory().hasResources(Resources.wood, 10)) {
             player.getInventory().removeResource(Resources.wood, 10);
             speak(
                     "Arthur",

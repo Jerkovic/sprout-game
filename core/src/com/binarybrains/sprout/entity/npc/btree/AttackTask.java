@@ -11,7 +11,7 @@ public class AttackTask extends LeafTask<Npc> {
 
     @Override
     public Status execute() {
-        System.out.println("Run attack task! " + getObject());
+        // System.out.println("Run attack task! " + getObject());
         return Status.SUCCEEDED;
     }
 

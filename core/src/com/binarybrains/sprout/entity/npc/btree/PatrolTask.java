@@ -11,7 +11,7 @@ public class PatrolTask extends LeafTask<Npc> {
         //
         // Task.Status - Status.SUCCEEDED;
         // loop times t
-        System.out.println("Patrol task! " + getObject());
+        //System.out.println("Patrol task! " + getObject());
         // call getObject().attack();
         return Status.SUCCEEDED;
     }

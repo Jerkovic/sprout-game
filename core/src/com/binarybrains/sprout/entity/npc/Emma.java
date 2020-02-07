@@ -46,7 +46,8 @@ public class Emma extends Npc {
     @Override
     public boolean interact(Player player, Item item, Direction attackDir) {
 
-        // QuestManager.getInstance().npcInteraction(player, this)
+        super.interact(player,item, attackDir); // sends a message to QuestManager
+
         if (player.activeItem != null && player.activeItem.getName().equals("Teddy")) {
             addAction(Actions.sequence(
                     Actions.run(() -> {

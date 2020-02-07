@@ -14,12 +14,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.SproutGame;
+import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.actions.SequenceAction;
 import com.binarybrains.sprout.events.TelegramType;
+import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.level.pathfind.Astar;
 
@@ -58,6 +60,12 @@ public class Npc extends Mob {
         this.shadow = new Sprite((Texture) SproutGame.assets.get("sprites/shadow.png"));
         this.framesTexture = framesTexture;
         setupAnimations();
+    }
+
+    @Override
+    public boolean interact(Player player, Item item, Direction attackDir) {
+        MessageManager.getInstance().dispatchMessage(this, TelegramType.PLAYER_NPC_START_INTERACTION, item);
+        return super.interact(player, item, attackDir);
     }
 
     /**
@@ -312,8 +320,6 @@ public class Npc extends Mob {
         }
 
         animationMatrix[ActionState.HOBBY.ordinal()][0] = new Animation(.10f, currentAnimFrames);
-
-
     }
 
     @Override
