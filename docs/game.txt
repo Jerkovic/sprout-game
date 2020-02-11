@@ -12,6 +12,8 @@ https://www.deviantart.com/d-e-n-a/art/Pixel-Tree-Tutorial-133166821
 
 TODOS:
 
+* Perks (boosts)
+
 * TreeNode (Unlock Tree)
 
 * Music Player
@@ -42,7 +44,7 @@ TODOS:
 
 * Make pickupItem behave like Slime follow instead. (Fixed)
 
-* ADD missing sfx file in knivsta. (Fixed)
+* ADD missing sfx file. (Fixed)
 
 * Be able to right click to move whole stack to chest. ?
 
@@ -73,14 +75,13 @@ sd
 * Are we disposing everything?
 * Concat strings -- Dont! Use stringbuilder instead.
 
----
 StringBuilder outputString = new StringBuilder();
 outputString.append(String.format("[%s]: ", id));
 outputString.append(System.getProperty("line.separator"));
 outputString.append(String.format("Number conversations: %d", conversations.size()));
 outputString.append(String.format(", Number of choices: %d", numberTotalChoices));
 return outputString.toString();
-
+----------------------------------
 * Fonts
     small, medium , large (gradient and dropshadow)
     xsmall pixel font with outline. (Fixed)
@@ -236,7 +237,7 @@ https://gamedevelopment.tutsplus.com/tutorials/create-a-procedurally-generated-d
 
 Game Name ideas
 ----------------------
-Farm bound
+Farmbound
 Bearshade Creek (https://cdn.dribbble.com/users/75575/screenshots/936394/californiashot.png)
 Whisper Wind
 
@@ -270,6 +271,7 @@ the manor
 the village
 the farm/your house
 the nuclear vault.
+dungeons
 
 Inspiration by
 -----------------
@@ -288,6 +290,7 @@ Stranger things
 Sherlock Homes
 Indiana Jones
 Uncharted
+Fallout
 
 -------------------------= Tech stuff --------------------------------
 
@@ -372,9 +375,9 @@ Tools
     Hammer = (används för att snickra)
     Scythe = lie (används för att skörda) starter tool
     fishing rod = metspö (används i vatten och kan ge fisk, chansen borde öka att få bättre fisk var du fiskar)  baits??
-    Ladder
+    Ladder (tool?)
 
-Weapons(tools)
+Weapons(inherits from tools)
 - Mace
 - Sword
 - Bow = pilbåge (wood x 3, rep (hampa), wood + sten för pilar)
@@ -528,4 +531,12 @@ Lasym: Male Human Entertainer, Sneaky. Lasym is short, with matted golden hair a
 Eston: Male Human Bounty hunter. He is a Poor hunter.
 
 Poniosost - A thief, a very good thief.
+
+Main Story
+-----------
+Player with a end mission: get off the island. But in the end he realizes that he wants to stay.
+
+Todo that: signals via radio?
+
+
 
