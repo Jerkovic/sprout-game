@@ -65,7 +65,7 @@ public class Player extends Npc implements InputProcessor {
                 32f,
                 SproutGame.assets.get("player/player_temp.png", Texture.class)
         );
-        setSpeed(64);
+        setSpeed(16 * 5);
 
         inventory = new Inventory(inventoryCapacity);
 
@@ -101,7 +101,6 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ResourceItem(Resources.apple, 12));
         */
 
-        // todo setActiveItemByName?
         setActiveItem(getInventory().getItems().get(0));
 
         // Setup Player as a Listener to numerous interesting events
@@ -217,6 +216,7 @@ public class Player extends Npc implements InputProcessor {
 
         MessageManager.getInstance().dispatchMessage(this, TelegramType.PLAYER_STATS_XP_INCREASED);
 
+        // Not here!
         if (getStats("rank") != LevelRank.getLevelRankByXP(getStats("xp"))) {
             getStats().set("rank", LevelRank.getLevelRankByXP(getStats("xp")));
             MessageManager.getInstance().dispatchMessage(this, TelegramType.PLAYER_STATS_RANK_INCREASED, getStats("rank"));

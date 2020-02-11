@@ -103,8 +103,12 @@ public abstract class Mob extends Entity {
         return speed;
     }
 
+    /**
+     *
+     * @param speed
+     */
     public void setSpeed(float speed) {
-        this.speed = speed;
+        this.speed = MathUtils.clamp(speed, 1, 16 * 6);;
     }
 
     public void die() {
