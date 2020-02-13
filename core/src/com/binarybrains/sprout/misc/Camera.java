@@ -86,7 +86,7 @@ public class Camera extends OrthographicCamera {
             position.y = cameraHalfHeight;
         }
 
-        position.set((int) position.x, (int) position.y, 0);
+        //position.set((int) position.x, (int) position.y, 0);
         super.update();
     }
 

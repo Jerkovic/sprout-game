@@ -1,7 +1,4 @@
-package quest.dialog;
-
-import com.binarybrains.sprout.quest.Quest;
-import com.binarybrains.sprout.quest.Requirement;
+package com.binarybrains.sprout.quest;
 
 import java.util.List;
 import java.util.Optional;

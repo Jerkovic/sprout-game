@@ -1,6 +1,5 @@
 package com.binarybrains.sprout.quest;
 
-import quest.dialog.Dialog;
 import com.binarybrains.sprout.structs.TreeNode;
 
 public class Quests {
