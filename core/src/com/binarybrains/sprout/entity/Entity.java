@@ -21,6 +21,7 @@ import java.util.List;
 
 public abstract class Entity implements Telegraph, Trigger {
 
+    private String id;
     private Level level;
     private Vector2 position;
     private int width, height;
@@ -402,6 +403,15 @@ public abstract class Entity implements Telegraph, Trigger {
     public String toString()
     {
         return "[" + this.getClass().getCanonicalName() + "@Pos:" + position + "]";
+    }
+
+    /**
+     * Returns the identity name
+     * @return
+     */
+    public String getId()
+    {
+        return this.id;
     }
 
     public int getWidth() {

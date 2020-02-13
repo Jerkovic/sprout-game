@@ -77,6 +77,11 @@ public class Emma extends Npc {
     }
 
     @Override
+    public String getId() {
+        return "npc_emma";
+    }
+
+    @Override
     public boolean blocks(Entity e) {
         if (e instanceof Emma) return false;
         if (e instanceof Player) {

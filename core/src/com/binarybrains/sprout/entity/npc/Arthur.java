@@ -212,6 +212,11 @@ public class Arthur extends Npc {
     }
 
     @Override
+    public String getId() {
+        return "npc_arthur";
+    }
+
+    @Override
     public boolean blocks(Entity e) {
         if (e instanceof Arthur) return false;
         if (e instanceof Player) {

@@ -12,9 +12,9 @@ import java.util.List;
 
 
 public class PlayerSpriteGenerator {
+
     /**
      * This is  a test to the handle animation
-     */
 
     float stateTime;
     Animation walkAnimation, walkArmsAnimation, walkPantsAnimation;
@@ -116,5 +116,7 @@ public class PlayerSpriteGenerator {
     public void update(float delta) {
 
     }
+     */
+
 }
 

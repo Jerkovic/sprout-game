@@ -13,7 +13,7 @@ import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 import com.binarybrains.sprout.misc.EnviroManager;
-import com.binarybrains.sprout.quest.QuestsManager;
+import com.binarybrains.sprout.quest.QuestManager;
 
 public class GameScreen implements Screen {
 
@@ -42,7 +42,7 @@ public class GameScreen implements Screen {
         hud = new Hud(skin, level);
 
         EnviroManager.getInstance().init(level);
-        QuestsManager.getInstance().init();
+        QuestManager.getInstance().init();
 
         InputMultiplexer multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(hud.getStage());

@@ -62,13 +62,13 @@ public class SheetGenerator extends ApplicationAdapter {
 
         float delta = Gdx.app.getGraphics().getDeltaTime();
 
-        player.update(delta);
+        //player.update(delta);
         // rendering stuff
         cam.update();
         batch.setProjectionMatrix(cam.combined);
 
         batch.begin();
-        player.draw(batch);
+        //player.draw(batch);
         batch.end();
 
 

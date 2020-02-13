@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TreeNode<T> implements Iterable<TreeNode<T>> {
 
-    public T data;
+    private T data;
     public TreeNode<T> parent;
     public List<TreeNode<T>> children;
 
@@ -16,6 +16,10 @@ public class TreeNode<T> implements Iterable<TreeNode<T>> {
 
     public boolean isLeaf() {
         return children.size() == 0;
+    }
+
+    public boolean hasChildren() {
+        return !isLeaf();
     }
 
     private List<TreeNode<T>> elementsIndex;
@@ -33,6 +37,10 @@ public class TreeNode<T> implements Iterable<TreeNode<T>> {
         this.children.add(childNode);
         this.registerChildForSearch(childNode);
         return childNode;
+    }
+
+    public T getData() {
+        return data;
     }
 
     public int getLevel() {
@@ -65,8 +73,7 @@ public class TreeNode<T> implements Iterable<TreeNode<T>> {
 
     @Override
     public Iterator<TreeNode<T>> iterator() {
-        TreeNodeIter<T> iter = new TreeNodeIter<T>(this);
-        return iter;
+        return new TreeNodeIter<T>(this);
     }
 
 }

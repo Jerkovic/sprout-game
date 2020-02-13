@@ -25,10 +25,14 @@ public class TelegramType {
 
     public static final int PLAYER_NPC_START_INTERACTION = 200;
 
+
+    // QUEST_Objective_Completed
+    // QUEST_Objective_Progressed
+    // QUEST_Objective_Started
+
     // Weather
     public static final int WEATHER_RAIN_FLASH = 401;
     public static final int WEATHER_THUNDER = 402;
-
 
     // NPC Message
     public static final int NPC_MESSAGE = 500;
