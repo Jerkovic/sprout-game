@@ -25,7 +25,7 @@ public class TelegramType {
 
     public static final int PLAYER_NPC_START_INTERACTION = 200;
 
-
+    // QUEST_ACCEPT
     // QUEST_Objective_Completed
     // QUEST_Objective_Progressed
     // QUEST_Objective_Started

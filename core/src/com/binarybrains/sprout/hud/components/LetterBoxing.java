@@ -27,8 +27,6 @@ public class LetterBoxing extends Actor {
                 shrinkHeight,
                 color
         );
-
-
         rectTop = new FilledRectangle(
                 0,
                 Gdx.app.getGraphics().getHeight(),
@@ -36,8 +34,6 @@ public class LetterBoxing extends Actor {
                 shrinkHeight,
                 color
         );
-        // rectTop.setOriginY(shrinkHeight);
-
         stage.addActor(rectBottom);
         stage.addActor(rectTop);
     }

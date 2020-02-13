@@ -59,12 +59,10 @@ public class MainMenuScreen implements Screen {
         textButtonStyle.overFontColor = Color.YELLOW;
         skin.add("text-button-default", textButtonStyle);
 
-
         Window.WindowStyle windowStyle = new Window.WindowStyle();
         windowStyle.background = new NinePatchDrawable(ninePatch);
         windowStyle.titleFont = skin.getFont("ruin-font");
         windowStyle.titleFontColor = Color.WHITE;
-
 
         skin.addRegions(atlas);
 

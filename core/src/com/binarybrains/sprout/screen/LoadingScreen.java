@@ -44,7 +44,6 @@ public class LoadingScreen implements Screen {
                 skin.newDrawable("default-hud-texture", Color.FIREBRICK)
         );
         barStyle.knobBefore = barStyle.knob;
-
         loadingBar = new ProgressBar(0, 100f, .5f, false, barStyle);
         loadingBar.setAnimateDuration(1f);
         loadingBar.setVisualInterpolation(Interpolation.smooth);
@@ -57,10 +56,8 @@ public class LoadingScreen implements Screen {
         );
     }
 
-
     @Override
     public void show() {
-
         SproutGame.assets.load(LoadingScreen.LOGO_IMAGE, Texture.class);
         SproutGame.assets.load("skin/uiskin.atlas", TextureAtlas.class);
         SproutGame.assets.load("skin/uiskin.json", Skin.class,
