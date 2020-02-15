@@ -58,6 +58,9 @@ project(":core") {
         compile "net.dermetfan.libgdx-utils:libgdx-utils:0.13.2"
         compile fileTree(dir: '../libs', include: '*.jar')
         compile "junit:junit:4.11"
+        // https://mvnrepository.com/artifact/org.yaml/snakeyaml
+        compile group: 'org.yaml', name: 'snakeyaml', version: '1.8'
+
     }
 }
 
