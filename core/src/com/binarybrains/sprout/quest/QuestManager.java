@@ -11,8 +11,11 @@ import com.binarybrains.sprout.structs.TreeNode;
 // QuestSystem/Manager
 public class QuestManager implements Telegraph {
 
+
     private static QuestManager instance = null;
-    private TreeNode<Dialog> tree;
+    private TreeNode<Dialog> tree; // NodeTypes: prompt, reply .. id(guid), Questnode (Different types as well), ActionNode
+    //  AI_Dialog
+    //  cutscene
 
     public static QuestManager getInstance()
     {
@@ -28,6 +31,7 @@ public class QuestManager implements Telegraph {
     private void testData() {
         // Store Trees in Map<String, DialogTree> ?? Npc-id , ond tree(s)
         // tree = new DialogTree("npc_emma_dialog_teddy");
+
     }
 
     /**
@@ -47,6 +51,7 @@ public class QuestManager implements Telegraph {
                 Player player = npc.getLevel().player;
 
                 dialogBetween(player, npc);
+                // QuestManager should keep state of where in the tree we are
                 // What should the QuestManager show to the user?
                 break;
             default:

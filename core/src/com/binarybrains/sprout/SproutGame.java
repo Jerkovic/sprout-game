@@ -18,7 +18,11 @@ import com.binarybrains.sprout.entity.tweens.EntityAccessor;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.hud.tweens.CameraAccessor;
 import com.binarybrains.sprout.misc.Camera;
+import com.binarybrains.sprout.quest.TestDialog;
 import com.binarybrains.sprout.screen.LoadingScreen;
+import org.yaml.snakeyaml.Yaml;
+
+import java.util.Map;
 
 public class SproutGame extends Game {
 
@@ -51,7 +55,10 @@ public class SproutGame extends Game {
 		FileHandle[] files = Gdx.files.local("dialogue/").list();
 		for(FileHandle file: files) {
 			String text = file.readString();
-			System.out.println(text);
+            Yaml yaml = new Yaml();
+            TestDialog obj = (TestDialog) yaml.load(text);
+            System.out.println("Loaded object type: " + obj.getClass());
+            System.out.println(obj.getId() + " " +  obj.getSay());
 		}
 		// end loader
 

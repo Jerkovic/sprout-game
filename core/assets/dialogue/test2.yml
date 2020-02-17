@@ -1,1 +1,9 @@
-dialog: some cool
+!!com.binarybrains.sprout.quest.TestDialog
+say: |
+    This entire block of text will be the value of the 'literal_block' key,
+    with line breaks being preserved.
+
+    The literal continues until de-dented, and the leading indentation is
+    stripped.
+id: a77143b7-be9b-439e-853d-8f000e30be92
+active: True
