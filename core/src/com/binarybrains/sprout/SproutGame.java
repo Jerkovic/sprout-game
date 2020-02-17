@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -45,6 +46,14 @@ public class SproutGame extends Game {
 		assets.load(SKIN_FILE, Skin.class);
 		assets.finishLoadingAsset(SKIN_FILE);
 		this.skin = assets.get(SKIN_FILE, Skin.class);
+
+		// Yaml loader
+		FileHandle[] files = Gdx.files.local("dialogue/").list();
+		for(FileHandle file: files) {
+			String text = file.readString();
+			System.out.println(text);
+		}
+		// end loader
 
 		setScreen(new LoadingScreen(this));
 	}
