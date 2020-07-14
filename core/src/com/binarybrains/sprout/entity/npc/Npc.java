@@ -18,6 +18,7 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
+import com.binarybrains.sprout.entity.actions.Action;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.actions.SequenceAction;
 import com.binarybrains.sprout.events.TelegramType;
@@ -102,9 +103,9 @@ public class Npc extends Mob {
      * Clears all entity actions in the queue and walks to spot
      * @param x
      * @param y
-     * @param state
+     * @param callback
      */
-    public void updateWalkDirections(int x, int y, NpcState state) {
+    public void updateWalkDirections(int x, int y, Runnable runnable) {
         clearFindPath();
         IntArray rawPath = generatePath(x, y);
         findPath = generatePathFindingDirections2(rawPath);
@@ -115,27 +116,15 @@ public class Npc extends Mob {
             PointDirection pd = findPath.get(i);
             Rectangle temp = getLevel().getTileBounds(pd.x, pd.y);
             seq.addAction(Actions.moveTo(temp.x, temp.y, .25f, Interpolation.linear));
-            seq.addAction(Actions.run((() -> {
+            seq.addAction(Actions.run(() -> {
                 setDirection(pd.direction);
                 setState(State.WALKING);
-            })
-            ));
+            }));
         }
-        seq.addAction(
-                Actions.run((() -> {
-                setState(State.STANDING);
-                setDirection(Direction.SOUTH); // should this be here even?
-                stateMachine.changeState(state);
-                if (!(this instanceof Player)) {
-                    MessageManager.getInstance().dispatchMessage(
-                            this,
-                            TelegramType.NPC_MESSAGE,
-                            new PointDirection(x, y, getDirection())
-                    );
-                }
-            })
-        ));
 
+        if (runnable != null) {
+            seq.addAction(Actions.run(runnable));
+        }
         this.addAction(seq);
     }
 
@@ -207,7 +196,7 @@ public class Npc extends Mob {
         List<PointDirection> travelDirections = new ArrayList<PointDirection>();
         Mob.Direction dir = Mob.Direction.WEST;
 
-        if (path.size < 4) { // there must be at least two pos(x,y) to be able to generate travel directions
+        if (path.size < 4) {
             throw new RuntimeException("There must be at least two pos(x,y) to be able to generate travel directions");
         }
 

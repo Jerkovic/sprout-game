@@ -57,7 +57,6 @@ public class Camera extends OrthographicCamera {
 
     @Override
     public void update() {
-        // System.out.println( viewportWidth + "x " + viewportHeight); 200x150
         float cameraHalfWidth = viewportWidth * .5f;
         float cameraHalfHeight = viewportHeight * .5f;
         float cameraLeft = position.x - cameraHalfWidth;
@@ -86,7 +85,6 @@ public class Camera extends OrthographicCamera {
             position.y = cameraHalfHeight;
         }
 
-        //position.set((int) position.x, (int) position.y, 0);
         super.update();
     }
 

@@ -44,6 +44,7 @@ public abstract class LevelEngine extends Stage {
         if (e1.getSortOrder() > e0.getSortOrder()) return +1;
         return 0;
     };
+    private Rectangle rect;
 
     /**
      *

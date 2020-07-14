@@ -136,7 +136,7 @@ public class Level extends LevelEngine {
 
         player = new Player(this);
         player.setTilePos(23, 76); //21x81
-        player.setHealth(50);
+        player.setHealth(100);
 
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();
@@ -175,7 +175,7 @@ public class Level extends LevelEngine {
 
         // Slime test
         for (int i = 0; i < 500; i++) {
-            // this.add(new Slime(this, new Vector2((22+i) * 16f, 107 * 16f), 16f, 16f));
+            this.add(new Emma(this, new Vector2((22+i) * 16f, 107 * 16f), 16f, 16f));
         }
 
         // this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
@@ -291,17 +291,6 @@ public class Level extends LevelEngine {
             AmbienceSound.setSoundAndStart("forest_night_ambience");
         }
 
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-
-
-            /*
-            int count = MathUtils.random(2, 6);
-            for (int i = 0; i < count; i++) {
-                player.getLevel().add(player.getLevel(), new PickupItem(player.getLevel(), new ResourceItem(Resources.cloth), new Vector2(player.getPosition().x, player.getPosition().y)));
-            }
-            */
-        }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT)) {
             player.increaseXP(100); // test

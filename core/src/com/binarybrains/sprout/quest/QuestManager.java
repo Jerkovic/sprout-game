@@ -8,7 +8,6 @@ import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.structs.TreeNode;
 
-// QuestSystem/Manager
 public class QuestManager implements Telegraph {
 
 

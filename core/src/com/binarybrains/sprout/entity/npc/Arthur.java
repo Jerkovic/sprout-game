@@ -48,7 +48,7 @@ public class Arthur extends Npc {
         super(level, position, width, height, SproutGame.assets.get("willy.png"));
         setState(State.STANDING);
         setDirection(Direction.SOUTH);
-        setSpeed(24);
+        setSpeed(500);
 
         // Sequence is a branch task that runs every children until one of them fails. If a child task
         // succeeds, the selector will start and run the next child task.
