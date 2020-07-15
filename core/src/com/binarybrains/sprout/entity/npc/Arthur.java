@@ -166,10 +166,6 @@ public class Arthur extends Npc {
         // this is a Part dependent on that the TeddyBear Quest is done and he got the axe
         // it also needs to be fullfilled that the player has seen the "Approach Arthur message"
         if (!player.getInventory().upgradeTool("Axe", ToolItem.COPPER)) {
-            speak(
-                    "Arthur",
-                    "Aaargh What do you want from me? argh *cough*"
-            );
             return false;
         }
 

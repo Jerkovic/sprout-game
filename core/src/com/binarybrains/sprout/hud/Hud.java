@@ -23,6 +23,7 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.events.*;
 import com.binarybrains.sprout.experience.LevelRank;
+import com.binarybrains.sprout.hud.components.CircularProgress;
 import com.binarybrains.sprout.hud.components.ItemToaster;
 import com.binarybrains.sprout.hud.components.LetterBoxing;
 import com.binarybrains.sprout.hud.components.LocationLabel;
@@ -30,7 +31,6 @@ import com.binarybrains.sprout.hud.inventory.ChestWindow;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryManagementWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryWindow;
-import com.binarybrains.sprout.hud.tweens.CameraAccessor;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.locations.Location;
@@ -71,6 +71,11 @@ public class Hud implements Telegraph {
 
     public LetterBoxing letterboxing;
 
+    // test stuff for progressbar
+    private CircularProgress circularProgress;
+    private long lastUpdate = 0L;
+    private float remainingPercentage = 1.0f;
+
     public Hud(Skin skin, Level level) {
         this.skin = skin;
         this.level = level;
@@ -80,8 +85,15 @@ public class Hud implements Telegraph {
 
         locationLabel = new LocationLabel("Welcome to Bearshade Creek", skin, "default");
         locationLabel.setVisible(true);
-
         stage.addActor(locationLabel);
+
+        // test circular progress
+        circularProgress = new CircularProgress(true, 105);
+        circularProgress.setSize(100, 100);
+        circularProgress.setPosition(250, 250);
+        circularProgress.setColor(Color.RED);
+        circularProgress.setAlpha(0.25f);
+        stage.addActor(circularProgress);
 
         // mouse
         lc = new Label("", skin);
@@ -658,6 +670,18 @@ public class Hud implements Telegraph {
     }
 
     public void act(float delta) {
+        // progress bar
+        if (System.currentTimeMillis() - lastUpdate > 50L) {
+            circularProgress.update(remainingPercentage);
+
+            remainingPercentage -= 0.01f;
+            lastUpdate = System.currentTimeMillis();
+
+            if (remainingPercentage <= 0.0f) {
+                remainingPercentage = 1.0f; // reset
+            }
+        }
+
         // temp mouseItem
         if (mouseItem != null) {
             mouseItem.setPosition(Gdx.input.getX(), Gdx.app.getGraphics().getHeight() - Gdx.input.getY());
@@ -670,6 +694,7 @@ public class Hud implements Telegraph {
 
     public void dispose() {
         //super.dispose();
+        stage.dispose();
         MessageManager.getInstance().clearListeners();
     }
 }

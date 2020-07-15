@@ -7,7 +7,6 @@ import com.binarybrains.sprout.item.FurnitureItem;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
-import com.binarybrains.sprout.item.furniture.Furniture;
 import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.resource.Resources;
 
@@ -19,10 +18,15 @@ public class Inventory {
     private static int UPGRADE_SLOTS = 12;
     private static int MAX_UPGRADE_SLOTS = 36;
     private int capacity;
+    private boolean isPlayerInventory = false;
 
     public Inventory(int capacity) {
         setCapacity(capacity);
         createEmptySlots(); // fill with empty slots
+    }
+
+    public void setAsPlayerInventory() {
+        isPlayerInventory = true;
     }
 
     public void sortInventory() {
@@ -30,11 +34,9 @@ public class Inventory {
         Collections.sort(items, new Comparator<Item>() {
             @Override
             public int compare(final Item object1, final Item object2) {
-
                 if (object1 == null || object2 == null) {
                     return 0;
                 }
-
                 int c = object1.getCategory().compareTo(object2.getCategory());
                 if (c == 0) {
                     c = object1.getName().compareTo(object2.getName());
@@ -44,7 +46,6 @@ public class Inventory {
         });
 
         Collections.reverse(items);
-
         fillEmptySlots();
     }
 
@@ -115,9 +116,12 @@ public class Inventory {
                 return false;
             }
         }
-        // if resource item we need to be able to send correct amount here.
-        MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_ADD_ITEM, item);
-        MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_UPDATED);
+        // BUG: if resource item we need to be able to send correct amount here.
+        // TODO: this is totally wrong to emit Player Inventory events here. Can be other inventories...
+        if (isPlayerInventory) {
+            MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_ADD_ITEM, item);
+            MessageManager.getInstance().dispatchMessage(TelegramType.PLAYER_INVENTORY_UPDATED);
+        }
         return true;
     }
 
@@ -167,7 +171,7 @@ public class Inventory {
     }
 
     /**
-     * Completly deletes all items of and rearranges inventory by filling empty slots
+     * Completely deletes all items of and rearranges inventory by filling empty slots
      * @param item
      * @return
      */

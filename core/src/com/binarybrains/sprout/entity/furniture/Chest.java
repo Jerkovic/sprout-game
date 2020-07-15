@@ -7,13 +7,18 @@ import com.binarybrains.sprout.SproutGame;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.item.ArtifactItem;
 import com.binarybrains.sprout.item.Item;
+import com.binarybrains.sprout.item.ResourceItem;
+import com.binarybrains.sprout.item.WeaponItem;
 import com.binarybrains.sprout.item.artifact.Artifacts;
+import com.binarybrains.sprout.item.resource.Resource;
+import com.binarybrains.sprout.item.weapon.Weapons;
 import com.binarybrains.sprout.level.Level;
 
 /**
  * A chest is a furniture that can be moved around.
  * It also serves as a inventory container space
  * But some chests are only for looting not storing?
+ * A chest might be locked?
  */
 public class Chest extends Entity implements Portable { // extends Furniture that implements Portable instead?
 
@@ -26,9 +31,11 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
     public Chest(Level level, Vector2 position) {
         super(level, position, 16, 16);
 
-        int capacity = 24;
+        int capacity = 1;
         container = new Inventory(capacity); // the chest is an inventory
-        container.add(new ArtifactItem(Artifacts.teddy));
+
+        // test item in chest
+        container.add(new WeaponItem(Weapons.neptuneSword, 0));
 
         frames = TextureRegion.split(getLevel().spritesheet, 16, 16);
         closedRegion = frames[48][23];

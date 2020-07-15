@@ -69,20 +69,17 @@ public class Player extends Npc implements InputProcessor {
         setSpeed(16 * 5);
 
         inventory = new Inventory(inventoryCapacity);
+        inventory.setAsPlayerInventory(); // will enable event emitting.
 
         getInventory().add(new ArtifactItem(Artifacts.teddy));
         getInventory().add(new ToolItem(Tools.hoe, 0));
+        getInventory().add(new ToolItem(Tools.wateringcan, 0));
+        getInventory().add(new ToolItem(Tools.pickaxe, 0));
+
         /*
         getInventory().add(new ResourceItem(Resources.ladder, 1));
-
-        getInventory().add(new ToolItem(Tools.wateringcan, 0));
-
-        getInventory().add(new ToolItem(Tools.pickaxe, 0));
         getInventory().add(new WeaponItem(Weapons.neptuneSword, 0));
-
-
         getInventory().add(new ToolItem(Tools.hammer, 0));
-
         getInventory().add(new ResourceItem(Resources.bomb,392));
         getInventory().add(new ResourceItem(Resources.ironOre, 40));
         getInventory().add(new ResourceItem(Resources.copperOre, 48));
@@ -119,6 +116,7 @@ public class Player extends Npc implements InputProcessor {
         // ugly check for Emma Message
         if (!(msg.sender instanceof Emma)) return false;
 
+        // test code .. should not be here.
         freezePlayerControl();
         getLevel().screen.hud.startCinemaMode();
         getLevel().screen.hud.hideHud();
