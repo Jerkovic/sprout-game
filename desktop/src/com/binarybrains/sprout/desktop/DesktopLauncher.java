@@ -25,14 +25,22 @@ public class DesktopLauncher {
         config.height = 1080;
         config.fullscreen = false;
         config.resizable = false;
-        config.useGL30 = false;
+        config.useGL30 = true;
 		config.title = SproutGame.name;
         config.vSyncEnabled = true;
         config.forceExit = true;
         // config.useHDPI = true // High Density Pixels on Mac?
         // Window icons: 128x128(Mac), 32x32 (for Win and Linux), and 16x16 (for Win).
         // config.addIcon("some icon", Files.FileType.Local);
-        new LwjglApplication(new SproutGame(), config);
-        //new LwjglApplication(new SheetGenerator(), config);
+        new LwjglApplication(new SproutGame(), config) {
+                @Override
+                public void exit()
+                {
+                        System.out.println("Overridden exit method Lwjgl app. should ask for exiting");
+                        super.exit();
+                }
+        };
+
+        // new LwjglApplication(new SheetGenerator(), config);
 	}
 }

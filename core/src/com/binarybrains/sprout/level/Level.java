@@ -173,11 +173,6 @@ public class Level extends LevelEngine {
         add(this, new Stone(this, 20, 75));
         add(this, new Stone(this, 29, 60));
 
-        // Slime test
-        for (int i = 0; i < 500; i++) {
-            this.add(new Emma(this, new Vector2((22+i) * 16f, 107 * 16f), 16f, 16f));
-        }
-
         // this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
         // add(this, new SpeechBubble(this, "I am hungry!"));
 

@@ -90,9 +90,9 @@ public class Hud implements Telegraph {
         // test circular progress
         circularProgress = new CircularProgress(true, 105);
         circularProgress.setSize(100, 100);
-        circularProgress.setPosition(250, 250);
+        circularProgress.setPosition(150, 150);
         circularProgress.setColor(Color.RED);
-        circularProgress.setAlpha(0.25f);
+        circularProgress.setAlpha(0.50f);
         stage.addActor(circularProgress);
 
         // mouse

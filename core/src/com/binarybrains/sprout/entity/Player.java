@@ -111,10 +111,12 @@ public class Player extends Npc implements InputProcessor {
 
     @Override
     public boolean handleMessage(Telegram msg) {
-        System.out.println("Player got a msg " + msg.extraInfo + " " + msg.sender);
+        System.out.println("Player got a msg: " + msg.extraInfo + " from " + msg.sender);
 
         // ugly check for Emma Message
         if (!(msg.sender instanceof Emma)) return false;
+        Entity sender = (Entity) msg.sender;
+        System.out.println("DEBUG - >" +  sender);
 
         // test code .. should not be here.
         freezePlayerControl();
@@ -122,8 +124,8 @@ public class Player extends Npc implements InputProcessor {
         getLevel().screen.hud.hideHud();
         addAction(Actions.sequence(
                 Actions.run(() -> {
-                    // do some
-                    setDirection(NORTH);
+                    System.out.println("DEBUG - >" +  sender);
+                    lookAt(sender);
                 }),
                 Actions.delay(1),
                 Actions.run(this::jump),
@@ -742,7 +744,7 @@ public class Player extends Npc implements InputProcessor {
         float mouseWorldPosX = clickedPos.x;
         float mouseWorldPosY = clickedPos.y;
 
-        lookAt(clickedPos);
+        // lookAt(clickedPos);
 
         int x = (int)this.getMouseSelectedTile().x;
         int y = (int)this.getMouseSelectedTile().y;

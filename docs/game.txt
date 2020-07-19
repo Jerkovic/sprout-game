@@ -12,11 +12,15 @@ https://www.deviantart.com/d-e-n-a/art/Pixel-Tree-Tutorial-133166821
 
 TODOS:
 
+* Circular Progress UI component (Done)
+
 * Perks (boosts)
 
 * TreeNode (Unlock Tree)
 
 * Directed Graph for Dialogs?
+
+* Checkout https://github.com/libgdx/packr for game distribution
 
 * https://docs.atherys.com/javadocs/AtherysQuests/index.html?com/atherys/quests/dialog/tree/DialogTree.html
 
@@ -379,7 +383,7 @@ Tools
     Hammer = (används för att snickra)
     Scythe = lie (används för att skörda) starter tool
     fishing rod = metspö (används i vatten och kan ge fisk, chansen borde öka att få bättre fisk var du fiskar)  baits??
-    Ladder (tool?)
+    Ladder (tool or furniture?)
 
 Weapons(inherits from tools)
 - Mace
