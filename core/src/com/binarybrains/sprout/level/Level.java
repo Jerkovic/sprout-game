@@ -165,13 +165,11 @@ public class Level extends LevelEngine {
         this.add(this, emma);
         emma.stateMachine.changeState(NpcState.IDLE);
 
-        Arthur arthur = new Arthur(this, new Vector2(40 * 16f,  30f * 16f), 16f, 32f);
+        Arthur arthur = new Arthur(this, new Vector2(20 * 16f,  80f * 16f), 16f, 32f);
         this.add(this, arthur);
 
 
         add(this, new Stone(this, 20, 77));
-        add(this, new Stone(this, 20, 75));
-        add(this, new Stone(this, 29, 60));
 
         // this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
         // add(this, new SpeechBubble(this, "I am hungry!"));

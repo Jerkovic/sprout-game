@@ -1,15 +1,12 @@
 package com.binarybrains.sprout.entity.npc;
 
 import com.badlogic.gdx.ai.GdxAI;
-import com.badlogic.gdx.ai.btree.branch.RandomSelector;
+
 import com.badlogic.gdx.ai.btree.branch.Selector;
-import com.badlogic.gdx.ai.btree.decorator.AlwaysFail;
-import com.badlogic.gdx.ai.btree.decorator.Include;
 import com.badlogic.gdx.ai.btree.utils.BehaviorTreeLibrary;
 import com.badlogic.gdx.ai.btree.utils.BehaviorTreeLibraryManager;
 import com.badlogic.gdx.ai.btree.utils.BehaviorTreeParser;
 import com.badlogic.gdx.ai.msg.Telegram;
-import com.badlogic.gdx.ai.utils.random.ConstantIntegerDistribution;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.binarybrains.sprout.SproutGame;
@@ -17,20 +14,16 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.npc.btree.AttackTask;
-import com.binarybrains.sprout.entity.npc.btree.PatrolTask;
-import com.binarybrains.sprout.entity.npc.btree.PlayerCloseCondition;
+import com.binarybrains.sprout.entity.npc.btree.FollowPathTask;
+import com.binarybrains.sprout.entity.npc.btree.JumpTask;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.item.ToolItem;
-import com.binarybrains.sprout.item.resource.Resource;
 import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.misc.BackgroundMusic;
 import com.badlogic.gdx.ai.btree.BehaviorTree;
-import com.badlogic.gdx.ai.btree.BranchTask;
-import com.badlogic.gdx.ai.btree.LeafTask;
 import com.badlogic.gdx.ai.btree.Task;
-import com.badlogic.gdx.ai.btree.branch.Parallel;
 import com.badlogic.gdx.ai.btree.branch.Sequence;
 
 
@@ -48,49 +41,13 @@ public class Arthur extends Npc {
         super(level, position, width, height, SproutGame.assets.get("willy.png"));
         setState(State.STANDING);
         setDirection(Direction.SOUTH);
-        setSpeed(500);
-
-        // Sequence is a branch task that runs every children until one of them fails. If a child task
-        // succeeds, the selector will start and run the next child task.
-        // Npc is the blackboard object,
-
-        // A BranchTask defines a behavior tree branch, contains logic of starting or running sub-branches and leaves
-        // A LeafTask - is a terminal task of a behavior tree, contains action or condition logic, can not have any
-        // child.
-
-        // Actions -
-        // which cause the execution of methods or functions on the game world,
-        // e.g. move a character, decrease health, etc...
-        //
-        // Conditions -
-        // which query the state of objects in the game world, e.g. location of character, inventory content,
-        // amount of health, etc...
-
-        /**
-         * A Selector is a branch task that runs every children until one of them succeeds. If a
-         * child task fails, the selector * will start and run the next child task. * * @param <E> type
-         * of the blackboard object that tasks use to read or modify game state
-         */
-
-        // https://github.com/jsjolund/GdxDemo3D/blob/master/android/assets/btrees/dog.btree
-
-        // Conditional
-
-        // com/badlogic/gdx/ai/tests/btree/tests/ParallelVsSequenceTest.java
+        setSpeed(250);
         setupAI();
     }
 
-    private void registerBehavior (BehaviorTreeLibrary library) {
-
-        Include<Npc> include = new Include<>();
-        include.lazy = true;
-        include.subtree = "npc.actual";
-
-        BehaviorTree<Npc> includeBehavior = new BehaviorTree<>(include);
-        library.registerArchetypeTree("arthur", includeBehavior);
-
-        BehaviorTree<Npc> actualBehavior = new BehaviorTree<>(createBehavior());
-        library.registerArchetypeTree("npc.actual", actualBehavior);
+    public void setupAI() {
+        this.behaviorTree = new BehaviorTree<>(createBehavior());
+        this.behaviorTree.setObject(this); // set blackboard object to this Arthur instance
     }
 
     /**
@@ -103,28 +60,19 @@ public class Arthur extends Npc {
         Sequence<Npc> sequence = new Sequence<>();
         selector.addChild(sequence);
 
-        sequence.addChild(new PlayerCloseCondition());
+        sequence.addChild(new FollowPathTask(new Vector2(24,60)));
+        sequence.addChild(new JumpTask());
+        sequence.addChild(new FollowPathTask(new Vector2(29,50)));
+        sequence.addChild(new JumpTask());
+        sequence.addChild(new FollowPathTask(new Vector2(20,60)));
+        sequence.addChild(new FollowPathTask(new Vector2(26,60)));
         sequence.addChild(new AttackTask());
-        sequence.addChild(new PatrolTask());
 
         return selector;
     }
 
-
-    public void setupAI() {
-        BehaviorTreeLibraryManager libraryManager = BehaviorTreeLibraryManager.getInstance();
-        BehaviorTreeLibrary library = new BehaviorTreeLibrary(BehaviorTreeParser.DEBUG_NONE);
-        registerBehavior(library);
-        libraryManager.setLibrary(library);
-        behaviorTree = libraryManager.createBehaviorTree("arthur", this);
-    }
-
     public BehaviorTree<Npc> getBehaviorTree () {
         return behaviorTree;
-    }
-
-    public void setBehaviorTree (BehaviorTree<Npc> behaviorTree) {
-        this.behaviorTree = behaviorTree;
     }
 
     @Override
@@ -172,6 +120,8 @@ public class Arthur extends Npc {
         // animation, sound and dialog
         addAction(Actions.sequence(
                 Actions.run(() -> {
+                    setState(State.STANDING);
+                    setActionState(ActionState.EMPTY_NORMAL);
                     lookAt(player);
 
                 }),

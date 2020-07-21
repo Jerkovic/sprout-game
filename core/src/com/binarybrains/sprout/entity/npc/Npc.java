@@ -14,11 +14,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.IntArray;
 import com.binarybrains.sprout.SproutGame;
-import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Inventory;
 import com.binarybrains.sprout.entity.Mob;
 import com.binarybrains.sprout.entity.Player;
-import com.binarybrains.sprout.entity.actions.Action;
 import com.binarybrains.sprout.entity.actions.Actions;
 import com.binarybrains.sprout.entity.actions.SequenceAction;
 import com.binarybrains.sprout.events.TelegramType;
@@ -79,19 +77,22 @@ public class Npc extends Mob {
     }
 
     /**
-     * Performs a happy jump
+     * Performs a happy jump ACTION
      */
-    public void jump() {
+    public void jump(Runnable runnable) {
         float ground_y = getY();
         float jump_to_y = getY() + 16;
-
+        SequenceAction seq = new SequenceAction();
         lockShadowY = ground_y;
-        SproutGame.playSound("jump", 0.8f);
-        addAction(Actions.sequence(
-                Actions.moveTo(getX(), jump_to_y, .3f, Interpolation.pow2),
-                Actions.moveTo(getX(), ground_y, .15f, Interpolation.exp5),
-                Actions.run(() -> { lockShadowY = 0; })
-        ));
+        SproutGame.playSound("jump", 0.7f);
+
+        seq.addAction(Actions.moveTo(getX(), jump_to_y, .3f, Interpolation.pow2));
+        seq.addAction(Actions.moveTo(getX(), ground_y, .15f, Interpolation.exp5));
+        seq.addAction(Actions.run(() -> { lockShadowY = 0; }));
+        if (runnable != null) {
+            seq.addAction(Actions.run(runnable));
+        }
+        this.addAction(seq);
     }
 
     @Override
@@ -259,19 +260,21 @@ public class Npc extends Mob {
         if (getState() == State.STANDING && getActionState() == ActionState.EMPTY_NORMAL) { // IDLE - NOT Walking
             currentFrame = (TextureRegion)animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrames()[0];
         }
-        else if (getState() == State.WALKING) {
+        else if (getState() == State.WALKING && getActionState() == ActionState.EMPTY_NORMAL) {
             animationMatrix[getActionState().ordinal()][animDirection.ordinal()].setPlayMode(Animation.PlayMode.LOOP);
             currentFrame = (TextureRegion) animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
         }
-        else if (getActionState() == ActionState.HOBBY) { // test juggling with football or dancing
+        else if (getState() == State.STANDING && getActionState() == ActionState.HOBBY) { // test juggling with football, fishing or dancing
             animationMatrix[getActionState().ordinal()][animDirection.ordinal()].setPlayMode(Animation.PlayMode.LOOP);
+            // All Hobby state are done in south direction. Does this rule comply?
             currentFrame = (TextureRegion) animationMatrix[getActionState().ordinal()][animDirection.ordinal()].getKeyFrame(stateTime, true);
         }
         if (currentFrame == null) {
-            Gdx.app.log(this.getClass().getName(), "Frame not found state: " + getState() + " actionState: " + getActionState() + " Dir:" + animDirection.name());
+            Gdx.app.log(this.getClass().getName(), "ERROR - Frame not found state: " + getState() + " actionState: " + getActionState() + " Dir:" + animDirection.name());
+        } else {
+            batch.draw(currentFrame, getX(), getY());
         }
 
-        batch.draw(currentFrame, getX(), getY());
     }
 
     public ActionState getActionState() {
@@ -299,16 +302,15 @@ public class Npc extends Mob {
             animationMatrix[ActionState.EMPTY_NORMAL.ordinal()][d] = new Animation(animSpeed, currentAnimFrames);
         }
 
-        // dummy extended animation 2 rows / 4 frames
-        Object[] currentAnimFrames = new TextureRegion[8]; // hardcoded really?
+        // Hobby - extended animation 1 rows / 4 frames
+        Object[] currentAnimFrames = new TextureRegion[4]; // hardcoded really?
         int cnt = 0;
-        for (row = 4; row <= 5; row++) {
+        for (row = 4; row <= 4; row++) {
             for (int col = 0; col < 4; col++) {
                 currentAnimFrames[cnt++] = framesRegions[row][col];
             }
         }
-
-        animationMatrix[ActionState.HOBBY.ordinal()][0] = new Animation(.10f, currentAnimFrames);
+        animationMatrix[ActionState.HOBBY.ordinal()][Direction.SOUTH.ordinal()] = new Animation(.15f, currentAnimFrames);
     }
 
     @Override
@@ -319,5 +321,4 @@ public class Npc extends Mob {
     public void dispose() {
         // todo disposal
     }
-
 }

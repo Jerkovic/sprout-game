@@ -29,7 +29,7 @@ public class Emma extends Npc {
         setHealth(100);
         setState(State.STANDING);
         setDirection(Direction.EAST);
-        setSpeed(700);
+        setSpeed(350);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class Emma extends Npc {
                         BackgroundMusic.setVolume(.5f);
                         BackgroundMusic.changeTrack(3);
                         lookAt(player);
-                        jump();
+                        jump(null);
                         ArtifactItem ai = (ArtifactItem) player.activeItem;
                         player.getInventory().removeItem(ai);
                         player.getLevel().screen.hud.refreshInventory();
@@ -67,7 +67,6 @@ public class Emma extends Npc {
 
                         );
                         player.getInventory().add(new ToolItem(Tools.axe, 0));
-                        SproutGame.playSound("blop", .7f, MathUtils.random(0.9f, 1.2f), 1f);
                         stateMachine.changeState(NpcState.GOTO_ARTHUR);
                     })
             ));

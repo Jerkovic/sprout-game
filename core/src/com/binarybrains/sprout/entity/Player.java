@@ -128,7 +128,7 @@ public class Player extends Npc implements InputProcessor {
                     lookAt(sender);
                 }),
                 Actions.delay(1),
-                Actions.run(this::jump),
+                Actions.run(() -> jump(null)),
                 Actions.delay(2f),
                 Actions.run(() -> {
                     setDirection(SOUTH); // make sure he is looking south
