@@ -65,7 +65,7 @@ public class TypeWriterDialog extends Window {
             charCountThisFrame = dialogText.length();
         }
         if (charCountThisFrame > charCountLastFrame && charCountThisFrame < dialogText.length() && charCountThisFrame % 2 == 0) {
-            if (MathUtils.random(1, 5) == 3)  SproutGame.playSound("speaker_blip", .34f, MathUtils.random(0.05f, .3f), 1f);
+            // if (MathUtils.random(1, 5) == 3)  SproutGame.playSound("speaker_blip", .34f, MathUtils.random(0.05f, .3f), 1f);
         }
 
         if (charCountThisFrame > dialogText.length()) {

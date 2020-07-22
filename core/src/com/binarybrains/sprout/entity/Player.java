@@ -555,14 +555,11 @@ public class Player extends Npc implements InputProcessor {
         }
 
         updateMovement();
-        surfaceSoundEffect();
+        // surfaceSoundEffect();
 
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             BackgroundMusic.stop();
-            getLevel().screen.hud.fadeOutRun(new Runnable() { public void run(){
-                Gdx.app.exit();
-            }});
-
+            getLevel().screen.hud.showConfirmDialog();
         }
     }
 
@@ -571,7 +568,7 @@ public class Player extends Npc implements InputProcessor {
     private void surfaceSoundEffect() {
         if (getState() == State.WALKING) {
             if (walkSoundId < 0) {
-                walkSoundId = ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).loop(.15f);
+                walkSoundId = ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).loop(.1f);
                 if (walkSoundId < 0) throw new RuntimeException("Error sound engine.");
             } else {
                 ((Sound) SproutGame.assets.get("sfx/grass_walk.wav")).resume(walkSoundId);

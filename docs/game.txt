@@ -13,6 +13,8 @@ https://www.deviantart.com/d-e-n-a/art/Pixel-Tree-Tutorial-133166821
 
 TODOS:
 
+* Modal Dialog Question box
+
 * Circular Progress UI component (Done)
 
 * Perks (boosts)
@@ -68,7 +70,7 @@ TODOS:
 
 * Cleanup hud class. Move out notificationToaster etc
 
-* Footsteps         // plays different walking sounds here. // https://www.youtube.com/watch?v=wYREdw4nz4E
+* Footsteps         // plays different walking sounds here on selected frames. // https://www.youtube.com/watch?v=wYREdw4nz4E
 sd
 
 * Handle AI pathfinding is triggered inside a house we need her/him go to the door and leave then start
@@ -96,7 +98,7 @@ return outputString.toString();
     xsmall pixel font with outline. (Fixed)
   - Rittswood Redstar (window longer text) (Downloaded to fonts, 16 pixels color #130a0f for sp. bubble match)
 
-* Skin composer. Create new ui skin theme?
+* Skin composer. Create new ui skin theme? done
 
 * Test a whole day...06:00 + (18 hours-ish) 18 minuter = 1 dag in game.
 

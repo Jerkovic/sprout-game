@@ -23,10 +23,7 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.events.*;
 import com.binarybrains.sprout.experience.LevelRank;
-import com.binarybrains.sprout.hud.components.CircularProgress;
-import com.binarybrains.sprout.hud.components.ItemToaster;
-import com.binarybrains.sprout.hud.components.LetterBoxing;
-import com.binarybrains.sprout.hud.components.LocationLabel;
+import com.binarybrains.sprout.hud.components.*;
 import com.binarybrains.sprout.hud.inventory.ChestWindow;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryManagementWindow;
@@ -65,6 +62,7 @@ public class Hud implements Telegraph {
     InventoryWindow inventoryWindow; // our Inventory fast reachable slots
     InventoryManagementWindow inventoryManagementWindow;
     ChestWindow chestManagementWindow;
+    ConfirmDialog confirmDialog;
 
     public int notificationsInHud = 0;
     public Image mouseItem;
@@ -93,7 +91,7 @@ public class Hud implements Telegraph {
         circularProgress.setPosition(150, 150);
         circularProgress.setColor(Color.RED);
         circularProgress.setAlpha(0.50f);
-        stage.addActor(circularProgress);
+        //stage.addActor(circularProgress);
 
         // mouse
         lc = new Label("", skin);
@@ -118,6 +116,27 @@ public class Hud implements Telegraph {
         inventoryWindow = new InventoryWindow(level, skin);
         inventoryWindow.onInventoryChanged(level.player.getInventory());
         stage.addActor(inventoryWindow);
+
+        // Exit game confirm dialog
+        confirmDialog = new ConfirmDialog(skin, "Exit Game", "Do you want to exit game?");
+        confirmDialog.setVisible(false);
+        confirmDialog.hide();
+        confirmDialog.setConfirmAction(new Runnable() {
+            public void run () {
+                fadeOutRun(new Runnable() { public void run(){
+                    Gdx.app.exit();
+                }});
+            }
+        });
+        confirmDialog.setCancelAction(new Runnable() {
+            public void run () {
+                level.screen.game.resume();
+                showMouseItem();
+            }
+        });
+        stage.addActor(confirmDialog);
+        // game confirm dialog
+
 
         fadeRenderer = new ShapeRenderer();
         fadeActor.clearActions();
@@ -338,6 +357,14 @@ public class Hud implements Telegraph {
         lc.setVisible(true);
     }
 
+    public void showConfirmDialog() {
+        level.screen.game.pause();
+        level.player.releaseKeys();
+        confirmDialog.setVisible(true);
+        confirmDialog.show(getStage());
+        hideMouseItem();
+    }
+
     public void showCraftingWindow() {
         level.screen.game.pause();
         level.player.releaseKeys();
@@ -358,6 +385,7 @@ public class Hud implements Telegraph {
         inventoryManagementWindow.onInventoryChanged(level.player.getInventory());
         hideMouseItem();
     }
+
 
     public void startCinemaMode() {
         letterboxing.start();
@@ -535,10 +563,9 @@ public class Hud implements Telegraph {
         dialog.text(say);
         dialog.button("  OK  ", true, skin.get("text-button-default", TextButton.TextButtonStyle.class)); //sends "true" as the result
         dialog.center();
-        //dialog.key(Input.Keys.Enter, true); //sends "true" when the ENTER key is pressed
+        // dialog.key(Input.Keys.Enter, true); //sends "true" when the ENTER key is pressed
         dialog.show(stage);
     }
-
 
     /**
      * Move this sucker to own class
