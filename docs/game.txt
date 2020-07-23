@@ -7,19 +7,21 @@ https://github.com/sndcode/stardewvalleycode/tree/master/Stardew%20Valley
 ________________________________________________________________________________
 
 Art stuff:
+
+
 https://szadiart.itch.io/rpg-worlds-houses-and-interiors
 
 https://www.deviantart.com/d-e-n-a/art/Pixel-Tree-Tutorial-133166821
 
 TODOS:
 
-* Modal Dialog Question box
+* Modal Dialog Question box (done)
 
 * Circular Progress UI component (Done)
 
 * Perks (boosts)
 
-* TreeNode (Unlock Tree)
+* TreeNode (Unlock Tree) Abilities? recepies
 
 * Directed Graph for Dialogs?
 
@@ -70,8 +72,7 @@ TODOS:
 
 * Cleanup hud class. Move out notificationToaster etc
 
-* Footsteps         // plays different walking sounds here on selected frames. // https://www.youtube.com/watch?v=wYREdw4nz4E
-sd
+* Footsteps  // plays different walking sounds here on selected frames. // https://www.youtube.com/watch?v=wYREdw4nz4Esd
 
 * Handle AI pathfinding is triggered inside a house we need her/him go to the door and leave then start
 (do we need something that tells if the location is inside or outside?)
@@ -286,6 +287,7 @@ dungeons
 
 Inspiration by
 -----------------
+Slormancer
 Gleaner Hights
 Graveyard Keeper
 Lost

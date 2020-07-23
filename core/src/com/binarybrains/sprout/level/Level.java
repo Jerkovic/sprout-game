@@ -15,7 +15,6 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -24,15 +23,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.binarybrains.sprout.entity.*;
 import com.binarybrains.sprout.entity.actions.Actions;
-import com.binarybrains.sprout.entity.enemy.Slime;
 import com.binarybrains.sprout.entity.furniture.Chest;
 import com.binarybrains.sprout.entity.npc.Arthur;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.NpcState;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.entity.terrain.Stone;
-import com.binarybrains.sprout.item.ResourceItem;
-import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.level.renderer.LevelMapRenderer;
 import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.Camera;
@@ -212,6 +208,9 @@ public class Level extends LevelEngine {
         // pe.update(delta);
         // if (pe.isComplete()) pe.reset();
 
+        System.out.println(tileMapRenderer.getViewBounds().getX() + "x" + tileMapRenderer.getViewBounds().getY());
+        System.out.println(tileMapRenderer.getViewBounds().getWidth() + "x" + tileMapRenderer.getViewBounds().getHeight());
+
         // AI time piece
         GdxAI.getTimepiece().update(delta);
 
@@ -361,7 +360,7 @@ public class Level extends LevelEngine {
 
         //render the first layer (the water) using our special vertex shader
         tileMapRenderer.getBatch().setShader(waterShader);
-        int[] water_layers = {0}; // water
+        int[] water_layers = {0}; // water - not a super solutions to specify layers by index
 
         tileMapRenderer.render(water_layers);
 
@@ -409,10 +408,13 @@ public class Level extends LevelEngine {
         for(int row = 0; row < layer.getHeight(); row++) {
             for(int col = 0; col < layer.getWidth(); col++) {
                 Rectangle tile = new Rectangle(row*16, col*16, 16, 16);
-                debugRenderer.rect(tile.getX(), tile.getY(), tile.width, tile.height);
-                if (getTile(row, col) != null && !getTile(row, col).mayPass) {
-                    debugRenderer.line(tile.getX(), tile.getY(), tile.getX()+16, tile.getY()+16);
-                    debugRenderer.line(tile.getX()+16, tile.getY(), tile.getX(), tile.getY()+16);
+
+                if (tileMapRenderer.getViewBounds().overlaps(tile)) {
+                    debugRenderer.rect(tile.getX(), tile.getY(), tile.width, tile.height);
+                    if (getTile(row, col) != null && !getTile(row, col).mayPass) {
+                        debugRenderer.line(tile.getX(), tile.getY(), tile.getX()+16, tile.getY()+16);
+                        debugRenderer.line(tile.getX()+16, tile.getY(), tile.getX(), tile.getY()+16);
+                    }
                 }
             }
         }
@@ -432,7 +434,6 @@ public class Level extends LevelEngine {
                 for(int ind = 0; ind < positions.size(); ind++) {
                     float x = positions.get(ind).x;
                     float y = positions.get(ind).y;
-
                     Rectangle pathtile = new Rectangle(x*16, y*16, 16, 16);
                     debugRenderer.rect(pathtile.getX(), pathtile.getY(), pathtile.width, pathtile.height);
                 }

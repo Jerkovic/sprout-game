@@ -27,8 +27,6 @@ import java.util.Map;
 public class SproutGame extends Game {
 
 	public static String name = "Bearshade Creek";
-	public static int WORLD_WIDTH = 256;
-	public static int WORLD_HEIGHT = 128;
 	public static String SKIN_FILE = "skin/uiskin.json";
 
 	private static TweenManager tweenManager;

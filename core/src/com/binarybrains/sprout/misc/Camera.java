@@ -88,6 +88,15 @@ public class Camera extends OrthographicCamera {
         super.update();
     }
 
+    public int getTileX() {
+        return (int)position.x >> 4;
+    }
+
+    public int getTileY() {
+        return (int)position.y >> 4;
+    }
+
+
     public boolean isCameraBottomWorld() {
         return position.y - (viewportHeight * .5f) <= 0;
     }

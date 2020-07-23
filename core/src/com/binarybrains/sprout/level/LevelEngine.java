@@ -37,7 +37,7 @@ public abstract class LevelEngine extends Stage {
     public LevelMapRenderer tileMapRenderer;
     public int tilePixelWidth, tilePixelHeight, width, height = 0;
     public List<Entity> entities = new ArrayList<Entity>();
-    public Tile tile[][] = new Tile[256][128];
+    public Tile tile[][] = new Tile[1024][1024];
 
     public Comparator<Entity> spriteSorter = (e0, e1) -> {
         if (e1.getSortOrder() < e0.getSortOrder()) return -1;
@@ -239,7 +239,8 @@ public abstract class LevelEngine extends Stage {
         map = new TmxMapLoader().load("levels/sdv_level" + i + ".tmx");
 
         MapObjects objects = map.getLayers().get("objects").getObjects();
-        System.out.println("# of objs found in objects layer: " + objects.getCount());
+        System.out.println("Total Layers count: " + map.getLayers().getCount());
+        System.out.println("Total items found in objects layer: " + objects.getCount());
 
         for(MapObject object : objects) {
 
@@ -273,7 +274,7 @@ public abstract class LevelEngine extends Stage {
                 } else if (objType.equals("Bush")) {
                     add(level, new Bush(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
                 } else if (objType.equals("AreaLocation")) {
-                    System.out.println("Name of Area Location" + object.getName());
+                    System.out.println("Name of Area Location: " + object.getName());
                     add(level, new Location(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(), object.getName(), "todo descr"));
 
                 }
@@ -352,5 +353,7 @@ public abstract class LevelEngine extends Stage {
         height = properties.get("height", Integer.class);
         tilePixelWidth = properties.get("tilewidth", Integer.class);
         tilePixelHeight = properties.get("tileheight", Integer.class);
+        System.out.println("Map Width: " + width);
+        System.out.println("Map Height: " + height);
     }
 }
