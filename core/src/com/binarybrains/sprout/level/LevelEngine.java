@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.house.Cottage;
+import com.binarybrains.sprout.entity.house.Door;
 import com.binarybrains.sprout.entity.house.Tower;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.entity.tree.Bush;
@@ -249,34 +250,16 @@ public abstract class LevelEngine extends Stage {
             }
 
             if (object instanceof RectangleMapObject) {
-
                 // Todo: code below..blää.. this has to change!
                 String objType = (String) object.getProperties().get("type");
                 Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-                if (objType.equals("bigtree")) {
-                    add(level, new Tree(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
-                } else if (objType.equals("cottage")) {
-                    Cottage cottage = new Cottage(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight());
-                    cottage.setDoorTilePos((Integer) object.getProperties().get("doorTileX"));
-                    add(level, cottage);
-                } else if (objType.equals("tower")) {
-                    Tower tower = new Tower(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight());
-                    tower.setDoorTilePos((Integer) object.getProperties().get("doorTileX"));
-                    add(level, tower);
-                } else if (objType.equals("BridgeTrigger")) { // location triggers
-                    String desc = object.getProperties().get("description").toString();
-                    add(level, new Bridge(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(),"Bridge trigger", desc));
-                } else if (objType.equals("BedTrigger")) { // location triggers
-                    String desc = object.getProperties().get("description").toString();
-                    add(level, new Bed(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(),"Go to bed", desc));
-                } else if (objType.equals("SmallTree")) {
-                    add(level, new SmallTree(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
-                } else if (objType.equals("Bush")) {
-                    add(level, new Bush(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
-                } else if (objType.equals("AreaLocation")) {
+                if (objType.equals("Door")) { // new generic Type
+                    System.out.println("Name of Door: " + object.getName());
+                    Door door = new Door(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight());
+                    add(level, door);
+                } else if (objType.equals("AreaLocation")) { // new generic Type
                     System.out.println("Name of Area Location: " + object.getName());
                     add(level, new Location(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(), object.getName(), "todo descr"));
-
                 }
                 // System.out.println("type:" + object.getClass() + " " + object.getProperties().get("type") + " " + rectangle);
                 // EntityFactory.createEntityFromTileMapObject(Object obj)
