@@ -1,5 +1,6 @@
 package com.binarybrains.sprout.desktop;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
@@ -36,11 +37,9 @@ public class DesktopLauncher {
                 @Override
                 public void exit()
                 {
-                        System.out.println("Overridden exit method Lwjgl app. should ask for exiting");
+                        System.out.println("Overridden exit method.");
                         super.exit();
                 }
         };
-
-        // new LwjglApplication(new SheetGenerator(), config);
 	}
 }

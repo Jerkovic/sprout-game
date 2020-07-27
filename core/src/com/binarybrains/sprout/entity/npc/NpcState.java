@@ -52,7 +52,7 @@ public enum NpcState implements State<Npc> {
         @Override
         public void enter(Npc npc)
         {
-            npc.updateWalkDirections(39, 31, () -> {
+            npc.updateWalkDirections(309, 161, () -> {
                 npc.setState(Mob.State.STANDING);
                 npc.setDirection(Mob.Direction.SOUTH); // should this be here even?
                 npc.stateMachine.changeState(WAIT); // wait for player

@@ -1,0 +1,52 @@
+Map size
+-1024x1024
+
+Layers
+-------
+above_all
+*objects
+ground_top2
+ground_top
+ground
+water
+sub_water
+
+Objects layer definitions:
+--------------------------
+Rule: All objects should have a name.
+
+- Trees
+------
+object type: bigtree
+width: 48
+height 96
+
+object type: SmallTree (big white tree)
+width: 64
+height 112
+
+object Type: Bush
+name Bush
+48x48
+
+- Triggers -
+Name: Bridge
+Type: BridgeTrigger
+custom props:
+description: "Some nice description"
+
+Name: Bed
+Type: BedTrigger
+description: "this is blababla"
+
+- Houses -
+Type: cottage
+width: 80
+Height: 128
+custom props:
+doorTileX 3
+
+
+- AreaLocation Triggers -
+Type: AreaLocation
+Name: the farm (this is what is shown top right corner i hud ui)

@@ -131,14 +131,13 @@ public class Level extends LevelEngine {
         camera.setToOrtho(false, screen.width / 4, screen.height / 4); // we scale 16x16 to 64x64
 
         player = new Player(this);
-        player.setTilePos(23, 76); //21x81
+        player.setTilePos(320, 172);
         player.setHealth(100);
 
         camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
         camera.update();
 
         // test world ui speech / action window
-
         ww = new Table(screen.skin);
         ww.add("lets get som text going");
         ww.pad(10).background(screen.skin.get("test-draw", NinePatchDrawable.class));
@@ -157,18 +156,12 @@ public class Level extends LevelEngine {
         gameTimer.start();
 
         // test some path finding stuff.. move this!!
-        Emma emma = new Emma(this, new Vector2(23 * 16f,  79f * 16f), 16f, 32f);
+        Emma emma = new Emma(this, new Vector2(300 * 16f,  172f * 16f), 16f, 32f);
         this.add(this, emma);
         emma.stateMachine.changeState(NpcState.IDLE);
 
-        Arthur arthur = new Arthur(this, new Vector2(20 * 16f,  80f * 16f), 16f, 32f);
+        Arthur arthur = new Arthur(this, new Vector2(310 * 16f,  190f * 16f), 16f, 32f);
         this.add(this, arthur);
-
-
-        add(this, new Stone(this, 20, 77));
-
-        // this.add(new Slime(this, new Vector2(22 * 16f, 107 * 16f), 16f, 16f));
-        // add(this, new SpeechBubble(this, "I am hungry!"));
 
         // particle effects test ...need to make pools?
         // pe = new ParticleEffect();

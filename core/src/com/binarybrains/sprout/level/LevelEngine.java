@@ -236,7 +236,7 @@ public abstract class LevelEngine extends Stage {
      * @param i
      */
     public void loadMap(Level level, int i) {
-        map = new TmxMapLoader().load("levels/sdv_level" + i + ".tmx");
+        map = new TmxMapLoader().load("world/world.tmx");
 
         MapObjects objects = map.getLayers().get("objects").getObjects();
         System.out.println("Total Layers count: " + map.getLayers().getCount());

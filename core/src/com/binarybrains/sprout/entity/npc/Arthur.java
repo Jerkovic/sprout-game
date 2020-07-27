@@ -60,13 +60,12 @@ public class Arthur extends Npc {
         Sequence<Npc> sequence = new Sequence<>();
         selector.addChild(sequence);
 
-        sequence.addChild(new FollowPathTask(new Vector2(24,60)));
+        sequence.addChild(new FollowPathTask(new Vector2(310,160)));
         sequence.addChild(new JumpTask());
-        sequence.addChild(new FollowPathTask(new Vector2(29,50)));
+        sequence.addChild(new FollowPathTask(new Vector2(320,170)));
         sequence.addChild(new JumpTask());
-        sequence.addChild(new FollowPathTask(new Vector2(20,60)));
-        sequence.addChild(new FollowPathTask(new Vector2(26,60)));
-        sequence.addChild(new AttackTask());
+        sequence.addChild(new FollowPathTask(new Vector2(310,160)));
+        sequence.addChild(new AttackTask()); // digging
 
         return selector;
     }

@@ -1,8 +1,9 @@
 package com.binarybrains.sprout.quest.dialog;
 
+import com.binarybrains.sprout.quest.Dialog;
 import com.binarybrains.sprout.structs.TreeNode;
 import org.junit.Test;
-import quest.dialog.Dialog;
+
 
 public class DialogTreeTest {
 
