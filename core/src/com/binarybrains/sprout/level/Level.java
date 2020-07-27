@@ -191,10 +191,9 @@ public class Level extends LevelEngine {
 
     /**
      * Set Ambience Color
-     * @param Color color
+     * @param color
      */
     public void setAmbientColor(Color color) {
-
         Level.ambientColor.x = color.r;
         Level.ambientColor.y = color.g;
         Level.ambientColor.z = color.b;
@@ -207,9 +206,6 @@ public class Level extends LevelEngine {
         // particles update!!
         // pe.update(delta);
         // if (pe.isComplete()) pe.reset();
-
-        System.out.println(tileMapRenderer.getViewBounds().getX() + "x" + tileMapRenderer.getViewBounds().getY());
-        System.out.println(tileMapRenderer.getViewBounds().getWidth() + "x" + tileMapRenderer.getViewBounds().getHeight());
 
         // AI time piece
         GdxAI.getTimepiece().update(delta);
@@ -330,13 +326,18 @@ public class Level extends LevelEngine {
         tileMapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
         tileMapRenderer.getBatch().begin();
 
-        if (ambientColor.x <= 100f  / 255f) { // how dark should it get before lights come on?
+        // TODO Draw light if they are on screen and we might need Light to be own entity
+        if (ambientColor.x <= 100f  / 255f) { // how dark should it get before lights come on automatic?
             Color color = tileMapRenderer.getBatch().getColor();
 
-            tileMapRenderer.getBatch().setColor(Color.WHITE);
+            // light size is a animated value
+            tileMapRenderer.getBatch().setColor(Color.FIREBRICK); // color of the light
             tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (85 * 16) - lightSize / 2, lightSize , lightSize);
             tileMapRenderer.getBatch().draw(light,90, 1289, lightSize , lightSize);
             tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2, player.getWalkBoxCenterY() - lightSize / 2, lightSize , lightSize);
+            tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (15 * 16) - lightSize / 2, lightSize , lightSize*2);
+            tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (20 * 16) - lightSize / 2, lightSize , lightSize*3);
+            tileMapRenderer.getBatch().draw(light, (27 * 16) - lightSize / 2, (5 * 16) - lightSize / 2, lightSize , lightSize*4);
             tileMapRenderer.getBatch().setColor(color);
         }
 
@@ -440,9 +441,8 @@ public class Level extends LevelEngine {
             }
         }
 
-        debugRenderer.end();
-
         Gdx.gl.glDisable(GL20.GL_BLEND);
+        debugRenderer.end();
 
         debugRenderer.setAutoShapeType(false);
         debugRenderer.begin(ShapeRenderer.ShapeType.Line);
@@ -450,11 +450,13 @@ public class Level extends LevelEngine {
         for (Entity entity : entities) {
             entity.renderDebug(debugRenderer, new Color(250,100, 10, 1f));
         }
-
-        // Player interact box
+        // Player interact box debug
         debugRenderer.setColor(Color.LIGHT_GRAY);
         debugRenderer.rect(player.getInteractBox().getX(), player.getInteractBox().getY(), player.getInteractBox().width, player.getInteractBox().height);
+
         debugRenderer.end();
+
+
     }
 
     private void renderHighlightCell() {

@@ -252,7 +252,7 @@ Game Name ideas
 Farmbound
 Bearshade Creek (https://cdn.dribbble.com/users/75575/screenshots/936394/californiashot.png)
 Whisper Wind
-
+Spell of Gora
 
 För att generera namn på farms.
 http://fantasynamegenerators.com/farm-names.php#.V34RBqOriko
@@ -496,6 +496,10 @@ Lvl: 47 Points: 1,128,000
 Lvl: 48 Points: 1,176,000
 Lvl: 49 Points: 1,225,000
 Lvl: 50 Points: 1,275,000
+
+
+----Mechanics-----
+Lightswitch connected to one or more lamps
 
 ----Secret Doors--------
 A trap door in the floor leads to a cellar/cave/dungeon
