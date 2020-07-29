@@ -15,6 +15,10 @@ https://www.deviantart.com/d-e-n-a/art/Pixel-Tree-Tutorial-133166821
 
 TODOS:
 
+* Draw lights if they are on screen and we might need Light to be own entity and object type
+
+* Particles also needs to be its own thing
+
 * Modal Dialog Question box (done)
 
 * Circular Progress UI component (Done)

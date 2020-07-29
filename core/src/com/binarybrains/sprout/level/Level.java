@@ -28,7 +28,6 @@ import com.binarybrains.sprout.entity.npc.Arthur;
 import com.binarybrains.sprout.entity.npc.Emma;
 import com.binarybrains.sprout.entity.npc.NpcState;
 import com.binarybrains.sprout.entity.npc.Npc;
-import com.binarybrains.sprout.entity.terrain.Stone;
 import com.binarybrains.sprout.level.renderer.LevelMapRenderer;
 import com.binarybrains.sprout.misc.AmbienceSound;
 import com.binarybrains.sprout.misc.Camera;
@@ -164,10 +163,10 @@ public class Level extends LevelEngine {
         this.add(this, arthur);
 
         // particle effects test ...need to make pools?
-        // pe = new ParticleEffect();
-        //pe.load(Gdx.files.internal("pfx/fire.p"),Gdx.files.internal("pfx/images")); // effect dir and images dir
-        //pe.getEmitters().first().setPosition(146, 110);
-        //pe.start();
+        pe = new ParticleEffect();
+        pe.load(Gdx.files.internal("pfx/mysmoke1.p"),Gdx.files.internal("pfx/images")); // effect dir and images dir
+        pe.getEmitters().first().setPosition(309 * 16f,  217f * 16f);
+        pe.start();
 
         showIntroDialog();
     }
@@ -197,8 +196,8 @@ public class Level extends LevelEngine {
         gameTimer.update();
 
         // particles update!!
-        // pe.update(delta);
-        // if (pe.isComplete()) pe.reset();
+        pe.update(delta);
+        if (pe.isComplete()) pe.reset();
 
         // AI time piece
         GdxAI.getTimepiece().update(delta);
@@ -319,7 +318,7 @@ public class Level extends LevelEngine {
         tileMapRenderer.getBatch().setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
         tileMapRenderer.getBatch().begin();
 
-        // TODO Draw light if they are on screen and we might need Light to be own entity
+        // TODO Draw light if they are on screen and we might need Light to be own object in tiled and entity
         if (ambientColor.x <= 100f  / 255f) { // how dark should it get before lights come on automatic?
             Color color = tileMapRenderer.getBatch().getColor();
 
@@ -377,7 +376,7 @@ public class Level extends LevelEngine {
         tileMapRenderer.renderSortedRowTileLayer(entities, (TiledMapTileLayer) map.getLayers().get(3));
 
         // sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
-        //pe.draw(tileMapRenderer.getBatch());
+        pe.draw(tileMapRenderer.getBatch());
 
         tileMapRenderer.getBatch().end();
 
@@ -473,7 +472,7 @@ public class Level extends LevelEngine {
         light.dispose();
         spritesheet.dispose();
         fbo.dispose();
-        // pe.dispose();
+        pe.dispose();
     }
 
     public void cameraFix() {
