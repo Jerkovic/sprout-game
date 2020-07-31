@@ -256,6 +256,8 @@ public abstract class LevelEngine extends Stage {
                 if (objType.equals("Door")) { // new generic Type
                     System.out.println("Name of Door: " + object.getName());
                     Door door = new Door(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight());
+                    door.setTeleportX((int) object.getProperties().get("teleport_x"));
+                    door.setTeleportY((int) object.getProperties().get("teleport_y"));
                     add(level, door);
                 } else if (objType.equals("AreaLocation")) { // new generic Type
                     System.out.println("Name of Area Location: " + object.getName());
@@ -268,7 +270,6 @@ public abstract class LevelEngine extends Stage {
 
         // water
         TiledMapTileLayer waterLayer = (TiledMapTileLayer) map.getLayers().get("water");
-        // TileFactory.createTileFromCell()
         for(int x = 0; x < waterLayer.getWidth();x++) {
             for(int y = 0; y < waterLayer.getHeight();y++) {
                 TiledMapTileLayer.Cell waterCell = waterLayer.getCell(x, y);
@@ -277,7 +278,6 @@ public abstract class LevelEngine extends Stage {
                 }
             }
         }
-
 
         TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get("ground");
         // temp stuff below, must be easy to map TileMap.Tile to (my)Tile
@@ -289,32 +289,24 @@ public abstract class LevelEngine extends Stage {
                 // Hmmm this is not good. We treating most Tiles as GrassTiles
                 if (cell != null && cell.getTile() != null) {
                     tile[x][y] = new GrassTile(x, y, true);
-                    // custom property
-                    if (cell.getTile().getProperties().containsKey("tileType") && (cell.getTile().getProperties().get("tileType").equals("teleporter"))) {
-                        tile[x][y] = new TeleportTile(x, y);
-                    }
-                    if (cell.getTile().getProperties().containsKey("tileType") && (cell.getTile().getProperties().get("tileType").equals("Wood"))) {
-                        tile[x][y] = new WoodTile(x, y);
-                    }
                 }
 
                 // check for tileType
                 if (cell != null && cell.getTile().getProperties().containsKey("blocked") && cell.getTile().getProperties().get("blocked").equals(true)) {
-                    tile[x][y] = new GrassTile(x, y, false); // mayNot pass grassTile
+                    tile[x][y] = new GrassTile(x, y, false); // masayNot pass grassTile
                 }
-
             }
         }
 
         // temp override with ground-top
         TiledMapTileLayer layer2 = (TiledMapTileLayer) map.getLayers().get("ground_top");
         // temp stuff below, must be easy to map TileMap.Tile to (my)Tile
-        for(int x = 0; x < layer2.getWidth();x++) {
+        for(int x = 0; x < layer2.getWidth(); x++) {
             for(int y = 0; y < layer2.getHeight();y++) {
                 TiledMapTileLayer.Cell cell2 = layer2.getCell(x, y);
 
                 if (cell2 != null && cell2.getTile() != null) {
-                    // custom property ..
+                    // custom property .. WoodTile is something
                     if (cell2.getTile().getProperties().containsKey("tileType") && (cell2.getTile().getProperties().get("tileType").equals("Wood"))) {
                         tile[x][y] = new WoodTile(x, y);
                     }
@@ -323,11 +315,19 @@ public abstract class LevelEngine extends Stage {
                 if (cell2 != null && cell2.getTile().getProperties().containsKey("blocked") ) {
                     tile[x][y] = new GrassTile(x, y, false); // mayNot pass could be a fence or alike
                 }
+            }
+        }
 
-                if (cell2 != null && cell2.getTile().getProperties().containsKey("tileType") && (cell2.getTile().getProperties().get("tileType").equals("teleporter"))) {
-                    tile[x][y] = new TeleportTile(x, y);
+
+        // Should we handles blocked tiles like this?
+        TiledMapTileLayer blockLayer = (TiledMapTileLayer) map.getLayers().get("blocked");
+        for(int x = 0; x < blockLayer.getWidth(); x++) {
+            for(int y = 0; y < blockLayer.getHeight();y++) {
+                TiledMapTileLayer.Cell cell = blockLayer.getCell(x, y);
+
+                if (cell != null && cell.getTile() != null) {
+                    tile[x][y] = new Tile(x, y, false);
                 }
-
             }
         }
 
