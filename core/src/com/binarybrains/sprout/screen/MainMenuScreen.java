@@ -162,7 +162,7 @@ public class MainMenuScreen implements Screen {
 
         play.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                SproutGame.playSound("button_click", 1f, MathUtils.random(1f, 1f), 1f);
+                SproutGame.playSound("button_click", .5f);
                 startGame(); // transition
             }
         });
@@ -182,7 +182,7 @@ public class MainMenuScreen implements Screen {
 
         opt.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                SproutGame.playSound("button_click", 1f, MathUtils.random(1f, 1f), 1f);
+                SproutGame.playSound("button_click", .5f);
             }
         });
 

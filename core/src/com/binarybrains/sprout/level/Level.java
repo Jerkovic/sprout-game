@@ -373,9 +373,14 @@ public class Level extends LevelEngine {
         fbo.getColorBufferTexture().bind(1);
         light.bind(0);
 
+        // reset
+        for (Entity ent : entities) {
+            ent.setOnScreen(false);
+        }
+
         tileMapRenderer.renderSortedRowTileLayer(entities, (TiledMapTileLayer) map.getLayers().get(3));
 
-        // sortAndRender(entities, tileMapRenderer.getBatch()); // todo render only entities on screen right
+        // particles
         pe.draw(tileMapRenderer.getBatch());
 
         tileMapRenderer.getBatch().end();

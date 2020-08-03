@@ -7,24 +7,16 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.objects.TextureMapObject;
 import com.badlogic.gdx.maps.tiled.*;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
-import com.binarybrains.sprout.entity.house.Cottage;
 import com.binarybrains.sprout.entity.house.Door;
-import com.binarybrains.sprout.entity.house.Tower;
 import com.binarybrains.sprout.entity.npc.Npc;
-import com.binarybrains.sprout.entity.tree.Bush;
-import com.binarybrains.sprout.entity.tree.SmallTree;
-import com.binarybrains.sprout.entity.tree.Tree;
 import com.binarybrains.sprout.level.pathfind.Astar;
 import com.binarybrains.sprout.level.renderer.LevelMapRenderer;
 import com.binarybrains.sprout.level.tile.*;
-import com.binarybrains.sprout.locations.Bed;
-import com.binarybrains.sprout.locations.Bridge;
 import com.binarybrains.sprout.locations.Location;
 
 import java.util.ArrayList;
@@ -90,7 +82,7 @@ public abstract class LevelEngine extends Stage {
 
         for (int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
-            if (e.getWalkBox().overlaps(area) && e.isInteractable()) {
+            if (e.getWalkBox().overlaps(area) && e.isIntractable()) {
                 e.setTempFloat(player.distanceToCenter(e));
                 result.add(e);
             }
@@ -116,7 +108,7 @@ public abstract class LevelEngine extends Stage {
         List<Entity> entities =  getEntities(rect);
         for (int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
-            if (!e.isInteractable()) {
+            if (!e.isIntractable()) {
                 entities.remove(e);
             }
         }
@@ -126,7 +118,7 @@ public abstract class LevelEngine extends Stage {
     public boolean isBlockingEntitiesAtTile(Entity ent, int tile_x, int tile_y) {
         List<Entity> tile_entities = getEntitiesAtTile(tile_x, tile_y);
         for (Entity e : tile_entities) {
-            if (e.blocks(ent) && e.isInteractable()) {
+            if (e.blocks(ent) && e.isIntractable()) {
                 return true;
             }
         }

@@ -34,7 +34,8 @@ public abstract class Entity implements Telegraph, Trigger {
     private List<Entity> containsList = new ArrayList<Entity>();
     private final Array<Action> actions = new Array(0);
     private float temp;
-    private boolean interactable = true;
+    private boolean intractable = true;
+    private boolean onScreen = false;
 
     // should be one tile in size
     protected Rectangle aiBox = new Rectangle();
@@ -57,11 +58,11 @@ public abstract class Entity implements Telegraph, Trigger {
      * flag the location so that it doesn't blocks Player interactions.
      */
     public void setNonInteractable() {
-        this.interactable = false;
+        this.intractable = false;
     }
 
-    public boolean isInteractable() {
-        return this.interactable;
+    public boolean isIntractable() {
+        return this.intractable;
     }
     /**
      * Add action to our entity
@@ -396,7 +397,6 @@ public abstract class Entity implements Telegraph, Trigger {
         return false;
     }
 
-
     public void draw(Batch batch, float parentAlpha) { }
 
     @Override
@@ -444,5 +444,17 @@ public abstract class Entity implements Telegraph, Trigger {
 
     public void dispose() {
 
+    }
+
+    public void setOnScreen(boolean b) {
+        this.onScreen = b;
+    }
+
+    /**
+     * Can use this to decide if we should play sfx
+     * @return
+     */
+    public boolean getOnScreen() {
+        return this.onScreen;
     }
 }

@@ -84,7 +84,9 @@ public class Npc extends Mob {
         float jump_to_y = getY() + 16;
         SequenceAction seq = new SequenceAction();
         lockShadowY = ground_y;
-        SproutGame.playSound("jump", 0.7f);
+        if (getOnScreen()) {
+            SproutGame.playSound("jump", 0.7f);
+        }
 
         seq.addAction(Actions.moveTo(getX(), jump_to_y, .3f, Interpolation.pow2));
         seq.addAction(Actions.moveTo(getX(), ground_y, .15f, Interpolation.exp5));

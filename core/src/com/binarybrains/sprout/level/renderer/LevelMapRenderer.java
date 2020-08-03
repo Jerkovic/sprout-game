@@ -59,7 +59,10 @@ public class LevelMapRenderer extends OrthogonalTiledMapRenderer {
             // todo there is a bug here with taller sprites not being drawn but disappearing on the bottom
             // of the screen
             for (Entity ent : entities) {
-                if (ent.getTileY() == row) ent.draw(batch, 1f);
+                if (ent.getTileY() == row) {
+                    ent.draw(batch, 1f);
+                    ent.setOnScreen(true);
+                }
             }
 
             for (int col = col1; col < col2; col++) {

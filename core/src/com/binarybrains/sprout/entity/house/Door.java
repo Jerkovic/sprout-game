@@ -11,10 +11,8 @@ import com.binarybrains.sprout.level.Level;
 
 public class Door extends Entity {
 
-    private boolean locked = false;
     private int teleport_x = 0;
     private int teleport_y = 0;
-    // name?
 
     public Door(Level level, Vector2 position, float width, float height) {
         super(level, position, width, height);
@@ -37,10 +35,17 @@ public class Door extends Entity {
     }
 
     @Override
+    public void updateBoundingBox() {
+        super.updateBoundingBox();
+        this.walkBox.setWidth(getWidth());
+        this.walkBox.setHeight(8);
+        this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
+    }
+
+    @Override
     public boolean interact(Player player, Item item, Mob.Direction attackDir) {
-        // && player.getDirection().equals(Mob.Direction.NORTH)
         if (player.getInteractBox().overlaps(getBoundingBox())) {
-            SproutGame.playSound("door_open");
+            SproutGame.playSound("door_open", .5f);
             getLevel().screen.hud.teleportPlayer(player, this.teleport_x, this.teleport_y);
             return true;
         }
