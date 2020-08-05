@@ -34,15 +34,15 @@ public class Camera extends OrthographicCamera {
     }
 
 
-    Vector3 temp = position;
-
     public void followPosition(Vector2 followPos, float deltaTime) {
 
-        if (noFollow) return; // disabled
-
-        temp.x = followPos.x;
-        temp.y = followPos.y;
-        temp.z = 0;
+        if (noFollow) return;
+        Vector3 target = new Vector3(followPos.x,followPos.y,0);
+        final float speed = deltaTime * 3.5f, iSpeed = 1.0f - speed;
+        Vector3 temp = position;
+        temp.scl(iSpeed);
+        target.scl(speed);
+        temp.add(target);
         position.set(temp);
 
         if (isShaking) {
