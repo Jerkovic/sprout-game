@@ -31,7 +31,7 @@ public class Chest extends Entity implements Portable { // extends Furniture tha
     public Chest(Level level, Vector2 position) {
         super(level, position, 16, 16);
 
-        int capacity = 1;
+        int capacity = 8;
         container = new Inventory(capacity); // the chest is an inventory
 
         // test item in chest

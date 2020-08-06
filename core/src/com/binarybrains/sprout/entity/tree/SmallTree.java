@@ -13,7 +13,7 @@ import com.binarybrains.sprout.item.ResourceItem;
 import com.binarybrains.sprout.level.Level;
 
 
-public class SmallTree extends Entity { // extends Vegitation or ?
+public class SmallTree extends Entity { // This is the  Tree house extends Vegitation or ?
 
     private Sprite sprite;
     private Sprite shadow;

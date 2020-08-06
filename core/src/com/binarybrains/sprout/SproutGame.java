@@ -127,6 +127,9 @@ public class SproutGame extends Game {
 		assets.load("player/player_temp.png", Texture.class);
 		assets.load("sprites/shadow.png", Texture.class);
 
+		// trees 9x10 tiles 10 animation frames on 2 rows
+		assets.load("world/grass_land/anims/tree1A_ss.png", Texture.class);
+
         assets.load("sfx/chopping_Wood_1.wav", Sound.class);
         assets.load("sfx/chopping_Wood_2.wav", Sound.class);
 		assets.load("sfx/blop.wav", Sound.class);

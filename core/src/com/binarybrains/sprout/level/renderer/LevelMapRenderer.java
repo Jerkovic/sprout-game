@@ -184,5 +184,13 @@ public class LevelMapRenderer extends OrthogonalTiledMapRenderer {
 
             y -= layerTileHeight;
         }
+        // fixes the bug with sprites to being rendered
+        for (int row = row1; row >= row1-30; row--) {
+            for (Entity ent : entities) {
+                if (ent.getTileY() == row) {
+                    ent.draw(batch, 1f);
+                }
+            }
+        }
     }
 }

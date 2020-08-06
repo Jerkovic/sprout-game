@@ -1,6 +1,7 @@
 package com.binarybrains.sprout.entity.tree;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Interpolation;
@@ -53,14 +54,16 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         this.flipped = MathUtils.randomBoolean();
 
         // the code below is no good - remake this
-        sprite = new Sprite(level.spritesheet, 48, 0, (int)width, (int)height);
+        Texture texture = SproutGame.assets.get("world/grass_land/anims/tree1A_ss.png", Texture.class);
+
+        sprite = new Sprite(texture, 0, 0, (int)width, (int)height);
         sprite.setSize(width, height);
         sprite.setFlip(flipped, false);
         sprite.setPosition(getX(), getY());
         sprite.setOrigin(getWidth() / 2, 8);
 
 
-        shadow = new Sprite(level.spritesheet, 48, 0, (int)width, (int)height);
+        shadow = new Sprite(texture, 0, 0, (int)width, (int)height);
         shadow.setColor(Color.BLACK);
         shadow.setAlpha(0.3f);
         shadow.setPosition(getX(), getY());
@@ -92,8 +95,8 @@ public class Tree extends Entity { // extends Tree  or TerrainItem or Vegetation
         this.box.setHeight(getHeight());
         this.box.setPosition(getPosition());
 
-        this.walkBox.setWidth(16);
-        this.walkBox.setHeight(16);
+        this.walkBox.setWidth(80);
+        this.walkBox.setHeight(32);
         this.walkBox.setPosition(getCenterPos().x - (walkBox.getWidth() / 2), getPosition().y);
     }
 

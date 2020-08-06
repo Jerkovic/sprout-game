@@ -21,6 +21,7 @@ import com.binarybrains.sprout.experience.LevelRank;
 import com.binarybrains.sprout.item.*;
 import com.binarybrains.sprout.item.artifact.Artifacts;
 import com.binarybrains.sprout.item.resource.FoodResource;
+import com.binarybrains.sprout.item.resource.Resources;
 import com.binarybrains.sprout.item.tool.Tools;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.mail.Mailbox;
@@ -75,12 +76,13 @@ public class Player extends Npc implements InputProcessor {
         getInventory().add(new ToolItem(Tools.hoe, 0));
         getInventory().add(new ToolItem(Tools.wateringcan, 0));
         getInventory().add(new ToolItem(Tools.pickaxe, 0));
+        getInventory().add(new ResourceItem(Resources.bomb,392));
 
         /*
         getInventory().add(new ResourceItem(Resources.ladder, 1));
         getInventory().add(new WeaponItem(Weapons.neptuneSword, 0));
         getInventory().add(new ToolItem(Tools.hammer, 0));
-        getInventory().add(new ResourceItem(Resources.bomb,392));
+
         getInventory().add(new ResourceItem(Resources.ironOre, 40));
         getInventory().add(new ResourceItem(Resources.copperOre, 48));
         getInventory().add(new ResourceItem(Resources.seeds, 8));

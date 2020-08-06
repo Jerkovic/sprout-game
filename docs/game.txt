@@ -15,9 +15,11 @@ https://www.deviantart.com/d-e-n-a/art/Pixel-Tree-Tutorial-133166821
 
 TODOS:
 
+* Rendering bug with sprites
+
 * Draw lights if they are on screen and we might need Light to be own entity and object type
 
-* Particles also needs to be its own thing
+* Particles also needs to be its own thing object with type Particle
 
 * Modal Dialog Question box (done)
 
@@ -25,7 +27,7 @@ TODOS:
 
 * Perks (boosts)
 
-* TreeNode (Unlock Tree) Abilities? recepies
+* TreeNode (Unlock Tree) Abilities? recepies -
 
 * Directed Graph for Dialogs?
 
@@ -525,7 +527,7 @@ The door is opened by twisting an iron ring
 "I've forgotten my name"
 "The Steel Cup is wreathed in flames"
 "Banke Arundson died here"
-"Homer was not here"
+
 
 ----Weapons---
 Demoncutter, an ornate battleaxe engraved with runes of destruction. It is said to have once belonged to a forgotten god of war.

@@ -14,6 +14,7 @@ import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.house.Door;
 import com.binarybrains.sprout.entity.npc.Npc;
+import com.binarybrains.sprout.entity.tree.Tree;
 import com.binarybrains.sprout.level.pathfind.Astar;
 import com.binarybrains.sprout.level.renderer.LevelMapRenderer;
 import com.binarybrains.sprout.level.tile.*;
@@ -242,7 +243,6 @@ public abstract class LevelEngine extends Stage {
             }
 
             if (object instanceof RectangleMapObject) {
-                // Todo: code below..blää.. this has to change!
                 String objType = (String) object.getProperties().get("type");
                 Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
                 if (objType.equals("Door")) { // new generic Type
@@ -254,7 +254,11 @@ public abstract class LevelEngine extends Stage {
                 } else if (objType.equals("AreaLocation")) { // new generic Type
                     System.out.println("Name of Area Location: " + object.getName());
                     add(level, new Location(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(), object.getName(), "todo descr"));
+                } else if (objType.equals("Tree")) { // new generic Type
+                    System.out.println("Tree: " + object.getName());
+                    add(level, new Tree(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
                 }
+
                 // System.out.println("type:" + object.getClass() + " " + object.getProperties().get("type") + " " + rectangle);
                 // EntityFactory.createEntityFromTileMapObject(Object obj)
             }

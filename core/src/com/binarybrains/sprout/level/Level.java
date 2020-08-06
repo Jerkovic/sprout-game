@@ -118,6 +118,7 @@ public class Level extends LevelEngine {
         setupAmbientLight();
         this.screen = screen;
         // dont load sprites like this.
+        // contains trees, chest, test bitwise auto tiles, house broken/fixed
         spritesheet = new Texture(Gdx.files.internal("levels/stardew_valley_01.png"));
 
         // BitmapFont to use for text Particles
@@ -133,7 +134,7 @@ public class Level extends LevelEngine {
         player.setTilePos(305, 203);
         player.setHealth(100);
 
-        camera.setPosition(new Vector3(player.getPosition().x, player.getPosition().y, 0));
+        camera.setPosition(new Vector3(player.getPosition().x-16, player.getPosition().y-16, 0));
         camera.update();
 
         // test world ui speech / action window
@@ -144,14 +145,14 @@ public class Level extends LevelEngine {
         // addActor(ww);
 
         add(this, player);
-        add(this, new Chest(this, new Vector2(16 * 10, 16 * 65)));
+        add(this, new Chest(this, new Vector2(300 * 16, 16 * 200)));
 
         tileMapRenderer = new LevelMapRenderer(map);
         tileMapRenderer.setView(camera);
         debugRenderer = new ShapeRenderer();
 
         gameTimer = new GameTime(0, 0, 1, 0, 0);
-        gameTimer.setDuration( ((60 * 60 * 26) * 27) + 10 );
+        gameTimer.setDuration( ((60 * 60 * 26) * 27) + 11 );
         gameTimer.start();
 
         // test some path finding stuff.. move this!!
@@ -168,7 +169,7 @@ public class Level extends LevelEngine {
         pe.getEmitters().first().setPosition(309 * 16f,  217f * 16f);
         pe.start();
 
-        showIntroDialog();
+        // showIntroDialog();
     }
 
     public void add(Entity entity) {
@@ -391,7 +392,7 @@ public class Level extends LevelEngine {
         // debug mode
         if (debugMode) renderDebug(entities);
 
-        renderHighlightCell(); // mouse selection test
+        // renderHighlightCell(); // mouse selection test
 
         super.draw();
     }
