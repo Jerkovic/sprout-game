@@ -15,7 +15,9 @@ https://www.deviantart.com/d-e-n-a/art/Pixel-Tree-Tutorial-133166821
 
 TODOS:
 
-* Rendering bug with sprites
+* Camera flickering to close to player.
+
+* Rendering bug sprites being culled (Fixed)
 
 * Draw lights if they are on screen and we might need Light to be own entity and object type
 
@@ -52,7 +54,7 @@ TODOS:
 
 * New mouse pointer (Fixed)
 
-* camera bug not following player centered top and right. (Fixed)
+* Camera bug not following player centered top and right. (Fixed)
 
 * Cinematic view (Fixed)
 
@@ -78,7 +80,7 @@ TODOS:
 
 * Cleanup hud class. Move out notificationToaster etc
 
-* Footsteps  // plays different walking sounds here on selected frames. // https://www.youtube.com/watch?v=wYREdw4nz4Esd
+* Footsteps  // plays different walking sounds here on selected frames and surface. // https://www.youtube.com/watch?v=wYREdw4nz4Esd
 
 * Handle AI pathfinding is triggered inside a house we need her/him go to the door and leave then start
 (do we need something that tells if the location is inside or outside?)

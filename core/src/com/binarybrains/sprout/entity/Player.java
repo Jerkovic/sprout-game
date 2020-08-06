@@ -126,7 +126,6 @@ public class Player extends Npc implements InputProcessor {
         getLevel().screen.hud.hideHud();
         addAction(Actions.sequence(
                 Actions.run(() -> {
-                    System.out.println("DEBUG - >" +  sender);
                     lookAt(sender);
                 }),
                 Actions.delay(1),

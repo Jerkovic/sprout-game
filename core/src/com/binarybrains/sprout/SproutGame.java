@@ -121,7 +121,7 @@ public class SproutGame extends Game {
 	public void loadAssets() {
 		assets.load("new_ui_experiment/ui.atlas", TextureAtlas.class);
 
-		assets.load("spritesheet.png", Texture.class);
+		//assets.load("spritesheet.png", Texture.class);
 		assets.load("haley-sheet.png", Texture.class);
 		assets.load("willy.png", Texture.class);
 		assets.load("player/player_temp.png", Texture.class);

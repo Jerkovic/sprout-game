@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.binarybrains.sprout.entity.Entity;
 import com.binarybrains.sprout.level.Level;
 
 
@@ -33,17 +34,33 @@ public class Camera extends OrthographicCamera {
         return position.y;
     }
 
+    public float distanceToPos(Vector3 t, Vector3 pos) {
+        float dx = pos.x - t.x;
+        float dy = pos.y - t.y;
+        return (float) (Math.sqrt((dx*dx)+(dy*dy)));
+    }
 
     public void followPosition(Vector2 followPos, float deltaTime) {
-
         if (noFollow) return;
         Vector3 target = new Vector3(followPos.x,followPos.y,0);
-        final float speed = deltaTime * 3.5f, iSpeed = 1.0f - speed;
+        final float speed = deltaTime * 3.7f, iSpeed = 1.0f - speed;
         Vector3 temp = position;
+
+
         temp.scl(iSpeed);
         target.scl(speed);
+
         temp.add(target);
         position.set(temp);
+
+        /*
+        // System.out.println(this.distanceToPos(temp, target));
+        This is because you are interpolating between the camera position and the player position indefinitely.
+        A quick way to fix this is to set a threshold for the camera to snap to the player.
+        So if distance is less than x then snap to player position and stop lerping. This way its not doing tiny micro movements.
+        Another solution can be to round out your camera position after you have lerped it so that its in screen units.
+        Sometimes this could be as simple as rounding to the nearest integer but other times You have to take scaling into account.
+        */
 
         if (isShaking) {
             if (TimeUtils.nanoTime() < startShakeTimer + 1000000000 * .3) {
