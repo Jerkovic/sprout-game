@@ -26,10 +26,12 @@ TODOS:
 * Modal Dialog Question box (done)
 
 * Circular Progress UI component (Done)
+  Revisit this code: https://www.coding-daddy.xyz/node/26
 
 * Perks (boosts)
 
-* TreeNode (Unlock Tree) Abilities? recepies -
+* Tree Node Graph Abilities? recepies - Graph Vertex Edges (done)
+   https://www.softwaretestinghelp.com/java-graph-tutorial/
 
 * Directed Graph for Dialogs?
 

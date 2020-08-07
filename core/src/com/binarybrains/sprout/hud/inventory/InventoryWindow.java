@@ -170,7 +170,6 @@ public class InventoryWindow extends Window {
             }
             if (icon != null) {
                 Image image = new Image(icon);
-                // testAnimate(image);
                 stack.add(image);
             } else {
                 stack.add(new Label("n/a", skin)); // should not happen
@@ -183,7 +182,6 @@ public class InventoryWindow extends Window {
             button.add(stack);
             if (item != null) {
                 Tooltip toolTip = new Tooltip(ItemTip.createTooltipTable(skin, item));
-                toolTip.getManager().animations = false;
                 toolTip.setInstant(true);
                 button.addListener(toolTip);
             }

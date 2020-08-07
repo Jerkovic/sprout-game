@@ -247,6 +247,7 @@ public class InventoryManagementWindow extends Dialog {
             if (item != null) {
                 Tooltip toolTip = new Tooltip(ItemTip.createTooltipTable(skin, item));
                 toolTip.getManager().animations = false;
+                toolTip.getManager().initialTime = 0;
                 toolTip.setInstant(true);
                 button.addListener(toolTip);
             }

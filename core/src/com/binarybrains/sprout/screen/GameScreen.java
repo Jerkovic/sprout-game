@@ -99,6 +99,15 @@ public class GameScreen implements Screen {
             }
         }
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.T)) {
+            if (gameState == GameState.RUN) {
+                pause();
+                hud.showSkillWindow();
+            } else {
+                resume();
+            }
+        }
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             if (gameState == GameState.RUN) {
                 pause();

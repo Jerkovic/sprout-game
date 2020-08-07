@@ -160,7 +160,7 @@ public class Level extends LevelEngine {
         this.add(this, emma);
         emma.stateMachine.changeState(NpcState.IDLE);
 
-        Arthur arthur = new Arthur(this, new Vector2(310 * 16f,  190f * 16f), 16f, 32f);
+        Arthur arthur = new Arthur(this, new Vector2(301 * 16f,  179f * 16f), 16f, 32f);
         this.add(this, arthur);
 
         // particle effects test ...need to make pools?

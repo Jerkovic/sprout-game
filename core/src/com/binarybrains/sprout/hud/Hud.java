@@ -28,6 +28,7 @@ import com.binarybrains.sprout.hud.inventory.ChestWindow;
 import com.binarybrains.sprout.hud.inventory.CraftingWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryManagementWindow;
 import com.binarybrains.sprout.hud.inventory.InventoryWindow;
+import com.binarybrains.sprout.hud.skilltree.SkillWindow;
 import com.binarybrains.sprout.item.Item;
 import com.binarybrains.sprout.level.Level;
 import com.binarybrains.sprout.locations.Location;
@@ -62,6 +63,7 @@ public class Hud implements Telegraph {
     InventoryWindow inventoryWindow; // our Inventory fast reachable slots
     InventoryManagementWindow inventoryManagementWindow;
     ChestWindow chestManagementWindow;
+    SkillWindow skillWindow;
     ConfirmDialog confirmDialog;
 
     public int notificationsInHud = 0;
@@ -102,6 +104,7 @@ public class Hud implements Telegraph {
 
         craftingWindow = new CraftingWindow(level.player,"CRAFTING", skin);
         craftingWindow.setVisible(false);
+        craftingWindow.setWidth(1600);
         craftingWindow.hide();
         stage.addActor(craftingWindow);
 
@@ -116,6 +119,14 @@ public class Hud implements Telegraph {
         inventoryWindow = new InventoryWindow(level, skin);
         inventoryWindow.onInventoryChanged(level.player.getInventory());
         stage.addActor(inventoryWindow);
+
+        // Skill tree window
+        skillWindow = new SkillWindow(level.player, "Skill tree", skin);
+        skillWindow.setVisible(false);
+        skillWindow.setWidth(1600);
+        skillWindow.hide();
+        stage.addActor(skillWindow);
+
 
         // Exit game confirm dialog
         confirmDialog = new ConfirmDialog(skin, "Exit Game", "Do you want to exit game?");
@@ -386,6 +397,14 @@ public class Hud implements Telegraph {
         hideMouseItem();
     }
 
+    public void showSkillWindow() {
+        hideInventory();
+        level.screen.game.pause();
+        level.player.releaseKeys();
+        skillWindow.setVisible(true);
+        skillWindow.show(getStage());
+        hideMouseItem();
+    }
 
     public void startCinemaMode() {
         letterboxing.start();

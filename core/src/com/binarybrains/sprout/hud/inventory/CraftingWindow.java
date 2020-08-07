@@ -50,14 +50,14 @@ public class CraftingWindow extends Dialog implements Telegraph {
         recipeTableScrollPane.setFlickScroll(false);
         recipeTableScrollPane.setFadeScrollBars(false);
         recipeTableScrollPane.setForceScroll(false, true);
-        recipeTableScrollPane.setWidth(500);
+        // recipeTableScrollPane.setWidth(1600);
 
 
         // container for our recipe scrollPane
         Table recipeContainer = new Table();
         recipeContainer.align(Align.top);
         recipeContainer.left();
-        recipeContainer.add(recipeTableScrollPane).height(50.2f * 9).width(800);
+        recipeContainer.add(recipeTableScrollPane).height(50.2f * 9).width(1000);
 
         row();
         add(recipeContainer);
@@ -76,7 +76,8 @@ public class CraftingWindow extends Dialog implements Telegraph {
         add(buttonExit).pad(5);
         pack();
 
-        recipeTableScrollPane.scrollTo(0, 200, 0, 200);
+        //  auto scroller
+        // recipeTableScrollPane.scrollTo(0, 200, 0, 200);
     }
 
     /**
@@ -87,7 +88,7 @@ public class CraftingWindow extends Dialog implements Telegraph {
     public Table buildRecipesButtonGroup(Skin skin) {
 
         Table recipeRowTable = new Table(skin);
-        recipeRowTable.setWidth(600);
+        // recipeRowTable.setWidth(1600);
         recipeRowTable.left().top();
 
         int index = 0;

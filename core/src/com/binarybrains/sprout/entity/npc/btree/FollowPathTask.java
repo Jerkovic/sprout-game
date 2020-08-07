@@ -37,6 +37,7 @@ public class FollowPathTask extends LeafTask<Npc> {
     @Override
     public void end () {
         System.out.println("Ending - Following path task! " + this.status);
+        // should this send message ?
         this.status = getStatus();
     }
 
