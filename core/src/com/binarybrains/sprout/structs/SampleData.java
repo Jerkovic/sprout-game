@@ -1,9 +1,5 @@
 package com.binarybrains.sprout.structs;
 
-import com.binarybrains.sprout.crafting.Crafting;
-import com.binarybrains.sprout.crafting.Recipe;
-import com.binarybrains.sprout.item.resource.Resources;
-
 /*
  * See https://github.com/gt4dev/yet-another-tree-structure/blob/master/java/src/com/tree/SampleIterating.java
  */

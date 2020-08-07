@@ -20,13 +20,10 @@ import com.binarybrains.sprout.hud.tweens.CameraAccessor;
 import com.binarybrains.sprout.misc.Camera;
 import com.binarybrains.sprout.quest.TestDialog;
 import com.binarybrains.sprout.screen.LoadingScreen;
-import org.yaml.snakeyaml.Yaml;
-
-import java.util.Map;
 
 public class SproutGame extends Game {
 
-	public static String name = "Bearshade Creek";
+	public static String name = "game";
 	public static String SKIN_FILE = "skin/uiskin.json";
 
 	private static TweenManager tweenManager;
@@ -53,10 +50,10 @@ public class SproutGame extends Game {
 		FileHandle[] files = Gdx.files.local("dialogue/").list();
 		for(FileHandle file: files) {
 			String text = file.readString();
-            Yaml yaml = new Yaml();
-            TestDialog obj = (TestDialog) yaml.load(text);
-            System.out.println("Loaded object type: " + obj.getClass());
-            System.out.println(obj.getId() + " " +  obj.getSay());
+            //Yaml yaml = new Yaml();
+            //TestDialog obj = (TestDialog) yaml.load(text);
+            //System.out.println("Loaded object type: " + obj.getClass());
+            //System.out.println(obj.getId() + " " +  obj.getSay());
 		}
 		// end loader
 
