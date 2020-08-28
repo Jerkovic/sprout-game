@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class Achievement implements Telegraph
 {
-    public  static final Map<String, Achievement> achievements = new HashMap<String,Achievement>();
+    public static final Map<String, Achievement> achievements = new HashMap<String,Achievement>();
 
     static {
         try {
@@ -138,7 +138,6 @@ public class Achievement implements Telegraph
 
     @Override
     public boolean handleMessage(Telegram msg) {
-
         if (msg.message == TelegramType.PLAYER_STATS_UPDATED) {
             Achievement.checkAwards((Player) msg.sender);
             return true;

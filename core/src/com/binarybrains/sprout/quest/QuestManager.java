@@ -7,14 +7,28 @@ import com.binarybrains.sprout.entity.Player;
 import com.binarybrains.sprout.entity.npc.Npc;
 import com.binarybrains.sprout.events.TelegramType;
 import com.binarybrains.sprout.structs.TreeNode;
+import com.binarybrains.sprout.structs.graph.Vertex;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class QuestManager implements Telegraph {
-
 
     private static QuestManager instance = null;
     private TreeNode<Dialog> tree; // NodeTypes: prompt, reply .. id(guid), Questnode (Different types as well), ActionNode
     //  AI_Dialog
     //  cutscene
+
+    private Map<String, Quest> questMap;
+
+    public QuestManager() {
+        this.questMap = new HashMap<>();
+    }
+
+    public Quest findQuestById(String id) {
+        return this.questMap.get(id);
+    }
 
     public static QuestManager getInstance()
     {
@@ -68,6 +82,4 @@ public class QuestManager implements Telegraph {
     public void dialogBetween(Player player, Npc npc) {
         System.out.println("QuestManager got a player npc interaction event with: " + npc.getId());
     }
-
-
 }
