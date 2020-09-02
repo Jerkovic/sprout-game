@@ -26,8 +26,16 @@ width: 64
 height 112
 
 object Type: Bush
-name Bush
+name_ Bush
 48x48
+
+- Points -
+----------
+object type: spawn
+name: Player,
+width: 0
+height 0
+
 
 - Triggers -
 Name: Bridge

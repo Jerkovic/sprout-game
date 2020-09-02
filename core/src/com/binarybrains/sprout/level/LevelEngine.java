@@ -238,23 +238,28 @@ public abstract class LevelEngine extends Stage {
 
         for(MapObject object : objects) {
 
+            System.out.println("Obj: " + object.getName());
+
             if (object instanceof TextureMapObject) {
                 continue;
             }
 
+            // Points in Tiled
+            // Actually points in LibGDX are treated as RectangleMapObject with height=0.0 and width=0.0.
+
             if (object instanceof RectangleMapObject) {
                 String objType = (String) object.getProperties().get("type");
                 Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-                if (objType.equals("Door")) { // new generic Type
+                if (objType.equals("Door")) {
                     System.out.println("Name of Door: " + object.getName());
                     Door door = new Door(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight());
                     door.setTeleportX((int) object.getProperties().get("teleport_x"));
                     door.setTeleportY((int) object.getProperties().get("teleport_y"));
                     add(level, door);
-                } else if (objType.equals("AreaLocation")) { // new generic Type
+                } else if (objType.equals("AreaLocation")) {
                     System.out.println("Name of Area Location: " + object.getName());
                     add(level, new Location(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight(), object.getName(), "todo descr"));
-                } else if (objType.equals("Tree")) { // new generic Type
+                } else if (objType.equals("Tree")) {
                     System.out.println("Tree: " + object.getName());
                     add(level, new Tree(level, new Vector2(rectangle.getX(), rectangle.getY()), rectangle.getWidth(), rectangle.getHeight()));
                 }

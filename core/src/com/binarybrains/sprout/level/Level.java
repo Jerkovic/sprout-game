@@ -142,7 +142,7 @@ public class Level extends LevelEngine {
         ww.add("lets get som text going");
         ww.pad(10).background(screen.skin.get("test-draw", NinePatchDrawable.class));
         ww.setSize(60f, 30f);
-        // addActor(ww);
+        addActor(ww);
 
         add(this, player);
         add(this, new Chest(this, new Vector2(300 * 16, 16 * 200)));
@@ -325,12 +325,7 @@ public class Level extends LevelEngine {
 
             // light size is a animated value
             tileMapRenderer.getBatch().setColor(Color.FIREBRICK); // color of the light
-            tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (85 * 16) - lightSize / 2, lightSize , lightSize);
-            tileMapRenderer.getBatch().draw(light,90, 1289, lightSize , lightSize);
             tileMapRenderer.getBatch().draw(light, player.getWalkBoxCenterX() - lightSize / 2, player.getWalkBoxCenterY() - lightSize / 2, lightSize , lightSize);
-            tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (15 * 16) - lightSize / 2, lightSize , lightSize*2);
-            tileMapRenderer.getBatch().draw(light, (17 * 16) - lightSize / 2, (20 * 16) - lightSize / 2, lightSize , lightSize*3);
-            tileMapRenderer.getBatch().draw(light, (27 * 16) - lightSize / 2, (5 * 16) - lightSize / 2, lightSize , lightSize*4);
             tileMapRenderer.getBatch().setColor(color);
         }
 

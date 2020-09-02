@@ -18,7 +18,6 @@ import com.binarybrains.sprout.entity.tweens.EntityAccessor;
 import com.binarybrains.sprout.hud.tweens.ActorAccessor;
 import com.binarybrains.sprout.hud.tweens.CameraAccessor;
 import com.binarybrains.sprout.misc.Camera;
-import com.binarybrains.sprout.quest.TestDialog;
 import com.binarybrains.sprout.screen.LoadingScreen;
 
 public class SproutGame extends Game {
@@ -118,7 +117,6 @@ public class SproutGame extends Game {
 	public void loadAssets() {
 		assets.load("new_ui_experiment/ui.atlas", TextureAtlas.class);
 
-		//assets.load("spritesheet.png", Texture.class);
 		assets.load("haley-sheet.png", Texture.class);
 		assets.load("willy.png", Texture.class);
 		assets.load("player/player_temp.png", Texture.class);
